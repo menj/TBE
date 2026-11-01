@@ -72,7 +72,10 @@ function tbe_install_dropins(): array {
 		}
 		$result[ $file ] = ( is_writable( WP_CONTENT_DIR ) && false !== file_put_contents( $path, $source ) ) ? 'written' : 'failed'; // phpcs:ignore WordPress.WP.AlternativeFunctions
 	}
-	update_option( 'tbe_dropins', TBE_VERSION . '|' . TBE_DROPIN_VERSION, false );
+	// Only remember a clean install: a failed write (wp-content not writable) is tried again on the next admin visit.
+	if ( ! in_array( 'failed', $result, true ) ) {
+		update_option( 'tbe_dropins', TBE_VERSION . '|' . TBE_DROPIN_VERSION, false );
+	}
 	return $result;
 }
 

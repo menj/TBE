@@ -32,8 +32,8 @@ final class TBE_Bible {
 		return self::books()[ $slug ] ?? null;
 	}
 
-	/** The JPS 1917 text of a chapter, verse number => string, or an empty array when it has not been added yet. @return array<int,string> */
-	public static function jps( string $slug, int $chapter ): array {
+	/** One JPS 1917 chapter in the Hebrew numbering the text is stored in. @return array<int,string> */
+	private static function jps_raw( string $slug, int $chapter ): array {
 		$file = TBE_DIR . '/data/jps/' . $slug . '/' . $chapter . '.json';
 		if ( ! is_readable( $file ) ) {
 			return array();
@@ -44,6 +44,42 @@ final class TBE_Bible {
 			$out[ (int) $verse['n'] ] = (string) $verse['t'];
 		}
 		return $out;
+	}
+
+	/**
+	 * The JPS 1917 text for an ESV chapter, keyed by the ESV's verse numbers: the JPS follows the Hebrew
+	 * numbering, which differs in places (Genesis 31:55 is 32:1 in Hebrew, and Genesis 32 runs one ahead),
+	 * so data/jps-versification.json says how to line the two up. Empty until the book has been added.
+	 *
+	 * @return array<int,string>
+	 */
+	public static function jps( string $slug, int $chapter ): array {
+		static $map = null;
+		if ( null === $map ) {
+			$file = TBE_DIR . '/data/jps-versification.json';
+			$map  = is_readable( $file ) ? (array) json_decode( (string) file_get_contents( $file ), true ) : array();
+		}
+		$rules = (array) ( $map[ $slug ][ (string) $chapter ] ?? array() );
+		$own   = self::jps_raw( $slug, $chapter );
+		if ( isset( $rules['shift'] ) ) {
+			$shifted = array();
+			foreach ( $own as $n => $text ) {
+				if ( $n - (int) $rules['shift'] >= 1 ) { // verse 1 of the Hebrew chapter belongs to the previous English chapter
+					$shifted[ $n - (int) $rules['shift'] ] = $text;
+				}
+			}
+			$own = $shifted;
+		}
+		foreach ( $rules as $verse => $from ) {
+			if ( is_string( $from ) && preg_match( '/^(\d+):(\d+)$/', $from, $m ) ) {
+				$other = self::jps_raw( $slug, (int) $m[1] );
+				if ( isset( $other[ (int) $m[2] ] ) ) {
+					$own[ (int) $verse ] = $other[ (int) $m[2] ];
+				}
+			}
+		}
+		ksort( $own );
+		return $own;
 	}
 
 	/** The Jewish (Hebrew) name of an Old Testament book: array( 'he' => Hebrew, 'tr' => transliteration ), or null. */
