@@ -1,0 +1,115 @@
+/* The Bible, Exposed — reader and commentary panel. */
+
+.tbe-reader { max-width: 44rem; margin-inline: auto; }
+
+.tbe-breadcrumb { font-family: var(--tbe-ui); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tbe-muted); }
+.tbe-breadcrumb a { color: inherit; text-decoration: none; }
+.tbe-breadcrumb a:hover { color: var(--tbe-accent); }
+
+.tbe-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; margin: 0.4rem 0 1rem; text-align: center; }
+
+.tbe-notice { background: var(--tbe-surface); border-inline-start: 3px solid var(--tbe-rubric); padding: 0.75rem 1rem; font-family: var(--tbe-ui); font-size: 0.9rem; }
+
+/* Toolbar */
+.tbe-toolbar { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; }
+
+/* Book index */
+.tbe-booklist { list-style: none; padding: 0; margin: 1rem 0 2rem; display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+.tbe-booklist a {
+	display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem;
+	padding: 0.6rem 0.85rem;
+	background: var(--tbe-surface); border: 1px solid var(--tbe-line); border-radius: 2px;
+	text-decoration: none; color: var(--tbe-ink);
+	transition: border-color 0.15s;
+}
+.tbe-booklist a:hover { border-color: var(--tbe-accent); }
+.tbe-booklist__count { font-family: var(--tbe-ui); font-size: 0.72rem; color: var(--tbe-muted); white-space: nowrap; }
+
+/* Chapter grid */
+.tbe-chapters { list-style: none; padding: 0; display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(3.5rem, 1fr)); }
+.tbe-chapters a {
+	display: block; text-align: center; padding: 0.55rem 0;
+	background: var(--tbe-surface); border: 1px solid var(--tbe-line); border-radius: 2px;
+	text-decoration: none; color: var(--tbe-ink); font-variant-numeric: tabular-nums;
+}
+.tbe-chapters a:hover { border-color: var(--tbe-accent); color: var(--tbe-accent); }
+
+/* Scripture text */
+.tbe-text { font-size: calc(1.2rem * var(--tbe-scale)); line-height: 1.85; }
+.tbe-para { margin: 0 0 1.1em; text-wrap: pretty; }
+.tbe-para:first-of-type::first-letter {
+	float: left;
+	font-size: 3.6em;
+	line-height: 0.85;
+	padding: 0.06em 0.1em 0 0;
+	color: var(--tbe-rubric);
+}
+
+.tbe-vn {
+	font-family: var(--tbe-ui);
+	font-size: 0.62em;
+	font-weight: 600;
+	vertical-align: super;
+	line-height: 0;
+	color: var(--tbe-rubric);
+	text-decoration: none;
+	margin-inline-end: 0.25em;
+}
+.tbe-vn:hover { text-decoration: underline; }
+.tbe-hide-numbers .tbe-vn { display: none; }
+
+.tbe-verse { scroll-margin-top: 6rem; transition: background-color 0.3s; }
+.tbe-verse.has-note { text-decoration: underline; text-decoration-color: var(--tbe-gold); text-decoration-style: dotted; text-underline-offset: 0.3em; }
+.tbe-verse.is-target,
+.tbe-verse:target { background: color-mix(in srgb, var(--tbe-gold) 22%, transparent); }
+
+.tbe-mark {
+	font-family: var(--tbe-ui);
+	font-size: 0.6em;
+	vertical-align: super;
+	line-height: 0;
+	color: var(--tbe-accent);
+	text-decoration: none;
+	margin-inline-start: 0.15em;
+}
+
+/* Poetry */
+.tbe-poem { margin: 0 0 1.25em; }
+.tbe-poem .tbe-verse { display: block; }
+.tbe-line { display: block; padding-inline-start: 1.5em; text-indent: -1.5em; }
+.tbe-line.tbe-i1 { padding-inline-start: 2.5em; }
+.tbe-line.tbe-i2 { padding-inline-start: 3.5em; }
+.tbe-line.tbe-i3 { padding-inline-start: 4.5em; }
+.tbe-line .tbe-vn { text-indent: 0; }
+.tbe-stanza { display: block; height: 1em; }
+
+/* Chapter pager */
+.tbe-pager { display: flex; justify-content: space-between; gap: 1rem; margin: 3rem 0; padding-top: 1rem; border-top: 1px solid var(--tbe-line); font-family: var(--tbe-ui); font-size: 0.9rem; }
+.tbe-pager a { text-decoration: none; }
+
+/* Commentary panel */
+.tbe-commentary { margin-top: 3rem; }
+.tbe-note {
+	background: var(--tbe-surface);
+	border: 1px solid var(--tbe-line);
+	border-inline-start: 3px solid var(--tbe-gold);
+	border-radius: 2px;
+	padding: 1.1rem 1.4rem;
+	margin-block: 1.25rem;
+	scroll-margin-top: 6rem;
+}
+.tbe-note:target, .tbe-note.is-active { border-inline-start-color: var(--tbe-accent); }
+.tbe-note__ref { font-family: var(--tbe-ui); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tbe-rubric); }
+.tbe-note__title { font-size: 1.3rem; margin: 0.2rem 0; }
+.tbe-note__title a { color: inherit; text-decoration: none; }
+.tbe-note__body { font-size: 1.05rem; }
+.tbe-note__body > :first-child { margin-top: 0.75rem; }
+
+@media (max-width: 600px) {
+	.tbe-text { line-height: 1.75; }
+	.tbe-pager { flex-direction: column; }
+}
+
+@media print {
+	.tbe-toolbar, .tbe-search, .tbe-header, .tbe-bismillah, .tbe-mark { display: none !important; }
+}

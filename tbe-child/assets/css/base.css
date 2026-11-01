@@ -1,0 +1,203 @@
+/* The Bible, Exposed — base styles: tokens, chrome, shared components. */
+
+/* Colour tokens. The active scheme is injected by PHP; these are safe defaults. */
+:root {
+	--tbe-paper: #f4eedc;
+	--tbe-surface: #fbf7ea;
+	--tbe-ink: #231d14;
+	--tbe-muted: #6b604f;
+	--tbe-accent: #17604e;
+	--tbe-rubric: #8c2f23;
+	--tbe-gold: #a67c2e;
+	--tbe-line: #d9cdb0;
+	--tbe-scale: 1;
+	--tbe-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--tbe-naskh: "Amiri", "Scheherazade New", "Noto Naskh Arabic", "Traditional Arabic", serif;
+}
+
+/* Dark mode, toggled by the visitor (theme.js sets data-theme on <html>). */
+html[data-theme="dark"] {
+	--tbe-paper: #14181a;
+	--tbe-surface: #1b2124;
+	--tbe-ink: #e9e2cf;
+	--tbe-muted: #a39b88;
+	--tbe-accent: #4fb39b;
+	--tbe-rubric: #d2796a;
+	--tbe-gold: #d1a64c;
+	--tbe-line: #2e3a3e;
+	color-scheme: dark;
+}
+
+body {
+	background: var(--tbe-paper);
+	color: var(--tbe-ink);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+:focus-visible { outline: 2px solid var(--tbe-accent); outline-offset: 3px; }
+
+.screen-reader-text:not(:focus) {
+	position: absolute !important;
+	width: 1px; height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.tbe-muted { color: var(--tbe-muted); }
+
+/* Bismillah band --------------------------------------------------------- */
+.tbe-bismillah {
+	background: var(--tbe-accent) url("../images/pattern.svg") center / 64px repeat;
+	background-blend-mode: soft-light;
+	color: var(--tbe-paper);
+	text-align: center;
+	padding: 0.35rem 1rem;
+}
+.tbe-bismillah p {
+	margin: 0;
+	font-family: var(--tbe-naskh);
+	font-size: 1.35rem;
+	line-height: 1.9;
+	color: inherit;
+}
+
+/* Header ----------------------------------------------------------------- */
+.tbe-header {
+	padding-block: 1rem;
+	border-bottom: 1px solid var(--tbe-line);
+	max-width: 72rem;
+	margin-inline: auto;
+	gap: 1rem;
+}
+.tbe-header .wp-block-site-title {
+	font-size: 1.5rem;
+	font-weight: 500;
+	letter-spacing: 0.01em;
+	margin: 0;
+}
+.tbe-header .wp-block-site-title a { color: var(--tbe-ink); text-decoration: none; }
+.tbe-header__tools { gap: 1rem; }
+.tbe-header .wp-block-navigation { font-family: var(--tbe-ui); font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* Buttons ---------------------------------------------------------------- */
+.tbe-btn {
+	font-family: var(--tbe-ui);
+	font-size: 0.85rem;
+	letter-spacing: 0.04em;
+	color: var(--tbe-ink);
+	background: transparent;
+	border: 1px solid var(--tbe-line);
+	border-radius: 2px;
+	padding: 0.4rem 0.8rem;
+	cursor: pointer;
+	transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+}
+.tbe-btn:hover { border-color: var(--tbe-accent); color: var(--tbe-accent); }
+.tbe-btn[aria-pressed="false"] { opacity: 0.55; }
+.tbe-btn--solid { background: var(--tbe-accent); border-color: var(--tbe-accent); color: var(--tbe-paper); }
+.tbe-btn--solid:hover { background: var(--tbe-ink); border-color: var(--tbe-ink); color: var(--tbe-paper); }
+
+.wp-block-button.is-style-outline .wp-block-button__link {
+	background: transparent;
+	color: var(--tbe-accent);
+	border: 1px solid var(--tbe-accent);
+}
+
+/* Passage search --------------------------------------------------------- */
+.tbe-search {
+	display: flex;
+	gap: 0.5rem;
+	max-width: 32rem;
+	margin: 1.5rem auto;
+}
+.tbe-search input[type="search"] {
+	flex: 1;
+	font: inherit;
+	font-size: 1rem;
+	color: var(--tbe-ink);
+	background: var(--tbe-surface);
+	border: 1px solid var(--tbe-line);
+	border-radius: 2px;
+	padding: 0.55rem 0.8rem;
+}
+
+/* Hero ------------------------------------------------------------------- */
+.tbe-hero { padding-block: clamp(2.5rem, 8vw, 5rem); text-align: center; }
+.tbe-hero h1 { font-size: clamp(2.4rem, 7vw, 4rem); font-weight: 400; margin: 0; }
+.tbe-hero .tbe-tagline {
+	max-width: 34rem;
+	margin: 1rem auto 0;
+	color: var(--tbe-muted);
+	font-style: italic;
+	font-size: 1.2rem;
+}
+.tbe-hero .tbe-search { margin-block: 2rem 1.5rem; }
+
+/* Ornamented headings ---------------------------------------------------- */
+.tbe-ornament {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: 1.25rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--tbe-muted);
+}
+.tbe-ornament::before,
+.tbe-ornament::after {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: linear-gradient(to right, transparent, var(--tbe-gold));
+}
+.tbe-ornament::after { background: linear-gradient(to left, transparent, var(--tbe-gold)); }
+
+/* Section chips ---------------------------------------------------------- */
+.tbe-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0; }
+.tbe-chips a, .tbe-chip {
+	font-family: var(--tbe-ui);
+	font-size: 0.72rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--tbe-accent);
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	padding: 0.1rem 0.6rem;
+}
+.tbe-chip--textual-criticism { color: var(--tbe-rubric); }
+.tbe-chip--reflection { color: var(--tbe-gold); }
+
+/* Passage label on single commentary pages ------------------------------- */
+.tbe-passage { font-family: var(--tbe-ui); font-size: 0.9rem; color: var(--tbe-muted); }
+.tbe-passage__label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; margin-right: 0.4rem; }
+
+/* Cards (commentary lists) ----------------------------------------------- */
+.tbe-cards .wp-block-post-template { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); padding: 0; list-style: none; }
+.tbe-cards .wp-block-post-template > li {
+	background: var(--tbe-surface);
+	border: 1px solid var(--tbe-line);
+	border-radius: 2px;
+	padding: 1.25rem;
+}
+.tbe-cards .wp-block-post-title { margin-top: 0; font-size: 1.2rem; }
+.tbe-cards .wp-block-post-title a { text-decoration: none; }
+
+/* Footer ----------------------------------------------------------------- */
+.tbe-footer { max-width: 72rem; margin-inline: auto; padding-block: 2rem; font-size: 0.85rem; }
+.tbe-copyright { color: var(--tbe-muted); line-height: 1.6; max-width: 52rem; }
+
+.tbe-main { padding-block: 1.5rem 3rem; }
+
+@media (max-width: 600px) {
+	.tbe-bismillah p { font-size: 1.15rem; }
+	.tbe-search { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { transition: none !important; scroll-behavior: auto !important; }
+}

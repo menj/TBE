@@ -1,0 +1,41 @@
+/* Settings screen — minimal, tabbed. */
+.tbe-admin { max-width: 52rem; }
+.tbe-admin h1 { font-weight: 500; margin-bottom: 1rem; }
+
+.tbe-tabs { display: flex; gap: 0.25rem; border-bottom: 1px solid #dcdcde; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.tbe-tab {
+	padding: 0.6rem 1rem;
+	text-decoration: none;
+	color: #50575e;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -1px;
+}
+.tbe-tab:hover { color: #1d2327; }
+.tbe-tab.is-active { color: #17604e; border-bottom-color: #17604e; font-weight: 600; }
+
+.tbe-panel { background: #fff; border: 1px solid #dcdcde; border-radius: 4px; padding: 1.5rem 1.75rem; }
+.tbe-panel h2 { font-size: 1.05rem; margin: 1.75rem 0 0.5rem; }
+.tbe-field { margin-bottom: 1.25rem; }
+.tbe-field > label:first-child { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+.tbe-field input[type="checkbox"] + * { margin-left: 0.25rem; }
+.tbe-rtl { direction: rtl; font-size: 1.15rem; }
+
+.tbe-status { border-collapse: collapse; margin-bottom: 1.5rem; }
+.tbe-status th, .tbe-status td { text-align: left; padding: 0.35rem 1.5rem 0.35rem 0; }
+
+/* Colour schemes */
+.tbe-schemes { border: 0; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+.tbe-scheme {
+	display: flex; align-items: center; gap: 0.75rem;
+	padding: 0.75rem 1rem;
+	border: 1px solid #dcdcde; border-radius: 4px; cursor: pointer;
+}
+.tbe-scheme:has(input:checked) { border-color: #17604e; box-shadow: 0 0 0 1px #17604e; }
+.tbe-scheme__name { flex: 1; font-weight: 500; }
+.tbe-scheme__swatches { display: flex; }
+.tbe-scheme__swatches i { width: 1.4rem; height: 1.4rem; border: 1px solid rgba(0, 0, 0, 0.15); margin-left: -4px; border-radius: 50%; }
+
+.tbe-custom[hidden] { display: none; }
+.tbe-grid { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+.tbe-color { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.tbe-color input[type="color"] { width: 2.5rem; height: 2rem; padding: 0; border: 1px solid #dcdcde; background: none; }

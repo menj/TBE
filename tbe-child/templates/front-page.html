@@ -1,0 +1,45 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"tbe-main","layout":{"type":"constrained"}} -->
+<main class="wp-block-group tbe-main">
+
+	<!-- wp:group {"className":"tbe-hero","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group tbe-hero">
+		<!-- wp:heading {"level":1,"textAlign":"center"} -->
+		<h1 class="wp-block-heading has-text-align-center">The Bible, Exposed</h1>
+		<!-- /wp:heading -->
+		<!-- wp:tbe/tagline /-->
+		<!-- wp:tbe/passage-search /-->
+		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+		<div class="wp-block-buttons">
+			<!-- wp:button -->
+			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/bible/">Read the books</a></div>
+			<!-- /wp:button -->
+			<!-- wp:button {"className":"is-style-outline"} -->
+			<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/commentary/">Browse commentary</a></div>
+			<!-- /wp:button -->
+		</div>
+		<!-- /wp:buttons -->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:heading {"className":"tbe-ornament"} -->
+	<h2 class="wp-block-heading tbe-ornament">Latest commentary</h2>
+	<!-- /wp:heading -->
+
+	<!-- wp:query {"query":{"perPage":6,"postType":"tbe_commentary","order":"desc","orderBy":"date","inherit":false},"className":"tbe-cards"} -->
+	<div class="wp-block-query tbe-cards">
+		<!-- wp:post-template -->
+			<!-- wp:post-title {"isLink":true,"level":3} /-->
+			<!-- wp:post-excerpt {"excerptLength":28} /-->
+		<!-- /wp:post-template -->
+		<!-- wp:query-no-results -->
+			<!-- wp:paragraph --><p>Commentary is on its way.</p><!-- /wp:paragraph -->
+		<!-- /wp:query-no-results -->
+	</div>
+	<!-- /wp:query -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
