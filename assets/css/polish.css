@@ -41,16 +41,47 @@ html[data-theme="dark"] {
 
 /* Header and navigation ---------------------------------------------------- */
 .tbe-header { border-bottom-color: color-mix(in srgb, var(--tbe-gold) 45%, var(--tbe-line)); }
-.tbe-header .wp-block-navigation a,
+.tbe-header .wp-block-site-title a:hover { color: var(--tbe-accent); }
+
+/* Navigation: quiet pills. Medium weight, wide tracking, a wash of colour on hover, a gold dot for the page you are on. */
+.tbe-header .wp-block-navigation { font-weight: 500; letter-spacing: 0.09em; font-size: 0.78rem; }
+.tbe-header .wp-block-navigation .wp-block-navigation__container { gap: 0.15rem; }
+.tbe-header .wp-block-navigation .wp-block-navigation-item__content,
 .mock-nav a {
 	position: relative;
-	padding-block: 0.3rem;
-	background: linear-gradient(var(--tbe-gold), var(--tbe-gold)) left bottom / 0% 2px no-repeat;
-	transition: background-size 0.3s var(--tbe-ease), color 0.2s var(--tbe-ease);
+	padding: 0.5rem 0.95rem;
+	border-radius: var(--tbe-radius-pill);
+	text-decoration: none;
+	color: var(--tbe-ink);
+	transition: background-color 0.2s var(--tbe-ease), color 0.2s var(--tbe-ease), box-shadow 0.25s var(--tbe-ease);
 }
-.tbe-header .wp-block-navigation a:hover,
-.mock-nav a:hover { color: var(--tbe-accent); background-size: 100% 2px; }
-.tbe-header .wp-block-site-title a:hover { color: var(--tbe-accent); }
+.tbe-header .wp-block-navigation .wp-block-navigation-item__content::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 0.18rem;
+	width: 0.28rem;
+	height: 0.28rem;
+	border-radius: 50%;
+	background: var(--tbe-gold);
+	transform: translateX(-50%) scale(0);
+	transition: transform 0.25s var(--tbe-ease);
+}
+.tbe-header .wp-block-navigation .wp-block-navigation-item__content:hover,
+.tbe-header .wp-block-navigation .wp-block-navigation-item__content:focus-visible,
+.mock-nav a:hover {
+	color: var(--tbe-accent);
+	background-color: var(--tbe-wash-accent);
+	text-decoration: none;
+}
+.tbe-header .wp-block-navigation .wp-block-navigation-item__content:hover::after { transform: translateX(-50%) scale(1); }
+.tbe-header .wp-block-navigation .current-menu-item > .wp-block-navigation-item__content,
+.tbe-header .wp-block-navigation [aria-current="page"] {
+	color: var(--tbe-accent);
+	background-color: var(--tbe-wash-accent);
+}
+.tbe-header .wp-block-navigation .current-menu-item > .wp-block-navigation-item__content::after,
+.tbe-header .wp-block-navigation [aria-current="page"]::after { transform: translateX(-50%) scale(1); }
 
 /* Buttons ------------------------------------------------------------------ */
 .tbe-btn {

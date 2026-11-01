@@ -22,6 +22,10 @@ add_action(
 		}
 		$colors = tbe_active_colors();
 		printf( '<meta name="theme-color" content="%s">' . "\n", esc_attr( (string) ( $colors['accent'] ?? '#6e1f2e' ) ) );
+		// An SEO plugin that writes its own social tags can switch these off: add_filter( 'tbe_social_meta', '__return_false' ).
+		if ( ! apply_filters( 'tbe_social_meta', ! defined( 'WPSEO_VERSION' ) && ! defined( 'RANK_MATH_VERSION' ) ) ) {
+			return;
+		}
 		printf( '<meta property="og:image" content="%s">' . "\n", esc_url( tbe_brand_url( 'social-preview.png' ) ) );
 		echo '<meta property="og:image:width" content="1200">' . "\n" . '<meta property="og:image:height" content="630">' . "\n";
 		echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
@@ -31,16 +35,15 @@ add_action(
 );
 
 /** Browsers ask for /favicon.ico on their own; answer with the brand icon unless a Site Icon is set. */
-add_action(
-	'do_faviconico',
-	static function () {
-		if ( has_site_icon() ) {
-			return;
-		}
-		header( 'Content-Type: image/x-icon' );
-		header( 'Cache-Control: public, max-age=604800' );
-		readfile( TBE_DIR . '/assets/img/brand/favicon.ico' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-		exit;
-	},
-	5
-);
+function tbe_serve_favicon(): void {
+	if ( has_site_icon() ) {
+		return;
+	}
+	header( 'Content-Type: image/x-icon' );
+	header( 'Cache-Control: public, max-age=604800' );
+	readfile( TBE_DIR . '/assets/img/brand/favicon.ico' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	exit;
+}
+// WordPress 5.4 renamed the action from do_faviconico to do_favicon; answer on both.
+add_action( 'do_favicon', 'tbe_serve_favicon', 5 );
+add_action( 'do_faviconico', 'tbe_serve_favicon', 5 );

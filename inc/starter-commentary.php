@@ -84,13 +84,21 @@ function tbe_write_entry( int $existing_id, array $entry, string $status ): int 
 /**
  * Create the entries of a pack that are not there yet.
  *
- * @return array{created:int,skipped:int,failed:string[]}
+ * With a deadline (a microtime value) it stops there and reports complete = false, so a big pack never
+ * runs a dashboard request out of time; the next call carries on where it stopped.
+ *
+ * @return array{created:int,skipped:int,failed:string[],complete:bool}
  */
-function tbe_import_pack( array $pack, string $status ): array {
-	$created = 0;
-	$skipped = 0;
-	$failed  = array();
+function tbe_import_pack( array $pack, string $status, float $deadline = 0.0 ): array {
+	$created  = 0;
+	$skipped  = 0;
+	$failed   = array();
+	$complete = true;
 	foreach ( $pack['entries'] as $entry ) {
+		if ( $deadline && microtime( true ) > $deadline ) {
+			$complete = false;
+			break;
+		}
 		$key = (string) $entry['key'];
 		if ( tbe_pack_existing( $key ) ) {
 			++$skipped;
@@ -102,7 +110,7 @@ function tbe_import_pack( array $pack, string $status ): array {
 			$failed[] = $key;
 		}
 	}
-	return array( 'created' => $created, 'skipped' => $skipped, 'failed' => $failed );
+	return array( 'created' => $created, 'skipped' => $skipped, 'failed' => $failed, 'complete' => $complete );
 }
 
 /** Every post that came from a pack, keyed by its pack key (trash excluded). @return array<string,WP_Post> */
@@ -180,9 +188,14 @@ function tbe_autosync_packs(): void {
 		if ( $seen === $fingerprint ) {
 			continue;
 		}
-		if ( false === $seen && ! tbe_pack_posts( (string) $pack['id'] ) ) {
-			$done   = tbe_import_pack( $pack, 'publish' );
+		if ( 'partial' === $seen || ( false === $seen && ! tbe_pack_posts( (string) $pack['id'] ) ) ) {
+			// First import: published, in batches of about fifteen seconds; 'partial' marks one still under way.
+			$done   = tbe_import_pack( $pack, 'publish', microtime( true ) + 15 );
 			$result = array( 'updated' => 0, 'created' => $done['created'], 'removed' => 0 );
+			if ( ! $done['complete'] ) {
+				update_option( $option, 'partial', false );
+				continue;
+			}
 		} else {
 			$result = tbe_sync_pack( $pack );
 		}

@@ -63,7 +63,7 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 }
 .tbe-header .wp-block-site-title a { color: var(--tbe-ink); text-decoration: none; }
 .tbe-header__tools { gap: 1rem; }
-.tbe-header .wp-block-navigation { font-family: var(--tbe-ui); font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.tbe-header .wp-block-navigation { font-family: var(--tbe-ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* Buttons ---------------------------------------------------------------- */
 .tbe-btn {
@@ -117,15 +117,18 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 }
 .tbe-header .wp-block-site-title,
 .tbe-header .wp-block-site-title a,
-.tbe-brand { font-family: "Angel", var(--tbe-display, Georgia), serif; font-weight: 400; letter-spacing: 0.02em; }
-.tbe-brand { font-size: clamp(3rem, 9vw, 5.5rem); line-height: 1.05; }
+.tbe-brand { font-family: "Angel", Georgia, serif; font-weight: 400; letter-spacing: 0.02em; }
+.tbe-hero h1.tbe-brand { font-size: clamp(3rem, 9vw, 5.5rem); line-height: 1.05; }
 
 /* Brand mark: the hollow inverted cross, coloured by the active scheme. */
 .tbe-lockup { gap: 0.7rem; }
 .tbe-brandmark { display: inline-flex; color: var(--tbe-accent); line-height: 0; }
 .tbe-brandmark svg { height: 2rem; width: auto; display: block; }
+.tbe-brandmark--hero { display: none; }
+@supports ((-webkit-mask: url("a.png")) or (mask: url("a.png"))) {
+	.tbe-brandmark--hero { display: block; }
+}
 .tbe-brandmark--hero {
-	display: block;
 	width: clamp(4.5rem, 11vw, 6.5rem);
 	aspect-ratio: 362 / 729;
 	margin: 0 auto 1.5rem;
