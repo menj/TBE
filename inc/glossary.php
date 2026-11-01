@@ -107,7 +107,16 @@ add_action(
 			return;
 		}
 		foreach ( tbe_seed_terms() as $seed ) {
-			if ( get_page_by_title( $seed[0], OBJECT, 'tbe_term' ) ) {
+			$existing = get_posts(
+				array(
+					'post_type'   => 'tbe_term',
+					'post_status' => 'any',
+					'title'       => $seed[0],
+					'numberposts' => 1,
+					'fields'      => 'ids',
+				)
+			);
+			if ( $existing ) {
 				continue;
 			}
 			$id = wp_insert_post(

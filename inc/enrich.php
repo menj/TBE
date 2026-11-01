@@ -14,7 +14,8 @@ defined( 'ABSPATH' ) || exit;
  * Text inside links, headings, code, buttons, footnote markers and existing terms is skipped.
  */
 function tbe_transform_text_nodes( string $html, callable $transform ): string {
-	if ( '' === trim( $html ) ) {
+	// Hover cards and glossary tooltips need PHP's DOM extension; without it, show the text as written.
+	if ( '' === trim( $html ) || ! class_exists( 'DOMDocument' ) ) {
 		return $html;
 	}
 	$previous = libxml_use_internal_errors( true );

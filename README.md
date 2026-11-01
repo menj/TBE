@@ -1,6 +1,11 @@
 # TBE — The Bible Exposed (child theme)
 
-Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires WordPress 6.6+ and PHP 8.0+.
+Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires WordPress 6.7+ (the parent theme's minimum) and PHP 8.0+.
+
+## Before you upload
+- **Install Twenty Twenty-Five first.** This is a child theme; WordPress refuses it without its parent.
+- **Hosting:** PHP 8.0+ with the `dom` and `mbstring` extensions (almost every host has both; without `dom` the glossary tooltips and scripture hover cards quietly switch off). The ZIP is about 14 MB, so check the host's upload limit (Appearance → Themes → Add New → Upload shows it), or upload by SFTP into `wp-content/themes/tbe/`.
+- After activating, go to Settings → Permalinks and press **Save** once. Pretty permalinks (not "Plain") are required for `/bible/…`.
 
 ## Install
 1. Install and keep **Twenty Twenty-Five** (the parent) on the site.
