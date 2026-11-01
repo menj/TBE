@@ -25,7 +25,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires Wor
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## Settings (Appearance → TBE)
-Tabbed: **General** (tagline, light/dark toggle, language switcher), **Appearance** (three colour schemes or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
+Tabbed: **General** (tagline, light/dark toggle, language switcher), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
 
 ## How a chapter is laid out
 Modelled on the verse-by-verse commentary book format, with web-only improvements:
