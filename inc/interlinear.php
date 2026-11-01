@@ -1,6 +1,6 @@
 <?php
 /**
- * Word-by-word Hebrew interlinear (Leningrad Codex).
+ * Word-by-word interlinear: Hebrew (Leningrad Codex) and Greek (NA28 with variants).
  * Data: STEPBible (https://www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
  * Built by tools/build_interlinear.py into data/interlinear/{book}/{chapter}.json.
  *
@@ -168,6 +168,84 @@ function tbe_hebrew_morph_segment( string $s ): string {
 	return implode( ' · ', $out );
 }
 
+/** Greek morphology (Robinson), e.g. "N-NSF", "V-PAI-3S", "V-PAP-NSM". */
+function tbe_greek_morph_text( string $code ): string {
+	if ( '' === $code ) {
+		return '';
+	}
+	$words = array(
+		'ADV' => 'adverb', 'CONJ' => 'conjunction', 'COND' => 'conditional', 'PRT' => 'particle', 'PREP' => 'preposition',
+		'INJ' => 'interjection', 'ARAM' => 'Aramaic word', 'HEB' => 'Hebrew word',
+	);
+	if ( isset( $words[ $code ] ) ) {
+		return $words[ $code ];
+	}
+	$pos = array(
+		'N' => 'noun', 'V' => 'verb', 'A' => 'adjective', 'T' => 'article', 'P' => 'personal pronoun', 'R' => 'relative pronoun',
+		'C' => 'reciprocal pronoun', 'D' => 'demonstrative pronoun', 'K' => 'correlative pronoun', 'I' => 'interrogative pronoun',
+		'X' => 'indefinite pronoun', 'Q' => 'correlative or interrogative pronoun', 'F' => 'reflexive pronoun', 'S' => 'possessive adjective',
+	);
+	$case   = array( 'N' => 'nominative', 'G' => 'genitive', 'D' => 'dative', 'A' => 'accusative', 'V' => 'vocative' );
+	$num    = array( 'S' => 'singular', 'P' => 'plural' );
+	$gen    = array( 'M' => 'masculine', 'F' => 'feminine', 'N' => 'neuter' );
+	$tense  = array( 'P' => 'present', 'I' => 'imperfect', 'F' => 'future', 'A' => 'aorist', 'R' => 'perfect', 'L' => 'pluperfect' );
+	$voice  = array(
+		'A' => 'active', 'M' => 'middle', 'P' => 'passive', 'E' => 'middle or passive', 'D' => 'middle deponent', 'O' => 'passive deponent',
+		'N' => 'middle or passive deponent', 'Q' => 'impersonal active', 'X' => 'no voice',
+	);
+	$mood   = array( 'I' => 'indicative', 'S' => 'subjunctive', 'O' => 'optative', 'M' => 'imperative', 'N' => 'infinitive', 'P' => 'participle', 'R' => 'imperative participle' );
+	$person = array( '1' => 'first person', '2' => 'second person', '3' => 'third person' );
+	$extra  = array( 'P' => 'person', 'L' => 'place', 'T' => 'title', 'C' => 'comparative', 'S' => 'superlative' );
+
+	$parts = explode( '-', $code );
+	$first = $parts[0];
+	if ( ! isset( $pos[ $first ] ) ) {
+		return '';
+	}
+	$out = array( $pos[ $first ] );
+
+	// Case-number-gender token, e.g. NSM; also 1NS / 2PS style person-number for pronouns.
+	$cng = static function ( string $t ) use ( $case, $num, $gen, $person ): array {
+		$o = array();
+		if ( 3 === strlen( $t ) && isset( $case[ $t[0] ] ) ) {
+			$o = array( $case[ $t[0] ], $num[ $t[1] ] ?? '', $gen[ $t[2] ] ?? '' );
+		} elseif ( 3 === strlen( $t ) && isset( $person[ $t[0] ] ) ) {
+			$o = array( $person[ $t[0] ], $num[ $t[2] ] ?? '', '' );
+			$o[] = isset( $case[ $t[1] ] ) ? $case[ $t[1] ] : '';
+		}
+		return array_values( array_filter( $o ) );
+	};
+
+	if ( 'V' === $first ) {
+		$tvm = $parts[1] ?? '';
+		$tvm = ltrim( $tvm, '2' ) !== $tvm ? 'second ' . substr( $tvm, 1 ) : $tvm;
+		$second = '' !== $tvm && 0 === strpos( $tvm, 'second ' );
+		$core   = $second ? substr( $tvm, 7 ) : $tvm;
+		if ( 3 === strlen( $core ) ) {
+			$out[] = ( $second ? 'second ' : '' ) . ( $tense[ $core[0] ] ?? '' );
+			$out[] = $voice[ $core[1] ] ?? '';
+			$out[] = $mood[ $core[2] ] ?? '';
+		}
+		$tail = $parts[2] ?? '';
+		if ( 2 === strlen( $tail ) && isset( $person[ $tail[0] ] ) ) {
+			$out[] = $person[ $tail[0] ];
+			$out[] = $num[ $tail[1] ] ?? '';
+		} elseif ( '' !== $tail ) {
+			$out = array_merge( $out, $cng( $tail ) );
+		}
+	} else {
+		if ( isset( $parts[1] ) ) {
+			$out = array_merge( $out, $cng( $parts[1] ) );
+		}
+		foreach ( array_slice( $parts, 2 ) as $flag ) {
+			if ( isset( $extra[ $flag ] ) ) {
+				$out[] = $extra[ $flag ];
+			}
+		}
+	}
+	return implode( ' · ', array_values( array_filter( $out ) ) );
+}
+
 /* View -------------------------------------------------------------------- */
 
 function tbe_interlinear_layers(): array {
@@ -194,8 +272,9 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 		return $out . '<p class="tbe-notice">' . esc_html__( 'The interlinear for this chapter is not available.', 'tbe-child' ) . '</p></div>';
 	}
 
-	$audio = TBE_Audio::chapter( $slug, $chapter );
-	$esv   = array();
+	$hebrew = 'he' === $data['lang'];
+	$audio  = $hebrew ? TBE_Audio::chapter( $slug, $chapter ) : null;
+	$esv    = array();
 	foreach ( (array) TBE_Bible::chapter( $slug, $chapter ) as $verse ) {
 		$esv[ (int) $verse['n'] ] = preg_replace( '/\s+/u', ' ', (string) $verse['t'] );
 	}
@@ -214,19 +293,26 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 		$on   = in_array( $key, array( 'gloss', 'translit', 'strongs' ), true );
 		$out .= '<button type="button" class="tbe-btn" data-tbe-il="' . esc_attr( $key ) . '" aria-pressed="' . ( $on ? 'true' : 'false' ) . '">' . esc_html( $label ) . '</button>';
 	}
-	$out .= '<button type="button" class="tbe-btn" data-tbe-il-script="vowels" aria-pressed="true">' . esc_html__( 'Vowel points', 'tbe-child' ) . '</button>';
-	$out .= '<button type="button" class="tbe-btn" data-tbe-il-script="cantillation" aria-pressed="true">' . esc_html__( 'Cantillation', 'tbe-child' ) . '</button>';
+	if ( $hebrew ) {
+		$out .= '<button type="button" class="tbe-btn" data-tbe-il-script="vowels" aria-pressed="true">' . esc_html__( 'Vowel points', 'tbe-child' ) . '</button>';
+		$out .= '<button type="button" class="tbe-btn" data-tbe-il-script="cantillation" aria-pressed="true">' . esc_html__( 'Cantillation', 'tbe-child' ) . '</button>';
+	} else {
+		$out .= '<button type="button" class="tbe-btn" data-tbe-il="variants" aria-pressed="true" data-tbe-tip="' . esc_attr__( 'Outline words that are not in the NA28 critical text and flag places where manuscripts differ', 'tbe-child' ) . '">' . esc_html__( 'Show variants', 'tbe-child' ) . '</button>';
+	}
 	if ( $audio && current_user_can( 'edit_posts' ) ) {
 		$out .= '<button type="button" class="tbe-btn" data-tbe-il="review" aria-pressed="false" data-tbe-tip="' . esc_attr__( 'Editors only: outline words whose timing is only an estimate, so you can check them by ear', 'tbe-child' ) . '">' . esc_html__( 'Check timings', 'tbe-child' ) . '</button>';
 	}
 	$out .= '</div>';
 
-	$out .= '<div class="tbe-il tbe-il--he tbe-il--hide-lemma tbe-il--hide-morph" id="tbe-il">';
+	$class = 'tbe-il tbe-il--' . ( $hebrew ? 'he' : 'gr' ) . ' tbe-il--hide-lemma tbe-il--hide-morph';
+	$out  .= '<div class="' . esc_attr( $class ) . '" id="tbe-il">';
+
+	$counts = array( 'variant' => 0 );
 	foreach ( $data['v'] as $verse => $words ) {
 		$n    = (int) $verse;
 		$line = '';
 		foreach ( $words as $idx => $w ) {
-			$line .= tbe_render_il_word( $w, $audio['words'][ $verse ][ $idx ] ?? null );
+			$line .= tbe_render_il_word( $w, $hebrew, $counts, $audio['words'][ $verse ][ $idx ] ?? null );
 		}
 		$out .= '<section class="tbe-il__verse" id="v' . $n . '"><p class="tbe-il__ref"><a class="tbe-vn" href="#v' . $n . '">' . ( 0 === $n ? esc_html__( 'Title', 'tbe-child' ) : $n ) . '</a>';
 		if ( $audio && ! empty( $audio['words'][ $verse ] ) ) {
@@ -235,11 +321,14 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 		if ( isset( $esv[ $n ] ) ) {
 			$out .= '<span class="tbe-il__esv tbe-scripture" lang="en" dir="ltr">' . esc_html( $esv[ $n ] ) . '</span>';
 		}
-		$out .= '</p><div class="tbe-il__words" dir="rtl">' . $line . '</div></section>';
+		$out .= '</p><div class="tbe-il__words" dir="' . ( $hebrew ? 'rtl' : 'ltr' ) . '">' . $line . '</div></section>';
 	}
 	$out .= '</div>';
 
-	$out .= '<p class="tbe-copyright">' . esc_html__( 'Hebrew: Westminster Leningrad Codex, tagged by Tyndale House.', 'tbe-child' ) . ' ' . wp_kses_post(
+	$source = $hebrew
+		? __( 'Hebrew: Westminster Leningrad Codex, tagged by Tyndale House.', 'tbe-child' )
+		: __( 'Greek: NA28 with variants from SBLGNT, the Textus Receptus and others, tagged by Tyndale House.', 'tbe-child' );
+	$out   .= '<p class="tbe-copyright">' . esc_html( $source ) . ' ' . wp_kses_post(
 		sprintf(
 			/* translators: %s: link to STEP Bible */
 			__( 'Interlinear data from %s, licensed CC BY 4.0.', 'tbe-child' ),
@@ -249,37 +338,45 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	return $out . '</div>';
 }
 
-/** One word: gloss, Hebrew, transliteration, Strong's number, root word, grammar. */
-function tbe_render_il_word( array $w, ?array $timing = null ): string {
+/** One word: gloss, original, transliteration, Strong's number, root word, grammar. */
+function tbe_render_il_word( array $w, bool $hebrew, array &$counts, ?array $timing = null ): string {
 	[ $text, $translit, $gloss, $strongs, $morph, $lemma ] = array_pad( $w, 6, '' );
-	$extra = isset( $w[6] ) && is_array( $w[6] ) ? $w[6] : array();
-	$parse = tbe_hebrew_morph_text( (string) $morph );
-	$class = 'tbe-il__w';
-	$flag  = false;
-	$tip   = array();
+	$extra  = isset( $w[6] ) && is_array( $w[6] ) ? $w[6] : array();
+	$parse  = $hebrew ? tbe_hebrew_morph_text( (string) $morph ) : tbe_greek_morph_text( (string) $morph );
+	$class  = 'tbe-il__w';
+	$notes  = array();
+	$tip    = array();
 	if ( '' !== $parse ) {
 		$tip[] = $parse;
 	}
 	if ( '' !== $strongs ) {
-		$tip[] = sprintf( /* translators: %s: Strong's number */ __( 'Strong\'s %s', 'tbe-child' ), $strongs );
+		$tip[] = sprintf( /* translators: %s: Strong's number */ __( 'Strong\'s %s', 'tbe-child' ), ltrim( (string) $strongs, 'HG0' ) ? $strongs : $strongs );
+	}
+
+	if ( ! $hebrew && ! empty( $extra['n'] ) ) {
+		$class .= ' tbe-il__w--outside';
+		$tip[]  = sprintf( /* translators: %s: manuscript editions */ __( 'Not in the NA28 critical text. Found in: %s', 'tbe-child' ), str_replace( '+', ', ', (string) ( $extra['e'] ?? '' ) ) );
 	}
 	if ( ! empty( $extra['v'] ) ) {
-		$tip[] = sprintf( /* translators: %s: description of the variant */ __( 'Variant: %s', 'tbe-child' ), (string) $extra['v'] );
-		$flag  = true;
+		$class .= ' tbe-il__w--variant';
+		$tip[]  = sprintf( /* translators: %s: description of the variant */ __( 'Variant: %s', 'tbe-child' ), (string) $extra['v'] );
+		$notes[] = '<span class="tbe-il__flag" aria-hidden="true">⚑</span>';
+		++$counts['variant'];
+	} elseif ( ! $hebrew && ! empty( $extra['e'] ) && empty( $extra['n'] ) ) {
+		$tip[] = sprintf( /* translators: %s: manuscript editions */ __( 'Read by: %s', 'tbe-child' ), str_replace( '+', ', ', (string) $extra['e'] ) );
 	}
-	if ( ! empty( $extra['t'] ) ) {
+	if ( $hebrew && ! empty( $extra['t'] ) ) {
 		$labels = array(
 			'Q' => __( 'Qere: the scribal correction followed by translators', 'tbe-child' ),
 			'R' => __( 'Restored from a parallel passage', 'tbe-child' ),
-			'X' => __( 'Added from the Septuagint (as in the BHS apparatus)', 'tbe-child' ),
+			'X' => __( 'Added from the Greek tradition (as in the BHS apparatus)', 'tbe-child' ),
 		);
 		if ( isset( $labels[ $extra['t'] ] ) ) {
-			$tip[] = $labels[ $extra['t'] ];
-			$flag  = true;
+			$class .= ' tbe-il__w--variant';
+			$tip[]  = $labels[ $extra['t'] ];
+			$notes[] = '<span class="tbe-il__flag" aria-hidden="true">⚑</span>';
+			++$counts['variant'];
 		}
-	}
-	if ( $flag ) {
-		$class .= ' tbe-il__w--variant';
 	}
 
 	$attrs = '';
@@ -287,19 +384,24 @@ function tbe_render_il_word( array $w, ?array $timing = null ): string {
 		$attrs  = ' data-t0="' . esc_attr( (string) $timing[0] ) . '" data-t1="' . esc_attr( (string) $timing[1] ) . '"' . ( empty( $timing[2] ) ? ' data-approx="1"' : '' );
 		$class .= ' tbe-il__w--timed';
 	}
+	$script_class = $hebrew ? 'tbe-il__he' : 'tbe-il__gr';
+	$script_lang  = $hebrew ? 'he' : 'grc';
+	$word_html    = '<span class="' . $script_class . '" lang="' . $script_lang . '" dir="' . ( $hebrew ? 'rtl' : 'ltr' ) . '"' . ( $hebrew ? ' data-full="' . esc_attr( (string) $text ) . '"' : '' ) . '>' . esc_html( (string) $text ) . '</span>';
 
 	return sprintf(
-		'<span class="%1$s" tabindex="0"%2$s data-tbe-tip-title="%3$s" data-tbe-tip="%4$s">%5$s<span class="tbe-il__gloss" dir="ltr">%6$s</span><span class="tbe-il__he" lang="he" dir="rtl" data-full="%7$s">%7$s</span><span class="tbe-il__translit" dir="ltr">%8$s</span><span class="tbe-il__strongs" dir="ltr">%9$s</span><span class="tbe-il__lemma tbe-il__he" lang="he">%10$s</span><span class="tbe-il__morph" dir="ltr">%11$s</span></span>',
+		'<span class="%1$s" tabindex="0"%13$s data-tbe-tip-title="%2$s" data-tbe-tip="%3$s">%4$s<span class="tbe-il__gloss" dir="ltr">%5$s</span>%6$s<span class="tbe-il__translit" dir="ltr">%7$s</span><span class="tbe-il__strongs" dir="ltr">%8$s</span><span class="tbe-il__lemma %9$s" lang="%10$s">%11$s</span><span class="tbe-il__morph" dir="ltr">%12$s</span></span>',
 		esc_attr( $class ),
-		$attrs,
 		esc_attr( trim( (string) $lemma . ( '' !== $gloss ? ' — ' . $gloss : '' ), ' —' ) ),
 		esc_attr( implode( ' · ', $tip ) ),
-		$flag ? '<span class="tbe-il__flag" aria-hidden="true">⚑</span>' : '',
+		implode( '', $notes ),
 		esc_html( (string) $gloss ),
-		esc_attr( (string) $text ),
+		$word_html,
 		esc_html( (string) $translit ),
 		esc_html( (string) $strongs ),
+		esc_attr( $script_class ),
+		esc_attr( $script_lang ),
 		esc_html( (string) $lemma ),
-		esc_html( $parse ?: (string) $morph )
+		esc_html( $parse ?: (string) $morph ),
+		$attrs
 	);
 }

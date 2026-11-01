@@ -134,7 +134,7 @@ add_filter(
 				$parts['title'] = __( 'Credits and references', 'tbe-child' );
 				break;
 			case 'interlinear-index':
-				$parts['title'] = __( 'Hebrew interlinear', 'tbe-child' );
+				$parts['title'] = __( 'Interlinear', 'tbe-child' );
 				break;
 			case 'book':
 				$parts['title'] = $request['book']['name'];
