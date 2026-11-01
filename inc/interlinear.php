@@ -202,7 +202,7 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 
 	if ( $audio ) {
 		$out .= '<figure class="tbe-il__audio"><figcaption>' . esc_html__( 'Listen to the Hebrew reading', 'tbe-child' ) . ' <span class="tbe-muted">' . esc_html__( 'Click a verse number or any word to hear it.', 'tbe-child' ) . '</span></figcaption>'
-			. '<audio id="tbe-il-audio" controls preload="none" src="' . esc_url( $audio['url'] ) . '"></audio>';
+			. '<audio id="tbe-il-audio" data-tbe-audio controls preload="metadata" src="' . esc_url( $audio['url'] ) . '"></audio>';
 		if ( '' !== trim( (string) $audio['credit'] ) ) {
 			$out .= '<p class="tbe-muted tbe-il__credit">' . esc_html( (string) $audio['credit'] ) . '</p>';
 		}

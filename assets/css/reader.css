@@ -160,3 +160,15 @@
 .tbe-il__audio--inline { max-width: 36rem; margin: 0 auto 1.75rem; text-align: center; }
 .tbe-il__audio--inline figcaption { font-family: var(--tbe-ui); font-size: 0.9rem; margin-bottom: 0.5rem; }
 .tbe-il__audio--inline audio { width: 100%; border-radius: var(--tbe-radius-pill, 999px); }
+
+/* Audio controls: play/pause, stop, seek, time (built by audio.js) ------------- */
+.tbe-player { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 0.65rem; margin-top: 0.6rem; font-family: var(--tbe-ui); }
+.tbe-player .tbe-btn { min-width: 6rem; padding-block: 0.4rem; }
+.tbe-player__seek { flex: 1 1 10rem; min-width: 8rem; accent-color: var(--tbe-accent); }
+.tbe-player__time { font-size: 0.85rem; font-variant-numeric: tabular-nums; color: var(--tbe-muted, inherit); min-width: 5.5rem; text-align: right; }
+.tbe-player.is-playing .tbe-player__play { border-color: var(--tbe-accent); color: var(--tbe-accent); }
+
+/* Interlinear chapter list */
+.tbe-chapters .has-interlinear a { box-shadow: inset 0 -2px 0 var(--tbe-gold); }
+.tbe-il-index__note { color: var(--tbe-gold); font-size: 0.8em; }
+.tbe-il-index .tbe-ornament a { color: inherit; text-decoration: none; }

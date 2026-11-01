@@ -36,6 +36,10 @@ add_action(
 		}
 		wp_enqueue_style( 'tbe-polish', TBE_URI . '/assets/css/polish.css', $polish_deps, TBE_VERSION );
 
+		if ( $request && in_array( $request['view'], array( 'chapter', 'interlinear' ), true ) ) {
+			wp_enqueue_script( 'tbe-audio', TBE_URI . '/assets/js/audio.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		}
+
 		if ( tbe_request() || is_singular( 'tbe_commentary' ) ) {
 			wp_enqueue_script( 'tbe-reader', TBE_URI . '/assets/js/reader.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		}
