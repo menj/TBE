@@ -29,6 +29,8 @@ function tbe_render_reader(): string {
 			return tbe_view_index();
 		case 'interlinear-index':
 			return tbe_view_interlinear_index();
+		case 'credits':
+			return tbe_view_credits();
 		default:
 			return tbe_view_missing();
 	}
@@ -41,6 +43,33 @@ function tbe_view_missing(): string {
 			esc_html__( 'That book or chapter does not exist. Try the %s.', 'tbe-child' ),
 			'<a href="' . esc_url( TBE_Bible::url() ) . '">' . esc_html__( 'list of books', 'tbe-child' ) . '</a>'
 		) . '</p></div>';
+}
+
+/** Credits and references: every source the site draws on, including each bundled commentary pack. */
+function tbe_view_credits(): string {
+	$out  = '<div class="tbe-reader tbe-credits">';
+	$out .= '<h1 class="tbe-title">' . esc_html__( 'Credits and references', 'tbe-child' ) . '</h1>';
+
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Scripture', 'tbe-child' ) . '</h2><p>' . esc_html( (string) tbe_setting( 'copyright' ) ) . '</p>';
+
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Hebrew text and interlinear', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'Hebrew: Westminster Leningrad Codex, tagged by Tyndale House, Cambridge. Word-by-word data from %s, licensed CC BY 4.0.', 'tbe-child' ), '<a href="https://www.STEPBible.org" rel="noopener">STEP Bible</a>' ) ) . '</p>';
+
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typeface', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit font, by the Society of Biblical Literature.', 'tbe-child' ) . '</p>';
+
+	$packs = tbe_packs();
+	if ( $packs ) {
+		$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Commentary sources', 'tbe-child' ) . '</h2><ul class="tbe-credits__list">';
+		foreach ( $packs as $pack ) {
+			$out .= '<li>' . esc_html( (string) $pack['source'] );
+			if ( ! empty( $pack['licence'] ) ) {
+				$out .= ' <span class="tbe-muted">(' . esc_html( (string) $pack['licence'] ) . ')</span>';
+			}
+			$out .= '</li>';
+		}
+		$out .= '</ul>';
+	}
+	return $out . '</div>';
 }
 
 /** Every chapter that has a Hebrew interlinear, by book; a note marks the ones with a recorded reading. */

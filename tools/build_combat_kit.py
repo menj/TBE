@@ -288,7 +288,7 @@ def main():
             passage = "%s %d:%d%s" % (book, ch, vs, "-%d" % ve if ve > vs else "")
             title = "%s%s: %s" % (topic, " (%s)" % letter if letter else "", passage)
             body_paras = [normalise_refs(p, book_re, canon) for p in g]
-            lead = [("Deedat's heading: " + normalise_refs(h, book_re, canon)) for h in heading] if k == 0 else []
+            lead = [("Heading in the source: " + normalise_refs(h, book_re, canon)) for h in heading] if k == 0 else []
             body = ""
             if lead:
                 body += "\n".join('<!-- wp:paragraph --><p><em>%s</em></p><!-- /wp:paragraph -->' % html.escape(x, quote=False) for x in lead) + "\n"
@@ -310,7 +310,7 @@ def main():
                 if n not in seen:
                     seen.add(n)
                     body += '\n<!-- wp:paragraph {"className":"tbe-source"} --><p class="tbe-source">%s</p><!-- /wp:paragraph -->' % html.escape(n, quote=False)
-            body += '\n<!-- wp:paragraph {"className":"tbe-source"} --><p class="tbe-source">From %s, no. %d, p. %d. Reproduced under the publisher\'s open permission to reproduce. This is the author\'s argument, set beside the text so it can be weighed; the ESV appears on hover.</p><!-- /wp:paragraph -->' % (html.escape(SOURCE, quote=False), t["n"], t["page"])
+            body += '\n<!-- wp:paragraph {"className":"tbe-source"} --><p class="tbe-source">Source: see <a href="/credits/">Credits and references</a> (no. %d, p. %d).</p><!-- /wp:paragraph -->' % (t["n"], t["page"])
             entries.append({
                 "key": "combat-kit:%d%s" % (t["n"], ":" + letter if letter else ""),
                 "title": title,
@@ -330,7 +330,7 @@ def main():
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     pack = {
         "id": "combat-kit",
-        "name": "Ahmed Deedat — Combat Kit Against Bible Thumpers",
+        "name": "Combat Kit",
         "source": SOURCE,
         "licence": "Open Order: permission to reproduce or translate, for sale or free distribution.",
         "held_back": [{"topic": n, "title": t, "reason": r} for n, t, r in skipped],

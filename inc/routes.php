@@ -12,6 +12,7 @@ add_action(
 	static function () {
 		add_rewrite_rule( '^bible/?$', 'index.php?tbe_view=books', 'top' );
 		add_rewrite_rule( '^bible/search/?$', 'index.php?tbe_view=search', 'top' );
+		add_rewrite_rule( '^credits/?$', 'index.php?tbe_view=credits', 'top' );
 		add_rewrite_rule( '^bible/index/?$', 'index.php?tbe_view=index', 'top' );
 		add_rewrite_rule( '^bible/interlinear/?$', 'index.php?tbe_view=interlinear-index', 'top' );
 		add_rewrite_rule( '^bible/([a-z0-9-]+)/?$', 'index.php?tbe_view=book&tbe_book=$matches[1]', 'top' );
@@ -37,7 +38,7 @@ function tbe_request(): ?array {
 	if ( '' === $view ) {
 		return $request = null;
 	}
-	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view ) {
+	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view || 'credits' === $view ) {
 		return $request = array( 'view' => $view );
 	}
 	if ( 'search' === $view ) {
@@ -128,6 +129,9 @@ add_filter(
 				break;
 			case 'index':
 				$parts['title'] = __( 'Index of commentary', 'tbe-child' );
+				break;
+			case 'credits':
+				$parts['title'] = __( 'Credits and references', 'tbe-child' );
 				break;
 			case 'interlinear-index':
 				$parts['title'] = __( 'Hebrew interlinear', 'tbe-child' );
