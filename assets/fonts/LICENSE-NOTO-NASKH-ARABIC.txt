@@ -1,0 +1,9 @@
+Noto Naskh Arabic
+Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is available with a FAQ at: https://openfontlicense.org
+
+NotoNaskhArabic-Regular.woff2 is a lossless WOFF2 conversion of the Regular weight (tools/ttf2woff2.js);
+the glyph data is unchanged. In this theme the font is used for the Arabic text of the hadith on the
+Credits and references page, and nothing else.

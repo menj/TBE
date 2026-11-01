@@ -172,3 +172,19 @@
 .tbe-chapters .has-interlinear a { box-shadow: inset 0 -2px 0 var(--tbe-gold); }
 .tbe-il-index__note { color: var(--tbe-gold); font-size: 0.8em; }
 .tbe-il-index .tbe-ornament a { color: inherit; text-decoration: none; }
+
+/* The Arabic of the hadith on the Credits page: Noto Naskh Arabic (SIL OFL; see assets/fonts/LICENSE-NOTO-NASKH-ARABIC.txt), used here and nowhere else. */
+@font-face {
+	font-family: "Noto Naskh Arabic";
+	src: url("../fonts/NotoNaskhArabic-Regular.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+.tbe-hadith-ar { font-family: "Noto Naskh Arabic", serif; font-size: 1.45rem; line-height: 2.1; text-align: right; }
+
+/* Credits */
+.tbe-credits__quote { margin: 1rem 0; padding: 0.9rem 1.25rem; border-inline-start: 3px solid var(--tbe-gold); background: var(--tbe-surface); border-radius: var(--tbe-radius, 4px); }
+.tbe-credits__quote p { margin: 0 0 0.6rem; }
+.tbe-credits__quote cite { display: block; font-family: var(--tbe-ui); font-size: 0.85rem; font-style: normal; color: var(--tbe-muted); }
