@@ -188,3 +188,22 @@
 .tbe-credits__quote { margin: 1rem 0; padding: 0.9rem 1.25rem; border-inline-start: 3px solid var(--tbe-gold); background: var(--tbe-surface); border-radius: var(--tbe-radius, 4px); }
 .tbe-credits__quote p { margin: 0 0 0.6rem; }
 .tbe-credits__quote cite { display: block; font-family: var(--tbe-ui); font-size: 0.85rem; font-style: normal; color: var(--tbe-muted); }
+
+/* Notes in the margin: on wide screens each note sits to the right of the verse it begins at, like a marginal gloss. */
+@media (min-width: 1340px) {
+	.tbe-text .tbe-box {
+		float: right;
+		clear: right;
+		width: 17rem;
+		margin: 0.15rem -19.75rem 1rem 1.5rem;
+		padding: 0.1rem 1rem 0.8rem;
+		font-size: calc(0.9rem * var(--tbe-scale));
+		line-height: 1.6;
+		text-indent: 0;
+	}
+	.tbe-text .tbe-box > summary { position: relative; flex-wrap: wrap; row-gap: 0.15rem; padding-block: 0.7rem 0.5rem; padding-inline-end: 1.6rem; }
+	.tbe-text .tbe-box > summary::after { position: absolute; top: 0.65rem; right: 0; margin: 0; font-size: 1.2rem; line-height: 1; color: var(--tbe-gold); }
+	.tbe-text .tbe-box__title { flex: 1 1 100%; }
+	.tbe-text .tbe-box .tbe-table { display: block; overflow-x: auto; }
+	.tbe-layout-flow .tbe-text .tbe-para { overflow: visible; }
+}

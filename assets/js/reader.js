@@ -112,6 +112,15 @@
 		if ( numbersButton && '0' === load( KEYS.numbers ) ) {
 			applyNumbers( numbersButton, false );
 		}
+		// With a margin to put them in, notes start as slim tabs beside their verses; click one to read it.
+		if ( window.matchMedia && window.matchMedia( '(min-width: 1340px)' ).matches ) {
+			var target = window.location.hash;
+			document.querySelectorAll( '.tbe-box:not(.tbe-box--intro)' ).forEach( function ( box ) {
+				if ( '#' + box.id !== target ) {
+					box.open = false;
+				}
+			} );
+		}
 		var layoutButton = document.querySelector( '[data-tbe-layout]' );
 		if ( layoutButton && load( KEYS.layout ) ) {
 			applyLayout( layoutButton, 'flow' === load( KEYS.layout ) );
