@@ -40,6 +40,9 @@ BOOKS = [
  ("2-john","2 John",1,"NT"),("3-john","3 John",1,"NT"),("jude","Jude",1,"NT"),("revelation","Revelation",22,"NT"),
 ]
 
+# Verses in the books that have a single chapter.
+ONE_CHAPTER = {"obadiah": 21, "philemon": 25, "2-john": 13, "3-john": 14, "jude": 25}
+
 PARAMS = {
   "include-passage-references": "false", "include-verse-numbers": "true",
   "include-first-verse-numbers": "true", "include-footnotes": "false",
@@ -97,7 +100,9 @@ def main():
         for ch in range(1, chapters + 1):
             path = os.path.join(OUT, slug, f"{ch}.json")
             if os.path.exists(path): skipped += 1; continue
-            data = fetch(token, f"{name} {ch}")
+            # "Jude 1" means verse 1 to the API, so one-chapter books are asked for by verse range.
+            query = f"{name} 1:1-{ONE_CHAPTER[slug]}" if slug in ONE_CHAPTER else f"{name} {ch}"
+            data = fetch(token, query)
             verses = parse(data["passages"][0]) if data.get("passages") else []
             if not verses: raise SystemExit(f"No verses for {name} {ch}")
             with open(path, "w", encoding="utf-8") as f:
