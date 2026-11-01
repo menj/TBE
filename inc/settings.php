@@ -91,6 +91,7 @@ function tbe_defaults(): array {
 		'allow_toggle'     => 1,
 		'schema'           => 1,
 		'pack_sync'        => 1,
+		'error_pages'      => 1,
 		// Appearance.
 		'scheme'           => 'manuscript',
 		'colors'           => array(),
@@ -203,6 +204,7 @@ function tbe_settings_tabs(): array {
 		'reader'     => __( 'Reader and commentary', 'tbe-child' ),
 		'esv'        => __( 'ESV and licence', 'tbe-child' ),
 		'starter'    => __( 'Starter commentary', 'tbe-child' ),
+		'errors'     => __( 'Error pages', 'tbe-child' ),
 	);
 }
 
@@ -226,6 +228,7 @@ function tbe_sanitize_settings( $input ): array {
 			$new['allow_toggle']   = $flag( 'allow_toggle' );
 			$new['schema']         = $flag( 'schema' );
 			$new['pack_sync']      = $flag( 'pack_sync' );
+			$new['error_pages']    = $flag( 'error_pages' );
 			break;
 
 		case 'appearance':
@@ -287,6 +290,8 @@ function tbe_render_settings_page(): void {
 
 		<?php if ( 'starter' === $tab ) : ?>
 			<div class="tbe-panel"><?php tbe_render_starter_tab(); ?></div>
+		<?php elseif ( 'errors' === $tab ) : ?>
+			<div class="tbe-panel"><?php tbe_render_errors_tab(); ?></div>
 		<?php else : ?>
 		<form method="post" action="options.php" class="tbe-panel">
 			<?php settings_fields( 'tbe_settings_group' ); ?>
@@ -298,6 +303,7 @@ function tbe_render_settings_page(): void {
 					tbe_field_text( 'tagline', __( 'Tagline', 'tbe-child' ), $s['tagline'], __( 'Shown on the home page hero.', 'tbe-child' ) );
 					tbe_field_check( 'schema', __( 'Output schema.org structured data (JSON-LD) for search engines', 'tbe-child' ), $s['schema'] );
 					tbe_field_check( 'allow_toggle', __( 'Show the light / dark toggle to visitors', 'tbe-child' ), $s['allow_toggle'] );
+					tbe_field_check( 'error_pages', __( 'Install the themed maintenance, database-error and fatal-error pages into wp-content (see the Error pages tab)', 'tbe-child' ), $s['error_pages'] );
 					tbe_field_check( 'pack_sync', __( 'Keep imported starter commentary in step with the theme: a changed entry overwrites the old one, and an entry the theme no longer includes goes to the Trash', 'tbe-child' ), $s['pack_sync'] );
 					break;
 

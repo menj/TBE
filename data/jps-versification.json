@@ -1,0 +1,11 @@
+{
+ "_note": "Where the English (ESV) verse numbers differ from the Hebrew numbering the JPS text follows. 'shift': ESV verse n is JPS verse n+shift in the same chapter; 'N':'C:V' takes ESV verse N from JPS chapter C verse V.",
+ "genesis": {
+  "31": {
+   "55": "32:1"
+  },
+  "32": {
+   "shift": 1
+  }
+ }
+}

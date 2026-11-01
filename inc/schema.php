@@ -198,6 +198,10 @@ function tbe_ld_book_node( array $book, bool $with_chapters = false ): array {
 		'isPartOf'   => tbe_ld_ref( tbe_ld_bible_id() ),
 		'numberOfPages' => (int) $book['chapters'],
 	);
+	$jewish = TBE_Bible::jewish_name( $book['slug'] );
+	if ( $jewish ) {
+		$node['alternateName'] = $jewish['tr'];
+	}
 	if ( $with_chapters ) {
 		$chapters = array();
 		for ( $i = 1; $i <= $book['chapters']; $i++ ) {

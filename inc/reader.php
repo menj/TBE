@@ -45,12 +45,24 @@ function tbe_view_missing(): string {
 		) . '</p></div>';
 }
 
+/** The Jewish name of a book, set beneath its title: the Hebrew and its transliteration. Empty for New Testament books. */
+function tbe_book_subtitle( array $book ): string {
+	$name = TBE_Bible::jewish_name( $book['slug'] );
+	if ( ! $name ) {
+		return '';
+	}
+	return '<p class="tbe-title-sub"><span class="tbe-title-sub__he" lang="he" dir="rtl">' . esc_html( (string) $name['he'] ) . '</span><span class="tbe-title-sub__tr">' . esc_html( (string) $name['tr'] ) . '</span></p>';
+}
+
 /** Credits and references: every source the site draws on, including each bundled commentary pack. */
 function tbe_view_credits(): string {
 	$out  = '<div class="tbe-reader tbe-credits">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'Credits and references', 'tbe-child' ) . '</h1>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Scripture', 'tbe-child' ) . '</h2><p>' . esc_html( (string) tbe_setting( 'copyright' ) ) . '</p>';
+
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Jewish translation', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The Jewish text beside the ESV is The Holy Scriptures: A New Translation (JPS 1917), published by the Jewish Publication Society and in the public domain. The digital text comes from %s, by way of the Open Siddur Project.', 'tbe-child' ), '<a href="https://www.sefaria.org" rel="noopener">Sefaria</a>' ) ) . '</p>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Hebrew and Greek text and interlinear', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'Hebrew: Westminster Leningrad Codex. Greek: Nestle-Aland 28th edition, with variants from the SBL Greek New Testament, the Textus Receptus and others. Both tagged by Tyndale House, Cambridge. Word-by-word data from %s, licensed CC BY 4.0.', 'tbe-child' ), '<a href="https://www.STEPBible.org" rel="noopener">STEP Bible</a>' ) ) . '</p>';
@@ -135,6 +147,7 @@ function tbe_view_book( array $book ): string {
 	$out .= tbe_breadcrumb( $book );
 	$out .= '<p class="tbe-eyebrow">' . esc_html( 'OT' === $book['testament'] ? __( 'Old Testament', 'tbe-child' ) : __( 'New Testament', 'tbe-child' ) ) . '</p>';
 	$out .= '<h1 class="tbe-title">' . esc_html( $book['name'] ) . '</h1>';
+	$out .= tbe_book_subtitle( $book );
 
 	foreach ( tbe_commentary_for_book( $book['slug'] ) as $entry ) {
 		$out .= tbe_render_box( $entry, $book['slug'], 0, true );
@@ -173,6 +186,7 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 	$out .= tbe_breadcrumb( $book, $chapter );
 	$out .= '<p class="tbe-eyebrow">' . esc_html( sprintf( /* translators: %d: chapter number */ __( 'Chapter %d', 'tbe-child' ), $chapter ) ) . '</p>';
 	$out .= '<h1 class="tbe-title">' . esc_html( $book['name'] ) . '</h1>';
+	$out .= tbe_book_subtitle( $book );
 	$out .= tbe_reader_toolbar();
 	if ( TBE_Interlinear::available( $slug, $chapter ) ) {
 		$out .= '<p class="tbe-center tbe-il-link"><a class="tbe-btn tbe-btn--solid" href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html( 'OT' === $book['testament'] ? __( 'Hebrew interlinear', 'tbe-child' ) : __( 'Greek interlinear', 'tbe-child' ) ) . ' <span aria-hidden="true">→</span></a></p>';
@@ -213,7 +227,8 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 	}
 
 	$class = 'tbe-text' . ( tbe_setting( 'verse_numbers' ) ? '' : ' tbe-hide-numbers' );
-	$out  .= '<div class="' . esc_attr( $class ) . '" lang="en" dir="ltr">' . tbe_render_verses( $verses, $starts, $covered, $slug, $chapter ) . '</div>';
+	$jps   = TBE_Bible::jps( $slug, $chapter );
+	$out  .= ( $jps ? tbe_parallel_toolbar() : '' ) . '<div class="' . esc_attr( $class ) . '" lang="en" dir="ltr"' . ( $jps ? ' data-tbe-view="esv"' : '' ) . '>' . ( $jps ? tbe_parallel_head() : '' ) . tbe_render_verses( $verses, $starts, $covered, $slug, $chapter, $jps ) . '</div>';
 	$out  .= tbe_render_chapter_nav( $slug, $chapter );
 	return $out . '</div>';
 }
@@ -227,6 +242,25 @@ function tbe_reader_toolbar(): string {
 		. '<button type="button" class="tbe-btn" data-tbe-toggle-notes="open">' . esc_html__( 'Open all notes', 'tbe-child' ) . '</button>'
 		. '<button type="button" class="tbe-btn" data-tbe-toggle-notes="close">' . esc_html__( 'Close all notes', 'tbe-child' ) . '</button>'
 		. '</div>';
+}
+
+/** Choose the translation: the Christian (ESV), the Jewish (JPS 1917), or both side by side. */
+function tbe_parallel_toolbar(): string {
+	$views = array(
+		'esv'  => __( 'Christian · ESV', 'tbe-child' ),
+		'jps'  => __( 'Jewish · JPS 1917', 'tbe-child' ),
+		'both' => __( 'Side by side', 'tbe-child' ),
+	);
+	$out = '<div class="tbe-toolbar tbe-parallel" role="group" aria-label="' . esc_attr__( 'Translation', 'tbe-child' ) . '">';
+	foreach ( $views as $key => $label ) {
+		$out .= '<button type="button" class="tbe-btn" data-tbe-view-set="' . esc_attr( $key ) . '" aria-pressed="' . ( 'esv' === $key ? 'true' : 'false' ) . '">' . esc_html( $label ) . '</button>';
+	}
+	return $out . '</div>';
+}
+
+/** Column headings, shown only in the side-by-side view. */
+function tbe_parallel_head(): string {
+	return '<div class="tbe-parallel-head" aria-hidden="true"><span>' . esc_html__( 'Christian · ESV', 'tbe-child' ) . '</span><span>' . esc_html__( 'Jewish · JPS 1917', 'tbe-child' ) . '</span></div>';
 }
 
 /** A short list of the notes in this chapter, linking to each box. @param array<int,WP_Post[]> $starts */
@@ -253,7 +287,7 @@ function tbe_render_notes_contents( array $starts, string $slug, int $chapter ):
  * @param array<int,WP_Post[]>  $starts  Entries keyed by first verse.
  * @param array<int,bool>       $covered Verses touched by any entry.
  */
-function tbe_render_verses( array $verses, array $starts, array $covered, string $slug, int $chapter ): string {
+function tbe_render_verses( array $verses, array $starts, array $covered, string $slug, int $chapter, array $jps = array() ): string {
 	$out     = '';
 	$para    = '';
 	$in_poem = false;
@@ -284,6 +318,7 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 		foreach ( $starts[ $n ] ?? array() as $entry ) {
 			$boxes .= tbe_render_box( $entry, $slug, $chapter );
 		}
+		$jewish = isset( $jps[ $n ] ) ? '<span class="tbe-jps' . ( $is_poem ? ' tbe-jps--n' : '' ) . '" lang="en" data-n="' . $n . '">' . esc_html( $jps[ $n ] ) . '</span>' : '';
 		$number = '<a class="tbe-vn" href="#v' . $n . '"><span class="screen-reader-text">' . esc_html__( 'Verse', 'tbe-child' ) . ' </span>' . $n . '</a>';
 
 		if ( $is_poem ) {
@@ -297,7 +332,7 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 				$indent = min( 3, (int) floor( ( strlen( $line ) - strlen( ltrim( $line, ' ' ) ) ) / 4 ) );
 				$lines .= '<span class="tbe-line tbe-i' . $indent . '">' . ( 0 === $i ? $number : '' ) . esc_html( ltrim( $line ) ) . '</span>';
 			}
-			$out .= $boxes . '<span class="' . esc_attr( $classes ) . '" id="v' . $n . '" data-v="' . $n . '">' . $lines . $marks . '</span>';
+			$out .= $boxes . '<span class="' . esc_attr( $classes ) . '" id="v' . $n . '" data-v="' . $n . '">' . ( $jewish ? '<span class="tbe-pv">' . $lines . '</span>' : $lines ) . $jewish . $marks . '</span>';
 			if ( ! empty( $verse['p'] ) ) {
 				$out .= '<span class="tbe-stanza" aria-hidden="true"></span>';
 			}
@@ -308,7 +343,7 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 			$out    .= '</div>';
 			$in_poem = false;
 		}
-		$para .= $boxes . '<span class="' . esc_attr( $classes ) . '" id="v' . $n . '" data-v="' . $n . '">' . $number . '<span class="tbe-vt">' . esc_html( $text ) . '</span>' . $marks . '</span> ';
+		$para .= $boxes . '<span class="' . esc_attr( $classes ) . '" id="v' . $n . '" data-v="' . $n . '">' . $number . '<span class="tbe-vt">' . esc_html( $text ) . '</span>' . $jewish . $marks . '</span> ';
 		if ( ! empty( $verse['p'] ) ) {
 			$flush();
 		}

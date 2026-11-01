@@ -266,6 +266,7 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	$out .= tbe_breadcrumb( $book, $chapter );
 	$out .= '<p class="tbe-eyebrow">' . esc_html( sprintf( /* translators: %d: chapter number */ __( 'Interlinear · Chapter %d', 'tbe-child' ), $chapter ) ) . '</p>';
 	$out .= '<h1 class="tbe-title">' . esc_html( $book['name'] ) . '</h1>';
+	$out .= tbe_book_subtitle( $book );
 	$out .= '<p class="tbe-center"><a href="' . esc_url( TBE_Bible::url( $slug, $chapter ) ) . '">' . esc_html__( 'Back to the ESV reading page', 'tbe-child' ) . '</a></p>';
 
 	if ( ! $data ) {
