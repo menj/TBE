@@ -15,15 +15,13 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 OUT = os.path.join(ROOT, "data", "commentary", "combat-kit.json")
 SOURCE = "Ahmed Deedat, Combat Kit Against Bible Thumpers (Islamic Propagation Centre International, 1992)"
 
-# Topics not imported, and why. They stay out until the site owner decides.
+# Topics not imported: only the two that are bare cross-references with no content of their own.
 HELD_BACK = {
-    39: "Its heading and glosses characterise gay and lesbian people in demeaning terms.",
     31: "A cross-reference only (\"see Swine\"), no content of its own.",
     42: "A cross-reference only (\"see Israelites\"), no content of its own.",
 }
-# Topics whose own heading is a demeaning generalisation about a people. The verses and notes are kept;
-# the heading is left out and the entry title uses only the neutral topic word.
-NO_HEADING = {17, 23, 25}
+# Topics whose author's heading is left out. None: everything is reproduced as the author wrote it.
+NO_HEADING = set()
 # Topics whose lettered items are independent claims about different passages: one entry per item.
 SPLIT = {3, 8, 10, 14}
 
