@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Download the complete ESV text, chapter by chapter, from api.esv.org.
 
-Usage:  ESV_API_TOKEN=xxxx python3 tools/fetch_esv.py [--delay 8] [--max 0]
+Usage:  ESV_API_TOKEN=xxxx python3 tools/fetch_esv.py [--delay 15] [--max-delay 30] [--max 0]
 The token is read from the environment only. Never commit it.
 Resumable: chapters already on disk are skipped.
 
 Deliberately gentle: the API allows 60/min, 1000/hr and 5000/day, and this script
-stays far below that (default one request every ~8 seconds, with jitter). If the API
+stays far below that (default one request every 15-30 seconds, random). If the API
 answers 429 (rate limited) the script stops at once instead of retrying; just run it
 again later. --max N stops after N new chapters, handy for "a little each day".
 """
@@ -81,7 +81,8 @@ def parse(text):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--delay", type=float, default=8.0, help="seconds between requests (default 8)")
+    ap.add_argument("--delay", type=float, default=15.0, help="minimum seconds between requests (default 15)")
+    ap.add_argument("--max-delay", type=float, default=30.0, help="maximum seconds between requests (default 30)")
     ap.add_argument("--max", type=int, default=0, help="stop after this many new chapters (0 = no limit)")
     args = ap.parse_args()
     token = os.environ.get("ESV_API_TOKEN")
@@ -105,7 +106,7 @@ def main():
             if done % 10 == 0: print(f"{done} fetched ({name} {ch})", flush=True)
             if args.max and done >= args.max:
                 print(f"Reached --max {args.max}. Run again to continue."); return
-            time.sleep(args.delay + random.uniform(0, args.delay * 0.4))
+            time.sleep(random.uniform(args.delay, max(args.delay, args.max_delay)))
     print(f"Finished. fetched={done} skipped={skipped}")
 
 if __name__ == "__main__":

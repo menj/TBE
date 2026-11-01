@@ -21,7 +21,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires Wor
 | `data/books.json` | The 66 books, chapter counts, order |
 | `inc/` | Settings, Bible data and reference parser, commentary post type, routes, reader, blocks |
 | `templates/`, `parts/` | Block-theme templates: front page, Bible reader, commentary single/archive, header, footer |
-| `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request per ~8 s; stops on any rate-limit reply; `--max N` per run) |
+| `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request every 15-30 s; stops on any rate-limit reply; `--max N` per run) |
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## Settings (Appearance → Bible Exposed)
@@ -32,7 +32,7 @@ Commentary → Add New. Fill the **Passage** box (for example `John 1:1-18`, `Ps
 
 ## Refreshing the ESV text
 ```bash
-ESV_API_TOKEN=... python3 tools/fetch_esv.py --delay 8 --max 100
+ESV_API_TOKEN=... python3 tools/fetch_esv.py --delay 15 --max-delay 30 --max 100
 ```
 Existing chapter files are skipped, so delete a file to re-fetch it. The script is deliberately slow and stops immediately if the API reports a rate limit.
 
