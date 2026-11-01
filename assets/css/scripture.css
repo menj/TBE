@@ -62,3 +62,6 @@
 .tbe-il__gr,
 .tbe-il__lemma.tbe-il__gr { font-family: "SBL Greek", "SBL BibLit", serif; }
 .tbe-il__esv { font-family: var(--tbe-scripture); }
+
+/* The Jewish name beneath a book title: the Hebrew in SBL Hebrew, then its transliteration. */
+.tbe-title-sub__he { font-family: "SBL Hebrew", "SBL BibLit", serif; }

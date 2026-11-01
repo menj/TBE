@@ -1,0 +1,158 @@
+{
+ "genesis": {
+  "he": "בְּרֵאשִׁית",
+  "tr": "Bereshit"
+ },
+ "exodus": {
+  "he": "שְׁמוֹת",
+  "tr": "Shemot"
+ },
+ "leviticus": {
+  "he": "וַיִּקְרָא",
+  "tr": "Vayikra"
+ },
+ "numbers": {
+  "he": "בַּמִּדְבָּר",
+  "tr": "Bamidbar"
+ },
+ "deuteronomy": {
+  "he": "דְּבָרִים",
+  "tr": "Devarim"
+ },
+ "joshua": {
+  "he": "יְהוֹשֻׁעַ",
+  "tr": "Yehoshua"
+ },
+ "judges": {
+  "he": "שׁוֹפְטִים",
+  "tr": "Shoftim"
+ },
+ "ruth": {
+  "he": "רוּת",
+  "tr": "Rut"
+ },
+ "1-samuel": {
+  "he": "שְׁמוּאֵל א׳",
+  "tr": "Shmuel Aleph"
+ },
+ "2-samuel": {
+  "he": "שְׁמוּאֵל ב׳",
+  "tr": "Shmuel Bet"
+ },
+ "1-kings": {
+  "he": "מְלָכִים א׳",
+  "tr": "Melakhim Aleph"
+ },
+ "2-kings": {
+  "he": "מְלָכִים ב׳",
+  "tr": "Melakhim Bet"
+ },
+ "1-chronicles": {
+  "he": "דִּבְרֵי הַיָּמִים א׳",
+  "tr": "Divrei HaYamim Aleph"
+ },
+ "2-chronicles": {
+  "he": "דִּבְרֵי הַיָּמִים ב׳",
+  "tr": "Divrei HaYamim Bet"
+ },
+ "ezra": {
+  "he": "עֶזְרָא",
+  "tr": "Ezra"
+ },
+ "nehemiah": {
+  "he": "נְחֶמְיָה",
+  "tr": "Nehemyah"
+ },
+ "esther": {
+  "he": "אֶסְתֵּר",
+  "tr": "Ester"
+ },
+ "job": {
+  "he": "אִיּוֹב",
+  "tr": "Iyov"
+ },
+ "psalms": {
+  "he": "תְּהִלִּים",
+  "tr": "Tehillim"
+ },
+ "proverbs": {
+  "he": "מִשְׁלֵי",
+  "tr": "Mishlei"
+ },
+ "ecclesiastes": {
+  "he": "קֹהֶלֶת",
+  "tr": "Kohelet"
+ },
+ "song-of-solomon": {
+  "he": "שִׁיר הַשִּׁירִים",
+  "tr": "Shir HaShirim"
+ },
+ "isaiah": {
+  "he": "יְשַׁעְיָהוּ",
+  "tr": "Yeshayahu"
+ },
+ "jeremiah": {
+  "he": "יִרְמְיָהוּ",
+  "tr": "Yirmeyahu"
+ },
+ "lamentations": {
+  "he": "אֵיכָה",
+  "tr": "Eikhah"
+ },
+ "ezekiel": {
+  "he": "יְחֶזְקֵאל",
+  "tr": "Yehezkel"
+ },
+ "daniel": {
+  "he": "דָּנִיֵּאל",
+  "tr": "Daniel"
+ },
+ "hosea": {
+  "he": "הוֹשֵׁעַ",
+  "tr": "Hoshea"
+ },
+ "joel": {
+  "he": "יוֹאֵל",
+  "tr": "Yoel"
+ },
+ "amos": {
+  "he": "עָמוֹס",
+  "tr": "Amos"
+ },
+ "obadiah": {
+  "he": "עֹבַדְיָה",
+  "tr": "Ovadyah"
+ },
+ "jonah": {
+  "he": "יוֹנָה",
+  "tr": "Yonah"
+ },
+ "micah": {
+  "he": "מִיכָה",
+  "tr": "Mikhah"
+ },
+ "nahum": {
+  "he": "נַחוּם",
+  "tr": "Nahum"
+ },
+ "habakkuk": {
+  "he": "חֲבַקּוּק",
+  "tr": "Havakkuk"
+ },
+ "zephaniah": {
+  "he": "צְפַנְיָה",
+  "tr": "Tzefanyah"
+ },
+ "haggai": {
+  "he": "חַגַּי",
+  "tr": "Haggai"
+ },
+ "zechariah": {
+  "he": "זְכַרְיָה",
+  "tr": "Zekharyah"
+ },
+ "malachi": {
+  "he": "מַלְאָכִי",
+  "tr": "Malakhi"
+ }
+}

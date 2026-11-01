@@ -207,3 +207,58 @@
 	.tbe-text .tbe-box .tbe-table { display: block; overflow-x: auto; }
 	.tbe-layout-flow .tbe-text .tbe-para { overflow: visible; }
 }
+
+.tbe-title-sub { display: flex; justify-content: center; align-items: baseline; flex-wrap: wrap; gap: 0.35rem 0.9rem; margin: -0.5rem 0 1.4rem; text-align: center; color: var(--tbe-muted); }
+.tbe-title-sub__he { font-size: 1.6rem; line-height: 1.3; color: var(--tbe-accent); }
+.tbe-title-sub__tr { font-family: var(--tbe-ui); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; }
+.tbe-title-sub__tr::before { content: ""; display: inline-block; width: 1.4rem; height: 1px; background: var(--tbe-gold); vertical-align: middle; margin-inline-end: 0.9rem; }
+
+/* Parallel view: the Christian (ESV) and Jewish (JPS 1917) texts, one or the other or side by side. -------- */
+.tbe-parallel { justify-content: center; margin-block: 0.5rem 1.25rem; }
+.tbe-jps { display: none; }
+.tbe-parallel-head { display: none; }
+.tbe-text[data-tbe-view="jps"] .tbe-vt,
+.tbe-text[data-tbe-view="jps"] .tbe-pv { display: none; }
+.tbe-text[data-tbe-view="jps"] .tbe-jps { display: inline; }
+.tbe-jps--n::before { content: attr(data-n); font: 700 0.62em/1 var(--tbe-ui); color: var(--tbe-rubric); vertical-align: 0.6em; margin-inline-end: 0.3em; }
+.tbe-text[data-tbe-view="both"] .tbe-jps--n::before { display: none; }
+
+.tbe-text[data-tbe-view="both"] .tbe-parallel-head {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2.25rem;
+	padding: 0 0 0.6rem 1.6rem;
+	margin-bottom: 0.9rem;
+	border-bottom: 1px solid var(--tbe-line);
+	font: 600 0.72rem/1 var(--tbe-ui);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--tbe-accent);
+}
+.tbe-text[data-tbe-view="both"] .tbe-parallel-head span:last-child { color: var(--tbe-gold); }
+.tbe-text[data-tbe-view="both"] .tbe-para, .tbe-text[data-tbe-view="both"] .tbe-poem { display: block; margin: 0; }
+.tbe-text[data-tbe-view="both"] .tbe-verse {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 2.25rem;
+	margin: 0 0 0.9em;
+	padding: 0.1em 0 0.1em 1.6rem;
+	position: relative;
+	border-bottom: 1px solid color-mix(in srgb, var(--tbe-line) 55%, transparent);
+}
+.tbe-text[data-tbe-view="both"] .tbe-verse > .tbe-vn { position: absolute; left: 0; top: 0.45em; }
+.tbe-text[data-tbe-view="both"] .tbe-verse > .tbe-pv .tbe-vn { position: absolute; left: 0; top: 0.45em; text-indent: 0; }
+.tbe-text[data-tbe-view="both"] .tbe-jps { display: block; color: color-mix(in srgb, var(--tbe-ink) 92%, var(--tbe-gold)); }
+.tbe-text[data-tbe-view="both"] .tbe-mark { position: absolute; right: 0; top: 0; }
+.tbe-text[data-tbe-view="both"] .tbe-line { padding-inline-start: 1.5em; text-indent: -1.5em; }
+
+/* Side by side needs room: the page widens, and notes drop back inline instead of into the margin. */
+.tbe-chapter:has(.tbe-text[data-tbe-view="both"]) { max-width: 64rem; }
+@media (min-width: 1340px) {
+	.tbe-chapter:has(.tbe-text[data-tbe-view="both"]) .tbe-text .tbe-box { float: none; width: auto; margin: 0.5rem 0 1.25rem; font-size: calc(1.02rem * var(--tbe-scale)); }
+}
+@media (max-width: 760px) {
+	.tbe-text[data-tbe-view="both"] .tbe-parallel-head { display: none; }
+	.tbe-text[data-tbe-view="both"] .tbe-verse { grid-template-columns: 1fr; row-gap: 0.4rem; }
+	.tbe-text[data-tbe-view="both"] .tbe-jps { padding-inline-start: 0.9rem; border-inline-start: 2px solid var(--tbe-gold); }
+}

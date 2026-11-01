@@ -281,3 +281,35 @@ add_action(
 		update_option( 'tbe_themes_to_tags', 1, false );
 	}
 );
+
+
+/**
+ * Cross-reference notes are filed twice, once on each passage, so a plain list would show every one twice.
+ * The home page and the commentary list show only the first copy (the New Testament side); the mirror
+ * still appears under its own verse and in the index.
+ */
+function tbe_hide_mirror_notes( array $query ): array {
+	$meta   = (array) ( $query['meta_query'] ?? array() );
+	$meta[] = array(
+		'relation' => 'OR',
+		array( 'key' => 'tbe_pack_key', 'compare' => 'NOT EXISTS' ),
+		array( 'key' => 'tbe_pack_key', 'value' => ':ot', 'compare' => 'NOT LIKE' ),
+	);
+	$query['meta_query'] = $meta; // phpcs:ignore WordPress.DB.SlowDBQuery
+	return $query;
+}
+add_filter(
+	'query_loop_block_query_vars',
+	static function ( array $query ): array {
+		return ( 'tbe_commentary' === ( $query['post_type'] ?? '' ) ) ? tbe_hide_mirror_notes( $query ) : $query;
+	}
+);
+add_action(
+	'pre_get_posts',
+	static function ( WP_Query $query ) {
+		if ( ! is_admin() && $query->is_main_query() && $query->is_post_type_archive( 'tbe_commentary' ) ) {
+			$vars = tbe_hide_mirror_notes( array( 'meta_query' => (array) $query->get( 'meta_query' ) ) );
+			$query->set( 'meta_query', $vars['meta_query'] );
+		}
+	}
+);

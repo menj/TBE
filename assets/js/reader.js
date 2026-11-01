@@ -6,7 +6,7 @@
 ( function () {
 	'use strict';
 
-	var KEYS = { size: 'tbe-size', numbers: 'tbe-numbers', layout: 'tbe-layout' };
+	var KEYS = { size: 'tbe-size', numbers: 'tbe-numbers', layout: 'tbe-layout', view: 'tbe-view' };
 	var root = document.documentElement;
 
 	function store( key, value ) {
@@ -111,6 +111,30 @@
 		var numbersButton = document.querySelector( '[data-tbe-numbers]' );
 		if ( numbersButton && '0' === load( KEYS.numbers ) ) {
 			applyNumbers( numbersButton, false );
+		}
+		// Parallel view: Christian (ESV), Jewish (JPS 1917) or both; the choice is remembered.
+		var viewButtons = document.querySelectorAll( '[data-tbe-view-set]' );
+		function setView( view ) {
+			var text = document.querySelector( '.tbe-text[data-tbe-view]' );
+			if ( ! text ) {
+				return;
+			}
+			text.setAttribute( 'data-tbe-view', view );
+			viewButtons.forEach( function ( b ) {
+				b.setAttribute( 'aria-pressed', b.getAttribute( 'data-tbe-view-set' ) === view ? 'true' : 'false' );
+			} );
+			store( KEYS.view, view );
+		}
+		if ( viewButtons.length ) {
+			var savedView = load( KEYS.view );
+			if ( 'jps' === savedView || 'both' === savedView ) {
+				setView( savedView );
+			}
+			viewButtons.forEach( function ( b ) {
+				b.addEventListener( 'click', function () {
+					setView( b.getAttribute( 'data-tbe-view-set' ) );
+				} );
+			} );
 		}
 		// With a margin to put them in, notes start as slim tabs beside their verses; click one to read it.
 		if ( window.matchMedia && window.matchMedia( '(min-width: 1340px)' ).matches ) {

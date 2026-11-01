@@ -32,6 +32,30 @@ final class TBE_Bible {
 		return self::books()[ $slug ] ?? null;
 	}
 
+	/** The JPS 1917 text of a chapter, verse number => string, or an empty array when it has not been added yet. @return array<int,string> */
+	public static function jps( string $slug, int $chapter ): array {
+		$file = TBE_DIR . '/data/jps/' . $slug . '/' . $chapter . '.json';
+		if ( ! is_readable( $file ) ) {
+			return array();
+		}
+		$data = json_decode( (string) file_get_contents( $file ), true );
+		$out  = array();
+		foreach ( (array) ( $data['verses'] ?? array() ) as $verse ) {
+			$out[ (int) $verse['n'] ] = (string) $verse['t'];
+		}
+		return $out;
+	}
+
+	/** The Jewish (Hebrew) name of an Old Testament book: array( 'he' => Hebrew, 'tr' => transliteration ), or null. */
+	public static function jewish_name( string $slug ): ?array {
+		static $names = null;
+		if ( null === $names ) {
+			$file  = TBE_DIR . '/data/jewish-names.json';
+			$names = is_readable( $file ) ? (array) json_decode( (string) file_get_contents( $file ), true ) : array();
+		}
+		return isset( $names[ $slug ] ) ? $names[ $slug ] : null;
+	}
+
 	public static function total_chapters(): int {
 		return (int) array_sum( array_column( self::books(), 'chapters' ) );
 	}
