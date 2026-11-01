@@ -54,6 +54,19 @@ PARAMS = {
   "line-length": "0",
 }
 
+def already_complete(path, slug):
+    """A chapter file counts as done, except a one-chapter book saved before the verse-range fix
+    (it holds only verse 1), which is fetched again."""
+    if not os.path.exists(path):
+        return False
+    if slug in ONE_CHAPTER:
+        try:
+            with open(path, encoding="utf-8") as f:
+                return len(json.load(f).get("verses", [])) >= ONE_CHAPTER[slug]
+        except (ValueError, OSError):
+            return False
+    return True
+
 def fetch(token, query):
     url = "https://api.esv.org/v3/passage/text/?" + urllib.parse.urlencode({"q": query, **PARAMS})
     req = urllib.request.Request(url, headers={"Authorization": "Token " + token, "User-Agent": "thebible.exposed-importer/1.0"})
@@ -99,7 +112,7 @@ def main():
         os.makedirs(os.path.join(OUT, slug), exist_ok=True)
         for ch in range(1, chapters + 1):
             path = os.path.join(OUT, slug, f"{ch}.json")
-            if os.path.exists(path): skipped += 1; continue
+            if already_complete(path, slug): skipped += 1; continue
             # "Jude 1" means verse 1 to the API, so one-chapter books are asked for by verse range.
             query = f"{name} 1:1-{ONE_CHAPTER[slug]}" if slug in ONE_CHAPTER else f"{name} {ch}"
             data = fetch(token, query)
