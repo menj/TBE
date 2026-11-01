@@ -312,9 +312,11 @@ a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, tra
 	content: "→";
 	position: absolute;
 	inset-block: 0;
-	right: 1rem;
+	right: 1.1rem;
 	display: flex;
 	align-items: center;
+	font-size: 1.7rem;
+	line-height: 1;
 	color: var(--tbe-accent);
 	opacity: 0;
 	transform: translateX(-0.6rem);
@@ -355,6 +357,22 @@ a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, tra
 .tbe-hits li, .tbe-glossary__item { transition: background-color 0.2s var(--tbe-ease), transform 0.25s var(--tbe-spring); }
 .tbe-hits li:hover, .tbe-glossary__item:hover { transform: translateX(4px); }
 .tbe-footer__col a { border-radius: var(--tbe-radius-sm); }
+
+/* Arrows that sit beside text (pager, buttons) read larger; dropdowns get a big, clear chevron. */
+.tbe-pager a span[aria-hidden], .tbe-btn span[aria-hidden], .wp-block-button__link span[aria-hidden] { font-size: 1.35em; line-height: 1; vertical-align: -0.08em; }
+main select {
+	appearance: none;
+	-webkit-appearance: none;
+	font: inherit;
+	color: var(--tbe-ink);
+	padding: 0.65rem 3rem 0.65rem 1.2rem;
+	border: 1.5px solid var(--tbe-line);
+	border-radius: var(--tbe-radius-pill);
+	background: var(--tbe-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a67c2e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E") no-repeat right 1rem center / 1.35rem;
+	box-shadow: var(--tbe-shadow);
+	transition: border-color 0.2s var(--tbe-ease), box-shadow 0.25s var(--tbe-ease);
+}
+main select:hover, main select:focus-visible { border-color: var(--tbe-gold); box-shadow: var(--tbe-glow-gold); }
 
 /* Where there is a rollover, there is no underline: the colour and movement say "link". ------------- */
 .tbe-btn, .tbe-btn:hover, .wp-block-button__link, .wp-block-button__link:hover,
