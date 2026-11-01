@@ -143,3 +143,20 @@
 @media print {
 	.tbe-toolbar, .tbe-search, .tbe-header, .tbe-mark { display: none !important; }
 }
+
+/* Credit line at the foot of an imported note */
+.tbe-source {
+	margin: 1rem 0 0;
+	padding-top: 0.6rem;
+	border-top: 1px solid var(--tbe-line);
+	font-family: var(--tbe-ui);
+	font-size: 0.78rem;
+	line-height: 1.5;
+	color: var(--tbe-muted);
+}
+.tbe-source + .tbe-source { margin-top: 0.4rem; padding-top: 0; border-top: 0; }
+
+/* Hebrew reading player shown on the ESV reading page too */
+.tbe-il__audio--inline { max-width: 36rem; margin: 0 auto 1.75rem; text-align: center; }
+.tbe-il__audio--inline figcaption { font-family: var(--tbe-ui); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.tbe-il__audio--inline audio { width: 100%; border-radius: var(--tbe-radius-pill, 999px); }

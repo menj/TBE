@@ -45,3 +45,7 @@
 .tbe-row input, .tbe-row textarea { width: 100%; }
 .tbe-remove { font-size: 1.4rem; line-height: 1; color: #b32d2e; text-decoration: none; padding: 0 0.25rem; }
 @media (max-width: 900px) { .tbe-row, .tbe-row--quran { grid-template-columns: 1fr; } }
+
+/* Starter commentary tab */
+.tbe-importer { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+.tbe-held { list-style: disc; padding-inline-start: 1.25rem; }

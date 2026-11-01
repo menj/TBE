@@ -134,6 +134,9 @@ add_filter(
 			case 'chapter':
 				$parts['title'] = TBE_Bible::label( $request['book']['slug'], $request['chapter'] );
 				break;
+			case 'interlinear':
+				$parts['title'] = sprintf( /* translators: %s: passage such as Genesis 1 */ __( 'Interlinear: %s', 'tbe-child' ), TBE_Bible::label( $request['book']['slug'], $request['chapter'] ) );
+				break;
 			default:
 				$parts['title'] = __( 'Passage not found', 'tbe-child' );
 		}
