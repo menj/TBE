@@ -487,11 +487,11 @@ function tbe_ld_graph(): array {
 				$extra[]       = array(
 					'@type'          => 'AudioObject',
 					'@id'            => TBE_Interlinear::url( $slug, $chapter ) . '#audio',
-					'name'           => sprintf( /* translators: %s: passage */ __( 'Hebrew reading of %s', 'tbe-child' ), TBE_Bible::label( $slug, $chapter ) ),
+					'name'           => sprintf( /* translators: %s: passage */ ( $greek ? __( 'Greek reading of %s', 'tbe-child' ) : __( 'Hebrew reading of %s', 'tbe-child' ) ), TBE_Bible::label( $slug, $chapter ) ),
 					'contentUrl'     => $audio['url'],
 					'encodingFormat' => 'audio/mpeg',
 					'duration'       => TBE_Audio::iso_duration( (float) $audio['duration'] ),
-					'inLanguage'     => 'he',
+					'inLanguage'     => $lang,
 					'about'          => tbe_ld_ref( $cid ),
 				);
 				$page['audio'] = tbe_ld_ref( TBE_Interlinear::url( $slug, $chapter ) . '#audio' );

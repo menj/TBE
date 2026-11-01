@@ -173,7 +173,7 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 		$out .= '<p class="tbe-center tbe-il-link"><a class="tbe-btn tbe-btn--solid" href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html( 'OT' === $book['testament'] ? __( 'Hebrew interlinear', 'tbe-child' ) : __( 'Greek interlinear', 'tbe-child' ) ) . ' <span aria-hidden="true">→</span></a></p>';
 		$audio = TBE_Audio::chapter( $slug, $chapter );
 		if ( $audio ) {
-			$out .= '<figure class="tbe-il__audio tbe-il__audio--inline"><figcaption>' . esc_html__( 'Listen to the Hebrew reading', 'tbe-child' ) . ' <a href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Follow it word by word', 'tbe-child' ) . '</a></figcaption><audio data-tbe-audio controls preload="metadata" src="' . esc_url( $audio['url'] ) . '"></audio>';
+			$out .= '<figure class="tbe-il__audio tbe-il__audio--inline"><figcaption>' . esc_html( 'OT' === $book['testament'] ? __( 'Listen to the Hebrew reading', 'tbe-child' ) : __( 'Listen to the Greek reading', 'tbe-child' ) ) . ' <a href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Follow it word by word', 'tbe-child' ) . '</a></figcaption><audio data-tbe-audio controls preload="metadata" src="' . esc_url( $audio['url'] ) . '"></audio>';
 			if ( '' !== trim( (string) $audio['credit'] ) ) {
 				$out .= '<p class="tbe-muted tbe-il__credit">' . esc_html( (string) $audio['credit'] ) . '</p>';
 			}
