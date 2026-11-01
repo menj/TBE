@@ -117,6 +117,8 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 }
 .tbe-header .wp-block-site-title,
 .tbe-header .wp-block-site-title a,
+.tbe-footer__brand .wp-block-site-title,
+.tbe-footer__brand .wp-block-site-title a,
 .tbe-brand { font-family: "Angel", Georgia, serif; font-weight: 400; letter-spacing: 0.02em; }
 .tbe-hero h1.tbe-brand { font-size: clamp(3rem, 9vw, 5.5rem); line-height: 1.05; }
 
@@ -202,6 +204,12 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 
 /* Footer ----------------------------------------------------------------- */
 .tbe-footer { max-width: 72rem; margin-inline: auto; padding-block: 2rem; font-size: 0.85rem; }
+.tbe-footer__main { gap: 1.5rem 3rem; padding-block: 1.25rem 1.5rem; align-items: flex-start; }
+.tbe-footer__brand { gap: 0.9rem; max-width: 26rem; }
+.tbe-footer__brand .tbe-brandmark svg { height: 3.4rem; }
+.tbe-footer__brand .wp-block-site-title { font-size: 1.35rem; margin: 0 0 0.35rem; }
+.tbe-footer__brand .tbe-tagline { margin: 0; color: var(--tbe-muted); font-style: italic; font-size: 0.95rem; line-height: 1.45; }
+.tbe-footer__nav { font-family: var(--tbe-ui); font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 500; }
 .tbe-copyright { color: var(--tbe-muted); line-height: 1.6; max-width: 52rem; }
 
 .tbe-main { padding-block: 1.5rem 3rem; }
