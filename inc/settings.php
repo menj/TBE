@@ -25,7 +25,20 @@ function tbe_color_roles(): array {
 function tbe_schemes(): array {
 	return array(
 		'manuscript' => array(
-			'label'  => __( 'Manuscript — cream and emerald', 'tbe-child' ),
+			'label'  => __( 'Manuscript — cream, burgundy and gold', 'tbe-child' ),
+			'colors' => array(
+				'paper'   => '#f4eedc',
+				'surface' => '#fbf7ea',
+				'ink'     => '#231d14',
+				'muted'   => '#6b604f',
+				'accent'  => '#6e1f2e',
+				'rubric'  => '#9b2c2c',
+				'gold'    => '#a67c2e',
+				'line'    => '#d9cdb0',
+			),
+		),
+		'emerald'    => array(
+			'label'  => __( 'Emerald — cream and green', 'tbe-child' ),
 			'colors' => array(
 				'paper'   => '#f4eedc',
 				'surface' => '#fbf7ea',
@@ -60,14 +73,14 @@ function tbe_schemes(): array {
 /** Palette used for dark mode (toggle and the "Night study" scheme). */
 function tbe_dark_colors(): array {
 	return array(
-		'paper'   => '#14181a',
-		'surface' => '#1b2124',
-		'ink'     => '#e9e2cf',
-		'muted'   => '#a39b88',
-		'accent'  => '#4fb39b',
-		'rubric'  => '#d2796a',
+		'paper'   => '#17120f',
+		'surface' => '#201915',
+		'ink'     => '#ece3cf',
+		'muted'   => '#a79c88',
+		'accent'  => '#d4a24c',
+		'rubric'  => '#d9786b',
 		'gold'    => '#d1a64c',
-		'line'    => '#2e3a3e',
+		'line'    => '#3a2f27',
 	);
 }
 

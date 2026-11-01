@@ -6,8 +6,8 @@
 	--tbe-surface: #fbf7ea;
 	--tbe-ink: #231d14;
 	--tbe-muted: #6b604f;
-	--tbe-accent: #17604e;
-	--tbe-rubric: #8c2f23;
+	--tbe-accent: #6e1f2e;
+	--tbe-rubric: #9b2c2c;
 	--tbe-gold: #a67c2e;
 	--tbe-line: #d9cdb0;
 	--tbe-scale: 1;
@@ -16,14 +16,14 @@
 
 /* Dark mode, toggled by the visitor (theme.js sets data-theme on <html>). */
 html[data-theme="dark"] {
-	--tbe-paper: #14181a;
-	--tbe-surface: #1b2124;
-	--tbe-ink: #e9e2cf;
-	--tbe-muted: #a39b88;
-	--tbe-accent: #4fb39b;
-	--tbe-rubric: #d2796a;
+	--tbe-paper: #17120f;
+	--tbe-surface: #201915;
+	--tbe-ink: #ece3cf;
+	--tbe-muted: #a79c88;
+	--tbe-accent: #d4a24c;
+	--tbe-rubric: #d9786b;
 	--tbe-gold: #d1a64c;
-	--tbe-line: #2e3a3e;
+	--tbe-line: #3a2f27;
 	color-scheme: dark;
 }
 
