@@ -55,7 +55,8 @@ function tbe_view_credits(): string {
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Hebrew and Greek text and interlinear', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'Hebrew: Westminster Leningrad Codex. Greek: Nestle-Aland 28th edition, with variants from the SBL Greek New Testament, the Textus Receptus and others. Both tagged by Tyndale House, Cambridge. Word-by-word data from %s, licensed CC BY 4.0.', 'tbe-child' ), '<a href="https://www.STEPBible.org" rel="noopener">STEP Bible</a>' ) ) . '</p>';
 
-	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typeface', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit font, by the Society of Biblical Literature.', 'tbe-child' ) . '</p>';
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typefaces', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit, SBL Hebrew and SBL Greek fonts, by the Society of Biblical Literature.', 'tbe-child' ) . '</p><p>'
+		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The site name is set in Angel, a freeware font by JuliaL of %s.', 'tbe-child' ), '<a href="http://nocturne.simplenet.com/angel/" rel="noopener">Tangled in Destiny</a>' ) ) . '</p>';
 
 	$packs = tbe_packs();
 	if ( $packs ) {

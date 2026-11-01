@@ -97,6 +97,6 @@ The ESV text is © Crossway. The copyright notice shown in the footer is editabl
 
 ## Fonts
 
-**Bible text only** is set in the SBL fonts in `assets/fonts/`: SBL BibLit for the ESV, SBL Hebrew for the Hebrew words and SBL Greek for the Greek words, via `assets/css/scripture.css`. Everything else (commentary, headings, menus, buttons) uses system fonts. SBL Greek is not included until the New Testament is added.
+**Bible text only** is set in the SBL fonts in `assets/fonts/`: SBL BibLit for the ESV, SBL Hebrew for the Hebrew words and SBL Greek for the Greek words, via `assets/css/scripture.css`. The site name ("The Bible Exposed", in the header and on the home page) is set in **Angel** by JuliaL, a freeware font; its notes are kept in `assets/fonts/LICENSE-ANGEL-FONT.txt` and it is credited, with a link back to Tangled in Destiny, on the Credits page. Everything else (commentary, headings, menus, buttons) uses system fonts.
 
-The fonts are lossless WOFF2 conversions of the original SBL TTFs, made with `node tools/ttf2woff2.js in.ttf out.woff2` (about a quarter of the size, identical glyphs). The site owner holds the SBL / Tiro Typeworks licence; its text is kept in `assets/fonts/LICENSE-SBL-FONTS.txt`.
+**Every font in the theme is WOFF2.** They are lossless conversions of the original TTFs, made with `node tools/ttf2woff2.js in.ttf out.woff2` (identical glyphs, much smaller). The site owner holds the SBL / Tiro Typeworks licence; its text is kept in `assets/fonts/LICENSE-SBL-FONTS.txt`.
