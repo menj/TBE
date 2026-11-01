@@ -277,6 +277,10 @@ function tbe_section_help( string $slug ): string {
 
 /** Entry body with its footnotes, scripture cards and glossary tooltips. */
 function tbe_entry_html( WP_Post $entry ): string {
+	static $cache = array();
+	if ( isset( $cache[ $entry->ID ] ) ) {
+		return $cache[ $entry->ID ];
+	}
 	global $post;
 	$backup = $post;
 	$post   = $entry; // phpcs:ignore WordPress.WP.GlobalVariablesOverride
@@ -288,7 +292,8 @@ function tbe_entry_html( WP_Post $entry ): string {
 	} else {
 		wp_reset_postdata();
 	}
-	return tbe_enrich_commentary( $html );
+	$cache[ $entry->ID ] = tbe_enrich_commentary( $html );
+	return $cache[ $entry->ID ];
 }
 
 /**

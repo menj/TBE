@@ -208,6 +208,11 @@ add_filter(
 
 /** Commentary entries for a chapter, ordered by starting verse. @return WP_Post[] */
 function tbe_commentary_for_chapter( string $book, int $chapter ): array {
+	static $cache = array();
+	$key = $book . ':' . $chapter;
+	if ( isset( $cache[ $key ] ) ) {
+		return $cache[ $key ];
+	}
 	$query = new WP_Query(
 		array(
 			'post_type'              => 'tbe_commentary',
@@ -224,7 +229,8 @@ function tbe_commentary_for_chapter( string $book, int $chapter ): array {
 			'orderby'                => array( 'meta_value_num' => 'ASC', 'date' => 'ASC' ),
 		)
 	);
-	return $query->posts;
+	$cache[ $key ] = $query->posts;
+	return $cache[ $key ];
 }
 
 /** "John 1:1–18", "John 3" (chapter introduction) or "John" (book introduction). */
