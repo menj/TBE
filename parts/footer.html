@@ -1,36 +1,57 @@
-<!-- wp:group {"tagName":"footer","className":"tbe-footer","layout":{"type":"constrained"}} -->
+<!-- wp:group {"tagName":"footer","className":"tbe-footer","layout":{"type":"default"}} -->
 <footer class="wp-block-group tbe-footer">
-	<!-- wp:separator {"className":"is-style-wide"} -->
-	<hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
-	<!-- /wp:separator -->
+	<!-- wp:group {"className":"tbe-footer__inner","layout":{"type":"default"}} -->
+	<div class="wp-block-group tbe-footer__inner">
 
-	<!-- wp:group {"className":"tbe-footer__main","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"top"}} -->
-	<div class="wp-block-group tbe-footer__main">
-		<!-- wp:group {"className":"tbe-footer__brand","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
-		<div class="wp-block-group tbe-footer__brand">
-			<!-- wp:tbe/brandmark /-->
-			<!-- wp:group {"layout":{"type":"constrained"}} -->
-			<div class="wp-block-group">
-				<!-- wp:site-title {"level":0,"isLink":true} /-->
-				<!-- wp:tbe/tagline /-->
+		<!-- wp:group {"className":"tbe-footer__grid","layout":{"type":"default"}} -->
+		<div class="wp-block-group tbe-footer__grid">
+
+			<!-- wp:group {"className":"tbe-footer__brand","layout":{"type":"default"}} -->
+			<div class="wp-block-group tbe-footer__brand">
+				<!-- wp:tbe/brandmark /-->
+				<!-- wp:group {"className":"tbe-footer__name","layout":{"type":"default"}} -->
+				<div class="wp-block-group tbe-footer__name">
+					<!-- wp:site-title {"level":0,"isLink":true} /-->
+					<!-- wp:tbe/tagline /-->
+				</div>
+				<!-- /wp:group -->
 			</div>
 			<!-- /wp:group -->
+
+			<!-- wp:html -->
+			<nav class="tbe-footer__col" aria-label="Read">
+				<h2 class="tbe-footer__head">Read</h2>
+				<ul>
+					<li><a href="/bible/">The Books</a></li>
+					<li><a href="/bible/interlinear/">Interlinear</a></li>
+					<li><a href="/commentary/">Commentary</a></li>
+					<li><a href="/glossary/">Index</a></li>
+				</ul>
+			</nav>
+			<!-- /wp:html -->
+
+			<!-- wp:html -->
+			<nav class="tbe-footer__col" aria-label="About">
+				<h2 class="tbe-footer__head">About</h2>
+				<ul>
+					<li><a href="/bible/search/">Search</a></li>
+					<li><a href="/bible/index/">Commentary by passage</a></li>
+					<li><a href="/credits/">Credits and references</a></li>
+				</ul>
+			</nav>
+			<!-- /wp:html -->
+
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:navigation {"overlayMenu":"never","className":"tbe-footer__nav","layout":{"type":"flex","orientation":"horizontal","flexWrap":"wrap"}} -->
-			<!-- wp:navigation-link {"label":"The Books","type":"custom","url":"/bible/","kind":"custom"} /-->
-			<!-- wp:navigation-link {"label":"Interlinear","type":"custom","url":"/bible/interlinear/","kind":"custom"} /-->
-			<!-- wp:navigation-link {"label":"Commentary","type":"custom","url":"/commentary/","kind":"custom"} /-->
-			<!-- wp:navigation-link {"label":"Index","type":"custom","url":"/glossary/","kind":"custom"} /-->
-			<!-- wp:navigation-link {"label":"Credits","type":"custom","url":"/credits/","kind":"custom"} /-->
-		<!-- /wp:navigation -->
+		<!-- wp:group {"className":"tbe-footer__legal","layout":{"type":"default"}} -->
+		<div class="wp-block-group tbe-footer__legal">
+			<!-- wp:tbe/copyright /-->
+			<!-- wp:tbe/rights /-->
+		</div>
+		<!-- /wp:group -->
+
 	</div>
 	<!-- /wp:group -->
-
-	<!-- wp:tbe/copyright /-->
-	<!-- wp:paragraph {"className":"tbe-muted","fontSize":"small"} -->
-	<p class="tbe-muted has-small-font-size">© The Bible Exposed</p>
-	<!-- /wp:paragraph -->
 </footer>
 <!-- /wp:group -->
