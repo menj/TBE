@@ -102,4 +102,3 @@ a.tbe-ref--quran::after { content: " ↗"; font-size: 0.75em; }
 .tbe-index__list { margin: 0; padding-inline-start: 1.1rem; }
 .tbe-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
 .tbe-tags a { display: inline-block; padding: 0.15rem 0.7rem; border: 1px solid var(--tbe-line); border-radius: 999px; text-decoration: none; font-family: var(--tbe-ui); font-size: 0.85rem; }
-

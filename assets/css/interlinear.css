@@ -27,6 +27,7 @@
 .tbe-il__w:hover, .tbe-il__w:focus-visible { border-color: var(--tbe-accent); }
 
 .tbe-il__he { font-size: 1.75rem; line-height: 1.5; color: var(--tbe-ink); }
+.tbe-il__gr { font-size: 1.45rem; line-height: 1.4; color: var(--tbe-ink); }
 .tbe-il__gloss { font-family: var(--tbe-ui); font-size: 0.85rem; line-height: 1.25; color: var(--tbe-accent); max-width: 9rem; }
 .tbe-il__translit { font-family: var(--tbe-ui); font-size: 0.75rem; font-style: italic; color: var(--tbe-muted); }
 .tbe-il__strongs { font-family: var(--tbe-ui); font-size: 0.7rem; letter-spacing: 0.04em; color: var(--tbe-rubric); }
@@ -37,6 +38,7 @@
 .tbe-il__w--variant { border-style: dashed; border-color: var(--tbe-gold); }
 .tbe-il__flag { position: absolute; margin-top: -0.9rem; font-size: 0.7rem; color: var(--tbe-rubric); }
 .tbe-il__w { position: relative; }
+.tbe-il__w--outside { opacity: 0.8; }
 
 /* Layers the reader can switch off */
 .tbe-il--hide-gloss .tbe-il__gloss,
@@ -44,6 +46,8 @@
 .tbe-il--hide-strongs .tbe-il__strongs,
 .tbe-il--hide-lemma .tbe-il__lemma,
 .tbe-il--hide-morph .tbe-il__morph { display: none; }
+.tbe-il--no-variants .tbe-il__w--variant { border-style: solid; border-color: var(--tbe-line); }
+.tbe-il--no-variants .tbe-il__flag { display: none; }
 
 @media (max-width: 600px) {
 	.tbe-il__he { font-size: 1.5rem; }

@@ -11,8 +11,8 @@ Needs (not part of the theme): faster-whisper, numpy and ffmpeg.
     .venv/bin/python tools/align_audio.py genesis 1 recording.mp3
 
 Outputs:
-    data/audio/he/{book}-{chapter}.json   word timings
-    assets/audio/he/{book}-{chapter}.mp3  web copy of the recording (mono, 96 kbps)
+    data/audio/{he|gr}/{book}-{chapter}.json   word timings (he = Hebrew, gr = Greek)
+    assets/audio/{he|gr}/{book}-{chapter}.mp3  web copy of the recording (mono, 96 kbps)
 """
 import json, os, re, subprocess, sys, time
 from difflib import SequenceMatcher
@@ -23,12 +23,31 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 POINTS = re.compile(r"[֑-ׇ]")          # vowel points, cantillation, marks
 FINALS = str.maketrans("ךםןףץ", "כמנפצ")
 WEAK = re.compile(r"[וי]")                        # vowel letters spelled differently in modern text
+WEAK_GR = re.compile(r"[aeiou]")                  # Greek: vowels are the part recordings and spelling disagree on
+
+
+GREEK = False   # set from the command line: Greek is matched by sound, not by spelling
 
 
 def skeleton(text):
-    """Consonants only, final forms folded, punctuation gone."""
+    """Hebrew: consonants only, final forms folded. Greek: a rough modern-Greek sound spelling,
+    because the recording is read with modern pronunciation while the text is spelled the ancient way."""
+    if GREEK:
+        return greek_sound(text)
     text = POINTS.sub("", text).translate(FINALS)
     return re.sub(r"[^א-ת]", "", text)
+
+
+def greek_sound(text):
+    import unicodedata
+    t = unicodedata.normalize("NFD", text.lower())
+    t = "".join(c for c in t if not unicodedata.combining(c)).replace("ς", "σ")
+    for a, b in (("ει", "i"), ("οι", "i"), ("υι", "i"), ("αι", "e"), ("ου", "u"), ("μπ", "b"), ("ντ", "d"), ("γκ", "g"),
+                 ("η", "i"), ("υ", "i"), ("ι", "i"), ("ε", "e"), ("ο", "o"), ("ω", "o"), ("α", "a"),
+                 ("β", "v"), ("γ", "g"), ("δ", "d"), ("ζ", "z"), ("θ", "t"), ("κ", "k"), ("λ", "l"), ("μ", "m"), ("ν", "n"),
+                 ("ξ", "x"), ("π", "p"), ("ρ", "r"), ("σ", "s"), ("τ", "t"), ("φ", "f"), ("χ", "h"), ("ψ", "p")):
+        t = t.replace(a, b)
+    return re.sub(r"[^a-z]", "", t)
 
 
 def similarity(a, b):
@@ -36,19 +55,20 @@ def similarity(a, b):
     if not a or not b:
         return 0.0
     strong = SequenceMatcher(None, a, b).ratio()
-    core_a, core_b = WEAK.sub("", a), WEAK.sub("", b)
+    weak = WEAK_GR if GREEK else WEAK
+    core_a, core_b = weak.sub("", a), weak.sub("", b)
     if core_a and core_b:
         strong = max(strong, SequenceMatcher(None, core_a, core_b).ratio() * 0.95)
     return strong
 
 
-def transcribe(src, model_name="medium"):
+def transcribe(src, model_name="medium", language="he"):
     from faster_whisper import WhisperModel
     raw = subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", src, "-ac", "1", "-ar", "16000", "-f", "f32le", "-"],
                          capture_output=True, check=True).stdout
     audio = np.frombuffer(raw, dtype=np.float32)
     model = WhisperModel(model_name, device="cpu", compute_type="int8", cpu_threads=os.cpu_count() or 4)
-    segments, info = model.transcribe(audio, language="he", word_timestamps=True, beam_size=5,
+    segments, info = model.transcribe(audio, language=language, word_timestamps=True, beam_size=5,
                                       condition_on_previous_text=False, vad_filter=False, temperature=0.0)
     words = []
     for seg in segments:
@@ -119,7 +139,11 @@ def main():
         sys.exit(__doc__)
     slug, chapter, src = sys.argv[1], int(sys.argv[2]), sys.argv[3]
     cache = sys.argv[4] if len(sys.argv) > 4 else None
-    data = json.load(open(os.path.join(ROOT, "data", "interlinear", slug, "%d.json" % chapter), encoding="utf8"))["v"]
+    doc = json.load(open(os.path.join(ROOT, "data", "interlinear", slug, "%d.json" % chapter), encoding="utf8"))
+    global GREEK
+    GREEK = doc.get("lang") != "he"
+    folder = "gr" if GREEK else "he"
+    data = doc["v"]
     verse_numbers = sorted(int(v) for v in data)
     known, owner = [], []
     for v in verse_numbers:
@@ -131,7 +155,7 @@ def main():
         heard_doc = json.load(open(cache, encoding="utf8"))
     else:
         t0 = time.time()
-        heard_doc = transcribe(src)
+        heard_doc = transcribe(src, language="el" if GREEK else "he")
         print("transcribed in %.0fs" % (time.time() - t0))
         if cache:
             json.dump(heard_doc, open(cache, "w", encoding="utf8"), ensure_ascii=False)
@@ -182,10 +206,10 @@ def main():
     for k, (v, idx) in enumerate(owner):
         out["words"].setdefault(str(v), []).append([times[k][0], times[k][1], 1 if conf[k] >= 0.6 else 0])
         flat += conf[k] >= 0.6
-    os.makedirs(os.path.join(ROOT, "data", "audio", "he"), exist_ok=True)
-    os.makedirs(os.path.join(ROOT, "assets", "audio", "he"), exist_ok=True)
-    json.dump(out, open(os.path.join(ROOT, "data", "audio", "he", "%s-%d.json" % (slug, chapter)), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
-    subprocess.run(["ffmpeg", "-nostdin", "-y", "-v", "error", "-i", src, "-ac", "1", "-b:a", "96k", os.path.join(ROOT, "assets", "audio", "he", out["file"])], check=True)
+    os.makedirs(os.path.join(ROOT, "data", "audio", folder), exist_ok=True)
+    os.makedirs(os.path.join(ROOT, "assets", "audio", folder), exist_ok=True)
+    json.dump(out, open(os.path.join(ROOT, "data", "audio", folder, "%s-%d.json" % (slug, chapter)), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
+    subprocess.run(["ffmpeg", "-nostdin", "-y", "-v", "error", "-i", src, "-ac", "1", "-b:a", "96k", os.path.join(ROOT, "assets", "audio", folder, out["file"])], check=True)
     matched = sum(1 for k in range(n) if conf[k] >= 0.34)
     print("words: %d | matched by sound: %d (%.0f%%) | confident: %d (%.0f%%) | estimated: %d" %
           (n, matched, 100 * matched / n, flat, 100 * flat / n, n - matched))

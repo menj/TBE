@@ -2,7 +2,7 @@
 
 Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 
-**Scope for now: the ESV (Old Testament) and the Hebrew.** The ESV New Testament and everything Greek are on hold until the New Testament text is pulled. The interface is English only. Requires WordPress 6.7+ (the parent theme's minimum) and PHP 8.0+.
+**Scope: the complete ESV, the Hebrew Old Testament and the Greek New Testament, word by word.** Recorded readings exist for Genesis 1 (Hebrew) and Matthew 1 (Greek) so far. The interface is English only. Requires WordPress 6.7+ (the parent theme's minimum) and PHP 8.0+.
 
 ## Before you upload
 - **Install Twenty Twenty-Five first.** This is a child theme; WordPress refuses it without its parent.
@@ -29,7 +29,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `inc/` | Settings, Bible data and reference parser, commentary post type, routes, reader, blocks |
 | `templates/`, `parts/` | Block-theme templates: front page, Bible reader, commentary single/archive, header, footer |
 | `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request every 15-30 s; stops on any rate-limit reply; `--max N` per run) |
-| `data/interlinear/` | Hebrew Old Testament, word by word (STEP Bible, CC BY 4.0; see its README.txt) |
+| `data/interlinear/` | Hebrew Old Testament and Greek New Testament, word by word (STEP Bible, CC BY 4.0; see its README.txt) |
 | `tools/build_interlinear.py` | Downloads the open STEPBible data and builds `data/interlinear/` |
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
@@ -60,13 +60,15 @@ Every page outputs one JSON-LD graph (`inc/schema.php`), switchable under Appear
 
 Individual interlinear words are not marked up: schema.org has no suitable type, and hundreds of nodes per page would only add weight. Check the output with `python3 tools/check_schema.py page.json`, which tests every type, property and cross-reference against the official vocabulary (downloaded to `tools/.cache/` on first use).
 
-## Interlinear (Old Testament)
+## Interlinear (Hebrew and Greek)
 Each Old Testament chapter links to a word-by-word Hebrew interlinear at `/bible/{book}/{chapter}/interlinear/`: Hebrew in SBL Hebrew, running right to left, with English gloss, transliteration, Strong's number, root word and grammar. Hover or focus a word for its root, meaning and grammar spelled out. Readers can switch each layer on or off and hide the vowel points or cantillation marks. Qere corrections and other variant readings are outlined and flagged.
+
+Every New Testament chapter has the same page in Greek: SBL Greek, left to right, the Nestle-Aland 28th edition with the same layers, plus Robinson-style grammar spelled out. Words that are in other editions (the Textus Receptus, for example) but not in the Nestle-Aland text are outlined, and a toggle shows or hides the flags.
 
 Data: STEP Bible (https://www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
 
-## Recorded Hebrew reading (audio)
-A chapter can have a recording, timed word by word. The interlinear page then shows a player, a play button on every verse, click-a-word-to-hear, and highlights the word being read. **Genesis 1** is done. Files: `assets/audio/he/{book}-{chapter}.mp3` (web copy) and `data/audio/he/{book}-{chapter}.json` (start/end time of every word, and a flag for the words whose timing is only an estimate). Add a `"credit"` line to that JSON to show a credit under the player.
+## Recorded readings (audio)
+A chapter can have a recording, timed word by word. The interlinear page then shows a player, a play button on every verse, click-a-word-to-hear, and highlights the word being read. **Genesis 1** (Hebrew) and **Matthew 1** (Greek) are done. Files: `assets/audio/{he|gr}/{book}-{chapter}.mp3` (web copy) and `data/audio/{he|gr}/{book}-{chapter}.json` (start/end time of every word, and a flag for the words whose timing is only an estimate). Add a `"credit"` line to that JSON to show a credit under the player.
 
 `tools/align_audio.py` makes the timings: a speech model (faster-whisper) finds when words are spoken, and a global alignment matches what it heard against the exact Hebrew words we already have, so timings are tied to the known text rather than to a transcription. Boundaries are then snapped to the quietest instant nearby. Editors see a **Check timings** button that outlines the estimated words so they can be checked by ear. For Genesis 1: 434 words, 97% matched by sound, 94% confident, and every verse cut from the recording by these timings is heard by the model as that verse. The recording starts with about 20 seconds of spoken introduction; the timings begin at verse 1.
 
@@ -95,6 +97,6 @@ The ESV text is © Crossway. The copyright notice shown in the footer is editabl
 
 ## Fonts
 
-**Bible text only** is set in the SBL fonts in `assets/fonts/`: SBL BibLit for the ESV and SBL Hebrew for the Hebrew words, via `assets/css/scripture.css`. Everything else (commentary, headings, menus, buttons) uses system fonts. SBL Greek is not included until the New Testament is added.
+**Bible text only** is set in the SBL fonts in `assets/fonts/`: SBL BibLit for the ESV, SBL Hebrew for the Hebrew words and SBL Greek for the Greek words, via `assets/css/scripture.css`. Everything else (commentary, headings, menus, buttons) uses system fonts. SBL Greek is not included until the New Testament is added.
 
 The fonts are lossless WOFF2 conversions of the original SBL TTFs, made with `node tools/ttf2woff2.js in.ttf out.woff2` (about a quarter of the size, identical glyphs). The site owner holds the SBL / Tiro Typeworks licence; its text is kept in `assets/fonts/LICENSE-SBL-FONTS.txt`.

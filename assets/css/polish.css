@@ -229,7 +229,7 @@ a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, tra
 	box-shadow: var(--tbe-glow-accent);
 }
 .tbe-il__w:hover .tbe-il__gloss { color: var(--tbe-rubric); }
-.tbe-il__w:hover .tbe-il__he { color: var(--tbe-accent); }
+.tbe-il__w:hover .tbe-il__he, .tbe-il__w:hover .tbe-il__gr { color: var(--tbe-accent); }
 .tbe-il__w--variant:hover { border-color: var(--tbe-gold); box-shadow: var(--tbe-glow-gold); }
 .tbe-il__w.is-playing {
 	background: linear-gradient(180deg, color-mix(in srgb, var(--tbe-gold) 35%, var(--tbe-surface)), var(--tbe-surface));

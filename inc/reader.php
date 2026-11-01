@@ -52,8 +52,8 @@ function tbe_view_credits(): string {
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Scripture', 'tbe-child' ) . '</h2><p>' . esc_html( (string) tbe_setting( 'copyright' ) ) . '</p>';
 
-	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Hebrew text and interlinear', 'tbe-child' ) . '</h2><p>'
-		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'Hebrew: Westminster Leningrad Codex, tagged by Tyndale House, Cambridge. Word-by-word data from %s, licensed CC BY 4.0.', 'tbe-child' ), '<a href="https://www.STEPBible.org" rel="noopener">STEP Bible</a>' ) ) . '</p>';
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Hebrew and Greek text and interlinear', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'Hebrew: Westminster Leningrad Codex. Greek: Nestle-Aland 28th edition, with variants from the SBL Greek New Testament, the Textus Receptus and others. Both tagged by Tyndale House, Cambridge. Word-by-word data from %s, licensed CC BY 4.0.', 'tbe-child' ), '<a href="https://www.STEPBible.org" rel="noopener">STEP Bible</a>' ) ) . '</p>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typeface', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit font, by the Society of Biblical Literature.', 'tbe-child' ) . '</p>';
 
@@ -75,8 +75,8 @@ function tbe_view_credits(): string {
 /** Every chapter that has a Hebrew interlinear, by book; a note marks the ones with a recorded reading. */
 function tbe_view_interlinear_index(): string {
 	$out  = '<div class="tbe-reader tbe-books tbe-il-index">';
-	$out .= '<h1 class="tbe-title">' . esc_html__( 'Hebrew interlinear', 'tbe-child' ) . '</h1>';
-	$out .= '<p class="tbe-center tbe-muted">' . esc_html__( 'The Hebrew word by word, with transliteration, gloss, Strong\'s numbers and grammar. Chapters marked with ♪ also have a recorded reading that follows along word by word.', 'tbe-child' ) . '</p>';
+	$out .= '<h1 class="tbe-title">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</h1>';
+	$out .= '<p class="tbe-center tbe-muted">' . esc_html__( 'The Old Testament in Hebrew and the New Testament in Greek, word by word, with transliteration, gloss, Strong\'s numbers and grammar. Chapters marked with ♪ also have a recorded reading that follows along word by word.', 'tbe-child' ) . '</p>';
 	$found = false;
 	foreach ( TBE_Bible::books() as $book ) {
 		$items = '';
@@ -102,7 +102,7 @@ function tbe_view_interlinear_index(): string {
 function tbe_view_books(): string {
 	$out  = '<div class="tbe-reader tbe-books">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'The Books of the Bible', 'tbe-child' ) . '</h1>';
-	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Hebrew interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
+	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
 
 	foreach ( array(
 		'OT' => __( 'Old Testament', 'tbe-child' ),
@@ -142,7 +142,7 @@ function tbe_view_book( array $book ): string {
 			'<li%s><a href="%s"%s>%d</a></li>',
 			$has ? ' class="has-interlinear"' : '',
 			esc_url( TBE_Bible::url( $book['slug'], $i ) ),
-			$has ? ' title="' . esc_attr__( 'Hebrew interlinear available', 'tbe-child' ) . '"' : '',
+			$has ? ' title="' . esc_attr__( 'Interlinear available', 'tbe-child' ) . '"' : '',
 			$i
 		);
 	}
@@ -170,10 +170,10 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 	$out .= '<h1 class="tbe-title">' . esc_html( $book['name'] ) . '</h1>';
 	$out .= tbe_reader_toolbar();
 	if ( TBE_Interlinear::available( $slug, $chapter ) ) {
-		$out .= '<p class="tbe-center tbe-il-link"><a class="tbe-btn tbe-btn--solid" href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Hebrew interlinear', 'tbe-child' ) . ' <span aria-hidden="true">→</span></a></p>';
+		$out .= '<p class="tbe-center tbe-il-link"><a class="tbe-btn tbe-btn--solid" href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html( 'OT' === $book['testament'] ? __( 'Hebrew interlinear', 'tbe-child' ) : __( 'Greek interlinear', 'tbe-child' ) ) . ' <span aria-hidden="true">→</span></a></p>';
 		$audio = TBE_Audio::chapter( $slug, $chapter );
 		if ( $audio ) {
-			$out .= '<figure class="tbe-il__audio tbe-il__audio--inline"><figcaption>' . esc_html__( 'Listen to the Hebrew reading', 'tbe-child' ) . ' <a href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Follow it word by word', 'tbe-child' ) . '</a></figcaption><audio data-tbe-audio controls preload="metadata" src="' . esc_url( $audio['url'] ) . '"></audio>';
+			$out .= '<figure class="tbe-il__audio tbe-il__audio--inline"><figcaption>' . esc_html( 'OT' === $book['testament'] ? __( 'Listen to the Hebrew reading', 'tbe-child' ) : __( 'Listen to the Greek reading', 'tbe-child' ) ) . ' <a href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Follow it word by word', 'tbe-child' ) . '</a></figcaption><audio data-tbe-audio controls preload="metadata" src="' . esc_url( $audio['url'] ) . '"></audio>';
 			if ( '' !== trim( (string) $audio['credit'] ) ) {
 				$out .= '<p class="tbe-muted tbe-il__credit">' . esc_html( (string) $audio['credit'] ) . '</p>';
 			}

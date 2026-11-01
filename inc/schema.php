@@ -466,30 +466,32 @@ function tbe_ld_graph(): array {
 				$page['significantLink'] = TBE_Interlinear::url( $slug, $chapter );
 			}
 		} else {
-			// Interlinear page: describes the same chapter in Hebrew, with its data source.
+			// Interlinear page: describes the same chapter in Hebrew or Greek, with its data source.
+			$greek = 'NT' === ( $request['book']['testament'] ?? '' );
+			$lang  = $greek ? 'grc' : 'he';
 			$trail[]            = array( sprintf( /* translators: %s: passage */ __( 'Interlinear: %s', 'tbe-child' ), TBE_Bible::label( $slug, $chapter ) ), TBE_Interlinear::url( $slug, $chapter ) );
 			$page['about']      = tbe_ld_ref( $cid );
-			$page['inLanguage'] = array( 'en', 'he' );
+			$page['inLanguage'] = array( 'en', $lang );
 			$page['isBasedOn']  = tbe_ld_ref( home_url( '/#step-bible-data' ) );
 			$extra[]            = array(
 				'@type'   => 'Dataset',
 				'@id'     => home_url( '/#step-bible-data' ),
-				'name'    => 'STEPBible Translators Amalgamated Hebrew OT (TAHOT)',
+				'name'    => $greek ? 'STEPBible Translators Amalgamated Greek NT (TAGNT)' : 'STEPBible Translators Amalgamated Hebrew OT (TAHOT)',
 				'url'     => 'https://github.com/STEPBible/STEPBible-Data',
 				'license' => 'https://creativecommons.org/licenses/by/4.0/',
 				'creator' => array( '@type' => 'Organization', 'name' => 'STEP Bible', 'url' => 'https://www.STEPBible.org' ),
-				'inLanguage' => 'he',
+				'inLanguage' => $lang,
 			);
 			$audio = TBE_Audio::chapter( $slug, $chapter );
 			if ( $audio ) {
 				$extra[]       = array(
 					'@type'          => 'AudioObject',
 					'@id'            => TBE_Interlinear::url( $slug, $chapter ) . '#audio',
-					'name'           => sprintf( /* translators: %s: passage */ __( 'Hebrew reading of %s', 'tbe-child' ), TBE_Bible::label( $slug, $chapter ) ),
+					'name'           => sprintf( /* translators: %s: passage */ ( $greek ? __( 'Greek reading of %s', 'tbe-child' ) : __( 'Hebrew reading of %s', 'tbe-child' ) ), TBE_Bible::label( $slug, $chapter ) ),
 					'contentUrl'     => $audio['url'],
 					'encodingFormat' => 'audio/mpeg',
 					'duration'       => TBE_Audio::iso_duration( (float) $audio['duration'] ),
-					'inLanguage'     => 'he',
+					'inLanguage'     => $lang,
 					'about'          => tbe_ld_ref( $cid ),
 				);
 				$page['audio'] = tbe_ld_ref( TBE_Interlinear::url( $slug, $chapter ) . '#audio' );
@@ -502,7 +504,7 @@ function tbe_ld_graph(): array {
 					'@id'             => $hid,
 					'position'        => (int) $n,
 					'text'            => implode( ' ', array_map( static fn( $w ) => (string) $w[0], $words ) ),
-					'inLanguage'      => 'he',
+					'inLanguage'      => $lang,
 					'isPartOf'        => tbe_ld_ref( $cid ),
 					'workTranslation' => tbe_ld_ref( TBE_Bible::url( $slug, $chapter ) . '#v' . (int) $n ),
 				);
