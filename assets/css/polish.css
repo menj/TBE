@@ -356,6 +356,16 @@ a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, tra
 .tbe-hits li:hover, .tbe-glossary__item:hover { transform: translateX(4px); }
 .tbe-footer__col a { border-radius: var(--tbe-radius-sm); }
 
+/* Where there is a rollover, there is no underline: the colour and movement say "link". ------------- */
+.tbe-btn, .tbe-btn:hover, .wp-block-button__link, .wp-block-button__link:hover,
+.tbe-il-link a, .tbe-il-link a:hover, .tbe-booklist a, .tbe-chapters a, .tbe-cards a, .tbe-cards a:hover,
+.tbe-pager a, .tbe-az a, .tbe-tags a, .tbe-chip, .tbe-chips a, .tbe-toc a, .tbe-hits a, .tbe-hit__ref,
+.tbe-glossary dt a, .tbe-index__book a, .tbe-index__list a, .tbe-box__link a, .tbe-breadcrumb a,
+.tbe-header a, .tbe-header a:hover, .tbe-footer a, .tbe-footer a:hover, .tbe-vn, .tbe-vn:hover, .tbe-il__play {
+	text-decoration: none;
+}
+a.tbe-term:hover, a.tbe-term:focus-visible, a.tbe-ref:hover, a.tbe-ref:focus-visible { text-decoration-color: transparent; }
+
 /* Respect reduced motion: keep the colour change, drop the movement ---------- */
 @media (prefers-reduced-motion: reduce) {
 	.tbe-btn:hover, .tbe-booklist a:hover, .tbe-chapters a:hover, .tbe-cards .wp-block-post-template > li:hover,

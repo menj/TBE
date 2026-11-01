@@ -248,10 +248,9 @@ html[data-theme="dark"] .tbe-footer { --tbe-f-bg: color-mix(in srgb, var(--tbe-g
 	font-family: var(--tbe-ui);
 	font-size: 0.92rem;
 	color: color-mix(in srgb, var(--tbe-f-text) 88%, transparent);
-	background: linear-gradient(var(--tbe-f-gold), var(--tbe-f-gold)) left bottom / 0% 1px no-repeat;
-	transition: color 0.2s var(--tbe-ease, ease), background-size 0.3s var(--tbe-ease, ease), transform 0.25s var(--tbe-ease, ease);
+	transition: color 0.2s var(--tbe-ease, ease), transform 0.25s var(--tbe-ease, ease);
 }
-.tbe-footer__col a:hover, .tbe-footer__col a:focus-visible { color: var(--tbe-f-gold); background-size: 100% 1px; transform: translateX(3px); }
+.tbe-footer__col a:hover, .tbe-footer__col a:focus-visible { color: var(--tbe-f-gold); transform: translateX(3px); }
 
 .tbe-footer__legal { margin-top: clamp(2rem, 5vw, 3.25rem); padding-top: 1.5rem; border-top: 1px solid var(--tbe-f-rule); display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 1rem 3rem; }
 .tbe-footer__legal > * { margin: 0; }
