@@ -25,7 +25,7 @@ add_action(
 				'rewrite'      => array( 'slug' => 'commentary', 'with_front' => false ),
 				'menu_icon'    => 'dashicons-book-alt',
 				'show_in_rest' => true,
-				'supports'     => array( 'title', 'editor', 'excerpt', 'author', 'revisions', 'thumbnail' ),
+				'supports'     => array( 'title', 'editor', 'excerpt', 'author', 'revisions', 'thumbnail', 'footnotes' ),
 			)
 		);
 
@@ -137,14 +137,14 @@ function tbe_passage_box( WP_Post $post ): void {
 		<label for="tbe-passage-field" class="screen-reader-text"><?php esc_html_e( 'Passage reference', 'tbe-child' ); ?></label>
 		<input type="text" id="tbe-passage-field" name="tbe_passage" class="widefat" value="<?php echo esc_attr( $value ); ?>" placeholder="John 1:1-18">
 	</p>
-	<p class="description"><?php esc_html_e( 'Book, chapter and verses, e.g. "Psalm 23", "1 Cor 13:4-7", "Jude 5". Leave verses out to cover a whole chapter.', 'tbe-child' ); ?></p>
+	<p class="description"><?php esc_html_e( 'Book, chapter and verses, e.g. "Psalm 23", "1 Cor 13:4-7", "Jude 5". Leave verses out to cover a whole chapter, or give just the book name ("Genesis") for a book introduction.', 'tbe-child' ); ?></p>
 	<?php
 	$book = (string) get_post_meta( $post->ID, 'tbe_book', true );
 	if ( $book ) {
 		printf(
 			'<p><strong>%s</strong> %s</p>',
 			esc_html__( 'Resolved:', 'tbe-child' ),
-			esc_html( TBE_Bible::label( $book, (int) get_post_meta( $post->ID, 'tbe_chapter', true ), (int) get_post_meta( $post->ID, 'tbe_vstart', true ), (int) get_post_meta( $post->ID, 'tbe_vend', true ) ) )
+			esc_html( tbe_passage_label( $book, (int) get_post_meta( $post->ID, 'tbe_chapter', true ), (int) get_post_meta( $post->ID, 'tbe_vstart', true ), (int) get_post_meta( $post->ID, 'tbe_vend', true ) ) )
 		);
 	}
 }
@@ -160,8 +160,14 @@ add_action(
 		}
 		$text   = sanitize_text_field( wp_unslash( $_POST['tbe_passage'] ?? '' ) );
 		$parsed = '' !== $text ? TBE_Bible::parse_reference( $text ) : null;
+		if ( $parsed && ! preg_match( '/\d/', preg_replace( '/^\s*(?:[1-3]|i{1,3}|first|second|third)\b\.?/i', '', $text ) ) ) {
+			// A book name with no chapter number: the entry introduces the whole book.
+			$parsed['chapter'] = 0;
+			$parsed['vstart']  = 0;
+			$parsed['vend']    = 0;
+		}
 		if ( $parsed ) {
-			update_post_meta( $post_id, 'tbe_passage', TBE_Bible::label( $parsed['book'], $parsed['chapter'], $parsed['vstart'], $parsed['vend'] ) );
+			update_post_meta( $post_id, 'tbe_passage', tbe_passage_label( $parsed['book'], $parsed['chapter'], $parsed['vstart'], $parsed['vend'] ) );
 			update_post_meta( $post_id, 'tbe_book', $parsed['book'] );
 			update_post_meta( $post_id, 'tbe_chapter', $parsed['chapter'] );
 			update_post_meta( $post_id, 'tbe_vstart', $parsed['vstart'] );
@@ -174,7 +180,7 @@ add_action(
 	}
 );
 
-/** Show the passage and a link to the reader at the top of a single entry. */
+/** On a single entry: show the passage with a link to the reader, then variants and Qur'an references. */
 add_filter(
 	'the_content',
 	static function ( string $content ): string {
@@ -188,14 +194,16 @@ add_filter(
 		}
 		$chapter = (int) get_post_meta( $id, 'tbe_chapter', true );
 		$vstart  = (int) get_post_meta( $id, 'tbe_vstart', true );
+		$url     = $chapter ? TBE_Bible::url( $book, $chapter, $vstart ?: null ) : TBE_Bible::url( $book );
 		$intro   = sprintf(
 			'<p class="tbe-passage"><span class="tbe-passage__label">%1$s</span> <a href="%2$s">%3$s</a></p>',
 			esc_html__( 'Passage', 'tbe-child' ),
-			esc_url( TBE_Bible::url( $book, $chapter, $vstart ?: null ) ),
+			esc_url( $url ),
 			esc_html( (string) get_post_meta( $id, 'tbe_passage', true ) )
 		);
-		return $intro . $content;
-	}
+		return $intro . $content . tbe_render_entry_extras( $id );
+	},
+	20
 );
 
 /** Commentary entries for a chapter, ordered by starting verse. @return WP_Post[] */
@@ -214,6 +222,35 @@ function tbe_commentary_for_chapter( string $book, int $chapter ): array {
 			),
 			'meta_key'               => 'tbe_vstart',
 			'orderby'                => array( 'meta_value_num' => 'ASC', 'date' => 'ASC' ),
+		)
+	);
+	return $query->posts;
+}
+
+/** "John 1:1–18", "John 3" (chapter introduction) or "John" (book introduction). */
+function tbe_passage_label( string $book, int $chapter, int $vstart = 0, int $vend = 0 ): string {
+	if ( 0 === $chapter ) {
+		$data = TBE_Bible::book( $book );
+		return $data ? $data['name'] : $book;
+	}
+	return TBE_Bible::label( $book, $chapter, $vstart, $vend );
+}
+
+/** Introduction entries for a whole book (chapter 0). @return WP_Post[] */
+function tbe_commentary_for_book( string $book ): array {
+	$query = new WP_Query(
+		array(
+			'post_type'      => 'tbe_commentary',
+			'post_status'    => 'publish',
+			'posts_per_page' => 20,
+			'no_found_rows'  => true,
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+			'meta_query'     => array(
+				'relation' => 'AND',
+				array( 'key' => 'tbe_book', 'value' => $book ),
+				array( 'key' => 'tbe_chapter', 'value' => 0, 'type' => 'NUMERIC' ),
+			),
 		)
 	);
 	return $query->posts;

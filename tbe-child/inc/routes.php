@@ -11,6 +11,8 @@ add_action(
 	'init',
 	static function () {
 		add_rewrite_rule( '^bible/?$', 'index.php?tbe_view=books', 'top' );
+		add_rewrite_rule( '^bible/search/?$', 'index.php?tbe_view=search', 'top' );
+		add_rewrite_rule( '^bible/index/?$', 'index.php?tbe_view=index', 'top' );
 		add_rewrite_rule( '^bible/([a-z0-9-]+)/?$', 'index.php?tbe_view=book&tbe_book=$matches[1]', 'top' );
 		add_rewrite_rule( '^bible/([a-z0-9-]+)/([0-9]+)/?$', 'index.php?tbe_view=chapter&tbe_book=$matches[1]&tbe_chapter=$matches[2]', 'top' );
 	}
@@ -19,7 +21,7 @@ add_action(
 add_filter(
 	'query_vars',
 	static function ( array $vars ): array {
-		return array_merge( $vars, array( 'tbe_view', 'tbe_book', 'tbe_chapter' ) );
+		return array_merge( $vars, array( 'tbe_view', 'tbe_book', 'tbe_chapter', 'q' ) );
 	}
 );
 
@@ -33,8 +35,15 @@ function tbe_request(): ?array {
 	if ( '' === $view ) {
 		return $request = null;
 	}
-	if ( 'books' === $view ) {
-		return $request = array( 'view' => 'books' );
+	if ( 'books' === $view || 'index' === $view ) {
+		return $request = array( 'view' => $view );
+	}
+	if ( 'search' === $view ) {
+		return $request = array(
+			'view' => 'search',
+			'q'    => trim( sanitize_text_field( wp_unslash( (string) get_query_var( 'q' ) ) ) ),
+			'page' => isset( $_GET['pg'] ) ? max( 1, absint( $_GET['pg'] ) ) : 1, // phpcs:ignore WordPress.Security.NonceVerification
+		);
 	}
 	$book = TBE_Bible::book( sanitize_key( (string) get_query_var( 'tbe_book' ) ) );
 	if ( ! $book ) {
@@ -50,18 +59,19 @@ function tbe_request(): ?array {
 	return $request = array( 'view' => 'chapter', 'book' => $book, 'chapter' => $chapter );
 }
 
-/** "Go to passage" form: ?tbe_ref=John+3:16 redirects to the reader. */
+/** The "go to passage or search" box: a reference jumps to the reader, anything else searches. */
 add_action(
 	'template_redirect',
 	static function () {
 		if ( empty( $_GET['tbe_ref'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			return;
 		}
-		$parsed = TBE_Bible::parse_reference( sanitize_text_field( wp_unslash( $_GET['tbe_ref'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification
+		$input  = sanitize_text_field( wp_unslash( $_GET['tbe_ref'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
+		$parsed = TBE_Bible::parse_reference( $input );
 		if ( $parsed ) {
 			wp_safe_redirect( TBE_Bible::url( $parsed['book'], $parsed['chapter'], $parsed['vstart'] ?: null ), 302 );
 		} else {
-			wp_safe_redirect( add_query_arg( 'not_found', '1', TBE_Bible::url() ), 302 );
+			wp_safe_redirect( add_query_arg( 'q', $input, home_url( '/bible/search/' ) ), 302 );
 		}
 		exit;
 	},
@@ -110,6 +120,12 @@ add_filter(
 		switch ( $request['view'] ) {
 			case 'books':
 				$parts['title'] = __( 'The Books of the Bible', 'tbe-child' );
+				break;
+			case 'search':
+				$parts['title'] = '' !== $request['q'] ? sprintf( /* translators: %s: search words */ __( 'Search: %s', 'tbe-child' ), $request['q'] ) : __( 'Search', 'tbe-child' );
+				break;
+			case 'index':
+				$parts['title'] = __( 'Index of commentary', 'tbe-child' );
 				break;
 			case 'book':
 				$parts['title'] = $request['book']['name'];

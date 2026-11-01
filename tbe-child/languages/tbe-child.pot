@@ -1,0 +1,316 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TBE\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "%d chapter"
+msgid_plural "%d chapters"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%d note in this chapter"
+msgid_plural "%d notes in this chapter"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%d verse"
+msgid_plural "%d verses"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "%d+ verses"
+msgstr ""
+
+msgid "112:1-4"
+msgstr ""
+
+msgid "Add commentary entry"
+msgstr ""
+
+msgid "Add glossary term"
+msgstr ""
+
+msgid "Add reading"
+msgstr ""
+
+msgid "Add reference"
+msgstr ""
+
+msgid "Arabic form (optional)"
+msgstr ""
+
+msgid "Book, chapter and verses, e.g. \"Psalm 23\", \"1 Cor 13:4-7\", \"Jude 5\". Leave verses out to cover a whole chapter, or give just the book name (\"Genesis\") for a book introduction."
+msgstr ""
+
+msgid "Books"
+msgstr ""
+
+msgid "Breadcrumb"
+msgstr ""
+
+msgid "By passage"
+msgstr ""
+
+msgid "By section"
+msgstr ""
+
+msgid "By theme"
+msgstr ""
+
+msgid "Chapter %d"
+msgstr ""
+
+msgid "Chapter navigation"
+msgstr ""
+
+msgid "Chapters"
+msgstr ""
+
+msgid "Close all notes"
+msgstr ""
+
+msgid "Comma-separated. Each one also gets a tooltip wherever it appears in commentary."
+msgstr ""
+
+msgid "Commentary"
+msgstr ""
+
+msgid "Commentary entry"
+msgstr ""
+
+msgid "Commentary on verse %d"
+msgstr ""
+
+msgid "Compares manuscripts and variant readings to establish the earliest text that can be recovered."
+msgstr ""
+
+msgid "Contemplation of the passage, the counterpart of tadabbur."
+msgstr ""
+
+msgid "Continuous text"
+msgstr ""
+
+msgid "Edit commentary entry"
+msgstr ""
+
+msgid "Edit glossary term"
+msgstr ""
+
+msgid "Examines language, context, authorship and historical background."
+msgstr ""
+
+msgid "Glossary"
+msgstr ""
+
+msgid "Glossary term"
+msgstr ""
+
+msgid "Go"
+msgstr ""
+
+msgid "Go to a passage or search"
+msgstr ""
+
+msgid "Go to a passage or search — e.g. John 1:1-18, mercy"
+msgstr ""
+
+msgid "In the commentary"
+msgstr ""
+
+msgid "In the text"
+msgstr ""
+
+msgid "Index of commentary"
+msgstr ""
+
+msgid "Introduction"
+msgstr ""
+
+msgid "Jump to letter"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Larger text"
+msgstr ""
+
+msgid "list of books"
+msgstr ""
+
+msgid "New Testament"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No commentary has been published yet."
+msgstr ""
+
+msgid "No commentary matched."
+msgstr ""
+
+msgid "No verses matched."
+msgstr ""
+
+msgid "Notes"
+msgstr ""
+
+msgid "Old Testament"
+msgstr ""
+
+msgid "One row per reading. Rows with the same variation unit are grouped in the table."
+msgstr ""
+
+msgid "Open all notes"
+msgstr ""
+
+msgid "Opens the Qur'an on quran.com in a new tab."
+msgstr ""
+
+msgid "Other spellings and abbreviations"
+msgstr ""
+
+msgid "Page %1$d of %2$d"
+msgstr ""
+
+msgid "Passage"
+msgstr ""
+
+msgid "Passage not found"
+msgstr ""
+
+msgid "Passage reference"
+msgstr ""
+
+msgid "Permalink to this note"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Qur'an"
+msgstr ""
+
+msgid "Qur'an %1$s (%2$s)"
+msgstr ""
+
+msgid "Qur'an cross-references"
+msgstr ""
+
+msgid "Reading"
+msgstr ""
+
+msgid "Reading tools"
+msgstr ""
+
+msgid "Reads the passage in light of the Qur'an and Islamic scholarship (tafsir)."
+msgstr ""
+
+msgid "Reference only, e.g. 2:255, 112:1-4 or 19 for a whole surah. Each reference is checked against the 114 surahs and links to quran.com."
+msgstr ""
+
+msgid "Remove row"
+msgstr ""
+
+msgid "Resolved:"
+msgstr ""
+
+msgid "Result pages"
+msgstr ""
+
+msgid "Scripture"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search the text and commentary"
+msgstr ""
+
+msgid "Search words or \"a phrase\""
+msgstr ""
+
+msgid "Search: %s"
+msgstr ""
+
+msgid "Section"
+msgstr ""
+
+msgid "Sections"
+msgstr ""
+
+msgid "Smaller text"
+msgstr ""
+
+msgid "Switch between light and dark"
+msgstr ""
+
+msgid "Switch between one verse per line and continuous paragraphs"
+msgstr ""
+
+msgid "Term details"
+msgstr ""
+
+msgid "Textual variants"
+msgstr ""
+
+msgid "Textual variants table"
+msgstr ""
+
+msgid "That book or chapter does not exist. Try the %s."
+msgstr ""
+
+msgid "The Books of the Bible"
+msgstr ""
+
+msgid "The ESV text is not fully loaded yet: the search covers %1$d of %2$d chapters."
+msgstr ""
+
+msgid "The glossary is empty for now."
+msgstr ""
+
+msgid "The short summary shown in the tooltip is the Excerpt. If empty, the start of the main text is used."
+msgstr ""
+
+msgid "The text of this chapter is not available right now."
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Themes"
+msgstr ""
+
+msgid "These Qur'an references were not recognised and were not saved:"
+msgstr ""
+
+msgid "This note cross-references the Qur'an."
+msgstr ""
+
+msgid "This note includes a table of manuscript variants."
+msgstr ""
+
+msgid "Type a word or phrase. Put a phrase in quotes. To go straight to a passage, type a reference such as John 3:16."
+msgstr ""
+
+msgid "Variants"
+msgstr ""
+
+msgid "Variation unit, e.g. John 1:18"
+msgstr ""
+
+msgid "Verse"
+msgstr ""
+
+msgid "Verse numbers"
+msgstr ""
+
+msgid "Why it matters here (optional)"
+msgstr ""
+
+msgid "Witnesses"
+msgstr ""
+
+msgid "Witnesses (manuscripts, versions, fathers)"
+msgstr ""

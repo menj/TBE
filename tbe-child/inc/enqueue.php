@@ -15,10 +15,16 @@ add_action(
 		wp_enqueue_style( 'tbe-base', TBE_URI . '/assets/css/base.css', $deps, TBE_VERSION );
 		wp_enqueue_style( 'tbe-reader', TBE_URI . '/assets/css/reader.css', array( 'tbe-base' ), TBE_VERSION );
 		wp_enqueue_style( 'tbe-scripture', TBE_URI . '/assets/css/scripture.css', array( 'tbe-reader' ), TBE_VERSION );
+		wp_enqueue_style( 'tbe-components', TBE_URI . '/assets/css/components.css', array( 'tbe-reader' ), TBE_VERSION );
+		if ( is_rtl() ) {
+			wp_enqueue_style( 'tbe-rtl', TBE_URI . '/assets/css/rtl.css', array( 'tbe-components', 'tbe-scripture' ), TBE_VERSION );
+		}
 		wp_add_inline_style( 'tbe-base', tbe_scheme_css() );
 
 		// Runs in <head> so a saved light/dark choice is applied before first paint.
 		wp_enqueue_script( 'tbe-theme', TBE_URI . '/assets/js/theme.js', array(), TBE_VERSION, array( 'in_footer' => false ) );
+
+		wp_enqueue_script( 'tbe-tooltips', TBE_URI . '/assets/js/tooltips.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 
 		if ( tbe_request() || is_singular( 'tbe_commentary' ) ) {
 			wp_enqueue_script( 'tbe-reader', TBE_URI . '/assets/js/reader.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );

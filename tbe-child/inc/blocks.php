@@ -17,8 +17,8 @@ add_action(
 			array(
 				'render_callback' => static function (): string {
 					return '<form class="tbe-search" role="search" method="get" action="' . esc_url( home_url( '/' ) ) . '">'
-						. '<label class="screen-reader-text" for="tbe-ref">' . esc_html__( 'Go to passage', 'tbe-child' ) . '</label>'
-						. '<input id="tbe-ref" type="search" name="tbe_ref" placeholder="' . esc_attr__( 'Go to a passage — e.g. John 1:1-18', 'tbe-child' ) . '" autocomplete="off">'
+						. '<label class="screen-reader-text" for="tbe-ref">' . esc_html__( 'Go to a passage or search', 'tbe-child' ) . '</label>'
+						. '<input id="tbe-ref" type="search" name="tbe_ref" placeholder="' . esc_attr__( 'Go to a passage or search — e.g. John 1:1-18, mercy', 'tbe-child' ) . '" autocomplete="off">'
 						. '<button type="submit" class="tbe-btn tbe-btn--solid">' . esc_html__( 'Go', 'tbe-child' ) . '</button>'
 						. '</form>';
 				},
@@ -57,6 +57,9 @@ add_action(
 				},
 			)
 		);
+
+		register_block_type( 'tbe/language-switcher', array( 'render_callback' => 'tbe_render_language_switcher' ) );
+		register_block_type( 'tbe/glossary', array( 'render_callback' => 'tbe_render_glossary' ) );
 
 		register_block_type(
 			'tbe/copyright',

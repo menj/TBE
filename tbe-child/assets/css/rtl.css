@@ -1,0 +1,10 @@
+/* Right-to-left interface (Arabic). Scripture stays left-to-right English: .tbe-text sets dir="ltr". */
+body { direction: rtl; }
+.tbe-text, .tbe-text * { direction: ltr; }
+.tbe-text { text-align: left; }
+.tbe-search input[type="search"] { text-align: right; }
+.tbe-pager__prev::before, .tbe-pager__next::after { content: none; }
+.tbe-header { flex-direction: row-reverse; }
+.tbe-box { text-align: right; }
+.tbe-box .tbe-scripture, .tbe-hit__text.tbe-scripture { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+.tbe-hits li { text-align: right; }

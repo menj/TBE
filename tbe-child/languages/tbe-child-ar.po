@@ -1,0 +1,332 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TBE\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+msgid "%d chapter"
+msgid_plural "%d chapters"
+msgstr[0] "لا إصحاحات"
+msgstr[1] "إصحاح واحد"
+msgstr[2] "إصحاحان"
+msgstr[3] "%d إصحاحات"
+msgstr[4] "%d إصحاحًا"
+msgstr[5] "%d إصحاح"
+
+msgid "%d note in this chapter"
+msgid_plural "%d notes in this chapter"
+msgstr[0] "لا ملاحظات في هذا الإصحاح"
+msgstr[1] "ملاحظة واحدة في هذا الإصحاح"
+msgstr[2] "ملاحظتان في هذا الإصحاح"
+msgstr[3] "%d ملاحظات في هذا الإصحاح"
+msgstr[4] "%d ملاحظة في هذا الإصحاح"
+msgstr[5] "%d ملاحظة في هذا الإصحاح"
+
+msgid "%d verse"
+msgid_plural "%d verses"
+msgstr[0] "لا آيات"
+msgstr[1] "آية واحدة"
+msgstr[2] "آيتان"
+msgstr[3] "%d آيات"
+msgstr[4] "%d آية"
+msgstr[5] "%d آية"
+
+msgid "%d+ verses"
+msgstr "%d+ آية"
+
+msgid "112:1-4"
+msgstr ""
+
+msgid "Add commentary entry"
+msgstr ""
+
+msgid "Add glossary term"
+msgstr ""
+
+msgid "Add reading"
+msgstr ""
+
+msgid "Add reference"
+msgstr ""
+
+msgid "Arabic form (optional)"
+msgstr ""
+
+msgid "Book, chapter and verses, e.g. \"Psalm 23\", \"1 Cor 13:4-7\", \"Jude 5\". Leave verses out to cover a whole chapter, or give just the book name (\"Genesis\") for a book introduction."
+msgstr ""
+
+msgid "Books"
+msgstr "الأسفار"
+
+msgid "Breadcrumb"
+msgstr "مسار التنقل"
+
+msgid "By passage"
+msgstr "حسب المقطع"
+
+msgid "By section"
+msgstr "حسب القسم"
+
+msgid "By theme"
+msgstr "حسب الموضوع"
+
+msgid "Chapter %d"
+msgstr "الإصحاح %d"
+
+msgid "Chapter navigation"
+msgstr "التنقل بين الإصحاحات"
+
+msgid "Chapters"
+msgstr "الإصحاحات"
+
+msgid "Close all notes"
+msgstr "إغلاق كل الملاحظات"
+
+msgid "Comma-separated. Each one also gets a tooltip wherever it appears in commentary."
+msgstr ""
+
+msgid "Commentary"
+msgstr "التعليق"
+
+msgid "Commentary entry"
+msgstr ""
+
+msgid "Commentary on verse %d"
+msgstr "تعليق على الآية %d"
+
+msgid "Compares manuscripts and variant readings to establish the earliest text that can be recovered."
+msgstr "يقارن بين المخطوطات والقراءات المختلفة لتحديد أقدم نص يمكن استرداده."
+
+msgid "Contemplation of the passage, the counterpart of tadabbur."
+msgstr "تأمّل في المقطع، وهو نظير التدبّر."
+
+msgid "Continuous text"
+msgstr "نص متصل"
+
+msgid "Edit commentary entry"
+msgstr ""
+
+msgid "Edit glossary term"
+msgstr ""
+
+msgid "Examines language, context, authorship and historical background."
+msgstr "يفحص اللغة والسياق والتأليف والخلفية التاريخية."
+
+msgid "Glossary"
+msgstr "المعجم"
+
+msgid "Glossary term"
+msgstr ""
+
+msgid "Go"
+msgstr "اذهب"
+
+msgid "Go to a passage or search"
+msgstr "اذهب إلى مقطع أو ابحث"
+
+msgid "Go to a passage or search — e.g. John 1:1-18, mercy"
+msgstr "اذهب إلى مقطع أو ابحث — مثال: John 1:1-18، رحمة"
+
+msgid "In the commentary"
+msgstr "في التعليقات"
+
+msgid "In the text"
+msgstr "في النص"
+
+msgid "Index of commentary"
+msgstr "فهرس التعليقات"
+
+msgid "Introduction"
+msgstr "مدخل"
+
+msgid "Jump to letter"
+msgstr "انتقل إلى الحرف"
+
+msgid "Language"
+msgstr "اللغة"
+
+msgid "Larger text"
+msgstr "نص أكبر"
+
+msgid "list of books"
+msgstr "قائمة الأسفار"
+
+msgid "New Testament"
+msgstr "العهد الجديد"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No commentary has been published yet."
+msgstr "لم يُنشر أي تعليق بعد."
+
+msgid "No commentary matched."
+msgstr "لا توجد تعليقات مطابقة."
+
+msgid "No verses matched."
+msgstr "لا توجد آيات مطابقة."
+
+msgid "Notes"
+msgstr "ملاحظات"
+
+msgid "Old Testament"
+msgstr "العهد القديم"
+
+msgid "One row per reading. Rows with the same variation unit are grouped in the table."
+msgstr ""
+
+msgid "Open all notes"
+msgstr "فتح كل الملاحظات"
+
+msgid "Opens the Qur'an on quran.com in a new tab."
+msgstr "يفتح القرآن في موقع quran.com في تبويب جديد."
+
+msgid "Other spellings and abbreviations"
+msgstr ""
+
+msgid "Page %1$d of %2$d"
+msgstr "الصفحة %1$d من %2$d"
+
+msgid "Passage"
+msgstr "المقطع"
+
+msgid "Passage not found"
+msgstr "المقطع غير موجود"
+
+msgid "Passage reference"
+msgstr ""
+
+msgid "Permalink to this note"
+msgstr "رابط دائم لهذه الملاحظة"
+
+msgid "Previous"
+msgstr "السابق"
+
+msgid "Qur'an"
+msgstr "القرآن"
+
+msgid "Qur'an %1$s (%2$s)"
+msgstr "القرآن %1$s (%2$s)"
+
+msgid "Qur'an cross-references"
+msgstr "إحالات قرآنية"
+
+msgid "Reading"
+msgstr "القراءة"
+
+msgid "Reading tools"
+msgstr "أدوات القراءة"
+
+msgid "Reads the passage in light of the Qur'an and Islamic scholarship (tafsir)."
+msgstr "يقرأ المقطع في ضوء القرآن والعلم الإسلامي (التفسير)."
+
+msgid "Reference only, e.g. 2:255, 112:1-4 or 19 for a whole surah. Each reference is checked against the 114 surahs and links to quran.com."
+msgstr ""
+
+msgid "Remove row"
+msgstr ""
+
+msgid "Resolved:"
+msgstr ""
+
+msgid "Result pages"
+msgstr "صفحات النتائج"
+
+msgid "Scripture"
+msgstr "نص مقدس"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search the text and commentary"
+msgstr "ابحث في النص والتعليقات"
+
+msgid "Search words or \"a phrase\""
+msgstr "ابحث عن كلمات أو «عبارة»"
+
+msgid "Search: %s"
+msgstr "بحث: %s"
+
+msgid "Section"
+msgstr "القسم"
+
+msgid "Sections"
+msgstr "الأقسام"
+
+msgid "Smaller text"
+msgstr "نص أصغر"
+
+msgid "Switch between light and dark"
+msgstr "التبديل بين الفاتح والداكن"
+
+msgid "Switch between one verse per line and continuous paragraphs"
+msgstr "التبديل بين آية في كل سطر وفقرات متصلة"
+
+msgid "Term details"
+msgstr ""
+
+msgid "Textual variants"
+msgstr "القراءات النصية المختلفة"
+
+msgid "Textual variants table"
+msgstr "جدول القراءات النصية المختلفة"
+
+msgid "That book or chapter does not exist. Try the %s."
+msgstr "هذا السفر أو الإصحاح غير موجود. جرّب %s."
+
+msgid "The Books of the Bible"
+msgstr "أسفار الكتاب المقدس"
+
+msgid "The ESV text is not fully loaded yet: the search covers %1$d of %2$d chapters."
+msgstr "نص ESV لم يُحمَّل بالكامل بعد: يشمل البحث %1$d من %2$d إصحاحًا."
+
+msgid "The glossary is empty for now."
+msgstr "المعجم فارغ حاليًا."
+
+msgid "The short summary shown in the tooltip is the Excerpt. If empty, the start of the main text is used."
+msgstr ""
+
+msgid "The text of this chapter is not available right now."
+msgstr "نص هذا الإصحاح غير متاح حاليًا."
+
+msgid "Theme"
+msgstr "الموضوع"
+
+msgid "Themes"
+msgstr "المواضيع"
+
+msgid "These Qur'an references were not recognised and were not saved:"
+msgstr ""
+
+msgid "This note cross-references the Qur'an."
+msgstr "تتضمن هذه الملاحظة إحالات إلى القرآن."
+
+msgid "This note includes a table of manuscript variants."
+msgstr "تتضمن هذه الملاحظة جدولًا بقراءات المخطوطات المختلفة."
+
+msgid "Type a word or phrase. Put a phrase in quotes. To go straight to a passage, type a reference such as John 3:16."
+msgstr "اكتب كلمة أو عبارة. ضع العبارة بين علامتي تنصيص. للانتقال مباشرة إلى مقطع، اكتب مرجعًا مثل John 3:16."
+
+msgid "Variants"
+msgstr "قراءات مختلفة"
+
+msgid "Variation unit, e.g. John 1:18"
+msgstr ""
+
+msgid "Verse"
+msgstr "آية"
+
+msgid "Verse numbers"
+msgstr "أرقام الآيات"
+
+msgid "Why it matters here (optional)"
+msgstr ""
+
+msgid "Witnesses"
+msgstr "الشواهد"
+
+msgid "Witnesses (manuscripts, versions, fathers)"
+msgstr ""

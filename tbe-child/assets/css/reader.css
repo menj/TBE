@@ -1,4 +1,4 @@
-/* The Bible, Exposed — reader and commentary panel. */
+/* The Bible Exposed — reader and commentary panel. */
 
 .tbe-reader { max-width: 44rem; margin-inline: auto; }
 
@@ -37,14 +37,7 @@
 /* Scripture text */
 .tbe-text { font-size: calc(1.2rem * var(--tbe-scale)); line-height: 1.85; }
 .tbe-para { margin: 0 0 1.1em; text-wrap: pretty; }
-.tbe-para:first-of-type::first-letter {
-	float: left;
-	font-size: 3.6em;
-	line-height: 0.85;
-	padding: 0.06em 0.1em 0 0;
-	color: var(--tbe-rubric);
-}
-
+.tbe-layout-verse .tbe-poem .tbe-verse { margin: 0; }
 .tbe-vn {
 	font-size: 0.62em;
 	font-weight: 600;
@@ -86,23 +79,61 @@
 .tbe-pager { display: flex; justify-content: space-between; gap: 1rem; margin: 3rem 0; padding-top: 1rem; border-top: 1px solid var(--tbe-line); font-family: var(--tbe-ui); font-size: 0.9rem; }
 .tbe-pager a { text-decoration: none; }
 
-/* Commentary panel */
-.tbe-commentary { margin-top: 3rem; }
-.tbe-note {
+/* Commentary boxes, set under the verse they discuss */
+.tbe-box {
+	display: block;
 	background: var(--tbe-surface);
 	border: 1px solid var(--tbe-line);
 	border-inline-start: 3px solid var(--tbe-gold);
 	border-radius: 2px;
-	padding: 1.1rem 1.4rem;
-	margin-block: 1.25rem;
+	padding: 0.2rem 1.25rem 0.9rem;
+	margin: 0.6rem 0 1.4rem;
+	font-size: calc(1.02rem * var(--tbe-scale));
+	line-height: 1.7;
 	scroll-margin-top: 6rem;
+	text-indent: 0;
 }
-.tbe-note:target, .tbe-note.is-active { border-inline-start-color: var(--tbe-accent); }
-.tbe-note__ref { font-family: var(--tbe-ui); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tbe-rubric); }
-.tbe-note__title { font-size: 1.3rem; margin: 0.2rem 0; }
-.tbe-note__title a { color: inherit; text-decoration: none; }
-.tbe-note__body { font-size: 1.05rem; }
-.tbe-note__body > :first-child { margin-top: 0.75rem; }
+.tbe-box:target,
+.tbe-box.is-active { border-inline-start-color: var(--tbe-accent); }
+.tbe-box > summary {
+	display: flex;
+	align-items: baseline;
+	gap: 0.75rem;
+	cursor: pointer;
+	list-style: none;
+	padding: 0.7rem 0 0.4rem;
+}
+.tbe-box > summary::-webkit-details-marker { display: none; }
+.tbe-box > summary::after { content: "▾"; margin-inline-start: auto; color: var(--tbe-muted); font-size: 0.85em; transition: transform 0.15s; }
+.tbe-box:not([open]) > summary::after { transform: rotate(-90deg); }
+.tbe-box__ref {
+	font-family: var(--tbe-ui);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--tbe-rubric);
+	white-space: nowrap;
+}
+.tbe-box__title { font-size: 1.15em; font-weight: 500; }
+.tbe-box__body > :first-child { margin-top: 0.5rem; }
+.tbe-box__body p { margin-block: 0.7em; }
+.tbe-box__link { margin: 0.75rem 0 0; font-family: var(--tbe-ui); font-size: 0.75rem; text-align: end; }
+.tbe-box__link a { color: var(--tbe-muted); text-decoration: none; }
+.tbe-box--intro { border-inline-start-color: var(--tbe-accent); margin-bottom: 2rem; }
+.tbe-box--intro > summary { cursor: default; }
+
+/* Layouts: one verse per line (default) or continuous paragraphs */
+.tbe-layout-verse .tbe-text .tbe-verse { display: block; margin: 0 0 0.55em; }
+.tbe-layout-verse .tbe-text .tbe-para { margin: 0; }
+.tbe-layout-flow .tbe-text .tbe-para:first-of-type::first-letter,
+.tbe-layout-flow .tbe-text > .tbe-para:first-child::first-letter {
+	float: left;
+	font-size: 3.6em;
+	line-height: 0.85;
+	padding: 0.06em 0.1em 0 0;
+	color: var(--tbe-rubric);
+}
 
 @media (max-width: 600px) {
 	.tbe-text { line-height: 1.75; }

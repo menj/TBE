@@ -78,12 +78,17 @@ function tbe_defaults(): array {
 		'bismillah'        => 1,
 		'bismillah_text'   => 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ',
 		'allow_toggle'     => 1,
+		'lang_switcher'    => 1,
 		// Appearance.
 		'scheme'           => 'manuscript',
 		'colors'           => array(),
 		// Reader and commentary.
 		'font_scale'       => 100,
 		'verse_numbers'    => 1,
+		'layout'           => 'verse',
+		'boxes_open'       => 1,
+		'glossary_tooltips' => 1,
+		'ref_cards'        => 1,
 		'label_textual'    => __( 'Textual Criticism', 'tbe-child' ),
 		'label_critical'   => __( 'Critical Commentary', 'tbe-child' ),
 		'label_islamic'    => __( 'Islamic Perspective (Tafsir)', 'tbe-child' ),
@@ -207,6 +212,7 @@ function tbe_sanitize_settings( $input ): array {
 			$new['bismillah_text'] = sanitize_text_field( $input['bismillah_text'] ?? '' );
 			$new['bismillah']      = $flag( 'bismillah' );
 			$new['allow_toggle']   = $flag( 'allow_toggle' );
+			$new['lang_switcher']  = $flag( 'lang_switcher' );
 			break;
 
 		case 'appearance':
@@ -225,6 +231,10 @@ function tbe_sanitize_settings( $input ): array {
 		case 'reader':
 			$new['font_scale']       = max( 80, min( 140, (int) ( $input['font_scale'] ?? 100 ) ) );
 			$new['verse_numbers']    = $flag( 'verse_numbers' );
+			$new['layout']           = 'flow' === ( $input['layout'] ?? '' ) ? 'flow' : 'verse';
+			$new['boxes_open']       = $flag( 'boxes_open' );
+			$new['glossary_tooltips'] = $flag( 'glossary_tooltips' );
+			$new['ref_cards']        = $flag( 'ref_cards' );
 			foreach ( array( 'label_textual', 'label_critical', 'label_islamic', 'label_reflection' ) as $key ) {
 				$label        = sanitize_text_field( $input[ $key ] ?? '' );
 				$new[ $key ] = '' !== $label ? $label : tbe_defaults()[ $key ];
@@ -273,6 +283,7 @@ function tbe_render_settings_page(): void {
 					tbe_field_check( 'bismillah', __( 'Show the Bismillah band above the header', 'tbe-child' ), $s['bismillah'] );
 					tbe_field_text( 'bismillah_text', __( 'Bismillah text', 'tbe-child' ), $s['bismillah_text'], '', 'tbe-rtl' );
 					tbe_field_check( 'allow_toggle', __( 'Show the light / dark toggle to visitors', 'tbe-child' ), $s['allow_toggle'] );
+					tbe_field_check( 'lang_switcher', __( 'Show the language switcher (English, Bahasa Melayu, Arabic)', 'tbe-child' ), $s['lang_switcher'] );
 					break;
 
 				case 'appearance':
@@ -282,6 +293,17 @@ function tbe_render_settings_page(): void {
 				case 'reader':
 					tbe_field_number( 'font_scale', __( 'Reading size (%)', 'tbe-child' ), $s['font_scale'], 80, 140, __( '100 is the default. Visitors can adjust size themselves.', 'tbe-child' ) );
 					tbe_field_check( 'verse_numbers', __( 'Show verse numbers', 'tbe-child' ), $s['verse_numbers'] );
+					printf(
+						'<div class="tbe-field"><label for="tbe-layout">%1$s</label><select id="tbe-layout" name="tbe_settings[layout]"><option value="verse" %2$s>%3$s</option><option value="flow" %4$s>%5$s</option></select></div>',
+						esc_html__( 'Default text layout', 'tbe-child' ),
+						selected( $s['layout'], 'verse', false ),
+						esc_html__( 'Verse by verse, with notes under each verse', 'tbe-child' ),
+						selected( $s['layout'], 'flow', false ),
+						esc_html__( 'Continuous paragraphs', 'tbe-child' )
+					);
+					tbe_field_check( 'boxes_open', __( 'Show commentary boxes open by default', 'tbe-child' ), $s['boxes_open'] );
+					tbe_field_check( 'glossary_tooltips', __( 'Underline glossary terms in commentary and show a tooltip', 'tbe-child' ), $s['glossary_tooltips'] );
+					tbe_field_check( 'ref_cards', __( 'Turn scripture references in commentary into links with a verse preview', 'tbe-child' ), $s['ref_cards'] );
 					echo '<h2>' . esc_html__( 'Commentary section names', 'tbe-child' ) . '</h2>';
 					tbe_field_text( 'label_textual', __( 'Textual criticism', 'tbe-child' ), $s['label_textual'] );
 					tbe_field_text( 'label_critical', __( 'Critical commentary', 'tbe-child' ), $s['label_critical'] );

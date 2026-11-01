@@ -1,18 +1,18 @@
 /**
- * Reader behaviour: verse highlighting from the URL hash, text size, verse-number toggle,
- * and linking commentary to the verses it covers. Everything works without JS; this enhances it.
+ * Reader behaviour: verse highlighting from the URL hash, text size, verse numbers, layout,
+ * opening and closing notes, and linking each note to the verses it covers.
+ * Everything works without JS; this enhances it.
  */
 ( function () {
 	'use strict';
 
-	var SIZE_KEY = 'tbe-size';
-	var NUMBERS_KEY = 'tbe-numbers';
+	var KEYS = { size: 'tbe-size', numbers: 'tbe-numbers', layout: 'tbe-layout' };
 	var root = document.documentElement;
 
 	function store( key, value ) {
 		try {
 			window.localStorage.setItem( key, value );
-		} catch ( e ) { /* ignore */ }
+		} catch ( e ) { /* storage unavailable */ }
 	}
 
 	function load( key ) {
@@ -23,41 +23,63 @@
 		}
 	}
 
-	/* Highlight #v16 or #v16-18 --------------------------------------------- */
 	function clearTargets() {
 		document.querySelectorAll( '.tbe-verse.is-target' ).forEach( function ( el ) {
 			el.classList.remove( 'is-target' );
 		} );
 	}
 
-	function highlightFromHash() {
-		var match = /^#v(\d+)(?:-(\d+))?$/.exec( window.location.hash );
+	function markRange( start, end ) {
 		clearTargets();
-		if ( ! match ) {
-			return;
-		}
-		var start = parseInt( match[ 1 ], 10 );
-		var end = match[ 2 ] ? parseInt( match[ 2 ], 10 ) : start;
 		for ( var v = start; v <= end; v++ ) {
 			var el = document.getElementById( 'v' + v );
 			if ( el ) {
 				el.classList.add( 'is-target' );
 			}
 		}
+	}
+
+	/* #v16 or #v16-18 */
+	function highlightFromHash() {
+		var match = /^#v(\d+)(?:-(\d+))?$/.exec( window.location.hash );
+		if ( ! match ) {
+			return;
+		}
+		var start = parseInt( match[ 1 ], 10 );
+		markRange( start, match[ 2 ] ? parseInt( match[ 2 ], 10 ) : start );
 		var first = document.getElementById( 'v' + start );
 		if ( first ) {
 			first.scrollIntoView( { block: 'center' } );
 		}
 	}
 
-	/* Text size -------------------------------------------------------------- */
+	/* A note: open it, highlight the verses it covers */
+	function activateNote( id, scroll ) {
+		document.querySelectorAll( '.tbe-box.is-active' ).forEach( function ( el ) {
+			el.classList.remove( 'is-active' );
+		} );
+		var note = id && document.getElementById( id );
+		if ( ! note || ! note.classList.contains( 'tbe-box' ) ) {
+			return;
+		}
+		note.open = true;
+		note.classList.add( 'is-active' );
+		var start = parseInt( note.getAttribute( 'data-vs' ), 10 );
+		var end = parseInt( note.getAttribute( 'data-ve' ), 10 ) || start;
+		if ( start ) {
+			markRange( start, end );
+		}
+		if ( scroll ) {
+			note.scrollIntoView( { block: 'center' } );
+		}
+	}
+
 	function applySize( scale ) {
 		scale = Math.max( 0.8, Math.min( 1.6, scale ) );
 		root.style.setProperty( '--tbe-scale', String( scale ) );
-		store( SIZE_KEY, String( scale ) );
+		store( KEYS.size, String( scale ) );
 	}
 
-	/* Verse numbers ---------------------------------------------------------- */
 	function applyNumbers( button, show ) {
 		var text = document.querySelector( '.tbe-text' );
 		if ( text ) {
@@ -66,39 +88,33 @@
 		if ( button ) {
 			button.setAttribute( 'aria-pressed', show ? 'true' : 'false' );
 		}
-		store( NUMBERS_KEY, show ? '1' : '0' );
+		store( KEYS.numbers, show ? '1' : '0' );
 	}
 
-	/* Commentary markers light up the verses they cover --------------------- */
-	function markActiveNote( id ) {
-		document.querySelectorAll( '.tbe-note.is-active' ).forEach( function ( el ) {
-			el.classList.remove( 'is-active' );
-		} );
-		var note = id && document.getElementById( id );
-		if ( ! note ) {
-			return;
+	function applyLayout( button, flow ) {
+		var chapter = document.querySelector( '.tbe-chapter' );
+		if ( chapter ) {
+			chapter.classList.toggle( 'tbe-layout-flow', flow );
+			chapter.classList.toggle( 'tbe-layout-verse', ! flow );
 		}
-		note.classList.add( 'is-active' );
-		clearTargets();
-		var start = parseInt( note.getAttribute( 'data-vs' ), 10 );
-		var end = parseInt( note.getAttribute( 'data-ve' ), 10 ) || start;
-		for ( var v = start; v <= end; v++ ) {
-			var el = document.getElementById( 'v' + v );
-			if ( el ) {
-				el.classList.add( 'is-target' );
-			}
+		if ( button ) {
+			button.setAttribute( 'aria-pressed', flow ? 'true' : 'false' );
 		}
+		store( KEYS.layout, flow ? 'flow' : 'verse' );
 	}
 
 	function init() {
-		var savedSize = parseFloat( load( SIZE_KEY ) );
+		var savedSize = parseFloat( load( KEYS.size ) );
 		if ( savedSize ) {
 			applySize( savedSize );
 		}
-
 		var numbersButton = document.querySelector( '[data-tbe-numbers]' );
-		if ( numbersButton && '0' === load( NUMBERS_KEY ) ) {
+		if ( numbersButton && '0' === load( KEYS.numbers ) ) {
 			applyNumbers( numbersButton, false );
+		}
+		var layoutButton = document.querySelector( '[data-tbe-layout]' );
+		if ( layoutButton && load( KEYS.layout ) ) {
+			applyLayout( layoutButton, 'flow' === load( KEYS.layout ) );
 		}
 
 		document.addEventListener( 'click', function ( event ) {
@@ -113,23 +129,46 @@
 				applyNumbers( numbers, 'true' !== numbers.getAttribute( 'aria-pressed' ) );
 				return;
 			}
+			var layout = event.target.closest( '[data-tbe-layout]' );
+			if ( layout ) {
+				applyLayout( layout, 'true' !== layout.getAttribute( 'aria-pressed' ) );
+				return;
+			}
+			var toggle = event.target.closest( '[data-tbe-toggle-notes]' );
+			if ( toggle ) {
+				var open = 'open' === toggle.getAttribute( 'data-tbe-toggle-notes' );
+				document.querySelectorAll( '.tbe-box:not(.tbe-box--intro)' ).forEach( function ( box ) {
+					box.open = open;
+				} );
+				return;
+			}
 			var mark = event.target.closest( '.tbe-mark' );
 			if ( mark ) {
-				markActiveNote( mark.getAttribute( 'href' ).slice( 1 ) );
+				activateNote( mark.getAttribute( 'href' ).slice( 1 ), false );
+				return;
+			}
+			var summary = event.target.closest( '.tbe-box > summary' );
+			if ( summary && ! summary.parentNode.classList.contains( 'tbe-box--intro' ) ) {
+				// Opening a box also lights up the verses it covers.
+				window.setTimeout( function () {
+					if ( summary.parentNode.open ) {
+						activateNote( summary.parentNode.id, false );
+					}
+				}, 0 );
 			}
 		} );
 
 		window.addEventListener( 'hashchange', function () {
 			var hash = window.location.hash.slice( 1 );
 			if ( 0 === hash.indexOf( 'note-' ) ) {
-				markActiveNote( hash );
+				activateNote( hash, true );
 			} else {
 				highlightFromHash();
 			}
 		} );
 
 		if ( 0 === window.location.hash.indexOf( '#note-' ) ) {
-			markActiveNote( window.location.hash.slice( 1 ) );
+			activateNote( window.location.hash.slice( 1 ), true );
 		} else {
 			highlightFromHash();
 		}

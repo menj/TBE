@@ -1,0 +1,111 @@
+/* The Bible Exposed — shared components: tooltips, glossary, tables, search, index, language switcher. */
+
+.tbe-center { text-align: center; }
+.tbe-eyebrow {
+	margin: 1rem 0 0;
+	text-align: center;
+	font-family: var(--tbe-ui);
+	font-size: 0.8rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--tbe-rubric);
+}
+.tbe-eyebrow + .tbe-title { margin-top: 0.2rem; }
+
+/* Tooltip (one floating element, created by tooltips.js) ------------------ */
+.tbe-tooltip {
+	position: absolute;
+	z-index: 9999;
+	max-width: min(22rem, calc(100vw - 1.5rem));
+	padding: 0.65rem 0.85rem;
+	background: var(--tbe-ink);
+	color: var(--tbe-paper);
+	border-radius: 3px;
+	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+	font-family: var(--tbe-ui);
+	font-size: 0.85rem;
+	line-height: 1.5;
+	pointer-events: none;
+}
+.tbe-tooltip[hidden] { display: none; }
+.tbe-tooltip__title { display: block; margin-bottom: 0.2rem; font-weight: 600; letter-spacing: 0.02em; }
+.tbe-tooltip__text--scripture { font-family: var(--tbe-scripture, serif); font-size: 0.95rem; }
+
+/* Glossary terms and scripture references inside commentary */
+a.tbe-term {
+	color: inherit;
+	text-decoration: underline dotted var(--tbe-accent);
+	text-decoration-thickness: 1.5px;
+	text-underline-offset: 0.25em;
+	cursor: help;
+}
+a.tbe-term:hover, a.tbe-term:focus-visible { color: var(--tbe-accent); }
+a.tbe-ref { text-decoration-color: var(--tbe-gold); white-space: nowrap; }
+a.tbe-ref--quran::after { content: " ↗"; font-size: 0.75em; }
+
+/* Section chips with help tooltips */
+.tbe-chips { margin-bottom: 0.4rem; }
+.tbe-chip { cursor: help; }
+.tbe-chip--variants { color: var(--tbe-muted); }
+.tbe-chip--quran { color: var(--tbe-accent); }
+
+/* Variants table */
+.tbe-sub {
+	margin: 1.5rem 0 0.5rem;
+	font-family: var(--tbe-ui);
+	font-size: 0.75rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--tbe-muted);
+}
+.tbe-tablewrap { overflow-x: auto; }
+.tbe-table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
+.tbe-table th, .tbe-table td { padding: 0.5rem 0.75rem; text-align: start; vertical-align: top; border-bottom: 1px solid var(--tbe-line); }
+.tbe-table thead th { font-family: var(--tbe-ui); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tbe-muted); }
+.tbe-table .tbe-unit th { background: color-mix(in srgb, var(--tbe-gold) 14%, transparent); font-weight: 600; color: var(--tbe-rubric); }
+.tbe-reading { font-style: italic; }
+
+/* Qur'an cross-references */
+.tbe-quranrefs ul { margin: 0; padding-inline-start: 1.1rem; }
+.tbe-quranrefs li { margin-block: 0.25rem; }
+
+/* Notes contents */
+.tbe-toc { margin: 0 0 1.75rem; font-family: var(--tbe-ui); font-size: 0.85rem; }
+.tbe-toc > summary { cursor: pointer; color: var(--tbe-muted); }
+.tbe-toc ol { margin: 0.5rem 0 0; padding-inline-start: 1.25rem; columns: 2 16rem; }
+.tbe-toc a { text-decoration: none; }
+.tbe-toc__ref { display: inline-block; min-width: 2rem; font-weight: 600; color: var(--tbe-rubric); }
+
+/* Footnotes inside a commentary box */
+.tbe-box sup.fn a { text-decoration: none; font-family: var(--tbe-ui); font-size: 0.85em; color: var(--tbe-accent); }
+.tbe-box .wp-block-footnotes { margin-top: 1rem; padding-top: 0.6rem; border-top: 1px solid var(--tbe-line); font-size: 0.9em; }
+
+/* Glossary page */
+.tbe-az { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin: 1rem 0 2rem; font-family: var(--tbe-ui); }
+.tbe-az a { padding: 0.15rem 0.6rem; border: 1px solid var(--tbe-line); border-radius: 2px; text-decoration: none; }
+.tbe-glossary { margin: 0; }
+.tbe-glossary__item { padding: 0.75rem 0; border-bottom: 1px solid var(--tbe-line); }
+.tbe-glossary dt { font-weight: 600; font-size: 1.15em; }
+.tbe-glossary dt a { text-decoration: none; }
+.tbe-glossary dd { margin: 0.25rem 0 0; color: var(--tbe-muted); }
+.tbe-glossary__ar { font-family: var(--tbe-naskh); font-size: 1.15em; font-weight: 400; color: var(--tbe-accent); margin-inline-start: 0.5rem; }
+
+/* Search results */
+.tbe-hits { list-style: none; padding: 0; margin: 0 0 1rem; }
+.tbe-hits li { padding: 0.65rem 0; border-bottom: 1px solid var(--tbe-line); }
+.tbe-hit__ref { font-family: var(--tbe-ui); font-weight: 600; font-size: 0.85rem; color: var(--tbe-rubric); text-decoration: none; margin-inline-end: 0.5rem; }
+.tbe-hit__text mark, .tbe-hits mark { background: color-mix(in srgb, var(--tbe-gold) 35%, transparent); color: inherit; padding: 0 0.1em; }
+.tbe-search-page .tbe-search { max-width: none; }
+
+/* Index of commentary */
+.tbe-index__book { margin: 1.5rem 0 0.25rem; font-size: 1.15rem; }
+.tbe-index__book a { text-decoration: none; }
+.tbe-index__list { margin: 0; padding-inline-start: 1.1rem; }
+.tbe-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
+.tbe-tags a { display: inline-block; padding: 0.15rem 0.7rem; border: 1px solid var(--tbe-line); border-radius: 999px; text-decoration: none; font-family: var(--tbe-ui); font-size: 0.85rem; }
+
+/* Language switcher */
+.tbe-lang ul { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; font-family: var(--tbe-ui); font-size: 0.8rem; }
+.tbe-lang a { display: block; padding: 0.2rem 0.5rem; border: 1px solid transparent; border-radius: 2px; text-decoration: none; color: var(--tbe-muted); }
+.tbe-lang a:hover { color: var(--tbe-accent); }
+.tbe-lang a[aria-current="true"] { border-color: var(--tbe-accent); color: var(--tbe-accent); }

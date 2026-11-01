@@ -27,8 +27,26 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires Wor
 ## Settings (Appearance → TBE)
 Tabbed: **General** (tagline, Bismillah band, light/dark toggle), **Appearance** (three colour schemes or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
 
+## How a chapter is laid out
+Modelled on the verse-by-verse commentary book format, with web-only improvements:
+- **Chapter opener**: chapter number, book title, an optional **chapter introduction**, and a clickable list of the notes in the chapter. Book pages show a **book introduction**.
+- **Verse by verse**: each verse is its own line (switch to continuous paragraphs with one click). A **commentary box** sits directly under the verse it discusses; a ✦ beside the verse opens it and lights up every verse it covers.
+- **Footnotes pop up on hover** instead of sending you to the back of the page.
+- **Scripture references in commentary** (`John 3:16`, `Rom 8:28`, `Qur'an 112:1-4`, `Q 2:255`) become links with a hover card showing the ESV verse; Qur'an references open quran.com.
+- **Glossary terms** are underlined once per note with a tooltip and a link to the term page. The Bible text itself is never annotated.
+- **Textual variants table** and **Qur'an cross-references** (validated against the 114 surahs) can be attached to any note.
+- **Index of commentary** at `/bible/index/` (by passage, theme and section), **glossary** at `/glossary/`, **search** at `/bible/search/`.
+
 ## Writing commentary
-Commentary → Add New. Fill the **Passage** box (for example `John 1:1-18`, `Psalm 23`, `Jude 5`), choose one or more **Sections** (Textual Criticism, Critical Commentary, Islamic Perspective, Reflection), and write the entry in the block editor. Entries appear under the chapter in the reader with a ✦ marker beside the verse they begin at.
+Commentary → Add New. Fill the **Passage** box (for example `John 1:1-18`, `Psalm 23`, `Jude 5`), choose one or more **Sections** (Textual Criticism, Critical Commentary, Islamic Perspective, Reflection), and write the entry in the block editor. Entries appear in a box under the verse they begin at, with a ✦ marker beside it.
+
+- Passage `John 3` (no verses) makes a **chapter introduction**; a bare book name such as `John` makes a **book introduction**.
+- Use the **Footnote** block for notes; they pop up on hover.
+- Add **Textual variants** (unit, reading, witnesses, notes) and **Qur'an cross-references** (`2:255`, `112:1-4`, `19`) in the boxes below the editor.
+- Glossary: Glossary → Add New. Give a short **Excerpt** (shown in the tooltip) and optional spellings/abbreviations. The theme adds 13 starter terms as **drafts** for you to review and publish.
+
+## Languages
+A header switcher offers English, Bahasa Melayu and Arabic (right-to-left). The choice is kept in a cookie. Scripture stays English (ESV) in all three. Translations live in `languages/` (visitor-facing strings only; admin screens stay English). To change a translation, edit `tools/build_translations.py`, then run `python3 tools/build_translations.py`. If you use a page cache, make it vary by the `tbe_lang` cookie. The Malay and Arabic text is a first draft and should be reviewed by a native speaker.
 
 ## Refreshing the ESV text
 ```bash

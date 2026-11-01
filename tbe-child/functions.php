@@ -1,17 +1,17 @@
 <?php
 /**
- * The Bible, Exposed — child theme of Twenty Twenty-Five.
+ * The Bible Exposed — child theme of Twenty Twenty-Five.
  *
  * @package tbe-child
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TBE_VERSION', '0.1.0' );
+define( 'TBE_VERSION', '0.2.0' );
 define( 'TBE_DIR', get_stylesheet_directory() );
 define( 'TBE_URI', get_stylesheet_directory_uri() );
 
-foreach ( array( 'settings', 'bible', 'esv-api', 'commentary', 'routes', 'reader', 'blocks', 'enqueue' ) as $tbe_file ) {
+foreach ( array( 'settings', 'i18n', 'bible', 'esv-api', 'quran', 'commentary', 'entry-fields', 'glossary', 'enrich', 'search', 'routes', 'reader', 'blocks', 'enqueue' ) as $tbe_file ) {
 	require_once TBE_DIR . '/inc/' . $tbe_file . '.php';
 }
 unset( $tbe_file );
