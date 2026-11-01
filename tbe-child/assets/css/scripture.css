@@ -1,0 +1,57 @@
+/*
+ * Scripture typography. The SBL fonts are used for Bible text and nothing else.
+ * Fonts are lossless WOFF2 conversions of the SBL TTFs (tools/ttf2woff2.js); glyph data is unchanged.
+ * Licence terms: assets/fonts/LICENSE-SBL-FONTS.txt.
+ * The browser picks the right face per character, so Hebrew and Greek quoted inside
+ * the text fall through to SBL Hebrew and SBL Greek automatically.
+ */
+@font-face {
+	font-family: "SBL BibLit";
+	src: url("../fonts/SBL_BLit.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "SBL Hebrew";
+	src: url("../fonts/SBL_Hbrw.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0590-05FF, U+FB1D-FB4F;
+}
+@font-face {
+	font-family: "SBL Greek";
+	src: url("../fonts/SBL_grk.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0370-03FF, U+1F00-1FFF;
+}
+
+:root {
+	--tbe-scripture: "SBL BibLit", "SBL Hebrew", "SBL Greek", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+}
+
+/* The ESV text in the reader, including its verse numbers. */
+.tbe-text,
+.tbe-text .tbe-vn,
+.tbe-text .tbe-vt,
+.tbe-text .tbe-line,
+.tbe-text .tbe-para,
+.tbe-text .tbe-para::first-letter {
+	font-family: var(--tbe-scripture);
+}
+
+/* Bible quotations inside commentary: add the "Scripture" style to a Quote block,
+   or the class tbe-scripture to any element. */
+.tbe-scripture,
+.wp-block-quote.is-style-scripture,
+.wp-block-quote.is-style-scripture p,
+.wp-block-quote.is-style-scripture cite {
+	font-family: var(--tbe-scripture);
+}
+.wp-block-quote.is-style-scripture {
+	border-inline-start: 3px solid var(--tbe-gold);
+	padding-inline-start: 1.25rem;
+}

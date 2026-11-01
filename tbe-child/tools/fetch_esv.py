@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """Download the complete ESV text, chapter by chapter, from api.esv.org.
 
-Usage:  ESV_API_TOKEN=xxxx python3 tools/fetch_esv.py
+Usage:  ESV_API_TOKEN=xxxx python3 tools/fetch_esv.py [--delay 8] [--max 0]
 The token is read from the environment only. Never commit it.
 Resumable: chapters already on disk are skipped.
-Respects API limits (60/min, 1000/hr, 5000/day) by throttling.
+
+Deliberately gentle: the API allows 60/min, 1000/hr and 5000/day, and this script
+stays far below that (default one request every ~8 seconds, with jitter). If the API
+answers 429 (rate limited) the script stops at once instead of retrying; just run it
+again later. --max N stops after N new chapters, handy for "a little each day".
 """
-import json, os, re, sys, time, urllib.parse, urllib.request, urllib.error
+import argparse, json, os, random, re, sys, time, urllib.parse, urllib.request, urllib.error
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 OUT = os.path.join(ROOT, "esv")
@@ -49,21 +53,17 @@ PARAMS = {
 
 def fetch(token, query):
     url = "https://api.esv.org/v3/passage/text/?" + urllib.parse.urlencode({"q": query, **PARAMS})
-    req = urllib.request.Request(url, headers={"Authorization": "Token " + token})
-    for attempt in range(8):
+    req = urllib.request.Request(url, headers={"Authorization": "Token " + token, "User-Agent": "thebible.exposed-importer/1.0"})
+    for attempt in range(3):
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
                 return json.load(r)
         except urllib.error.HTTPError as e:
             if e.code == 429:
-                wait = 65
-                try: wait = int(re.search(r"(\d+) seconds", e.read().decode()).group(1)) + 2
-                except Exception: pass
-                print(f"  rate limited, sleeping {wait}s", flush=True); time.sleep(wait)
-            else:
-                print(f"  HTTP {e.code} on {query}", flush=True); time.sleep(5 * (attempt + 1))
+                raise SystemExit(f"Rate limited by the ESV API on {query}. Stopping; run again later.")
+            print(f"  HTTP {e.code} on {query}", flush=True); time.sleep(30 * (attempt + 1))
         except Exception as e:
-            print(f"  error {e} on {query}", flush=True); time.sleep(5 * (attempt + 1))
+            print(f"  error {e} on {query}", flush=True); time.sleep(30 * (attempt + 1))
     raise SystemExit(f"Giving up on {query}")
 
 def parse(text):
@@ -80,6 +80,10 @@ def parse(text):
     return verses
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--delay", type=float, default=8.0, help="seconds between requests (default 8)")
+    ap.add_argument("--max", type=int, default=0, help="stop after this many new chapters (0 = no limit)")
+    args = ap.parse_args()
     token = os.environ.get("ESV_API_TOKEN")
     if not token: raise SystemExit("Set ESV_API_TOKEN in the environment.")
     os.makedirs(OUT, exist_ok=True)
@@ -98,8 +102,10 @@ def main():
             with open(path, "w", encoding="utf-8") as f:
                 json.dump({"book": slug, "chapter": ch, "verses": verses}, f, ensure_ascii=False, separators=(",", ":"))
             done += 1
-            if done % 25 == 0: print(f"{done} fetched ({name} {ch})", flush=True)
-            time.sleep(1.2)
+            if done % 10 == 0: print(f"{done} fetched ({name} {ch})", flush=True)
+            if args.max and done >= args.max:
+                print(f"Reached --max {args.max}. Run again to continue."); return
+            time.sleep(args.delay + random.uniform(0, args.delay * 0.4))
     print(f"Finished. fetched={done} skipped={skipped}")
 
 if __name__ == "__main__":

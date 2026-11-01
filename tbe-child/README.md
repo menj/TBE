@@ -21,7 +21,8 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires Wor
 | `data/books.json` | The 66 books, chapter counts, order |
 | `inc/` | Settings, Bible data and reference parser, commentary post type, routes, reader, blocks |
 | `templates/`, `parts/` | Block-theme templates: front page, Bible reader, commentary single/archive, header, footer |
-| `tools/fetch_esv.py` | Re-downloads the ESV text (resumable; throttled to API limits) |
+| `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request per ~8 s; stops on any rate-limit reply; `--max N` per run) |
+| `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## Settings (Appearance → Bible Exposed)
 Tabbed: **General** (tagline, Bismillah band, light/dark toggle), **Appearance** (three colour schemes or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
@@ -31,12 +32,14 @@ Commentary → Add New. Fill the **Passage** box (for example `John 1:1-18`, `Ps
 
 ## Refreshing the ESV text
 ```bash
-ESV_API_TOKEN=... python3 tools/fetch_esv.py
+ESV_API_TOKEN=... python3 tools/fetch_esv.py --delay 8 --max 100
 ```
-Existing chapter files are skipped, so delete a file to re-fetch it.
+Existing chapter files are skipped, so delete a file to re-fetch it. The script is deliberately slow and stops immediately if the API reports a rate limit.
 
 ## Licence note
 The ESV text is © Crossway. The copyright notice shown in the footer is editable under ESV and licence; use the exact wording your Crossway permission requires.
 
 ## Fonts
-No web fonts are bundled. Body text uses the visitor's system old-style serif (Iowan Old Style, Palatino, Georgia); Arabic uses Amiri or Scheherazade New if installed, then system Naskh. Self-hosting Amiri and EB Garamond would be the next refinement.
+**Bible text only** is set in the SBL fonts in `assets/fonts/` (SBL BibLit for English, SBL Hebrew, SBL Greek), via `assets/css/scripture.css`. This covers the ESV in the reader and any Quote block given the *Scripture* style. Everything else uses system fonts: an old-style serif for prose, and Amiri / Scheherazade New / system Naskh for the Bismillah.
+
+The fonts are lossless WOFF2 conversions of the original SBL TTFs, made with `node tools/ttf2woff2.js in.ttf out.woff2` (about a quarter of the size, identical glyphs). The site owner holds the SBL / Tiro Typeworks licence; its text is kept in `assets/fonts/LICENSE-SBL-FONTS.txt`.
