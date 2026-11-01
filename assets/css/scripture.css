@@ -2,8 +2,8 @@
  * Scripture typography. The SBL fonts are used for Bible text and nothing else.
  * Fonts are lossless WOFF2 conversions of the SBL TTFs (tools/ttf2woff2.js); glyph data is unchanged.
  * Licence terms: assets/fonts/LICENSE-SBL-FONTS.txt.
- * The browser picks the right face per character, so Hebrew and Greek quoted inside
- * the text fall through to SBL Hebrew and SBL Greek automatically.
+ * The browser picks the right face per character, so Hebrew quoted inside the text
+ * falls through to SBL Hebrew automatically.
  */
 @font-face {
 	font-family: "SBL BibLit";
@@ -20,17 +20,9 @@
 	font-display: swap;
 	unicode-range: U+0590-05FF, U+FB1D-FB4F;
 }
-@font-face {
-	font-family: "SBL Greek";
-	src: url("../fonts/SBL_grk.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-	unicode-range: U+0370-03FF, U+1F00-1FFF;
-}
 
 :root {
-	--tbe-scripture: "SBL BibLit", "SBL Hebrew", "SBL Greek", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+	--tbe-scripture: "SBL BibLit", "SBL Hebrew", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 }
 
 /* The ESV text in the reader, including its verse numbers. */
@@ -56,9 +48,7 @@
 	padding-inline-start: 1.25rem;
 }
 
-/* Hebrew and Greek words in the interlinear: the SBL fonts, nothing else. */
+/* Hebrew words in the interlinear: SBL Hebrew, nothing else. */
 .tbe-il__he,
 .tbe-il__lemma.tbe-il__he { font-family: "SBL Hebrew", "SBL BibLit", serif; }
-.tbe-il__gr,
-.tbe-il__lemma.tbe-il__gr { font-family: "SBL Greek", "SBL BibLit", serif; }
 .tbe-il__esv { font-family: var(--tbe-scripture); }

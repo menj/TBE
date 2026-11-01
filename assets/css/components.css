@@ -103,8 +103,3 @@ a.tbe-ref--quran::after { content: " ↗"; font-size: 0.75em; }
 .tbe-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
 .tbe-tags a { display: inline-block; padding: 0.15rem 0.7rem; border: 1px solid var(--tbe-line); border-radius: 999px; text-decoration: none; font-family: var(--tbe-ui); font-size: 0.85rem; }
 
-/* Language switcher */
-.tbe-lang ul { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; font-family: var(--tbe-ui); font-size: 0.8rem; }
-.tbe-lang a { display: block; padding: 0.2rem 0.5rem; border: 1px solid transparent; border-radius: 2px; text-decoration: none; color: var(--tbe-muted); }
-.tbe-lang a:hover { color: var(--tbe-accent); }
-.tbe-lang a[aria-current="true"] { border-color: var(--tbe-accent); color: var(--tbe-accent); }

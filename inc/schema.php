@@ -29,11 +29,6 @@ function tbe_ld_current_url(): string {
 	return trailingslashit( home_url( '/' . $path ) );
 }
 
-/** Languages the interface is offered in, as BCP 47 codes. */
-function tbe_ld_languages(): array {
-	return array_values( array_map( static fn( $code ) => str_replace( '_', '-', strtok( $code, '_' ) ), array_keys( tbe_enabled_languages() ) ) );
-}
-
 /* Shared nodes ------------------------------------------------------------ */
 
 function tbe_ld_org_id(): string {
@@ -78,7 +73,7 @@ function tbe_ld_site_nodes(): array {
 		'url'             => home_url( '/' ),
 		'name'            => get_bloginfo( 'name' ),
 		'description'     => (string) tbe_setting( 'tagline' ),
-		'inLanguage'      => tbe_ld_languages(),
+		'inLanguage'      => 'en',
 		'publisher'       => tbe_ld_ref( tbe_ld_org_id() ),
 		'isAccessibleForFree' => true,
 		'potentialAction' => array(

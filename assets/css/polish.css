@@ -25,7 +25,7 @@ html[data-theme="dark"] {
 
 /* Shared motion ----------------------------------------------------------- */
 .tbe-btn, .tbe-booklist a, .tbe-chapters a, .tbe-cards .wp-block-post-template > li, .tbe-box, .tbe-chip,
-.tbe-il__w, .tbe-il__play, .tbe-pager a, .tbe-az a, .tbe-tags a, .tbe-lang a, .tbe-search input[type="search"],
+.tbe-il__w, .tbe-il__play, .tbe-pager a, .tbe-az a, .tbe-tags a, .tbe-search input[type="search"],
 .wp-block-button__link, a.tbe-term, a.tbe-ref, .tbe-verse, .tbe-vn, .tbe-mark, .tbe-toc, .tbe-table tbody tr {
 	transition: background-color 0.2s var(--tbe-ease), border-color 0.2s var(--tbe-ease), color 0.2s var(--tbe-ease),
 		box-shadow 0.25s var(--tbe-ease), transform 0.25s var(--tbe-ease), background-size 0.3s var(--tbe-ease);
@@ -228,7 +228,7 @@ a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, tra
 	box-shadow: var(--tbe-glow-accent);
 }
 .tbe-il__w:hover .tbe-il__gloss { color: var(--tbe-rubric); }
-.tbe-il__w:hover .tbe-il__he, .tbe-il__w:hover .tbe-il__gr { color: var(--tbe-accent); }
+.tbe-il__w:hover .tbe-il__he { color: var(--tbe-accent); }
 .tbe-il__w--variant:hover { border-color: var(--tbe-gold); box-shadow: var(--tbe-glow-gold); }
 .tbe-il__w.is-playing {
 	background: linear-gradient(180deg, color-mix(in srgb, var(--tbe-gold) 35%, var(--tbe-surface)), var(--tbe-surface));
@@ -245,9 +245,6 @@ a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, tra
 .tbe-az a, .tbe-tags a { border-radius: var(--tbe-radius-pill); }
 .tbe-az a:hover { color: var(--tbe-paper); border-color: transparent; background: var(--tbe-gradient-gold); transform: translateY(-1px); }
 .tbe-tags a:hover { color: var(--tbe-paper); border-color: transparent; background: var(--tbe-gradient); transform: translateY(-1px); }
-.tbe-lang a { border-radius: var(--tbe-radius-pill); }
-.tbe-lang a:hover { background: var(--tbe-wash-accent); }
-.tbe-lang a[aria-current="true"] { background: var(--tbe-wash-accent); }
 
 /* Breadcrumb, glossary, notices, tooltip -------------------------------------- */
 .tbe-breadcrumb a:hover { color: var(--tbe-accent); }

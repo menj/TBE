@@ -1,6 +1,8 @@
 # TBE — The Bible Exposed (child theme)
 
-Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires WordPress 6.7+ (the parent theme's minimum) and PHP 8.0+.
+Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
+
+**Scope for now: the ESV (Old Testament) and the Hebrew.** The ESV New Testament and everything Greek are on hold until the New Testament text is pulled. The interface is English only. Requires WordPress 6.7+ (the parent theme's minimum) and PHP 8.0+.
 
 ## Before you upload
 - **Install Twenty Twenty-Five first.** This is a child theme; WordPress refuses it without its parent.
@@ -32,7 +34,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires Wor
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## Settings (Appearance → TBE)
-Tabbed: **General** (tagline, light/dark toggle, language switcher), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
+Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
 
 ## How a chapter is laid out
 Modelled on the verse-by-verse commentary book format, with web-only improvements:
@@ -61,7 +63,7 @@ Individual interlinear words are not marked up: schema.org has no suitable type,
 ## Interlinear (Old Testament)
 Each Old Testament chapter links to a word-by-word Hebrew interlinear at `/bible/{book}/{chapter}/interlinear/`: Hebrew in SBL Hebrew, running right to left, with English gloss, transliteration, Strong's number, root word and grammar. Hover or focus a word for its root, meaning and grammar spelled out. Readers can switch each layer on or off and hide the vowel points or cantillation marks. Qere corrections and other variant readings are outlined and flagged.
 
-Data: STEP Bible (https://www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge. The Greek New Testament interlinear is held back until the ESV New Testament has been pulled (`python3 tools/build_interlinear.py --greek`).
+Data: STEP Bible (https://www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
 
 ## Recorded Hebrew reading (audio)
 A chapter can have a recording, timed word by word. The interlinear page then shows a player, a play button on every verse, click-a-word-to-hear, and highlights the word being read. **Genesis 1** is done. Files: `assets/audio/he/{book}-{chapter}.mp3` (web copy) and `data/audio/he/{book}-{chapter}.json` (start/end time of every word, and a flag for the words whose timing is only an estimate). Add a `"credit"` line to that JSON to show a credit under the player.
@@ -76,9 +78,6 @@ Commentary → Add New. Fill the **Passage** box (for example `John 1:1-18`, `Ps
 - Add **Textual variants** (unit, reading, witnesses, notes) and **Qur'an cross-references** (`2:255`, `112:1-4`, `19`) in the boxes below the editor.
 - Glossary: Glossary → Add New. Give a short **Excerpt** (shown in the tooltip) and optional spellings/abbreviations. The theme adds 13 starter terms as **drafts** for you to review and publish.
 
-## Languages
-The interface is available in English and Bahasa Melayu. Turn either on or off under Appearance → TBE → General; the header switcher appears when both are on, and the choice is kept in a cookie. Scripture stays English (ESV). Translations live in `languages/` (visitor-facing strings only; admin screens stay English). To change a translation, edit `tools/build_translations.py`, then run `python3 tools/build_translations.py`. If you use a page cache, make it vary by the `tbe_lang` cookie. The Malay text is a first draft and should be reviewed by a native speaker.
-
 ## Refreshing the ESV text
 ```bash
 ESV_API_TOKEN=... python3 tools/fetch_esv.py --delay 15 --max-delay 30 --max 100
@@ -89,5 +88,7 @@ Existing chapter files are skipped, so delete a file to re-fetch it. The script 
 The ESV text is © Crossway. The copyright notice shown in the footer is editable under ESV and licence; use the exact wording your Crossway permission requires.
 
 ## Fonts
+
+**Bible text only** is set in the SBL fonts in `assets/fonts/`: SBL BibLit for the ESV and SBL Hebrew for the Hebrew words, via `assets/css/scripture.css`. Everything else (commentary, headings, menus, buttons) uses system fonts. SBL Greek is not included until the New Testament is added.
 
 The fonts are lossless WOFF2 conversions of the original SBL TTFs, made with `node tools/ttf2woff2.js in.ttf out.woff2` (about a quarter of the size, identical glyphs). The site owner holds the SBL / Tiro Typeworks licence; its text is kept in `assets/fonts/LICENSE-SBL-FONTS.txt`.

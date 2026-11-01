@@ -46,7 +46,6 @@ add_action(
 			)
 		);
 
-		register_block_type( 'tbe/language-switcher', array( 'render_callback' => 'tbe_render_language_switcher' ) );
 		register_block_type( 'tbe/glossary', array( 'render_callback' => 'tbe_render_glossary' ) );
 
 		register_block_type(

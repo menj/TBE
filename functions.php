@@ -11,7 +11,7 @@ define( 'TBE_VERSION', '0.3.0' );
 define( 'TBE_DIR', get_stylesheet_directory() );
 define( 'TBE_URI', get_stylesheet_directory_uri() );
 
-foreach ( array( 'settings', 'i18n', 'bible', 'interlinear', 'audio', 'esv-api', 'quran', 'commentary', 'entry-fields', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'enqueue' ) as $tbe_file ) {
+foreach ( array( 'settings', 'bible', 'interlinear', 'audio', 'esv-api', 'quran', 'commentary', 'entry-fields', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'enqueue' ) as $tbe_file ) {
 	require_once TBE_DIR . '/inc/' . $tbe_file . '.php';
 }
 unset( $tbe_file );
