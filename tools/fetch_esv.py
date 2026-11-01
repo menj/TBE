@@ -40,6 +40,9 @@ BOOKS = [
  ("2-john","2 John",1,"NT"),("3-john","3 John",1,"NT"),("jude","Jude",1,"NT"),("revelation","Revelation",22,"NT"),
 ]
 
+# Verses in the books that have a single chapter.
+ONE_CHAPTER = {"obadiah": 21, "philemon": 25, "2-john": 13, "3-john": 14, "jude": 25}
+
 PARAMS = {
   "include-passage-references": "false", "include-verse-numbers": "true",
   "include-first-verse-numbers": "true", "include-footnotes": "false",
@@ -50,6 +53,19 @@ PARAMS = {
   "indent-poetry-lines": "4", "indent-declares": "0", "indent-psalm-doxology": "0",
   "line-length": "0",
 }
+
+def already_complete(path, slug):
+    """A chapter file counts as done, except a one-chapter book saved before the verse-range fix
+    (it holds only verse 1), which is fetched again."""
+    if not os.path.exists(path):
+        return False
+    if slug in ONE_CHAPTER:
+        try:
+            with open(path, encoding="utf-8") as f:
+                return len(json.load(f).get("verses", [])) >= ONE_CHAPTER[slug]
+        except (ValueError, OSError):
+            return False
+    return True
 
 def fetch(token, query):
     url = "https://api.esv.org/v3/passage/text/?" + urllib.parse.urlencode({"q": query, **PARAMS})
@@ -96,8 +112,10 @@ def main():
         os.makedirs(os.path.join(OUT, slug), exist_ok=True)
         for ch in range(1, chapters + 1):
             path = os.path.join(OUT, slug, f"{ch}.json")
-            if os.path.exists(path): skipped += 1; continue
-            data = fetch(token, f"{name} {ch}")
+            if already_complete(path, slug): skipped += 1; continue
+            # "Jude 1" means verse 1 to the API, so one-chapter books are asked for by verse range.
+            query = f"{name} 1:1-{ONE_CHAPTER[slug]}" if slug in ONE_CHAPTER else f"{name} {ch}"
+            data = fetch(token, query)
             verses = parse(data["passages"][0]) if data.get("passages") else []
             if not verses: raise SystemExit(f"No verses for {name} {ch}")
             with open(path, "w", encoding="utf-8") as f:
