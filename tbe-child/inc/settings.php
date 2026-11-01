@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme settings: tabbed admin screen (Appearance → Bible Exposed).
+ * Theme settings: tabbed admin screen (Appearance → TBE).
  *
  * @package tbe-child
  */
@@ -142,8 +142,8 @@ add_action(
 	'admin_menu',
 	static function () {
 		add_theme_page(
-			__( 'Bible Exposed', 'tbe-child' ),
-			__( 'Bible Exposed', 'tbe-child' ),
+			__( 'TBE', 'tbe-child' ),
+			__( 'TBE', 'tbe-child' ),
 			'manage_options',
 			'tbe-settings',
 			'tbe_render_settings_page'
@@ -250,7 +250,7 @@ function tbe_render_settings_page(): void {
 	$s    = tbe_settings();
 	?>
 	<div class="wrap tbe-admin">
-		<h1><?php esc_html_e( 'The Bible, Exposed', 'tbe-child' ); ?></h1>
+		<h1><?php esc_html_e( 'TBE settings', 'tbe-child' ); ?></h1>
 
 		<nav class="tbe-tabs" aria-label="<?php esc_attr_e( 'Settings sections', 'tbe-child' ); ?>">
 			<?php foreach ( $tabs as $slug => $label ) : ?>

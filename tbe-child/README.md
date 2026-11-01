@@ -1,4 +1,4 @@
-# The Bible, Exposed — child theme
+# TBE — child theme
 
 Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires WordPress 6.6+ and PHP 8.0+.
 
@@ -24,7 +24,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires Wor
 | `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request every 15-30 s; stops on any rate-limit reply; `--max N` per run) |
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
-## Settings (Appearance → Bible Exposed)
+## Settings (Appearance → TBE)
 Tabbed: **General** (tagline, Bismillah band, light/dark toggle), **Appearance** (three colour schemes or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
 
 ## Writing commentary
