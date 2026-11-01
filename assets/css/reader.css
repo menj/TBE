@@ -182,7 +182,7 @@
 	font-display: swap;
 	unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
 }
-.tbe-hadith-ar { font-family: "Noto Naskh Arabic", serif; font-size: 1.45rem; line-height: 2.1; text-align: right; }
+.tbe-hadith-ar { font-family: "Noto Naskh Arabic", serif; font-size: 1.45rem; line-height: 2.1; text-align: start; }
 
 /* Credits */
 .tbe-credits__quote { margin: 1rem 0; padding: 0.9rem 1.25rem; border-inline-start: 3px solid var(--tbe-gold); background: var(--tbe-surface); border-radius: var(--tbe-radius, 4px); }

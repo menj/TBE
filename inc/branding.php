@@ -15,6 +15,8 @@ function tbe_brand_url( string $file ): string {
 add_action(
 	'wp_head',
 	static function () {
+		// The site name is above the fold on every page; fetch its font early so the title does not jump when it loads.
+		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( TBE_URI . '/assets/fonts/Angel.woff2' ) );
 		if ( ! has_site_icon() ) {
 			printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "\n", esc_url( tbe_brand_url( 'favicon.svg' ) ) );
 			printf( '<link rel="icon" href="%s" sizes="32x32" type="image/png">' . "\n", esc_url( tbe_brand_url( 'favicon-32.png' ) ) );
