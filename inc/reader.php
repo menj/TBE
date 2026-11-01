@@ -265,15 +265,6 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 		}
 	};
 
-	// A note sits after the last verse it covers; its marker stays beside the first.
-	$ends = array();
-	foreach ( $starts as $first => $entries ) {
-		foreach ( $entries as $entry ) {
-			$last            = max( (int) $first, (int) get_post_meta( $entry->ID, 'tbe_vend', true ) );
-			$ends[ $last ][] = $entry;
-		}
-	}
-
 	foreach ( $verses as $verse ) {
 		$n       = (int) $verse['n'];
 		$text    = (string) $verse['t'];
@@ -289,7 +280,8 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 				esc_attr( get_the_title( $entry ) )
 			);
 		}
-		foreach ( $ends[ $n ] ?? array() as $entry ) {
+		// A note comes in at the verse it begins on: in the margin on wide screens, above its verses on narrow ones.
+		foreach ( $starts[ $n ] ?? array() as $entry ) {
 			$boxes .= tbe_render_box( $entry, $slug, $chapter );
 		}
 		$number = '<a class="tbe-vn" href="#v' . $n . '"><span class="screen-reader-text">' . esc_html__( 'Verse', 'tbe-child' ) . ' </span>' . $n . '</a>';
@@ -305,7 +297,7 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 				$indent = min( 3, (int) floor( ( strlen( $line ) - strlen( ltrim( $line, ' ' ) ) ) / 4 ) );
 				$lines .= '<span class="tbe-line tbe-i' . $indent . '">' . ( 0 === $i ? $number : '' ) . esc_html( ltrim( $line ) ) . '</span>';
 			}
-			$out .= '<span class="' . esc_attr( $classes ) . '" id="v' . $n . '" data-v="' . $n . '">' . $lines . $marks . '</span>' . $boxes;
+			$out .= $boxes . '<span class="' . esc_attr( $classes ) . '" id="v' . $n . '" data-v="' . $n . '">' . $lines . $marks . '</span>';
 			if ( ! empty( $verse['p'] ) ) {
 				$out .= '<span class="tbe-stanza" aria-hidden="true"></span>';
 			}
@@ -316,7 +308,7 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 			$out    .= '</div>';
 			$in_poem = false;
 		}
-		$para .= '<span class="' . esc_attr( $classes ) . '" id="v' . $n . '" data-v="' . $n . '">' . $number . '<span class="tbe-vt">' . esc_html( $text ) . '</span>' . $marks . '</span> ' . $boxes;
+		$para .= $boxes . '<span class="' . esc_attr( $classes ) . '" id="v' . $n . '" data-v="' . $n . '">' . $number . '<span class="tbe-vt">' . esc_html( $text ) . '</span>' . $marks . '</span> ';
 		if ( ! empty( $verse['p'] ) ) {
 			$flush();
 		}

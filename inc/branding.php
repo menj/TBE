@@ -9,7 +9,8 @@
 defined( 'ABSPATH' ) || exit;
 
 function tbe_brand_url( string $file ): string {
-	return TBE_URI . '/assets/img/brand/' . $file;
+	// The version in the address makes browsers fetch a changed icon instead of showing the one they cached.
+	return add_query_arg( 'ver', TBE_VERSION, TBE_URI . '/assets/img/brand/' . $file );
 }
 
 add_action(
