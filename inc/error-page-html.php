@@ -1,0 +1,68 @@
+<?php
+/**
+ * The HTML of the themed error pages. Plain PHP with no WordPress calls: the drop-ins run when WordPress cannot,
+ * and tools/build_error_pages.php uses it to write the static pages in errors/.
+ *
+ * @package tbe-child
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/** Every page: status, heading, text, and whether the site's own links can be offered (not when the site itself is down). */
+function tbe_error_pages(): array {
+	return array(
+		'400'         => array( 'title' => 'That made no sense', 'lines' => array( 'Your request could not be understood, rather like the Council of Nicaea’s account of how one God is three.', 'Go back and try again; at least this one can be fixed.' ), 'links' => true ),
+		'401'         => array( 'title' => 'Identify yourself', 'lines' => array( 'This part of the site wants a sign-in, and what you sent did not match.', 'We will not put it to a vote, as the bishops did when they decided who gets to be God.' ), 'links' => true ),
+		'403'         => array( 'title' => 'No entry', 'lines' => array( 'You are not allowed in here. No blood is accepted as payment.', 'The Bible text, commentary and interlinear are open to everyone.' ), 'links' => true ),
+		'404'         => array( 'title' => 'Not found. Like the Trinity in your Bible', 'lines' => array( 'The page you followed does not exist. You will not find the word “Trinity” in any verse either, though people have been searching for seventeen centuries.' ), 'links' => true ),
+		'500'         => array( 'title' => 'Something broke', 'lines' => array( 'A server error. Unlike original sin, it is nobody’s fault but ours, and it will be forgiven without a sacrifice.', 'Please try again in a few minutes.' ), 'links' => false ),
+		'502'         => array( 'title' => 'The server is not answering', 'lines' => array( 'The server behind this site has gone silent, much like the Gospel writers when asked who wrote them.', 'Please try again in a moment.' ), 'links' => false ),
+		'503'         => array( 'title' => 'Back shortly', 'lines' => array( 'The site is being updated. Unlike the Second Coming, we are giving you a date: a few minutes from now.', 'Thank you for your patience.' ), 'links' => false ),
+		'db-error'    => array( 'code' => '503', 'title' => 'The database has gone missing', 'lines' => array( 'The site cannot find its stored text, rather like the original manuscripts: everyone talks about them and nobody can produce them.', 'Please try again in a few minutes.' ), 'links' => false ),
+		'php-error'   => array( 'code' => '500', 'title' => 'A fatal error', 'lines' => array( 'Something stopped this page from loading. Nobody has to die for it: reloading is the whole atonement.', 'Please try again in a few minutes.' ), 'links' => false ),
+		'maintenance' => array( 'code' => '503', 'title' => 'Back shortly', 'lines' => array( 'The site is being updated. Unlike the Second Coming, we are giving you a date: a few minutes from now.', 'Thank you for your patience.' ), 'links' => false ),
+	);
+}
+
+/**
+ * The HTML of one error page.
+ *
+ * @param string $key      A key of tbe_error_pages().
+ * @param string $font_url Root-relative address of Angel.woff2 (the site name's font).
+ */
+function tbe_error_page_html( string $key, string $font_url = '/wp-content/themes/TBE/assets/fonts/Angel.woff2' ): string {
+	$pages = tbe_error_pages();
+	$page  = $pages[ $key ];
+	$code  = $page['code'] ?? $key;
+	$e     = static fn( string $s ): string => htmlspecialchars( $s, ENT_QUOTES, 'UTF-8' );
+	$text  = '';
+	foreach ( $page['lines'] as $line ) {
+		$text .= '<p>' . $e( $line ) . '</p>';
+	}
+	$links = $page['links']
+		? '<nav class="more" aria-label="Elsewhere on the site"><a href="/bible/">The Books</a><a href="/bible/interlinear/">Interlinear</a><a href="/commentary/">Commentary</a><a href="/glossary/">Index</a></nav>'
+		: '';
+	$again = $page['links'] ? '<a class="go" href="/">Go to the home page</a>' : '<a class="go" href="/">Try again</a>';
+	$mark  = '<svg viewBox="0 -52 340 717" fill="none" stroke="currentColor" stroke-width="30" stroke-linejoin="round" aria-hidden="true"><path d="M135.75 210L144 216L159 202L174 217L190 204L202.25 209.5V460.75H331.25V526.25H202.25V656.25H135.75V526.25H7.75V460.75H135.75Z"/><path d="M135.75 7.75H202.25V209.5L190 204L174 217L159 202L144 216L135.75 210Z" transform="translate(-24 -40) rotate(-8 169 218)"/></svg>';
+
+	return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
+		. '<title>' . $e( $page['title'] ) . ' · The Bible Exposed</title><style>'
+		. '@font-face{font-family:"Angel";src:url("' . $e( $font_url ) . '") format("woff2");font-display:swap}'
+		. ':root{--paper:#f4eedc;--card:#fbf7ea;--ink:#231d14;--muted:#6b604f;--accent:#6e1f2e;--rubric:#9b2c2c;--gold:#a67c2e;--line:#d9cdb0}'
+		. '@media (prefers-color-scheme:dark){:root{--paper:#17120f;--card:#201915;--ink:#ece3cf;--muted:#a79c88;--accent:#d4a24c;--rubric:#d9786b;--gold:#d1a64c;--line:#3a2f27}}'
+		. '*{box-sizing:border-box}html,body{height:100%;margin:0}'
+		. 'body{display:flex;align-items:center;justify-content:center;padding:24px;background:var(--paper);color:var(--ink);font:1.1rem/1.65 Georgia,"Times New Roman",serif}'
+		. 'main{width:min(34rem,100%);padding:2.6rem 2.2rem 2.4rem;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:30px;text-align:center;box-shadow:0 18px 50px -24px rgba(35,29,20,.45)}'
+		. '.mark{display:inline-block;color:var(--accent);height:5.2rem}.mark svg{height:100%;width:auto}'
+		. '.name{margin:.9rem 0 0;font:2rem/1.1 "Angel",Georgia,serif;letter-spacing:.02em}'
+		. '.code{margin:1.6rem 0 .2rem;font:600 .78rem/1 system-ui,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}'
+		. 'h1{margin:.2rem 0 1rem;font-size:clamp(1.6rem,5vw,2.1rem);font-weight:400;line-height:1.2}'
+		. 'p{margin:0 auto .6rem;max-width:30rem;color:var(--muted)}'
+		. '.go{display:inline-block;margin-top:1.4rem;padding:.7rem 1.7rem;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--rubric));color:#fff;font:600 .95rem system-ui,sans-serif;text-decoration:none;transition:transform .2s,box-shadow .2s}'
+		. '.go:hover,.go:focus-visible{transform:translateY(-2px);box-shadow:0 12px 24px -12px var(--accent)}'
+		. '.more{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin-top:1.4rem;font:500 .78rem system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase}'
+		. '.more a{padding:.45rem .9rem;border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s}'
+		. '.more a:hover,.more a:focus-visible{background:color-mix(in srgb,var(--accent) 12%,var(--card));color:var(--accent)}'
+		. '</style></head><body><main role="main"><div class="mark">' . $mark . '</div><p class="name">The Bible Exposed</p>'
+		. '<p class="code">' . $e( $code ) . '</p><h1>' . $e( $page['title'] ) . '</h1>' . $text . $again . $links . '</main></body></html>';
+}

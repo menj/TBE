@@ -78,6 +78,13 @@ Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Test
 ## Cross-references between the Testaments
 `data/commentary/cross-references.json` holds 32 critical cross-references, each written once and filed on **both** passages, so the note appears under the New Testament verse and under the Old Testament verse it cites. They cover how Paul reworks the Law (Galatians 3:10-17, Romans 3, 9 and 10, 1 Corinthians 9), how New Testament authors quote the Old Testament differently from its wording (Ephesians 4:8, Hebrews 10:5, Acts 7, Luke 3:36), and Jesus’ own use of Scripture (Matthew 5, 15 and 22, Mark 2 and 12, Luke 4, John 10 and 17). Each note sets the two ESV texts side by side and says plainly where they differ. They are tagged **Cross-reference**, imported and kept in step like the other starter commentary, and carry no typology: they compare wording and context only.
 
+## Error pages
+Errors get their own pages, in the site's look (the broken cross, Angel, burgundy and gold, light and dark) and with a dry edge aimed at the doctrines, not the people.
+
+- **Errors WordPress answers.** `maintenance.php` (503), `db-error.php` (the database cannot be reached) and `php-error.php` (a fatal PHP error) are written into `wp-content` by the theme, so they show even when WordPress is down. They are installed on activation and after each update, refreshed from **Appearance → TBE → Error pages**, and removed again if another theme is activated. A file of yours with the same name is never overwritten; one written by another theme (it says "Written by the … theme; safe to delete") is replaced. Switch it off under General.
+- **Errors the web server answers.** 400, 401, 403, 404 for files, 500, 502 and 503 come from Apache before WordPress starts. The static pages are in `errors/` (rebuild with `php tools/build_error_pages.php`); the Error pages tab gives the `ErrorDocument` lines to paste into `.htaccess`.
+- Missing pages inside the site use `templates/404.html`.
+
 ## Branding
 The brand mark is a hollow, inverted cross that is broken through the shaft, drawn in two forms: a clean vector built into the header and footer, and a worn, hand-drawn version (`assets/img/brand/mark-textured.png`, used as a mask so the active colour scheme tints it). The break follows the report in Sahih al-Bukhari 2476 that Jesus, son of Mary, will break the cross on his return; it is cited, in English, on the Credits page. It sits beside the site name in the header and above the title on the home page, and it takes its colour from the scheme, in light and dark. The site name itself is set in Angel.
 
