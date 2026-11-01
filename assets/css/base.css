@@ -256,6 +256,7 @@ html[data-theme="dark"] .tbe-footer { --tbe-f-bg: color-mix(in srgb, var(--tbe-g
 .tbe-footer__legal { margin-top: clamp(2rem, 5vw, 3.25rem); padding-top: 1.5rem; border-top: 1px solid var(--tbe-f-rule); display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 1rem 3rem; }
 .tbe-footer__legal > * { margin: 0; }
 .tbe-footer .tbe-copyright { color: var(--tbe-f-dim); font-size: 0.78rem; line-height: 1.65; max-width: 46rem; flex: 1 1 24rem; }
+.tbe-footer .tbe-copyright a { color: var(--tbe-f-gold); text-decoration: underline; text-underline-offset: 3px; }
 .tbe-footer__rights { font-family: var(--tbe-ui); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--tbe-f-dim); white-space: nowrap; }
 
 @media (max-width: 760px) {

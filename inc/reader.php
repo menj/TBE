@@ -484,6 +484,14 @@ function tbe_view_index(): string {
 
 /** The ESV copyright notice, taken from the settings screen. */
 function tbe_copyright_html(): string {
-	$text = (string) tbe_setting( 'copyright' );
-	return '' === trim( $text ) ? '' : '<p class="tbe-copyright">' . wp_kses_post( $text ) . '</p>';
+	$text = trim( (string) tbe_setting( 'copyright' ) );
+	if ( '' === $text ) {
+		return '';
+	}
+	// Pages carry the short form (up to "All rights reserved."); the full notice stays on the Credits page.
+	$end = stripos( $text, 'All rights reserved.' );
+	if ( false !== $end && strlen( $text ) > $end + 20 ) {
+		return '<p class="tbe-copyright">' . wp_kses_post( substr( $text, 0, $end + 20 ) ) . ' <a href="' . esc_url( home_url( '/credits/' ) ) . '">' . esc_html__( 'Full notice', 'tbe-child' ) . '</a></p>';
+	}
+	return '<p class="tbe-copyright">' . wp_kses_post( $text ) . '</p>';
 }

@@ -5,9 +5,10 @@
  */
 
 :root {
-	--tbe-radius-sm: 8px;
-	--tbe-radius: 14px;
-	--tbe-radius-lg: 20px;
+	--tbe-radius-sm: 12px;
+	--tbe-radius: 20px;
+	--tbe-radius-lg: 30px;
+	--tbe-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 	--tbe-radius-pill: 999px;
 	--tbe-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 	--tbe-shadow: 0 1px 2px rgba(35, 29, 20, 0.06), 0 8px 20px -12px rgba(35, 29, 20, 0.28);
@@ -289,10 +290,78 @@ a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, tra
 .tbe-hits mark, .tbe-hit__text mark { border-radius: 4px; }
 .tbe-tooltip { border-radius: var(--tbe-radius); border-top: 3px solid var(--tbe-gold); box-shadow: var(--tbe-glow-gold); }
 
+/* Rounder, livelier rollovers ------------------------------------------------ */
+/* Buttons: a soft sheen sweeps across on hover. */
+.tbe-btn--solid, .wp-block-button__link { position: relative; overflow: hidden; isolation: isolate; }
+.tbe-btn--solid::after, .wp-block-button__link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background: linear-gradient(110deg, transparent 30%, color-mix(in srgb, #fff 38%, transparent) 50%, transparent 70%);
+	transform: translateX(-120%);
+	transition: transform 0.6s var(--tbe-ease);
+}
+.tbe-btn--solid:hover::after, .wp-block-button__link:hover::after { transform: translateX(120%); }
+.tbe-btn:hover, .tbe-btn--solid:hover, .wp-block-button__link:hover { transition-timing-function: var(--tbe-spring); }
+.tbe-btn:active, .tbe-btn--solid:active, .wp-block-button__link:active { transform: translateY(0) scale(0.97); }
+
+/* Book list: the tile fills with colour from the left and an arrow slides in. */
+.tbe-booklist a { position: relative; overflow: hidden; border-radius: var(--tbe-radius); }
+.tbe-booklist a::after {
+	content: "→";
+	position: absolute;
+	inset-block: 0;
+	right: 1rem;
+	display: flex;
+	align-items: center;
+	color: var(--tbe-accent);
+	opacity: 0;
+	transform: translateX(-0.6rem);
+	transition: opacity 0.25s var(--tbe-ease), transform 0.3s var(--tbe-spring);
+}
+.tbe-booklist a:hover::after, .tbe-booklist a:focus-visible::after { opacity: 1; transform: translateX(0); }
+.tbe-booklist a:hover .tbe-booklist__count { opacity: 0; }
+.tbe-testament:nth-of-type(2) .tbe-booklist a::after { color: var(--tbe-rubric); }
+
+/* Chapter tiles: round, and they spring up. */
+.tbe-chapters a { border-radius: var(--tbe-radius); transition-timing-function: var(--tbe-spring); }
+.tbe-chapters a:hover { transform: translateY(-4px) scale(1.12); }
+.tbe-chapters .has-interlinear a { box-shadow: var(--tbe-shadow), inset 0 -3px 0 var(--tbe-gold); }
+
+/* Cards and commentary boxes lift and glow. */
+.tbe-cards .wp-block-post-template > li { border-radius: var(--tbe-radius-lg); }
+.tbe-cards .wp-block-post-template > li:hover { transform: translateY(-6px); }
+.tbe-box { border-radius: var(--tbe-radius-lg); overflow: hidden; transition-timing-function: var(--tbe-ease); }
+.tbe-box:hover { transform: translateY(-2px); border-inline-start-color: var(--tbe-gold); }
+.tbe-box > summary { border-radius: var(--tbe-radius); }
+
+/* Scripture: the verse under the pointer gets a rounded wash and a gold edge. */
+.tbe-verse { border-radius: var(--tbe-radius-sm); }
+.tbe-verse:hover { box-shadow: inset 3px 0 0 var(--tbe-gold); background: color-mix(in srgb, var(--tbe-gold) 16%, transparent); }
+
+/* Interlinear words pop out of the line. */
+.tbe-il__w { border-radius: var(--tbe-radius); transition-timing-function: var(--tbe-spring); }
+.tbe-il__w:hover, .tbe-il__w:focus-visible { transform: translateY(-3px) scale(1.04); }
+.tbe-il__play { border-radius: var(--tbe-radius-pill); }
+
+/* Pager, index letters, tags and chips: fully round, with a small push on hover. */
+.tbe-pager a, .tbe-az a, .tbe-tags a, .tbe-chip, .tbe-chips a { border-radius: var(--tbe-radius-pill); transition-timing-function: var(--tbe-spring); }
+.tbe-pager a:hover, .tbe-az a:hover, .tbe-tags a:hover { transform: translateY(-3px); }
+
+/* Inputs, notices, hits, glossary rows, tables: rounded to match. */
+.tbe-search input[type="search"], .tbe-notice, .tbe-hits li, .tbe-glossary__item, .tbe-toc { border-radius: var(--tbe-radius); }
+.tbe-table { border-radius: var(--tbe-radius); overflow: hidden; }
+.tbe-hits li, .tbe-glossary__item { transition: background-color 0.2s var(--tbe-ease), transform 0.25s var(--tbe-spring); }
+.tbe-hits li:hover, .tbe-glossary__item:hover { transform: translateX(4px); }
+.tbe-footer__col a { border-radius: var(--tbe-radius-sm); }
+
 /* Respect reduced motion: keep the colour change, drop the movement ---------- */
 @media (prefers-reduced-motion: reduce) {
 	.tbe-btn:hover, .tbe-booklist a:hover, .tbe-chapters a:hover, .tbe-cards .wp-block-post-template > li:hover,
 	.tbe-il__w:hover, .tbe-il__play:hover, .tbe-pager a:hover, .tbe-az a:hover, .tbe-tags a:hover, .tbe-mark:hover,
-	.tbe-vn:hover, .tbe-chip:hover, .wp-block-button__link:hover { transform: none; }
+	.tbe-vn:hover, .tbe-chip:hover, .wp-block-button__link:hover, .tbe-box:hover,
+	.tbe-hits li:hover, .tbe-glossary__item:hover, .tbe-footer__col a:hover { transform: none; }
+	.tbe-btn--solid::after, .wp-block-button__link::after, .tbe-booklist a::after { transition: none; }
 	.tbe-cards .wp-block-post-template > li::before { transition: none; }
 }
