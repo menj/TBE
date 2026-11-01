@@ -100,7 +100,7 @@ function tbe_ld_chrome_nodes( string $page_id ): array {
 		array( 'The Books', home_url( '/bible/' ) ),
 		array( 'Commentary', home_url( '/commentary/' ) ),
 		array( 'Index', home_url( '/bible/index/' ) ),
-		array( 'Glossary', home_url( '/glossary/' ) ),
+		array( 'Index', home_url( '/glossary/' ) ),
 	);
 	$nodes = array();
 	$parts = array();
@@ -245,7 +245,7 @@ function tbe_ld_note_nodes( WP_Post $entry, ?string $about_chapter_url = null ):
 		}
 	}
 	$themes   = array();
-	$theme_terms = get_the_terms( $entry, 'tbe_theme' );
+	$theme_terms = get_the_terms( $entry, 'post_tag' );
 	if ( is_array( $theme_terms ) ) {
 		foreach ( $theme_terms as $term ) {
 			$themes[] = $term->name;
@@ -575,11 +575,11 @@ function tbe_ld_graph(): array {
 				}
 			}
 		}
-	} elseif ( is_post_type_archive( 'tbe_commentary' ) || is_tax( array( 'tbe_section', 'tbe_theme' ) ) ) {
+	} elseif ( is_post_type_archive( 'tbe_commentary' ) || is_tag() || is_tax( 'tbe_section' ) ) {
 		$page['@type'] = 'CollectionPage';
 		$trail[]       = array( __( 'Commentary', 'tbe-child' ), home_url( '/commentary/' ) );
 		global $wp_query;
-		if ( is_tax() ) {
+		if ( is_tax() || is_tag() ) {
 			$obj     = get_queried_object();
 			$trail[] = array( $obj->name, $url );
 		}
@@ -588,7 +588,7 @@ function tbe_ld_graph(): array {
 
 	} elseif ( is_post_type_archive( 'tbe_term' ) ) {
 		$page['@type'] = 'CollectionPage';
-		$trail[]       = array( __( 'Glossary', 'tbe-child' ), home_url( '/glossary/' ) );
+		$trail[]       = array( __( 'Index', 'tbe-child' ), home_url( '/glossary/' ) );
 		$terms         = tbe_glossary_terms();
 		$set           = array(
 			'@type'           => 'DefinedTermSet',
@@ -605,7 +605,7 @@ function tbe_ld_graph(): array {
 
 	} elseif ( is_singular( 'tbe_term' ) ) {
 		$post    = get_queried_object();
-		$trail[] = array( __( 'Glossary', 'tbe-child' ), home_url( '/glossary/' ) );
+		$trail[] = array( __( 'Index', 'tbe-child' ), home_url( '/glossary/' ) );
 		$trail[] = array( get_the_title( $post ), get_permalink( $post ) );
 		$page['@type'] = 'ItemPage';
 		$extra[] = array( '@type' => 'DefinedTermSet', '@id' => tbe_ld_terms_set_id(), 'name' => 'Glossary', 'url' => home_url( '/glossary/' ) );

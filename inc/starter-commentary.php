@@ -77,7 +77,7 @@ function tbe_write_entry( int $existing_id, array $entry, string $status ): int 
 	update_post_meta( $id, 'tbe_vstart', $ref['vstart'] );
 	update_post_meta( $id, 'tbe_vend', $ref['vend'] );
 	wp_set_object_terms( $id, array( (string) $entry['section'] ), 'tbe_section' );
-	wp_set_object_terms( $id, array_map( 'strval', (array) $entry['themes'] ), 'tbe_theme' );
+	wp_set_post_tags( $id, array_map( 'strval', (array) $entry['themes'] ), false );
 	return (int) $id;
 }
 

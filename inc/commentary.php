@@ -44,20 +44,9 @@ add_action(
 			)
 		);
 
-		register_taxonomy(
-			'tbe_theme',
-			'tbe_commentary',
-			array(
-				'labels'       => array(
-					'name'          => __( 'Themes', 'tbe-child' ),
-					'singular_name' => __( 'Theme', 'tbe-child' ),
-				),
-				'public'       => true,
-				'hierarchical' => false,
-				'show_in_rest' => true,
-				'rewrite'      => array( 'slug' => 'theme', 'with_front' => false ),
-			)
-		);
+		// WordPress's own Tags, on commentary entries and index terms (replaces the old custom Themes taxonomy).
+		register_taxonomy_for_object_type( 'post_tag', 'tbe_commentary' );
+		register_taxonomy_for_object_type( 'post_tag', 'tbe_term' );
 
 		foreach ( array(
 			'tbe_book'    => 'string',
@@ -261,3 +250,34 @@ function tbe_commentary_for_book( string $book ): array {
 	);
 	return $query->posts;
 }
+
+
+/** A tag page lists commentary entries and index terms along with ordinary posts. */
+add_action(
+	'pre_get_posts',
+	static function ( WP_Query $query ) {
+		if ( ! is_admin() && $query->is_main_query() && $query->is_tag() ) {
+			$query->set( 'post_type', array( 'post', 'tbe_commentary', 'tbe_term' ) );
+		}
+	}
+);
+
+/** One time: carry the old custom "Themes" over into WordPress Tags so nothing is lost. */
+add_action(
+	'admin_init',
+	static function () {
+		if ( get_option( 'tbe_themes_to_tags' ) || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		global $wpdb;
+		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			"SELECT tr.object_id AS id, t.name AS name FROM {$wpdb->term_relationships} tr
+			 JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id AND tt.taxonomy = 'tbe_theme'
+			 JOIN {$wpdb->terms} t ON t.term_id = tt.term_id"
+		);
+		foreach ( (array) $rows as $row ) {
+			wp_set_post_tags( (int) $row->id, array( $row->name ), true );
+		}
+		update_option( 'tbe_themes_to_tags', 1, false );
+	}
+);
