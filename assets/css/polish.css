@@ -288,9 +288,6 @@ a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, tra
 .tbe-notice { border-radius: var(--tbe-radius); }
 .tbe-hits mark, .tbe-hit__text mark { border-radius: 4px; }
 .tbe-tooltip { border-radius: var(--tbe-radius); border-top: 3px solid var(--tbe-gold); box-shadow: var(--tbe-glow-gold); }
-.tbe-footer hr { border-top-color: color-mix(in srgb, var(--tbe-gold) 45%, var(--tbe-line)); }
-.tbe-footer__nav .wp-block-navigation-item__content { padding: 0.45rem 0.85rem; border-radius: var(--tbe-radius-pill); text-decoration: none; color: var(--tbe-ink); transition: background-color 0.2s var(--tbe-ease), color 0.2s var(--tbe-ease); }
-.tbe-footer__nav .wp-block-navigation-item__content:hover, .tbe-footer__nav .wp-block-navigation-item__content:focus-visible { color: var(--tbe-accent); background-color: var(--tbe-wash-accent); }
 
 /* Respect reduced motion: keep the colour change, drop the movement ---------- */
 @media (prefers-reduced-motion: reduce) {

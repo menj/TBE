@@ -147,6 +147,7 @@ function tbe_scheme_css(): string {
 	$css  .= '--tbe-scale:' . ( $scale / 100 ) . ';}';
 	if ( 'night' === tbe_setting( 'scheme' ) ) {
 		$css .= 'html:not([data-theme="light"]){color-scheme:dark;}';
+		$css .= 'html:not([data-theme="light"]) .tbe-footer{--tbe-f-bg:color-mix(in srgb,var(--tbe-gold) 9%,#0b0807);}';
 	}
 	return $css;
 }
