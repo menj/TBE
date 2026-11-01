@@ -46,6 +46,20 @@ add_action(
 			)
 		);
 
+		register_block_type(
+			'tbe/brandmark',
+			array(
+				'attributes'      => array( 'variant' => array( 'type' => 'string', 'default' => 'mark' ) ),
+				'render_callback' => static function ( array $attrs ): string {
+					if ( 'hero' === ( $attrs['variant'] ?? '' ) ) {
+						// The hand-worn mark, coloured by the active scheme through a CSS mask.
+						return '<span class="tbe-brandmark tbe-brandmark--hero" aria-hidden="true"></span>';
+					}
+					return '<span class="tbe-brandmark" aria-hidden="true"><svg viewBox="0 0 340 665" focusable="false" fill="none"><path d="M135.75 7.75H202.25V460.75H331.25V526.25H202.25V656.25H135.75V526.25H7.75V460.75H135.75Z" stroke="currentColor" stroke-width="28" stroke-linejoin="round"/></svg></span>';
+				},
+			)
+		);
+
 		register_block_type( 'tbe/glossary', array( 'render_callback' => 'tbe_render_glossary' ) );
 
 		register_block_type(

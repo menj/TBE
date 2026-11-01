@@ -66,6 +66,14 @@ function tbe_ld_site_nodes(): array {
 		'@id'   => tbe_ld_org_id(),
 		'name'  => get_bloginfo( 'name' ),
 		'url'   => home_url( '/' ),
+		'logo'  => array(
+			'@type'      => 'ImageObject',
+			'url'        => TBE_URI . '/assets/img/brand/icon-512.png',
+			'width'      => 512,
+			'height'     => 512,
+			'contentUrl' => TBE_URI . '/assets/img/brand/icon-512.png',
+		),
+		'image' => TBE_URI . '/assets/img/brand/social-preview.png',
 	);
 	$nodes[] = array(
 		'@type'           => 'WebSite',
@@ -98,8 +106,8 @@ function tbe_ld_site_nodes(): array {
 function tbe_ld_chrome_nodes( string $page_id ): array {
 	$links = array(
 		array( 'The Books', home_url( '/bible/' ) ),
+		array( 'Interlinear', home_url( '/bible/interlinear/' ) ),
 		array( 'Commentary', home_url( '/commentary/' ) ),
-		array( 'Index', home_url( '/bible/index/' ) ),
 		array( 'Index', home_url( '/glossary/' ) ),
 	);
 	$nodes = array();

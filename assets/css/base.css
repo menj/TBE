@@ -120,6 +120,20 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .tbe-brand { font-family: "Angel", var(--tbe-display, Georgia), serif; font-weight: 400; letter-spacing: 0.02em; }
 .tbe-brand { font-size: clamp(3rem, 9vw, 5.5rem); line-height: 1.05; }
 
+/* Brand mark: the hollow inverted cross, coloured by the active scheme. */
+.tbe-lockup { gap: 0.7rem; }
+.tbe-brandmark { display: inline-flex; color: var(--tbe-accent); line-height: 0; }
+.tbe-brandmark svg { height: 2rem; width: auto; display: block; }
+.tbe-brandmark--hero {
+	display: block;
+	width: clamp(4.5rem, 11vw, 6.5rem);
+	aspect-ratio: 355 / 680;
+	margin: 0 auto 1.5rem;
+	background: linear-gradient(180deg, var(--tbe-gold), var(--tbe-accent));
+	-webkit-mask: url("../img/brand/mark-textured.png") center / contain no-repeat;
+	mask: url("../img/brand/mark-textured.png") center / contain no-repeat;
+}
+
 /* Hero ------------------------------------------------------------------- */
 .tbe-hero { padding-block: clamp(2.5rem, 8vw, 5rem); text-align: center; }
 .tbe-hero h1 { font-size: clamp(2.4rem, 7vw, 4rem); font-weight: 400; margin: 0; }
