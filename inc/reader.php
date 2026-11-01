@@ -462,7 +462,7 @@ function tbe_view_index(): string {
 	$out .= '</section>';
 
 	// By theme and by section.
-	foreach ( array( 'tbe_theme' => __( 'By theme', 'tbe-child' ), 'tbe_section' => __( 'By section', 'tbe-child' ) ) as $taxonomy => $heading ) {
+	foreach ( array( 'post_tag' => __( 'By tag', 'tbe-child' ), 'tbe_section' => __( 'By section', 'tbe-child' ) ) as $taxonomy => $heading ) {
 		$terms = get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => true ) );
 		if ( is_wp_error( $terms ) || ! $terms ) {
 			continue;
@@ -473,7 +473,7 @@ function tbe_view_index(): string {
 		}
 		$out .= '</ul></section>';
 	}
-	$out .= '<p class="tbe-center"><a href="' . esc_url( get_post_type_archive_link( 'tbe_term' ) ) . '">' . esc_html__( 'Glossary', 'tbe-child' ) . '</a></p>';
+	$out .= '<p class="tbe-center"><a href="' . esc_url( get_post_type_archive_link( 'tbe_term' ) ) . '">' . esc_html__( 'Index of terms', 'tbe-child' ) . '</a></p>';
 	return $out . '</div>';
 }
 

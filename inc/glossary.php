@@ -15,11 +15,11 @@ add_action(
 			'tbe_term',
 			array(
 				'labels'       => array(
-					'name'          => __( 'Glossary', 'tbe-child' ),
+					'name'          => __( 'Index', 'tbe-child' ),
 					'singular_name' => __( 'Glossary term', 'tbe-child' ),
 					'add_new_item'  => __( 'Add glossary term', 'tbe-child' ),
 					'edit_item'     => __( 'Edit glossary term', 'tbe-child' ),
-					'menu_name'     => __( 'Glossary', 'tbe-child' ),
+					'menu_name'     => __( 'Index', 'tbe-child' ),
 				),
 				'public'       => true,
 				'has_archive'  => 'glossary',
