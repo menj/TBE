@@ -73,6 +73,22 @@ add_action(
 			)
 		);
 
+		// The not-found message: a different line each time the page loads.
+		register_block_type(
+			'tbe/error-message',
+			array(
+				'attributes'      => array( 'code' => array( 'type' => 'string', 'default' => '404' ) ),
+				'render_callback' => static function ( array $attrs ): string {
+					$variant = tbe_error_variant( (string) ( $attrs['code'] ?? '404' ) );
+					$out     = '<h1 class="wp-block-heading has-text-align-center">' . esc_html( $variant['title'] ) . '</h1>';
+					foreach ( $variant['lines'] as $line ) {
+						$out .= '<p class="has-text-align-center">' . esc_html( $line ) . '</p>';
+					}
+					return $out;
+				},
+			)
+		);
+
 		register_block_type( 'tbe/glossary', array( 'render_callback' => 'tbe_render_glossary' ) );
 
 		register_block_type(

@@ -83,7 +83,8 @@ Errors get their own pages, in the site's look (the broken cross, Angel, burgund
 
 - **Errors WordPress answers.** `maintenance.php` (503), `db-error.php` (the database cannot be reached) and `php-error.php` (a fatal PHP error) are written into `wp-content` by the theme, so they show even when WordPress is down. They are installed on activation and after each update, refreshed from **Appearance → TBE → Error pages**, and removed again if another theme is activated. A file of yours with the same name is never overwritten; one written by another theme (it says "Written by the … theme; safe to delete") is replaced. Switch it off under General.
 - **Errors the web server answers.** 400, 401, 403, 404 for files, 500, 502 and 503 come from Apache before WordPress starts. The static pages are in `errors/` (rebuild with `php tools/build_error_pages.php`); the Error pages tab gives the `ErrorDocument` lines to paste into `.htaccess`.
-- Missing pages inside the site use `templates/404.html`.
+- Missing pages inside the site use `templates/404.html`, whose message is chosen at random on each load.
+- Every page has several wordings (`inc/error-page-html.php`); a different one greets each visit. Static pages and the drop-ins pick one in the browser, so a visitor without JavaScript sees the first.
 
 ## Branding
 The brand mark is a hollow, inverted cross that is broken through the shaft, drawn in two forms: a clean vector built into the header and footer, and a worn, hand-drawn version (`assets/img/brand/mark-textured.png`, used as a mask so the active colour scheme tints it). The break follows the report in Sahih al-Bukhari 2476 that Jesus, son of Mary, will break the cross on his return; it is cited, in English, on the Credits page. It sits beside the site name in the header and above the title on the home page, and it takes its colour from the scheme, in light and dark. The site name itself is set in Angel.
