@@ -18,7 +18,6 @@
 .tbe-field { margin-bottom: 1.25rem; }
 .tbe-field > label:first-child { display: block; font-weight: 600; margin-bottom: 0.35rem; }
 .tbe-field input[type="checkbox"] + * { margin-left: 0.25rem; }
-.tbe-rtl { direction: rtl; font-size: 1.15rem; }
 
 .tbe-status { border-collapse: collapse; margin-bottom: 1.5rem; }
 .tbe-status th, .tbe-status td { text-align: left; padding: 0.35rem 1.5rem 0.35rem 0; }

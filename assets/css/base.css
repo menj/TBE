@@ -12,7 +12,6 @@
 	--tbe-line: #d9cdb0;
 	--tbe-scale: 1;
 	--tbe-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-	--tbe-naskh: "Amiri", "Scheherazade New", "Noto Naskh Arabic", "Traditional Arabic", serif;
 }
 
 /* Dark mode, toggled by the visitor (theme.js sets data-theme on <html>). */
@@ -48,22 +47,6 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 
 .tbe-muted { color: var(--tbe-muted); }
 
-/* Bismillah band --------------------------------------------------------- */
-.tbe-bismillah {
-	background: var(--tbe-accent) url("../images/pattern.svg") center / 64px repeat;
-	background-blend-mode: soft-light;
-	color: var(--tbe-paper);
-	text-align: center;
-	padding: 0.35rem 1rem;
-}
-.tbe-bismillah p {
-	margin: 0;
-	font-family: var(--tbe-naskh);
-	font-size: 1.35rem;
-	line-height: 1.9;
-	color: inherit;
-}
-
 /* Header ----------------------------------------------------------------- */
 .tbe-header {
 	padding-block: 1rem;
@@ -96,7 +79,7 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 	transition: border-color 0.15s, background-color 0.15s, color 0.15s;
 }
 .tbe-btn:hover { border-color: var(--tbe-accent); color: var(--tbe-accent); }
-.tbe-btn[aria-pressed="false"] { opacity: 0.55; }
+.tbe-btn[aria-pressed="true"] { border-color: var(--tbe-accent); color: var(--tbe-accent); background: color-mix(in srgb, var(--tbe-accent) 8%, transparent); }
 .tbe-btn--solid { background: var(--tbe-accent); border-color: var(--tbe-accent); color: var(--tbe-paper); }
 .tbe-btn--solid:hover { background: var(--tbe-ink); border-color: var(--tbe-ink); color: var(--tbe-paper); }
 
@@ -194,7 +177,6 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .tbe-main { padding-block: 1.5rem 3rem; }
 
 @media (max-width: 600px) {
-	.tbe-bismillah p { font-size: 1.15rem; }
 	.tbe-search { flex-direction: column; }
 }
 

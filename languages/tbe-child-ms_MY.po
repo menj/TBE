@@ -37,9 +37,6 @@ msgstr ""
 msgid "Add reference"
 msgstr ""
 
-msgid "Arabic form (optional)"
-msgstr ""
-
 msgid "Book, chapter and verses, e.g. \"Psalm 23\", \"1 Cor 13:4-7\", \"Jude 5\". Leave verses out to cover a whole chapter, or give just the book name (\"Genesis\") for a book introduction."
 msgstr ""
 

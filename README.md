@@ -25,7 +25,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires Wor
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## Settings (Appearance → TBE)
-Tabbed: **General** (tagline, Bismillah band, light/dark toggle), **Appearance** (three colour schemes or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
+Tabbed: **General** (tagline, light/dark toggle, language switcher), **Appearance** (three colour schemes or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
 
 ## How a chapter is laid out
 Modelled on the verse-by-verse commentary book format, with web-only improvements:
@@ -46,7 +46,7 @@ Commentary → Add New. Fill the **Passage** box (for example `John 1:1-18`, `Ps
 - Glossary: Glossary → Add New. Give a short **Excerpt** (shown in the tooltip) and optional spellings/abbreviations. The theme adds 13 starter terms as **drafts** for you to review and publish.
 
 ## Languages
-A header switcher offers English, Bahasa Melayu and Arabic (right-to-left). The choice is kept in a cookie. Scripture stays English (ESV) in all three. Translations live in `languages/` (visitor-facing strings only; admin screens stay English). To change a translation, edit `tools/build_translations.py`, then run `python3 tools/build_translations.py`. If you use a page cache, make it vary by the `tbe_lang` cookie. The Malay and Arabic text is a first draft and should be reviewed by a native speaker.
+The interface is available in English and Bahasa Melayu. Turn either on or off under Appearance → TBE → General; the header switcher appears when both are on, and the choice is kept in a cookie. Scripture stays English (ESV). Translations live in `languages/` (visitor-facing strings only; admin screens stay English). To change a translation, edit `tools/build_translations.py`, then run `python3 tools/build_translations.py`. If you use a page cache, make it vary by the `tbe_lang` cookie. The Malay text is a first draft and should be reviewed by a native speaker.
 
 ## Refreshing the ESV text
 ```bash
@@ -58,6 +58,5 @@ Existing chapter files are skipped, so delete a file to re-fetch it. The script 
 The ESV text is © Crossway. The copyright notice shown in the footer is editable under ESV and licence; use the exact wording your Crossway permission requires.
 
 ## Fonts
-**Bible text only** is set in the SBL fonts in `assets/fonts/` (SBL BibLit for English, SBL Hebrew, SBL Greek), via `assets/css/scripture.css`. This covers the ESV in the reader and any Quote block given the *Scripture* style. Everything else uses system fonts: an old-style serif for prose, and Amiri / Scheherazade New / system Naskh for the Bismillah.
 
 The fonts are lossless WOFF2 conversions of the original SBL TTFs, made with `node tools/ttf2woff2.js in.ttf out.woff2` (about a quarter of the size, identical glyphs). The site owner holds the SBL / Tiro Typeworks licence; its text is kept in `assets/fonts/LICENSE-SBL-FONTS.txt`.

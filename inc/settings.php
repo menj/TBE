@@ -75,10 +75,9 @@ function tbe_defaults(): array {
 	return array(
 		// General.
 		'tagline'          => __( 'Textual criticism, critical commentary and reflection on the Bible.', 'tbe-child' ),
-		'bismillah'        => 1,
-		'bismillah_text'   => 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ',
 		'allow_toggle'     => 1,
 		'lang_switcher'    => 1,
+		'languages'        => array( 'en_US', 'ms_MY' ),
 		// Appearance.
 		'scheme'           => 'manuscript',
 		'colors'           => array(),
@@ -209,10 +208,10 @@ function tbe_sanitize_settings( $input ): array {
 	switch ( $tab ) {
 		case 'general':
 			$new['tagline']        = sanitize_text_field( $input['tagline'] ?? '' );
-			$new['bismillah_text'] = sanitize_text_field( $input['bismillah_text'] ?? '' );
-			$new['bismillah']      = $flag( 'bismillah' );
 			$new['allow_toggle']   = $flag( 'allow_toggle' );
 			$new['lang_switcher']  = $flag( 'lang_switcher' );
+			$chosen               = array_values( array_intersect( array_keys( tbe_languages() ), (array) ( $input['languages'] ?? array() ) ) );
+			$new['languages']      = $chosen ? $chosen : array( 'en_US' );
 			break;
 
 		case 'appearance':
@@ -280,10 +279,18 @@ function tbe_render_settings_page(): void {
 			switch ( $tab ) {
 				case 'general':
 					tbe_field_text( 'tagline', __( 'Tagline', 'tbe-child' ), $s['tagline'], __( 'Shown on the home page hero.', 'tbe-child' ) );
-					tbe_field_check( 'bismillah', __( 'Show the Bismillah band above the header', 'tbe-child' ), $s['bismillah'] );
-					tbe_field_text( 'bismillah_text', __( 'Bismillah text', 'tbe-child' ), $s['bismillah_text'], '', 'tbe-rtl' );
 					tbe_field_check( 'allow_toggle', __( 'Show the light / dark toggle to visitors', 'tbe-child' ), $s['allow_toggle'] );
-					tbe_field_check( 'lang_switcher', __( 'Show the language switcher (English, Bahasa Melayu, Arabic)', 'tbe-child' ), $s['lang_switcher'] );
+					tbe_field_check( 'lang_switcher', __( 'Show the language switcher when more than one language is enabled', 'tbe-child' ), $s['lang_switcher'] );
+					echo '<fieldset class="tbe-field"><legend>' . esc_html__( 'Interface languages visitors can choose', 'tbe-child' ) . '</legend>';
+					foreach ( tbe_languages() as $code => $lang ) {
+						printf(
+							'<label style="display:block"><input type="checkbox" name="tbe_settings[languages][]" value="%1$s" %2$s> %3$s</label>',
+							esc_attr( $code ),
+							checked( in_array( $code, (array) $s['languages'], true ), true, false ),
+							esc_html( $lang['label'] )
+						);
+					}
+					echo '<p class="description">' . esc_html__( 'Scripture stays English (ESV) in every language.', 'tbe-child' ) . '</p></fieldset>';
 					break;
 
 				case 'appearance':

@@ -16,9 +16,6 @@ add_action(
 		wp_enqueue_style( 'tbe-reader', TBE_URI . '/assets/css/reader.css', array( 'tbe-base' ), TBE_VERSION );
 		wp_enqueue_style( 'tbe-scripture', TBE_URI . '/assets/css/scripture.css', array( 'tbe-reader' ), TBE_VERSION );
 		wp_enqueue_style( 'tbe-components', TBE_URI . '/assets/css/components.css', array( 'tbe-reader' ), TBE_VERSION );
-		if ( is_rtl() ) {
-			wp_enqueue_style( 'tbe-rtl', TBE_URI . '/assets/css/rtl.css', array( 'tbe-components', 'tbe-scripture' ), TBE_VERSION );
-		}
 		wp_add_inline_style( 'tbe-base', tbe_scheme_css() );
 
 		// Runs in <head> so a saved light/dark choice is applied before first paint.

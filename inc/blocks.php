@@ -26,18 +26,6 @@ add_action(
 		);
 
 		register_block_type(
-			'tbe/bismillah',
-			array(
-				'render_callback' => static function (): string {
-					if ( ! tbe_setting( 'bismillah' ) ) {
-						return '';
-					}
-					return '<div class="tbe-bismillah"><p lang="ar" dir="rtl">' . esc_html( (string) tbe_setting( 'bismillah_text' ) ) . '</p></div>';
-				},
-			)
-		);
-
-		register_block_type(
 			'tbe/theme-toggle',
 			array(
 				'render_callback' => static function (): string {

@@ -29,7 +29,7 @@ add_action(
 				'supports'     => array( 'title', 'editor', 'excerpt', 'revisions' ),
 			)
 		);
-		foreach ( array( 'tbe_aliases', 'tbe_arabic' ) as $key ) {
+		foreach ( array( 'tbe_aliases' ) as $key ) {
 			register_post_meta( 'tbe_term', $key, array( 'type' => 'string', 'single' => true, 'show_in_rest' => true ) );
 		}
 	}
@@ -52,10 +52,6 @@ function tbe_term_box( WP_Post $post ): void {
 		<input type="text" id="tbe-aliases" name="tbe_aliases" class="widefat" value="<?php echo esc_attr( (string) get_post_meta( $post->ID, 'tbe_aliases', true ) ); ?>" placeholder="MT, Masoretic">
 		<span class="description"><?php esc_html_e( 'Comma-separated. Each one also gets a tooltip wherever it appears in commentary.', 'tbe-child' ); ?></span>
 	</p>
-	<p>
-		<label for="tbe-arabic"><strong><?php esc_html_e( 'Arabic form (optional)', 'tbe-child' ); ?></strong></label>
-		<input type="text" id="tbe-arabic" name="tbe_arabic" class="widefat" dir="rtl" value="<?php echo esc_attr( (string) get_post_meta( $post->ID, 'tbe_arabic', true ) ); ?>">
-	</p>
 	<p class="description"><?php esc_html_e( 'The short summary shown in the tooltip is the Excerpt. If empty, the start of the main text is used.', 'tbe-child' ); ?></p>
 	<?php
 }
@@ -71,7 +67,6 @@ add_action(
 			return;
 		}
 		update_post_meta( $post_id, 'tbe_aliases', sanitize_text_field( wp_unslash( $_POST['tbe_aliases'] ?? '' ) ) );
-		update_post_meta( $post_id, 'tbe_arabic', sanitize_text_field( wp_unslash( $_POST['tbe_arabic'] ?? '' ) ) );
 		tbe_flush_glossary();
 	}
 );
@@ -89,19 +84,19 @@ function tbe_flush_glossary(): void {
 
 function tbe_seed_terms(): array {
 	return array(
-		array( 'Textual criticism', '', 'The scholarly discipline of comparing surviving manuscripts and versions of a text in order to identify variant readings and reconstruct the earliest form that can be recovered.', '' ),
-		array( 'Variant reading', 'variant; variants; variation unit', 'A place where surviving manuscripts of the same work differ in wording, spelling, word order or omission. Scholars call each such place a variation unit.', '' ),
-		array( 'Manuscript', 'manuscripts', 'A handwritten copy of a text, as opposed to a printed one.', '' ),
-		array( 'Codex', 'codices', 'An early book form made of folded sheets bound along one edge, which gradually replaced the scroll.', '' ),
-		array( 'Codex Sinaiticus', 'Sinaiticus', 'A fourth-century Greek manuscript of the Christian Bible, found at St Catherine\'s Monastery on Mount Sinai. It is one of the oldest nearly complete copies of the New Testament.', '' ),
-		array( 'Codex Vaticanus', 'Vaticanus', 'A fourth-century Greek manuscript of the Bible, held in the Vatican Library since at least the fifteenth century.', '' ),
-		array( 'Septuagint', 'LXX', 'The Greek translation of the Hebrew scriptures, begun in Alexandria in the third century BCE. Often abbreviated LXX.', '' ),
-		array( 'Masoretic Text', 'MT; Masoretic', 'The standard Hebrew text of the Hebrew Bible, preserved and vocalised by Jewish scribes known as the Masoretes in the early medieval period. Often abbreviated MT.', '' ),
-		array( 'Dead Sea Scrolls', '', 'Manuscripts discovered from 1947 in caves near Qumran, including the oldest known copies of many books of the Hebrew Bible.', '' ),
-		array( 'Textus Receptus', '', 'The Greek New Testament text printed in the sixteenth century from a small number of late manuscripts, which underlies the King James Version. Latin for "received text".', '' ),
-		array( 'Pericope', 'pericopes', 'A self-contained passage or unit of text, such as a parable or a miracle story.', '' ),
-		array( 'Tafsir', 'tafseer', 'Arabic for explanation or interpretation: the Islamic discipline of explaining the Qur\'an. On this site it names the section where a Bible passage is read in light of Islamic scholarship.', 'تفسير' ),
-		array( 'Tadabbur', 'tadabur', 'Arabic for deep reflection or contemplation, especially on the meaning of the Qur\'an. On this site the matching section for Bible passages is called Reflection.', 'تدبّر' ),
+		array( 'Textual criticism', '', 'The scholarly discipline of comparing surviving manuscripts and versions of a text in order to identify variant readings and reconstruct the earliest form that can be recovered.' ),
+		array( 'Variant reading', 'variant; variants; variation unit', 'A place where surviving manuscripts of the same work differ in wording, spelling, word order or omission. Scholars call each such place a variation unit.' ),
+		array( 'Manuscript', 'manuscripts', 'A handwritten copy of a text, as opposed to a printed one.' ),
+		array( 'Codex', 'codices', 'An early book form made of folded sheets bound along one edge, which gradually replaced the scroll.' ),
+		array( 'Codex Sinaiticus', 'Sinaiticus', 'A fourth-century Greek manuscript of the Christian Bible, found at St Catherine\'s Monastery on Mount Sinai. It is one of the oldest nearly complete copies of the New Testament.' ),
+		array( 'Codex Vaticanus', 'Vaticanus', 'A fourth-century Greek manuscript of the Bible, held in the Vatican Library since at least the fifteenth century.' ),
+		array( 'Septuagint', 'LXX', 'The Greek translation of the Hebrew scriptures, begun in Alexandria in the third century BCE. Often abbreviated LXX.' ),
+		array( 'Masoretic Text', 'MT; Masoretic', 'The standard Hebrew text of the Hebrew Bible, preserved and vocalised by Jewish scribes known as the Masoretes in the early medieval period. Often abbreviated MT.' ),
+		array( 'Dead Sea Scrolls', '', 'Manuscripts discovered from 1947 in caves near Qumran, including the oldest known copies of many books of the Hebrew Bible.' ),
+		array( 'Textus Receptus', '', 'The Greek New Testament text printed in the sixteenth century from a small number of late manuscripts, which underlies the King James Version. Latin for "received text".' ),
+		array( 'Pericope', 'pericopes', 'A self-contained passage or unit of text, such as a parable or a miracle story.' ),
+		array( 'Tafsir', 'tafseer', 'Explanation or interpretation: the Islamic discipline of explaining the Qur\'an. On this site it names the section where a Bible passage is read in light of Islamic scholarship.' ),
+		array( 'Tadabbur', 'tadabur', 'Deep reflection or contemplation, especially on the meaning of the Qur\'an. On this site the matching section for Bible passages is called Reflection.' ),
 	);
 }
 
@@ -126,7 +121,6 @@ add_action(
 			);
 			if ( $id && ! is_wp_error( $id ) ) {
 				update_post_meta( $id, 'tbe_aliases', $seed[1] );
-				update_post_meta( $id, 'tbe_arabic', $seed[3] );
 			}
 		}
 		update_option( 'tbe_glossary_seeded', 1, false );
@@ -136,7 +130,7 @@ add_action(
 
 /* Term index and annotation ---------------------------------------------- */
 
-/** @return array<int,array{id:int,title:string,names:string[],tip:string,url:string,arabic:string}> */
+/** @return array<int,array{id:int,title:string,names:string[],tip:string,url:string}> */
 function tbe_glossary_terms(): array {
 	$cached = get_transient( 'tbe_glossary_v1' );
 	if ( is_array( $cached ) ) {
@@ -167,7 +161,6 @@ function tbe_glossary_terms(): array {
 			'names'  => array_values( array_unique( $names ) ),
 			'tip'    => wp_trim_words( wp_strip_all_tags( strip_shortcodes( $tip ) ), 45 ),
 			'url'    => get_permalink( $post ),
-			'arabic' => (string) get_post_meta( $post->ID, 'tbe_arabic', true ),
 		);
 	}
 	set_transient( 'tbe_glossary_v1', $out, DAY_IN_SECONDS );
@@ -208,9 +201,6 @@ function tbe_render_glossary(): string {
 		$out .= '<section class="tbe-glossary-group" id="g-' . esc_attr( (string) $letter ) . '"><h2 class="tbe-ornament">' . esc_html( (string) $letter ) . '</h2><dl class="tbe-glossary">';
 		foreach ( $items as $term ) {
 			$out .= '<div class="tbe-glossary__item" id="term-' . (int) $term['id'] . '"><dt><a href="' . esc_url( $term['url'] ) . '">' . esc_html( $term['title'] ) . '</a>';
-			if ( '' !== $term['arabic'] ) {
-				$out .= ' <span class="tbe-glossary__ar" lang="ar" dir="rtl">' . esc_html( $term['arabic'] ) . '</span>';
-			}
 			$out .= '</dt><dd>' . esc_html( $term['tip'] ) . '</dd></div>';
 		}
 		$out .= '</dl></section>';

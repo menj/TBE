@@ -88,7 +88,6 @@ a.tbe-ref--quran::after { content: " ↗"; font-size: 0.75em; }
 .tbe-glossary dt { font-weight: 600; font-size: 1.15em; }
 .tbe-glossary dt a { text-decoration: none; }
 .tbe-glossary dd { margin: 0.25rem 0 0; color: var(--tbe-muted); }
-.tbe-glossary__ar { font-family: var(--tbe-naskh); font-size: 1.15em; font-weight: 400; color: var(--tbe-accent); margin-inline-start: 0.5rem; }
 
 /* Search results */
 .tbe-hits { list-style: none; padding: 0; margin: 0 0 1rem; }

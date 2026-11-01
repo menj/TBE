@@ -55,7 +55,7 @@ function tbe_surahs(): array {
  * @return array{surah:int,from:int,to:int}|null from/to are 0 for a whole surah.
  */
 function tbe_parse_quran_ref( string $input ): ?array {
-	$input = trim( str_replace( array( '–', '—', '،' ), array( '-', '-', '' ), $input ) );
+	$input = trim( str_replace( array( '–', '—' ), '-', $input ) );
 	if ( ! preg_match( '/^(\d{1,3})(?:\s*[:.]\s*(\d{1,3})(?:\s*-\s*(\d{1,3}))?)?$/', $input, $m ) ) {
 		return null;
 	}

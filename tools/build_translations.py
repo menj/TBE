@@ -96,91 +96,6 @@ MS = {
 MS_PLURAL = "nplurals=1; plural=0;"
 
 # ----------------------------------------------------------------------------------------------
-# Arabic (Modern Standard); six plural forms: zero, one, two, few (3-10), many (11-99), other.
-AR = {
-    "%d+ verses": "%d+ آية",
-    "%d note in this chapter": ["لا ملاحظات في هذا الإصحاح", "ملاحظة واحدة في هذا الإصحاح", "ملاحظتان في هذا الإصحاح", "%d ملاحظات في هذا الإصحاح", "%d ملاحظة في هذا الإصحاح", "%d ملاحظة في هذا الإصحاح"],
-    "%d verse": ["لا آيات", "آية واحدة", "آيتان", "%d آيات", "%d آية", "%d آية"],
-    "%d chapter": ["لا إصحاحات", "إصحاح واحد", "إصحاحان", "%d إصحاحات", "%d إصحاحًا", "%d إصحاح"],
-    "Books": "الأسفار",
-    "Breadcrumb": "مسار التنقل",
-    "By passage": "حسب المقطع",
-    "By section": "حسب القسم",
-    "By theme": "حسب الموضوع",
-    "Chapter %d": "الإصحاح %d",
-    "Chapter navigation": "التنقل بين الإصحاحات",
-    "Chapters": "الإصحاحات",
-    "Close all notes": "إغلاق كل الملاحظات",
-    "Commentary": "التعليق",
-    "Commentary on verse %d": "تعليق على الآية %d",
-    "Compares manuscripts and variant readings to establish the earliest text that can be recovered.": "يقارن بين المخطوطات والقراءات المختلفة لتحديد أقدم نص يمكن استرداده.",
-    "Contemplation of the passage, the counterpart of tadabbur.": "تأمّل في المقطع، وهو نظير التدبّر.",
-    "Continuous text": "نص متصل",
-    "Examines language, context, authorship and historical background.": "يفحص اللغة والسياق والتأليف والخلفية التاريخية.",
-    "Glossary": "المعجم",
-    "Go": "اذهب",
-    "Go to a passage or search": "اذهب إلى مقطع أو ابحث",
-    "Go to a passage or search — e.g. John 1:1-18, mercy": "اذهب إلى مقطع أو ابحث — مثال: John 1:1-18، رحمة",
-    "In the commentary": "في التعليقات",
-    "In the text": "في النص",
-    "Index of commentary": "فهرس التعليقات",
-    "Introduction": "مدخل",
-    "Jump to letter": "انتقل إلى الحرف",
-    "Language": "اللغة",
-    "Larger text": "نص أكبر",
-    "Smaller text": "نص أصغر",
-    "list of books": "قائمة الأسفار",
-    "New Testament": "العهد الجديد",
-    "Old Testament": "العهد القديم",
-    "Next": "التالي",
-    "Previous": "السابق",
-    "No commentary has been published yet.": "لم يُنشر أي تعليق بعد.",
-    "No commentary matched.": "لا توجد تعليقات مطابقة.",
-    "No verses matched.": "لا توجد آيات مطابقة.",
-    "Notes": "ملاحظات",
-    "Open all notes": "فتح كل الملاحظات",
-    "Opens the Qur'an on quran.com in a new tab.": "يفتح القرآن في موقع quran.com في تبويب جديد.",
-    "Page %1$d of %2$d": "الصفحة %1$d من %2$d",
-    "Passage": "المقطع",
-    "Passage not found": "المقطع غير موجود",
-    "Permalink to this note": "رابط دائم لهذه الملاحظة",
-    "Qur'an": "القرآن",
-    "Qur'an %1$s (%2$s)": "القرآن %1$s (%2$s)",
-    "Qur'an cross-references": "إحالات قرآنية",
-    "Reading": "القراءة",
-    "Reading tools": "أدوات القراءة",
-    "Reads the passage in light of the Qur'an and Islamic scholarship (tafsir).": "يقرأ المقطع في ضوء القرآن والعلم الإسلامي (التفسير).",
-    "Result pages": "صفحات النتائج",
-    "Scripture": "نص مقدس",
-    "Search": "بحث",
-    "Search the text and commentary": "ابحث في النص والتعليقات",
-    'Search words or "a phrase"': "ابحث عن كلمات أو «عبارة»",
-    "Search: %s": "بحث: %s",
-    "Section": "القسم",
-    "Sections": "الأقسام",
-    "Switch between light and dark": "التبديل بين الفاتح والداكن",
-    "Switch between one verse per line and continuous paragraphs": "التبديل بين آية في كل سطر وفقرات متصلة",
-    "Textual variants": "القراءات النصية المختلفة",
-    "Textual variants table": "جدول القراءات النصية المختلفة",
-    "That book or chapter does not exist. Try the %s.": "هذا السفر أو الإصحاح غير موجود. جرّب %s.",
-    "The Books of the Bible": "أسفار الكتاب المقدس",
-    "The ESV text is not fully loaded yet: the search covers %1$d of %2$d chapters.": "نص ESV لم يُحمَّل بالكامل بعد: يشمل البحث %1$d من %2$d إصحاحًا.",
-    "The glossary is empty for now.": "المعجم فارغ حاليًا.",
-    "The text of this chapter is not available right now.": "نص هذا الإصحاح غير متاح حاليًا.",
-    "Theme": "الموضوع",
-    "Themes": "المواضيع",
-    "This note cross-references the Qur'an.": "تتضمن هذه الملاحظة إحالات إلى القرآن.",
-    "This note includes a table of manuscript variants.": "تتضمن هذه الملاحظة جدولًا بقراءات المخطوطات المختلفة.",
-    "Type a word or phrase. Put a phrase in quotes. To go straight to a passage, type a reference such as John 3:16.": "اكتب كلمة أو عبارة. ضع العبارة بين علامتي تنصيص. للانتقال مباشرة إلى مقطع، اكتب مرجعًا مثل John 3:16.",
-    "Variants": "قراءات مختلفة",
-    "Verse": "آية",
-    "Verse numbers": "أرقام الآيات",
-    "Witnesses": "الشواهد",
-}
-AR_PLURAL = "nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);"
-
-
-# ----------------------------------------------------------------------------------------------
 def unq(s):
     return s.encode().decode("unicode_escape") if False else re.sub(r'\\(.)', lambda m: {"n": "\n", '"': '"', "\\": "\\"}.get(m.group(1), m.group(1)), s)
 
@@ -257,4 +172,3 @@ def write_mo(path, messages):
 
 if __name__ == "__main__":
     write_po_and_mo("ms_MY", MS, MS_PLURAL, 1)
-    write_po_and_mo("ar", AR, AR_PLURAL, 6)

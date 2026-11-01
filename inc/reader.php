@@ -182,6 +182,15 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 		}
 	};
 
+	// A note sits after the last verse it covers; its marker stays beside the first.
+	$ends = array();
+	foreach ( $starts as $first => $entries ) {
+		foreach ( $entries as $entry ) {
+			$last            = max( (int) $first, (int) get_post_meta( $entry->ID, 'tbe_vend', true ) );
+			$ends[ $last ][] = $entry;
+		}
+	}
+
 	foreach ( $verses as $verse ) {
 		$n       = (int) $verse['n'];
 		$text    = (string) $verse['t'];
@@ -196,6 +205,8 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 				esc_attr( sprintf( /* translators: %d: verse number */ __( 'Commentary on verse %d', 'tbe-child' ), $n ) ),
 				esc_attr( get_the_title( $entry ) )
 			);
+		}
+		foreach ( $ends[ $n ] ?? array() as $entry ) {
 			$boxes .= tbe_render_box( $entry, $slug, $chapter );
 		}
 		$number = '<a class="tbe-vn" href="#v' . $n . '"><span class="screen-reader-text">' . esc_html__( 'Verse', 'tbe-child' ) . ' </span>' . $n . '</a>';
