@@ -73,6 +73,12 @@ msgstr "Navigasi bab"
 msgid "Chapters"
 msgstr "Bab"
 
+msgid "Check timings"
+msgstr "Semak masa"
+
+msgid "Click a verse number or any word to hear it."
+msgstr "Klik pada ayat atau mana-mana perkataan untuk mendengarnya."
+
 msgid "Close all notes"
 msgstr "Tutup semua nota"
 
@@ -103,6 +109,9 @@ msgstr ""
 msgid "Edit glossary term"
 msgstr ""
 
+msgid "Editors only: outline words whose timing is only an estimate, so you can check them by ear"
+msgstr ""
+
 msgid "English"
 msgstr "Bahasa Inggeris"
 
@@ -130,6 +139,9 @@ msgstr "Tatabahasa"
 msgid "Greek: NA28 with variants from SBLGNT, the Textus Receptus and others, tagged by Tyndale House."
 msgstr ""
 
+msgid "Hebrew reading of %s"
+msgstr "Bacaan Ibrani %s"
+
 msgid "Hebrew: Westminster Leningrad Codex, tagged by Tyndale House."
 msgstr "Ibrani: Kodeks Leningrad Westminster, ditandai oleh Tyndale House."
 
@@ -151,6 +163,9 @@ msgstr "Pilihan paparan interlinear"
 msgid "Interlinear · Chapter %d"
 msgstr "Interlinear · Bab %d"
 
+msgid "Interlinear: %s"
+msgstr "Interlinear: %s"
+
 msgid "Introduction"
 msgstr "Pengenalan"
 
@@ -165,6 +180,9 @@ msgstr "Teks lebih besar"
 
 msgid "list of books"
 msgstr "senarai kitab"
+
+msgid "Listen to the Hebrew reading"
+msgstr "Dengar bacaan Ibrani"
 
 msgid "New Testament"
 msgstr "Perjanjian Baru"
@@ -219,6 +237,9 @@ msgstr ""
 
 msgid "Permalink to this note"
 msgstr "Pautan tetap ke nota ini"
+
+msgid "Play verse %d"
+msgstr "Mainkan ayat %d"
 
 msgid "Previous"
 msgstr "Sebelumnya"

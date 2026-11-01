@@ -72,6 +72,12 @@ msgstr ""
 msgid "Chapters"
 msgstr ""
 
+msgid "Check timings"
+msgstr ""
+
+msgid "Click a verse number or any word to hear it."
+msgstr ""
+
 msgid "Close all notes"
 msgstr ""
 
@@ -102,6 +108,9 @@ msgstr ""
 msgid "Edit glossary term"
 msgstr ""
 
+msgid "Editors only: outline words whose timing is only an estimate, so you can check them by ear"
+msgstr ""
+
 msgid "English"
 msgstr ""
 
@@ -129,6 +138,9 @@ msgstr ""
 msgid "Greek: NA28 with variants from SBLGNT, the Textus Receptus and others, tagged by Tyndale House."
 msgstr ""
 
+msgid "Hebrew reading of %s"
+msgstr ""
+
 msgid "Hebrew: Westminster Leningrad Codex, tagged by Tyndale House."
 msgstr ""
 
@@ -150,6 +162,9 @@ msgstr ""
 msgid "Interlinear · Chapter %d"
 msgstr ""
 
+msgid "Interlinear: %s"
+msgstr ""
+
 msgid "Introduction"
 msgstr ""
 
@@ -163,6 +178,9 @@ msgid "Larger text"
 msgstr ""
 
 msgid "list of books"
+msgstr ""
+
+msgid "Listen to the Hebrew reading"
 msgstr ""
 
 msgid "New Testament"
@@ -217,6 +235,9 @@ msgid "Passage reference"
 msgstr ""
 
 msgid "Permalink to this note"
+msgstr ""
+
+msgid "Play verse %d"
 msgstr ""
 
 msgid "Previous"

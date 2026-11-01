@@ -485,6 +485,20 @@ function tbe_ld_graph(): array {
 				'creator' => array( '@type' => 'Organization', 'name' => 'STEP Bible', 'url' => 'https://www.STEPBible.org' ),
 				'inLanguage' => 'he',
 			);
+			$audio = TBE_Audio::chapter( $slug, $chapter );
+			if ( $audio ) {
+				$extra[]       = array(
+					'@type'          => 'AudioObject',
+					'@id'            => TBE_Interlinear::url( $slug, $chapter ) . '#audio',
+					'name'           => sprintf( /* translators: %s: passage */ __( 'Hebrew reading of %s', 'tbe-child' ), TBE_Bible::label( $slug, $chapter ) ),
+					'contentUrl'     => $audio['url'],
+					'encodingFormat' => 'audio/mpeg',
+					'duration'       => TBE_Audio::iso_duration( (float) $audio['duration'] ),
+					'inLanguage'     => 'he',
+					'about'          => tbe_ld_ref( $cid ),
+				);
+				$page['audio'] = tbe_ld_ref( TBE_Interlinear::url( $slug, $chapter ) . '#audio' );
+			}
 			$data = TBE_Interlinear::chapter( $slug, $chapter );
 			foreach ( (array) ( $data['v'] ?? array() ) as $n => $words ) {
 				$hid     = TBE_Interlinear::url( $slug, $chapter ) . '#he-v' . (int) $n;

@@ -53,3 +53,21 @@
 	.tbe-il__he { font-size: 1.5rem; }
 	.tbe-il__w { min-width: 3rem; padding: 0.35rem 0.4rem; }
 }
+
+/* Recorded reading */
+.tbe-il__audio { max-width: 44rem; margin: 0 auto 1.5rem; text-align: center; }
+.tbe-il__audio figcaption { font-family: var(--tbe-ui); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.tbe-il__audio audio { width: 100%; }
+.tbe-il__credit { font-size: 0.8rem; margin: 0.35rem 0 0; }
+.tbe-il__play {
+	flex: none;
+	width: 1.7rem; height: 1.7rem;
+	border: 1px solid var(--tbe-accent); border-radius: 50%;
+	background: transparent; color: var(--tbe-accent);
+	font-size: 0.65rem; line-height: 1; cursor: pointer;
+	transition: background-color 0.15s, color 0.15s;
+}
+.tbe-il__play:hover { background: var(--tbe-accent); color: var(--tbe-paper); }
+.tbe-il__w--timed { cursor: pointer; }
+.tbe-il__w.is-playing { border-color: var(--tbe-accent); background: color-mix(in srgb, var(--tbe-accent) 14%, var(--tbe-surface)); box-shadow: 0 0 0 2px var(--tbe-accent); }
+.tbe-il--review .tbe-il__w[data-approx] { outline: 2px dashed var(--tbe-rubric); outline-offset: 1px; }

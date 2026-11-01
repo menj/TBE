@@ -109,6 +109,11 @@ MS = {
     "Hebrew: Westminster Leningrad Codex, tagged by Tyndale House.": "Ibrani: Kodeks Leningrad Westminster, ditandai oleh Tyndale House.",
     "Interlinear data from %s, licensed CC BY 4.0.": "Data interlinear daripada %s, dilesenkan CC BY 4.0.",
     "Strong's %s": "Strong %s",
+    "Listen to the Hebrew reading": "Dengar bacaan Ibrani",
+    "Click a verse number or any word to hear it.": "Klik pada ayat atau mana-mana perkataan untuk mendengarnya.",
+    "Play verse %d": "Mainkan ayat %d",
+    "Check timings": "Semak masa",
+    "Hebrew reading of %s": "Bacaan Ibrani %s",
     "Variant: %s": "Varian: %s",
 }
 MS_PLURAL = "nplurals=1; plural=0;"

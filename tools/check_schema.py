@@ -106,6 +106,8 @@ def main(paths):
                 if not (rng & NUMBERY) and "Text" not in rng:
                     errors.append(f"{where}: '{prop}' got a number but accepts {sorted(rng)}")
             elif isinstance(v, str):
+                if "Duration" in rng and re.match(r"^P(T?\d|\d)", v):
+                    return                      # schema.org writes durations as ISO 8601 strings
                 if not (rng & TEXTY) and not (rng & {"Boolean"}):
                     errors.append(f"{where}: '{prop}' got text but accepts {sorted(rng)}")
             elif isinstance(v, dict):

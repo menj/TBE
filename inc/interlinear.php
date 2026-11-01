@@ -273,9 +273,19 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	}
 
 	$hebrew = 'he' === $data['lang'];
+	$audio  = $hebrew ? TBE_Audio::chapter( $slug, $chapter ) : null;
 	$esv    = array();
 	foreach ( (array) TBE_Bible::chapter( $slug, $chapter ) as $verse ) {
 		$esv[ (int) $verse['n'] ] = preg_replace( '/\s+/u', ' ', (string) $verse['t'] );
+	}
+
+	if ( $audio ) {
+		$out .= '<figure class="tbe-il__audio"><figcaption>' . esc_html__( 'Listen to the Hebrew reading', 'tbe-child' ) . ' <span class="tbe-muted">' . esc_html__( 'Click a verse number or any word to hear it.', 'tbe-child' ) . '</span></figcaption>'
+			. '<audio id="tbe-il-audio" controls preload="none" src="' . esc_url( $audio['url'] ) . '"></audio>';
+		if ( '' !== trim( (string) $audio['credit'] ) ) {
+			$out .= '<p class="tbe-muted tbe-il__credit">' . esc_html( (string) $audio['credit'] ) . '</p>';
+		}
+		$out .= '</figure>';
 	}
 
 	$out .= '<div class="tbe-toolbar" role="group" aria-label="' . esc_attr__( 'Interlinear display options', 'tbe-child' ) . '">';
@@ -289,6 +299,9 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	} else {
 		$out .= '<button type="button" class="tbe-btn" data-tbe-il="variants" aria-pressed="true" data-tbe-tip="' . esc_attr__( 'Outline words that are not in the NA28 critical text and flag places where manuscripts differ', 'tbe-child' ) . '">' . esc_html__( 'Show variants', 'tbe-child' ) . '</button>';
 	}
+	if ( $audio && current_user_can( 'edit_posts' ) ) {
+		$out .= '<button type="button" class="tbe-btn" data-tbe-il="review" aria-pressed="false" data-tbe-tip="' . esc_attr__( 'Editors only: outline words whose timing is only an estimate, so you can check them by ear', 'tbe-child' ) . '">' . esc_html__( 'Check timings', 'tbe-child' ) . '</button>';
+	}
 	$out .= '</div>';
 
 	$class = 'tbe-il tbe-il--' . ( $hebrew ? 'he' : 'gr' ) . ' tbe-il--hide-lemma tbe-il--hide-morph';
@@ -298,10 +311,13 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	foreach ( $data['v'] as $verse => $words ) {
 		$n    = (int) $verse;
 		$line = '';
-		foreach ( $words as $w ) {
-			$line .= tbe_render_il_word( $w, $hebrew, $counts );
+		foreach ( $words as $idx => $w ) {
+			$line .= tbe_render_il_word( $w, $hebrew, $counts, $audio['words'][ $verse ][ $idx ] ?? null );
 		}
 		$out .= '<section class="tbe-il__verse" id="v' . $n . '"><p class="tbe-il__ref"><a class="tbe-vn" href="#v' . $n . '">' . ( 0 === $n ? esc_html__( 'Title', 'tbe-child' ) : $n ) . '</a>';
+		if ( $audio && ! empty( $audio['words'][ $verse ] ) ) {
+			$out .= '<button type="button" class="tbe-il__play" data-tbe-play-verse="' . $n . '" aria-label="' . esc_attr( sprintf( /* translators: %d: verse number */ __( 'Play verse %d', 'tbe-child' ), $n ) ) . '"><span aria-hidden="true">▶</span></button>';
+		}
 		if ( isset( $esv[ $n ] ) ) {
 			$out .= '<span class="tbe-il__esv tbe-scripture" lang="en" dir="ltr">' . esc_html( $esv[ $n ] ) . '</span>';
 		}
@@ -323,7 +339,7 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 }
 
 /** One word: gloss, original, transliteration, Strong's number, root word, grammar. */
-function tbe_render_il_word( array $w, bool $hebrew, array &$counts ): string {
+function tbe_render_il_word( array $w, bool $hebrew, array &$counts, ?array $timing = null ): string {
 	[ $text, $translit, $gloss, $strongs, $morph, $lemma ] = array_pad( $w, 6, '' );
 	$extra  = isset( $w[6] ) && is_array( $w[6] ) ? $w[6] : array();
 	$parse  = $hebrew ? tbe_hebrew_morph_text( (string) $morph ) : tbe_greek_morph_text( (string) $morph );
@@ -363,12 +379,17 @@ function tbe_render_il_word( array $w, bool $hebrew, array &$counts ): string {
 		}
 	}
 
+	$attrs = '';
+	if ( $timing ) {
+		$attrs  = ' data-t0="' . esc_attr( (string) $timing[0] ) . '" data-t1="' . esc_attr( (string) $timing[1] ) . '"' . ( empty( $timing[2] ) ? ' data-approx="1"' : '' );
+		$class .= ' tbe-il__w--timed';
+	}
 	$script_class = $hebrew ? 'tbe-il__he' : 'tbe-il__gr';
 	$script_lang  = $hebrew ? 'he' : 'grc';
 	$word_html    = '<span class="' . $script_class . '" lang="' . $script_lang . '" dir="' . ( $hebrew ? 'rtl' : 'ltr' ) . '"' . ( $hebrew ? ' data-full="' . esc_attr( (string) $text ) . '"' : '' ) . '>' . esc_html( (string) $text ) . '</span>';
 
 	return sprintf(
-		'<span class="%1$s" tabindex="0" data-tbe-tip-title="%2$s" data-tbe-tip="%3$s">%4$s<span class="tbe-il__gloss" dir="ltr">%5$s</span>%6$s<span class="tbe-il__translit" dir="ltr">%7$s</span><span class="tbe-il__strongs" dir="ltr">%8$s</span><span class="tbe-il__lemma %9$s" lang="%10$s">%11$s</span><span class="tbe-il__morph" dir="ltr">%12$s</span></span>',
+		'<span class="%1$s" tabindex="0"%13$s data-tbe-tip-title="%2$s" data-tbe-tip="%3$s">%4$s<span class="tbe-il__gloss" dir="ltr">%5$s</span>%6$s<span class="tbe-il__translit" dir="ltr">%7$s</span><span class="tbe-il__strongs" dir="ltr">%8$s</span><span class="tbe-il__lemma %9$s" lang="%10$s">%11$s</span><span class="tbe-il__morph" dir="ltr">%12$s</span></span>',
 		esc_attr( $class ),
 		esc_attr( trim( (string) $lemma . ( '' !== $gloss ? ' — ' . $gloss : '' ), ' —' ) ),
 		esc_attr( implode( ' · ', $tip ) ),
@@ -380,6 +401,7 @@ function tbe_render_il_word( array $w, bool $hebrew, array &$counts ): string {
 		esc_attr( $script_class ),
 		esc_attr( $script_lang ),
 		esc_html( (string) $lemma ),
-		esc_html( $parse ?: (string) $morph )
+		esc_html( $parse ?: (string) $morph ),
+		$attrs
 	);
 }
