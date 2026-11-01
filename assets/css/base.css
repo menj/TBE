@@ -123,7 +123,7 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 /* Brand mark: the hollow inverted cross, coloured by the active scheme. */
 .tbe-lockup { gap: 0.7rem; }
 .tbe-brandmark { display: inline-flex; color: var(--tbe-accent); line-height: 0; }
-.tbe-brandmark svg { height: 2rem; width: auto; display: block; }
+.tbe-brandmark svg { height: 2.6rem; width: auto; display: block; }
 .tbe-brandmark--hero { display: none; }
 @supports ((-webkit-mask: url("a.png")) or (mask: url("a.png"))) {
 	.tbe-brandmark--hero { display: block; }
