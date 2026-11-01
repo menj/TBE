@@ -1,0 +1,272 @@
+/*
+ * The Bible Exposed — shape and motion: rounded corners, soft depth, colourful hover and focus.
+ * Loaded last. Every colour is mixed from the active scheme's tokens (--tbe-accent, --tbe-gold,
+ * --tbe-rubric, --tbe-surface...), so custom colours and dark mode carry through automatically.
+ */
+
+:root {
+	--tbe-radius-sm: 8px;
+	--tbe-radius: 14px;
+	--tbe-radius-lg: 20px;
+	--tbe-radius-pill: 999px;
+	--tbe-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+	--tbe-shadow: 0 1px 2px rgba(35, 29, 20, 0.06), 0 8px 20px -12px rgba(35, 29, 20, 0.28);
+	--tbe-glow-accent: 0 2px 4px rgba(35, 29, 20, 0.08), 0 14px 26px -12px color-mix(in srgb, var(--tbe-accent) 55%, transparent);
+	--tbe-glow-gold: 0 2px 4px rgba(35, 29, 20, 0.06), 0 14px 26px -12px color-mix(in srgb, var(--tbe-gold) 65%, transparent);
+	--tbe-wash-gold: color-mix(in srgb, var(--tbe-gold) 16%, var(--tbe-surface));
+	--tbe-wash-accent: color-mix(in srgb, var(--tbe-accent) 11%, var(--tbe-surface));
+	--tbe-wash-rubric: color-mix(in srgb, var(--tbe-rubric) 11%, var(--tbe-surface));
+	--tbe-gradient: linear-gradient(135deg, var(--tbe-accent), color-mix(in srgb, var(--tbe-accent) 55%, var(--tbe-rubric)));
+	--tbe-gradient-gold: linear-gradient(135deg, color-mix(in srgb, var(--tbe-gold) 70%, var(--tbe-ink)), color-mix(in srgb, var(--tbe-gold) 45%, var(--tbe-rubric)));
+}
+html[data-theme="dark"] {
+	--tbe-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 22px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Shared motion ----------------------------------------------------------- */
+.tbe-btn, .tbe-booklist a, .tbe-chapters a, .tbe-cards .wp-block-post-template > li, .tbe-box, .tbe-chip,
+.tbe-il__w, .tbe-il__play, .tbe-pager a, .tbe-az a, .tbe-tags a, .tbe-lang a, .tbe-search input[type="search"],
+.wp-block-button__link, a.tbe-term, a.tbe-ref, .tbe-verse, .tbe-vn, .tbe-mark, .tbe-toc, .tbe-table tbody tr {
+	transition: background-color 0.2s var(--tbe-ease), border-color 0.2s var(--tbe-ease), color 0.2s var(--tbe-ease),
+		box-shadow 0.25s var(--tbe-ease), transform 0.25s var(--tbe-ease), background-size 0.3s var(--tbe-ease);
+}
+
+/* Focus: a clear double ring on any shape ---------------------------------- */
+:focus-visible {
+	outline: 2px solid var(--tbe-accent);
+	outline-offset: 3px;
+	border-radius: var(--tbe-radius-sm);
+	box-shadow: 0 0 0 5px color-mix(in srgb, var(--tbe-gold) 45%, transparent);
+}
+
+/* Header and navigation ---------------------------------------------------- */
+.tbe-header { border-bottom-color: color-mix(in srgb, var(--tbe-gold) 45%, var(--tbe-line)); }
+.tbe-header .wp-block-navigation a,
+.mock-nav a {
+	position: relative;
+	padding-block: 0.3rem;
+	background: linear-gradient(var(--tbe-gold), var(--tbe-gold)) left bottom / 0% 2px no-repeat;
+	transition: background-size 0.3s var(--tbe-ease), color 0.2s var(--tbe-ease);
+}
+.tbe-header .wp-block-navigation a:hover,
+.mock-nav a:hover { color: var(--tbe-accent); background-size: 100% 2px; }
+.tbe-header .wp-block-site-title a:hover { color: var(--tbe-accent); }
+
+/* Buttons ------------------------------------------------------------------ */
+.tbe-btn {
+	border-radius: var(--tbe-radius-pill);
+	padding: 0.45rem 1rem;
+	background: color-mix(in srgb, var(--tbe-surface) 70%, transparent);
+}
+.tbe-btn:hover {
+	color: var(--tbe-accent);
+	border-color: var(--tbe-accent);
+	background: var(--tbe-wash-accent);
+	transform: translateY(-1px);
+	box-shadow: var(--tbe-glow-accent);
+}
+.tbe-btn:active { transform: translateY(0); box-shadow: none; }
+.tbe-btn[aria-pressed="true"] {
+	color: var(--tbe-accent);
+	border-color: var(--tbe-accent);
+	background: var(--tbe-wash-accent);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tbe-gold) 60%, transparent);
+}
+.tbe-btn--solid, .wp-block-button__link {
+	border: 0;
+	border-radius: var(--tbe-radius-pill);
+	color: var(--tbe-paper);
+	background: var(--tbe-gradient);
+	box-shadow: var(--tbe-shadow);
+}
+.tbe-btn--solid:hover, .wp-block-button__link:hover {
+	color: var(--tbe-paper);
+	background: var(--tbe-gradient-gold);
+	transform: translateY(-2px);
+	box-shadow: var(--tbe-glow-gold);
+}
+.wp-block-button.is-style-outline .wp-block-button__link {
+	background: transparent;
+	color: var(--tbe-accent);
+	box-shadow: inset 0 0 0 1.5px var(--tbe-accent);
+}
+.wp-block-button.is-style-outline .wp-block-button__link:hover {
+	color: var(--tbe-paper);
+	background: var(--tbe-gradient);
+	box-shadow: var(--tbe-glow-accent);
+}
+
+/* Search and fields -------------------------------------------------------- */
+.tbe-search input[type="search"] {
+	border-radius: var(--tbe-radius-pill);
+	padding: 0.65rem 1.2rem;
+	box-shadow: var(--tbe-shadow);
+}
+.tbe-search input[type="search"]:hover { border-color: var(--tbe-gold); }
+.tbe-search input[type="search"]:focus {
+	border-color: var(--tbe-accent);
+	outline: none;
+	box-shadow: 0 0 0 4px color-mix(in srgb, var(--tbe-gold) 40%, transparent), var(--tbe-shadow);
+}
+
+/* Cards, book list, chapter grid -------------------------------------------- */
+.tbe-cards .wp-block-post-template > li {
+	border-radius: var(--tbe-radius-lg);
+	box-shadow: var(--tbe-shadow);
+	position: relative;
+	overflow: hidden;
+}
+.tbe-cards .wp-block-post-template > li::before {
+	content: "";
+	position: absolute;
+	inset: 0 0 auto 0;
+	height: 4px;
+	background: var(--tbe-gradient-gold);
+	transform: scaleX(0.18);
+	transform-origin: left;
+	transition: transform 0.35s var(--tbe-ease);
+}
+.tbe-cards .wp-block-post-template > li:hover {
+	border-color: var(--tbe-gold);
+	background: var(--tbe-wash-gold);
+	transform: translateY(-3px);
+	box-shadow: var(--tbe-glow-gold);
+}
+.tbe-cards .wp-block-post-template > li:hover::before { transform: scaleX(1); }
+.tbe-cards .wp-block-post-title a:hover { color: var(--tbe-rubric); }
+
+.tbe-booklist a {
+	border-radius: var(--tbe-radius);
+	box-shadow: var(--tbe-shadow);
+}
+.tbe-booklist a:hover {
+	transform: translateY(-2px);
+	border-color: var(--tbe-accent);
+	background: linear-gradient(135deg, var(--tbe-wash-accent), var(--tbe-surface));
+	box-shadow: var(--tbe-glow-accent);
+}
+.tbe-booklist a:hover .tbe-booklist__name { color: var(--tbe-accent); }
+.tbe-booklist a:hover .tbe-booklist__count { color: var(--tbe-rubric); }
+/* The New Testament answers in gold */
+.tbe-testament:nth-of-type(2) .tbe-booklist a:hover {
+	border-color: var(--tbe-gold);
+	background: linear-gradient(135deg, var(--tbe-wash-gold), var(--tbe-surface));
+	box-shadow: var(--tbe-glow-gold);
+}
+.tbe-testament:nth-of-type(2) .tbe-booklist a:hover .tbe-booklist__name { color: var(--tbe-rubric); }
+
+.tbe-chapters a {
+	border-radius: var(--tbe-radius-sm);
+	box-shadow: var(--tbe-shadow);
+	font-weight: 500;
+}
+.tbe-chapters a:hover {
+	color: var(--tbe-paper);
+	border-color: transparent;
+	background: var(--tbe-gradient);
+	transform: translateY(-2px) scale(1.06);
+	box-shadow: var(--tbe-glow-accent);
+}
+.tbe-chapters li:nth-child(3n+2) a:hover { background: var(--tbe-gradient-gold); box-shadow: var(--tbe-glow-gold); }
+.tbe-chapters li:nth-child(3n) a:hover { background: linear-gradient(135deg, var(--tbe-rubric), var(--tbe-accent)); }
+
+/* Scripture: a golden wash follows the verse under the pointer -------------- */
+.tbe-verse { border-radius: var(--tbe-radius-sm); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.tbe-verse:hover { background: color-mix(in srgb, var(--tbe-gold) 15%, transparent); }
+.tbe-verse.is-target, .tbe-verse:target { background: color-mix(in srgb, var(--tbe-gold) 28%, transparent); }
+.tbe-vn:hover { color: var(--tbe-accent); transform: scale(1.25); display: inline-block; text-decoration: none; }
+.tbe-mark { display: inline-block; }
+.tbe-mark:hover { color: var(--tbe-rubric); transform: scale(1.5) rotate(20deg); }
+
+/* Commentary boxes ---------------------------------------------------------- */
+.tbe-box {
+	border-radius: var(--tbe-radius-lg);
+	border-inline-start-width: 5px;
+	box-shadow: var(--tbe-shadow);
+}
+.tbe-box:hover { border-color: color-mix(in srgb, var(--tbe-gold) 60%, var(--tbe-line)); box-shadow: var(--tbe-glow-gold); }
+.tbe-box > summary { border-radius: var(--tbe-radius); }
+.tbe-box > summary:hover .tbe-box__title { color: var(--tbe-accent); }
+.tbe-box > summary:hover::after { color: var(--tbe-gold); }
+.tbe-box--intro { box-shadow: var(--tbe-glow-accent); }
+.tbe-box__link a:hover { color: var(--tbe-accent); }
+.tbe-toc { border-radius: var(--tbe-radius); padding: 0.4rem 0.8rem; }
+.tbe-toc:hover, .tbe-toc[open] { background: var(--tbe-wash-gold); }
+.tbe-toc a:hover { color: var(--tbe-accent); }
+
+/* Chips take the colour of what they name ---------------------------------- */
+.tbe-chip, .tbe-chips a { border-radius: var(--tbe-radius-pill); padding: 0.15rem 0.75rem; }
+.tbe-chip:hover, .tbe-chips a:hover { background: color-mix(in srgb, currentColor 14%, transparent); transform: translateY(-1px); }
+.tbe-chip--critical-commentary { color: var(--tbe-accent); }
+.tbe-chip--islamic-perspective { color: color-mix(in srgb, var(--tbe-gold) 80%, var(--tbe-ink)); }
+.tbe-chip--textual-criticism { color: var(--tbe-rubric); }
+.tbe-chip--reflection { color: color-mix(in srgb, var(--tbe-accent) 50%, var(--tbe-gold)); }
+
+/* Links inside notes ------------------------------------------------------- */
+a.tbe-term { border-radius: 4px; }
+a.tbe-term:hover, a.tbe-term:focus-visible { background: color-mix(in srgb, var(--tbe-gold) 24%, transparent); color: var(--tbe-ink); }
+a.tbe-ref { border-radius: 4px; }
+a.tbe-ref:hover, a.tbe-ref:focus-visible { background: color-mix(in srgb, var(--tbe-accent) 14%, transparent); color: var(--tbe-accent); }
+a.tbe-ref--quran:hover { background: color-mix(in srgb, var(--tbe-gold) 26%, transparent); color: var(--tbe-ink); }
+
+/* Tables -------------------------------------------------------------------- */
+.tbe-tablewrap {
+	border: 1px solid var(--tbe-line);
+	border-radius: var(--tbe-radius);
+	overflow: auto;
+}
+.tbe-table th, .tbe-table td { border-bottom-color: color-mix(in srgb, var(--tbe-line) 70%, transparent); }
+.tbe-table tbody tr:not(.tbe-unit):hover { background: var(--tbe-wash-gold); }
+.tbe-table tbody tr:last-child td { border-bottom: 0; }
+
+/* Interlinear --------------------------------------------------------------- */
+.tbe-il__w { border-radius: var(--tbe-radius); box-shadow: var(--tbe-shadow); }
+.tbe-il__w:hover, .tbe-il__w:focus-visible {
+	transform: translateY(-3px);
+	border-color: var(--tbe-accent);
+	background: linear-gradient(180deg, var(--tbe-wash-accent), var(--tbe-surface) 70%);
+	box-shadow: var(--tbe-glow-accent);
+}
+.tbe-il__w:hover .tbe-il__gloss { color: var(--tbe-rubric); }
+.tbe-il__w:hover .tbe-il__he, .tbe-il__w:hover .tbe-il__gr { color: var(--tbe-accent); }
+.tbe-il__w--variant:hover { border-color: var(--tbe-gold); box-shadow: var(--tbe-glow-gold); }
+.tbe-il__w.is-playing {
+	background: linear-gradient(180deg, color-mix(in srgb, var(--tbe-gold) 35%, var(--tbe-surface)), var(--tbe-surface));
+	box-shadow: 0 0 0 3px var(--tbe-gold), var(--tbe-glow-gold);
+}
+.tbe-il__play { box-shadow: var(--tbe-shadow); }
+.tbe-il__play:hover { color: var(--tbe-paper); background: var(--tbe-gradient-gold); border-color: transparent; transform: scale(1.18); box-shadow: var(--tbe-glow-gold); }
+.tbe-il__audio audio { border-radius: var(--tbe-radius-pill); box-shadow: var(--tbe-shadow); }
+.tbe-il__verse { border-bottom-color: color-mix(in srgb, var(--tbe-gold) 40%, var(--tbe-line)); }
+
+/* Pager, A-Z, tags, language ------------------------------------------------- */
+.tbe-pager a { padding: 0.5rem 1rem; border-radius: var(--tbe-radius-pill); border: 1px solid var(--tbe-line); background: var(--tbe-surface); }
+.tbe-pager a:hover { color: var(--tbe-paper); border-color: transparent; background: var(--tbe-gradient); box-shadow: var(--tbe-glow-accent); transform: translateY(-1px); }
+.tbe-az a, .tbe-tags a { border-radius: var(--tbe-radius-pill); }
+.tbe-az a:hover { color: var(--tbe-paper); border-color: transparent; background: var(--tbe-gradient-gold); transform: translateY(-1px); }
+.tbe-tags a:hover { color: var(--tbe-paper); border-color: transparent; background: var(--tbe-gradient); transform: translateY(-1px); }
+.tbe-lang a { border-radius: var(--tbe-radius-pill); }
+.tbe-lang a:hover { background: var(--tbe-wash-accent); }
+.tbe-lang a[aria-current="true"] { background: var(--tbe-wash-accent); }
+
+/* Breadcrumb, glossary, notices, tooltip -------------------------------------- */
+.tbe-breadcrumb a:hover { color: var(--tbe-accent); }
+.tbe-glossary__item { border-radius: var(--tbe-radius); padding-inline: 0.75rem; transition: background-color 0.2s var(--tbe-ease); }
+.tbe-glossary__item:hover { background: var(--tbe-wash-gold); }
+.tbe-glossary dt a:hover { color: var(--tbe-accent); }
+.tbe-hits li { border-radius: var(--tbe-radius); padding-inline: 0.75rem; transition: background-color 0.2s var(--tbe-ease); }
+.tbe-hits li:hover { background: var(--tbe-wash-gold); }
+.tbe-hit__ref:hover { color: var(--tbe-accent); }
+.tbe-index__list a:hover { color: var(--tbe-rubric); }
+.tbe-notice { border-radius: var(--tbe-radius); }
+.tbe-hits mark, .tbe-hit__text mark { border-radius: 4px; }
+.tbe-tooltip { border-radius: var(--tbe-radius); border-top: 3px solid var(--tbe-gold); box-shadow: var(--tbe-glow-gold); }
+.tbe-footer hr { border-top-color: color-mix(in srgb, var(--tbe-gold) 45%, var(--tbe-line)); }
+
+/* Respect reduced motion: keep the colour change, drop the movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+	.tbe-btn:hover, .tbe-booklist a:hover, .tbe-chapters a:hover, .tbe-cards .wp-block-post-template > li:hover,
+	.tbe-il__w:hover, .tbe-il__play:hover, .tbe-pager a:hover, .tbe-az a:hover, .tbe-tags a:hover, .tbe-mark:hover,
+	.tbe-vn:hover, .tbe-chip:hover, .wp-block-button__link:hover { transform: none; }
+	.tbe-cards .wp-block-post-template > li::before { transition: none; }
+}

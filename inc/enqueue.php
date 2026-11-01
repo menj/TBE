@@ -29,6 +29,13 @@ add_action(
 			wp_enqueue_script( 'tbe-interlinear', TBE_URI . '/assets/js/interlinear.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		}
 
+		// Shape and motion go last so they refine everything above.
+		$polish_deps = array( 'tbe-components', 'tbe-scripture' );
+		if ( $request && 'interlinear' === $request['view'] ) {
+			$polish_deps[] = 'tbe-interlinear';
+		}
+		wp_enqueue_style( 'tbe-polish', TBE_URI . '/assets/css/polish.css', $polish_deps, TBE_VERSION );
+
 		if ( tbe_request() || is_singular( 'tbe_commentary' ) ) {
 			wp_enqueue_script( 'tbe-reader', TBE_URI . '/assets/js/reader.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		}

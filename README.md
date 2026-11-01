@@ -39,6 +39,9 @@ Modelled on the verse-by-verse commentary book format, with web-only improvement
 - **Textual variants table** and **Qur'an cross-references** (validated against the 114 surahs) can be attached to any note.
 - **Index of commentary** at `/bible/index/` (by passage, theme and section), **glossary** at `/glossary/`, **search** at `/bible/search/`.
 
+## Shape and motion
+`assets/css/polish.css` (loaded last) holds the rounded corners, soft shadows and hover states. Radii are tokens (`--tbe-radius-sm`, `--tbe-radius`, `--tbe-radius-lg`, `--tbe-radius-pill`), and every hover colour is mixed from the active scheme (accent, gold, rubric), so custom colours and dark mode follow automatically. Old Testament books answer in burgundy and New Testament books in gold; chapter numbers fill with burgundy, bronze or red gradients; verses wash gold; notes, interlinear words and cards lift with a coloured glow; section chips take the colour of what they name. Text on every filled hover keeps at least 4.9:1 contrast. With "reduce motion" on, colours still change but nothing moves.
+
 ## Structured data (schema.org)
 Every page outputs one JSON-LD graph (`inc/schema.php`), switchable under Appearance → TBE → General:
 - **Site-wide:** `Organization`, `WebSite` with a `SearchAction`, the page itself (`WebPage`, `CollectionPage`, `ItemPage` or `SearchResultsPage`), a `BreadcrumbList`, the header and footer (`WPHeader`, `WPFooter`) and each navigation link (`SiteNavigationElement`).
