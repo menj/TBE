@@ -13,6 +13,7 @@ add_action(
 		add_rewrite_rule( '^bible/?$', 'index.php?tbe_view=books', 'top' );
 		add_rewrite_rule( '^bible/search/?$', 'index.php?tbe_view=search', 'top' );
 		add_rewrite_rule( '^bible/index/?$', 'index.php?tbe_view=index', 'top' );
+		add_rewrite_rule( '^bible/interlinear/?$', 'index.php?tbe_view=interlinear-index', 'top' );
 		add_rewrite_rule( '^bible/([a-z0-9-]+)/?$', 'index.php?tbe_view=book&tbe_book=$matches[1]', 'top' );
 		add_rewrite_rule( '^bible/([a-z0-9-]+)/([0-9]+)/interlinear/?$', 'index.php?tbe_view=interlinear&tbe_book=$matches[1]&tbe_chapter=$matches[2]', 'top' );
 		add_rewrite_rule( '^bible/([a-z0-9-]+)/([0-9]+)/?$', 'index.php?tbe_view=chapter&tbe_book=$matches[1]&tbe_chapter=$matches[2]', 'top' );
@@ -36,7 +37,7 @@ function tbe_request(): ?array {
 	if ( '' === $view ) {
 		return $request = null;
 	}
-	if ( 'books' === $view || 'index' === $view ) {
+	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view ) {
 		return $request = array( 'view' => $view );
 	}
 	if ( 'search' === $view ) {
@@ -128,11 +129,17 @@ add_filter(
 			case 'index':
 				$parts['title'] = __( 'Index of commentary', 'tbe-child' );
 				break;
+			case 'interlinear-index':
+				$parts['title'] = __( 'Hebrew interlinear', 'tbe-child' );
+				break;
 			case 'book':
 				$parts['title'] = $request['book']['name'];
 				break;
 			case 'chapter':
 				$parts['title'] = TBE_Bible::label( $request['book']['slug'], $request['chapter'] );
+				break;
+			case 'interlinear':
+				$parts['title'] = sprintf( /* translators: %s: passage such as Genesis 1 */ __( 'Interlinear: %s', 'tbe-child' ), TBE_Bible::label( $request['book']['slug'], $request['chapter'] ) );
 				break;
 			default:
 				$parts['title'] = __( 'Passage not found', 'tbe-child' );

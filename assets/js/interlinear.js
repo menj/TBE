@@ -64,6 +64,7 @@
 		var lit = null;
 		var frame = 0;
 		var ours = false;
+		var activeKey = null;
 
 		function highlight( time ) {
 			var now = null;
@@ -101,6 +102,12 @@
 		}
 
 		function playRange( from, to ) {
+			var key = from + '-' + to;
+			if ( ! audio.paused && key === activeKey ) {
+				audio.pause();   // a second click on what is playing pauses it
+				return;
+			}
+			activeKey = key;
 			ours = true;
 			stopAt = to;
 			audio.currentTime = from;
@@ -119,7 +126,13 @@
 			frame = window.requestAnimationFrame( tick );
 		} );
 		audio.addEventListener( 'seeked', function () { highlight( audio.currentTime ); } );
-		audio.addEventListener( 'ended', function () { highlight( -1 ); } );
+		audio.addEventListener( 'ended', function () { highlight( -1 ); activeKey = null; } );
+		audio.addEventListener( 'tbe:audio-stop', function () {
+			stopAt = null;
+			activeKey = null;
+			window.cancelAnimationFrame( frame );
+			highlight( -1 );
+		} );
 
 		document.addEventListener( 'click', function ( event ) {
 			var verseButton = event.target.closest( '[data-tbe-play-verse]' );

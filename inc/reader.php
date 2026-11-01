@@ -27,6 +27,8 @@ function tbe_render_reader(): string {
 			return tbe_view_search( $request );
 		case 'index':
 			return tbe_view_index();
+		case 'interlinear-index':
+			return tbe_view_interlinear_index();
 		default:
 			return tbe_view_missing();
 	}
@@ -41,10 +43,37 @@ function tbe_view_missing(): string {
 		) . '</p></div>';
 }
 
+/** Every chapter that has a Hebrew interlinear, by book; a note marks the ones with a recorded reading. */
+function tbe_view_interlinear_index(): string {
+	$out  = '<div class="tbe-reader tbe-books tbe-il-index">';
+	$out .= '<h1 class="tbe-title">' . esc_html__( 'Hebrew interlinear', 'tbe-child' ) . '</h1>';
+	$out .= '<p class="tbe-center tbe-muted">' . esc_html__( 'The Hebrew word by word, with transliteration, gloss, Strong\'s numbers and grammar. Chapters marked with ♪ also have a recorded reading that follows along word by word.', 'tbe-child' ) . '</p>';
+	$found = false;
+	foreach ( TBE_Bible::books() as $book ) {
+		$items = '';
+		for ( $i = 1; $i <= (int) $book['chapters']; $i++ ) {
+			if ( ! TBE_Interlinear::available( $book['slug'], $i ) ) {
+				continue;
+			}
+			$sound  = TBE_Audio::chapter( $book['slug'], $i ) ? ' <span class="tbe-il-index__note" title="' . esc_attr__( 'Recorded reading', 'tbe-child' ) . '" aria-label="' . esc_attr__( 'with recorded reading', 'tbe-child' ) . '">♪</span>' : '';
+			$items .= '<li><a href="' . esc_url( TBE_Interlinear::url( $book['slug'], $i ) ) . '">' . (int) $i . $sound . '</a></li>';
+		}
+		if ( '' === $items ) {
+			continue;
+		}
+		$found = true;
+		$out  .= '<section class="tbe-testament"><h2 class="tbe-ornament"><a href="' . esc_url( TBE_Bible::url( $book['slug'] ) ) . '">' . esc_html( $book['name'] ) . '</a></h2><ol class="tbe-chapters">' . $items . '</ol></section>';
+	}
+	if ( ! $found ) {
+		$out .= '<p class="tbe-notice">' . esc_html__( 'No interlinear chapters have been added yet.', 'tbe-child' ) . '</p>';
+	}
+	return $out . '</div>';
+}
+
 function tbe_view_books(): string {
 	$out  = '<div class="tbe-reader tbe-books">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'The Books of the Bible', 'tbe-child' ) . '</h1>';
-	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
+	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Hebrew interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
 
 	foreach ( array(
 		'OT' => __( 'Old Testament', 'tbe-child' ),
@@ -79,7 +108,14 @@ function tbe_view_book( array $book ): string {
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Chapters', 'tbe-child' ) . '</h2><ol class="tbe-chapters">';
 	for ( $i = 1; $i <= $book['chapters']; $i++ ) {
-		$out .= sprintf( '<li><a href="%s">%d</a></li>', esc_url( TBE_Bible::url( $book['slug'], $i ) ), $i );
+		$has  = TBE_Interlinear::available( $book['slug'], $i );
+		$out .= sprintf(
+			'<li%s><a href="%s"%s>%d</a></li>',
+			$has ? ' class="has-interlinear"' : '',
+			esc_url( TBE_Bible::url( $book['slug'], $i ) ),
+			$has ? ' title="' . esc_attr__( 'Hebrew interlinear available', 'tbe-child' ) . '"' : '',
+			$i
+		);
 	}
 	return $out . '</ol></div>';
 }
@@ -105,7 +141,15 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 	$out .= '<h1 class="tbe-title">' . esc_html( $book['name'] ) . '</h1>';
 	$out .= tbe_reader_toolbar();
 	if ( TBE_Interlinear::available( $slug, $chapter ) ) {
-		$out .= '<p class="tbe-center tbe-il-link"><a href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Word-by-word Hebrew interlinear', 'tbe-child' ) . ' <span aria-hidden="true">→</span></a></p>';
+		$out .= '<p class="tbe-center tbe-il-link"><a class="tbe-btn tbe-btn--solid" href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Hebrew interlinear', 'tbe-child' ) . ' <span aria-hidden="true">→</span></a></p>';
+		$audio = TBE_Audio::chapter( $slug, $chapter );
+		if ( $audio ) {
+			$out .= '<figure class="tbe-il__audio tbe-il__audio--inline"><figcaption>' . esc_html__( 'Listen to the Hebrew reading', 'tbe-child' ) . ' <a href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Follow it word by word', 'tbe-child' ) . '</a></figcaption><audio data-tbe-audio controls preload="metadata" src="' . esc_url( $audio['url'] ) . '"></audio>';
+			if ( '' !== trim( (string) $audio['credit'] ) ) {
+				$out .= '<p class="tbe-muted tbe-il__credit">' . esc_html( (string) $audio['credit'] ) . '</p>';
+			}
+			$out .= '</figure>';
+		}
 	}
 
 	$entries = tbe_commentary_for_chapter( $slug, $chapter );
