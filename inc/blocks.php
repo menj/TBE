@@ -60,6 +60,19 @@ add_action(
 			)
 		);
 
+		// "© 2026 The Bible Exposed", running on to "© 2026–2027" and so on as the years pass.
+		register_block_type(
+			'tbe/rights',
+			array(
+				'render_callback' => static function (): string {
+					$start = 2026;
+					$year  = (int) wp_date( 'Y' );
+					$span  = $year > $start ? $start . '–' . $year : (string) $start;
+					return '<p class="tbe-footer__rights">© ' . esc_html( $span ) . ' ' . esc_html( get_bloginfo( 'name' ) ) . '</p>';
+				},
+			)
+		);
+
 		register_block_type( 'tbe/glossary', array( 'render_callback' => 'tbe_render_glossary' ) );
 
 		register_block_type(
