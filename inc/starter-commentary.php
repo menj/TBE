@@ -163,27 +163,37 @@ function tbe_sync_pack( array $pack ): ?array {
 	return array( 'updated' => $updated, 'created' => $created, 'removed' => $removed );
 }
 
-/** After a theme update, bring imported packs in step once (switch off under Appearance → TBE → General). */
-add_action(
-	'admin_init',
-	static function () {
-		if ( ! current_user_can( 'manage_options' ) || ! tbe_setting( 'pack_sync' ) ) {
-			return;
+/**
+ * Keep bundled packs in step with the theme. A pack that has never been handled is imported and
+ * published as soon as the theme is activated (or first loaded in the admin after an upload).
+ * A pack already imported follows the theme: changed entries are overwritten, new ones arrive as
+ * drafts, dropped ones go to the Trash. Switch off under Appearance → TBE → General.
+ */
+function tbe_autosync_packs(): void {
+	if ( ! current_user_can( 'manage_options' ) || ! tbe_setting( 'pack_sync' ) ) {
+		return;
+	}
+	foreach ( tbe_packs() as $pack ) {
+		$option      = 'tbe_pack_sync_' . $pack['id'];
+		$seen        = get_option( $option );
+		$fingerprint = md5( (string) wp_json_encode( $pack ) );
+		if ( $seen === $fingerprint ) {
+			continue;
 		}
-		foreach ( tbe_packs() as $pack ) {
-			$fingerprint = md5( (string) wp_json_encode( $pack ) );
-			if ( get_option( 'tbe_pack_sync_' . $pack['id'] ) === $fingerprint ) {
-				continue;
-			}
+		if ( false === $seen && ! tbe_pack_posts( (string) $pack['id'] ) ) {
+			$done   = tbe_import_pack( $pack, 'publish' );
+			$result = array( 'updated' => 0, 'created' => $done['created'], 'removed' => 0 );
+		} else {
 			$result = tbe_sync_pack( $pack );
-			update_option( 'tbe_pack_sync_' . $pack['id'], $fingerprint, false );
-			if ( $result && array_sum( $result ) ) {
-				set_transient( 'tbe_sync_notice', $result + array( 'name' => (string) $pack['name'] ), 600 );
-			}
 		}
-	},
-	20
-);
+		update_option( $option, $fingerprint, false );
+		if ( $result && array_sum( $result ) ) {
+			set_transient( 'tbe_sync_notice', $result + array( 'name' => (string) $pack['name'] ), 600 );
+		}
+	}
+}
+add_action( 'after_switch_theme', 'tbe_autosync_packs' );
+add_action( 'admin_init', 'tbe_autosync_packs', 20 );
 
 /** On an entry that came from a pack: a switch to keep the editor's own changes through theme updates. */
 add_action(
@@ -236,8 +246,8 @@ add_action(
 			'<div class="notice notice-info is-dismissible"><p>%s</p></div>',
 			esc_html(
 				sprintf(
-					/* translators: 1: pack name, 2: updated, 3: added as drafts, 4: moved to Trash */
-					__( 'TBE brought "%1$s" in step with the theme: %2$d updated, %3$d added as drafts, %4$d moved to the Trash.', 'tbe-child' ),
+					/* translators: 1: pack name, 2: updated, 3: added, 4: moved to Trash */
+					__( 'TBE brought "%1$s" in step with the theme: %2$d updated, %3$d added, %4$d moved to the Trash.', 'tbe-child' ),
 					$notice['name'],
 					$notice['updated'],
 					$notice['created'],
