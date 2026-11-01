@@ -36,6 +36,12 @@ msgstr ""
 msgid "Add reference"
 msgstr ""
 
+msgid "Added from the Greek tradition (as in the BHS apparatus)"
+msgstr ""
+
+msgid "Back to the ESV reading page"
+msgstr ""
+
 msgid "Book, chapter and verses, e.g. \"Psalm 23\", \"1 Cor 13:4-7\", \"Jude 5\". Leave verses out to cover a whole chapter, or give just the book name (\"Genesis\") for a book introduction."
 msgstr ""
 
@@ -52,6 +58,9 @@ msgid "By section"
 msgstr ""
 
 msgid "By theme"
+msgstr ""
+
+msgid "Cantillation"
 msgstr ""
 
 msgid "Chapter %d"
@@ -93,6 +102,9 @@ msgstr ""
 msgid "Edit glossary term"
 msgstr ""
 
+msgid "English"
+msgstr ""
+
 msgid "Examines language, context, authorship and historical background."
 msgstr ""
 
@@ -111,6 +123,15 @@ msgstr ""
 msgid "Go to a passage or search — e.g. John 1:1-18, mercy"
 msgstr ""
 
+msgid "Grammar"
+msgstr ""
+
+msgid "Greek: NA28 with variants from SBLGNT, the Textus Receptus and others, tagged by Tyndale House."
+msgstr ""
+
+msgid "Hebrew: Westminster Leningrad Codex, tagged by Tyndale House."
+msgstr ""
+
 msgid "In the commentary"
 msgstr ""
 
@@ -118,6 +139,15 @@ msgid "In the text"
 msgstr ""
 
 msgid "Index of commentary"
+msgstr ""
+
+msgid "Interlinear data from %s, licensed CC BY 4.0."
+msgstr ""
+
+msgid "Interlinear display options"
+msgstr ""
+
+msgid "Interlinear · Chapter %d"
 msgstr ""
 
 msgid "Introduction"
@@ -150,6 +180,9 @@ msgstr ""
 msgid "No verses matched."
 msgstr ""
 
+msgid "Not in the NA28 critical text. Found in: %s"
+msgstr ""
+
 msgid "Notes"
 msgstr ""
 
@@ -166,6 +199,9 @@ msgid "Opens the Qur'an on quran.com in a new tab."
 msgstr ""
 
 msgid "Other spellings and abbreviations"
+msgstr ""
+
+msgid "Outline words that are not in the NA28 critical text and flag places where manuscripts differ"
 msgstr ""
 
 msgid "Page %1$d of %2$d"
@@ -186,6 +222,9 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
+msgid "Qere: the scribal correction followed by translators"
+msgstr ""
+
 msgid "Qur'an"
 msgstr ""
 
@@ -193,6 +232,9 @@ msgid "Qur'an %1$s (%2$s)"
 msgstr ""
 
 msgid "Qur'an cross-references"
+msgstr ""
+
+msgid "Read by: %s"
 msgstr ""
 
 msgid "Reading"
@@ -213,7 +255,13 @@ msgstr ""
 msgid "Resolved:"
 msgstr ""
 
+msgid "Restored from a parallel passage"
+msgstr ""
+
 msgid "Result pages"
+msgstr ""
+
+msgid "Root word"
 msgstr ""
 
 msgid "Scripture"
@@ -237,7 +285,16 @@ msgstr ""
 msgid "Sections"
 msgstr ""
 
+msgid "Show variants"
+msgstr ""
+
 msgid "Smaller text"
+msgstr ""
+
+msgid "Strong's"
+msgstr ""
+
+msgid "Strong's %s"
 msgstr ""
 
 msgid "Switch between light and dark"
@@ -267,6 +324,9 @@ msgstr ""
 msgid "The glossary is empty for now."
 msgstr ""
 
+msgid "The interlinear for this chapter is not available."
+msgstr ""
+
 msgid "The short summary shown in the tooltip is the Excerpt. If empty, the start of the main text is used."
 msgstr ""
 
@@ -288,7 +348,16 @@ msgstr ""
 msgid "This note includes a table of manuscript variants."
 msgstr ""
 
+msgid "Title"
+msgstr ""
+
+msgid "Transliteration"
+msgstr ""
+
 msgid "Type a word or phrase. Put a phrase in quotes. To go straight to a passage, type a reference such as John 3:16."
+msgstr ""
+
+msgid "Variant: %s"
 msgstr ""
 
 msgid "Variants"
@@ -303,6 +372,9 @@ msgstr ""
 msgid "Verse numbers"
 msgstr ""
 
+msgid "Vowel points"
+msgstr ""
+
 msgid "Why it matters here (optional)"
 msgstr ""
 
@@ -310,4 +382,7 @@ msgid "Witnesses"
 msgstr ""
 
 msgid "Witnesses (manuscripts, versions, fathers)"
+msgstr ""
+
+msgid "Word-by-word Hebrew interlinear"
 msgstr ""

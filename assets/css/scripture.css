@@ -55,3 +55,10 @@
 	border-inline-start: 3px solid var(--tbe-gold);
 	padding-inline-start: 1.25rem;
 }
+
+/* Hebrew and Greek words in the interlinear: the SBL fonts, nothing else. */
+.tbe-il__he,
+.tbe-il__lemma.tbe-il__he { font-family: "SBL Hebrew", "SBL BibLit", serif; }
+.tbe-il__gr,
+.tbe-il__lemma.tbe-il__gr { font-family: "SBL Greek", "SBL BibLit", serif; }
+.tbe-il__esv { font-family: var(--tbe-scripture); }

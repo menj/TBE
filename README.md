@@ -22,6 +22,8 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed. Requires Wor
 | `inc/` | Settings, Bible data and reference parser, commentary post type, routes, reader, blocks |
 | `templates/`, `parts/` | Block-theme templates: front page, Bible reader, commentary single/archive, header, footer |
 | `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request every 15-30 s; stops on any rate-limit reply; `--max N` per run) |
+| `data/interlinear/` | Hebrew Old Testament, word by word (STEP Bible, CC BY 4.0; see its README.txt) |
+| `tools/build_interlinear.py` | Downloads the open STEPBible data and builds `data/interlinear/` |
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## Settings (Appearance → TBE)
@@ -36,6 +38,11 @@ Modelled on the verse-by-verse commentary book format, with web-only improvement
 - **Glossary terms** are underlined once per note with a tooltip and a link to the term page. The Bible text itself is never annotated.
 - **Textual variants table** and **Qur'an cross-references** (validated against the 114 surahs) can be attached to any note.
 - **Index of commentary** at `/bible/index/` (by passage, theme and section), **glossary** at `/glossary/`, **search** at `/bible/search/`.
+
+## Interlinear (Old Testament)
+Each Old Testament chapter links to a word-by-word Hebrew interlinear at `/bible/{book}/{chapter}/interlinear/`: Hebrew in SBL Hebrew, running right to left, with English gloss, transliteration, Strong's number, root word and grammar. Hover or focus a word for its root, meaning and grammar spelled out. Readers can switch each layer on or off and hide the vowel points or cantillation marks. Qere corrections and other variant readings are outlined and flagged.
+
+Data: STEP Bible (https://www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge. The Greek New Testament interlinear is held back until the ESV New Testament has been pulled (`python3 tools/build_interlinear.py --greek`).
 
 ## Writing commentary
 Commentary → Add New. Fill the **Passage** box (for example `John 1:1-18`, `Psalm 23`, `Jude 5`), choose one or more **Sections** (Textual Criticism, Critical Commentary, Islamic Perspective, Reflection), and write the entry in the block editor. Entries appear in a box under the verse they begin at, with a ✦ marker beside it.

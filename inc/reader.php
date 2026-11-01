@@ -21,6 +21,8 @@ function tbe_render_reader(): string {
 			return tbe_view_book( $request['book'] );
 		case 'chapter':
 			return tbe_view_chapter( $request['book'], $request['chapter'] );
+		case 'interlinear':
+			return tbe_view_interlinear( $request['book'], $request['chapter'] );
 		case 'search':
 			return tbe_view_search( $request );
 		case 'index':
@@ -102,6 +104,9 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 	$out .= '<p class="tbe-eyebrow">' . esc_html( sprintf( /* translators: %d: chapter number */ __( 'Chapter %d', 'tbe-child' ), $chapter ) ) . '</p>';
 	$out .= '<h1 class="tbe-title">' . esc_html( $book['name'] ) . '</h1>';
 	$out .= tbe_reader_toolbar();
+	if ( TBE_Interlinear::available( $slug, $chapter ) ) {
+		$out .= '<p class="tbe-center tbe-il-link"><a href="' . esc_url( TBE_Interlinear::url( $slug, $chapter ) ) . '">' . esc_html__( 'Word-by-word Hebrew interlinear', 'tbe-child' ) . ' <span aria-hidden="true">→</span></a></p>';
+	}
 
 	$entries = tbe_commentary_for_chapter( $slug, $chapter );
 	$intro   = array();

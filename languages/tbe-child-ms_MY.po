@@ -37,6 +37,12 @@ msgstr ""
 msgid "Add reference"
 msgstr ""
 
+msgid "Added from the Greek tradition (as in the BHS apparatus)"
+msgstr ""
+
+msgid "Back to the ESV reading page"
+msgstr "Kembali ke halaman bacaan ESV"
+
 msgid "Book, chapter and verses, e.g. \"Psalm 23\", \"1 Cor 13:4-7\", \"Jude 5\". Leave verses out to cover a whole chapter, or give just the book name (\"Genesis\") for a book introduction."
 msgstr ""
 
@@ -54,6 +60,9 @@ msgstr "Mengikut bahagian"
 
 msgid "By theme"
 msgstr "Mengikut tema"
+
+msgid "Cantillation"
+msgstr "Kantilasi"
 
 msgid "Chapter %d"
 msgstr "Bab %d"
@@ -94,6 +103,9 @@ msgstr ""
 msgid "Edit glossary term"
 msgstr ""
 
+msgid "English"
+msgstr "Bahasa Inggeris"
+
 msgid "Examines language, context, authorship and historical background."
 msgstr "Meneliti bahasa, konteks, kepengarangan dan latar sejarah."
 
@@ -112,6 +124,15 @@ msgstr "Pergi ke petikan atau cari"
 msgid "Go to a passage or search — e.g. John 1:1-18, mercy"
 msgstr "Pergi ke petikan atau cari — cth. John 1:1-18, mercy"
 
+msgid "Grammar"
+msgstr "Tatabahasa"
+
+msgid "Greek: NA28 with variants from SBLGNT, the Textus Receptus and others, tagged by Tyndale House."
+msgstr ""
+
+msgid "Hebrew: Westminster Leningrad Codex, tagged by Tyndale House."
+msgstr "Ibrani: Kodeks Leningrad Westminster, ditandai oleh Tyndale House."
+
 msgid "In the commentary"
 msgstr "Dalam ulasan"
 
@@ -120,6 +141,15 @@ msgstr "Dalam teks"
 
 msgid "Index of commentary"
 msgstr "Indeks ulasan"
+
+msgid "Interlinear data from %s, licensed CC BY 4.0."
+msgstr "Data interlinear daripada %s, dilesenkan CC BY 4.0."
+
+msgid "Interlinear display options"
+msgstr "Pilihan paparan interlinear"
+
+msgid "Interlinear · Chapter %d"
+msgstr "Interlinear · Bab %d"
 
 msgid "Introduction"
 msgstr "Pengenalan"
@@ -151,6 +181,9 @@ msgstr "Tiada ulasan yang sepadan."
 msgid "No verses matched."
 msgstr "Tiada ayat yang sepadan."
 
+msgid "Not in the NA28 critical text. Found in: %s"
+msgstr ""
+
 msgid "Notes"
 msgstr "Nota"
 
@@ -167,6 +200,9 @@ msgid "Opens the Qur'an on quran.com in a new tab."
 msgstr "Membuka Al-Quran di quran.com dalam tab baharu."
 
 msgid "Other spellings and abbreviations"
+msgstr ""
+
+msgid "Outline words that are not in the NA28 critical text and flag places where manuscripts differ"
 msgstr ""
 
 msgid "Page %1$d of %2$d"
@@ -187,6 +223,9 @@ msgstr "Pautan tetap ke nota ini"
 msgid "Previous"
 msgstr "Sebelumnya"
 
+msgid "Qere: the scribal correction followed by translators"
+msgstr ""
+
 msgid "Qur'an"
 msgstr "Al-Quran"
 
@@ -195,6 +234,9 @@ msgstr "Al-Quran %1$s (%2$s)"
 
 msgid "Qur'an cross-references"
 msgstr "Rujukan silang Al-Quran"
+
+msgid "Read by: %s"
+msgstr ""
 
 msgid "Reading"
 msgstr "Bacaan"
@@ -214,8 +256,14 @@ msgstr ""
 msgid "Resolved:"
 msgstr ""
 
+msgid "Restored from a parallel passage"
+msgstr ""
+
 msgid "Result pages"
 msgstr "Halaman hasil"
+
+msgid "Root word"
+msgstr "Kata dasar"
 
 msgid "Scripture"
 msgstr "Kitab suci"
@@ -238,8 +286,17 @@ msgstr "Bahagian"
 msgid "Sections"
 msgstr "Bahagian"
 
+msgid "Show variants"
+msgstr ""
+
 msgid "Smaller text"
 msgstr "Teks lebih kecil"
+
+msgid "Strong's"
+msgstr "Strong"
+
+msgid "Strong's %s"
+msgstr "Strong %s"
 
 msgid "Switch between light and dark"
 msgstr "Tukar antara cerah dan gelap"
@@ -268,6 +325,9 @@ msgstr "Teks ESV belum dimuatkan sepenuhnya: carian meliputi %1$d daripada %2$d 
 msgid "The glossary is empty for now."
 msgstr "Glosari masih kosong buat masa ini."
 
+msgid "The interlinear for this chapter is not available."
+msgstr "Interlinear untuk bab ini tidak tersedia."
+
 msgid "The short summary shown in the tooltip is the Excerpt. If empty, the start of the main text is used."
 msgstr ""
 
@@ -289,8 +349,17 @@ msgstr "Nota ini membuat rujukan silang kepada Al-Quran."
 msgid "This note includes a table of manuscript variants."
 msgstr "Nota ini mengandungi jadual variasi manuskrip."
 
+msgid "Title"
+msgstr "Tajuk"
+
+msgid "Transliteration"
+msgstr "Transliterasi"
+
 msgid "Type a word or phrase. Put a phrase in quotes. To go straight to a passage, type a reference such as John 3:16."
 msgstr "Taip perkataan atau frasa. Letakkan frasa dalam tanda petik. Untuk terus ke satu petikan, taip rujukan seperti John 3:16."
+
+msgid "Variant: %s"
+msgstr "Varian: %s"
 
 msgid "Variants"
 msgstr "Variasi"
@@ -304,6 +373,9 @@ msgstr "Ayat"
 msgid "Verse numbers"
 msgstr "Nombor ayat"
 
+msgid "Vowel points"
+msgstr "Tanda vokal"
+
 msgid "Why it matters here (optional)"
 msgstr ""
 
@@ -312,3 +384,6 @@ msgstr "Saksi teks"
 
 msgid "Witnesses (manuscripts, versions, fathers)"
 msgstr ""
+
+msgid "Word-by-word Hebrew interlinear"
+msgstr "Interlinear Ibrani perkataan demi perkataan"

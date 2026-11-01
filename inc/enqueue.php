@@ -23,6 +23,12 @@ add_action(
 
 		wp_enqueue_script( 'tbe-tooltips', TBE_URI . '/assets/js/tooltips.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 
+		$request = tbe_request();
+		if ( $request && 'interlinear' === $request['view'] ) {
+			wp_enqueue_style( 'tbe-interlinear', TBE_URI . '/assets/css/interlinear.css', array( 'tbe-components', 'tbe-scripture' ), TBE_VERSION );
+			wp_enqueue_script( 'tbe-interlinear', TBE_URI . '/assets/js/interlinear.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		}
+
 		if ( tbe_request() || is_singular( 'tbe_commentary' ) ) {
 			wp_enqueue_script( 'tbe-reader', TBE_URI . '/assets/js/reader.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		}

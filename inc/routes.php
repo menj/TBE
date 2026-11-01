@@ -14,6 +14,7 @@ add_action(
 		add_rewrite_rule( '^bible/search/?$', 'index.php?tbe_view=search', 'top' );
 		add_rewrite_rule( '^bible/index/?$', 'index.php?tbe_view=index', 'top' );
 		add_rewrite_rule( '^bible/([a-z0-9-]+)/?$', 'index.php?tbe_view=book&tbe_book=$matches[1]', 'top' );
+		add_rewrite_rule( '^bible/([a-z0-9-]+)/([0-9]+)/interlinear/?$', 'index.php?tbe_view=interlinear&tbe_book=$matches[1]&tbe_chapter=$matches[2]', 'top' );
 		add_rewrite_rule( '^bible/([a-z0-9-]+)/([0-9]+)/?$', 'index.php?tbe_view=chapter&tbe_book=$matches[1]&tbe_chapter=$matches[2]', 'top' );
 	}
 );
@@ -56,7 +57,7 @@ function tbe_request(): ?array {
 	if ( $chapter < 1 || $chapter > $book['chapters'] ) {
 		return $request = array( 'view' => 'missing' );
 	}
-	return $request = array( 'view' => 'chapter', 'book' => $book, 'chapter' => $chapter );
+	return $request = array( 'view' => 'interlinear' === $view ? 'interlinear' : 'chapter', 'book' => $book, 'chapter' => $chapter );
 }
 
 /** The "go to passage or search" box: a reference jumps to the reader, anything else searches. */

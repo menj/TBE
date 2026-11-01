@@ -1,0 +1,55 @@
+/* The Bible Exposed — interlinear: one unit per word, Hebrew flowing right to left. */
+
+.tbe-il-page { max-width: 72rem; }
+.tbe-il-link { margin: -0.5rem 0 1.5rem; font-family: var(--tbe-ui); font-size: 0.9rem; }
+
+.tbe-il__verse { margin: 0 0 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--tbe-line); scroll-margin-top: 5rem; }
+.tbe-il__ref { display: flex; gap: 0.75rem; align-items: baseline; margin: 0 0 0.75rem; }
+.tbe-il__ref .tbe-vn { font-size: 0.8rem; vertical-align: baseline; }
+.tbe-il__esv { font-size: 1rem; line-height: 1.6; color: var(--tbe-muted); }
+
+/* Words wrap in reading order: right to left for Hebrew (dir is set on the container). */
+.tbe-il__words { display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; }
+.tbe-il__w {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.15rem;
+	min-width: 3.5rem;
+	padding: 0.45rem 0.55rem;
+	background: var(--tbe-surface);
+	border: 1px solid var(--tbe-line);
+	border-radius: 3px;
+	text-align: center;
+	cursor: help;
+	transition: border-color 0.15s;
+}
+.tbe-il__w:hover, .tbe-il__w:focus-visible { border-color: var(--tbe-accent); }
+
+.tbe-il__he { font-size: 1.75rem; line-height: 1.5; color: var(--tbe-ink); }
+.tbe-il__gr { font-size: 1.45rem; line-height: 1.4; color: var(--tbe-ink); }
+.tbe-il__gloss { font-family: var(--tbe-ui); font-size: 0.85rem; line-height: 1.25; color: var(--tbe-accent); max-width: 9rem; }
+.tbe-il__translit { font-family: var(--tbe-ui); font-size: 0.75rem; font-style: italic; color: var(--tbe-muted); }
+.tbe-il__strongs { font-family: var(--tbe-ui); font-size: 0.7rem; letter-spacing: 0.04em; color: var(--tbe-rubric); }
+.tbe-il__lemma { font-size: 1.05rem; color: var(--tbe-muted); }
+.tbe-il__morph { font-family: var(--tbe-ui); font-size: 0.68rem; line-height: 1.3; color: var(--tbe-muted); max-width: 9rem; }
+
+/* A word that carries a variant reading or scribal correction */
+.tbe-il__w--variant { border-style: dashed; border-color: var(--tbe-gold); }
+.tbe-il__flag { position: absolute; margin-top: -0.9rem; font-size: 0.7rem; color: var(--tbe-rubric); }
+.tbe-il__w { position: relative; }
+.tbe-il__w--outside { opacity: 0.8; }
+
+/* Layers the reader can switch off */
+.tbe-il--hide-gloss .tbe-il__gloss,
+.tbe-il--hide-translit .tbe-il__translit,
+.tbe-il--hide-strongs .tbe-il__strongs,
+.tbe-il--hide-lemma .tbe-il__lemma,
+.tbe-il--hide-morph .tbe-il__morph { display: none; }
+.tbe-il--no-variants .tbe-il__w--variant { border-style: solid; border-color: var(--tbe-line); }
+.tbe-il--no-variants .tbe-il__flag { display: none; }
+
+@media (max-width: 600px) {
+	.tbe-il__he { font-size: 1.5rem; }
+	.tbe-il__w { min-width: 3rem; padding: 0.35rem 0.4rem; }
+}
