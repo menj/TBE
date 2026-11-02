@@ -1,0 +1,267 @@
+{
+ "_note": "Which tradition counts which book as scripture. The 66 books follow their testament (see inc/canon.php); the books below are planned and have no text on the site yet. Lists vary between churches, so each section says so.",
+ "traditions": {
+  "jewish": {
+   "name": "Jewish",
+   "full": "Jewish (Tanakh)",
+   "note": "The Tanakh counts 24 books, the same writings as the Protestant Old Testament, arranged as Torah, Prophets and Writings."
+  },
+  "protestant": {
+   "name": "Protestant",
+   "full": "Protestant",
+   "note": "66 books: the 39 of the Tanakh and the 27 of the New Testament."
+  },
+  "catholic": {
+   "name": "Catholic",
+   "full": "Roman Catholic",
+   "note": "73 books: the 66, plus the deuterocanonical books."
+  },
+  "orthodox": {
+   "name": "Orthodox",
+   "full": "Eastern Orthodox",
+   "note": "The Catholic books and more, based on the Septuagint; the lists differ somewhat between Orthodox churches."
+  },
+  "ethiopian": {
+   "name": "Ethiopian",
+   "full": "Ethiopian Orthodox Tewahedo",
+   "note": "The widest canon, usually counted as 81 books in its broader form; the counts and lists vary."
+  }
+ },
+ "sections": [
+  {
+   "id": "deuterocanon",
+   "title": "Deuterocanonical books",
+   "traditions": [
+    "catholic",
+    "orthodox"
+   ],
+   "intro": "Books that the Catholic and Orthodox churches count as scripture and the Tanakh and most Protestant Bibles do not. Most survive in Greek, in the Septuagint.",
+   "books": [
+    {
+     "slug": "tobit",
+     "name": "Tobit",
+     "traditions": [
+      "catholic",
+      "orthodox",
+      "ethiopian"
+     ],
+     "language": "Greek; Aramaic and Hebrew fragments at Qumran",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "judith",
+     "name": "Judith",
+     "traditions": [
+      "catholic",
+      "orthodox",
+      "ethiopian"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "wisdom",
+     "name": "Wisdom of Solomon",
+     "traditions": [
+      "catholic",
+      "orthodox",
+      "ethiopian"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "sirach",
+     "name": "Sirach (Ben Sira)",
+     "traditions": [
+      "catholic",
+      "orthodox",
+      "ethiopian"
+     ],
+     "language": "Hebrew in part, and Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "baruch",
+     "name": "Baruch, with the Letter of Jeremiah",
+     "traditions": [
+      "catholic",
+      "orthodox",
+      "ethiopian"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "1-maccabees",
+     "name": "1 Maccabees",
+     "traditions": [
+      "catholic",
+      "orthodox"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "2-maccabees",
+     "name": "2 Maccabees",
+     "traditions": [
+      "catholic",
+      "orthodox"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "esther-additions",
+     "name": "Additions to Esther",
+     "traditions": [
+      "catholic",
+      "orthodox"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "daniel-additions",
+     "name": "Additions to Daniel: Prayer of Azariah, Susanna, Bel and the Dragon",
+     "traditions": [
+      "catholic",
+      "orthodox"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "id": "orthodox-additions",
+   "title": "Further Orthodox books",
+   "traditions": [
+    "orthodox"
+   ],
+   "intro": "Books found in Orthodox Bibles beyond the Catholic list. Which of them are canonical varies between Orthodox churches.",
+   "books": [
+    {
+     "slug": "1-esdras",
+     "name": "1 Esdras",
+     "traditions": [
+      "orthodox"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "3-maccabees",
+     "name": "3 Maccabees",
+     "traditions": [
+      "orthodox"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "prayer-of-manasseh",
+     "name": "Prayer of Manasseh",
+     "traditions": [
+      "orthodox"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "psalm-151",
+     "name": "Psalm 151",
+     "traditions": [
+      "orthodox"
+     ],
+     "language": "Greek; Hebrew at Qumran",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "4-maccabees",
+     "name": "4 Maccabees",
+     "traditions": [
+      "orthodox"
+     ],
+     "language": "Greek",
+     "status": "planned",
+     "note": "An appendix in some editions."
+    }
+   ]
+  },
+  {
+   "id": "ethiopian",
+   "title": "Ethiopian Orthodox books",
+   "traditions": [
+    "ethiopian"
+   ],
+   "intro": "Books in the Ethiopian Orthodox Tewahedo canon beyond those above. The full list is still being confirmed, so this shows only the best known.",
+   "books": [
+    {
+     "slug": "1-enoch",
+     "name": "1 Enoch (Henok)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez; Aramaic fragments at Qumran",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "jubilees",
+     "name": "Jubilees (Kufale)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez; Hebrew fragments at Qumran",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "1-meqabyan",
+     "name": "1 Meqabyan",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez",
+     "status": "planned",
+     "note": "Not the Maccabees of the Greek Bible."
+    },
+    {
+     "slug": "2-meqabyan",
+     "name": "2 Meqabyan",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "3-meqabyan",
+     "name": "3 Meqabyan",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez",
+     "status": "planned",
+     "note": ""
+    }
+   ]
+  }
+ ]
+}

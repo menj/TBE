@@ -262,3 +262,45 @@
 	.tbe-text[data-tbe-view="both"] .tbe-verse { grid-template-columns: 1fr; row-gap: 0.4rem; }
 	.tbe-text[data-tbe-view="both"] .tbe-jps { padding-inline-start: 0.9rem; border-inline-start: 2px solid var(--tbe-gold); }
 }
+
+/* Canons: who counts a book as scripture, and the sections prepared for books not on the site yet. ------- */
+.tbe-canon { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; margin: 0; padding: 0; }
+.tbe-canon__chip {
+	--chip: var(--tbe-muted);
+	padding: 0.15rem 0.7rem;
+	border: 1px solid color-mix(in srgb, var(--chip) 55%, var(--tbe-line));
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--chip) 9%, var(--tbe-surface));
+	color: color-mix(in srgb, var(--chip) 80%, var(--tbe-ink));
+	font: 600 0.7rem/1.5 var(--tbe-ui);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	cursor: default;
+}
+.tbe-canon__chip--jewish { --chip: var(--tbe-gold); }
+.tbe-canon__chip--protestant { --chip: var(--tbe-muted); }
+.tbe-canon__chip--catholic { --chip: var(--tbe-rubric); }
+.tbe-canon__chip--orthodox { --chip: var(--tbe-accent); }
+.tbe-canon__chip--ethiopian { --chip: #2a6f8a; }
+html[data-theme="dark"] .tbe-canon__chip--ethiopian { --chip: #6fb7d4; }
+.tbe-canon-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 0.9rem; margin: -0.4rem auto 1.6rem; }
+.tbe-canon-line__label { font: 500 0.75rem var(--tbe-ui); letter-spacing: 0.1em; text-transform: uppercase; color: var(--tbe-muted); }
+
+.tbe-canon-filter { justify-content: center; margin-block: 0.5rem 1.5rem; }
+.tbe-booklist li, .tbe-testament { transition: opacity 0.25s var(--tbe-ease, ease), filter 0.25s var(--tbe-ease, ease); }
+.tbe-booklist li.is-off, .tbe-testament.is-off { opacity: 0.28; filter: grayscale(1); }
+
+.tbe-extra { margin-top: 3rem; }
+.tbe-extra__intro { max-width: 40rem; margin: -0.4rem auto 1.2rem; }
+.tbe-booklist--planned { grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+.tbe-booklist--planned li { display: flex; flex-direction: column; gap: 0.5rem; }
+.tbe-booklist__item--planned {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	padding: 0.75rem 1.1rem;
+	border: 1px dashed var(--tbe-line);
+	border-radius: var(--tbe-radius, 14px);
+	color: var(--tbe-muted);
+}
+.tbe-booklist--planned .tbe-canon { padding-inline: 0.4rem; }

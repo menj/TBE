@@ -7,11 +7,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TBE_VERSION', '0.6.0' );
+define( 'TBE_VERSION', '0.7.0' );
 define( 'TBE_DIR', get_stylesheet_directory() );
 define( 'TBE_URI', get_stylesheet_directory_uri() );
 
-foreach ( array( 'settings', 'bible', 'interlinear', 'dss', 'audio', 'esv-api', 'quran', 'commentary', 'entry-fields', 'starter-commentary', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'enqueue', 'branding', 'error-pages' ) as $tbe_file ) {
+foreach ( array( 'settings', 'bible', 'canon', 'interlinear', 'dss', 'audio', 'esv-api', 'quran', 'commentary', 'entry-fields', 'starter-commentary', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'enqueue', 'branding', 'error-pages' ) as $tbe_file ) {
 	require_once TBE_DIR . '/inc/' . $tbe_file . '.php';
 }
 unset( $tbe_file );

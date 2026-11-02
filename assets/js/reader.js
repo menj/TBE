@@ -112,6 +112,20 @@
 		if ( numbersButton && '0' === load( KEYS.numbers ) ) {
 			applyNumbers( numbersButton, false );
 		}
+		// Books page: dim the books a tradition does not count as scripture.
+		document.querySelectorAll( '[data-tbe-canon]' ).forEach( function ( button ) {
+			button.addEventListener( 'click', function () {
+				var tradition = button.getAttribute( 'data-tbe-canon' );
+				document.querySelectorAll( '[data-tbe-canon]' ).forEach( function ( b ) {
+					b.setAttribute( 'aria-pressed', b === button ? 'true' : 'false' );
+				} );
+				document.querySelectorAll( 'li[data-canon], section[data-canon]' ).forEach( function ( item ) {
+					var counted = 'all' === tradition || ( ' ' + item.getAttribute( 'data-canon' ) + ' ' ).indexOf( ' ' + tradition + ' ' ) > -1;
+					item.classList.toggle( 'is-off', ! counted );
+				} );
+			} );
+		} );
+
 		// Parallel view: Christian (ESV), Jewish (JPS 1917) or both; the choice is remembered.
 		var viewButtons = document.querySelectorAll( '[data-tbe-view-set]' );
 		function setView( view ) {
