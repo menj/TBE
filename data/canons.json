@@ -1,5 +1,5 @@
 {
- "_note": "Which tradition counts which book as scripture. The 66 books follow their testament (see inc/canon.php); the books below are planned and have no text on the site yet. Lists vary between churches, so each section says so.",
+ "_note": "Which tradition counts which book as scripture. The 66 books follow their testament (see inc/canon.php); the books below are planned and have no text on the site yet. Lists vary between churches. Checked against the comparison tables in Wikipedia's 'Biblical canon' article (CC BY-SA 4.0) and the sources it cites.",
  "traditions": {
   "jewish": {
    "name": "Jewish",
@@ -24,7 +24,7 @@
   "ethiopian": {
    "name": "Ethiopian",
    "full": "Ethiopian Orthodox Tewahedo",
-   "note": "The widest canon, usually counted as 81 books in its broader form; the counts and lists vary."
+   "note": "The widest canon. Authorities and printings differ on the list, and a narrower and a broader canon are distinguished."
   }
  },
  "sections": [
@@ -124,7 +124,8 @@
      "name": "Additions to Esther",
      "traditions": [
       "catholic",
-      "orthodox"
+      "orthodox",
+      "ethiopian"
      ],
      "language": "Greek",
      "status": "planned",
@@ -135,11 +136,12 @@
      "name": "Additions to Daniel: Prayer of Azariah, Susanna, Bel and the Dragon",
      "traditions": [
       "catholic",
-      "orthodox"
+      "orthodox",
+      "ethiopian"
      ],
      "language": "Greek",
      "status": "planned",
-     "note": ""
+     "note": "The Ethiopian Orthodox church is said to accept all the Catholic deuterocanonical books except the Maccabees."
     }
    ]
   },
@@ -147,19 +149,21 @@
    "id": "orthodox-additions",
    "title": "Further Orthodox books",
    "traditions": [
-    "orthodox"
+    "orthodox",
+    "ethiopian"
    ],
-   "intro": "Books found in Orthodox Bibles beyond the Catholic list. Which of them are canonical varies between Orthodox churches.",
+   "intro": "Books found in Orthodox Bibles beyond the Catholic list. Which of them are canonical varies between Orthodox churches, and the Ethiopian Orthodox church shares several.",
    "books": [
     {
      "slug": "1-esdras",
      "name": "1 Esdras",
      "traditions": [
+      "ethiopian",
       "orthodox"
      ],
      "language": "Greek",
      "status": "planned",
-     "note": ""
+     "note": "Ezra Kali in the Ethiopian canon."
     },
     {
      "slug": "3-maccabees",
@@ -175,21 +179,23 @@
      "slug": "prayer-of-manasseh",
      "name": "Prayer of Manasseh",
      "traditions": [
+      "ethiopian",
       "orthodox"
      ],
      "language": "Greek",
      "status": "planned",
-     "note": ""
+     "note": "In the Ethiopian canon it is part of 2 Chronicles."
     },
     {
      "slug": "psalm-151",
      "name": "Psalm 151",
      "traditions": [
+      "ethiopian",
       "orthodox"
      ],
      "language": "Greek; Hebrew at Qumran",
      "status": "planned",
-     "note": ""
+     "note": "The Ethiopian Orthodox church is said to accept the Orthodox additional books except the Maccabees."
     },
     {
      "slug": "4-maccabees",
@@ -209,7 +215,7 @@
    "traditions": [
     "ethiopian"
    ],
-   "intro": "Books in the Ethiopian Orthodox Tewahedo canon beyond those above. The full list is still being confirmed, so this shows only the best known.",
+   "intro": "Books in the Ethiopian Orthodox Tewahedo canon beyond those above. The list varies between authorities, and a narrower and a broader canon are distinguished; books of the broader canon only are marked.",
    "books": [
     {
      "slug": "1-enoch",
@@ -260,6 +266,86 @@
      "language": "Ge'ez",
      "status": "planned",
      "note": ""
+    },
+    {
+     "slug": "4-ezra",
+     "name": "Ezra Sutu'el (4 Ezra)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Latin and other languages; Hebrew original lost",
+     "status": "planned",
+     "note": ""
+    },
+    {
+     "slug": "4-baruch",
+     "name": "4 Baruch (Säqoqawä Eremyas)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Greek and Ge'ez",
+     "status": "planned",
+     "note": "In the Ethiopian canon it is part of Säqoqawä Eremyas."
+    },
+    {
+     "slug": "zena-ayhud",
+     "name": "Zëna Ayhud (Pseudo-Josephus)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Hebrew original, Ge'ez version",
+     "status": "planned",
+     "note": "Broader canon only."
+    }
+   ]
+  },
+  {
+   "id": "ethiopian-nt",
+   "title": "Ethiopian Orthodox New Testament, broader canon",
+   "traditions": [
+    "ethiopian"
+   ],
+   "intro": "The broader Ethiopian Orthodox canon adds these church writings to the New Testament. They are not counted as scripture by any other church.",
+   "books": [
+    {
+     "slug": "sinodos",
+     "name": "Sinodos (Ser'atä Seyon, Te'ezaz, Gessew, Abtelis)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez",
+     "status": "planned",
+     "note": "Broader canon only."
+    },
+    {
+     "slug": "covenant",
+     "name": "Book of the Covenant (Mäshafä Kidan, two parts)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez",
+     "status": "planned",
+     "note": "Broader canon only."
+    },
+    {
+     "slug": "clement",
+     "name": "Ethiopic Clement (Qälëmentos)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez",
+     "status": "planned",
+     "note": "Broader canon only. Not the Clement known in the West."
+    },
+    {
+     "slug": "didascalia",
+     "name": "Ethiopic Didascalia (Didesqelya)",
+     "traditions": [
+      "ethiopian"
+     ],
+     "language": "Ge'ez",
+     "status": "planned",
+     "note": "Broader canon only. Not the Didascalia known in the West."
     }
    ]
   }
