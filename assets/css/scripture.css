@@ -29,6 +29,15 @@
 	unicode-range: U+0370-03FF, U+1F00-1FFF;
 }
 
+@font-face {
+	font-family: "Estrangela";
+	src: url("../fonts/Estrangela.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0700-074F;
+}
+
 :root {
 	--tbe-scripture: "SBL BibLit", "SBL Hebrew", "SBL Greek", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 }
@@ -65,3 +74,6 @@
 
 /* The Jewish name beneath a book title: the Hebrew in SBL Hebrew, then its transliteration. */
 .tbe-title-sub__he { font-family: "SBL Hebrew", "SBL BibLit", serif; }
+
+/* Syriac words, once the Syriac interlinear is added: Estrangela, right to left. */
+.tbe-il__sy, .tbe-il__lemma.tbe-il__sy { font-family: "Estrangela", serif; direction: rtl; }
