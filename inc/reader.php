@@ -124,6 +124,8 @@ function tbe_view_books(): string {
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'The Books of the Bible', 'tbe-child' ) . '</h1>';
 	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
 
+	$out .= tbe_canon_filter();
+
 	foreach ( array(
 		'OT' => __( 'Old Testament', 'tbe-child' ),
 		'NT' => __( 'New Testament', 'tbe-child' ),
@@ -134,7 +136,7 @@ function tbe_view_books(): string {
 				continue;
 			}
 			$out .= sprintf(
-				'<li><a href="%s"><span class="tbe-booklist__name">%s</span><span class="tbe-booklist__count">%s</span></a></li>',
+				'<li data-canon="' . esc_attr( implode( ' ', TBE_Canon::for_book( $book ) ) ) . '"><a href="%s"><span class="tbe-booklist__name">%s</span><span class="tbe-booklist__count">%s</span></a></li>',
 				esc_url( TBE_Bible::url( $book['slug'] ) ),
 				esc_html( $book['name'] ),
 				esc_html( sprintf( /* translators: %d: number of chapters */ _n( '%d chapter', '%d chapters', (int) $book['chapters'], 'tbe-child' ), $book['chapters'] ) )
@@ -142,7 +144,7 @@ function tbe_view_books(): string {
 		}
 		$out .= '</ul></section>';
 	}
-	return $out . '</div>';
+	return $out . tbe_canon_sections() . '</div>';
 }
 
 function tbe_view_book( array $book ): string {
@@ -151,6 +153,7 @@ function tbe_view_book( array $book ): string {
 	$out .= '<p class="tbe-eyebrow">' . esc_html( 'OT' === $book['testament'] ? __( 'Old Testament', 'tbe-child' ) : __( 'New Testament', 'tbe-child' ) ) . '</p>';
 	$out .= '<h1 class="tbe-title">' . esc_html( $book['name'] ) . '</h1>';
 	$out .= tbe_book_subtitle( $book );
+	$out .= tbe_canon_line( $book );
 
 	foreach ( tbe_commentary_for_book( $book['slug'] ) as $entry ) {
 		$out .= tbe_render_box( $entry, $book['slug'], 0, true );
