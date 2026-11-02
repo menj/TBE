@@ -1,0 +1,5 @@
+Estrangelo (V1.1), Regular
+
+Supplied by the site owner as ESTRANG2.TTF. No licence text came with the file and the font itself carries no
+copyright or licence string, so its terms are the owner's to confirm. ESTRANG2.TTF is converted losslessly to WOFF2
+(tools/ttf2woff2.js, glyph data unchanged) and is meant for Syriac Bible text only, once the Syriac interlinear is added.

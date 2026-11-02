@@ -61,6 +61,9 @@ function tbe_view_credits(): string {
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Scripture', 'tbe-child' ) . '</h2><p>' . esc_html( (string) tbe_setting( 'copyright' ) ) . '</p>';
 
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The readings of the scrolls are compared using the %s: Jarod Jacobs, Martijn Naaijer and Dirk Roorda, built on the data files of Martin Abegg, licensed CC BY-NC 4.0 (version 2.0, doi:10.5281/zenodo.23731063). So far the Great Isaiah Scroll (1QIsa-a) is compared with Isaiah 1 to 5. The scroll photographs belong to the Israel Antiquities Authority and are not reproduced here.', 'tbe-child' ), '<a href="https://github.com/ETCBC/dss" rel="noopener">CACCHT / ETCBC Dead Sea Scrolls dataset</a>' ) ) . '</p>';
+
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Jewish translation', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The Jewish text beside the ESV is The Holy Scriptures: A New Translation (JPS 1917), published by the Jewish Publication Society and in the public domain. The digital text comes from %s, by way of the Open Siddur Project.', 'tbe-child' ), '<a href="https://www.sefaria.org" rel="noopener">Sefaria</a>' ) ) . '</p>';
 
