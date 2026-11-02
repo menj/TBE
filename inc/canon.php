@@ -47,6 +47,11 @@ function tbe_canon_chips( array $traditions ): string {
 	return '' === $out ? '' : '<ul class="tbe-canon" aria-label="' . esc_attr__( 'Counted as scripture by', 'tbe-child' ) . '">' . $out . '</ul>';
 }
 
+/** A neutral label for a writing no church counts today, such as "Once read as scripture". */
+function tbe_canon_badge( string $text ): string {
+	return '' === $text ? '' : '<ul class="tbe-canon"><li class="tbe-canon__chip tbe-canon__chip--past">' . esc_html( $text ) . '</li></ul>';
+}
+
 /** On a book's page: who counts it as scripture. */
 function tbe_canon_line( array $book ): string {
 	$chips = tbe_canon_chips( TBE_Canon::for_book( $book ) );
@@ -68,7 +73,7 @@ function tbe_canon_sections(): string {
 	foreach ( TBE_Canon::data()['sections'] as $section ) {
 		$items = '';
 		foreach ( (array) $section['books'] as $book ) {
-			$items .= '<li data-canon="' . esc_attr( implode( ' ', (array) $book['traditions'] ) ) . '"><span class="tbe-booklist__item tbe-booklist__item--planned"><span class="tbe-booklist__name">' . esc_html( (string) $book['name'] ) . '</span><span class="tbe-booklist__count">' . esc_html__( 'Not on the site yet', 'tbe-child' ) . '</span>' . ( ! empty( $book['note'] ) ? '<span class="tbe-booklist__note">' . esc_html( (string) $book['note'] ) . '</span>' : '' ) . '</span>' . tbe_canon_chips( (array) $book['traditions'] ) . '</li>';
+			$items .= '<li data-canon="' . esc_attr( implode( ' ', (array) $book['traditions'] ) ) . '"><span class="tbe-booklist__item tbe-booklist__item--planned"><span class="tbe-booklist__name">' . esc_html( (string) $book['name'] ) . '</span><span class="tbe-booklist__count">' . esc_html__( 'Not on the site yet', 'tbe-child' ) . '</span>' . ( ! empty( $book['note'] ) ? '<span class="tbe-booklist__note">' . esc_html( (string) $book['note'] ) . '</span>' : '' ) . '</span>' . tbe_canon_chips( (array) $book['traditions'] ) . tbe_canon_badge( (string) ( $book['badge'] ?? '' ) ) . '</li>';
 		}
 		$out .= '<section class="tbe-testament tbe-extra" id="' . esc_attr( (string) $section['id'] ) . '" data-canon="' . esc_attr( implode( ' ', (array) $section['traditions'] ) ) . '"><h2 class="tbe-ornament">' . esc_html( (string) $section['title'] ) . '</h2><p class="tbe-center tbe-muted tbe-extra__intro">' . esc_html( (string) $section['intro'] ) . '</p><ul class="tbe-booklist tbe-booklist--planned">' . $items . '</ul></section>';
 	}
