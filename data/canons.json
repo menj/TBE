@@ -348,6 +348,86 @@
      "note": "Broader canon only. Not the Didascalia known in the West."
     }
    ]
+  },
+  {
+   "id": "early-church",
+   "title": "Early Christian writings once read as scripture",
+   "traditions": [],
+   "intro": "No church counts these as scripture today. There was no fixed New Testament in the first century: for some centuries different churches read different writings as scripture, and these appear in early Bibles, canon lists or the writings of church fathers. Writings that were never put forward as scripture are left out.",
+   "books": [
+    {
+     "slug": "1-clement",
+     "name": "1 Clement",
+     "traditions": [],
+     "badge": "Once read as scripture",
+     "language": "Greek",
+     "status": "planned",
+     "note": "Written about the end of the first century. In Codex Alexandrinus, and listed as canonical in Canon 85 of the Apostolic Canons."
+    },
+    {
+     "slug": "2-clement",
+     "name": "2 Clement",
+     "traditions": [],
+     "badge": "Once read as scripture",
+     "language": "Greek",
+     "status": "planned",
+     "note": "A sermon of the second century. In Codex Alexandrinus, and listed with 1 Clement in Canon 85 of the Apostolic Canons."
+    },
+    {
+     "slug": "didache",
+     "name": "Didache (Teaching of the Twelve Apostles)",
+     "traditions": [],
+     "badge": "Once read as scripture",
+     "language": "Greek",
+     "status": "planned",
+     "note": "A church manual of the first or second century; the dating is debated. Treated as scriptural by some early church writers; preserved in Codex Hierosolymitanus."
+    },
+    {
+     "slug": "barnabas",
+     "name": "Epistle of Barnabas",
+     "traditions": [],
+     "badge": "Once read as scripture",
+     "language": "Greek",
+     "status": "planned",
+     "note": "Written between the late first and the early second century. In Codex Sinaiticus; also in the lists of Codex Claromontanus and Codex Hierosolymitanus."
+    },
+    {
+     "slug": "hermas",
+     "name": "Shepherd of Hermas",
+     "traditions": [],
+     "badge": "Once read as scripture",
+     "language": "Greek",
+     "status": "planned",
+     "note": "Written in the first half of the second century. In Codex Sinaiticus and in the list of Codex Claromontanus; read as scripture by some early church writers."
+    },
+    {
+     "slug": "apocalypse-of-peter",
+     "name": "Apocalypse of Peter",
+     "traditions": [],
+     "badge": "Once read as scripture",
+     "language": "Greek, Ethiopic",
+     "status": "planned",
+     "note": "Written in the early second century. Listed as accepted in the Muratorian fragment."
+    },
+    {
+     "slug": "3-corinthians",
+     "name": "3 Corinthians (from the Acts of Paul)",
+     "traditions": [],
+     "badge": "Once read as scripture",
+     "language": "Greek, Syriac, Armenian",
+     "status": "planned",
+     "note": "A second-century letter. Aphrahat and Ephraem treated it as canonical in the Syriac church; it was once part of the Armenian Bible."
+    },
+    {
+     "slug": "laodiceans",
+     "name": "Epistle to the Laodiceans",
+     "traditions": [],
+     "badge": "Once read as scripture",
+     "language": "Latin",
+     "status": "planned",
+     "note": "A short letter in Paul's name, in many Latin Vulgate manuscripts and in Wycliffe's English Bible."
+    }
+   ]
   }
  ]
 }
