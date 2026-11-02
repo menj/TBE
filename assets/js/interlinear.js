@@ -9,7 +9,7 @@
 	// Cantillation (accents) and vowel points / marks, as Unicode ranges.
 	var CANTILLATION = /[֑-֯]/g;
 	var VOWELS = /[ְ-ׇֽֿׁׂ]/g;
-	var defaults = { gloss: true, translit: true, strongs: true, lemma: false, morph: false, variants: true, vowels: true, cantillation: true, review: false };
+	var defaults = { gloss: true, translit: true, strongs: true, lemma: false, morph: false, variants: true, vowels: true, cantillation: true, review: false, dss: true, dssSpelling: false };
 
 	function load() {
 		try {
@@ -30,6 +30,8 @@
 			root.classList.toggle( 'tbe-il--hide-' + layer, ! state[ layer ] );
 		} );
 		root.classList.toggle( 'tbe-il--no-variants', ! state.variants );
+		root.classList.toggle( 'tbe-il--dss-off', ! state.dss );
+		root.classList.toggle( 'tbe-il--dss-spelling', !! state.dssSpelling );
 		root.classList.toggle( 'tbe-il--review', !! state.review );
 
 		root.querySelectorAll( '.tbe-il__he[data-full]' ).forEach( function ( el ) {

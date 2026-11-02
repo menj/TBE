@@ -300,6 +300,11 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	} else {
 		$out .= '<button type="button" class="tbe-btn" data-tbe-il="variants" aria-pressed="true" data-tbe-tip="' . esc_attr__( 'Outline words that are not in the NA28 critical text and flag places where manuscripts differ', 'tbe-child' ) . '">' . esc_html__( 'Show variants', 'tbe-child' ) . '</button>';
 	}
+	$dss = $hebrew ? tbe_dss_chapter( $slug, $chapter ) : null;
+	if ( $dss ) {
+		$out .= '<button type="button" class="tbe-btn tbe-btn--dss" data-tbe-il="dss" aria-pressed="true" data-tbe-tip="' . esc_attr__( 'Mark words where a Dead Sea Scroll reads differently from the Masoretic text', 'tbe-child' ) . '">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</button>';
+		$out .= '<button type="button" class="tbe-btn tbe-btn--dss" data-tbe-il="dssSpelling" aria-pressed="false" data-tbe-tip="' . esc_attr__( 'Also show differences of spelling only', 'tbe-child' ) . '">' . esc_html__( 'Spelling too', 'tbe-child' ) . '</button>';
+	}
 	if ( $audio && current_user_can( 'edit_posts' ) ) {
 		$out .= '<button type="button" class="tbe-btn" data-tbe-il="review" aria-pressed="false" data-tbe-tip="' . esc_attr__( 'Editors only: outline words whose timing is only an estimate, so you can check them by ear', 'tbe-child' ) . '">' . esc_html__( 'Check timings', 'tbe-child' ) . '</button>';
 	}
@@ -308,12 +313,17 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	$class = 'tbe-il tbe-il--' . ( $hebrew ? 'he' : 'gr' ) . ' tbe-il--hide-lemma tbe-il--hide-morph';
 	$out  .= '<div class="' . esc_attr( $class ) . '" id="tbe-il">';
 
+	if ( $dss ) {
+		[ $meaning, $spelling ] = tbe_dss_counts( $dss );
+		$out .= '<p class="tbe-dss-summary"><strong>' . esc_html( sprintf( /* translators: %s: scroll name */ __( 'Compared with the %s', 'tbe-child' ), (string) $dss['scroll'] ) ) . '.</strong> ' . esc_html( sprintf( /* translators: 1: meaning differences, 2: spelling differences */ _n( '%1$d difference of meaning in this chapter, and %2$d of spelling.', '%1$d differences of meaning in this chapter, and %2$d of spelling.', $meaning, 'tbe-child' ), $meaning, $spelling ) ) . '</p>';
+	}
 	$counts = array( 'variant' => 0 );
 	foreach ( $data['v'] as $verse => $words ) {
 		$n    = (int) $verse;
 		$line = '';
+		$show = $dss ? tbe_dss_verse( (array) ( $dss['v'][ (string) $verse ] ?? array() ), $words, (string) $dss['scroll'] ) : array( 'words' => array(), 'notes' => '' );
 		foreach ( $words as $idx => $w ) {
-			$line .= tbe_render_il_word( $w, $hebrew, $counts, $audio['words'][ $verse ][ $idx ] ?? null );
+			$line .= tbe_render_il_word( $w, $hebrew, $counts, $audio['words'][ $verse ][ $idx ] ?? null, $show['words'][ $idx ] ?? null );
 		}
 		$out .= '<section class="tbe-il__verse" id="v' . $n . '"><p class="tbe-il__ref"><a class="tbe-vn" href="#v' . $n . '">' . ( 0 === $n ? esc_html__( 'Title', 'tbe-child' ) : $n ) . '</a>';
 		if ( $audio && ! empty( $audio['words'][ $verse ] ) ) {
@@ -322,7 +332,7 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 		if ( isset( $esv[ $n ] ) ) {
 			$out .= '<span class="tbe-il__esv tbe-scripture" lang="en" dir="ltr">' . esc_html( $esv[ $n ] ) . '</span>';
 		}
-		$out .= '</p><div class="tbe-il__words" dir="' . ( $hebrew ? 'rtl' : 'ltr' ) . '">' . $line . '</div></section>';
+		$out .= '</p><div class="tbe-il__words" dir="' . ( $hebrew ? 'rtl' : 'ltr' ) . '">' . $line . '</div>' . $show['notes'] . '</section>';
 	}
 	$out .= '</div>';
 
@@ -340,7 +350,7 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 }
 
 /** One word: gloss, original, transliteration, Strong's number, root word, grammar. */
-function tbe_render_il_word( array $w, bool $hebrew, array &$counts, ?array $timing = null ): string {
+function tbe_render_il_word( array $w, bool $hebrew, array &$counts, ?array $timing = null, ?array $dss = null ): string {
 	[ $text, $translit, $gloss, $strongs, $morph, $lemma ] = array_pad( $w, 6, '' );
 	$extra  = isset( $w[6] ) && is_array( $w[6] ) ? $w[6] : array();
 	$parse  = $hebrew ? tbe_hebrew_morph_text( (string) $morph ) : tbe_greek_morph_text( (string) $morph );
@@ -378,6 +388,11 @@ function tbe_render_il_word( array $w, bool $hebrew, array &$counts, ?array $tim
 			$notes[] = '<span class="tbe-il__flag" aria-hidden="true">⚑</span>';
 			++$counts['variant'];
 		}
+	}
+
+	if ( $dss ) { // a Dead Sea Scroll reads differently here
+		$class .= ' tbe-il__w--dss tbe-il__w--dss-' . $dss['kind'];
+		$tip[]  = $dss['tip'];
 	}
 
 	$attrs = '';
