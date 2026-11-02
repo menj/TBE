@@ -297,3 +297,4 @@ html[data-theme="dark"] .tbe-canon__chip--ethiopian { --chip: #6fb7d4; }
 	color: var(--tbe-muted);
 }
 .tbe-booklist--planned .tbe-canon { padding-inline: 0.4rem; }
+.tbe-booklist__note { font-size: 0.78rem; line-height: 1.45; color: var(--tbe-muted); font-style: italic; }
