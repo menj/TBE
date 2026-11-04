@@ -47,6 +47,11 @@ function admin_url( $path = '' ) { return 'https://thebible.exposed/wp-admin/' .
 function wp_parse_url( $url, $component = -1 ) { return parse_url( $url, $component ); }
 function trailingslashit( $s ) { return rtrim( $s, '/' ) . '/'; }
 function get_permalink( $id ) { return 'https://thebible.exposed/page-' . (int) $id . '/'; }
+function get_post_types( $args = array(), $output = 'names' ) { return array( 'book' => (object) array( 'rewrite' => array( 'slug' => 'library/books' ) ), 'post' => (object) array( 'rewrite' => false ) ); }
+$GLOBALS['ih_extra_slugs'] = array();
+function get_taxonomies( $args = array(), $output = 'names' ) { $out = array( 'topic' => (object) array( 'rewrite' => array( 'slug' => '/topics/' ) ) ); foreach ( $GLOBALS['ih_extra_slugs'] as $i => $slug ) { $out[ 'x' . $i ] = (object) array( 'rewrite' => array( 'slug' => $slug ) ); } return $out; }
+$GLOBALS['ih_flushes'] = 0;
+function flush_rewrite_rules( $hard = true ) { $GLOBALS['ih_flushes']++; $GLOBALS['ih_flush_base'] = $GLOBALS['wp_rewrite']->search_base ?? null; }
 function sanitize_key( $k ) { return preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) $k ) ); }
 
 require dirname( __DIR__ ) . '/inc/unlist.php';
@@ -142,8 +147,35 @@ foreach ( array( 'bible', 'Bible', 'interlinear', 'commentary', 'glossary', 'cre
 	$GLOBALS['ih_options']['tbe_search_base'] = $reserved;
 	check( 'search' === tbe_search_base(), "the reserved base {$reserved} falls back to search" );
 }
+$GLOBALS['ih_options']['category_base'] = '/subjects/';
+$GLOBALS['ih_options']['tag_base']      = 'labels';
+foreach ( array( 'subjects', 'labels', 'library', 'topics' ) as $live ) {
+	check( '' === tbe_search_clean_base( $live ), "the live rewrite slug {$live} is refused" );
+}
+check( '' === tbe_search_clean_base( array( 'x' ) ), 'an array for the base gives the empty string, no TypeError' );
 check( '' === tbe_search_clean_base( 'bible' ) && 'find' === tbe_search_clean_base( 'find' ), 'clean_base refuses a reserved base and keeps a free one' );
 check( isset( $GLOBALS['ih_hooks']['template_redirect'] ), 'the redirect is hooked' );
+
+// The rules are flushed once when the base in force differs from the one they were built with.
+$GLOBALS['wp_rewrite'] = (object) array( 'search_base' => 'search' );
+$GLOBALS['ih_options']['tbe_search_base'] = 'feed'; // stored before it was refused
+$GLOBALS['ih_options']['tbe_search_rules_base'] = 'feed';
+foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
+check( 1 === $GLOBALS['ih_flushes'] && 'search' === $GLOBALS['ih_options']['tbe_search_rules_base'], 'a newly refused base flushes the rules once' );
+foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
+check( 1 === $GLOBALS['ih_flushes'], 'the next load does not flush again' );
+
+// A post type that takes "search" itself: the fallback moves on, and the flush uses the new base.
+$GLOBALS['ih_extra_slugs'] = array( 'search' );
+check( 'find' === tbe_search_fallback_base(), 'the fallback skips a reserved search' );
+$GLOBALS['ih_extra_slugs'] = array( 'search', 'find' );
+check( 'search-results' === tbe_search_fallback_base(), 'then skips find' );
+$GLOBALS['ih_options']['tbe_search_base'] = 'search';
+$GLOBALS['wp_rewrite']->search_base = 'search';
+$GLOBALS['ih_flush_base'] = null;
+foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
+check( 'search-results' === $GLOBALS['ih_flush_base'], 'the rules are flushed with the base in force, set before the flush' );
+$GLOBALS['ih_extra_slugs'] = array();
 
 echo $fail ? "\n{$fail} failed\n" : "\nall passed\n";
 exit( $fail ? 1 : 0 );
