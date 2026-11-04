@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.0
+
+A login screen in the site's dress. Nothing was renamed or removed.
+
+- `inc/login.php` and `assets/css/login.css` cover every screen wp-login.php serves: log in, lost password, reset, registration and the box shown when a session expires. The broken-cross mark and the name in Angel sit above the form and link home. The card, fields and button take the active colour scheme, custom colours included, and dark mode follows the choice the visitor saved on the site, because `theme.js` loads on the login screen too.
+- The stylesheet loads only through `login_enqueue_scripts`, and every rule is scoped to `body.tbe-login` (`tbe-login--interim` in the session box). The title tag reads "Log In | The Bible Exposed", cut to stay under 60 characters.
+- WCAG 2.2 AA: field edges and focus rings reach 3:1 or more, text 4.5:1 or more in light and dark, and the links, checkbox and buttons are at least 24px. On phones the button runs the full width of the card.
+- A new tab, Appearance → TBE → Login screen, holds a switch (`login_design`, on by default), a logo URL (`login_logo`) and a line above the form (`login_message`).
+- While a plugin that styles the login screen is active (LoginPress, Custom Login, Login Logo, Branda, Admin Custom Login, Login Designer, Erident), the theme leaves the screen alone; the `tbe_login_plugin_active` filter adds others. The module builds no login address, so WPS Hide Login keeps moving it.
+- The clean brand mark is now `tbe_brandmark_svg()`, used by the `tbe/brandmark` block and the login screen.
+- `tools/test_login.php` checks all of this.
+
 ## 0.8.2
 
 Two fixes to the search base, from the review of the same code on injil.help.

@@ -34,7 +34,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## Settings (Appearance → TBE)
-Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice). The search base is set under Settings → Permalinks.
+Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice), **Login screen** (the theme's dress on wp-login.php on or off, a logo URL, a line above the form). The search base is set under Settings → Permalinks.
 
 ## Built in from four plugins (0.8.0)
 The theme does the work of the Minimalist Social Icons Pack, Reading Progress Bar, Unlist Posts & Pages and Pretty Search Permalinks. None of them existed in the theme before. The last three turn themselves off while their plugin is active, so nothing runs twice.
@@ -45,6 +45,9 @@ The theme does the work of the Minimalist Social Icons Pack, Reading Progress Ba
 - **Search addresses** (`inc/search-permalinks.php`). `/?s=term` answers 301 to `/search/term/`, and `/?s=term&paged=2` to `/search/term/page/2/`. Other query arguments are kept, arrays such as `post_type[]` included, and an empty search is not redirected. Set the base under Settings → Permalinks → Optional (option `tbe_search_base`): lower-case letters, digits and hyphens. A base the theme's own routes use (`bible`, `interlinear`, `credits`, `commentary`, `section`, `glossary`) one WordPress keeps, or a live category, tag, post type or taxonomy base is refused with a notice, and `search` is used instead (filter `tbe_search_reserved_bases`). When the base in force differs from the one the rewrite rules were built with (`tbe_search_rules_base`), the rules are flushed once. The Bible search at `/bible/search/` is its own route and is unchanged. The rules are flushed by the existing version check in `functions.php`, never on an ordinary load. Filter: `tbe_search_permalinks_enabled`.
 
 `php tools/test_plugin_features.php` checks the unlisted filtering and the search addresses.
+
+## Login screen (0.9.0)
+`inc/login.php` and `assets/css/login.css`: the broken-cross mark and the name in Angel above the form, linking home, on the active colour scheme, light or dark as the visitor chose on the site. Every screen wp-login.php serves is covered, the session-expired box included. Body classes `tbe-login` and `tbe-login--interim`; title "<screen> | <site name>" under 60 characters. It steps aside while a login styling plugin is active (filter `tbe_login_plugin_active`) and builds no login address, so WPS Hide Login keeps working. `php tools/test_login.php` checks it.
 
 ## How a chapter is laid out
 Modelled on the verse-by-verse commentary book format, with web-only improvements:
