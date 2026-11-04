@@ -1,0 +1,300 @@
+/*
+ * The Bible Exposed: the login screen (inc/login.php).
+ *
+ * Loaded only through login_enqueue_scripts while Appearance → TBE → Login screen is on; every
+ * rule is scoped to body.tbe-login. The tokens repeat base.css, and the active scheme arrives
+ * after this file from tbe_scheme_css(), so the four schemes and custom colours follow. Dark mode
+ * is the site's own: theme.js sets data-theme="dark" on <html> from the visitor's saved choice.
+ *
+ * Contrast, Manuscript scheme: ink on surface 14:1, muted 5.6:1, surface on the accent button
+ * 10:1, the accent focus ring 9:1. Night study and dark mode: ink 13:1, paper on the gold button 8:1.
+ */
+
+@font-face {
+	font-family: "Angel";
+	src: url("../fonts/Angel.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--tbe-paper: #f4eedc;
+	--tbe-surface: #fbf7ea;
+	--tbe-ink: #231d14;
+	--tbe-muted: #6b604f;
+	--tbe-accent: #6e1f2e;
+	--tbe-rubric: #9b2c2c;
+	--tbe-gold: #a67c2e;
+	--tbe-line: #d9cdb0;
+	--tbe-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--tbe-book: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+}
+html[data-theme="dark"] {
+	--tbe-paper: #17120f;
+	--tbe-surface: #201915;
+	--tbe-ink: #ece3cf;
+	--tbe-muted: #a79c88;
+	--tbe-accent: #d4a24c;
+	--tbe-rubric: #d9786b;
+	--tbe-gold: #d1a64c;
+	--tbe-line: #3a2f27;
+	color-scheme: dark;
+}
+
+body.tbe-login {
+	/* Field and button edges need 3:1 against the card; the scheme's line colour is decoration only. */
+	--tbe-login-edge: color-mix(in srgb, var(--tbe-muted) 85%, var(--tbe-surface));
+	min-height: 100vh;
+	margin: 0;
+	background:
+		radial-gradient(ellipse 70% 50% at 50% 0%, color-mix(in srgb, var(--tbe-gold) 14%, transparent), transparent 70%),
+		var(--tbe-paper);
+	color: var(--tbe-ink);
+	font-family: var(--tbe-book);
+	font-size: 17px;
+	line-height: 1.55;
+}
+body.tbe-login *, body.tbe-login *::before, body.tbe-login *::after { box-sizing: border-box; }
+
+body.tbe-login #login {
+	width: min(380px, calc(100% - 32px));
+	margin: 0 auto;
+	padding: 7vh 0 40px;
+}
+
+/* The mark and the name in Angel, linking home. */
+body.tbe-login h1 a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	width: auto;
+	height: auto;
+	margin: 0 auto 24px;
+	padding: 6px 8px;
+	background: none;
+	text-indent: 0;
+	overflow: visible;
+	font-family: "Angel", Georgia, serif;
+	font-size: 34px;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	line-height: 1.1;
+	color: var(--tbe-ink);
+	text-align: center;
+	text-decoration: none;
+	border-radius: 6px;
+	overflow-wrap: anywhere;
+}
+body.tbe-login h1 a .tbe-brandmark { color: var(--tbe-accent); line-height: 0; }
+body.tbe-login h1 a .tbe-brandmark svg { display: block; width: auto; height: 64px; }
+body.tbe-login .tbe-login-logo { display: block; width: 72px; height: 72px; object-fit: contain; }
+body.tbe-login h1 a:hover { color: var(--tbe-accent); }
+body.tbe-login h1 a:focus { box-shadow: none; outline: none; }
+body.tbe-login h1 a:focus-visible { outline: 2px solid var(--tbe-accent); outline-offset: 4px; }
+
+/* Messages. */
+body.tbe-login .message,
+body.tbe-login .notice,
+body.tbe-login .success,
+body.tbe-login #login_error {
+	margin: 0 0 18px;
+	padding: 12px 16px;
+	font-family: var(--tbe-ui);
+	font-size: 15px;
+	color: var(--tbe-ink);
+	background: var(--tbe-surface);
+	border: 1px solid var(--tbe-line);
+	border-left: 4px solid var(--tbe-gold);
+	border-radius: 8px;
+	box-shadow: none;
+	overflow-wrap: anywhere;
+}
+body.tbe-login #login_error,
+body.tbe-login .notice-error { border-left-color: var(--tbe-rubric); }
+body.tbe-login .tbe-login-note { text-align: center; font-family: var(--tbe-book); font-size: 17px; font-style: italic; }
+body.tbe-login .message a,
+body.tbe-login #login_error a { color: var(--tbe-accent); }
+
+/* The card. */
+body.tbe-login form {
+	margin-top: 0;
+	padding: 26px 24px 24px;
+	background: var(--tbe-surface);
+	border: 1px solid var(--tbe-line);
+	border-top: 3px solid var(--tbe-accent);
+	border-radius: 10px;
+	box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--tbe-ink) 55%, transparent);
+	color: var(--tbe-ink);
+	overflow: visible;
+}
+body.tbe-login label {
+	font-family: var(--tbe-ui);
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--tbe-ink);
+}
+body.tbe-login form p,
+body.tbe-login #reg_passmail,
+body.tbe-login .description { color: var(--tbe-muted); font-family: var(--tbe-ui); font-size: 14px; }
+body.tbe-login form .input,
+body.tbe-login input[type="text"],
+body.tbe-login input[type="password"],
+body.tbe-login input[type="email"] {
+	min-height: 46px;
+	margin: 6px 0 18px;
+	padding: 8px 12px;
+	font-family: var(--tbe-ui);
+	font-size: 16px;
+	color: var(--tbe-ink);
+	background: var(--tbe-paper);
+	border: 1px solid var(--tbe-login-edge);
+	border-radius: 6px;
+	box-shadow: none;
+}
+body.tbe-login form .input:focus,
+body.tbe-login input[type="text"]:focus,
+body.tbe-login input[type="password"]:focus,
+body.tbe-login input[type="email"]:focus {
+	border-color: var(--tbe-accent);
+	outline: 2px solid var(--tbe-accent);
+	outline-offset: 1px;
+	box-shadow: none;
+}
+body.tbe-login .button.wp-hide-pw {
+	min-width: 44px;
+	min-height: 44px;
+	margin-top: 7px;
+	color: var(--tbe-accent);
+	background: transparent;
+	border: 0;
+}
+body.tbe-login .button.wp-hide-pw .dashicons { color: var(--tbe-accent); }
+body.tbe-login .button.wp-hide-pw:focus { outline: 2px solid var(--tbe-accent); outline-offset: -2px; box-shadow: none; border-radius: 6px; }
+
+body.tbe-login .forgetmenot { display: flex; align-items: center; gap: 8px; min-height: 46px; margin-bottom: 0; }
+body.tbe-login .forgetmenot label { font-weight: 400; line-height: 1.3; }
+body.tbe-login input[type="checkbox"] {
+	width: 24px;
+	height: 24px;
+	margin: 0;
+	background: var(--tbe-paper);
+	border: 1px solid var(--tbe-login-edge);
+	border-radius: 4px;
+}
+body.tbe-login input[type="checkbox"]:checked { background: var(--tbe-accent); border-color: var(--tbe-accent); }
+body.tbe-login input[type="checkbox"]:checked::before {
+	content: "";
+	display: block;
+	width: 8px;
+	height: 13px;
+	margin: 3px 0 0 7px;
+	border: solid var(--tbe-surface);
+	border-width: 0 3px 3px 0;
+	transform: rotate(45deg);
+}
+body.tbe-login input[type="checkbox"]:focus { outline: 2px solid var(--tbe-accent); outline-offset: 2px; box-shadow: none; }
+
+/* The button: the scheme's accent, its text in the card colour. */
+body.tbe-login .button-primary,
+body.tbe-login.wp-core-ui .button-primary {
+	float: right;
+	min-height: 44px;
+	padding: 0 24px;
+	font-family: var(--tbe-ui);
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--tbe-surface);
+	background: var(--tbe-accent);
+	border: 1px solid var(--tbe-accent);
+	border-radius: 999px;
+	text-shadow: none;
+	box-shadow: none;
+}
+body.tbe-login .button-primary:hover,
+body.tbe-login.wp-core-ui .button-primary:hover {
+	color: var(--tbe-surface);
+	background: color-mix(in srgb, var(--tbe-accent) 85%, var(--tbe-ink));
+	border-color: color-mix(in srgb, var(--tbe-accent) 85%, var(--tbe-ink));
+}
+body.tbe-login .button-primary:focus,
+body.tbe-login.wp-core-ui .button-primary:focus { color: var(--tbe-surface); outline: 2px solid var(--tbe-accent); outline-offset: 3px; box-shadow: none; }
+body.tbe-login .submit::after { content: ""; display: table; clear: both; }
+
+body.tbe-login .button:not(.button-primary):not(.wp-hide-pw) {
+	min-height: 40px;
+	color: var(--tbe-accent);
+	background: transparent;
+	border: 1px solid var(--tbe-accent);
+	border-radius: 999px;
+}
+body.tbe-login .button:not(.button-primary):not(.wp-hide-pw):focus { outline: 2px solid var(--tbe-accent); outline-offset: 2px; box-shadow: none; }
+body.tbe-login #pass-strength-result { border-radius: 6px; }
+
+/* Links under the card: 24px targets, visible focus. */
+body.tbe-login #nav,
+body.tbe-login #backtoblog,
+body.tbe-login .privacy-policy-page-link {
+	margin: 18px 0 0;
+	padding: 0;
+	text-align: center;
+	font-family: var(--tbe-ui);
+	font-size: 15px;
+	color: var(--tbe-muted);
+}
+body.tbe-login #nav a,
+body.tbe-login #backtoblog a,
+body.tbe-login .privacy-policy-page-link a {
+	display: inline-block;
+	min-height: 24px;
+	padding: 4px;
+	color: var(--tbe-accent);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+body.tbe-login #nav a:hover,
+body.tbe-login #backtoblog a:hover { color: var(--tbe-rubric); }
+body.tbe-login #nav a:focus,
+body.tbe-login #backtoblog a:focus,
+body.tbe-login .privacy-policy-page-link a:focus,
+body.tbe-login .message a:focus,
+body.tbe-login #login_error a:focus {
+	color: var(--tbe-accent);
+	outline: 2px solid var(--tbe-accent);
+	outline-offset: 2px;
+	border-radius: 4px;
+	box-shadow: none;
+}
+body.tbe-login .language-switcher { margin-top: 24px; }
+body.tbe-login .language-switcher label .dashicons { color: var(--tbe-muted); }
+body.tbe-login .language-switcher select {
+	min-height: 40px;
+	color: var(--tbe-ink);
+	background-color: var(--tbe-surface);
+	border-color: var(--tbe-login-edge);
+	border-radius: 6px;
+}
+
+/* Phones. */
+@media (max-width: 400px) {
+	body.tbe-login #login { padding-top: 28px; }
+	body.tbe-login form { padding: 22px 18px; }
+	body.tbe-login h1 a { font-size: 28px; }
+	body.tbe-login .button-primary { float: none; width: 100%; margin-top: 8px; }
+}
+
+/* The interim login inside the dashboard's modal. */
+body.tbe-login.interim-login #login { width: auto; padding: 16px 16px 0; margin: 0; }
+body.tbe-login.interim-login h1 a { font-size: 26px; gap: 8px; margin-bottom: 12px; }
+body.tbe-login.interim-login h1 a .tbe-brandmark svg { height: 44px; }
+
+@media (prefers-reduced-motion: no-preference) {
+	body.tbe-login .button-primary,
+	body.tbe-login #nav a,
+	body.tbe-login #backtoblog a { transition: background-color 0.18s, color 0.18s; }
+}
+@media (prefers-reduced-motion: reduce) {
+	body.tbe-login .shake { animation: none; }
+}

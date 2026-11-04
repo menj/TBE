@@ -115,6 +115,10 @@ function tbe_defaults(): array {
 		'progress_track'    => '',
 		// Profile links.
 		'social_profiles'   => array(),
+		// Login screen.
+		'login_design'      => 1,
+		'login_logo'        => '',
+		'login_message'     => '',
 		// ESV and licence.
 		'esv_live_fallback' => 1,
 		'copyright'        => 'Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. The ESV text may not be quoted in any publication made available to the public by a Creative Commons license. The ESV may not be translated into any other language.',
@@ -214,6 +218,7 @@ function tbe_settings_tabs(): array {
 		'reading'    => __( 'Reading bar', 'tbe-child' ),
 		'social'     => __( 'Profile links', 'tbe-child' ),
 		'esv'        => __( 'ESV and licence', 'tbe-child' ),
+		'login'      => __( 'Login screen', 'tbe-child' ),
 		'starter'    => __( 'Starter commentary', 'tbe-child' ),
 		'errors'     => __( 'Error pages', 'tbe-child' ),
 	);
@@ -288,6 +293,12 @@ function tbe_sanitize_settings( $input ): array {
 				}
 			}
 			$new['social_profiles'] = $profiles;
+			break;
+
+		case 'login':
+			$new['login_design']  = $flag( 'login_design' );
+			$new['login_logo']    = esc_url_raw( trim( (string) ( $input['login_logo'] ?? '' ) ), array( 'https', 'http' ) );
+			$new['login_message'] = sanitize_text_field( $input['login_message'] ?? '' );
 			break;
 
 		case 'esv':
@@ -375,6 +386,13 @@ function tbe_render_settings_page(): void {
 
 				case 'esv':
 					tbe_render_esv_tab( $s );
+					break;
+
+				case 'login':
+					tbe_field_check( 'login_design', __( 'Dress the login screen in the site design: the broken-cross mark, the name in Angel and the active colour scheme, light or dark as the visitor chose', 'tbe-child' ), $s['login_design'] );
+					echo '<p class="description">' . esc_html__( 'Covers the log-in, lost-password, reset and registration screens and the box shown when a session expires. A plugin that styles the login screen, such as LoginPress, takes over while it is active. WPS Hide Login keeps working: it moves the address and the design follows.', 'tbe-child' ) . '</p>';
+					tbe_field_text( 'login_logo', __( 'Logo URL', 'tbe-child' ), $s['login_logo'], __( 'Optional. A square image shown at 72 pixels in place of the mark.', 'tbe-child' ) );
+					tbe_field_text( 'login_message', __( 'Line above the form', 'tbe-child' ), $s['login_message'], __( 'Optional plain text on the log-in screen only, for example who may sign in.', 'tbe-child' ) );
 					break;
 			}
 			submit_button();
