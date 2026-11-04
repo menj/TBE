@@ -106,6 +106,15 @@ function tbe_defaults(): array {
 		'label_critical'   => __( 'Critical Commentary', 'tbe-child' ),
 		'label_islamic'    => __( 'Islamic Perspective (Tafsir)', 'tbe-child' ),
 		'label_reflection' => __( 'Reflection (Tadabbur)', 'tbe-child' ),
+		// Reading bar.
+		'progress'          => 1,
+		'progress_types'    => array( 'post', 'page', 'tbe_commentary', 'bible' ),
+		'progress_position' => 'top',
+		'progress_height'   => 3,
+		'progress_color'    => '',
+		'progress_track'    => '',
+		// Profile links.
+		'social_profiles'   => array(),
 		// ESV and licence.
 		'esv_live_fallback' => 1,
 		'copyright'        => 'Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. The ESV text may not be quoted in any publication made available to the public by a Creative Commons license. The ESV may not be translated into any other language.',
@@ -202,6 +211,8 @@ function tbe_settings_tabs(): array {
 		'general'    => __( 'General', 'tbe-child' ),
 		'appearance' => __( 'Appearance', 'tbe-child' ),
 		'reader'     => __( 'Reader and commentary', 'tbe-child' ),
+		'reading'    => __( 'Reading bar', 'tbe-child' ),
+		'social'     => __( 'Profile links', 'tbe-child' ),
 		'esv'        => __( 'ESV and licence', 'tbe-child' ),
 		'starter'    => __( 'Starter commentary', 'tbe-child' ),
 		'errors'     => __( 'Error pages', 'tbe-child' ),
@@ -255,6 +266,28 @@ function tbe_sanitize_settings( $input ): array {
 				$label        = sanitize_text_field( $input[ $key ] ?? '' );
 				$new[ $key ] = '' !== $label ? $label : tbe_defaults()[ $key ];
 			}
+			break;
+
+		case 'reading':
+			$new['progress']          = $flag( 'progress' );
+			$new['progress_types']    = array_values( array_intersect( array_keys( tbe_progress_type_choices() ), array_map( 'sanitize_key', (array) ( $input['progress_types'] ?? array() ) ) ) );
+			$new['progress_position'] = 'bottom' === ( $input['progress_position'] ?? '' ) ? 'bottom' : 'top';
+			$new['progress_height']   = max( 1, min( 12, (int) ( $input['progress_height'] ?? 3 ) ) );
+			// An empty colour follows the scheme; the "use the scheme" box clears the picker's value.
+			foreach ( array( 'progress_color', 'progress_track' ) as $key ) {
+				$new[ $key ] = empty( $input[ $key . '_scheme' ] ) ? (string) sanitize_hex_color( (string) ( $input[ $key ] ?? '' ) ) : '';
+			}
+			break;
+
+		case 'social':
+			$profiles = array();
+			foreach ( array_keys( tbe_social_networks() ) as $net ) {
+				$url = esc_url_raw( trim( (string) ( $input['social_profiles'][ $net ] ?? '' ) ), array( 'https', 'http' ) );
+				if ( '' !== $url ) {
+					$profiles[ $net ] = $url;
+				}
+			}
+			$new['social_profiles'] = $profiles;
 			break;
 
 		case 'esv':
@@ -332,6 +365,14 @@ function tbe_render_settings_page(): void {
 					tbe_field_text( 'label_reflection', __( 'Reflection', 'tbe-child' ), $s['label_reflection'], __( 'The Christian parallel to tadabbur has no exact name; "Reflection" or "Meditation" both work.', 'tbe-child' ) );
 					break;
 
+				case 'reading':
+					tbe_render_reading_tab( $s );
+					break;
+
+				case 'social':
+					tbe_render_social_tab( $s );
+					break;
+
 				case 'esv':
 					tbe_render_esv_tab( $s );
 					break;
@@ -377,6 +418,55 @@ function tbe_render_appearance_tab( array $s ): void {
 		</div>
 	</div>
 	<?php
+}
+
+function tbe_render_reading_tab( array $s ): void {
+	echo '<p class="description">' . esc_html__( 'A thin bar at the edge of the window fills as the reader scrolls. It never shows on the home page, and screen readers skip it: the scroll bar already says how far down the page you are.', 'tbe-child' ) . '</p>';
+	tbe_field_check( 'progress', __( 'Show the reading progress bar', 'tbe-child' ), $s['progress'] );
+	?>
+	<fieldset class="tbe-field">
+		<legend><?php esc_html_e( 'Show it on', 'tbe-child' ); ?></legend>
+		<?php foreach ( tbe_progress_type_choices() as $type => $label ) : ?>
+			<label class="tbe-check"><input type="checkbox" name="tbe_settings[progress_types][]" value="<?php echo esc_attr( $type ); ?>" <?php checked( in_array( $type, (array) $s['progress_types'], true ) ); ?>> <?php echo esc_html( $label ); ?></label>
+		<?php endforeach; ?>
+	</fieldset>
+	<div class="tbe-field">
+		<label for="tbe-progress-position"><?php esc_html_e( 'Position', 'tbe-child' ); ?></label>
+		<select id="tbe-progress-position" name="tbe_settings[progress_position]">
+			<option value="top" <?php selected( $s['progress_position'], 'top' ); ?>><?php esc_html_e( 'Top of the window, under the admin bar', 'tbe-child' ); ?></option>
+			<option value="bottom" <?php selected( $s['progress_position'], 'bottom' ); ?>><?php esc_html_e( 'Bottom of the window', 'tbe-child' ); ?></option>
+		</select>
+	</div>
+	<?php
+	tbe_field_number( 'progress_height', __( 'Height (pixels)', 'tbe-child' ), $s['progress_height'], 1, 12, __( 'From 1 to 12. The default is 3.', 'tbe-child' ) );
+	$active = tbe_active_colors();
+	?>
+	<h2><?php esc_html_e( 'Colours', 'tbe-child' ); ?></h2>
+	<div class="tbe-grid">
+		<?php foreach ( array( 'progress_color' => array( __( 'Bar', 'tbe-child' ), $active['accent'] ), 'progress_track' => array( __( 'Track behind the bar', 'tbe-child' ), $active['line'] ) ) as $key => $c ) : ?>
+			<div class="tbe-color tbe-color--optional">
+				<label for="tbe-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $c[0] ); ?></label>
+				<input type="color" id="tbe-<?php echo esc_attr( $key ); ?>" name="tbe_settings[<?php echo esc_attr( $key ); ?>]" value="<?php echo esc_attr( '' !== $s[ $key ] ? $s[ $key ] : $c[1] ); ?>">
+				<label class="tbe-check"><input type="checkbox" name="tbe_settings[<?php echo esc_attr( $key ); ?>_scheme]" value="1" <?php checked( '' === $s[ $key ] ); ?>> <?php echo esc_html( 'progress_color' === $key ? __( 'Use the scheme accent', 'tbe-child' ) : __( 'No track', 'tbe-child' ) ); ?></label>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<?php
+}
+
+function tbe_render_social_tab( array $s ): void {
+	echo '<p class="description">' . esc_html__( 'The site’s own profiles, shown as icons in the footer. Paste the full address of each one you want shown and leave the rest empty. The tbe/social block and the [tbe_social] shortcode show the same row anywhere else.', 'tbe-child' ) . '</p>';
+	echo '<div class="tbe-grid tbe-profiles">';
+	foreach ( tbe_social_networks() as $key => $name ) {
+		printf(
+			'<div class="tbe-field"><label for="tbe-profile-%1$s"><span class="tbe-profile-icon">%4$s</span>%2$s</label><input type="url" id="tbe-profile-%1$s" name="tbe_settings[social_profiles][%1$s]" value="%3$s" class="regular-text" placeholder="https://"></div>',
+			esc_attr( $key ),
+			esc_html( $name ),
+			esc_attr( (string) ( $s['social_profiles'][ $key ] ?? '' ) ),
+			tbe_social_svg( $key ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- a bundled SVG.
+		);
+	}
+	echo '</div>';
 }
 
 function tbe_render_esv_tab( array $s ): void {
