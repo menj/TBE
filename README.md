@@ -34,7 +34,17 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## Settings (Appearance → TBE)
-Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **ESV and licence** (token status, local-text count, live fallback, copyright notice).
+Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice). The search base is set under Settings → Permalinks.
+
+## Built in from four plugins (0.8.0)
+The theme does the work of the Minimalist Social Icons Pack, Reading Progress Bar, Unlist Posts & Pages and Pretty Search Permalinks. None of them existed in the theme before. The last three turn themselves off while their plugin is active, so nothing runs twice.
+
+- **Profile links** (`inc/social.php`, `assets/css/social.css`, `assets/img/social/`). Twelve icons from the Minimalist Social Icons Pack 2.8, GPL, stripped of their titles. Each is inline SVG filled with `currentColor`, marked `aria-hidden` and `focusable="false"`, inside a link named by its `aria-label` and 44 pixels square. The footer carries the `tbe/social` block; the `[tbe_social]` shortcode puts the row anywhere else. With no address set, nothing prints and the stylesheet does not load. The pack's LinkedIn and Scribd icons come from Font Awesome under CC BY 4.0 and are left out. Filter: `tbe_social_networks`.
+- **Reading progress bar** (`inc/progress.php`, `assets/css/progress.css`, `assets/js/progress.js`). It shows on single posts, pages and commentary notes, and on Bible chapter and interlinear pages, as chosen on the Reading bar tab. It never shows on the home page. The script uses a passive scroll listener with one `requestAnimationFrame` per frame and moves the fill with a transform; reduced motion drops the transition. Above 600 pixels a top bar starts under the admin bar, and below that the admin bar covers it until it scrolls away. The bar is `aria-hidden`, because the scroll bar already says how far down the page you are and a live `progressbar` would be announced on every scroll.
+- **Unlisted posts** (`inc/unlist.php`, `inc/unlist-admin.php`, `assets/js/unlist-admin.js`). Each public post type, commentary and glossary terms included, gets an Unlist box in the editor sidebar, an Unlisted column, Quick Edit and Bulk Edit, the "Unlisted" post state and an "Unlisted (n)" view. An unlisted entry opens at its address. It is left out of the home page, archives, feeds, search, REST collections, the commentary boxes under the verses, the commentary index, the core and Rank Math sitemaps, `wp_list_pages()`, the page-list block and the previous and next links. Its head carries `noindex`, through `rank_math/frontend/robots` when Rank Math is active. Admin screens, and AJAX calls from this site's admin, still see it. Each entry keeps its state in the post meta `_tbe_unlisted`, and every save rebuilds the option `tbe_unlisted` from it, so two saves at once cannot undo each other. The list is mirrored to the plugin's `unlist_posts`, and a change the plugin later makes to that list is taken over on the theme's next read. `tbe_unlisted_live_ids()` returns whichever list is live. Filter: `tbe_unlist_enabled`.
+- **Search addresses** (`inc/search-permalinks.php`). `/?s=term` answers 301 to `/search/term/`, and `/?s=term&paged=2` to `/search/term/page/2/`. Other query arguments are kept, arrays such as `post_type[]` included, and an empty search is not redirected. Set the base under Settings → Permalinks → Optional (option `tbe_search_base`): lower-case letters, digits and hyphens. A base the theme's own routes use (`bible`, `interlinear`, `credits`, `commentary`, `section`, `glossary`) or one WordPress keeps is refused with a notice, and `search` is used instead (filter `tbe_search_reserved_bases`). The Bible search at `/bible/search/` is its own route and is unchanged. The rules are flushed by the existing version check in `functions.php`, never on an ordinary load. Filter: `tbe_search_permalinks_enabled`.
+
+`php tools/test_plugin_features.php` checks the unlisted filtering and the search addresses.
 
 ## How a chapter is laid out
 Modelled on the verse-by-verse commentary book format, with web-only improvements:
@@ -120,6 +130,8 @@ ESV_API_TOKEN=... python3 tools/fetch_esv.py --delay 15 --max-delay 30 --max 100
 Existing chapter files are skipped, so delete a file to re-fetch it. The script is deliberately slow and stops immediately if the API reports a rate limit.
 
 ## Licence note
+The profile icons in `assets/img/social/` are from the Minimalist Social Icons Pack 2.8, released under the GPL. The brand marks stay trademarks of their owners.
+
 The ESV text is © Crossway. The copyright notice shown in the footer is editable under ESV and licence; use the exact wording your Crossway permission requires.
 
 ## Fonts
