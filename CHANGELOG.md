@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.2
+
+Two fixes to the search base, from the review of the same code on injil.help.
+
+- A page whose address is the base now refuses it, as on injil.help, and the fallback candidates are checked the same way, so a page at `/search/` keeps its child paths.
+- When `search`, `find` and `search-results` are all taken, the fallback numbers the last (`search-results-2`, `search-results-3` and on) until one is free.
+- `tools/test_plugin_features.php` checks both.
+
 ## 0.8.1
 
 Fixes to the search base from the review of the same code on injil.help. Nothing was renamed or removed.
