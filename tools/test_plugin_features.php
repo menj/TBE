@@ -52,6 +52,7 @@ $GLOBALS['ih_extra_slugs'] = array();
 function get_taxonomies( $args = array(), $output = 'names' ) { $out = array( 'topic' => (object) array( 'rewrite' => array( 'slug' => '/topics/' ) ) ); foreach ( $GLOBALS['ih_extra_slugs'] as $i => $slug ) { $out[ 'x' . $i ] = (object) array( 'rewrite' => array( 'slug' => $slug ) ); } return $out; }
 $GLOBALS['ih_flushes'] = 0;
 function flush_rewrite_rules( $hard = true ) { $GLOBALS['ih_flushes']++; $GLOBALS['ih_flush_base'] = $GLOBALS['wp_rewrite']->search_base ?? null; }
+function get_page_by_path( $path ) { return in_array( $path, $GLOBALS['ih_pages'] ?? array(), true ) ? (object) array( 'ID' => 1 ) : null; }
 function sanitize_key( $k ) { return preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) $k ) ); }
 
 require dirname( __DIR__ ) . '/inc/unlist.php';
@@ -175,6 +176,14 @@ $GLOBALS['wp_rewrite']->search_base = 'search';
 $GLOBALS['ih_flush_base'] = null;
 foreach ( $GLOBALS['ih_hooks']['init'] as $cb ) { $cb(); }
 check( 'search-results' === $GLOBALS['ih_flush_base'], 'the rules are flushed with the base in force, set before the flush' );
+$GLOBALS['ih_extra_slugs'] = array();
+
+// A page at /search/ takes the base too, and when all three fallbacks are taken a number is added.
+$GLOBALS['ih_pages'] = array( 'search' );
+check( 'find' === tbe_search_fallback_base(), 'a page at /search/ moves the fallback to find' );
+$GLOBALS['ih_extra_slugs'] = array( 'find', 'search-results', 'search-results-2' );
+check( 'search-results-3' === tbe_search_fallback_base(), 'with all three taken, the first free numbered base is used' );
+$GLOBALS['ih_pages']       = array();
 $GLOBALS['ih_extra_slugs'] = array();
 
 echo $fail ? "\n{$fail} failed\n" : "\nall passed\n";
