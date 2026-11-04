@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.1
+
+Fixes to the search base from the review of the same code on injil.help. Nothing was renamed or removed.
+
+- The list of refused bases also takes the live category and tag bases from Settings → Permalinks and the rewrite slug of every registered post type and taxonomy (`tbe_search_live_slugs()`).
+- A base stored before it was refused left the saved rewrite rules on the old base. The option `tbe_search_rules_base` records the base the rules were built with, and `init` flushes once when the base in force differs.
+- An array posted for the field made `sanitize_key()` throw a TypeError on PHP 8. The value is checked with `is_string()` first.
+- `tools/test_plugin_features.php` checks all of these.
+
 ## 0.8.0
 
 The features of four plugins, built into the theme. Nothing was renamed or removed.
