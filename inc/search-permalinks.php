@@ -92,7 +92,22 @@ function tbe_search_clean_base( $raw ) {
 /** The search base; "search" when the stored value is empty or reserved. */
 function tbe_search_base() {
 	$base = tbe_search_clean_base( get_option( 'tbe_search_base', 'search' ) );
-	return '' === $base ? 'search' : $base;
+	return '' === $base ? tbe_search_fallback_base() : $base;
+}
+
+/**
+ * The base used when the chosen one is empty or refused: the first of search, find and
+ * search-results that is free, since a post type or taxonomy may register "search" itself.
+ *
+ * @return string
+ */
+function tbe_search_fallback_base() {
+	foreach ( array( 'search', 'find', 'search-results' ) as $candidate ) {
+		if ( '' !== tbe_search_clean_base( $candidate ) ) {
+			return $candidate;
+		}
+	}
+	return 'search-results';
 }
 
 /**
@@ -153,7 +168,11 @@ if ( tbe_search_permalinks_on() ) {
 	add_action(
 		'init',
 		function () {
-			$base = tbe_search_base();
+			// The base can change here: a post type registered on init after priority 1 may have
+			// taken it. Set it again on every load, so links and any flush use the base in force.
+			global $wp_rewrite;
+			$base                    = tbe_search_base();
+			$wp_rewrite->search_base = $base;
 			if ( get_option( 'tbe_search_rules_base' ) !== $base ) {
 				flush_rewrite_rules( false );
 				update_option( 'tbe_search_rules_base', $base, false );
@@ -176,14 +195,14 @@ if ( tbe_search_permalinks_on() ) {
 					add_settings_error(
 						'tbe_search_base',
 						'tbe_search_base_reserved',
-						/* translators: %s: the refused base */
-						sprintf( __( 'The search base "%s" is taken by another part of the site, so "search" is used instead.', 'tbe-child' ), str_replace( '_', '', $raw ) ),
+						/* translators: 1: the refused base, 2: the base used instead */
+						sprintf( __( 'The search base "%1$s" is taken by another part of the site, so "%2$s" is used instead.', 'tbe-child' ), str_replace( '_', '', $raw ), tbe_search_fallback_base() ),
 						'warning'
 					);
 					// The Permalinks screen redirects after saving; settings_errors() reads this transient there.
 					set_transient( 'settings_errors', get_settings_errors(), 30 );
 				}
-				update_option( 'tbe_search_base', '' === $base ? 'search' : $base );
+				update_option( 'tbe_search_base', '' === $base ? tbe_search_fallback_base() : $base );
 				global $wp_rewrite;
 				$wp_rewrite->search_base = tbe_search_base();
 			}
