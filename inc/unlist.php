@@ -8,8 +8,9 @@
  * next links, the "Read next" row and REST collections. Its head carries noindex, through Rank
  * Math's robots filter when Rank Math is active.
  *
- * The IDs are kept in one option, tbe_unlisted, as the plugin keeps them in unlist_posts;
- * a site that ran the plugin has its list copied over once. While the plugin is active this file
+ * Each post's state is post meta (_tbe_unlisted); the option tbe_unlisted holds the list built
+ * from it, mirrored to the plugin's unlist_posts. A change the plugin makes to its list while it
+ * is active is taken over when the theme next reads it. While the plugin is active this file
  * does nothing, so the two never run twice. Filter tbe_unlist_enabled to switch it off.
  *
  * @package tbe-child
@@ -47,14 +48,79 @@ function tbe_unlist_normalise( $stored ) {
 	return array_values( array_unique( $ids ) );
 }
 
-/** The unlisted IDs. The plugin's list is copied in the first time, when the theme has none. */
-function tbe_unlisted_ids() {
-	$stored = get_option( TBE_UNLISTED, null );
-	if ( null === $stored ) {
-		$stored = tbe_unlist_normalise( get_option( 'unlist_posts', array() ) );
-		update_option( TBE_UNLISTED, $stored, true );
+/** Post meta that holds the truth for each post: 1 when it is unlisted. */
+const TBE_UNLISTED_META = '_tbe_unlisted';
+
+/**
+ * A fingerprint of a list of IDs, order aside.
+ *
+ * @param int[] $ids IDs.
+ * @return string
+ */
+function tbe_unlist_hash( $ids ) {
+	$ids = tbe_unlist_normalise( $ids );
+	sort( $ids );
+	return md5( implode( ',', $ids ) );
+}
+
+/** The IDs whose post meta says unlisted, read from the database each time. */
+function tbe_unlist_meta_ids() {
+	global $wpdb;
+	$ids = tbe_unlist_normalise( $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT post_id FROM {$wpdb->postmeta} WHERE meta_key = %s AND meta_value = '1'", TBE_UNLISTED_META ) ) );
+	sort( $ids );
+	return $ids;
+}
+
+/**
+ * Write the list from the post meta: the theme option, and the plugin's unlist_posts as a
+ * mirror, so the plugin sees the same list if it is switched on again. The fingerprint of
+ * what was written is kept, so a later change made by the plugin can be told apart.
+ *
+ * @return int[]
+ */
+function tbe_unlist_rebuild() {
+	$ids = tbe_unlist_meta_ids();
+	update_option( TBE_UNLISTED, $ids, true );
+	update_option( 'unlist_posts', $ids );
+	update_option( 'tbe_unlisted_src', tbe_unlist_hash( $ids ), false );
+	return $ids;
+}
+
+/**
+ * Take over the plugin's list when it differs from what the theme last wrote: the first time,
+ * and again whenever the plugin has been active and changed it.
+ */
+function tbe_unlist_sync() {
+	$plugin = tbe_unlist_normalise( get_option( 'unlist_posts', array() ) );
+	if ( get_option( 'tbe_unlisted_src' ) === tbe_unlist_hash( $plugin ) && null !== get_option( TBE_UNLISTED, null ) ) {
+		return;
 	}
-	return tbe_unlist_normalise( $stored );
+	foreach ( array_diff( tbe_unlist_meta_ids(), $plugin ) as $id ) {
+		delete_post_meta( $id, TBE_UNLISTED_META );
+	}
+	foreach ( $plugin as $id ) {
+		update_post_meta( $id, TBE_UNLISTED_META, '1' );
+	}
+	tbe_unlist_rebuild();
+}
+
+/** The unlisted IDs the theme applies, after taking over any change the plugin made. */
+function tbe_unlisted_ids() {
+	tbe_unlist_sync();
+	return tbe_unlist_normalise( get_option( TBE_UNLISTED, array() ) );
+}
+
+/**
+ * The unlisted IDs from whichever side is live: the plugin's list while it is active, else the
+ * theme's. For exclusions that run either way, such as the image sitemap.
+ *
+ * @return int[]
+ */
+function tbe_unlisted_live_ids() {
+	if ( class_exists( 'Unlist_Posts' ) || defined( 'UNLIST_POSTS_VER' ) ) {
+		return (bool) apply_filters( 'unlist_posts_enabled', true ) ? tbe_unlist_normalise( get_option( 'unlist_posts', array() ) ) : array();
+	}
+	return tbe_unlist_on() ? tbe_unlisted_ids() : array();
 }
 
 /**
@@ -68,20 +134,24 @@ function tbe_is_unlisted( $post_id ) {
 }
 
 /**
- * Add a post to the list or take it off.
+ * Add a post to the list or take it off. The post meta is the truth and the list is rebuilt
+ * from it, so two saves at the same moment cannot undo each other.
  *
  * @param int  $post_id Post ID.
  * @param bool $unlist  True to unlist.
  */
 function tbe_set_unlisted( $post_id, $unlist ) {
 	$post_id = (int) $post_id;
-	$ids     = tbe_unlisted_ids();
-	if ( $unlist ) {
-		$ids[] = $post_id;
-	} else {
-		$ids = array_diff( $ids, array( $post_id ) );
+	if ( $post_id <= 0 ) {
+		return;
 	}
-	update_option( TBE_UNLISTED, tbe_unlist_normalise( $ids ), true );
+	tbe_unlist_sync();
+	if ( $unlist ) {
+		update_post_meta( $post_id, TBE_UNLISTED_META, '1' );
+	} else {
+		delete_post_meta( $post_id, TBE_UNLISTED_META );
+	}
+	tbe_unlist_rebuild();
 }
 
 /** The post types the feature covers: every public one, as in the plugin. */

@@ -20,7 +20,18 @@ $GLOBALS['ih_admin']   = false;
 $GLOBALS['ih_ajax']    = false;
 $GLOBALS['ih_referer'] = '';
 $GLOBALS['ih_hooks']   = array();
-$GLOBALS['wpdb']       = (object) array( 'posts' => 'wp_posts' );
+$GLOBALS['ih_meta']    = array(); // post ID => '1'
+class TBE_Test_DB {
+	public $posts    = 'wp_posts';
+	public $postmeta = 'wp_postmeta';
+	public function prepare( $sql, ...$args ) { return $sql; }
+	public function get_col( $sql ) { return array_map( 'strval', array_keys( $GLOBALS['ih_meta'] ) ); }
+}
+$GLOBALS['wpdb'] = new TBE_Test_DB();
+function update_post_meta( $id, $key, $value ) { $GLOBALS['ih_meta'][ (int) $id ] = $value; return true; }
+function delete_post_meta( $id, $key ) { unset( $GLOBALS['ih_meta'][ (int) $id ] ); return true; }
+function sanitize_text_field( $s ) { return trim( strip_tags( (string) $s ) ); }
+
 
 function add_action( $hook, $cb, $p = 10, $a = 1 ) { $GLOBALS['ih_hooks'][ $hook ][] = $cb; }
 function add_filter( $hook, $cb, $p = 10, $a = 1 ) { $GLOBALS['ih_hooks'][ $hook ][] = $cb; }
@@ -50,14 +61,30 @@ function check( $ok, $label ) {
 
 // The plugin's list is copied in once; a malformed list is emptied.
 $GLOBALS['ih_options']['unlist_posts'] = array( '12', 7, 7, 0, -3, 'x' );
-check( array( 12, 7 ) === tbe_unlisted_ids(), 'the plugin list is copied and cleaned' );
-check( array( 12, 7 ) === $GLOBALS['ih_options']['tbe_unlisted'], 'the copy is stored under the theme option' );
+check( array( 7, 12 ) === tbe_unlisted_ids(), 'the plugin list is copied and cleaned' );
+check( array( 7, 12 ) === $GLOBALS['ih_options']['tbe_unlisted'], 'the copy is stored under the theme option' );
 check( array() === tbe_unlist_normalise( '' ), 'an empty-string list counts as empty' );
 
 tbe_set_unlisted( 30, true );
 tbe_set_unlisted( 7, false );
 tbe_set_unlisted( 30, true );
 check( array( 12, 30 ) === tbe_unlisted_ids(), 'set_unlisted adds once and removes' );
+check( array( 12, 30 ) === $GLOBALS['ih_options']['unlist_posts'], 'the plugin option mirrors the theme list' );
+check( array( 12 => '1', 30 => '1' ) === $GLOBALS['ih_meta'], 'each post keeps its state in post meta' );
+
+// Two saves that each read the list before the other wrote: the meta keeps both.
+$GLOBALS['ih_options']['tbe_unlisted'] = array( 12 ); // a stale list, as a racing request would leave it
+tbe_set_unlisted( 44, true );
+check( array( 12, 30, 44 ) === tbe_unlisted_ids(), 'a save rebuilds the list from the meta, so no edit is lost' );
+tbe_set_unlisted( 44, false );
+
+// The plugin is switched on again, changes its list, and is switched off: the theme takes the change.
+$GLOBALS['ih_options']['unlist_posts'] = array( 30, 55 );
+check( array( 30, 55 ) === tbe_unlisted_ids(), 'a later change by the plugin is taken over' );
+check( array( 30 => '1', 55 => '1' ) === $GLOBALS['ih_meta'], 'the meta follows the plugin change' );
+check( array( 30, 55 ) === tbe_unlisted_live_ids(), 'the live list is the theme list while the plugin is off' );
+tbe_set_unlisted( 12, true );
+tbe_set_unlisted( 55, false );
 check( tbe_is_unlisted( 30 ) && ! tbe_is_unlisted( 7 ), 'is_unlisted reads the list' );
 
 $list   = (object) array( 'is_singular' => false );
@@ -104,6 +131,8 @@ check( 'https://thebible.exposed/search/mercy/page/2/' === tbe_search_pretty_url
 check( 'https://thebible.exposed/find/a/b/' === tbe_search_pretty_url( $home, 'find', 'a/b' ), 'a custom base, and a slash kept as core keeps it' );
 check( '' === tbe_search_pretty_url( $home, 'search', '   ' ), 'an empty search is not redirected' );
 check( 'https://thebible.exposed/search/x?post_type=page' === tbe_search_pretty_url( $home, 'search', 'x', 1, array( 'post_type' => 'page' ), false ), 'other arguments are carried over' );
+check( array( 'post_type' => array( 'post', 'page' ), 'lang' => 'en' ) === tbe_search_clean_args( array( 'post_type' => array( 'post', '<b>page</b>' ), 'lang' => 'en' ) ), 'array arguments such as post_type[] are kept' );
+check( 'https://thebible.exposed/search/x/?post_type%5B0%5D=post&post_type%5B1%5D=page' === tbe_search_pretty_url( $home, 'search', 'x', 1, array( 'post_type' => array( 'post', 'page' ) ) ), 'the redirect carries them' );
 check( 'search' === tbe_search_base(), 'the default base is search' );
 $GLOBALS['ih_options']['tbe_search_base'] = 'Find Me!';
 check( 'findme' === tbe_search_base(), 'the base is sanitised' );
