@@ -118,7 +118,7 @@ function tbe_search_fallback_base() {
 			return 'search-results-' . $n;
 		}
 	}
-	return 'search-results-' . wp_rand( 100, 999999 );
+	return 'search-results-' . substr( md5( home_url( '/' ) ), 0, 8 ); // Stable per site, so rules and links agree.
 }
 
 /**
