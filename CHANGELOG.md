@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.0
+
+The error pages, checked against the brief for all eight themes. The drop-ins, the static pages, the button and the `.htaccess` lines were already here. Nothing was renamed or removed.
+
+- The installer no longer replaces a drop-in another theme wrote. It used to treat any "Written by the … theme; safe to delete" file as replaceable; now it writes only a missing file or its own, and the Error pages tab says "written by another theme; left alone".
+- The Error pages tab tells a current copy from an outdated one ("installed (this theme), outdated"). `tbe_dropin_state()` returns `outdated` when the file differs from what the theme would write now. `TBE_DROPIN_VERSION` is 2, so the first admin page after the update writes the new copies.
+- Each write goes to a temporary file and is renamed into place, so WordPress never reads half a drop-in.
+- `php-error.php` opens on "Something went wrong" and `db-error.php` on "We cannot reach our database"; the other variants stay and the script still picks one at random.
+- Every error page's title tag reads "<page> | The Bible Exposed" (it used " · ") and stays under 60 characters: a variant title over 32 characters falls back to the page's short name (`tbe_error_title_tag()`), in PHP and in the script.
+- The drop-ins send `X-Robots-Tag: noindex` beside the robots meta tag.
+- The code above the heading takes the rubric red instead of the gold, which fell below 4.5:1 on the light card.
+- The 404 page sends `noindex, follow`, and its title reads "Page not found | The Bible Exposed" (it used an en dash).
+- `tools/test_error_pages.php`.
+
 ## 0.9.0
 
 A login screen in the site's dress. Nothing was renamed or removed.
