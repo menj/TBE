@@ -136,6 +136,13 @@ check( 'https://thebible.exposed/search/x/?post_type%5B0%5D=post&post_type%5B1%5
 check( 'search' === tbe_search_base(), 'the default base is search' );
 $GLOBALS['ih_options']['tbe_search_base'] = 'Find Me!';
 check( 'findme' === tbe_search_base(), 'the base is sanitised' );
+$GLOBALS['ih_options']['tbe_search_base'] = 'my_search';
+check( 'mysearch' === tbe_search_base(), 'underscores are removed, as the help text says' );
+foreach ( array( 'bible', 'Bible', 'interlinear', 'commentary', 'glossary', 'credits', 'wp-json' ) as $reserved ) {
+	$GLOBALS['ih_options']['tbe_search_base'] = $reserved;
+	check( 'search' === tbe_search_base(), "the reserved base {$reserved} falls back to search" );
+}
+check( '' === tbe_search_clean_base( 'bible' ) && 'find' === tbe_search_clean_base( 'find' ), 'clean_base refuses a reserved base and keeps a free one' );
 check( isset( $GLOBALS['ih_hooks']['template_redirect'] ), 'the redirect is hooked' );
 
 echo $fail ? "\n{$fail} failed\n" : "\nall passed\n";

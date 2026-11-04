@@ -21,9 +21,34 @@ function tbe_search_permalinks_on() {
 	return ! function_exists( 'wpseosearch_base' ) && (bool) apply_filters( 'tbe_search_permalinks_enabled', true );
 }
 
-/** The search base: lower-case letters, digits, hyphens and underscores; "search" when empty. */
+/**
+ * Slugs the search base may not take: the theme's own routes (the Bible reader and its
+ * interlinear, credits, commentary and its sections, the glossary), which have rewrite rules
+ * of higher priority, and the paths WordPress keeps for itself. Filter tbe_search_reserved_bases.
+ *
+ * @return string[]
+ */
+function tbe_search_reserved_bases() {
+	return (array) apply_filters(
+		'tbe_search_reserved_bases',
+		array( 'bible', 'interlinear', 'credits', 'commentary', 'section', 'glossary', 'wp-admin', 'wp-content', 'wp-includes', 'wp-json', 'feed', 'page', 'comments', 'category', 'tag', 'author', 'embed', 'trackback', 'attachment', 'type' )
+	);
+}
+
+/**
+ * A base as it is stored: lower-case letters, digits and hyphens. Empty or reserved gives ''.
+ *
+ * @param mixed $raw Submitted or stored value.
+ * @return string
+ */
+function tbe_search_clean_base( $raw ) {
+	$base = str_replace( '_', '', sanitize_key( (string) $raw ) );
+	return in_array( $base, tbe_search_reserved_bases(), true ) ? '' : $base;
+}
+
+/** The search base; "search" when the stored value is empty or reserved. */
 function tbe_search_base() {
-	$base = sanitize_key( (string) get_option( 'tbe_search_base', 'search' ) );
+	$base = tbe_search_clean_base( get_option( 'tbe_search_base', 'search' ) );
 	return '' === $base ? 'search' : $base;
 }
 
@@ -86,7 +111,19 @@ if ( tbe_search_permalinks_on() ) {
 		function () {
 			if ( isset( $_POST['tbe_search_base'] ) && current_user_can( 'manage_options' ) ) {
 				check_admin_referer( 'update-permalink' );
-				$base = sanitize_key( wp_unslash( $_POST['tbe_search_base'] ) );
+				$raw  = sanitize_key( wp_unslash( $_POST['tbe_search_base'] ) );
+				$base = tbe_search_clean_base( $raw );
+				if ( '' !== $raw && '' === $base ) {
+					add_settings_error(
+						'tbe_search_base',
+						'tbe_search_base_reserved',
+						/* translators: %s: the refused base */
+						sprintf( __( 'The search base "%s" is taken by another part of the site, so "search" is used instead.', 'tbe-child' ), str_replace( '_', '', $raw ) ),
+						'warning'
+					);
+					// The Permalinks screen redirects after saving; settings_errors() reads this transient there.
+					set_transient( 'settings_errors', get_settings_errors(), 30 );
+				}
 				update_option( 'tbe_search_base', '' === $base ? 'search' : $base );
 				global $wp_rewrite;
 				$wp_rewrite->search_base = tbe_search_base();
@@ -98,7 +135,7 @@ if ( tbe_search_permalinks_on() ) {
 					printf(
 						'<input type="text" name="tbe_search_base" id="tbe_search_base" value="%1$s" class="regular-text code" aria-describedby="tbe-search-base-help"><p class="description" id="tbe-search-base-help">%2$s</p>',
 						esc_attr( tbe_search_base() ),
-						esc_html__( 'Site search results open at /search/term/ by default. Letters, digits and hyphens only; empty keeps "search".', 'tbe-child' )
+						esc_html__( 'Site search results open at /search/term/ by default. Lower-case letters, digits and hyphens; anything else is removed. Empty, or a word another part of the site uses (bible, commentary, glossary and the like), keeps "search".', 'tbe-child' )
 					);
 				},
 				'permalink',
