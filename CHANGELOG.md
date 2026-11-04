@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.1
+
+The structured data names the author. Nothing visible changes, and nothing was renamed or removed.
+
+- One Person node, `#author` at the site root: "Mohd Elfie Nieshaem Juferi", `url` `https://menj.bio`, `sameAs` `https://menj.bio` (`tbe_ld_author_node()` in `inc/schema.php`). It is added once to every graph. `tbe_ld_person()` now returns a reference to it, so every commentary Article points to it, whoever the WordPress user is; before, each Article embedded the user's display name and author archive.
+- `tbe_ld_one_author()` points every `author` in the graph to that Person and gives page nodes (WebPage, ItemPage, CollectionPage, SearchResultsPage and the like) the same reference. The publisher stays the site.
+- `tools/test_schema_author.php` checks the Person, the references, one Person per graph and the publisher.
+- The front end was searched for wording that presents other sites as related ("sister", "network", "our other site", "family of sites"). There is none to change: the hits are Bible text and the names of social networks.
+
 ## 0.10.0
 
 The error pages, checked against the brief for all eight themes. The drop-ins, the static pages, the button and the `.htaccess` lines were already here. Nothing was renamed or removed.

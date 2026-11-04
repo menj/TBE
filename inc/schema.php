@@ -220,12 +220,76 @@ function tbe_ld_book_node( array $book, bool $with_chapters = false ): array {
 	return array( $node, array() );
 }
 
+/**
+ * The author of an entry: a reference to the one author Person. The owner
+ * ruled on 4 November 2026 that the structured data names him as the author
+ * of every entry, whoever the WordPress user is; nothing visible changes.
+ *
+ * @param int $user_id WordPress user, kept for callers; no longer read.
+ */
 function tbe_ld_person( int $user_id ): array {
+	return tbe_ld_ref( tbe_ld_author_id() );
+}
+
+function tbe_ld_author_id(): string {
+	return home_url( '/#author' );
+}
+
+/** The author Person: Mohd Elfie Nieshaem Juferi, at https://menj.bio. */
+function tbe_ld_author_node(): array {
 	return array(
-		'@type' => 'Person',
-		'name'  => (string) get_the_author_meta( 'display_name', $user_id ),
-		'url'   => (string) get_author_posts_url( $user_id ),
+		'@type'  => 'Person',
+		'@id'    => tbe_ld_author_id(),
+		'name'   => 'Mohd Elfie Nieshaem Juferi',
+		'url'    => 'https://menj.bio',
+		'sameAs' => array( 'https://menj.bio' ),
 	);
+}
+
+/**
+ * One author across the graph: every author value points to the author
+ * Person, every article and page node without one gets that reference, and
+ * the Person is added once. The publisher stays the site.
+ *
+ * @param array $nodes Top-level nodes.
+ * @return array
+ */
+function tbe_ld_one_author( array $nodes ): array {
+	$id   = tbe_ld_author_id();
+	$walk = static function ( $n ) use ( &$walk, $id ) {
+		if ( ! is_array( $n ) ) {
+			return $n;
+		}
+		foreach ( $n as $k => $v ) {
+			if ( 'author' === $k ) {
+				$n[ $k ] = tbe_ld_ref( $id );
+			} elseif ( is_array( $v ) ) {
+				$n[ $k ] = $walk( $v );
+			}
+		}
+		return $n;
+	};
+	$types = array( 'Article', 'BlogPosting', 'WebPage', 'AboutPage', 'CollectionPage', 'ItemPage', 'SearchResultsPage', 'FAQPage', 'ProfilePage', 'ContactPage' );
+	$have  = false;
+	foreach ( $nodes as $i => $node ) {
+		if ( ! is_array( $node ) ) {
+			continue;
+		}
+		if ( $id === ( $node['@id'] ?? '' ) ) {
+			$nodes[ $i ] = array_merge( $node, tbe_ld_author_node() );
+			$have        = true;
+			continue;
+		}
+		$node = $walk( $node );
+		if ( array_intersect( (array) ( $node['@type'] ?? array() ), $types ) && empty( $node['author'] ) ) {
+			$node['author'] = tbe_ld_ref( $id );
+		}
+		$nodes[ $i ] = $node;
+	}
+	if ( ! $have ) {
+		$nodes[] = tbe_ld_author_node();
+	}
+	return array_values( $nodes );
 }
 
 /** Commentary entry as an Article, with its variants table, Qur'an citations and glossary mentions. */
@@ -683,7 +747,7 @@ function tbe_ld_graph(): array {
 	}
 	return array(
 		'@context' => 'https://schema.org',
-		'@graph'   => array_values( $out ),
+		'@graph'   => tbe_ld_one_author( array_values( $out ) ),
 	);
 }
 
