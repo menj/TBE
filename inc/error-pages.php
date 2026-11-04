@@ -75,7 +75,9 @@ function tbe_install_dropins(): array {
 		$path = WP_CONTENT_DIR . '/' . $file;
 		// A temporary name, then a rename, so WordPress never reads half a file.
 		$tmp             = $path . '.' . uniqid( 'tbe-', true ) . '.tmp';
-		$result[ $file ] = ( is_writable( WP_CONTENT_DIR ) && false !== @file_put_contents( $tmp, tbe_dropin_source( $file ) ) && @rename( $tmp, $path ) ) ? 'written' : 'failed'; // phpcs:ignore WordPress.WP.AlternativeFunctions, WordPress.PHP.NoSilencedErrors
+		$source          = tbe_dropin_source( $file );
+		// The whole text or nothing: a short write never replaces the live file.
+		$result[ $file ] = ( is_writable( WP_CONTENT_DIR ) && strlen( $source ) === @file_put_contents( $tmp, $source ) && @rename( $tmp, $path ) ) ? 'written' : 'failed'; // phpcs:ignore WordPress.WP.AlternativeFunctions, WordPress.PHP.NoSilencedErrors
 		if ( file_exists( $tmp ) ) {
 			@unlink( $tmp ); // phpcs:ignore WordPress.WP.AlternativeFunctions, WordPress.PHP.NoSilencedErrors
 		}
@@ -87,10 +89,13 @@ function tbe_install_dropins(): array {
 	return $result;
 }
 
-/** Remove this theme's own copies (only those carrying its marker). */
+/**
+ * Remove this theme's own copies (only those carrying its marker). An outdated copy counts: on switch_theme the
+ * stylesheet already names the new theme, so the font URL in a current copy no longer matches.
+ */
 function tbe_remove_dropins(): void {
 	foreach ( array_keys( tbe_dropin_specs() ) as $file ) {
-		if ( 'ours' === tbe_dropin_state( $file ) ) {
+		if ( in_array( tbe_dropin_state( $file ), array( 'ours', 'outdated' ), true ) ) {
 			wp_delete_file( WP_CONTENT_DIR . '/' . $file );
 		}
 	}
