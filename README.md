@@ -100,8 +100,19 @@ Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Test
 ## Error pages
 Errors get their own pages, in the site's look (the broken cross, Angel, burgundy and gold, light and dark) and with a dry edge aimed at the doctrines, not the people.
 
-- **Errors WordPress answers.** `maintenance.php` (503), `db-error.php` (the database cannot be reached) and `php-error.php` (a fatal PHP error) are written into `wp-content` by the theme, so they show even when WordPress is down. They are installed on activation and after each update, refreshed from **Appearance → TBE → Error pages**, and removed again if another theme is activated. A file of yours with the same name is never overwritten; one written by another theme (it says "Written by the … theme; safe to delete") is replaced. Switch it off under General.
-- **Errors the web server answers.** 400, 401, 403, 404 for files, 500, 502 and 503 come from Apache before WordPress starts. The static pages are in `errors/` (rebuild with `php tools/build_error_pages.php`); the Error pages tab gives the `ErrorDocument` lines to paste into `.htaccess`.
+- **Errors WordPress answers.** `maintenance.php` (503), `db-error.php` (the database cannot be reached) and `php-error.php` (a fatal PHP error) are written into `wp-content` by the theme, so they show even when WordPress is down. They are installed on activation and after each update, refreshed from **Appearance → TBE → Error pages**, and removed again if another theme is activated. They answer `503` with `Retry-After` (maintenance, database) or `500` ("Something went wrong"), with `noindex` and `no-store`. The tab shows each as not installed, installed and current, installed and outdated, or someone else's file. A file the theme did not write, yours or another theme's, is never overwritten (from 0.10.0; earlier versions replaced another theme's copy). Switch it off under General.
+- **Errors the web server answers.** 400, 401, 403, 404 for files, 500, 502 and 503 come from Apache before WordPress starts. The static pages are in `errors/` (rebuild with `php tools/build_error_pages.php`); the Error pages tab gives the `ErrorDocument` lines to paste into `.htaccess`:
+
+  ```
+  ErrorDocument 400 /wp-content/themes/TBE/errors/400.html
+  ErrorDocument 401 /wp-content/themes/TBE/errors/401.html
+  ErrorDocument 403 /wp-content/themes/TBE/errors/403.html
+  ErrorDocument 404 /wp-content/themes/TBE/errors/404.html
+  ErrorDocument 500 /wp-content/themes/TBE/errors/500.html
+  ErrorDocument 502 /wp-content/themes/TBE/errors/502.html
+  ErrorDocument 503 /wp-content/themes/TBE/errors/503.html
+  ```
+
 - Missing pages inside the site use `templates/404.html`, whose message is chosen at random on each load.
 - Every page has several wordings (`inc/error-page-html.php`); a different one greets each visit. Static pages and the drop-ins pick one in the browser, so a visitor without JavaScript sees the first.
 

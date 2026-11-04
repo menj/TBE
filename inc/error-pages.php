@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const TBE_DROPIN_VERSION = '1';
+const TBE_DROPIN_VERSION = '2';
 
 require_once __DIR__ . '/error-page-html.php';
 
@@ -33,11 +33,15 @@ function tbe_dropin_source( string $file ): string {
 	$font    = wp_parse_url( get_stylesheet_directory_uri() . '/assets/fonts/Angel.woff2', PHP_URL_PATH );
 	$headers = "\tif ( ! headers_sent() ) {\n\t\theader( 'HTTP/1.1 " . $spec['status'] . " ' . " . ( 503 === $spec['status'] ? "'Service Unavailable'" : "'Internal Server Error'" ) . ", true, " . $spec['status'] . " );\n\t\theader( 'Content-Type: text/html; charset=utf-8' );\n"
 		. ( $spec['retry'] ? "\t\theader( 'Retry-After: " . $spec['retry'] . "' );\n" : '' )
-		. "\t\theader( 'Cache-Control: no-store, max-age=0' );\n\t}\n";
+		. "\t\theader( 'X-Robots-Tag: noindex' );\n\t\theader( 'Cache-Control: no-store, max-age=0' );\n\t}\n";
 	return "<?php\n// TBE error-page drop-in " . TBE_DROPIN_VERSION . '. Written by the TBE theme; safe to delete.' . "\n" . $headers . "?>\n" . tbe_error_page_html( $spec['key'], (string) $font ) . "\n";
 }
 
-/** 'missing', 'ours' (written by this theme), 'theme' (written by another theme, safe to replace) or 'foreign' (leave alone). */
+/**
+ * 'missing', 'ours' (written by this theme, current), 'outdated' (written by this theme, an older copy), 'theme'
+ * (written by another theme) or 'foreign' (anyone else's). Only 'missing', 'ours' and 'outdated' are written:
+ * from 0.10.0 a file another theme wrote is left alone too, since the theme never overwrites a file it did not write.
+ */
 function tbe_dropin_state( string $file ): string {
 	$path = WP_CONTENT_DIR . '/' . $file;
 	if ( ! file_exists( $path ) ) {
@@ -45,7 +49,7 @@ function tbe_dropin_state( string $file ): string {
 	}
 	$head = (string) file_get_contents( $path, false, null, 0, 400 );
 	if ( false !== strpos( $head, 'Written by the TBE theme; safe to delete' ) ) {
-		return 'ours';
+		return (string) file_get_contents( $path ) === tbe_dropin_source( $file ) ? 'ours' : 'outdated';
 	}
 	return preg_match( '/Written by the .{1,60} theme; safe to delete/', $head ) ? 'theme' : 'foreign';
 }
@@ -60,17 +64,23 @@ function tbe_install_dropins(): array {
 	$result = array();
 	foreach ( array_keys( tbe_dropin_specs() ) as $file ) {
 		$state = tbe_dropin_state( $file );
-		if ( 'foreign' === $state ) {
+		if ( 'foreign' === $state || 'theme' === $state ) {
 			$result[ $file ] = 'kept';
 			continue;
 		}
-		$source = tbe_dropin_source( $file );
-		$path   = WP_CONTENT_DIR . '/' . $file;
-		if ( 'ours' === $state && (string) file_get_contents( $path ) === $source ) {
+		if ( 'ours' === $state ) {
 			$result[ $file ] = 'unchanged';
 			continue;
 		}
-		$result[ $file ] = ( is_writable( WP_CONTENT_DIR ) && false !== file_put_contents( $path, $source ) ) ? 'written' : 'failed'; // phpcs:ignore WordPress.WP.AlternativeFunctions
+		$path = WP_CONTENT_DIR . '/' . $file;
+		// A temporary name, then a rename, so WordPress never reads half a file.
+		$tmp             = $path . '.' . uniqid( 'tbe-', true ) . '.tmp';
+		$source          = tbe_dropin_source( $file );
+		// The whole text or nothing: a short write never replaces the live file.
+		$result[ $file ] = ( is_writable( WP_CONTENT_DIR ) && strlen( $source ) === @file_put_contents( $tmp, $source ) && @rename( $tmp, $path ) ) ? 'written' : 'failed'; // phpcs:ignore WordPress.WP.AlternativeFunctions, WordPress.PHP.NoSilencedErrors
+		if ( file_exists( $tmp ) ) {
+			@unlink( $tmp ); // phpcs:ignore WordPress.WP.AlternativeFunctions, WordPress.PHP.NoSilencedErrors
+		}
 	}
 	// Only remember a clean install: a failed write (wp-content not writable) is tried again on the next admin visit.
 	if ( ! in_array( 'failed', $result, true ) ) {
@@ -79,10 +89,13 @@ function tbe_install_dropins(): array {
 	return $result;
 }
 
-/** Remove this theme's own copies (only those carrying its marker). */
+/**
+ * Remove this theme's own copies (only those carrying its marker). An outdated copy counts: on switch_theme the
+ * stylesheet already names the new theme, so the font URL in a current copy no longer matches.
+ */
 function tbe_remove_dropins(): void {
 	foreach ( array_keys( tbe_dropin_specs() ) as $file ) {
-		if ( 'ours' === tbe_dropin_state( $file ) ) {
+		if ( in_array( tbe_dropin_state( $file ), array( 'ours', 'outdated' ), true ) ) {
 			wp_delete_file( WP_CONTENT_DIR . '/' . $file );
 		}
 	}
@@ -107,6 +120,26 @@ add_action(
 	30
 );
 add_action( 'switch_theme', 'tbe_remove_dropins' );
+
+/**
+ * The 404 page: noindex, follow, and its title in the site's form, "Page not found | The Bible Exposed".
+ */
+add_filter(
+	'wp_robots',
+	static function ( array $robots ): array {
+		if ( is_404() ) {
+			$robots['noindex'] = true;
+			$robots['follow']  = true;
+		}
+		return $robots;
+	}
+);
+add_filter(
+	'document_title_separator',
+	static function ( string $sep ): string {
+		return is_404() ? '|' : $sep;
+	}
+);
 
 /** The lines to paste into .htaccess so the web server shows the static pages for the errors it answers itself. */
 function tbe_htaccess_snippet(): string {
@@ -139,11 +172,12 @@ function tbe_render_errors_tab(): void {
 	// phpcs:enable
 	$words = array(
 		'missing' => __( 'not installed', 'tbe-child' ),
-		'ours'    => __( 'installed (this theme)', 'tbe-child' ),
-		'theme'   => __( 'written by another theme; will be replaced', 'tbe-child' ),
+		'ours'     => __( 'installed (this theme), current', 'tbe-child' ),
+		'outdated' => __( 'installed (this theme), outdated: press the button to refresh it', 'tbe-child' ),
+		'theme'    => __( 'written by another theme; left alone', 'tbe-child' ),
 		'foreign' => __( 'your own file; left alone', 'tbe-child' ),
 	);
-	echo '<h2>' . esc_html__( 'Errors WordPress answers', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Three pages are written into wp-content so they can show even when WordPress itself is down: maintenance, database error and fatal error. They are installed on activation and after every update, and removed if another theme is activated. A file of your own with the same name is never overwritten.', 'tbe-child' ) . '</p><table class="widefat striped tbe-table-admin"><thead><tr><th>' . esc_html__( 'File', 'tbe-child' ) . '</th><th>' . esc_html__( 'Shown when', 'tbe-child' ) . '</th><th>' . esc_html__( 'Status', 'tbe-child' ) . '</th></tr></thead><tbody>';
+	echo '<h2>' . esc_html__( 'Errors WordPress answers', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Three pages are written into wp-content so they can show even when WordPress itself is down: maintenance, database error and fatal error. They are installed on activation and after every update, and removed if another theme is activated. A file the theme did not write, yours or another theme’s, is never overwritten.', 'tbe-child' ) . '</p><table class="widefat striped tbe-table-admin"><thead><tr><th>' . esc_html__( 'File', 'tbe-child' ) . '</th><th>' . esc_html__( 'Shown when', 'tbe-child' ) . '</th><th>' . esc_html__( 'Status', 'tbe-child' ) . '</th></tr></thead><tbody>';
 	$when = array(
 		'maintenance.php' => __( 'WordPress is updating (503)', 'tbe-child' ),
 		'db-error.php'    => __( 'the database cannot be reached (503)', 'tbe-child' ),
