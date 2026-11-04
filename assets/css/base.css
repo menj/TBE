@@ -120,7 +120,9 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .tbe-footer__name .wp-block-site-title,
 .tbe-footer__name .wp-block-site-title a,
 .tbe-brand { font-family: "Angel", Georgia, serif; font-weight: 400; letter-spacing: 0.02em; }
-.tbe-hero h1.tbe-brand { font-size: clamp(3rem, 9vw, 5.5rem); line-height: 1.05; }
+/* One line at every width: the name is about 8em wide in Angel, so its size
+   follows the viewport and stops where it still fits the 44rem column. */
+.tbe-hero h1.tbe-brand { font-size: min(5.2rem, 10.5vw); line-height: 1.05; white-space: nowrap; max-width: none; }
 
 /* Brand mark: the hollow inverted cross, coloured by the active scheme. */
 .tbe-lockup { gap: 0.7rem; }
