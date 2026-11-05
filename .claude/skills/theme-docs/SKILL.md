@@ -33,8 +33,9 @@ The reference implementation is the injil.help theme (menj/injil.help), which ke
 - Description: what the theme is for, in two or three short paragraphs.
 - Installation and updating: written for someone installing or updating the theme with the WordPress uploader or by FTP.
   - The uploader steps: Appearance > Themes > Add New > Upload Theme. For an update, WordPress then offers "Replace active with uploaded" (or "Replace installed with uploaded" when the theme is not active).
-  - The FTP steps: show hidden files, so the theme's own `.htaccess` files go up. Upload the theme folder to `wp-content/themes/` under a temporary name.
-  - For an FTP update: rename the old folder aside, rename the new one into place, check the site, then delete the old folder.
+  - The FTP steps: show hidden files, so the theme's own `.htaccess` files go up, and upload each `.htaccess` before the rest of its folder.
+  - For a fresh FTP install: upload the theme folder to `wp-content/themes/` under its exact folder name, then activate it.
+  - For an FTP update: upload the new folder under a temporary name, outside `wp-content/themes/` where the host allows it. Rename the old folder aside, move the new one into place under the exact folder name, check the site, then delete the old folder.
 - Settings: each settings tab and what it does.
 - Frequently Asked Questions.
 - Changelog: a short version, with the full one in CHANGELOG.md.
@@ -96,7 +97,7 @@ The reference implementation is the injil.help theme (menj/injil.help), which ke
   - no contractions (possessives and quotations are exempt);
   - no em dashes;
   - no negative parallelisms, the shape that denies one framing and then asserts another ("this is not X, it is Y"); say only what the thing is;
-  - none of the banned words in the repo's own rules, and none of the words on the skill's own banned list;
+  - none of the banned words in the repo's own rules, and, where the skill is available, none on its list;
   - short paragraphs of one or two sentences, three at most.
 - Respect each repo's own rules in `.claude/CLAUDE.md` and `SSOT.md`, such as banned words, names that must not appear, and title limits.
 - Never announce publicly that the sites are related, sister sites or a network. Cross-links are fine. Where a shipped document already says so, remove that wording in the same change that next edits the document.
@@ -114,14 +115,14 @@ Every theme is licensed under the GNU General Public License, version 3 or later
 
 ## Release checklist
 
-Run it before merging any change that the skill's description covers: a release, or a change to features, settings, paths, constants, hooks, security rules or upgrade steps. A change that touches none of these (a typo, a comment, a test) needs no version bump and no document edits.
+Run it before merging a release, or a change to features, settings, paths, constants, hooks, security rules, packaging or upgrade steps. A change that touches none of these (a typo, a comment, a test) needs no version bump and no edits to the other documents. A typo in a document is fixed where it sits.
 
 Before merging such a change:
-1. The version is the same in `style.css`, `readme.txt` (Stable tag and changelog), `CHANGELOG.md`, and every other place the theme records it (a `functions.php` constant, `SSOT.md`, a manifest).
+1. The version is raised for the change, and the new version is the same in `style.css`, `readme.txt` (Stable tag and changelog), `CHANGELOG.md`, and every other place the theme records it (a `functions.php` constant, `SSOT.md`, a manifest).
 2. `CHANGELOG.md` has the new entry, and `readme.txt` has the short form.
 3. `UPGRADING.md` has a note if the site owner must do anything, and the roadmap is updated: shipped items removed, new gaps added.
 4. `README.md` covers any new hook, filter, constant, setting, file or rule.
 5. `SSOT.md` covers any new fixed fact or owner decision.
-6. Every path named in a document exists (`git grep` or `ls`).
+6. Every path a document names as current exists (`git grep` or `ls`). Changelog entries keep the paths of their time.
 7. The licence lines match the Licence section above.
 8. The repo's own checks pass: whichever of its tests, style linter and banned-word greps it has. A repo with none of these skips this step.
