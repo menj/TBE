@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.11
+Stable tag: 0.10.12
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -96,6 +96,10 @@ That is the theme waiting for the rest of its files. It goes away by itself once
 = Can I turn the reading bar or the login design off? =
 Yes, on the Reading bar and Login screen tabs.
 
+= My site is in a subfolder. Where does the browser icon go? =
+
+Browsers ask for /favicon.ico at the top of the domain, such as example.com/favicon.ico, even when the site lives in example.com/blog/. WordPress never sees that request, so put a copy of the theme's favicon.ico in the domain root folder. The icon tags in each page cover the pages either way. If you have set a Site Icon, put that icon there, converted to an ICO file named favicon.ico, instead.
+
 == Credits ==
 
 TBE is distributed under the GNU General Public License v3 or later. The full text is in the LICENSE file.
@@ -108,6 +112,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
 == Changelog ==
+
+= 0.10.12 =
+* The readme says where the browser icon goes on a site in a subfolder: a copy of favicon.ico in the domain root.
 
 = 0.10.11 =
 * The browser icon set is complete: a 192px icon, a maskable icon and a web app manifest join the brand icons, and the touch icon sits on a solid background. The icons show on the login screen and in the admin too, and the error pages show the mark in the tab. A Site Icon you set still wins.
@@ -135,6 +142,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.12 =
+Upload the whole theme folder. On a site in a subfolder, also put a copy of assets/img/brand/favicon.ico in the domain root folder (or, with a Site Icon set, that icon converted to an ICO file named favicon.ico); otherwise nothing to do.
 
 = 0.10.11 =
 Nothing to do by hand. The next admin page writes the error pages again with the icon.
