@@ -182,12 +182,23 @@ $GLOBALS['t']['options']['tbe_dev_files_lock'] = $GLOBALS['tbe_cleanup_lease'];
 tbe_renew_cleanup_lease();
 check( time() - (int) $GLOBALS['t']['options']['tbe_dev_files_lock'] < 60, 'a running clean-up renews its lease' );
 unset( $GLOBALS['tbe_cleanup_lease'], $GLOBALS['t']['options']['tbe_dev_files_lock'] );
+$outside = sys_get_temp_dir() . '/tbe-live-target-' . getmypid();
+file_put_contents( $outside, 'x' );
+chmod( $outside, 0600 );
+symlink( $outside, "$root/.link" );
+mkdir( "$root/inner" );
+symlink( $outside, "$root/inner/link" );
+tbe_remove_tree( "$root/.link" );
+tbe_remove_tree( "$root/inner" );
+clearstatcache();
+check( ! is_link( "$root/.link" ) && ! file_exists( "$root/inner" ) && 0600 === ( fileperms( $outside ) & 0777 ), 'a link is removed without touching its target' );
+unlink( $outside );
 tbe_remove_tree( $root );
 check( ! file_exists( $root ), 'the test folder is gone' );
 
 // The incomplete-upload guard.
 $fn = (string) file_get_contents( __DIR__ . '/../functions.php' );
-foreach ( array( 'tbe_theme_files', 'tbe_theme_support_files', 'tbe_incomplete_serves', 'tbe_incomplete_theme' ) as $name ) {
+foreach ( array( 'tbe_theme_files', 'tbe_theme_support_files', 'tbe_incomplete_is_login', 'tbe_incomplete_serves', 'tbe_incomplete_theme' ) as $name ) {
 	preg_match( '/^function ' . $name . '\(.*?^}\n/ms', $fn, $m ) || exit( "not found: $name\n" );
 	eval( $m[0] ); // phpcs:ignore Squiz.PHP.Eval
 }
@@ -209,6 +220,12 @@ check( ! tbe_incomplete_serves( true, 'apache2handler' ), 'nor does AJAX' );
 $GLOBALS['t']['ajax']   = false;
 $_SERVER['REQUEST_URI'] = '/wp-login.php';
 check( ! tbe_incomplete_serves( true, 'apache2handler' ), 'nor the login screen' );
+$GLOBALS['t']['options']['whl_page'] = 'gate';
+$_SERVER['REQUEST_URI']              = '/gate/';
+check( ! tbe_incomplete_serves( true, 'apache2handler' ), 'nor the WPS Hide Login address' );
+$_SERVER['REQUEST_URI'] = '/gateway/';
+check( tbe_incomplete_serves( true, 'apache2handler' ), 'but a page that only starts like it does' );
+unset( $_SERVER['REQUEST_URI'] );
 @unlink( $log ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
 
 // Every script in tools/ exits outside the command line.

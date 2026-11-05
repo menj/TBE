@@ -24,11 +24,38 @@ function tbe_theme_support_files(): array {
 }
 
 /**
+ * Whether this request is for the login screen: wp-login.php, or a private
+ * login address (the WPS Hide Login plugin's, or the theme's own), read from
+ * the stored options, since the theme's own code may be the part missing.
+ * The owner must be able to log in while an upload finishes.
+ *
+ * @return bool
+ */
+function tbe_incomplete_is_login(): bool {
+	$uri = (string) ( $_SERVER['REQUEST_URI'] ?? '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	if ( 'wp-login.php' === ( $GLOBALS['pagenow'] ?? '' ) || false !== strpos( $uri, 'wp-login' ) ) {
+		return true;
+	}
+	$slugs = array( (string) get_option( 'whl_page', '' ) );
+	$path = trim( (string) parse_url( $uri, PHP_URL_PATH ), '/' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	$home = function_exists( 'home_url' ) ? trim( (string) parse_url( home_url( '/' ), PHP_URL_PATH ), '/' ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions
+	if ( '' !== $home && 0 === strpos( $path . '/', $home . '/' ) ) {
+		$path = trim( substr( $path, strlen( $home ) ), '/' );
+	}
+	foreach ( array_filter( $slugs ) as $slug ) {
+		if ( $slug === $path || isset( $_GET[ $slug ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
  * Whether tbe_incomplete_theme() sends the page to this request. The login screen, AJAX, cron and the command
  * line never get it; the admin gets it only when $all is set.
  */
 function tbe_incomplete_serves( bool $all = false, string $sapi = PHP_SAPI ): bool {
-	if ( wp_doing_ajax() || wp_doing_cron() || 'cli' === $sapi || false !== strpos( (string) ( $_SERVER['REQUEST_URI'] ?? '' ), 'wp-login' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	if ( wp_doing_ajax() || wp_doing_cron() || 'cli' === $sapi || tbe_incomplete_is_login() ) {
 		return false;
 	}
 	return $all || ! is_admin();
