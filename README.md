@@ -101,20 +101,20 @@ Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Test
 Errors get their own pages, in the site's look (the broken cross, Angel, burgundy and gold, light and dark) and with a dry edge aimed at the doctrines, not the people.
 
 - **Errors WordPress answers.** `maintenance.php` (503), `db-error.php` (the database cannot be reached) and `php-error.php` (a fatal PHP error) are written into `wp-content` by the theme, so they show even when WordPress is down. They are installed on activation and after each update, refreshed from **Appearance → TBE → Error pages**, and removed again if another theme is activated. They answer `503` with `Retry-After` (maintenance, database) or `500` ("Something went wrong"), with `noindex` and `no-store`. The tab shows each as not installed, installed and current, installed and outdated, or someone else's file. A copy another theme left behind, marked "safe to delete", is replaced (from 0.10.2); a file with no such mark is yours and is never overwritten. Switch it off under General.
-- **Errors the web server answers.** 400, 401, 403, 404 for files, 500, 502, 503 and 504 come from Apache before WordPress starts. The static pages are in `errors/` (rebuild with `php tools/build_error_pages.php`); the Error pages tab gives the `ErrorDocument` lines to paste into `.htaccess`:
+- **Errors the web server answers.** 400, 401, 403, 404 for files, 500, 502, 503 and 504 come from Apache before WordPress starts. The theme writes a static page for each into `wp-content/tbe-errors/`, with the drop-ins and under the same marker. Each copy carries the site's real home address for its links and the real path of the Angel font, so the pages work on a site in a subfolder or with `wp-content` moved. The drop-ins use the same addresses. The copies go when another theme is activated. The Error pages tab gives the `ErrorDocument` lines to paste into `.htaccess`, built from the real address of `wp-content`. At the domain root they read:
 
   ```
-  ErrorDocument 400 /wp-content/themes/tbe/errors/400.html
-  ErrorDocument 401 /wp-content/themes/tbe/errors/401.html
-  ErrorDocument 403 /wp-content/themes/tbe/errors/403.html
-  ErrorDocument 404 /wp-content/themes/tbe/errors/404.html
-  ErrorDocument 500 /wp-content/themes/tbe/errors/500.html
-  ErrorDocument 502 /wp-content/themes/tbe/errors/502.html
-  ErrorDocument 503 /wp-content/themes/tbe/errors/503.html
-  ErrorDocument 504 /wp-content/themes/tbe/errors/504.html
+  ErrorDocument 400 /wp-content/tbe-errors/400.html
+  ErrorDocument 401 /wp-content/tbe-errors/401.html
+  ErrorDocument 403 /wp-content/tbe-errors/403.html
+  ErrorDocument 404 /wp-content/tbe-errors/404.html
+  ErrorDocument 500 /wp-content/tbe-errors/500.html
+  ErrorDocument 502 /wp-content/tbe-errors/502.html
+  ErrorDocument 503 /wp-content/tbe-errors/503.html
+  ErrorDocument 504 /wp-content/tbe-errors/504.html
   ```
 
-  These lines assume WordPress at the root of the domain. On a site installed in a subfolder, or with `wp-content` moved, copy the lines from the Error pages tab instead: it builds them from the real address. The static pages cannot learn that address, so their home link points to `/` and the Angel font is looked up under `/wp-content/themes/tbe/`; where it is missing the page falls back to Georgia.
+  `errors/` in the theme keeps the copies for a site at the domain root with the theme in `/wp-content/themes/tbe/` (rebuild with `php tools/build_error_pages.php`; `--check` fails on a stale page). If the font cannot be found, a page falls back to Georgia.
 
 - Missing pages inside the site use `templates/404.html`, whose message is chosen at random on each load.
 - Every page has several wordings (`inc/error-page-html.php`); a different one greets each visit. Static pages and the drop-ins pick one in the browser, so a visitor without JavaScript sees the first.

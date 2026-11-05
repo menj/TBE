@@ -141,8 +141,9 @@ function tbe_error_variant( string $key ): array {
  *
  * @param string $key      A page key (400 ... 504, maintenance, db-error, php-error).
  * @param string $font_url Root-relative address of Angel.woff2 (the site name's font).
+ * @param string $home     Root-relative address of the home page, with a trailing slash. The links start from it.
  */
-function tbe_error_page_html( string $key, string $font_url = '/wp-content/themes/tbe/assets/fonts/Angel.woff2' ): string {
+function tbe_error_page_html( string $key, string $font_url = '/wp-content/themes/tbe/assets/fonts/Angel.woff2', string $home = '/' ): string {
 	$page     = tbe_error_page( $key );
 	$code     = $page['code'];
 	$first    = $page['variants'][0];
@@ -153,9 +154,9 @@ function tbe_error_page_html( string $key, string $font_url = '/wp-content/theme
 	}
 	$json     = json_encode( $page['variants'], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE );
 	$links    = $page['links']
-		? '<nav class="more" aria-label="Elsewhere on the site"><a href="/bible/">The Books</a><a href="/bible/interlinear/">Interlinear</a><a href="/commentary/">Commentary</a><a href="/glossary/">Index</a></nav>'
+		? '<nav class="more" aria-label="Elsewhere on the site"><a href="' . $e( $home . 'bible/' ) . '">The Books</a><a href="' . $e( $home . 'bible/interlinear/' ) . '">Interlinear</a><a href="' . $e( $home . 'commentary/' ) . '">Commentary</a><a href="' . $e( $home . 'glossary/' ) . '">Index</a></nav>'
 		: '';
-	$again    = $page['links'] ? '<a class="go" href="/">Go to the home page</a>' : '<a class="go" href="/">Try again</a>';
+	$again    = $page['links'] ? '<a class="go" href="' . $e( $home ) . '">Go to the home page</a>' : '<a class="go" href="' . $e( $home ) . '">Try again</a>';
 	$mark     = '<svg viewBox="0 -52 340 717" fill="none" stroke="currentColor" stroke-width="30" stroke-linejoin="round" aria-hidden="true"><path d="M135.75 210L144 216L159 202L174 217L190 204L202.25 209.5V460.75H331.25V526.25H202.25V656.25H135.75V526.25H7.75V460.75H135.75Z"/><path d="M135.75 7.75H202.25V209.5L190 204L174 217L159 202L144 216L135.75 210Z" transform="translate(-24 -40) rotate(-8 169 218)"/></svg>';
 	$script   = '(function(){var S=' . json_encode( tbe_error_short_titles()[ $key ] ?? 'Error', JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE ) . ',V=' . $json . ';var v=V[Math.floor(Math.random()*V.length)];var h=document.getElementById("t"),b=document.getElementById("b");if(!h||!b){return;}h.textContent=v.title;document.title=(v.title.length<=32?v.title:S)+" | The Bible Exposed";b.textContent="";v.lines.forEach(function(l){var p=document.createElement("p");p.textContent=l;b.appendChild(p);});})();';
 

@@ -1,16 +1,29 @@
 <?php
 /**
  * Write the static error pages in errors/ (400, 401, 403, 404, 500, 502, 503, 504) from inc/error-page-html.php.
- * Usage: php tools/build_error_pages.php
+ * These are the copies for a site at the domain root with the theme in /wp-content/themes/tbe/; the theme writes
+ * a copy for the site's own addresses into wp-content/tbe-errors/.
+ * Usage: php tools/build_error_pages.php (add --check to fail when a page is stale)
  */
 define( 'ABSPATH', __DIR__ . '/' );
 require __DIR__ . '/../inc/error-page-html.php';
 
-$dir = __DIR__ . '/../errors';
-if ( ! is_dir( $dir ) ) {
+$check = in_array( '--check', $argv, true );
+$stale = 0;
+$dir   = __DIR__ . '/../errors';
+if ( ! $check && ! is_dir( $dir ) ) {
 	mkdir( $dir, 0755, true );
 }
 foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504' ) as $code ) {
-	file_put_contents( $dir . '/' . $code . '.html', tbe_error_page_html( $code ) . "\n" );
+	$html = tbe_error_page_html( $code ) . "\n";
+	if ( $check ) {
+		if ( ! is_readable( "$dir/$code.html" ) || file_get_contents( "$dir/$code.html" ) !== $html ) {
+			fwrite( STDERR, "stale: errors/$code.html\n" );
+			++$stale;
+		}
+		continue;
+	}
+	file_put_contents( $dir . '/' . $code . '.html', $html );
 	echo $code, ".html\n";
 }
+exit( $stale ? 1 : 0 );

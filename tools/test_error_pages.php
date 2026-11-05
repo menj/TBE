@@ -5,7 +5,8 @@
  * WordPress is stubbed. The test checks that each drop-in has its own status, wording and headers and runs
  * without WordPress; that the installer writes missing and outdated copies of its own, replaces another
  * theme's marked leftover, and leaves a file with no marker alone; that every title reads "<page> | The Bible Exposed" under 60
- * characters; and that errors/ matches the builder. Exit code 0 on success.
+ * characters; that errors/ matches the builder; and that the copies in wp-content/tbe-errors/ follow the site's
+ * home address and font path and are removed on a switch. Exit code 0 on success.
  *
  * @package tbe-child
  */
@@ -20,7 +21,11 @@ function add_action() {}
 function add_filter() {}
 function __( $s ) { return $s; }
 function tbe_setting() { return 1; }
-function get_stylesheet_directory_uri() { return 'https://tbe.test/wp-content/themes/tbe'; }
+function get_stylesheet_directory_uri() { return $GLOBALS['t_root'] . '/wp-content/themes/tbe'; }
+function home_url( $p = '' ) { return $GLOBALS['t_root'] . $p; }
+function content_url( $p = '' ) { return $GLOBALS['t_root'] . '/wp-content' . $p; }
+function wp_mkdir_p( $d ) { return is_dir( $d ) || mkdir( $d, 0700, true ); }
+$GLOBALS['t_root'] = 'https://tbe.test';
 function wp_parse_url( $u, $c = -1 ) { return parse_url( $u, $c ); }
 function update_option( $k, $v ) { $GLOBALS['t_opt'][ $k ] = $v; return true; }
 function delete_option( $k ) { unset( $GLOBALS['t_opt'][ $k ] ); }
@@ -70,6 +75,20 @@ file_put_contents( "$t_dir/php-error.php", str_replace( 'Something went wrong', 
 check( 'outdated' === tbe_dropin_state( 'php-error.php' ), 'an older copy of its own reads as outdated' );
 check( 'written' === tbe_install_dropins()['php-error.php'] && file_get_contents( "$t_dir/php-error.php" ) === $src['php-error.php'], 'the installer refreshes it' );
 check( array() === glob( "$t_dir/*.tmp" ), 'no temporary file is left' );
+check( 'ours' === tbe_dropin_state( 'tbe-errors/404.html' ) && file_get_contents( "$t_dir/tbe-errors/404.html" ) === '<!-- TBE error page ' . TBE_DROPIN_VERSION . ". Written by the TBE theme; safe to delete. -->\n" . tbe_error_page_html( '404' ) . "\n", 'the static copies are written; at the root they match errors/' );
+check( false !== strpos( tbe_htaccess_snippet(), 'ErrorDocument 404 /wp-content/tbe-errors/404.html' ), '.htaccess lines point at the site copies' );
+$GLOBALS['t_root'] = 'https://tbe.test/blog';
+check( 'outdated' === tbe_dropin_state( 'tbe-errors/404.html' ), 'a subfolder install makes the copies outdated' );
+tbe_install_dropins();
+$h = (string) file_get_contents( "$t_dir/tbe-errors/404.html" );
+check( false !== strpos( $h, 'href="/blog/"' ) && false !== strpos( $h, 'href="/blog/bible/"' ) && false !== strpos( $h, 'url("/blog/wp-content/themes/tbe/assets/fonts/Angel.woff2")' ) && false === strpos( $h, 'href="/bible/"' ), 'a subfolder copy has its own home links and font path' );
+check( false !== strpos( (string) file_get_contents( "$t_dir/php-error.php" ), 'href="/blog/"' ), 'the drop-ins link to the subfolder home too' );
+check( false !== strpos( tbe_htaccess_snippet(), 'ErrorDocument 404 /blog/wp-content/tbe-errors/404.html' ), '.htaccess lines follow wp-content' );
+file_put_contents( "$t_dir/tbe-errors/500.html", "<p>own</p>\n" );
+tbe_remove_dropins();
+check( ! file_exists( "$t_dir/tbe-errors/404.html" ) && file_exists( "$t_dir/tbe-errors/500.html" ) && file_exists( "$t_dir/db-error.php" ), 'switching away removes only the theme\'s own files' );
+unlink( "$t_dir/tbe-errors/500.html" );
+rmdir( "$t_dir/tbe-errors" );
 
 foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504' ) as $code ) {
 	$h = (string) file_get_contents( __DIR__ . "/../errors/$code.html" );
