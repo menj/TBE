@@ -1,0 +1,50 @@
+# TBE theme folder: files a working copy carries that the web server must
+# never serve. The theme removes the hidden entries and tools/ from a live site
+# on the first request after an update (inc/dev-files.php); these lines cover
+# the time before that, and a site that keeps them. No Markdown file is linked
+# from the site.
+
+# Every file and folder whose name begins with a dot: .git, .gitignore, .env,
+# .htaccess (this file) and the like. .well-known stays open.
+<IfModule mod_alias.c>
+	RedirectMatch 403 /\.(?!well-known(/|$))[^/]+(/|$)
+</IfModule>
+<FilesMatch "^\.">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+	<IfModule !mod_authz_core.c>
+		Order allow,deny
+		Deny from all
+	</IfModule>
+</FilesMatch>
+
+# The tests, tools, documentation and command-line scripts, at the top of the
+# theme folder. RedirectMatch reads the whole request path, so this matches
+# /wp-content/themes/tbe/tools/ with or without a site subfolder in front.
+# tools/ also carries its own .htaccess, which refuses it wherever the theme
+# folder sits.
+<IfModule mod_alias.c>
+	RedirectMatch 403 /themes/[^/]+/(tests|tools|bin|docs)(/|$)
+</IfModule>
+
+# Where mod_alias is missing, mod_rewrite refuses the same paths. Only then:
+# a rewrite engine in this folder replaces the site's own rules for it.
+<IfModule !mod_alias.c>
+	<IfModule mod_rewrite.c>
+		RewriteEngine On
+		RewriteRule (^|/)\.(?!well-known(/|$)) - [F]
+		RewriteRule ^(tests|tools|bin|docs)(/|$) - [F]
+	</IfModule>
+</IfModule>
+
+# Markdown: README.md and CHANGELOG.md are for whoever works on the theme.
+<FilesMatch "\.md$">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+	<IfModule !mod_authz_core.c>
+		Order allow,deny
+		Deny from all
+	</IfModule>
+</FilesMatch>

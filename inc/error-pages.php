@@ -349,4 +349,9 @@ function tbe_render_errors_tab(): void {
 
 	echo '<h2 style="margin-top:2rem">' . esc_html__( 'Errors the web server answers', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Errors such as 400, 401, 403, 404 for files, 500, 502, 503 and 504 are produced by the web server before WordPress starts, so the theme cannot change them on its own. The theme writes a static page for each into wp-content/tbe-errors, with this site’s home address and font path. To use them, paste these lines at the top of your .htaccess file (or set each page under Error Pages in cPanel):', 'tbe-child' ) . '</p>';
 	echo '<textarea readonly rows="10" class="large-text code" onclick="this.select()">' . esc_textarea( tbe_htaccess_snippet() ) . '</textarea>';
+
+	if ( function_exists( 'tbe_security_htaccess_snippet' ) ) {
+		echo '<h2 style="margin-top:2rem">' . esc_html__( 'Requests the web server should refuse', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bots ask for xmlrpc.php to guess passwords, and for WordPress files that are never meant to be opened by address (wp-settings.php, wp-config-sample.php, readme.html, wp-admin/install.php and the PHP files in wp-includes). WordPress already refuses XML-RPC while this theme runs, unless TBE_ALLOW_XMLRPC is set or Jetpack is active. To refuse all of them at the server, paste these lines into your .htaccess file, after the WordPress section. The editor\'s TinyMCE loader and ms-files.php stay open.', 'tbe-child' ) . '</p>';
+		echo '<textarea readonly rows="16" class="large-text code" onclick="this.select()">' . esc_textarea( tbe_security_htaccess_snippet() ) . '</textarea>';
+	}
 }

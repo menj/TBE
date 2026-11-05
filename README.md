@@ -8,6 +8,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 - **Install Twenty Twenty-Five first.** This is a child theme; WordPress refuses it without its parent.
 - **Hosting:** PHP 8.0+ with the `dom` and `mbstring` extensions (almost every host has both; without `dom` the glossary tooltips and scripture hover cards quietly switch off). The ZIP is about 14 MB, so check the host's upload limit (Appearance → Themes → Add New → Upload shows it), or upload by SFTP into `wp-content/themes/tbe/`.
 - After activating, go to Settings → Permalinks and press **Save** once. Pretty permalinks (not "Plain") are required for `/bible/…`.
+- **Uploading by FTP:** turn on "show hidden files" in the FTP client (in FileZilla: Server, Force showing hidden files), so the theme's `.htaccess` and `tools/.htaccess` go up with the rest. They keep the web server from serving `.git`, `tools/` and the Markdown files while they are on the server. Upload `inc/` before `functions.php` if you can; if a visitor arrives while a file is still missing, they get the 503 page with `Retry-After`, never a fatal error.
 
 ## Install
 1. Install and keep **Twenty Twenty-Five** (the parent) on the site.
@@ -108,6 +109,40 @@ Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Test
 
 ## Cross-references between the Testaments
 `data/commentary/cross-references.json` holds 32 critical cross-references, each written once and filed on **both** passages, so the note appears under the New Testament verse and under the Old Testament verse it cites. They cover how Paul reworks the Law (Galatians 3:10-17, Romans 3, 9 and 10, 1 Corinthians 9), how New Testament authors quote the Old Testament differently from its wording (Ephesians 4:8, Hebrews 10:5, Acts 7, Luke 3:36), and Jesus’ own use of Scripture (Matthew 5, 15 and 22, Mark 2 and 12, Luke 4, John 10 and 17). Each note sets the two ESV texts side by side and says plainly where they differ. They are tagged **Cross-reference**, imported and kept in step like the other starter commentary, and carry no typology: they compare wording and context only.
+
+## Hardening (0.10.5)
+Fixes from the live logs of the sister sites, where an FTP upload of a working copy, password guessing and bots asking for WordPress's own files showed up again and again.
+
+- **Development files.** The theme's `.htaccess` refuses every file and folder whose name begins with a dot (`.well-known` stays open), the `tests`, `tools`, `bin` and `docs` folders, and every Markdown file. `tools/.htaccess` refuses its folder wherever the theme sits. Where mod_alias is missing, mod_rewrite refuses the same paths. On the first request after the version changes, `inc/dev-files.php` removes the hidden entries and `tools/` from a live site, once, under a lease that only one request can hold. A local or development site keeps them, and so does `define( 'TBE_KEEP_DOTFILES', true );` in `wp-config.php`. Every PHP script in `tools/` exits unless it runs from the command line.
+- **A theme caught half uploaded.** `functions.php` checks every file in `inc/` before it loads any (`tbe_theme_files()`, `tbe_theme_support_files()`), and loads them inside a `try`. A missing or half-written file gives the static 503 page with `Retry-After: 300` and one line in the error log every ten minutes (`tbe_incomplete_theme()`). A missing file leaves the admin alone; the login screen, AJAX, cron and the command line never get the page.
+- **Accounts.** `/wp/v2/users` and `/wp/v2/users/<id>` are refused to visitors who are not logged in (`tbe_hide_rest_users()`), `?author=N` and `?author_name=` go to the home page with a 301 (`tbe_block_author_query()`), and the users sitemap goes.
+- **XML-RPC** is off: no methods, no pingback header, and `xmlrpc.php` answers 403. It stays on while Jetpack is active, or with `define( 'TBE_ALLOW_XMLRPC', true );` in `wp-config.php`.
+- **At the web server.** The theme does not write the site's `.htaccess`. The Error pages tab shows the lines to paste after the WordPress section (`tbe_security_htaccess_snippet()`): a "Block xmlrpc.php" section, left out while XML-RPC is allowed, and "TBE: deny direct core files", which answers 403 for the PHP files in `wp-includes` (TinyMCE's loader and `ms-files.php` excepted), `wp-settings.php`, `wp-config-sample.php`, `readme.html` and `wp-admin/install.php`. With WordPress in its own subfolder the lines carry it. At the domain root they read:
+
+  ```
+  # BEGIN Block xmlrpc.php
+  <Files xmlrpc.php>
+  <IfModule mod_authz_core.c>
+  Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+  Order Deny,Allow
+  Deny from all
+  </IfModule>
+  </Files>
+  # END Block xmlrpc.php
+  # BEGIN TBE: deny direct core files
+  <IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^wp-includes/(?!js/tinymce/|ms-files\.php$).+\.php$ - [F,L]
+  RewriteRule ^(wp-settings|wp-config-sample)\.php$ - [F,L]
+  RewriteRule ^readme\.html$ - [F,L]
+  RewriteRule ^wp-admin/install\.php$ - [F,L]
+  </IfModule>
+  # END TBE: deny direct core files
+  ```
+
+  `php tools/test_live_logs.php` checks all of the above.
 
 ## Error pages
 Errors get their own pages, in the site's look (the broken cross, Angel, burgundy and gold, light and dark) and with a dry edge aimed at the doctrines, not the people.

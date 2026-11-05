@@ -13,6 +13,11 @@
  * @package tbe-child
  */
 
+// Run from the command line only: on a web server this file does nothing.
+if ( 'cli' !== PHP_SAPI ) {
+	exit;
+}
+
 define( 'ABSPATH', __DIR__ . '/' );
 
 function add_action( $hook, $cb, $p = 10, $a = 1 ) {}
