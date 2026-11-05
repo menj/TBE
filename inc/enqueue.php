@@ -110,8 +110,9 @@ function tbe_font_face_handles(): array {
  * left out.
  *
  * @param string[] $keys Keys of tbe_font_faces().
+ * @param string   $q    The quote mark: TinyMCE takes its settings in double quotes, so it gets single ones.
  */
-function tbe_font_face_css( array $keys ): string {
+function tbe_font_face_css( array $keys, string $q = '"' ): string {
 	$css   = '';
 	$faces = tbe_font_faces();
 	foreach ( $keys as $key ) {
@@ -123,7 +124,7 @@ function tbe_font_face_css( array $keys ): string {
 		if ( '' === $url ) {
 			continue;
 		}
-		$css .= '@font-face{font-family:"' . $family . '";src:url("' . esc_url( $url ) . '") format("woff2");font-weight:normal;font-style:normal;font-display:swap' . ( '' !== $range ? ';unicode-range:' . $range : '' ) . '}';
+		$css .= '@font-face{font-family:' . $q . $family . $q . ';src:url(' . $q . esc_url( $url ) . $q . ') format(' . $q . 'woff2' . $q . ');font-weight:normal;font-style:normal;font-display:swap' . ( '' !== $range ? ';unicode-range:' . $range : '' ) . '}';
 	}
 	return $css;
 }
@@ -186,11 +187,31 @@ function tbe_mce_css( $css ): string {
 }
 add_filter( 'mce_css', 'tbe_mce_css', 20 );
 
+/**
+ * The classic editor's TinyMCE gets the same font rules as the block editor, in its content_style setting, which
+ * WordPress writes out in double quotes: the rules use single ones.
+ *
+ * @param array $init TinyMCE settings.
+ */
+function tbe_mce_font_faces( $init ) {
+	$css = tbe_font_face_css( tbe_editor_font_keys(), "'" );
+	if ( '' !== $css && is_array( $init ) ) {
+		$init['content_style'] = trim( (string) ( $init['content_style'] ?? '' ) . ' ' . $css );
+	}
+	return $init;
+}
+add_filter( 'tiny_mce_before_init', 'tbe_mce_font_faces' );
+
+/** The fonts the editor styles (base.css, scripture.css) use. */
+function tbe_editor_font_keys(): array {
+	return array( 'angel', 'biblit', 'hebrew', 'greek', 'estrangela' );
+}
+
 /** The editor loads base.css and scripture.css as editor styles; the fonts they use come with them. */
 add_filter(
 	'block_editor_settings_all',
 	static function ( $settings ) {
-		$css = tbe_font_face_css( array( 'angel', 'biblit', 'hebrew', 'greek', 'estrangela' ) );
+		$css = tbe_font_face_css( tbe_editor_font_keys() );
 		if ( '' !== $css && is_array( $settings ) ) {
 			$settings['styles']   = (array) ( $settings['styles'] ?? array() );
 			$settings['styles'][] = array( 'css' => $css );

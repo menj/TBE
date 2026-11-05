@@ -135,6 +135,8 @@ foreach ( $GLOBALS['t']['hooks']['block_editor_settings_all'] ?? array() as $h )
 check( is_array( $editor ) && false !== strpos( (string) ( end( $editor['styles'] )['css'] ?? '' ), 'SBL BibLit' ), 'the editor gets the same rules' );
 $mce = tbe_mce_css( 'https://tbe.test/wp-includes/css/dashicons.css,' . TBE_URI . '/assets/fonts/SBL_BLit.woff2?ver=6.9,' . TBE_URI . '/assets/css/scripture.css?ver=6.9' );
 check( 'https://tbe.test/wp-includes/css/dashicons.css,' . $font === $mce, 'TinyMCE gets the theme\'s editor styles at their hashed addresses, a missing one left out, and other stylesheets untouched' );
+$mce_init = tbe_mce_font_faces( array( 'content_style' => 'p{margin:0}' ) );
+check( 0 === strpos( $mce_init['content_style'], 'p{margin:0} @font-face{' ) && false !== strpos( $mce_init['content_style'], "font-family:'SBL BibLit'" ) && false === strpos( $mce_init['content_style'], '"' ), 'the classic editor gets the font rules too, in single quotes, after its own style' );
 $css_files = '';
 foreach ( glob( __DIR__ . '/../assets/css/*.css' ) as $f ) {
 	$css_files .= (string) file_get_contents( $f );

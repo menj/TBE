@@ -55,12 +55,17 @@ function get_option( $k, $d = false ) { return $GLOBALS['t_opt'][ $k ] ?? $d; }
 function wp_delete_file( $p ) { @unlink( $p ); }
 require __DIR__ . '/../inc/error-pages.php';
 
+// The font's version, from the theme's own Angel.woff2.
+$t_fv = substr( md5_file( __DIR__ . '/../assets/fonts/Angel.woff2' ), 0, 12 );
+
 $fail = 0;
 function check( $ok, $label ) {
 	global $fail;
 	echo ( $ok ? 'ok   ' : 'FAIL ' ) . $label . "\n";
 	$fail += $ok ? 0 : 1;
 }
+
+check( 12 === strlen( $t_fv ) && $t_fv === tbe_error_font_version( __DIR__ . '/../assets/fonts/Angel.woff2' ) && '' === tbe_error_font_version( __DIR__ . '/missing.woff2' ), 'the font version is the first 12 characters of its MD5, empty for a missing file' );
 
 $src = array();
 foreach ( array_keys( tbe_dropin_specs() ) as $file ) {
@@ -97,14 +102,14 @@ file_put_contents( "$t_dir/php-error.php", str_replace( 'Something went wrong', 
 check( 'outdated' === tbe_dropin_state( 'php-error.php' ), 'an older copy of its own reads as outdated' );
 check( 'written' === tbe_install_dropins()['php-error.php'] && file_get_contents( "$t_dir/php-error.php" ) === $src['php-error.php'], 'the installer refreshes it' );
 check( array() === glob( "$t_dir/*.tmp" ), 'no temporary file is left' );
-check( 'ours' === tbe_dropin_state( 'tbe-errors/404.html' ) && file_get_contents( "$t_dir/tbe-errors/404.html" ) === '<!-- TBE error page ' . TBE_DROPIN_VERSION . ". Written by the TBE theme; safe to delete. -->\n" . tbe_error_page_html( '404', '/wp-content/themes/TBE/assets/fonts/Angel.woff2' ) . "\n", 'the static copies are written, with the real theme folder in the font path' );
+check( 'ours' === tbe_dropin_state( 'tbe-errors/404.html' ) && file_get_contents( "$t_dir/tbe-errors/404.html" ) === '<!-- TBE error page ' . TBE_DROPIN_VERSION . ". Written by the TBE theme; safe to delete. -->\n" . tbe_error_page_html( '404', '/wp-content/themes/TBE/assets/fonts/Angel.woff2?ver=' . $t_fv ) . "\n", 'the static copies are written, with the real theme folder in the font path' );
 check( 'TBE' === tbe_theme_folder(), 'the folder name is read from the stylesheet directory, upper case kept' );
 check( false !== strpos( tbe_htaccess_snippet(), 'ErrorDocument 404 /wp-content/tbe-errors/404.html' ), '.htaccess lines point at the site copies' );
 $GLOBALS['t_root'] = 'https://tbe.test/blog';
 check( 'outdated' === tbe_dropin_state( 'tbe-errors/404.html' ), 'a subfolder install makes the copies outdated' );
 tbe_install_dropins();
 $h = (string) file_get_contents( "$t_dir/tbe-errors/404.html" );
-check( false !== strpos( $h, 'href="/blog/"' ) && false !== strpos( $h, 'href="/blog/bible/"' ) && false !== strpos( $h, 'url("/blog/wp-content/themes/TBE/assets/fonts/Angel.woff2")' ) && false === strpos( $h, 'href="/bible/"' ), 'a subfolder copy has its own home links and font path' );
+check( false !== strpos( $h, 'href="/blog/"' ) && false !== strpos( $h, 'href="/blog/bible/"' ) && false !== strpos( $h, 'url("/blog/wp-content/themes/TBE/assets/fonts/Angel.woff2?ver=' . $t_fv . '")' ) && false === strpos( $h, 'href="/bible/"' ), 'a subfolder copy has its own home links and font path' );
 check( false !== strpos( (string) file_get_contents( "$t_dir/php-error.php" ), 'href="/blog/"' ), 'the drop-ins link to the subfolder home too' );
 check( false !== strpos( tbe_htaccess_snippet(), 'ErrorDocument 404 /blog/wp-content/tbe-errors/404.html' ), '.htaccess lines follow wp-content' );
 $GLOBALS['t_multi'] = true;
@@ -157,13 +162,13 @@ check( ! file_exists( "$t_dir/tbe-errors/404.html" ) && file_exists( "$t_dir/tbe
 unlink( "$t_dir/tbe-errors/500.html" );
 rmdir( "$t_dir/tbe-errors" );
 $GLOBALS['t_cdn'] = true;
-check( 'https://cdn.tbe.test/wp-content/themes/TBE/assets/fonts/Angel.woff2' === tbe_error_font_url(), 'a theme served from another host gets the full font address' );
+check( 'https://cdn.tbe.test/wp-content/themes/TBE/assets/fonts/Angel.woff2?ver=' . $t_fv === tbe_error_font_url(), 'a theme served from another host gets the full font address' );
 unset( $GLOBALS['t_cdn'] );
 
 foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504' ) as $code ) {
 	$h = (string) file_get_contents( __DIR__ . "/../errors/$code.html" );
 	check( $h === tbe_error_page_html( $code ) . "\n", "errors/$code.html matches the builder" );
-	check( false !== strpos( $h, 'url("../assets/fonts/Angel.woff2")' ) && ! preg_match( '~themes/(tbe|TBE)/~i', $h ), "errors/$code.html names the font relative to errors/, with no theme folder" );
+	check( false !== strpos( $h, 'url("../assets/fonts/Angel.woff2?ver=' . $t_fv . '")' ) && ! preg_match( '~themes/(tbe|TBE)/~i', $h ), "errors/$code.html names the font relative to errors/, with no theme folder" );
 }
 
 // No file in the theme names the theme folder: it is read at run time. The tests' stub addresses are left out.

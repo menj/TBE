@@ -88,7 +88,8 @@ function tbe_incomplete_theme( string $what, bool $all = false ): void {
 		header( 'Cache-Control: no-store, max-age=0' );
 	}
 	// The site's own copy of the static page, then the theme's, then a plain one. The theme's copy names its font
-	// relative to errors/, which would resolve against this request's address, so it gets the theme's real one.
+	// relative to errors/, which would resolve against this request's address, so it gets the theme's real one
+	// (its ?ver= stays).
 	if ( is_readable( WP_CONTENT_DIR . '/tbe-errors/503.html' ) ) {
 		readfile( WP_CONTENT_DIR . '/tbe-errors/503.html' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		exit;

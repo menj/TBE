@@ -54,18 +54,20 @@ function tbe_error_home_path(): string {
 	return '' !== $path ? $path : '/';
 }
 
-/** What the files embed besides the theme version: the home address and the theme folder. */
+/** What the files embed besides the theme version: the home address, the theme folder and the font's version. */
 function tbe_dropin_stamp(): string {
-	return TBE_VERSION . '|' . TBE_DROPIN_VERSION . '|' . md5( home_url( '/' ) . '|' . get_stylesheet_directory_uri() );
+	return TBE_VERSION . '|' . TBE_DROPIN_VERSION . '|' . md5( home_url( '/' ) . '|' . get_stylesheet_directory_uri() . '|' . tbe_error_font_url() );
 }
 
 /**
  * The address of Angel.woff2: root-relative when the theme is served from the site's own host, in full when a
- * plugin serves theme files from another host (a CDN), so the font is asked for where it is.
+ * plugin serves theme files from another host (a CDN), so the font is asked for where it is, and versioned.
  */
 function tbe_error_font_url(): string {
 	$url = get_stylesheet_directory_uri() . '/assets/fonts/Angel.woff2';
-	return wp_parse_url( $url, PHP_URL_HOST ) === wp_parse_url( home_url( '/' ), PHP_URL_HOST ) ? (string) wp_parse_url( $url, PHP_URL_PATH ) : $url;
+	$url = wp_parse_url( $url, PHP_URL_HOST ) === wp_parse_url( home_url( '/' ), PHP_URL_HOST ) ? (string) wp_parse_url( $url, PHP_URL_PATH ) : $url;
+	// With the font's version, so a changed font gets a new address (tbe_error_versioned_font()).
+	return tbe_error_versioned_font( $url, dirname( __DIR__ ) . '/assets/fonts/Angel.woff2' );
 }
 
 /**
