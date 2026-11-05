@@ -66,9 +66,98 @@ function tbe_error_font_url(): string {
 	return wp_parse_url( $url, PHP_URL_HOST ) === wp_parse_url( home_url( '/' ), PHP_URL_HOST ) ? (string) wp_parse_url( $url, PHP_URL_PATH ) : $url;
 }
 
-/** On a network every site shares wp-content, so only the main site writes or removes the files. */
+/**
+ * Whether this site writes the shared files in wp-content: any site off a network, the main site of a network,
+ * or, while the main site runs another theme, the one subsite with the lowest ID that runs this one. Without the
+ * last case a network whose main site had switched away kept the files of the old version for good, and one that
+ * never ran the theme on its main site never got them. One writer only, so the files never flip between
+ * subsites' addresses.
+ */
 function tbe_error_files_owner(): bool {
-	return ! is_multisite() || is_main_site();
+	if ( ! is_multisite() || is_main_site() ) {
+		return true;
+	}
+	$main = get_main_site_id();
+	if ( tbe_error_files_site_runs_theme( $main ) ) {
+		return false;
+	}
+	return get_current_blog_id() === tbe_error_files_first_theme_site();
+}
+
+/** Whether a site of the network runs this theme, as its stylesheet or its template. */
+function tbe_error_files_site_runs_theme( int $id ): bool {
+	$slug = basename( dirname( __DIR__ ) );
+	return in_array( $slug, array( get_blog_option( $id, 'stylesheet' ), get_blog_option( $id, 'template' ) ), true );
+}
+
+/**
+ * The sites of the network, 500 at a time, in order of ID, so a large network is read in full without loading
+ * every site at once. The callback returns true to stop.
+ *
+ * @param callable $visit Called with each site ID.
+ * @param int[]    $skip  Site IDs left out.
+ */
+function tbe_error_files_walk_sites( callable $visit, array $skip = array() ): void {
+	$offset = 0;
+	do {
+		$ids = get_sites(
+			array(
+				'fields'       => 'ids',
+				'number'       => 500,
+				'offset'       => $offset,
+				'orderby'      => 'id',
+				'order'        => 'ASC',
+				'site__not_in' => $skip,
+			)
+		);
+		foreach ( $ids as $id ) {
+			if ( $visit( (int) $id ) ) {
+				return;
+			}
+		}
+		$offset += 500;
+	} while ( 500 === count( $ids ) );
+}
+
+/** The site with the lowest ID that runs this theme; 0 when none does. */
+function tbe_error_files_first_theme_site(): int {
+	$first = 0;
+	tbe_error_files_walk_sites(
+		static function ( int $id ) use ( &$first ): bool {
+			if ( tbe_error_files_site_runs_theme( $id ) ) {
+				$first = $id;
+				return true;
+			}
+			return false;
+		}
+	);
+	return $first;
+}
+
+/** Whether another site of the network, the main site included, still runs this theme. The shared files then stay. */
+function tbe_error_files_in_use_elsewhere(): bool {
+	if ( ! is_multisite() ) {
+		return false;
+	}
+	$found = false;
+	tbe_error_files_walk_sites(
+		static function ( int $id ) use ( &$found ): bool {
+			$found = tbe_error_files_site_runs_theme( $id );
+			return $found;
+		},
+		array( get_current_blog_id() )
+	);
+	return $found;
+}
+
+/** Whether any of the theme's files is missing from wp-content. */
+function tbe_error_files_missing(): bool {
+	foreach ( tbe_error_files() as $file ) {
+		if ( ! file_exists( WP_CONTENT_DIR . '/' . $file ) ) {
+			return true;
+		}
+	}
+	return false;
 }
 
 /** The text of one file: for a drop-in, headers first, then the page; for a static copy, the marker, then the page. */
@@ -144,10 +233,13 @@ function tbe_install_dropins(): array {
 
 /**
  * Remove this theme's own copies (only those carrying its marker). An outdated copy counts: on switch_theme the
- * stylesheet already names the new theme, so the font URL in a current copy no longer matches.
+ * stylesheet already names the new theme, so the font URL in a current copy no longer matches. On a network the
+ * files are shared: they stay while any other site, the main site included, still runs the theme, and the last
+ * site to switch away removes them, even a subsite.
  */
 function tbe_remove_dropins(): void {
-	if ( ! tbe_error_files_owner() ) {
+	if ( tbe_error_files_in_use_elsewhere() ) {
+		delete_option( 'tbe_dropins' );
 		return;
 	}
 	foreach ( tbe_error_files() as $file ) {
@@ -172,7 +264,9 @@ add_action(
 add_action(
 	'admin_init',
 	static function () {
-		if ( current_user_can( 'manage_options' ) && tbe_error_files_owner() && tbe_setting( 'error_pages' ) && get_option( 'tbe_dropins' ) !== tbe_dropin_stamp() ) {
+		// Also when a file has gone missing (deleted by hand, or removed by another site of a network whose scan
+		// missed this one), since the stamp alone would say all is well.
+		if ( current_user_can( 'manage_options' ) && tbe_error_files_owner() && tbe_setting( 'error_pages' ) && ( get_option( 'tbe_dropins' ) !== tbe_dropin_stamp() || tbe_error_files_missing() ) ) {
 			tbe_install_dropins();
 		}
 	},

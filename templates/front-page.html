@@ -11,25 +11,16 @@
 		<!-- /wp:heading -->
 		<!-- wp:tbe/tagline /-->
 		<!-- wp:tbe/passage-search /-->
-		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
-		<div class="wp-block-buttons">
-			<!-- wp:button -->
-			<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/bible/">Read the books</a></div>
-			<!-- /wp:button -->
-			<!-- wp:button {"className":"is-style-outline"} -->
-			<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/bible/interlinear/">Interlinear</a></div>
-			<!-- /wp:button -->
-			<!-- wp:button {"className":"is-style-outline"} -->
-			<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/commentary/">Browse commentary</a></div>
-			<!-- /wp:button -->
-		</div>
-		<!-- /wp:buttons -->
 	</div>
 	<!-- /wp:group -->
 
 	<!-- wp:heading {"className":"tbe-ornament"} -->
-	<h2 class="wp-block-heading tbe-ornament">Latest commentary</h2>
+	<h2 class="wp-block-heading tbe-ornament">What the commentary finds</h2>
 	<!-- /wp:heading -->
+
+	<!-- wp:paragraph {"className":"tbe-section-lede"} -->
+	<p class="tbe-section-lede">The latest notes. Each one is filed under the passage it reads, so you can check it against the text.</p>
+	<!-- /wp:paragraph -->
 
 	<!-- wp:query {"query":{"perPage":6,"postType":"tbe_commentary","order":"desc","orderBy":"date","inherit":false},"align":"wide","className":"tbe-cards"} -->
 	<div class="wp-block-query alignwide tbe-cards">
@@ -42,6 +33,28 @@
 		<!-- /wp:query-no-results -->
 	</div>
 	<!-- /wp:query -->
+
+	<!-- wp:heading {"className":"tbe-ornament"} -->
+	<h2 class="wp-block-heading tbe-ornament">Read the text yourself</h2>
+	<!-- /wp:heading -->
+
+	<!-- wp:paragraph {"className":"tbe-section-lede"} -->
+	<p class="tbe-section-lede">All 66 books of the ESV, with the Hebrew and the Greek beneath them, word by word.</p>
+	<!-- /wp:paragraph -->
+
+	<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"className":"tbe-next"} -->
+	<div class="wp-block-buttons tbe-next">
+		<!-- wp:button -->
+		<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/bible/">Read the books</a></div>
+		<!-- /wp:button -->
+		<!-- wp:button {"className":"is-style-outline"} -->
+		<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/bible/interlinear/">Interlinear</a></div>
+		<!-- /wp:button -->
+		<!-- wp:button {"className":"is-style-outline"} -->
+		<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/commentary/">Browse commentary</a></div>
+		<!-- /wp:button -->
+	</div>
+	<!-- /wp:buttons -->
 
 </main>
 <!-- /wp:group -->

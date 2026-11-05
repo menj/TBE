@@ -26,6 +26,18 @@ function home_url( $p = '' ) { return $GLOBALS['t_root'] . $p; }
 function content_url( $p = '' ) { return $GLOBALS['t_root'] . '/wp-content' . $p; }
 function is_multisite() { return $GLOBALS['t_multi'] ?? false; }
 function is_main_site() { return $GLOBALS['t_main'] ?? true; }
+// A network: site ID => stylesheet. Site 1 is the main site; t_blog is the site the request runs on.
+$GLOBALS['t_sites'] = array();
+$GLOBALS['t_blog']  = 1;
+function get_main_site_id() { return 1; }
+function get_current_blog_id() { return $GLOBALS['t_blog']; }
+function get_blog_option( $id, $k ) { return $GLOBALS['t_sites'][ $id ] ?? 'twentytwentyfive'; }
+function get_sites( $a ) {
+	$ids = array_keys( $GLOBALS['t_sites'] );
+	sort( $ids );
+	$ids = array_values( array_diff( $ids, $a['site__not_in'] ?? array() ) );
+	return array_slice( $ids, $a['offset'], $a['number'] );
+}
 function wp_mkdir_p( $d ) { return is_dir( $d ) || mkdir( $d, 0700, true ); }
 $GLOBALS['t_root'] = 'https://tbe.test';
 function wp_parse_url( $u, $c = -1 ) { return parse_url( $u, $c ); }
@@ -89,10 +101,46 @@ check( false !== strpos( tbe_htaccess_snippet(), 'ErrorDocument 404 /blog/wp-con
 $GLOBALS['t_multi'] = true;
 $GLOBALS['t_main']  = false;
 $GLOBALS['t_root']  = 'https://tbe.test/other';
+$GLOBALS['t_sites'] = array( 1 => 'tbe', 2 => 'tbe', 3 => 'tbe' );
+$GLOBALS['t_blog']  = 2;
 check( array() === tbe_install_dropins() && false !== strpos( (string) file_get_contents( "$t_dir/tbe-errors/404.html" ), 'href="/blog/"' ), 'a network subsite writes nothing over the main site\'s files' );
+// The subsite switches away while the main site and site 3 still run the theme: the shared files stay.
+$GLOBALS['t_sites'][2] = 'twentytwentyfive';
 tbe_remove_dropins();
-check( file_exists( "$t_dir/tbe-errors/404.html" ), 'a network subsite removes nothing' );
+check( file_exists( "$t_dir/tbe-errors/404.html" ), 'a subsite switching away removes nothing while other sites run the theme' );
+// The main site switches away while subsites still run the theme: the shared files stay too.
+$GLOBALS['t_main']     = true;
+$GLOBALS['t_blog']     = 1;
+$GLOBALS['t_sites'][1] = 'twentytwentyfive';
+tbe_remove_dropins();
+check( file_exists( "$t_dir/tbe-errors/404.html" ), 'the main site switching away keeps the files while a subsite runs the theme' );
+// With the main site on another theme, one writer only: the lowest-ID subsite that runs this one.
+$GLOBALS['t_main']  = false;
+$GLOBALS['t_sites'] = array( 1 => 'twentytwentyfive', 2 => 'twentytwentyfive', 4 => 'tbe', 7 => 'tbe' );
+$GLOBALS['t_blog']  = 7;
+check( ! tbe_error_files_owner() && array() === tbe_install_dropins(), 'a higher-ID subsite does not write while a lower one runs the theme' );
+$GLOBALS['t_blog'] = 4;
+check( tbe_error_files_owner(), 'the lowest-ID subsite that runs the theme writes when the main site runs another' );
+check( 'written' === ( tbe_install_dropins()['tbe-errors/404.html'] ?? '' ) && false !== strpos( (string) file_get_contents( "$t_dir/tbe-errors/404.html" ), 'href="/other/"' ), 'that subsite writes the files with its own home address' );
+// A large network is paged: the only site running the theme sits past the first 500.
+$GLOBALS['t_sites'] = array_fill_keys( range( 1, 1203 ), 'twentytwentyfive' );
+$GLOBALS['t_sites'][1201] = 'tbe';
+$GLOBALS['t_blog']  = 1201;
+check( 1201 === tbe_error_files_first_theme_site() && tbe_error_files_owner(), 'the site scan pages through every site' );
+$GLOBALS['t_blog'] = 2;
+check( tbe_error_files_in_use_elsewhere(), 'the in-use scan finds a site past the first 500' );
+$GLOBALS['t_sites'][1201] = 'twentytwentyfive';
+check( ! tbe_error_files_in_use_elsewhere(), 'no other site runs the theme: not in use' );
+// The last site to switch away, a subsite, removes the files; then the main site's copies are written back for the rest of the test.
+$GLOBALS['t_blog'] = 4;
+tbe_remove_dropins();
+check( ! file_exists( "$t_dir/tbe-errors/404.html" ), 'the last site to switch away removes the files, even a subsite' );
+check( tbe_error_files_missing(), 'missing files are noticed, so the next admin page writes them back' );
 $GLOBALS['t_multi'] = false;
+$GLOBALS['t_root']  = 'https://tbe.test/blog';
+tbe_install_dropins();
+$GLOBALS['t_sites'] = array();
+$GLOBALS['t_blog']  = 1;
 $GLOBALS['t_root']  = 'https://tbe.test/blog';
 file_put_contents( "$t_dir/tbe-errors/500.html", "<p>own</p>\n" );
 tbe_remove_dropins();
