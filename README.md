@@ -33,6 +33,18 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/build_interlinear.py` | Downloads the open STEPBible data and builds `data/interlinear/` |
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
+## The home page as a story
+`templates/front-page.html` reads top to bottom as one argument, the way the site works: make the claim, open the text, show what the notes find, then hand the reader the whole text.
+
+| Step | Section | Its job |
+|---|---|---|
+| 1 | Hero: the broken cross, the name, the tagline | The claim: textual criticism, critical commentary and reflection on the Bible (the tagline, Appearance → TBE). |
+| 2 | Passage search, in the hero | The reader's question: go straight to any passage or word. |
+| 3 | "What the commentary finds", the six latest notes | The evidence. Its line says each note is filed under the passage it reads, so it can be checked against the text. |
+| 4 | "Read the text yourself", the Read the books, Interlinear and Browse commentary buttons | The next step: the 66 books of the ESV with the Hebrew and Greek beneath them. |
+
+The buttons sat in the hero until 0.10.4 and now close the page; the header menu carries the same links at the top. Each section heading is an ornamented `h2` followed by one line (`.tbe-section-lede`). A front-page template saved in the Site Editor keeps its own layout; reset it (Appearance → Editor → Templates → Front page → Reset) to take this one.
+
 ## Settings (Appearance → TBE)
 Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice), **Login screen** (the theme's dress on wp-login.php on or off, a logo URL, a line above the form). The search base is set under Settings → Permalinks.
 
@@ -116,6 +128,7 @@ Errors get their own pages, in the site's look (the broken cross, Angel, burgund
 
   `errors/` in the theme keeps the copies for a site at the domain root with the theme in `/wp-content/themes/tbe/` (rebuild with `php tools/build_error_pages.php`; `--check` fails on a stale page). If the font cannot be found, a page falls back to Georgia.
 
+- **On a network** every site shares `wp-content`, so one site writes the files: the main site, or, while the main site runs another theme, the subsite with the lowest ID that runs TBE (`tbe_error_files_owner()`). A theme switch removes them only when no other site, the main site included, still runs TBE (`tbe_error_files_in_use_elsewhere()`); the last site to switch away removes them, even a subsite. Both scans read the sites 500 at a time.
 - Missing pages inside the site use `templates/404.html`, whose message is chosen at random on each load.
 - Every page has several wordings (`inc/error-page-html.php`); a different one greets each visit. Static pages and the drop-ins pick one in the browser, so a visitor without JavaScript sees the first.
 

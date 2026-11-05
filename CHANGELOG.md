@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.4
+
+The home page reads as one story, and the error pages are shared properly on a network. Nothing was renamed or removed.
+
+- The home page runs claim, question, evidence, next step: the hero with its tagline and passage search, then "What the commentary finds" (the six latest notes, a heading that read "Latest commentary"), then "Read the text yourself" with the Read the books, Interlinear and Browse commentary buttons, which used to sit in the hero. Each section heading has one line under it (`.tbe-section-lede`). The README sets out each step and its job.
+- On a phone the site name in the hero ran past the edge of the screen (the page scrolled sideways by 34 pixels at 375). It now scales to fit.
+- The header and footer parts were a `<header>` inside the template's `<header>` and a `<footer>` inside its `<footer>`, which gave every page two banner and two contentinfo landmarks. The inner groups are now `<div>`s with the same classes. axe reports no violations on the home page at 1280 and 375 pixels.
+- On a network, 0.10.3 let only the main site write or remove the error pages. A theme switch on the main site then deleted the shared files while subsites still ran TBE, and a network whose main site runs another theme never got them. `tbe_error_files_owner()` now also lets the lowest-ID subsite that runs TBE write them while the main site runs another theme (`tbe_error_files_first_theme_site()`), and `tbe_remove_dropins()` keeps them while any other site still runs TBE (`tbe_error_files_in_use_elsewhere()`), so the last site to switch away removes them. Both read the sites 500 at a time. `tools/test_error_pages.php` covers the main site switching away, the single writer and a network past 500 sites.
+
 ## 0.10.3
 
 The web server error pages work on a site in a subfolder. Nothing was renamed or removed.

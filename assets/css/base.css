@@ -122,7 +122,7 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .tbe-brand { font-family: "Angel", Georgia, serif; font-weight: 400; letter-spacing: 0.02em; }
 /* One line at every width: the name is about 8em wide in Angel, so its size
    follows the viewport and stops where it still fits the 44rem column. */
-.tbe-hero h1.tbe-brand { font-size: min(5.2rem, calc((100vw - 2rem) / 8.5)); line-height: 1.05; white-space: nowrap; max-width: none; }
+.tbe-hero h1.tbe-brand { font-size: min(5.2rem, calc((100vw - 2rem) / 10.5)); line-height: 1.05; white-space: nowrap; max-width: none; }
 
 /* Brand mark: the hollow inverted cross, coloured by the active scheme. */
 .tbe-lockup { gap: 0.7rem; }
@@ -172,6 +172,12 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 	background: linear-gradient(to right, transparent, var(--tbe-gold));
 }
 .tbe-ornament::after { background: linear-gradient(to left, transparent, var(--tbe-gold)); }
+
+/* Home page story: one line under each section heading, and the closing step's buttons */
+.tbe-section-lede { max-width: 40rem; margin: -0.25rem auto 1.75rem; text-align: center; color: var(--tbe-muted); }
+.tbe-next { margin-block: 0.5rem clamp(2.5rem, 6vw, 4rem); }
+.tbe-main > .tbe-ornament { text-align: center; }
+.tbe-cards + .tbe-ornament { margin-top: clamp(2.5rem, 6vw, 4rem); }
 
 /* Section chips ---------------------------------------------------------- */
 .tbe-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0; }

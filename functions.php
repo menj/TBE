@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TBE_VERSION', '0.10.3' );
+define( 'TBE_VERSION', '0.10.4' );
 define( 'TBE_DIR', get_stylesheet_directory() );
 define( 'TBE_URI', get_stylesheet_directory_uri() );
 
