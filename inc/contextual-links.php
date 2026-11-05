@@ -301,11 +301,13 @@ function tbe_ctx_apply( string $content, string $here ): string {
 add_filter(
 	'the_content',
 	static function ( $content ) {
-		if ( is_admin() || is_feed() || ! is_singular( 'tbe_commentary' ) || ! is_main_query() || doing_filter( 'get_the_excerpt' ) ) {
+		// The same test as the passage line and the glossary tooltips (tbe_is_entry_body()), so the scripture cards at
+		// 99 have always run first and "John 3:16" stays a card.
+		if ( ! tbe_is_entry_body() ) {
 			return $content;
 		}
 		$post = get_queried_object();
-		if ( ! $post instanceof WP_Post || get_the_ID() !== $post->ID || ! apply_filters( 'tbe_contextual_links_enabled', true, $post ) ) {
+		if ( ! $post instanceof WP_Post || ! apply_filters( 'tbe_contextual_links_enabled', true, $post ) ) {
 			return $content;
 		}
 		return tbe_ctx_apply( (string) $content, (string) get_permalink( $post ) );

@@ -21,6 +21,8 @@ The single commentary entry gets the pieces a long article needs, in reading ord
 
 ### Changed
 - On an entry's own page the "Textual variants" title is a level-two heading, so the headings run in order; inside the reader's boxes it stays as it was.
+- The passage line, the apparatus, the glossary tooltips and the contextual links all find the entry's body the same way (`tbe_is_entry_body()`): the queried entry, in or out of the classic Loop. On a WordPress that renders the Post Content block outside the Loop they used to be left out, and a contextual link could take "John 3:16" from its scripture card.
+- Two answer boxes on one page get headings with ids of their own, and a box that carries its own points counts as speakable.
 ## 0.10.7
 
 The theme's documents, brought to one standard. Nothing in the site changed for visitors, and nothing was renamed or removed.

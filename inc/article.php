@@ -20,12 +20,8 @@ function tbe_article_post(): ?WP_Post {
 }
 
 /** Whether a the_content call is the main entry of a single commentary page. */
-function tbe_article_is_main( int $id = 0 ): bool {
-	if ( is_admin() || is_feed() || ! is_singular( 'tbe_commentary' ) || doing_filter( 'get_the_excerpt' ) ) {
-		return false;
-	}
-	$post = get_queried_object();
-	return $post instanceof WP_Post && ( $id ? $id : (int) get_the_ID() ) === $post->ID;
+function tbe_article_is_main(): bool {
+	return tbe_is_entry_body();
 }
 
 /* Headings ---------------------------------------------------------------- */
@@ -251,7 +247,11 @@ function tbe_render_answer_box( array $attrs = array() ): string {
 	if ( '' === $summary && ! $points ) {
 		return '';
 	}
-	$out = '<section class="tbe-answer" aria-labelledby="tbe-answer-title"><h2 id="tbe-answer-title" class="tbe-answer__title">' . esc_html__( 'In short', 'tbe-child' ) . '</h2>';
+	// Each box on the page gets its own heading id: the template's box and one placed in the text can both show.
+	static $count = 0;
+	++$count;
+	$hid = 1 === $count ? 'tbe-answer-title' : 'tbe-answer-title-' . $count;
+	$out = '<section class="tbe-answer" aria-labelledby="' . $hid . '"><h2 id="' . $hid . '" class="tbe-answer__title">' . esc_html__( 'In short', 'tbe-child' ) . '</h2>';
 	if ( '' !== $summary ) {
 		$out .= '<p class="tbe-answer__summary">' . esc_html( $summary ) . '</p>';
 	}
@@ -643,6 +643,23 @@ function tbe_article_faq( array $blocks ): array {
 }
 
 /**
+ * Whether the text holds an answer-box block that shows by itself: one with its own summary or points.
+ *
+ * @param array $blocks Parsed blocks.
+ */
+function tbe_article_has_answer_block( array $blocks ): bool {
+	foreach ( $blocks as $block ) {
+		if ( 'tbe/answer-box' === ( $block['blockName'] ?? '' ) && ( '' !== trim( (string) ( $block['attrs']['summary'] ?? '' ) ) || tbe_article_points( (string) ( $block['attrs']['points'] ?? '' ) ) ) ) {
+			return true;
+		}
+		if ( ! empty( $block['innerBlocks'] ) && tbe_article_has_answer_block( (array) $block['innerBlocks'] ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
  * Nodes the commentary page adds to its graph: the FAQPage when the entry shows questions, and the speakable parts
  * of the page (the dek and the answer box) when they are there.
  *
@@ -676,7 +693,7 @@ function tbe_article_ld( WP_Post $post, string $url, string $page_id ): array {
 	if ( '' !== trim( (string) $post->post_excerpt ) ) {
 		$speakable[] = '.tbe-dek';
 	}
-	if ( tbe_setting( 'answer_box' ) && '' !== trim( (string) get_post_meta( $post->ID, 'tbe_takeaways', true ) ) ) {
+	if ( tbe_setting( 'answer_box' ) && ( '' !== trim( (string) get_post_meta( $post->ID, 'tbe_takeaways', true ) ) || tbe_article_has_answer_block( parse_blocks( (string) $post->post_content ) ) ) ) {
 		$speakable[] = '.tbe-answer';
 	}
 	return array( 'nodes' => $nodes, 'speakable' => $speakable );
