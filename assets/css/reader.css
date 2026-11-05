@@ -174,14 +174,7 @@
 .tbe-il-index .tbe-ornament a { color: inherit; text-decoration: none; }
 
 /* The Arabic of the hadith on the Credits page: Noto Naskh Arabic (SIL OFL; see assets/fonts/LICENSE-NOTO-NASKH-ARABIC.txt), used here and nowhere else. */
-@font-face {
-	font-family: "Noto Naskh Arabic";
-	src: url("../fonts/NotoNaskhArabic-Regular.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-	unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
-}
+/* The @font-face rule for "Noto Naskh Arabic" is written by inc/enqueue.php (tbe_font_face_css()), with the file's version, and left out while the file is missing. */
 .tbe-hadith-ar { font-family: "Noto Naskh Arabic", serif; font-size: 1.45rem; line-height: 2.1; text-align: start; }
 
 /* Credits */

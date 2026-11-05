@@ -108,13 +108,7 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 }
 
 /* The site name: Angel by JuliaL (freeware; see assets/fonts/LICENSE-ANGEL-FONT.txt), used for the name and nothing else. */
-@font-face {
-	font-family: "Angel";
-	src: url("../fonts/Angel.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-}
+/* The @font-face rule for "Angel" is written by inc/enqueue.php (tbe_font_face_css()), with the file's version, and left out while the file is missing. */
 .tbe-header .wp-block-site-title,
 .tbe-header .wp-block-site-title a,
 .tbe-footer__name .wp-block-site-title,

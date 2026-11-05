@@ -46,6 +46,7 @@ function wp_enqueue_script( $h, $src = '', $deps = array(), $ver = false, $args 
 }
 function wp_register_script( $h, $src, $deps = array(), $ver = false, $args = array() ) { $GLOBALS['t']['scripts'][ $h ] = array( $src, $deps, $ver, $args ); }
 function esc_url( $u ) { return (string) $u; }
+function wp_add_inline_style( $h, $css ) { $GLOBALS['t']['inline'][ $h ][] = $css; }
 function esc_url_raw( $u ) { return (string) $u; }
 function add_query_arg( $k, $v, $u ) { return $u . '?' . $k . '=' . $v; }
 function home_url( $p = '' ) { return 'https://tbe.test' . $p; }
@@ -106,7 +107,34 @@ check( false === $GLOBALS['t']['scripts']['tbe-reader'][0], 'a missing script le
 check( '' === tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ), 'no preload for a font that is not there yet' );
 file_put_contents( "$t_dir/assets/fonts/SBL_BLit.woff2", 'x' );
 clearstatcache();
-check( false !== strpos( tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ), 'href="' . TBE_URI . '/assets/fonts/SBL_BLit.woff2"' ), 'a preload once it is' );
+touch( "$t_dir/assets/fonts/SBL_BLit.woff2", 1700001500 );
+clearstatcache();
+$font = TBE_URI . '/assets/fonts/SBL_BLit.woff2?ver=1700001500-1';
+check( false !== strpos( tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ), 'href="' . $font . '"' ), 'a preload once it is, at the versioned address' );
+
+// The @font-face rules come from PHP: versioned, and only for fonts whose files are there.
+$css = tbe_font_face_css( array( 'biblit', 'hebrew', 'greek', 'estrangela' ) );
+check( 1 === substr_count( $css, '@font-face' ) && false !== strpos( $css, 'font-family:"SBL BibLit";src:url("' . $font . '")' ), 'a rule for the font that is there, at the address its preload names; none for the missing ones' );
+file_put_contents( "$t_dir/assets/fonts/SBL_Hbrw.woff2", 'xy' );
+clearstatcache();
+check( false !== strpos( tbe_font_face_css( array( 'hebrew' ) ), 'unicode-range:U+0590-05FF, U+FB1D-FB4F' ), 'the character range is kept' );
+$GLOBALS['t']['inline'] = array();
+tbe_attach_font_faces( 'tbe-scripture' );
+tbe_attach_font_faces( 'tbe-scripture' );
+check( 1 === count( $GLOBALS['t']['inline']['tbe-scripture'] ?? array() ) && 2 === substr_count( $GLOBALS['t']['inline']['tbe-scripture'][0], '@font-face' ), 'the rules go inline with the stylesheet that uses them, once' );
+$editor = null;
+foreach ( $GLOBALS['t']['hooks']['block_editor_settings_all'] ?? array() as $h ) {
+	$editor = call_user_func( $h[0], array( 'styles' => array() ) );
+}
+check( is_array( $editor ) && false !== strpos( (string) ( end( $editor['styles'] )['css'] ?? '' ), 'SBL BibLit' ), 'the editor gets the same rules' );
+$css_files = '';
+foreach ( glob( __DIR__ . '/../assets/css/*.css' ) as $f ) {
+	$css_files .= (string) file_get_contents( $f );
+}
+check( false === stripos( $css_files, '@font-face {' ) && ! preg_match( '~url\(["\']?\.\./fonts/~', $css_files ), 'no stylesheet names a font file itself any more' );
+$handles = tbe_font_face_handles();
+$faces   = tbe_font_faces();
+check( array() === array_diff( array_merge( ...array_values( $handles ) ), array_keys( $faces ) ) && array() === array_diff( array_keys( $faces ), array_merge( ...array_values( $handles ) ) ), 'every font has a stylesheet that carries its rule' );
 
 // No theme file is enqueued with the theme version or straight from TBE_URI any more.
 $left = array();
@@ -130,6 +158,9 @@ tbe_brand_tag( '<link rel="icon" href="%s">', 'favicon.svg' );
 check( '<link rel="icon" href="' . TBE_URI . '/assets/img/brand/favicon.svg?ver=1700002000-6">' . "\n" === ob_get_clean(), 'once it is up, the tag carries its file time and size' );
 $brand = (string) file_get_contents( __DIR__ . '/../inc/branding.php' );
 check( false !== strpos( $brand, "tbe_font_preload( 'assets/fonts/Angel.woff2' )" ) && false === strpos( $brand, 'esc_url( tbe_brand_url(' ), 'the Angel preload waits for its file, and every brand tag goes through tbe_brand_tag()' );
+
+$schema = (string) file_get_contents( __DIR__ . '/../inc/schema.php' );
+check( false === strpos( $schema, "TBE_URI . '/assets/img/brand/" ) && false !== strpos( $schema, "tbe_brand_url( 'icon-512.png' )" ), 'the JSON-LD logo and image use the versioned brand addresses too' );
 
 // Sitemaps.
 $priority = null;
