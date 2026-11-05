@@ -23,9 +23,9 @@ The single commentary entry gets the pieces a long article needs, in reading ord
 - On an entry's own page the "Textual variants" title is a level-two heading, so the headings run in order; inside the reader's boxes it stays as it was.
 - The passage line, the apparatus, the glossary tooltips and the contextual links all find the entry's body the same way (`tbe_is_entry_body()`): the queried entry, in or out of the classic Loop. On a WordPress that renders the Post Content block outside the Loop they used to be left out, and a contextual link could take "John 3:16" from its scripture card.
 - Two answer boxes on one page get headings with ids of their own, and a box that carries its own points counts as speakable.
-- A heading id the author set is reserved, so a made id never repeats it. The reading time counts every word, Hebrew, Greek and Arabic included. "Last reviewed" takes only a real calendar date, and shows the date saved in any time zone.
+- A heading id the author set is reserved, so a made id never repeats it. A heading in Hebrew, Greek or Arabic keeps its letters in its id, so its contents link finds it. The reading time counts every word, Hebrew, Greek and Arabic included. "Last reviewed" takes only a real calendar date, and shows the date saved in any time zone.
 - A contextual link never takes a chapter and verse, and a ">" inside an attribute no longer splits a tag. The footnotes move to Notes and sources only when that block follows the body in the template, and are read whether WordPress stored them as JSON or as an array.
-- Related entries and the next entry read every entry on the book, with their terms from the cache.
+- Related entries and the next entry read every entry on the book, with their terms from the cache. Ties go to the nearer chapter, then the nearer verse.
 ## 0.10.7
 
 The theme's documents, brought to one standard. Nothing in the site changed for visitors, and nothing was renamed or removed.

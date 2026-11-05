@@ -33,7 +33,9 @@ function tbe_article_is_main(): bool {
  * @param array  $seen Ids taken so far, as keys; the new one is added.
  */
 function tbe_article_slug( string $text, array &$seen ): string {
-	$base = sanitize_title( $text );
+	// sanitize_title() percent-encodes letters outside ASCII; the id keeps them as letters, so "#" links to a
+	// Hebrew or Greek heading match it exactly.
+	$base = rawurldecode( sanitize_title( $text ) );
 	$base = '' !== $base ? $base : 'section';
 	$slug = $base;
 	for ( $n = 2; isset( $seen[ $slug ] ); $n++ ) {
@@ -503,7 +505,7 @@ function tbe_article_term_ids( WP_Post $post, string $taxonomy ): array {
 
 /**
  * Related entries on the same book, scored: 3 for the same chapter, 2 for each shared tag, 1 for each shared
- * section; ties go to the nearer passage. Entries with no shared chapter, tag or section score 0 and still count,
+ * section; ties go to the nearer chapter, then the nearer verse, then the older entry. Entries with no shared chapter, tag or section score 0 and still count,
  * after the rest, since the book is shared.
  *
  * @return WP_Post[]
@@ -514,6 +516,7 @@ function tbe_article_related( WP_Post $post, int $limit ): array {
 		return array();
 	}
 	$chapter  = (int) get_post_meta( $post->ID, 'tbe_chapter', true );
+	$verse    = (int) get_post_meta( $post->ID, 'tbe_vstart', true );
 	$tags     = tbe_article_term_ids( $post, 'post_tag' );
 	$sections = tbe_article_term_ids( $post, 'tbe_section' );
 	$scored   = array();
@@ -525,10 +528,12 @@ function tbe_article_related( WP_Post $post, int $limit ): array {
 		$score      = ( $ch === $chapter ? 3 : 0 )
 			+ 2 * count( array_intersect( $tags, tbe_article_term_ids( $entry, 'post_tag' ) ) )
 			+ count( array_intersect( $sections, tbe_article_term_ids( $entry, 'tbe_section' ) ) );
-		$scored[]   = array( $score, -abs( $ch - $chapter ), $entry );
+		$vs         = (int) get_post_meta( $entry->ID, 'tbe_vstart', true );
+		$scored[]   = array( $score, -abs( $ch - $chapter ), -abs( $vs - $verse ), -$entry->ID, $entry );
 	}
-	usort( $scored, static fn( $a, $b ) => array( $b[0], $b[1] ) <=> array( $a[0], $a[1] ) );
-	return array_map( static fn( $s ) => $s[2], array_slice( $scored, 0, $limit ) );
+	// Highest score, then the nearer chapter, then the nearer verse, then the older entry: always one order.
+	usort( $scored, static fn( $a, $b ) => array( $b[0], $b[1], $b[2], $b[3] ) <=> array( $a[0], $a[1], $a[2], $a[3] ) );
+	return array_map( static fn( $s ) => $s[4], array_slice( $scored, 0, $limit ) );
 }
 
 /** Related entries on the same book, as cards. */

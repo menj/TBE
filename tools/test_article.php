@@ -28,7 +28,14 @@ function apply_filters( $hook, $value ) {
 function esc_attr( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES ); }
 function esc_url( $s ) { return (string) $s; }
 function wp_strip_all_tags( $s ) { return trim( strip_tags( (string) $s ) ); }
-function sanitize_title( $s ) { return trim( (string) preg_replace( '/[^a-z0-9]+/', '-', strtolower( (string) $s ) ), '-' ); }
+// Like WordPress: ASCII lower-cased, other letters percent-encoded, everything else a dash.
+function sanitize_title( $s ) {
+	$out = '';
+	foreach ( preg_split( '//u', strtolower( (string) $s ), -1, PREG_SPLIT_NO_EMPTY ) as $ch ) {
+		$out .= preg_match( '/^[a-z0-9]$/', $ch ) ? $ch : ( strlen( $ch ) > 1 ? strtolower( rawurlencode( $ch ) ) : '-' );
+	}
+	return trim( (string) preg_replace( '/-+/', '-', $out ), '-' );
+}
 function wp_parse_url( $u, $c = -1 ) { return parse_url( (string) $u, $c ); } // phpcs:ignore WordPress.WP.AlternativeFunctions
 function home_url( $p = '' ) { return 'https://thebible.exposed' . $p; }
 function untrailingslashit( $s ) { return rtrim( (string) $s, '/' ); }
@@ -60,6 +67,10 @@ check( 1 === substr_count( $html, 'id="own"' ), 'a heading with an id is left as
 $clash = '<h2 id="introduction">Custom</h2><h2>Introduction</h2><h2>Introduction</h2>';
 check( array( 'introduction', 'introduction-2', 'introduction-3' ) === array_column( tbe_article_heading_list( $clash ), 0 ), 'an author-set id is never made again' );
 check( 1 === substr_count( tbe_article_heading_ids( $clash ), 'id="introduction"' ), 'and the rendered headings agree' );
+
+// A heading in another script keeps its letters in the id, so its contents link matches.
+$greek = tbe_article_heading_list( '<h2>Λόγος</h2>' );
+check( 'λόγος' === $greek[0][0] || 'Λόγος' === $greek[0][0], 'a Greek heading id keeps its letters (' . $greek[0][0] . ')' );
 
 // Mid-article next step.
 $aside = '<aside>next</aside>';
