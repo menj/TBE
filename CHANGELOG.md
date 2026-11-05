@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.3
+
+The web server error pages work on a site in a subfolder. Nothing was renamed or removed.
+
+- `tbe_install_dropins()` also writes a copy of each static page (400, 401, 403, 404, 500, 502, 503, 504) into `wp-content/tbe-errors/`, with the site's home address for the links and the real path of the Angel font. The Error pages tab lists them, `tbe_remove_dropins()` deletes them on a theme switch, and `tbe_htaccess_snippet()` points at them. `errors/` stays as the copy for a site at the domain root.
+- `tbe_error_page_html()` takes the home address as a third argument (default `/`), so the drop-ins also link to a subfolder home.
+- The admin check rewrites the files when the home address or the theme folder changes, as well as after an update (option `tbe_dropins`).
+- On a network only the main site writes or removes the files (`tbe_error_files_owner()`), since every site shares `wp-content`; a subsite no longer overwrites the main site's copies.
+- When a plugin serves theme files from another host, the pages ask for the Angel font at its full address (`tbe_error_font_url()`).
+- `tools/build_error_pages.php --check` fails on a stale page in `errors/`. `tools/test_error_pages.php` covers the copies in a subfolder.
+
 ## 0.10.2
 
 The error pages, after a check on a live copy of WordPress. Nothing was renamed or removed.
