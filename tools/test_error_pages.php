@@ -21,9 +21,11 @@ function add_action() {}
 function add_filter() {}
 function __( $s ) { return $s; }
 function tbe_setting() { return 1; }
-function get_stylesheet_directory_uri() { return $GLOBALS['t_root'] . '/wp-content/themes/tbe'; }
+function get_stylesheet_directory_uri() { return empty( $GLOBALS['t_cdn'] ) ? $GLOBALS['t_root'] . '/wp-content/themes/tbe' : 'https://cdn.tbe.test/wp-content/themes/tbe'; }
 function home_url( $p = '' ) { return $GLOBALS['t_root'] . $p; }
 function content_url( $p = '' ) { return $GLOBALS['t_root'] . '/wp-content' . $p; }
+function is_multisite() { return $GLOBALS['t_multi'] ?? false; }
+function is_main_site() { return $GLOBALS['t_main'] ?? true; }
 function wp_mkdir_p( $d ) { return is_dir( $d ) || mkdir( $d, 0700, true ); }
 $GLOBALS['t_root'] = 'https://tbe.test';
 function wp_parse_url( $u, $c = -1 ) { return parse_url( $u, $c ); }
@@ -84,11 +86,22 @@ $h = (string) file_get_contents( "$t_dir/tbe-errors/404.html" );
 check( false !== strpos( $h, 'href="/blog/"' ) && false !== strpos( $h, 'href="/blog/bible/"' ) && false !== strpos( $h, 'url("/blog/wp-content/themes/tbe/assets/fonts/Angel.woff2")' ) && false === strpos( $h, 'href="/bible/"' ), 'a subfolder copy has its own home links and font path' );
 check( false !== strpos( (string) file_get_contents( "$t_dir/php-error.php" ), 'href="/blog/"' ), 'the drop-ins link to the subfolder home too' );
 check( false !== strpos( tbe_htaccess_snippet(), 'ErrorDocument 404 /blog/wp-content/tbe-errors/404.html' ), '.htaccess lines follow wp-content' );
+$GLOBALS['t_multi'] = true;
+$GLOBALS['t_main']  = false;
+$GLOBALS['t_root']  = 'https://tbe.test/other';
+check( array() === tbe_install_dropins() && false !== strpos( (string) file_get_contents( "$t_dir/tbe-errors/404.html" ), 'href="/blog/"' ), 'a network subsite writes nothing over the main site\'s files' );
+tbe_remove_dropins();
+check( file_exists( "$t_dir/tbe-errors/404.html" ), 'a network subsite removes nothing' );
+$GLOBALS['t_multi'] = false;
+$GLOBALS['t_root']  = 'https://tbe.test/blog';
 file_put_contents( "$t_dir/tbe-errors/500.html", "<p>own</p>\n" );
 tbe_remove_dropins();
 check( ! file_exists( "$t_dir/tbe-errors/404.html" ) && file_exists( "$t_dir/tbe-errors/500.html" ) && file_exists( "$t_dir/db-error.php" ), 'switching away removes only the theme\'s own files' );
 unlink( "$t_dir/tbe-errors/500.html" );
 rmdir( "$t_dir/tbe-errors" );
+$GLOBALS['t_cdn'] = true;
+check( 'https://cdn.tbe.test/wp-content/themes/tbe/assets/fonts/Angel.woff2' === tbe_error_font_url(), 'a theme served from another host gets the full font address' );
+unset( $GLOBALS['t_cdn'] );
 
 foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504' ) as $code ) {
 	$h = (string) file_get_contents( __DIR__ . "/../errors/$code.html" );

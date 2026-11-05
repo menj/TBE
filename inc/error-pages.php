@@ -57,9 +57,23 @@ function tbe_dropin_stamp(): string {
 	return TBE_VERSION . '|' . TBE_DROPIN_VERSION . '|' . md5( home_url( '/' ) . '|' . get_stylesheet_directory_uri() );
 }
 
+/**
+ * The address of Angel.woff2: root-relative when the theme is served from the site's own host, in full when a
+ * plugin serves theme files from another host (a CDN), so the font is asked for where it is.
+ */
+function tbe_error_font_url(): string {
+	$url = get_stylesheet_directory_uri() . '/assets/fonts/Angel.woff2';
+	return wp_parse_url( $url, PHP_URL_HOST ) === wp_parse_url( home_url( '/' ), PHP_URL_HOST ) ? (string) wp_parse_url( $url, PHP_URL_PATH ) : $url;
+}
+
+/** On a network every site shares wp-content, so only the main site writes or removes the files. */
+function tbe_error_files_owner(): bool {
+	return ! is_multisite() || is_main_site();
+}
+
 /** The text of one file: for a drop-in, headers first, then the page; for a static copy, the marker, then the page. */
 function tbe_dropin_source( string $file ): string {
-	$font = wp_parse_url( get_stylesheet_directory_uri() . '/assets/fonts/Angel.woff2', PHP_URL_PATH );
+	$font = tbe_error_font_url();
 	if ( 0 === strpos( $file, TBE_STATIC_ERRORS . '/' ) ) {
 		return '<!-- TBE error page ' . TBE_DROPIN_VERSION . '. Written by the TBE theme; safe to delete. -->' . "\n" . tbe_error_page_html( basename( $file, '.html' ), (string) $font, tbe_error_home_path() ) . "\n";
 	}
@@ -95,6 +109,9 @@ function tbe_dropin_state( string $file ): string {
  */
 function tbe_install_dropins(): array {
 	$result = array();
+	if ( ! tbe_error_files_owner() ) {
+		return $result;
+	}
 	foreach ( tbe_error_files() as $file ) {
 		$state = tbe_dropin_state( $file );
 		if ( 'foreign' === $state ) {
@@ -130,6 +147,9 @@ function tbe_install_dropins(): array {
  * stylesheet already names the new theme, so the font URL in a current copy no longer matches.
  */
 function tbe_remove_dropins(): void {
+	if ( ! tbe_error_files_owner() ) {
+		return;
+	}
 	foreach ( tbe_error_files() as $file ) {
 		if ( in_array( tbe_dropin_state( $file ), array( 'ours', 'outdated' ), true ) ) {
 			wp_delete_file( WP_CONTENT_DIR . '/' . $file );
@@ -152,7 +172,7 @@ add_action(
 add_action(
 	'admin_init',
 	static function () {
-		if ( current_user_can( 'manage_options' ) && tbe_setting( 'error_pages' ) && get_option( 'tbe_dropins' ) !== tbe_dropin_stamp() ) {
+		if ( current_user_can( 'manage_options' ) && tbe_error_files_owner() && tbe_setting( 'error_pages' ) && get_option( 'tbe_dropins' ) !== tbe_dropin_stamp() ) {
 			tbe_install_dropins();
 		}
 	},
