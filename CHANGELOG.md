@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.9
+
+### Changed
+- The theme is licensed under the GNU General Public License, version 3 or later, as the owner decided on 5 November 2026. `style.css` and `readme.txt` name it, and `LICENSE` holds the full, unmodified text. The fonts, texts, data and images keep their own licences and credits.
+- `.claude/skills/theme-docs/SKILL.md` gains its Licence section.
+
 ## 0.10.8
 
 The single commentary entry gets the pieces a long article needs, in reading order. No sales prompt, no byline: the author stays in the structured data only. Nothing was renamed or removed.

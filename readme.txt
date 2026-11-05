@@ -4,10 +4,10 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.8
+Stable tag: 0.10.9
 Template: twentytwentyfive
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: GNU General Public License v3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Child theme of Twenty Twenty-Five, built for one site: The Bible Exposed at thebible.exposed.
 
@@ -98,7 +98,7 @@ Yes, on the Reading bar and Login screen tabs.
 
 == Credits ==
 
-TBE is distributed under the GNU General Public License v2 or later.
+TBE is distributed under the GNU General Public License v3 or later. The full text is in the LICENSE file.
 
 * The ESV text is copyright Crossway, used by permission. The copyright line in the footer is set under ESV and licence.
 * The Hebrew and Greek word-by-word data is from STEPBible (www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
@@ -108,6 +108,9 @@ TBE is distributed under the GNU General Public License v2 or later.
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
 == Changelog ==
+
+= 0.10.9 =
+* The theme is now licensed under the GNU General Public License, version 3 or later. The full text is in the LICENSE file.
 
 = 0.10.8 =
 * Each commentary entry's page gains a breadcrumb, the excerpt under the title, the dates and reading time, an "In short" box, a contents list, a notes and sources section, a next step ("Read the passage") and related entries on the same book.
@@ -126,6 +129,9 @@ TBE is distributed under the GNU General Public License v2 or later.
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.9 =
+Nothing to do by hand. The licence is now GPL version 3 or later.
 
 = 0.10.8 =
 Nothing to do by hand. If you saved the commentary template in the Site Editor, reset it to get the new layout.

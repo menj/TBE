@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.9
+Nothing to do. The licence is now GPL version 3 or later; the full text is in `LICENSE`.
+
 ### To 0.10.8
 - Nothing to do by hand. If the commentary template was saved in the Site Editor (Appearance, Editor, Templates, Single item: Commentary entry), reset it to take the new layout.
 - The Commentary pages tab under Appearance, TBE has the new settings. The defaults show everything except the one-line next step in the middle of an entry.
