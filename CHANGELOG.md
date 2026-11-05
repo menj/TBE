@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.10.5
+
+Fixes from the live logs of the sister sites. Nothing was renamed or removed.
+
+- The owner uploads by FTP from a working copy, which puts `.git` and `tools/` on the live server. A new theme `.htaccess` refuses every dot entry (`.well-known` stays open), the `tests`, `tools`, `bin` and `docs` folders and every Markdown file, with a mod_rewrite fallback where mod_alias is missing. `tools/.htaccess` refuses its folder wherever the theme sits.
+- `inc/dev-files.php` removes the hidden entries and `tools/` on the first request of any kind after the version changes (`tbe_cleanup_on_version_change()` on `init`). One request runs it, under a lease taken with `add_option()`, renewed once a minute while the walk runs and taken over after five minutes by one compare-and-set UPDATE (`tbe_swap_lock()`). The version is recorded only when nothing is left; an entry that cannot be removed is tried again five minutes later and logged once a day. A local or development site keeps everything, and so does `TBE_KEEP_DOTFILES`.
+- Every PHP script in `tools/` exits at once unless PHP runs it from the command line.
+- An upload that sent `functions.php` before `inc/` would end every request in a fatal error. `functions.php` now lists its files (`tbe_theme_files()`, and `tbe_theme_support_files()` for the two that other files load), checks every one before any loads, and loads them inside a `try`, so a half-written file is caught too. Visitors get the static 503 page (the site's copy in `wp-content/tbe-errors/`, else the theme's) with `Retry-After: 300`; the log gets one line per problem every ten minutes (`tbe_incomplete_theme()`). A missing file leaves the admin alone; a file that breaks part-way sends the page to the admin too. The login screen, AJAX, cron and the command line never get it (`tbe_incomplete_serves()`).
+- `/wp/v2/users` and `/wp/v2/users/<id>` were public. `inc/hardening.php` removes them for visitors who are not logged in (`tbe_hide_rest_users()`); the block editor keeps them. `?author=N` and `?author_name=` go to the home page with a 301 before WordPress's canonical redirect names the account (`tbe_block_author_query()`), and the users sitemap goes.
+- XML-RPC answered password guesses. It is now off (`xmlrpc_enabled` false, no methods, no pingback header or RSD link, and `xmlrpc.php` answers 403), unless Jetpack is active or `TBE_ALLOW_XMLRPC` is set (`tbe_xmlrpc_allowed()`).
+- The theme does not write the site's `.htaccess`, so the Error pages tab shows the lines to paste for it (`tbe_security_htaccess_snippet()`): "Block xmlrpc.php" (left out while XML-RPC is allowed) and "TBE: deny direct core files", which answers 403 for the PHP files in `wp-includes` (TinyMCE's loader and `ms-files.php` excepted), `wp-settings.php`, `wp-config-sample.php`, `readme.html` and `wp-admin/install.php`. The README gives them too.
+- `tools/test_live_logs.php` checks all of the above. Checked on Apache 2.4 with mod_php, with and without mod_alias: every denied path answers 403, and the login screen, the admin, the REST API, TinyMCE's loader, the stylesheets, fonts, error pages and data files answer 200. With a stubbed WordPress, a missing or half-written `inc/` file gives the 503 page and one log line.
+
+### Upgrading from 0.10.4
+- Upload the whole theme folder with hidden files shown in the FTP client, so `.htaccess` and `tools/.htaccess` go up. The first page load afterwards removes `.git`, `.gitignore` and `tools/` from the theme folder on the server; add `define( 'TBE_KEEP_DOTFILES', true );` to `wp-config.php` first to keep them.
+- Paste the lines from Appearance, TBE, Error pages, "Requests the web server should refuse", into the site's `.htaccess`, after the WordPress section.
+- If Jetpack or a mobile app needs XML-RPC and Jetpack is not active, add `define( 'TBE_ALLOW_XMLRPC', true );` to `wp-config.php`.
+
 ## 0.10.4
 
 The home page reads as one story, and the error pages are shared properly on a network. Nothing was renamed or removed.

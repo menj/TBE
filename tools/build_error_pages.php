@@ -5,6 +5,11 @@
  * a copy for the site's own addresses into wp-content/tbe-errors/.
  * Usage: php tools/build_error_pages.php (add --check to fail when a page is stale)
  */
+
+// Run from the command line only: on a web server this file does nothing.
+if ( 'cli' !== PHP_SAPI ) {
+	exit;
+}
 define( 'ABSPATH', __DIR__ . '/' );
 require __DIR__ . '/../inc/error-page-html.php';
 

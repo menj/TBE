@@ -1,0 +1,9 @@
+# Never served: development files. The theme folder's own .htaccess refuses
+# this folder by its address too; this file refuses it wherever the theme sits.
+<IfModule mod_authz_core.c>
+	Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+	Order allow,deny
+	Deny from all
+</IfModule>
