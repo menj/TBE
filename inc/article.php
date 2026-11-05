@@ -249,7 +249,9 @@ function tbe_render_article_meta(): string {
 	}
 	$reviewed = (string) get_post_meta( $post->ID, 'tbe_reviewed', true );
 	if ( tbe_article_valid_date( $reviewed ) ) {
-		$stamp   = (int) strtotime( $reviewed . ' 12:00:00 UTC' );
+		// Noon on that day in the site's own time zone, so the date shown is the date saved, in any zone.
+		$day     = DateTimeImmutable::createFromFormat( '!Y-m-d H:i', $reviewed . ' 12:00', wp_timezone() );
+		$stamp   = $day ? $day->getTimestamp() : 0;
 		$items[] = sprintf( '<span class="tbe-meta__item">%1$s <time datetime="%2$s">%3$s</time></span>', esc_html__( 'Last reviewed', 'tbe-child' ), esc_attr( $reviewed ), esc_html( wp_date( (string) get_option( 'date_format' ), $stamp ) ) );
 	}
 	$minutes = tbe_article_minutes( $post );
