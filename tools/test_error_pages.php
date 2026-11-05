@@ -165,6 +165,7 @@ $GLOBALS['t_cdn'] = true;
 check( 'https://cdn.tbe.test/wp-content/themes/TBE/assets/fonts/Angel.woff2?ver=' . $t_fv === tbe_error_font_url(), 'a theme served from another host gets the full font address' );
 unset( $GLOBALS['t_cdn'] );
 
+check( false !== strpos( tbe_error_icon_link(), rawurlencode( trim( (string) preg_replace( '/>\s+</', '><', (string) file_get_contents( __DIR__ . '/../assets/img/brand/favicon.svg' ) ) ) ) ), 'the error-page icon is assets/img/brand/favicon.svg' );
 foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504' ) as $code ) {
 	$h = (string) file_get_contents( __DIR__ . "/../errors/$code.html" );
 	check( $h === tbe_error_page_html( $code ) . "\n", "errors/$code.html matches the builder" );

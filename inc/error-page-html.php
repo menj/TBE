@@ -146,14 +146,12 @@ function tbe_error_short_titles(): array {
 
 /**
  * The brand mark as the tab icon, a data address: an error page answers at any path, in a subfolder install too,
- * and while WordPress or PHP is down, so it carries the icon inside the page and asks the server for nothing.
+ * and while WordPress or PHP is down, so it carries the icon inside the page and asks the server for nothing. The
+ * mark is written out here, the same as assets/img/brand/favicon.svg (tools/test_error_pages.php compares them),
+ * so a page built while that file is still uploading has its icon too.
  */
 function tbe_error_icon_link(): string {
-	$svg = @file_get_contents( dirname( __DIR__ ) . '/assets/img/brand/favicon.svg' ); // phpcs:ignore WordPress.WP.AlternativeFunctions, WordPress.PHP.NoSilencedErrors
-	if ( ! is_string( $svg ) || '' === $svg ) {
-		return '';
-	}
-	$svg = trim( (string) preg_replace( '/>\s+</', '><', $svg ) );
+	$svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#6e1f2e"/><g fill="none" stroke="#e0b958" stroke-width="3.2" stroke-linejoin="round"><path d="M25 27L39 23V38H50V52H39V58H25V52H14V38H25Z"/><path d="M25 13H39V23L25 27Z" transform="translate(-7 -6) rotate(-13 32 25)"/></g></svg>';
 	return '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,' . htmlspecialchars( rawurlencode( $svg ), ENT_QUOTES, 'UTF-8' ) . '">';
 }
 
