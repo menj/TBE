@@ -35,7 +35,7 @@ The reference implementation is the injil.help theme (menj/injil.help), which ke
   - The uploader steps: Appearance > Themes > Add New > Upload Theme. For an update, WordPress then offers "Replace active with uploaded" (or "Replace installed with uploaded" when the theme is not active).
   - The FTP steps: show hidden files, so the theme's own `.htaccess` files go up, and upload each `.htaccess` before the rest of its folder.
   - For a fresh FTP install: upload the theme folder to `wp-content/themes/` under its exact folder name, then activate it.
-  - For an FTP update: upload the new folder under a temporary name, outside `wp-content/themes/` where the host allows it. Rename the old folder aside, move the new one into place under the exact folder name, check the site, then delete the old folder.
+  - For an FTP update: upload the new folder into `wp-content/themes/` under a temporary name (for example `<folder>-new`), sending its `.htaccess` and deny files first so nothing in it is readable while the rest arrives. Staying on the same filesystem lets the rename work in one step. Rename the old folder aside, move the new one into place under the exact folder name, check the site, then delete the old folder.
 - Settings: each settings tab and what it does.
 - Frequently Asked Questions.
 - Changelog: a short version, with the full one in CHANGELOG.md.
