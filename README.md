@@ -114,6 +114,8 @@ Errors get their own pages, in the site's look (the broken cross, Angel, burgund
   ErrorDocument 504 /wp-content/themes/tbe/errors/504.html
   ```
 
+  These lines assume WordPress at the root of the domain. On a site installed in a subfolder, or with `wp-content` moved, copy the lines from the Error pages tab instead: it builds them from the real address. The static pages cannot learn that address, so their home link points to `/` and the Angel font is looked up under `/wp-content/themes/tbe/`; where it is missing the page falls back to Georgia.
+
 - Missing pages inside the site use `templates/404.html`, whose message is chosen at random on each load.
 - Every page has several wordings (`inc/error-page-html.php`); a different one greets each visit. Static pages and the drop-ins pick one in the browser, so a visitor without JavaScript sees the first.
 
