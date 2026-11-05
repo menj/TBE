@@ -73,12 +73,13 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 
 ## Test and release
 ```bash
-for t in tools/test_*.php; do php "$t" || echo "FAILED: $t"; done
-for f in functions.php inc/*.php tools/*.php; do php -l "$f" >/dev/null || echo "lint: $f"; done
+set -e
+for t in tools/test_*.php; do php "$t"; done
+for f in functions.php inc/*.php tools/*.php; do php -l "$f" >/dev/null; done
 php tools/build_error_pages.php --check
 python3 tools/check_packs.py
 ```
-A release bumps `Version:` in `style.css`, `TBE_VERSION` in `functions.php` and `Stable tag:` in `readme.txt`, adds the entry to `CHANGELOG.md` and its short form to `readme.txt`, and adds a note to `UPGRADING.md` when the owner must act. `SSOT.md` holds the full checklist.
+With `set -e` the first failure stops the run with a non-zero exit code. A release bumps `Version:` in `style.css`, `TBE_VERSION` in `functions.php` and `Stable tag:` in `readme.txt`, adds the entry to `CHANGELOG.md` and its short form to `readme.txt`, and adds a note to `UPGRADING.md` when the owner must act. `SSOT.md` holds the full checklist.
 
 ## The home page as a story
 `templates/front-page.html` reads top to bottom as one argument, the way the site works: make the claim, open the text, show what the notes find, then hand the reader the whole text.
@@ -240,7 +241,8 @@ location ~ /\.(?!well-known(/|$)) { deny all; }
 # The theme's dev folders and Markdown documents, whatever the folder is called.
 location ~ ^/wp-content/themes/[^/]+/(tests|tools|bin|docs)(/|$) { deny all; }
 location ~* ^/wp-content/themes/[^/]+/.*\.md$ { deny all; }
-# XML-RPC, unless TBE_ALLOW_XMLRPC or Jetpack needs it.
+# XML-RPC. Nginx cannot read TBE_ALLOW_XMLRPC or see Jetpack: leave this
+# line out on a site that needs XML-RPC (Jetpack, an old mobile app).
 location = /xmlrpc.php { deny all; }
 # WordPress files never meant to be opened by address.
 location ~ ^/wp-includes/(?!js/tinymce/|ms-files\.php$).+\.php$ { deny all; }

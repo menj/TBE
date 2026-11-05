@@ -57,7 +57,7 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - A Syriac interlinear. Why: the Estrangela font is bundled and unused, waiting on an open Syriac dataset.
 
 ### Ideas
-- A spam check for comments and posts, as another theme by the same owner already carries. Why: worth weighing if comments open.
+- A spam check for comments and posts. Why: the theme has no spam filter of its own, and would need one before comments open.
 - An image sitemap, named in `robots.txt`. Why: the reader and the brand pages carry images that `/wp-sitemap.xml` does not list.
 - Contextual links from glossary terms and scripture references to the commentary that treats them. Why: the glossary already marks the terms in each note; the link would close the loop.
 - A share row under each note. Why: the commentary is the part readers quote.

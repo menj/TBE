@@ -46,7 +46,7 @@ On activation the theme publishes its starter commentary and adds 13 glossary te
 4. Open any admin screen once. The theme refreshes its error pages and settles in.
 5. Read UPGRADING.md in the theme folder for anything a version asks you to do by hand. Delete TBE-old when all is well.
 
-If you upload straight over the old folder instead, that works too: while a file is still missing, visitors see a short "back shortly" page and you can still log in.
+If you upload straight over the old folder instead, that works too, in any order: while a file is still missing, visitors see a short "back shortly" page and you can still log in.
 
 Never upload a fresh copy of WordPress itself without the site's wp-config.php in place, or the site starts its installer.
 
@@ -69,10 +69,6 @@ Everything lives under Appearance, TBE:
 Go to Commentary, Add New. Type the passage (for example John 1:1-18), pick one or more sections, and write. The note shows under the first verse of the passage, with a mark beside the verse.
 
 A passage with no verses, such as John 3, makes a chapter introduction. A book name alone, such as John, makes a book introduction.
-
-== Updating ==
-
-Upload the new theme folder over the old one. You can upload in any order: while a file is still missing, visitors see a short "back shortly" page, and you can still log in. Read UPGRADING.md in the theme folder for anything a version asks you to do by hand.
 
 == Search engines ==
 
