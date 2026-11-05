@@ -180,7 +180,7 @@ function tbe_glossary_terms(): array {
 add_filter(
 	'the_content',
 	static function ( string $content ): string {
-		if ( is_singular( 'tbe_commentary' ) && in_the_loop() && is_main_query() ) {
+		if ( function_exists( 'tbe_is_entry_body' ) && tbe_is_entry_body() ) {
 			return tbe_enrich_commentary( $content );
 		}
 		return $content;

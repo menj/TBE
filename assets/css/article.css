@@ -1,0 +1,164 @@
+/* The Bible Exposed: the commentary page (0.10.8). Breadcrumbs, dek, meta row, answer box, contents, tables,
+   FAQ, notes and sources, next step and related entries. Colours come from the scheme tokens in base.css and the
+   shapes from polish.css, so custom colours and dark mode carry through. */
+
+.tbe-article { --tbe-article-gap: clamp(1.75rem, 4vw, 2.5rem); }
+.tbe-answer, .tbe-contents, .tbe-next, .tbe-related__card, .tbe-article .wp-block-details.is-style-faq { box-sizing: border-box; }
+.tbe-article h2[id], .tbe-article .tbe-sources, .tbe-article .wp-block-footnotes li { scroll-margin-top: 4.5rem; }
+
+/* Breadcrumbs */
+.tbe-crumbs { font-family: var(--tbe-ui); font-size: 0.8rem; color: var(--tbe-muted); margin-block-end: 0.5rem; }
+.tbe-crumbs ol { display: flex; flex-wrap: wrap; gap: 0.25rem 0; margin: 0; padding: 0; list-style: none; }
+.tbe-crumbs li + li::before { content: "›"; margin-inline: 0.5rem; color: var(--tbe-gold); }
+.tbe-crumbs a { color: var(--tbe-muted); }
+.tbe-crumbs a:hover { color: var(--tbe-accent); }
+.tbe-crumbs [aria-current] { color: var(--tbe-ink); }
+
+/* Dek and meta row */
+.tbe-dek { font-size: 1.2rem; line-height: 1.5; color: var(--tbe-ink); margin-block: 0.75rem 0.5rem; }
+/* The items wrap freely: each is its own short phrase, spaced apart, with no separator to strand at a line start. */
+.tbe-meta { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font-family: var(--tbe-ui); font-size: 0.82rem; color: var(--tbe-muted); margin-block: 0.5rem 0; }
+
+/* Answer box */
+.tbe-answer {
+	margin-block: 1.5rem 0;
+	padding: 1rem 1.25rem;
+	background: var(--tbe-wash-gold, var(--tbe-surface));
+	border-inline-start: 4px solid var(--tbe-gold);
+	border-radius: var(--tbe-radius-sm, 12px);
+}
+.tbe-answer__title,
+.tbe-contents__title,
+.tbe-next__kicker,
+.tbe-sources__sub {
+	margin: 0 0 0.5rem;
+	font-family: var(--tbe-ui);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--tbe-muted);
+}
+.tbe-answer__summary { margin: 0 0 0.5rem; font-weight: 600; }
+.tbe-answer__points { margin: 0; padding-inline-start: 1.2rem; }
+.tbe-answer__points li + li { margin-block-start: 0.3rem; }
+
+/* Contents, inline */
+.tbe-contents--inline {
+	margin-block: 1.5rem 0;
+	padding: 1rem 1.25rem;
+	border: 1px solid var(--tbe-line);
+	border-radius: var(--tbe-radius-sm, 12px);
+	background: var(--tbe-surface);
+}
+.tbe-contents ol { margin: 0; padding-inline-start: 1.4rem; font-family: var(--tbe-ui); font-size: 0.92rem; }
+.tbe-contents li + li { margin-block-start: 0.3rem; }
+.tbe-contents a { text-decoration: none; }
+.tbe-contents a:hover { text-decoration: underline; }
+
+/* Contents, sticky: a bar at the top of the window that opens on a tap */
+.tbe-contents--sticky {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	margin-block: 1.5rem 0;
+	background: var(--tbe-surface);
+	border: 1px solid var(--tbe-line);
+	border-radius: var(--tbe-radius-sm, 12px);
+	box-shadow: var(--tbe-shadow, none);
+}
+/* Under the admin bar: 32px tall, 46px up to 782px wide, and no longer fixed at 600px and below. */
+.admin-bar .tbe-contents--sticky { top: 32px; }
+@media (max-width: 782px) { .admin-bar .tbe-contents--sticky { top: 46px; } }
+@media (max-width: 600px) { .admin-bar .tbe-contents--sticky { top: 0; } }
+.tbe-contents--sticky > summary { cursor: pointer; padding: 0.6rem 1rem; font-family: var(--tbe-ui); font-size: 0.85rem; font-weight: 600; }
+.tbe-contents--sticky nav { padding: 0 1rem 0.8rem; max-height: 60vh; overflow-y: auto; }
+
+/* Tables and figure captions in the text */
+.tbe-article .wp-block-table { margin-block: 1.5rem; overflow-x: auto; }
+.tbe-article .wp-block-table table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
+.tbe-article .wp-block-table th,
+.tbe-article .wp-block-table td { padding: 0.55rem 0.75rem; text-align: start; vertical-align: top; border: 0; border-bottom: 1px solid var(--tbe-line); }
+.tbe-article .wp-block-table thead { border: 0; }
+.tbe-article .wp-block-table thead th {
+	font-family: var(--tbe-ui);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--tbe-muted);
+	border-bottom: 2px solid var(--tbe-accent);
+}
+.tbe-article .wp-block-table tbody tr:hover { background: var(--tbe-wash-gold, transparent); }
+.tbe-article figcaption,
+.tbe-article .wp-block-table figcaption { margin-top: 0.6rem; font-family: var(--tbe-ui); font-size: 0.82rem; font-style: italic; color: var(--tbe-muted); text-align: start; }
+
+/* FAQ: Details blocks in the FAQ style */
+.tbe-article .wp-block-details.is-style-faq {
+	margin-block: 0.6rem;
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--tbe-line);
+	border-radius: var(--tbe-radius-sm, 12px);
+	background: var(--tbe-surface);
+}
+.tbe-article .wp-block-details.is-style-faq > summary { cursor: pointer; font-weight: 600; }
+.tbe-article .wp-block-details.is-style-faq[open] > summary { margin-block-end: 0.5rem; color: var(--tbe-accent); }
+.tbe-article .wp-block-details.is-style-faq > :not(summary) { margin-block: 0.4rem 0; }
+
+/* Notes and sources */
+.tbe-sources { margin-block-start: var(--tbe-article-gap); padding-block-start: 1.25rem; border-top: 1px solid var(--tbe-line); }
+.tbe-sources__title { font-size: 1.4rem; margin: 0 0 0.75rem; }
+.tbe-sources__sub { margin-block-start: 1rem; }
+.tbe-sources .wp-block-footnotes,
+.tbe-sources__list { margin: 0; padding-inline-start: 1.4rem; font-size: 0.92rem; }
+.tbe-sources .wp-block-footnotes li + li,
+.tbe-sources__list li + li { margin-block-start: 0.35rem; }
+
+/* Next step */
+.tbe-next {
+	margin-block-start: var(--tbe-article-gap);
+	padding: 1.25rem 1.5rem;
+	border-radius: var(--tbe-radius, 20px);
+	background: var(--tbe-wash-accent, var(--tbe-surface));
+	border: 1px solid color-mix(in srgb, var(--tbe-accent) 25%, var(--tbe-line));
+}
+.tbe-next__title { margin: 0 0 0.4rem; font-size: 1.35rem; }
+.tbe-next__lead { margin: 0 0 0.9rem; }
+.tbe-next__actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; }
+.tbe-next__actions .tbe-btn { text-decoration: none; }
+.tbe-next__path { margin: 0.9rem 0 0; font-family: var(--tbe-ui); font-size: 0.88rem; color: var(--tbe-muted); }
+.tbe-next--mid { margin-block: 1.5rem; padding: 0.75rem 1rem; border-radius: var(--tbe-radius-sm, 12px); }
+.tbe-next--mid p { margin: 0; }
+
+/* Related entries */
+.tbe-related { margin-block-start: var(--tbe-article-gap); }
+.tbe-related__title { font-size: 1.4rem; margin: 0 0 0.9rem; }
+.tbe-related__list { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); margin: 0; padding: 0; list-style: none; }
+.tbe-related__card {
+	position: relative;
+	padding: 1rem 1.1rem;
+	background: var(--tbe-surface);
+	border: 1px solid var(--tbe-line);
+	border-radius: var(--tbe-radius, 20px);
+	box-shadow: var(--tbe-shadow, none);
+}
+.tbe-related__card:hover { border-color: var(--tbe-gold); }
+.tbe-related__ref { margin: 0 0 0.3rem; font-family: var(--tbe-ui); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tbe-rubric); }
+.tbe-related__name { margin: 0; font-size: 1.1rem; line-height: 1.3; }
+.tbe-related__name a { text-decoration: none; }
+.tbe-related__name a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.tbe-related__name a:hover { color: var(--tbe-rubric); }
+.tbe-related__excerpt { margin: 0.4rem 0 0; font-size: 0.92rem; color: var(--tbe-muted); }
+
+/* Contextual links to other sites carry a small mark */
+a.tbe-ctx-link--out::after { content: " ↗"; font-size: 0.75em; }
+
+@media (max-width: 600px) {
+	.tbe-dek { font-size: 1.08rem; }
+	.tbe-answer, .tbe-contents--inline, .tbe-next { padding: 0.9rem 1rem; }
+	.tbe-article .wp-block-table th, .tbe-article .wp-block-table td { padding: 0.45rem 0.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tbe-related__card { transition: none; }
+}

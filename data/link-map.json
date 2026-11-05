@@ -1,0 +1,3351 @@
+{
+ "version": 1,
+ "sites": {
+  "abrahamic": "https://abrahamic-religions.com",
+  "bestofislam": "https://bestofislam.org",
+  "injil": "https://injil.help",
+  "paulus": "https://apostleofdoom.org",
+  "ce": "https://compelling-evidence.com",
+  "murtadd": "https://murtadd.org",
+  "lailatulqadar": "https://lailatulqadar.guide"
+ },
+ "links": [
+  {
+   "site": "abrahamic",
+   "path": "/religions/mandaeism/",
+   "phrases": [
+    "Mandaeism",
+    "Mandaeans",
+    "Mandaean"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/reference/sacred-texts/tanakh/",
+   "phrases": [
+    "Tanakh",
+    "Hebrew Bible"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/reference/sacred-texts/bible/",
+   "phrases": [
+    "Christian Bible"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/reference/timeline/",
+   "phrases": [
+    "history of the Abrahamic religions"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/reference/places/",
+   "phrases": [
+    "Abrahamic holy places"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/reference/figures/",
+   "phrases": [
+    "Abrahamic figures"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/who-was-abraham/",
+   "phrases": [
+    "Abraham",
+    "Prophet Ibrahim",
+    "Nabi Ibrahim"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/abrahamic-monotheism/",
+   "phrases": [
+    "Abrahamic monotheism"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/millat-ibrahim/",
+   "phrases": [
+    "millat Ibrahim",
+    "millat Ibrāhīm",
+    "path of Abraham",
+    "religion of Abraham"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/who-was-kedar/",
+   "phrases": [
+    "Kedar",
+    "Qedar"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/john-the-baptist/",
+   "phrases": [
+    "John the Baptist",
+    "Yahya ibn Zakariyya"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/masbuta-baptism-in-running-water/",
+   "phrases": [
+    "Masbuta",
+    "baptism in running water"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-sabians-of-the-quran/",
+   "phrases": [
+    "Sabians",
+    "Sabaeans",
+    "Ṣābiʾūn"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/sabians-in-classical-muslim-texts/",
+   "phrases": [
+    "Sabians of Harran"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/jesus-across-the-traditions/",
+   "phrases": [
+    "Jesus across the traditions"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/mary-across-the-traditions/",
+   "phrases": [
+    "Virgin Mary",
+    "Maryam bint Imran"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/transmission-of-scripture/",
+   "phrases": [
+    "transmission of scripture"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/ibn-rushd-and-al-ghazali/",
+   "phrases": [
+    "Ibn Rushd",
+    "Averroes",
+    "al-Ghazali",
+    "al-Ghazālī",
+    "Tahafut al-Falasifa"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/faith-and-reason/",
+   "phrases": [
+    "Maimonides",
+    "Thomas Aquinas"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/amman-message-and-a-common-word/",
+   "phrases": [
+    "Amman Message",
+    "A Common Word"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/interfaith-dialogue/",
+   "phrases": [
+    "interfaith dialogue",
+    "Nostra Aetate"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-cairo-genizah/",
+   "phrases": [
+    "Cairo Genizah"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/paul-and-peter-two-missions/",
+   "phrases": [
+    "Paul and Peter",
+    "Peter and Paul"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/apostasy-in-the-abrahamic-faiths/",
+   "phrases": [
+    "apostasy in Judaism",
+    "apostasy in Christianity"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/abrahamic-family-tree/",
+   "phrases": [
+    "Abrahamic family tree"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-council-of-nicaea/",
+   "phrases": [
+    "Council of Nicaea",
+    "Nicaea",
+    "Nicene Creed",
+    "First Council of Nicaea"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-five-great-sees/",
+   "phrases": [
+    "Pentarchy",
+    "five great sees"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/hagia-sophia/",
+   "phrases": [
+    "Hagia Sophia",
+    "Ayasofya"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-stations-of-the-hajj/",
+   "phrases": [
+    "Muzdalifah",
+    "Mount Arafat",
+    "ʿArafāt",
+    "Plain of Arafat"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/hira-and-quba/",
+   "phrases": [
+    "Cave of Hira",
+    "Ḥirāʾ",
+    "Quba Mosque",
+    "Qubāʾ"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/what-language-did-abraham-speak/",
+   "phrases": [
+    "language of Abraham"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-parting-of-the-ways/",
+   "phrases": [
+    "parting of the ways"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/where-was-abraham-from/",
+   "phrases": [
+    "Ur of the Chaldees",
+    "Harran",
+    "Urfa"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/religious-law/",
+   "phrases": [
+    "halakhah",
+    "halakha",
+    "canon law"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/food-and-faith/",
+   "phrases": [
+    "kosher",
+    "kashrut",
+    "halal food"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/war-and-peace/",
+   "phrases": [
+    "Are the Abrahamic religions violent",
+    "just war"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-messiah-in-three-traditions/",
+   "phrases": [
+    "Messiah in Judaism",
+    "Jewish Messiah",
+    "al-Masih"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/ishmael/",
+   "phrases": [
+    "Ishmael",
+    "Prophet Ismail",
+    "Nabi Ismail"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/is-allah-the-god-of-the-bible/",
+   "phrases": [
+    "Allah the God of the Bible",
+    "Allah and the God of the Bible"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-gospel-of-barnabas/",
+   "phrases": [
+    "Gospel of Barnabas"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/what-the-quran-says/",
+   "phrases": [
+    "Torah, Psalms and Gospel",
+    "Tawrat",
+    "Zabur"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-kaaba/",
+   "phrases": [
+    "Kaaba",
+    "Ka'bah",
+    "Kaʿba",
+    "Kaʿbah"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/saul-in-the-quran/",
+   "phrases": [
+    "Talut",
+    "Ṭālūt",
+    "King Saul"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/interfaith-marriage/",
+   "phrases": [
+    "interfaith marriage",
+    "marry a Christian"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/gog-and-magog-and-the-dajjal/",
+   "phrases": [
+    "Gog and Magog",
+    "Ya'juj and Ma'juj",
+    "Dajjal",
+    "Dajjāl",
+    "Antichrist"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/what-does-begotten-mean/",
+   "phrases": [
+    "begotten",
+    "only begotten",
+    "John 3:16"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/harut-and-marut/",
+   "phrases": [
+    "Harut and Marut",
+    "Hārūt and Mārūt"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/prophet-like-moses/",
+   "phrases": [
+    "Deuteronomy 18:18",
+    "prophet like Moses",
+    "a prophet like unto thee"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/muhammad-in-the-bible/",
+   "phrases": [
+    "Muhammad in the Bible"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/jews-under-muslim-rule/",
+   "phrases": [
+    "Jews under Muslim rule",
+    "Jews under Islam"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/galilee/",
+   "phrases": [
+    "Galilee",
+    "Capernaum",
+    "Mount Tabor",
+    "Tabgha"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/safed-and-tiberias/",
+   "phrases": [
+    "Safed",
+    "Tiberias"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/shiloh-and-masada/",
+   "phrases": [
+    "Masada",
+    "Shiloh"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/patmos-and-mount-athos/",
+   "phrases": [
+    "Patmos",
+    "Mount Athos"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/christian-pilgrimage/",
+   "phrases": [
+    "Santiago de Compostela",
+    "Lourdes",
+    "Fátima"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/masjid-al-aqsa/",
+   "phrases": [
+    "Masjid al-Aqsa",
+    "al-Aqsa",
+    "Al-Aqsa Mosque",
+    "Farthest Mosque"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/badr-and-uhud/",
+   "phrases": [
+    "Battle of Uhud",
+    "Uhud"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/kairouan/",
+   "phrases": [
+    "Kairouan",
+    "Qayrawan"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/tigris-and-euphrates/",
+   "phrases": [
+    "Tigris",
+    "Euphrates"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/jerusalem-in-three-traditions/",
+   "phrases": [
+    "Jerusalem in three traditions",
+    "holy city of three faiths"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/archaeology-and-scripture/",
+   "phrases": [
+    "biblical archaeology",
+    "ancient Near East"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/prayer-in-abrahamic-traditions/",
+   "phrases": [
+    "prayer across the Abrahamic traditions"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/population-of-abrahamic-religions/",
+   "phrases": [
+    "population of the Abrahamic religions"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-king-and-the-pharaoh/",
+   "phrases": [
+    "Pharaoh of the Exodus"
+   ]
+  },
+  {
+   "site": "abrahamic",
+   "path": "/journal/the-symbols-of-the-four-traditions/",
+   "phrases": [
+    "Star of David",
+    "star and crescent"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/islam-religion-of-peace/",
+   "phrases": [
+    "religion of peace"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/prophet-died-poisoning/",
+   "phrases": [
+    "poisoning at Khaybar",
+    "poisoned at Khaybar",
+    "poisoned lamb"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/al-zutt-allegation/",
+   "phrases": [
+    "al-Zutt"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/five-pillars-explained/",
+   "phrases": [
+    "five pillars",
+    "pillars of Islam"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/who-is-allah/",
+   "phrases": [
+    "name Allah",
+    "word Allah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/morality-without-god/",
+   "phrases": [
+    "secular humanism"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/instruments-islamic-world/",
+   "phrases": [
+    "astrolabe",
+    "armillary sphere"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/seven-libraries/",
+   "phrases": [
+    "House of Wisdom",
+    "Bayt al-Hikma"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/deuteronomy-prophecy-and-the-paraclete/",
+   "phrases": [
+    "Paraclete",
+    "Parakletos",
+    "John 14:16"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/same-god/",
+   "phrases": [
+    "same God"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/jesus-not-god/",
+   "phrases": [
+    "Son of God",
+    "Trinity",
+    "divinity of Jesus",
+    "Jesus is not God"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/manuscript-transmission/",
+   "phrases": [
+    "Papyrus 46",
+    "manuscript transmission",
+    "P46"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/haman-anachronism/",
+   "phrases": [
+    "Haman"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/where-is-the-injil/",
+   "phrases": [
+    "Injīl",
+    "Injil",
+    "where is the Injil"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/paul-and-the-law/",
+   "phrases": [
+    "Matthew 5:17"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/paul-claim-to-apostleship/",
+   "phrases": [
+    "Paul's apostleship",
+    "claim to apostleship"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/pauline-letters-authorship/",
+   "phrases": [
+    "disputed letters of Paul",
+    "pseudo-Pauline",
+    "Pastoral Epistles"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/ezra-and-mary/",
+   "phrases": [
+    "Uzayr",
+    "ʿUzayr",
+    "Ezra the son of God"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/aisha-sheep-report-stoning-and-suckling-verses/",
+   "phrases": [
+    "stoning verse",
+    "verse of stoning"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/seven-ahruf-cairo-edition-stoning-verse/",
+   "phrases": [
+    "seven ahruf",
+    "ahruf",
+    "aḥruf",
+    "Cairo edition",
+    "1924 Cairo"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/uthman-copies/",
+   "phrases": [
+    "Uthmanic codex",
+    "Uthmanic codices",
+    "Uthman's copies",
+    "muṣḥaf of ʿUthmān"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/qibla-change/",
+   "phrases": [
+    "change of qibla",
+    "qibla",
+    "qiblah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/why-five-prayers/",
+   "phrases": [
+    "five daily prayers",
+    "five prayers"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/who-saw-gabriel/",
+   "phrases": [
+    "Gabriel",
+    "Jibril",
+    "Jibrīl"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/fastest-growing-religion/",
+   "phrases": [
+    "fastest-growing religion",
+    "fastest growing religion"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/second-peter/",
+   "phrases": [
+    "2 Peter",
+    "Second Peter",
+    "Second Epistle of Peter"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/ex-muslim-blog-study/",
+   "phrases": [
+    "ex-Muslim blog",
+    "ex-Muslim blogs"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/kaaba-witnesses/",
+   "phrases": [
+    "Kaaba before Islam",
+    "pre-Islamic Kaaba"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/dome-inscriptions/",
+   "phrases": [
+    "Dome of the Rock",
+    "Qubbat al-Sakhra"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/library-of-alexandria/",
+   "phrases": [
+    "Library of Alexandria"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/jizya/",
+   "phrases": [
+    "jizya",
+    "jizyah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/apostasy-in-islam/",
+   "phrases": [
+    "death penalty for apostasy"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/crucifixion-quran/",
+   "phrases": [
+    "crucifixion",
+    "Quran 4:157",
+    "Qur'an 4:157",
+    "Qurʾān 4:157"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/six-articles-of-faith/",
+   "phrases": [
+    "articles of faith",
+    "six articles of faith"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/fate-and-free-will/",
+   "phrases": [
+    "divine decree",
+    "al-qadar",
+    "qadaʾ and qadar"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/end-of-time/",
+   "phrases": [
+    "Day of Judgement",
+    "Day of Judgment",
+    "signs of the Hour",
+    "Yawm al-Qiyamah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/blasphemy-and-insults-to-the-prophet/",
+   "phrases": [
+    "blasphemy",
+    "insulting the Prophet"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/sharia-and-hudud/",
+   "phrases": [
+    "sharia",
+    "shariah",
+    "shariʿa",
+    "hudud",
+    "ḥudūd"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/quranic-ethics/",
+   "phrases": [
+    "Quranic ethics",
+    "Qurʾānic ethics"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/why-no-interest/",
+   "phrases": [
+    "riba",
+    "ribā",
+    "interest-free"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/women-in-the-prophets-life/",
+   "phrases": [
+    "Khadija",
+    "Khadījah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/questions-about-aisha/",
+   "phrases": [
+    "Aisha",
+    "ʿĀʾisha",
+    "A'isha"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/child-marriage-in-islam/",
+   "phrases": [
+    "child marriage"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/does-the-quran-allow-wife-beating/",
+   "phrases": [
+    "striking wives",
+    "wife-beating",
+    "wife beating"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/slavery-in-islam/",
+   "phrases": [
+    "slavery in Islam"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/homosexuality-in-islam/",
+   "phrases": [
+    "homosexuality in Islam",
+    "people of Lut",
+    "people of Lot"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/hijab-and-modesty/",
+   "phrases": [
+    "hijab",
+    "ḥijāb"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/houris-and-paradise/",
+   "phrases": [
+    "houris",
+    "ḥūr ʿīn"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/quran-science-claims-graded/",
+   "phrases": [
+    "scientific claims about the Quran",
+    "embryology verses"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/gods-attributes-and-anthropomorphism/",
+   "phrases": [
+    "anthropomorphism",
+    "hand of God",
+    "istiwa"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/temporary-marriage-mutah/",
+   "phrases": [
+    "mutah",
+    "mut'ah",
+    "mutʿa",
+    "temporary marriage"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/crusades-facts/",
+   "phrases": [
+    "Crusades",
+    "Crusaders",
+    "First Crusade"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/islam-in-china/",
+   "phrases": [
+    "Hui Muslims",
+    "Islam in China",
+    "Uyghurs"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/kharijites-and-takfir/",
+   "phrases": [
+    "Kharijites",
+    "Khawarij",
+    "takfir",
+    "takfīr"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/taqiyya-myths/",
+   "phrases": [
+    "taqiyya",
+    "taqiyyah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/before-your-first-friday-prayer/",
+   "phrases": [
+    "Friday prayer",
+    "jumuah",
+    "jumu'ah",
+    "khutbah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/hajj-rites-explained/",
+   "phrases": [
+    "Hajj",
+    "rites of Hajj",
+    "ihram",
+    "iḥrām"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/funeral-dhikr-dua/",
+   "phrases": [
+    "dhikr",
+    "janazah",
+    "funeral prayer"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/scholars-who-shaped-islamic-study/",
+   "phrases": [
+    "Ismail al-Faruqi",
+    "Isma'il al-Faruqi"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/western-scholars-of-islam/",
+   "phrases": [
+    "Western scholars of Islam",
+    "Orientalists",
+    "orientalism"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/islamic-art-and-the-one-god/",
+   "phrases": [
+    "arabesque",
+    "Islamic art"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/mosques-adapt-to-place/",
+   "phrases": [
+    "Islamic architecture"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/islamophobia-facts/",
+   "phrases": [
+    "Islamophobia",
+    "Islamophobic"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/islamisation-of-the-west/",
+   "phrases": [
+    "Islamisation of the West",
+    "Eurabia"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/black-stone-and-kissing/",
+   "phrases": [
+    "Black Stone",
+    "al-Hajar al-Aswad"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/fly-hadith-and-adult-suckling/",
+   "phrases": [
+    "fly hadith",
+    "adult suckling",
+    "radaʿ al-kabir"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/camel-urine-hadith/",
+   "phrases": [
+    "camel urine"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/quran-grammar-errors-claim/",
+   "phrases": [
+    "grammatical errors in the Quran"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/who-wrote-the-quran/",
+   "phrases": [
+    "who wrote the Quran",
+    "authorship of the Quran"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/buraq-and-miracle-stories/",
+   "phrases": [
+    "Buraq",
+    "Burāq",
+    "Night Journey",
+    "Isra and Mi'raj"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/raids-badr-and-the-conquest-of-mecca/",
+   "phrases": [
+    "Battle of Badr",
+    "conquest of Mecca",
+    "conquest of Makkah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/revisionist-case-weighed/",
+   "phrases": [
+    "Patricia Crone",
+    "Hagarism"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/medina-jewish-tribes-and-qurayza/",
+   "phrases": [
+    "Banu Qurayza",
+    "Qurayza",
+    "Banu Nadir",
+    "Banu Qaynuqa"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/first-revelation-demonic-claim/",
+   "phrases": [
+    "first revelation",
+    "Waraqa ibn Nawfal"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/terrorism-and-muslims-the-data/",
+   "phrases": [
+    "terrorism data",
+    "Global Terrorism Database"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/magic-jinn-and-satan-hadiths/",
+   "phrases": [
+    "jinn",
+    "sihr"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/sira-ibn-ishaq-hisham-tabari/",
+   "phrases": [
+    "Ibn Isḥāq",
+    "Ibn Ishaq",
+    "Ibn Hisham",
+    "Ibn Hishām",
+    "al-Tabari",
+    "al-Ṭabarī"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/prophets-marriages-zaynab-and-others/",
+   "phrases": [
+    "Zaynab bint Jahsh",
+    "Zaynab bint Jaḥsh",
+    "Safiyya",
+    "Ṣafiyyah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/apes-and-pigs-and-the-jews/",
+   "phrases": [
+    "apes and pigs",
+    "apes and swine"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/satanic-verses-report/",
+   "phrases": [
+    "Satanic Verses",
+    "gharaniq",
+    "gharānīq",
+    "story of the cranes"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/abrogation-and-the-sword-verse/",
+   "phrases": [
+    "Sword Verse",
+    "verse of the sword",
+    "abrogation",
+    "naskh"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/quran-on-christians/",
+   "phrases": [
+    "People of the Book",
+    "Ahl al-Kitab",
+    "Ahl al-Kitāb"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/fighting-verses-in-context/",
+   "phrases": [
+    "fighting verses"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/first-muslims-kept-the-faith/",
+   "phrases": [
+    "persecution in Mecca",
+    "Bilal ibn Rabah"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/jihad-meaning-quran-hadith-jurists/",
+   "phrases": [
+    "jihad",
+    "jihād",
+    "holy war"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/talmud-midrash-apocrypha-borrowing/",
+   "phrases": [
+    "Talmud",
+    "midrash",
+    "apocrypha",
+    "Infancy Gospel"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/hanif-poets-and-musaylima/",
+   "phrases": [
+    "Musaylima",
+    "Musaylimah",
+    "hanif",
+    "ḥanīf",
+    "Umayya ibn Abi al-Salt"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/schacht-isnads-dating-hadith/",
+   "phrases": [
+    "Joseph Schacht",
+    "Schacht",
+    "isnad",
+    "isnād",
+    "isnads",
+    "common link"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/was-muhammad-illiterate-ummi/",
+   "phrases": [
+    "ummi",
+    "ummī",
+    "unlettered prophet",
+    "Iqra"
+   ]
+  },
+  {
+   "site": "bestofislam",
+   "path": "/ridda-wars-abu-bakr-fadak/",
+   "phrases": [
+    "Ridda wars",
+    "Wars of Apostasy",
+    "Fadak"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/islamic-dilemma/",
+   "phrases": [
+    "Islamic Dilemma",
+    "Islamic dilemma argument"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/islamic-dilemma/secular-form/",
+   "phrases": [
+    "secular form of the Islamic Dilemma"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/islamic-dilemma/balance-of-truth/",
+   "phrases": [
+    "Balance of Truth",
+    "Pfander",
+    "Mizan al-Haqq"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/method/",
+   "phrases": [
+    "criterion of the Quran"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/",
+   "phrases": [
+    "Five Gospels",
+    "canonical gospels"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/mark/",
+   "phrases": [
+    "Gospel of Mark",
+    "Mark’s gospel",
+    "Mark's gospel"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/matthew/",
+   "phrases": [
+    "Gospel of Matthew",
+    "Matthew's gospel"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/luke/",
+   "phrases": [
+    "Gospel of Luke",
+    "Luke's gospel"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/john/",
+   "phrases": [
+    "Gospel of John",
+    "Fourth Gospel",
+    "John's gospel"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/thomas/",
+   "phrases": [
+    "Gospel of Thomas",
+    "Nag Hammadi"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/thomas/correlation/",
+   "phrases": [
+    "sayings-order test"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/thomas/set-aside/",
+   "phrases": [
+    "sayings of Thomas"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/synoptic-problem/",
+   "phrases": [
+    "Synoptic Gospels",
+    "synoptic problem",
+    "Q source",
+    "two-source hypothesis",
+    "Markan priority"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/discrepancies/",
+   "phrases": [
+    "gospel discrepancies",
+    "contradictions in the gospels"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/discrepancies/genealogies/",
+   "phrases": [
+    "genealogies of Jesus",
+    "genealogy of Jesus"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/discrepancies/nativity/",
+   "phrases": [
+    "birth narratives",
+    "nativity accounts",
+    "census of Quirinius"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/discrepancies/last-supper/",
+   "phrases": [
+    "Last Supper",
+    "last supper accounts"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/discrepancies/crucifixion/",
+   "phrases": [
+    "crucifixion accounts",
+    "crucifixion narratives"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospels/discrepancies/resurrection/",
+   "phrases": [
+    "resurrection accounts",
+    "empty tomb"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/paul/acts-galatians/",
+   "phrases": [
+    "Acts against Galatians",
+    "Acts and Galatians"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/paul/paul-against-jesus/",
+   "phrases": [
+    "Paul against Jesus"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/paul/james/",
+   "phrases": [
+    "Jerusalem church",
+    "church of Jerusalem"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/paul/ebionites/",
+   "phrases": [
+    "Ebionites",
+    "Ebionite",
+    "Nazarenes"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/paul/seven-letters/",
+   "phrases": [
+    "seven letters",
+    "undisputed letters",
+    "seven undisputed letters"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/paul/false-apostles/",
+   "phrases": [
+    "false apostles"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/quran/",
+   "phrases": [
+    "Jesus in the Quran",
+    "Jesus in the Qur'an",
+    "Jesus in the Qurʾān"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/quran/birth/",
+   "phrases": [
+    "annunciation",
+    "virgin birth"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/quran/signs/",
+   "phrases": [
+    "bird of clay",
+    "birds of clay",
+    "signs of Jesus"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/quran/servant/",
+   "phrases": [
+    "servant and messenger",
+    "servant of God"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/quran/table/",
+   "phrases": [
+    "table from heaven",
+    "al-Maʾida",
+    "al-Ma'ida"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/quran/raised/",
+   "phrases": [
+    "raised to heaven",
+    "raised him up",
+    "rafʿ"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/quran/ahmad/",
+   "phrases": [
+    "Aḥmad",
+    "Quran 61:6"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/",
+   "phrases": [
+    "Gospel According to Islam"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/how-composed/",
+   "phrases": [
+    "how this gospel was composed"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/family-of-amran-zacharias-and-john/",
+   "phrases": [
+    "family of Imran",
+    "Āl ʿImrān",
+    "Zechariah",
+    "Zakariyya"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/baptism-temptation-and-return-to-nazareth/",
+   "phrases": [
+    "temptation of Jesus",
+    "temptation in the wilderness"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/leper-sabbath-and-beatitudes/",
+   "phrases": [
+    "Beatitudes",
+    "Sermon on the Mount"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/signs-rich-man-and-lazarus-and-woes/",
+   "phrases": [
+    "rich man and Lazarus"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/gethsemane-arrest-and-peters-denial/",
+   "phrases": [
+    "Gethsemane",
+    "Peter's denial"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/trial-barabbas-and-raising-of-jesus/",
+   "phrases": [
+    "Barabbas",
+    "trial of Jesus"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/gospel-according-to-islam/entry-into-jerusalem-and-cleansing-of-temple/",
+   "phrases": [
+    "cleansing of the Temple",
+    "triumphal entry"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/resources/timeline/",
+   "phrases": [
+    "timeline of the gospels"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/resources/manuscripts/",
+   "phrases": [
+    "extracanonical gospels",
+    "Oxyrhynchus"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/resources/borrowing/",
+   "phrases": [
+    "did the Qur'an borrow",
+    "did the Quran borrow"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/resources/objections/",
+   "phrases": [
+    "objections and replies"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/resources/responses/",
+   "phrases": [
+    "responses to named articles"
+   ]
+  },
+  {
+   "site": "injil",
+   "path": "/bonus/epistle/",
+   "phrases": [
+    "Epistle unto the Congregation of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/who-was-paul-of-tarsus/",
+   "phrases": [
+    "Paul of Tarsus",
+    "apostle Paul",
+    "Paul the Apostle",
+    "Saint Paul",
+    "St Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/tarsus-and-a-persona-for-every-audience/",
+   "phrases": [
+    "all things to all men"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/the-roman/",
+   "phrases": [
+    "Saul and Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/the-citizenship-and-the-appeal-to-caesar/",
+   "phrases": [
+    "Roman citizenship",
+    "appeal to Caesar",
+    "Roman citizen"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/saul-the-persecutor/",
+   "phrases": [
+    "Saul the persecutor",
+    "Saul of Tarsus",
+    "stoning of Stephen"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/the-damascus-road/",
+   "phrases": [
+    "Damascus road",
+    "road to Damascus",
+    "conversion of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/the-three-accounts-compared/",
+   "phrases": [
+    "three accounts of the conversion"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/a-self-appointed-apostle/",
+   "phrases": [
+    "self-appointed apostle",
+    "apostle to the Gentiles"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/curses-for-dissenters/",
+   "phrases": [
+    "let him be accursed"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/the-purse/",
+   "phrases": [
+    "collection for Jerusalem",
+    "collection for the saints"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/a-psychological-portrait-of-paul/",
+   "phrases": [
+    "Paul's guilt",
+    "psychological portrait of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/ego-epilepsy-and-narcissism/",
+   "phrases": [
+    "thorn in the flesh"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/the-character-of-paul/",
+   "phrases": [
+    "whited wall",
+    "character of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/women-slaves-and-caesar/",
+   "phrases": [
+    "women be silent",
+    "slaves obey your masters",
+    "Romans 13"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/the-flesh/",
+   "phrases": [
+    "war within",
+    "works of the flesh"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-man/the-fruit-at-corinth/",
+   "phrases": [
+    "church at Corinth",
+    "Corinthian church"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-measure/",
+   "phrases": [
+    "standard of this case"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/at-the-crossroads-of-the-message/",
+   "phrases": [
+    "two portraits of Jesus"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/paul-against-the-disciples/",
+   "phrases": [
+    "Jerusalem Council",
+    "Council of Jerusalem",
+    "Acts 15"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-parting-with-barnabas/",
+   "phrases": [
+    "Barnabas",
+    "Incident at Antioch",
+    "Antioch incident"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/by-their-fruits/",
+   "phrases": [
+    "by their fruits",
+    "by their fruits ye shall know them"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/them-which-say-they-are-apostles/",
+   "phrases": [
+    "Revelation 2:2",
+    "say they are apostles"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-foundations-of-pauline-doctrine/",
+   "phrases": [
+    "Pauline doctrine",
+    "Pauline theology",
+    "Pauline Christianity"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/seven-doctrines/",
+   "phrases": [
+    "original sin"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/seven-doctrines-the-law-and-the-covenant/",
+   "phrases": [
+    "curse of the law",
+    "Mosaic law",
+    "law of Moses"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-letters-of-a-man/",
+   "phrases": [
+    "Pauline epistles",
+    "letters of Paul",
+    "Paul's letters",
+    "epistles of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-greek-body-and-the-jewish-bed/",
+   "phrases": [
+    "celibacy",
+    "better to marry than to burn"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/revelation-or-borrowing/",
+   "phrases": [
+    "five hundred witnesses",
+    "angel of light"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/lord-before-the-spirit/",
+   "phrases": [
+    "Christ as an angel",
+    "angel Christology"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/borrowings-from-the-rabbis/",
+   "phrases": [
+    "borrowings from the rabbis",
+    "rabbinic borrowing",
+    "Gamaliel"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/suffering-that-atones/",
+   "phrases": [
+    "third heaven",
+    "vicarious suffering",
+    "suffering that atones"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/paul-and-the-new-testament/",
+   "phrases": [
+    "New Testament canon",
+    "canon of the New Testament",
+    "Marcion"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/letters-that-contradict-themselves/",
+   "phrases": [
+    "contradictions in Paul's letters"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-gospels-and-the-new-covenant/",
+   "phrases": [
+    "new covenant",
+    "Hebrew Matthew"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/justification-by-faith/",
+   "phrases": [
+    "justification by faith",
+    "faith alone",
+    "sola fide",
+    "Philo of Alexandria"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/twisting-the-scriptures/",
+   "phrases": [
+    "twisting the scriptures"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/typology/",
+   "phrases": [
+    "typology",
+    "typological reading"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-tanakh-rewritten/",
+   "phrases": [
+    "Tanakh rewritten"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/paul-the-father-of-a-new-religion/",
+   "phrases": [
+    "founder of Christianity",
+    "father of Christianity",
+    "second founder of Christianity"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/what-the-romans-saw/",
+   "phrases": [
+    "heirs of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-failed-prophet/",
+   "phrases": [
+    "Paul the false prophet",
+    "parousia",
+    "imminent return"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/a-death-the-scriptures-never-record/",
+   "phrases": [
+    "death of Paul",
+    "how did Paul die",
+    "martyrdom of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/the-religion-of-paul-today/",
+   "phrases": [
+    "religion of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-charges/malaysia-and-southeast-asia/",
+   "phrases": [
+    "Christianity in Malaysia",
+    "Christian missions in Malaysia"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/james-the-brother/",
+   "phrases": [
+    "James the Just",
+    "James the brother of Jesus",
+    "brother of the Lord"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/the-first-witnesses/",
+   "phrases": [
+    "first witnesses against Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/the-quran-as-witness/",
+   "phrases": [
+    "Quran on Paul",
+    "Qurʾān as witness"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/the-injil-and-the-letters/",
+   "phrases": [
+    "Injil and the letters"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/paul-in-the-islamic-tradition/",
+   "phrases": [
+    "no prophet between me and",
+    "Paul in the Islamic tradition"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/pauls-own-titles/",
+   "phrases": [
+    "Ya Sin",
+    "Yā Sīn",
+    "Surah Yasin",
+    "three messengers of Antioch"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/the-early-islamic-record/",
+   "phrases": [
+    "Sayf ibn Umar",
+    "Sayf ibn ʿUmar"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/from-khushaysh-to-al-shahrastani/",
+   "phrases": [
+    "al-Shahrastani",
+    "al-Shahrastānī",
+    "Khushaysh"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/ibn-hazm-and-al-thalabi/",
+   "phrases": [
+    "Ibn Hazm",
+    "Ibn Ḥazm",
+    "al-Tha'labi",
+    "al-Thaʿlabī"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/modern-voices-from-al-kairanawi-to-akhtar/",
+   "phrases": [
+    "al-Kairanawi",
+    "al-Kairanawī",
+    "Rahmatullah Kairanawi",
+    "Izhar ul-Haqq",
+    "Shabbir Akhtar"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/the-hostile-witnesses/",
+   "phrases": [
+    "hostile witnesses"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-witnesses/an-epistle-to-the-churches-of-paul/",
+   "phrases": [
+    "epistle to the churches of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/questions/",
+   "phrases": [
+    "questions about Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/paul-at-a-glance/",
+   "phrases": [
+    "Paul at a glance"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/the-verdict/",
+   "phrases": [
+    "verdict on Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/reference/chronology/",
+   "phrases": [
+    "timeline of Paul's life",
+    "chronology of Paul"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/appendices/paul-in-the-churches/",
+   "phrases": [
+    "Paul in the churches"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/appendices/dale-b-martin-luke-versus-paul/",
+   "phrases": [
+    "Dale B. Martin",
+    "Dale Martin"
+   ]
+  },
+  {
+   "site": "paulus",
+   "path": "/appendices/why-luke-does-not-know-pauls-letters/",
+   "phrases": [
+    "Luke does not know Paul's letters"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/why-does-anything-exist/",
+   "phrases": [
+    "something rather than nothing",
+    "why anything exists"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/existence-come-out-of-nothing/",
+   "phrases": [
+    "cosmological argument",
+    "kalam argument",
+    "kalām cosmological argument"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/fine-tuning-universe/",
+   "phrases": [
+    "fine-tuning",
+    "fine tuning",
+    "anthropic principle"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/ontological-argument/",
+   "phrases": [
+    "ontological argument",
+    "Anselm"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/argument-from-reason/",
+   "phrases": [
+    "argument from reason"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/consciousness-hard-problem/",
+   "phrases": [
+    "hard problem of consciousness",
+    "hard problem"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/moral-argument-god/",
+   "phrases": [
+    "moral argument",
+    "moral realism"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/ethics-without-god/",
+   "phrases": [
+    "secular ethics",
+    "ethics without God"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/objective-morality/",
+   "phrases": [
+    "objective morality",
+    "moral relativism"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/problem-of-evil-response/",
+   "phrases": [
+    "problem of evil"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/suffering-and-god/",
+   "phrases": [
+    "problem of suffering",
+    "theodicy"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/natural-evil/",
+   "phrases": [
+    "natural evil"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/science-limits/",
+   "phrases": [
+    "limits of science"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/science-and-religion/",
+   "phrases": [
+    "scientism",
+    "science and religion"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/multiverse-objection/",
+   "phrases": [
+    "multiverse",
+    "many-worlds"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/big-bang-creation/",
+   "phrases": [
+    "Big Bang"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/quran-literary-argument/",
+   "phrases": [
+    "literary miracle",
+    "inimitability",
+    "iʿjāz",
+    "i'jaz"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/quran-historical-reliability/",
+   "phrases": [
+    "preservation of the Quran",
+    "Quran preservation"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/islam-and-science/",
+   "phrases": [
+    "Islam and science"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/purpose-of-life/",
+   "phrases": [
+    "purpose of life",
+    "meaning of life"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/god-of-gaps/",
+   "phrases": [
+    "God of the gaps"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/why-islam-not-christianity/",
+   "phrases": [
+    "why Islam and not Christianity"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/why-hellfire/",
+   "phrases": [
+    "hellfire",
+    "eternal hellfire"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/finite-sins-infinite-punishment/",
+   "phrases": [
+    "finite sins, infinite punishment",
+    "infinite punishment"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/why-create-knowing-suffering/",
+   "phrases": [
+    "why did God create"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/universal-salvation/",
+   "phrases": [
+    "universal salvation"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/euthyphro-dilemma/",
+   "phrases": [
+    "Euthyphro dilemma",
+    "Euthyphro"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/free-will-predestination/",
+   "phrases": [
+    "predestination",
+    "free will and predestination"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/divine-hiddenness/",
+   "phrases": [
+    "divine hiddenness",
+    "hiddenness of God"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/burden-of-proof/",
+   "phrases": [
+    "burden of proof"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/god-as-psychological-projection/",
+   "phrases": [
+    "psychological projection",
+    "Freud",
+    "Feuerbach"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/god-personal-or-deist/",
+   "phrases": [
+    "deism",
+    "first cause"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/does-god-answer-prayer/",
+   "phrases": [
+    "unanswered prayer"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/evolution-and-islam/",
+   "phrases": [
+    "evolution and Islam",
+    "human evolution"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/evolution-explains-design/",
+   "phrases": [
+    "argument from design"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/religious-experience-neuroscience/",
+   "phrases": [
+    "religious experience",
+    "neurotheology"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/near-death-experiences/",
+   "phrases": [
+    "near-death experiences",
+    "near death experiences",
+    "near-death experience"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/scientific-miracles-quran/",
+   "phrases": [
+    "scientific miracles in the Quran"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/quran-variant-readings-qiraat/",
+   "phrases": [
+    "qiraat",
+    "qirāʾāt",
+    "variant readings",
+    "Hafs and Warsh"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/meccan-medinan-abrogation/",
+   "phrases": [
+    "Meccan and Medinan",
+    "Meccan surahs",
+    "Medinan surahs"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/sword-verse-jizya/",
+   "phrases": [
+    "Quran 9:5",
+    "Quran 9:29"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/is-allah-a-moon-god/",
+   "phrases": [
+    "moon god",
+    "Hubal"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/did-muhammad-order-critics-killed/",
+   "phrases": [
+    "Kaʿb ibn al-Ashraf",
+    "Ka'b ibn al-Ashraf",
+    "Asma bint Marwan"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/dhul-qarnayn-sun-muddy-spring/",
+   "phrases": [
+    "Dhul-Qarnayn",
+    "Dhu al-Qarnayn",
+    "muddy spring"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/quran-contradictions-method/",
+   "phrases": [
+    "alleged contradiction",
+    "contradictions in the Quran"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/hadith-reliability/",
+   "phrases": [
+    "hadith science",
+    "hadith criticism",
+    "chain of transmission"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/hadith-authenticity/",
+   "phrases": [
+    "Goldziher",
+    "hadith fabrication"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/was-muhammad-who-he-claimed-to-be/",
+   "phrases": [
+    "Muhammad's character",
+    "prophethood of Muhammad"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/kill-him-who-changes-religion/",
+   "phrases": [
+    "kill him who changes his religion",
+    "whoever changes his religion"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/no-compulsion-in-religion/",
+   "phrases": [
+    "no compulsion in religion",
+    "Quran 2:256"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/apostasy-international-law/",
+   "phrases": [
+    "Universal Declaration of Human Rights",
+    "freedom of religion"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/apostasy-political-history/",
+   "phrases": [
+    "political history of apostasy"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/islam-and-enlightenment/",
+   "phrases": [
+    "Islamic Reformation"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/islam-and-same-sex-attraction/",
+   "phrases": [
+    "same-sex attraction",
+    "LGBTQ"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/the-freethinkers-islam-produced/",
+   "phrases": [
+    "Islamic Golden Age",
+    "golden age of Islam",
+    "freethinkers",
+    "Ibn al-Rawandi"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/when-the-presence-fades/",
+   "phrases": [
+    "spiritual dryness"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/what-does-islam-say-happens-after-death/",
+   "phrases": [
+    "afterlife",
+    "barzakh",
+    "death in Islam"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/coming-back-after-leaving/",
+   "phrases": [
+    "tawbah",
+    "coming back to Islam"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/what-draws-people-to-islam-today/",
+   "phrases": [
+    "converts to Islam",
+    "conversion to Islam"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/if-nothing-really-matters/",
+   "phrases": [
+    "nihilism",
+    "existential nihilism"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/how-can-a-rational-person-believe-in-the-unseen/",
+   "phrases": [
+    "believing in the unseen",
+    "al-ghayb"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/religion-of-your-birth/",
+   "phrases": [
+    "religion of your birth",
+    "accident of birth",
+    "born into religion"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/why-arabic-prayer/",
+   "phrases": [
+    "pray in Arabic",
+    "prayer in Arabic"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/islam-prison-conversion/",
+   "phrases": [
+    "prison conversion",
+    "Islam in prison"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/quran-bible-stories/",
+   "phrases": [
+    "recycled Bible stories",
+    "Bible stories"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/moon-splitting/",
+   "phrases": [
+    "splitting of the moon",
+    "moon splitting"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/islam-jinn-mental-illness/",
+   "phrases": [
+    "jinn possession",
+    "ruqyah"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/evil-eye-islamic-view/",
+   "phrases": [
+    "evil eye"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/ritual-purity-wudu-menstruation/",
+   "phrases": [
+    "ritual purity",
+    "wudu",
+    "wuḍūʾ",
+    "ablution"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/ramadan-fasting-purpose/",
+   "phrases": [
+    "purpose of fasting",
+    "fasting in Ramadan"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/shirk-unforgivable/",
+   "phrases": [
+    "shirk",
+    "unforgivable sin"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/religious-trauma/",
+   "phrases": [
+    "religious trauma"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/doubt-permitted-in-islam/",
+   "phrases": [
+    "doubt in Islam"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/inconsistent-revelations/",
+   "phrases": [
+    "competing revelations",
+    "competing claims to revelation"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/does-god-communicate-with-humanity/",
+   "phrases": [
+    "does God communicate"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/does-the-quran-teach-hatred-of-jews/",
+   "phrases": [
+    "antisemitism",
+    "hatred of Jews"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/is-islam-compatible-with-western-democracy/",
+   "phrases": [
+    "Western democracy",
+    "loyal citizen"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/does-islam-teach-salvation-by-works/",
+   "phrases": [
+    "salvation by works",
+    "earn paradise"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/jesus-word-of-god-spirit-quran/",
+   "phrases": [
+    "spirit from Him",
+    "kalimat Allah"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/muhammad-in-the-bible-deuteronomy-paraclete/",
+   "phrases": [
+    "Muhammad foretold in the Bible"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/was-muhammad-possessed-first-revelation/",
+   "phrases": [
+    "was Muhammad possessed",
+    "fatra"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/did-islam-spread-by-the-sword/",
+   "phrases": [
+    "spread by the sword"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/honour-killings-culture-not-islam/",
+   "phrases": [
+    "honour killing",
+    "honour killings",
+    "honor killing"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/quran-cosmology-flat-earth-seven-heavens/",
+   "phrases": [
+    "seven heavens",
+    "flat earth",
+    "shooting stars"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/quran-creation-accounts/",
+   "phrases": [
+    "creation accounts",
+    "clot of blood"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/selective-hadith-embarrassing-reports/",
+   "phrases": [
+    "embarrassing reports"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/angels-and-the-unseen/",
+   "phrases": [
+    "angels in Islam"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/is-allah-a-slave-master-or-a-god-of-love/",
+   "phrases": [
+    "God of love",
+    "slave-master"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/islam-built-on-fear/",
+   "phrases": [
+    "religion of fear"
+   ]
+  },
+  {
+   "site": "ce",
+   "path": "/articles/islamic-dilemma-quran-and-bible/",
+   "phrases": [
+    "corruption of the Bible",
+    "tahrif",
+    "taḥrīf"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/apostasy-and-the-classical-law/",
+   "phrases": [
+    "apostasy",
+    "apostasy law",
+    "apostate",
+    "apostates",
+    "irtidad",
+    "riddah"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/what-leaving-actually-costs/",
+   "phrases": [
+    "leaving Islam",
+    "cost of leaving"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/marriage-requires-consent/",
+   "phrases": [
+    "forced marriage",
+    "consent to marriage",
+    "consent in marriage"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/quran-wife-beating-verse-in-context/",
+   "phrases": [
+    "Quran 4:34",
+    "Qur'an 4:34",
+    "Qurʾān 4:34"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/women-as-witnesses/",
+   "phrases": [
+    "women's testimony",
+    "testimony of women",
+    "two women witnesses"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-head-cover-and-modesty/",
+   "phrases": [
+    "head-cover",
+    "head cover",
+    "tudung",
+    "headscarf"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/islam-and-terrorism/",
+   "phrases": [
+    "Islam and terrorism"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/jihad-and-qital/",
+   "phrases": [
+    "qital",
+    "qitāl"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/captives-and-slavery/",
+   "phrases": [
+    "captives of war",
+    "prisoners of war",
+    "concubinage"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/is-it-illegal-to-sell-dogs/",
+   "phrases": [
+    "sale of dogs",
+    "selling dogs"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/were-monkeys-stoned-for-adultery/",
+   "phrases": [
+    "monkeys stoned",
+    "stoned monkey"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/inheritance-across-faiths/",
+   "phrases": [
+    "inheritance across faiths",
+    "inherit from a non-Muslim"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/is-islam-a-cult/",
+   "phrases": [
+    "Islam a cult",
+    "is Islam a cult"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/are-all-non-muslims-damned/",
+   "phrases": [
+    "non-Muslims damned",
+    "salvation of non-Muslims"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/is-islamic-faith-irrational/",
+   "phrases": [
+    "blind faith"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-state-of-muslims-argument/",
+   "phrases": [
+    "state of the Muslims",
+    "state of the ummah"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/i-studied-it-in-school/",
+   "phrases": [
+    "credential claim"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/muslims-cannot-agree/",
+   "phrases": [
+    "sectarian division",
+    "seventy-three sects",
+    "73 sects"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/modesty-and-the-visual-argument/",
+   "phrases": [
+    "lowering the gaze",
+    "lower their gaze"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-polemical-echo-chamber/",
+   "phrases": [
+    "echo chamber",
+    "polemical echo chamber"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-scientific-miracles-genre/",
+   "phrases": [
+    "scientific miracles",
+    "scientific miracles genre",
+    "Bucaille",
+    "Zakir Naik"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/what-the-testimonies-actually-do/",
+   "phrases": [
+    "deconversion testimonies",
+    "ex-Muslim testimonies"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-fragility-argument/",
+   "phrases": [
+    "fragility argument"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-death-threat-charge/",
+   "phrases": [
+    "death threats",
+    "death threat"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/marital-consent-and-the-rape-charge/",
+   "phrases": [
+    "marital rape",
+    "marital consent"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/modesty-and-the-morality-police/",
+   "phrases": [
+    "morality police",
+    "religious police",
+    "hisbah"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-movement-and-its-self-description/",
+   "phrases": [
+    "ex-Muslim movement",
+    "ex-Muslims"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-challenge/",
+   "phrases": [
+    "produce a surah like it"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/religion-by-registration/",
+   "phrases": [
+    "religion by registration",
+    "religion on identity documents",
+    "religion on identity cards"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-age-of-aisha/",
+   "phrases": [
+    "age of Aisha",
+    "Aisha's age",
+    "marriage of Aisha"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/polygamy-and-the-condition/",
+   "phrases": [
+    "polygamy",
+    "polygyny"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-inheritance-shares/",
+   "phrases": [
+    "inheritance shares",
+    "shares of inheritance",
+    "faraid",
+    "farāʾiḍ"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/dhimmi-status-and-jizya/",
+   "phrases": [
+    "dhimmi",
+    "dhimmī",
+    "dhimmis",
+    "ahl al-dhimma"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/blasphemy-and-the-rushdie-case/",
+   "phrases": [
+    "Rushdie",
+    "Salman Rushdie",
+    "Rushdie affair"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/where-was-god-when-i-was-hurt/",
+   "phrases": [
+    "Where was God when I was hurt"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-slide-from-hadith-to-nothing/",
+   "phrases": [
+    "Quran-only",
+    "Quranists",
+    "Qurʾāniyyūn",
+    "hadith rejection"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/rebuttals/the-dare/",
+   "phrases": [
+    "imhal",
+    "imhāl"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/doubts/why-does-the-ummah-feel-broken/",
+   "phrases": [
+    "broken ummah"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/doubts/i-studied-islam-and-still-left/",
+   "phrases": [
+    "studied Islam and still left"
+   ]
+  },
+  {
+   "site": "murtadd",
+   "path": "/doubts/the-hadith-about-leaving/",
+   "phrases": [
+    "hadith about leaving"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/what-is-laylat-al-qadr/",
+   "phrases": [
+    "Laylat al-Qadr",
+    "Laylatul Qadr",
+    "Lailatulqadar",
+    "Night of Power",
+    "Night of Decree",
+    "better than a thousand months"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/surah-al-qadr/",
+   "phrases": [
+    "Surah al-Qadr",
+    "Sūrat al-Qadr",
+    "Surah 97",
+    "Sura 97"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/when-is-laylat-al-qadr/",
+   "phrases": [
+    "odd nights",
+    "27th night",
+    "twenty-seventh night"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/last-ten-nights-of-ramadan/",
+   "phrases": [
+    "last ten nights",
+    "last ten nights of Ramadan",
+    "last 10 nights",
+    "iʿtikāf",
+    "i'tikaf",
+    "itikaf"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/signs-of-laylat-al-qadr/",
+   "phrases": [
+    "signs of Laylat al-Qadr",
+    "rayless sunrise"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/laylat-al-qadr-prayer/",
+   "phrases": [
+    "qiyām al-layl",
+    "qiyam al-layl",
+    "qiyam",
+    "night prayer",
+    "tahajjud"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/laylat-al-qadr-dua/",
+   "phrases": [
+    "Allahumma innaka ʿafuwwun",
+    "Allahumma innaka afuwwun",
+    "Laylat al-Qadr dua"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/night-planner/",
+   "phrases": [
+    "last third of the night"
+   ]
+  },
+  {
+   "site": "lailatulqadar",
+   "path": "/hadith-and-sources/",
+   "phrases": [
+    "hadith on Laylat al-Qadr"
+   ]
+  }
+ ]
+}

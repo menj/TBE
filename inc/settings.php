@@ -106,6 +106,18 @@ function tbe_defaults(): array {
 		'label_critical'   => __( 'Critical Commentary', 'tbe-child' ),
 		'label_islamic'    => __( 'Islamic Perspective (Tafsir)', 'tbe-child' ),
 		'label_reflection' => __( 'Reflection (Tadabbur)', 'tbe-child' ),
+		// Commentary pages (0.10.8).
+		'toc'               => 1,
+		'toc_style'         => 'inline',
+		'answer_box'        => 1,
+		'next_step'         => 1,
+		'mid_next'          => 0,
+		'related_count'     => 3,
+		'ask_url'           => '',
+		'ctx_out'           => 1,
+		'ctx_out_max'       => 3,
+		'ctx_own_max'       => 4,
+		'ctx_extra'         => '',
 		// Reading bar.
 		'progress'          => 1,
 		'progress_types'    => array( 'post', 'page', 'tbe_commentary', 'bible' ),
@@ -215,6 +227,7 @@ function tbe_settings_tabs(): array {
 		'general'    => __( 'General', 'tbe-child' ),
 		'appearance' => __( 'Appearance', 'tbe-child' ),
 		'reader'     => __( 'Reader and commentary', 'tbe-child' ),
+		'article'    => __( 'Commentary pages', 'tbe-child' ),
 		'reading'    => __( 'Reading bar', 'tbe-child' ),
 		'social'     => __( 'Profile links', 'tbe-child' ),
 		'esv'        => __( 'ESV and licence', 'tbe-child' ),
@@ -271,6 +284,20 @@ function tbe_sanitize_settings( $input ): array {
 				$label        = sanitize_text_field( $input[ $key ] ?? '' );
 				$new[ $key ] = '' !== $label ? $label : tbe_defaults()[ $key ];
 			}
+			break;
+
+		case 'article':
+			$new['toc']           = $flag( 'toc' );
+			$new['toc_style']     = 'sticky' === ( $input['toc_style'] ?? '' ) ? 'sticky' : 'inline';
+			$new['answer_box']    = $flag( 'answer_box' );
+			$new['next_step']     = $flag( 'next_step' );
+			$new['mid_next']      = $flag( 'mid_next' );
+			$new['related_count'] = max( 0, min( 6, (int) ( $input['related_count'] ?? 3 ) ) );
+			$new['ask_url']       = esc_url_raw( trim( (string) ( $input['ask_url'] ?? '' ) ), array( 'https', 'http' ) );
+			$new['ctx_out']       = $flag( 'ctx_out' );
+			$new['ctx_out_max']   = max( 0, min( 10, (int) ( $input['ctx_out_max'] ?? 3 ) ) );
+			$new['ctx_own_max']   = max( 0, min( 15, (int) ( $input['ctx_own_max'] ?? 4 ) ) );
+			$new['ctx_extra']     = tbe_sanitize_ctx_lines( (string) ( $input['ctx_extra'] ?? '' ) );
 			break;
 
 		case 'reading':
@@ -376,6 +403,10 @@ function tbe_render_settings_page(): void {
 					tbe_field_text( 'label_reflection', __( 'Reflection', 'tbe-child' ), $s['label_reflection'], __( 'The Christian parallel to tadabbur has no exact name; "Reflection" or "Meditation" both work.', 'tbe-child' ) );
 					break;
 
+				case 'article':
+					tbe_render_article_tab( $s );
+					break;
+
 				case 'reading':
 					tbe_render_reading_tab( $s );
 					break;
@@ -434,6 +465,57 @@ function tbe_render_appearance_tab( array $s ): void {
 				</label>
 			<?php endforeach; ?>
 		</div>
+	</div>
+	<?php
+}
+
+/**
+ * The "phrase | address" lines of the contextual links, one a line: plain text for the phrase, a path or a web
+ * address for the target. Lines without both parts are dropped.
+ */
+function tbe_sanitize_ctx_lines( string $text ): string {
+	$out = array();
+	foreach ( preg_split( '/\r\n|\r|\n/', $text ) as $line ) {
+		$parts = array_map( 'trim', explode( '|', (string) $line, 2 ) );
+		if ( count( $parts ) < 2 || '' === $parts[0] || '' === $parts[1] ) {
+			continue;
+		}
+		$phrase = sanitize_text_field( $parts[0] );
+		$target = '/' === $parts[1][0] && '/' !== ( $parts[1][1] ?? '' ) ? '/' . ltrim( sanitize_text_field( $parts[1] ), '/' ) : esc_url_raw( $parts[1], array( 'https', 'http' ) );
+		// A full address must be on a host the link map names; tbe_ctx_parse_line() reads it the same way.
+		if ( '' !== $phrase && '' !== $target && null !== tbe_ctx_parse_line( $phrase . ' | ' . $target, tbe_ctx_hosts( tbe_ctx_map() ) ) ) {
+			$out[] = $phrase . ' | ' . $target;
+		}
+	}
+	return implode( "\n", $out );
+}
+
+function tbe_render_article_tab( array $s ): void {
+	echo '<p class="description">' . esc_html__( 'The pieces around a single commentary entry. The excerpt shows under the title, the dates and reading time under that. The notes and sources block and the related entries need no switch: each shows when the entry has something to put in it.', 'tbe-child' ) . '</p>';
+	tbe_field_check( 'toc', __( 'Show the contents when an entry has three or more sections (level-two headings)', 'tbe-child' ), $s['toc'] );
+	printf(
+		'<div class="tbe-field"><label for="tbe-toc-style">%1$s</label><select id="tbe-toc-style" name="tbe_settings[toc_style]"><option value="inline" %2$s>%3$s</option><option value="sticky" %4$s>%5$s</option></select></div>',
+		esc_html__( 'Contents style', 'tbe-child' ),
+		selected( $s['toc_style'], 'inline', false ),
+		esc_html__( 'In the page, above the text', 'tbe-child' ),
+		selected( $s['toc_style'], 'sticky', false ),
+		esc_html__( 'A bar that stays at the top of the window and opens on a tap', 'tbe-child' )
+	);
+	tbe_field_check( 'answer_box', __( 'Show the "In short" box with the entry\'s key points', 'tbe-child' ), $s['answer_box'] );
+	tbe_field_check( 'next_step', __( 'Show the next step at the end: read the passage, and the next entry on the book', 'tbe-child' ), $s['next_step'] );
+	tbe_field_check( 'mid_next', __( 'Also show a one-line next step before the third section', 'tbe-child' ), $s['mid_next'] );
+	tbe_field_number( 'related_count', __( 'Related entries on the same book', 'tbe-child' ), $s['related_count'], 0, 6, __( 'From 0 to 6. 0 hides them.', 'tbe-child' ) );
+	tbe_field_text( 'ask_url', __( 'Ask a question page', 'tbe-child' ), $s['ask_url'], __( 'Optional. The address of a page where readers can send a question. Empty hides the link.', 'tbe-child' ) );
+	echo '<h2>' . esc_html__( 'Contextual links', 'tbe-child' ) . '</h2>';
+	echo '<p class="description">' . esc_html__( 'The first mention of a known phrase in an entry links to the page that treats it. Each target is linked once, at most once a paragraph, and never inside scripture, headings, tables or links.', 'tbe-child' ) . '</p>';
+	tbe_field_check( 'ctx_out', __( 'Link phrases from the shared link map to pages on bestofislam.org, injil.help, apostleofdoom.org, abrahamic-religions.com, compelling-evidence.com, murtadd.org and lailatulqadar.guide', 'tbe-child' ), $s['ctx_out'] );
+	tbe_field_number( 'ctx_out_max', __( 'Links to those pages on one entry', 'tbe-child' ), $s['ctx_out_max'], 0, 10, __( 'From 0 to 10.', 'tbe-child' ) );
+	tbe_field_number( 'ctx_own_max', __( 'Links to this site on one entry', 'tbe-child' ), $s['ctx_own_max'], 0, 15, __( 'From 0 to 15. They come from the lines below.', 'tbe-child' ) );
+	?>
+	<div class="tbe-field">
+		<label for="tbe-ctx-extra"><?php esc_html_e( 'More phrases', 'tbe-child' ); ?></label>
+		<textarea id="tbe-ctx-extra" name="tbe_settings[ctx_extra]" rows="6" class="large-text code" placeholder="Johannine comma | /commentary/johannine-comma/"><?php echo esc_textarea( (string) $s['ctx_extra'] ); ?></textarea>
+		<p class="description"><?php esc_html_e( 'One a line: phrase | address. A path such as /glossary/septuagint/ is a page on this site; a full address must be on one of the sites above. These come before the shared map, so a phrase here wins.', 'tbe-child' ); ?></p>
 	</div>
 	<?php
 }

@@ -56,11 +56,11 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 ## Names that must not change
 
 - Options: `tbe_settings` (every setting on Appearance, TBE), `tbe_search_base`, `tbe_search_rules_base`, `tbe_unlisted`, `tbe_rewrite_version`, `tbe_dropins`, `tbe_dev_files_version`, `tbe_dev_files_lock`, `tbe_glossary_seeded`, `tbe_sections_seeded`, `tbe_themes_to_tags`, `tbe_unlisted_src`, and the `tbe_pack_sync_*` family.
-- Post meta: `_tbe_unlisted`.
+- Post meta: `_tbe_unlisted`, `tbe_takeaways`, `tbe_reviewed`.
 - Post types and taxonomy: `tbe_commentary`, `tbe_term`, the `section` rewrite slug.
 - Constants a site sets in `wp-config.php`: `TBE_ESV_API_TOKEN`, `TBE_KEEP_DOTFILES`, `TBE_ALLOW_XMLRPC`.
-- Filters: `tbe_core_sitemaps`, `tbe_plugin_sitemap_url`, `tbe_login_plugin_active`, `tbe_search_permalinks_enabled`, `tbe_search_reserved_bases`, `tbe_social_meta`, `tbe_social_networks`, `tbe_unlist_enabled`.
-- Block and shortcode: `tbe/social`, `[tbe_social]`.
+- Filters: `tbe_core_sitemaps`, `tbe_plugin_sitemap_url`, `tbe_login_plugin_active`, `tbe_search_permalinks_enabled`, `tbe_search_reserved_bases`, `tbe_social_meta`, `tbe_social_networks`, `tbe_unlist_enabled`, `tbe_contextual_links_map`, `tbe_contextual_links_enabled`.
+- Block and shortcode: `tbe/social`, `[tbe_social]`. The commentary page blocks: `tbe/breadcrumbs`, `tbe/dek`, `tbe/article-meta`, `tbe/answer-box`, `tbe/contents`, `tbe/sources`, `tbe/next-step`, `tbe/related`. The block style `is-style-faq` on `core/details` and the pattern `tbe/faq`.
 - Design tokens in `assets/css/base.css`: `--tbe-paper`, `--tbe-surface`, `--tbe-ink`, `--tbe-muted`, `--tbe-accent`, `--tbe-rubric`, `--tbe-gold`, `--tbe-line`, `--tbe-scale`, `--tbe-ui`, and the radius tokens in `assets/css/polish.css`.
 - The default scheme: paper `#f4eedc`, ink `#231d14`, accent (burgundy) `#6e1f2e`, gold `#a67c2e`.
 
@@ -78,6 +78,8 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Never remove a feature. A rename comes with a redirect or a fallback.
 - Prose in the five documents, admin strings and commit messages is plain, direct English: no contractions, no em dashes, none of the banned words and constructions of the `anti-ai-writing-style` skill, short paragraphs.
 - Never describe the site as related to other sites. Links to other sites are fine.
+- The commentary page shows no byline: the author is named in the structured data only. A next step is only ever keep reading, check the sources or ask a question; never a price, a buy button or "get started" wording (0.10.8).
+- `FAQPage` goes in the graph only for questions shown on the page, from Details blocks in the FAQ style.
 - "Discourage search engines" under Settings, Reading is the owner's setting. The theme keeps the sitemap open either way and says on the dashboard when the box is ticked; it never changes the setting (0.10.6).
 - The title tags the theme builds (the reader views, the login screen and the error pages) read `<page> | The Bible Exposed` and stay under 60 characters. That leaves 32 characters for the page part. A new view keeps the same rule.
 - Every theme stylesheet and script goes through `tbe_enqueue_theme_style()` or `tbe_enqueue_theme_script()`, every font through `tbe_font_faces()`, every brand image through `tbe_brand_url()`. Each address carries a hash of its own file, and a missing file is left out. No stylesheet carries an `@font-face` rule of its own.

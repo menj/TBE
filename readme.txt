@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.7
+Stable tag: 0.10.8
 Template: twentytwentyfive
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -57,6 +57,7 @@ Everything lives under Appearance, TBE:
 * General: the tagline, structured data, the light and dark switch, and whether starter commentary follows theme updates.
 * Appearance: the colour scheme, or your own colours.
 * Reader and commentary: text size, verse numbers and section names.
+* Commentary pages: the contents list (in the page, or a bar that stays at the top), the "In short" box, the next step at the end, related entries, an optional "Ask a question" page, and links from known phrases to the pages that treat them.
 * Reading bar: the thin bar that shows how far down a page you are.
 * Profile links: the addresses of the site's social profiles, shown in the footer.
 * ESV and licence: the token status, the live fallback and the copyright line.
@@ -69,6 +70,10 @@ Everything lives under Appearance, TBE:
 Go to Commentary, Add New. Type the passage (for example John 1:1-18), pick one or more sections, and write. The note shows under the first verse of the passage, with a mark beside the verse.
 
 A passage with no verses, such as John 3, makes a chapter introduction. A book name alone, such as John, makes a book introduction.
+
+Each entry's own page shows, in order: the breadcrumb, the title, the excerpt under it, the dates and reading time, the "In short" box, the contents, the text, the notes and sources, the next step and related entries on the same book. Fill the Key points and review box beside the editor for the "In short" list and the "Last reviewed" date. An entry with three or more sections (level-two headings) gets a contents list.
+
+For questions and answers, insert the "Questions and answers" pattern: each question is a Details block in the FAQ style. Search engines are told about the questions only when they are on the page.
 
 == Search engines ==
 
@@ -104,6 +109,11 @@ TBE is distributed under the GNU General Public License v2 or later.
 
 == Changelog ==
 
+= 0.10.8 =
+* Each commentary entry's page gains a breadcrumb, the excerpt under the title, the dates and reading time, an "In short" box, a contents list, a notes and sources section, a next step ("Read the passage") and related entries on the same book.
+* Tables in an entry scroll on a phone and carry their caption. A FAQ style for Details blocks, with a pattern.
+* Known phrases in an entry link to the pages that treat them. A new Commentary pages tab sets all of this.
+
 = 0.10.7 =
 * The theme's documents are complete: this readme, the facts file, the upgrade notes and the roadmap.
 
@@ -116,6 +126,9 @@ TBE is distributed under the GNU General Public License v2 or later.
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.8 =
+Nothing to do by hand. If you saved the commentary template in the Site Editor, reset it to get the new layout.
 
 = 0.10.7 =
 Nothing to do by hand.

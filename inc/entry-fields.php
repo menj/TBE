@@ -172,16 +172,23 @@ add_action(
 
 /* Front-end rendering ----------------------------------------------------- */
 
-function tbe_render_variants( int $post_id ): string {
+/**
+ * The variants table of an entry.
+ *
+ * @param int $post_id Entry.
+ * @param int $level   Heading level of its title: 4 inside a reader box, 2 on the entry's own page (0.10.8).
+ */
+function tbe_render_variants( int $post_id, int $level = 4 ): string {
 	$rows = tbe_get_variants( $post_id );
 	if ( ! $rows ) {
 		return '';
 	}
+	$level = max( 2, min( 6, $level ) );
 	$groups = array();
 	foreach ( $rows as $row ) {
 		$groups[ $row['unit'] ][] = $row;
 	}
-	$out  = '<section class="tbe-variants"><h4 class="tbe-sub">' . esc_html__( 'Textual variants', 'tbe-child' ) . '</h4>';
+	$out  = '<section class="tbe-variants"><h' . $level . ' class="tbe-sub">' . esc_html__( 'Textual variants', 'tbe-child' ) . '</h' . $level . '>';
 	$out .= '<div class="tbe-tablewrap" role="region" tabindex="0" aria-label="' . esc_attr__( 'Textual variants table', 'tbe-child' ) . '"><table class="tbe-table"><thead><tr>';
 	$out .= '<th scope="col">' . esc_html__( 'Reading', 'tbe-child' ) . '</th><th scope="col">' . esc_html__( 'Witnesses', 'tbe-child' ) . '</th><th scope="col">' . esc_html__( 'Notes', 'tbe-child' ) . '</th></tr></thead><tbody>';
 	foreach ( $groups as $unit => $items ) {
@@ -215,7 +222,14 @@ function tbe_render_quran_refs( int $post_id ): string {
 	return $out . '</ul></section>';
 }
 
-/** Variants table and Qur'an references for one entry. */
-function tbe_render_entry_extras( int $post_id ): string {
-	return tbe_render_variants( $post_id ) . tbe_render_quran_refs( $post_id );
+/**
+ * Variants table and Qur'an references for one entry. On the entry's own page the variants heading is a level-two
+ * heading and the Qur'an references go to the notes and sources block instead (0.10.8).
+ *
+ * @param int  $post_id Entry.
+ * @param int  $level   Heading level of the variants title.
+ * @param bool $quran   Include the Qur'an references.
+ */
+function tbe_render_entry_extras( int $post_id, int $level = 4, bool $quran = true ): string {
+	return tbe_render_variants( $post_id, $level ) . ( $quran ? tbe_render_quran_refs( $post_id ) : '' );
 }

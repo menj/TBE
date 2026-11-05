@@ -169,11 +169,21 @@ add_action(
 	}
 );
 
+/**
+ * Whether a the_content call renders the body of the entry this page is about. Block templates render the Post
+ * Content block outside the classic Loop on some WordPress versions, so the queried entry is matched instead of
+ * in_the_loop() (0.10.8). An excerpt built from the text is never treated as the body.
+ */
+function tbe_is_entry_body(): bool {
+	return is_singular( 'tbe_commentary' ) && is_main_query() && ! is_admin() && ! is_feed() && ! doing_filter( 'get_the_excerpt' )
+		&& (int) get_the_ID() === (int) get_queried_object_id();
+}
+
 /** On a single entry: show the passage with a link to the reader, then variants and Qur'an references. */
 add_filter(
 	'the_content',
 	static function ( string $content ): string {
-		if ( ! is_singular( 'tbe_commentary' ) || ! in_the_loop() || ! is_main_query() ) {
+		if ( ! tbe_is_entry_body() ) {
 			return $content;
 		}
 		$id   = get_the_ID();
@@ -190,7 +200,9 @@ add_filter(
 			esc_url( $url ),
 			esc_html( (string) get_post_meta( $id, 'tbe_passage', true ) )
 		);
-		return $intro . $content . tbe_render_entry_extras( $id );
+		// The Qur'an references move to the notes and sources block when the template has one (0.10.8).
+		$moved = function_exists( 'tbe_article_template_has_sources' ) && tbe_article_template_has_sources();
+		return $intro . $content . tbe_render_entry_extras( $id, $moved ? 2 : 4, ! $moved );
 	},
 	20
 );
