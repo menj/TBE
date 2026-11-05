@@ -42,7 +42,7 @@ On activation the theme publishes its starter commentary and adds 13 glossary te
 
 1. Turn on "show hidden files" in your FTP program.
 2. Upload the new version to a temporary folder next to the old one, for example wp-content/themes/TBE-new. Send its .htaccess files first: the one at the top of the folder, then the one in tools. On Apache they close the theme's private files to visitors while the rest arrives. On Nginx, which ignores them, add the server lines from README.md before the first FTP update.
-3. When every file is up, rename the old folder (for example to TBE-old), then rename TBE-new to TBE. The site switches over in a moment.
+3. When every file is up, rename the old folder (for example to TBE-old) and, straight after, rename TBE-new to TBE. The site switches over in a moment. Keep the admin closed from before the first rename until the second is done: while no folder is named TBE, an admin page can switch the site to another theme.
 4. Open any admin screen once. The theme refreshes its error pages and settles in.
 5. Read UPGRADING.md in the theme folder for anything a version asks you to do by hand. Delete TBE-old when all is well.
 
