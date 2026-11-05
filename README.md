@@ -307,10 +307,10 @@ Entry keys must start with the pack id (`combat-kit:…`, `cross-references:…`
 ## The commentary page (0.10.8)
 `templates/single-tbe_commentary.html` places the pieces in reading order: `tbe/breadcrumbs`, the title, the section chips, `tbe/dek` (the excerpt), `tbe/article-meta`, `tbe/answer-box`, `tbe/contents`, the content, `tbe/sources`, `tbe/next-step`, the tags and `tbe/related`. Each renders nothing when it has nothing to show. There is no byline: the author is named in the structured data only.
 
-- The meta row shows the published date, the updated date when it falls on a later day, "Last reviewed" from post meta `tbe_reviewed` (`Y-m-d`), and the reading time at 220 words a minute.
+- The meta row shows the published date, the updated date when it falls on a later day, "Last reviewed" from post meta `tbe_reviewed` (a real `Y-m-d` date), and the reading time at 220 words a minute, counting every run of non-space characters.
 - The answer box lists post meta `tbe_takeaways`, one point a line. Both meta keys are set in the Key points and review box and shown in REST.
 - The contents list comes from the level-two headings in the stored text (`tbe_article_headings()`), from three up; the rendered headings get the same ids (`tbe_article_heading_ids()`, `the_content` at 12).
-- The footnotes block renders empty in the body and its list prints in `tbe/sources`, when the current template has that block. The Qur'an cross-references move there too, and the variants title becomes a level-two heading.
+- The footnotes block renders empty in the body and its list prints in `tbe/sources`, when the current template has that block after Post Content. Author-set heading ids are reserved before any id is made. The Qur'an cross-references move there too, and the variants title becomes a level-two heading.
 - Related entries come from the same book, scored 3 for the same chapter, 2 a shared tag and 1 a shared section, nearer chapters first; mirror copies of cross-references are left out.
 - Tables (`core/table`) in an entry become a focusable region labelled by their caption.
 

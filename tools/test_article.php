@@ -5,8 +5,9 @@
  *
  * WordPress is stubbed. The test checks that the contents and the rendered headings get the same ids, repeated
  * headings included; that the mid-article next step goes before the third heading only; that contextual links
- * link each target once, at most once a paragraph, never inside a link, heading, table or scripture, and never
- * the page itself; that the caps hold; and that a settings line is read only for this site or a mapped host.
+ * link each target once, at most once a paragraph, never inside a link, heading, table or scripture, never a
+ * chapter and verse, and never the page itself; that each cap holds; that a ">" inside an attribute does not
+ * split a tag; and that a settings line is read only for this site or a mapped host.
  * Exit code 0 on success.
  *
  * @package tbe-child
@@ -55,6 +56,11 @@ foreach ( $list as $h ) {
 }
 check( 1 === substr_count( $html, 'id="own"' ), 'a heading with an id is left as it is' );
 
+// An id the author set is reserved, so a later heading with the same text gets another.
+$clash = '<h2 id="introduction">Custom</h2><h2>Introduction</h2><h2>Introduction</h2>';
+check( array( 'introduction', 'introduction-2', 'introduction-3' ) === array_column( tbe_article_heading_list( $clash ), 0 ), 'an author-set id is never made again' );
+check( 1 === substr_count( tbe_article_heading_ids( $clash ), 'id="introduction"' ), 'and the rendered headings agree' );
+
 // Mid-article next step.
 $aside = '<aside>next</aside>';
 check( 1 === preg_match( '#<p>b</p><aside>next</aside><h2 id="own">#', tbe_article_insert_mid( tbe_article_heading_ids( $post->post_content ), $aside ) ), 'the mid next step goes before the third heading' );
@@ -67,6 +73,9 @@ $GLOBALS['t_map'] = array(
 		array( 'site' => 'boi', 'path' => '/trinity/', 'phrases' => array( 'Trinity', 'the Trinity' ) ),
 		array( 'site' => 'injil', 'path' => '/gospels/', 'phrases' => array( 'gospels' ) ),
 		array( 'site' => 'injil', 'path' => '/paul/', 'phrases' => array( 'Paul' ) ),
+		array( 'site' => 'injil', 'path' => '/john-3-16/', 'phrases' => array( 'John 3:16' ) ),
+		array( 'site' => 'boi', 'path' => '/tawhid/', 'phrases' => array( 'tawhid' ) ),
+		array( 'site' => 'boi', 'path' => '/salah/', 'phrases' => array( 'salah' ) ),
 	),
 );
 $GLOBALS['t_set'] = array( 'ctx_out' => 1, 'ctx_out_max' => 3, 'ctx_own_max' => 4, 'ctx_extra' => "scribes | /glossary/scribes/\nevil | https://evil.example/x" );
@@ -78,6 +87,18 @@ check( false === strpos( $out, 'injil.help/gospels/' ), 'a paragraph gets one ne
 check( false === strpos( $out, 'injil.help/paul/' ), 'nothing inside headings, tables, quotations, links or Greek' );
 check( false !== strpos( $out, '<a class="tbe-ctx-link" href="https://thebible.exposed/glossary/scribes/">scribes</a>' ), 'a settings line with a path links this site' );
 check( false === strpos( $out, 'evil.example' ), 'a settings line for an unmapped host is ignored' );
+$refs = tbe_ctx_apply( '<p>See John 3:16 today.</p>', 'https://thebible.exposed/commentary/n/' );
+check( false === strpos( $refs, '<a' ), 'a chapter and verse is never a contextual link' );
+$attr = tbe_ctx_apply( '<p title="a > b tawhid">x</p>', 'https://thebible.exposed/commentary/n/' );
+check( '<p title="a > b tawhid">x</p>' === $attr, 'a ">" inside an attribute does not split the tag' );
+$GLOBALS['t_set']['ctx_out_max'] = 1;
+$capped = tbe_ctx_apply( '<p>tawhid</p><p>salah</p><p>gospels</p>', 'https://thebible.exposed/commentary/n/' );
+check( 1 === substr_count( $capped, 'tbe-ctx-link--out' ), 'the cap on outbound links holds' );
+$GLOBALS['t_set']['ctx_own_max'] = 0;
+$GLOBALS['t_set']['ctx_out_max'] = 3;
+$own0 = tbe_ctx_apply( '<p>scribes</p><p>tawhid</p>', 'https://thebible.exposed/commentary/n/' );
+check( false === strpos( $own0, 'glossary/scribes' ) && 1 === substr_count( $own0, 'tbe-ctx-link--out' ), 'the cap on links to this site holds on its own' );
+$GLOBALS['t_set']['ctx_own_max'] = 4;
 $GLOBALS['t_set']['ctx_out'] = 0;
 $cold = tbe_ctx_apply( $in, 'https://thebible.exposed/commentary/n/' );
 check( false === strpos( $cold, 'bestofislam.org' ), 'outbound links switch off' );

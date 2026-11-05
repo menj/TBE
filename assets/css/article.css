@@ -16,10 +16,8 @@
 
 /* Dek and meta row */
 .tbe-dek { font-size: 1.2rem; line-height: 1.5; color: var(--tbe-ink); margin-block: 0.75rem 0.5rem; }
-.tbe-meta { display: flex; flex-wrap: wrap; gap: 0.25rem 0; font-family: var(--tbe-ui); font-size: 0.82rem; color: var(--tbe-muted); margin-block: 0.5rem 0; }
-.tbe-meta { column-gap: 1.1rem; }
-.tbe-meta__item { position: relative; }
-.tbe-meta__item + .tbe-meta__item::before { content: "·"; position: absolute; inset-inline-start: -0.75rem; color: var(--tbe-gold); }
+/* The items wrap freely: each is its own short phrase, spaced apart, with no separator to strand at a line start. */
+.tbe-meta { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font-family: var(--tbe-ui); font-size: 0.82rem; color: var(--tbe-muted); margin-block: 0.5rem 0; }
 
 /* Answer box */
 .tbe-answer {
@@ -69,8 +67,10 @@
 	border-radius: var(--tbe-radius-sm, 12px);
 	box-shadow: var(--tbe-shadow, none);
 }
+/* Under the admin bar: 32px tall, 46px up to 782px wide, and no longer fixed at 600px and below. */
 .admin-bar .tbe-contents--sticky { top: 32px; }
-@media (max-width: 782px) { .admin-bar .tbe-contents--sticky { top: 0; } }
+@media (max-width: 782px) { .admin-bar .tbe-contents--sticky { top: 46px; } }
+@media (max-width: 600px) { .admin-bar .tbe-contents--sticky { top: 0; } }
 .tbe-contents--sticky > summary { cursor: pointer; padding: 0.6rem 1rem; font-family: var(--tbe-ui); font-size: 0.85rem; font-weight: 600; }
 .tbe-contents--sticky nav { padding: 0 1rem 0.8rem; max-height: 60vh; overflow-y: auto; }
 

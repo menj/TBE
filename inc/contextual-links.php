@@ -199,7 +199,8 @@ function tbe_ctx_apply( string $content, string $here ): string {
 	if ( ! $map['patterns'] || ( ! $caps[0] && ! $caps[1] ) || false === strpos( $content, '<' ) ) {
 		return $content;
 	}
-	$pieces = preg_split( '/(<[^>]+>)/', $content, -1, PREG_SPLIT_DELIM_CAPTURE );
+	// A tag runs to the first ">" outside quotes, so a ">" inside an attribute value never splits it.
+	$pieces = preg_split( '/(<(?:[^>"\']|"[^"]*"|\'[^\']*\')*>)/', $content, -1, PREG_SPLIT_DELIM_CAPTURE );
 	if ( false === $pieces ) {
 		return $content;
 	}
@@ -264,7 +265,9 @@ function tbe_ctx_apply( string $content, string $here ): string {
 			list( $match, $at ) = $best;
 			$pos = $at + strlen( $match );
 			$hit = tbe_ctx_lookup( $map['phrases'], $match );
-			if ( ! $hit ) {
+			// A phrase with a chapter and verse ("John 3:16") is a scripture reference: it stays the reader's
+			// card, even where the cards are switched off or PHP has no DOM extension to make them.
+			if ( ! $hit || preg_match( '/\d\s*:\s*\d/', $match ) ) {
 				continue;
 			}
 			list( $url, $own ) = $hit;

@@ -27,21 +27,53 @@ function tbe_article_is_main(): bool {
 /* Headings ---------------------------------------------------------------- */
 
 /**
- * An id for a heading: its own text as a slug, numbered when the text repeats.
+ * An id for a heading: its own text as a slug, numbered when that id is taken.
  *
  * @param string $text Heading text.
- * @param array  $seen Slugs given so far.
+ * @param array  $seen Ids taken so far, as keys; the new one is added.
  */
 function tbe_article_slug( string $text, array &$seen ): string {
-	$slug = sanitize_title( $text );
-	$slug = '' !== $slug ? $slug : 'section';
-	$seen[ $slug ] = ( $seen[ $slug ] ?? 0 ) + 1;
-	return $seen[ $slug ] > 1 ? $slug . '-' . $seen[ $slug ] : $slug;
+	$base = sanitize_title( $text );
+	$base = '' !== $base ? $base : 'section';
+	$slug = $base;
+	for ( $n = 2; isset( $seen[ $slug ] ); $n++ ) {
+		$slug = $base . '-' . $n;
+	}
+	$seen[ $slug ] = true;
+	return $slug;
 }
 
 /** Plain text of a piece of heading HTML. */
 function tbe_article_heading_text( string $html ): string {
 	return trim( (string) preg_replace( '/\s+/u', ' ', html_entity_decode( wp_strip_all_tags( $html ), ENT_QUOTES, 'UTF-8' ) ) );
+}
+
+/**
+ * The ids of the level-two headings in a piece of HTML, in order: the author's own id where a heading has one,
+ * else one made from its text. The author's ids are reserved first, so a made id never repeats one. A heading
+ * with no text gets ''.
+ *
+ * @param string $html Stored or rendered text.
+ * @return array<int,array{0:string,1:string,2:bool}> Id, text, whether the author set the id.
+ */
+function tbe_article_heading_list( string $html ): array {
+	if ( ! preg_match_all( '#<h2(\s[^>]*)?>(.*?)</h2>#is', $html, $found, PREG_SET_ORDER ) ) {
+		return array();
+	}
+	$seen = array();
+	$own  = array();
+	foreach ( $found as $i => $m ) {
+		if ( preg_match( '/\sid\s*=\s*["\']([^"\']+)["\']/i', (string) ( $m[1] ?? '' ), $idm ) ) {
+			$own[ $i ]          = $idm[1];
+			$seen[ $idm[1] ] = true;
+		}
+	}
+	$out = array();
+	foreach ( $found as $i => $m ) {
+		$text  = tbe_article_heading_text( $m[2] );
+		$out[] = isset( $own[ $i ] ) ? array( $own[ $i ], $text, true ) : array( '' === $text ? '' : tbe_article_slug( $text, $seen ), $text, false );
+	}
+	return $out;
 }
 
 /**
@@ -52,33 +84,27 @@ function tbe_article_heading_text( string $html ): string {
  * @return array<int,array{0:string,1:string}>
  */
 function tbe_article_headings( WP_Post $post ): array {
-	if ( ! preg_match_all( '#<h2(\s[^>]*)?>(.*?)</h2>#is', (string) $post->post_content, $found, PREG_SET_ORDER ) ) {
-		return array();
-	}
-	$seen = array();
-	$out  = array();
-	foreach ( $found as $m ) {
-		$text = tbe_article_heading_text( $m[2] );
-		if ( '' === $text ) {
-			continue;
+	$out = array();
+	foreach ( tbe_article_heading_list( (string) $post->post_content ) as $h ) {
+		if ( '' !== $h[1] ) {
+			$out[] = array( $h[0], $h[1] );
 		}
-		$id    = preg_match( '/\sid\s*=\s*["\']([^"\']+)["\']/i', (string) $m[1], $idm ) ? $idm[1] : tbe_article_slug( $text, $seen );
-		$out[] = array( $id, $text );
 	}
 	return $out;
 }
 
 /** Give each level-two heading of the rendered body an id, matching tbe_article_headings(). */
 function tbe_article_heading_ids( string $html ): string {
-	$seen = array();
+	$list = tbe_article_heading_list( $html );
+	$i    = 0;
 	return (string) preg_replace_callback(
 		'#<h2(\s[^>]*)?>(.*?)</h2>#is',
-		static function ( $m ) use ( &$seen ) {
-			$text = tbe_article_heading_text( $m[2] );
-			if ( '' === $text || preg_match( '/\sid\s*=/i', (string) $m[1] ) ) {
+		static function ( $m ) use ( $list, &$i ) {
+			$h = $list[ $i++ ] ?? array( '', '', true );
+			if ( $h[2] || '' === $h[0] ) {
 				return $m[0];
 			}
-			return '<h2 id="' . esc_attr( tbe_article_slug( $text, $seen ) ) . '"' . (string) $m[1] . '>' . $m[2] . '</h2>';
+			return '<h2 id="' . esc_attr( $h[0] ) . '"' . (string) ( $m[1] ?? '' ) . '>' . $m[2] . '</h2>';
 		},
 		$html
 	);
@@ -126,9 +152,15 @@ add_filter(
 	}
 );
 
-/** Whether the page's template prints the notes and sources block. */
+/**
+ * Whether the page's template prints the notes and sources block after the body. Only then can the footnotes
+ * move there: a block placed before Post Content renders before the list exists.
+ */
 function tbe_article_template_has_sources(): bool {
-	return has_block( 'tbe/sources', (string) ( $GLOBALS['_wp_current_template_content'] ?? '' ) );
+	$tpl     = (string) ( $GLOBALS['_wp_current_template_content'] ?? '' );
+	$body    = strpos( $tpl, '<!-- wp:post-content' );
+	$sources = strpos( $tpl, '<!-- wp:tbe/sources' );
+	return false !== $body && false !== $sources && $sources > $body;
 }
 
 /**
@@ -155,7 +187,9 @@ add_filter(
  * @return array<int,array{text:string,url:string}>
  */
 function tbe_article_footnotes( int $post_id ): array {
-	$rows = json_decode( (string) get_post_meta( $post_id, 'footnotes', true ), true );
+	// WordPress keeps the footnotes as a JSON string; an array (from an import or another plugin) is read as it is.
+	$raw  = get_post_meta( $post_id, 'footnotes', true );
+	$rows = is_array( $raw ) ? $raw : json_decode( is_string( $raw ) ? $raw : '', true );
 	$out  = array();
 	foreach ( is_array( $rows ) ? $rows : array() as $row ) {
 		$html = (string) ( $row['content'] ?? '' );
@@ -197,7 +231,8 @@ function tbe_render_dek(): string {
 
 /** Minutes to read an entry, at 220 words a minute. */
 function tbe_article_minutes( WP_Post $post ): int {
-	$words = str_word_count( wp_strip_all_tags( strip_shortcodes( (string) $post->post_content ) ) );
+	// Every run of non-space characters is a word, so Hebrew, Greek and Arabic count too.
+	$words = (int) preg_match_all( '/\S+/u', wp_strip_all_tags( strip_shortcodes( (string) $post->post_content ) ) );
 	return max( 1, (int) ceil( $words / 220 ) );
 }
 
@@ -213,7 +248,7 @@ function tbe_render_article_meta(): string {
 		$items[] = sprintf( '<span class="tbe-meta__item">%1$s <time datetime="%2$s">%3$s</time></span>', esc_html__( 'Updated', 'tbe-child' ), esc_attr( (string) get_post_modified_time( 'c', true, $post ) ), esc_html( (string) get_the_modified_date( '', $post ) ) );
 	}
 	$reviewed = (string) get_post_meta( $post->ID, 'tbe_reviewed', true );
-	if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $reviewed ) ) {
+	if ( tbe_article_valid_date( $reviewed ) ) {
 		$stamp   = (int) strtotime( $reviewed . ' 12:00:00 UTC' );
 		$items[] = sprintf( '<span class="tbe-meta__item">%1$s <time datetime="%2$s">%3$s</time></span>', esc_html__( 'Last reviewed', 'tbe-child' ), esc_attr( $reviewed ), esc_html( wp_date( (string) get_option( 'date_format' ), $stamp ) ) );
 	}
@@ -221,6 +256,11 @@ function tbe_render_article_meta(): string {
 	/* translators: %d: minutes of reading. */
 	$items[] = '<span class="tbe-meta__item">' . esc_html( sprintf( _n( '%d minute to read', '%d minutes to read', $minutes, 'tbe-child' ), $minutes ) ) . '</span>';
 	return '<p class="tbe-meta">' . implode( '', $items ) . '</p>';
+}
+
+/** Whether a string is a real calendar date written Y-m-d. */
+function tbe_article_valid_date( string $date ): bool {
+	return (bool) preg_match( '/^(\d{4})-(\d{2})-(\d{2})$/', $date, $m ) && checkdate( (int) $m[2], (int) $m[3], (int) $m[1] );
 }
 
 /** Key points from a block attribute or the entry's "Key points" field, one a line. @return string[] */
@@ -374,7 +414,7 @@ function tbe_article_book_entries( string $book ): array {
 				array(
 					'post_type'              => 'tbe_commentary',
 					'post_status'            => 'publish',
-					'numberposts'            => 300,
+					'numberposts'            => -1,
 					'no_found_rows'          => true,
 					'update_post_term_cache' => true,
 					'meta_query'             => array( array( 'key' => 'tbe_book', 'value' => $book ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
@@ -448,6 +488,18 @@ function tbe_render_next_step( array $attrs = array() ): string {
 }
 
 /**
+ * The term ids of an entry in one taxonomy, from the term cache the entry query primed.
+ *
+ * @param WP_Post $post     Entry.
+ * @param string  $taxonomy Taxonomy.
+ * @return int[]
+ */
+function tbe_article_term_ids( WP_Post $post, string $taxonomy ): array {
+	$terms = get_the_terms( $post, $taxonomy );
+	return is_array( $terms ) ? array_map( 'intval', wp_list_pluck( $terms, 'term_id' ) ) : array();
+}
+
+/**
  * Related entries on the same book, scored: 3 for the same chapter, 2 for each shared tag, 1 for each shared
  * section; ties go to the nearer passage. Entries with no shared chapter, tag or section score 0 and still count,
  * after the rest, since the book is shared.
@@ -460,21 +512,17 @@ function tbe_article_related( WP_Post $post, int $limit ): array {
 		return array();
 	}
 	$chapter  = (int) get_post_meta( $post->ID, 'tbe_chapter', true );
-	$tags     = wp_get_post_terms( $post->ID, 'post_tag', array( 'fields' => 'ids' ) );
-	$sections = wp_get_post_terms( $post->ID, 'tbe_section', array( 'fields' => 'ids' ) );
-	$tags     = is_wp_error( $tags ) ? array() : $tags;
-	$sections = is_wp_error( $sections ) ? array() : $sections;
+	$tags     = tbe_article_term_ids( $post, 'post_tag' );
+	$sections = tbe_article_term_ids( $post, 'tbe_section' );
 	$scored   = array();
 	foreach ( tbe_article_book_entries( $book ) as $entry ) {
 		if ( $entry->ID === $post->ID ) {
 			continue;
 		}
-		$their_tags = wp_get_post_terms( $entry->ID, 'post_tag', array( 'fields' => 'ids' ) );
-		$their_secs = wp_get_post_terms( $entry->ID, 'tbe_section', array( 'fields' => 'ids' ) );
 		$ch         = (int) get_post_meta( $entry->ID, 'tbe_chapter', true );
 		$score      = ( $ch === $chapter ? 3 : 0 )
-			+ 2 * count( array_intersect( $tags, is_wp_error( $their_tags ) ? array() : $their_tags ) )
-			+ count( array_intersect( $sections, is_wp_error( $their_secs ) ? array() : $their_secs ) );
+			+ 2 * count( array_intersect( $tags, tbe_article_term_ids( $entry, 'post_tag' ) ) )
+			+ count( array_intersect( $sections, tbe_article_term_ids( $entry, 'tbe_section' ) ) );
 		$scored[]   = array( $score, -abs( $ch - $chapter ), $entry );
 	}
 	usort( $scored, static fn( $a, $b ) => array( $b[0], $b[1] ) <=> array( $a[0], $a[1] ) );
@@ -599,7 +647,7 @@ add_action(
 		}
 		$points = implode( "\n", tbe_article_points( sanitize_textarea_field( wp_unslash( $_POST['tbe_takeaways'] ?? '' ) ) ) );
 		$date   = sanitize_text_field( wp_unslash( $_POST['tbe_reviewed'] ?? '' ) );
-		foreach ( array( 'tbe_takeaways' => $points, 'tbe_reviewed' => preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) ? $date : '' ) as $key => $value ) {
+		foreach ( array( 'tbe_takeaways' => $points, 'tbe_reviewed' => tbe_article_valid_date( $date ) ? $date : '' ) as $key => $value ) {
 			if ( '' !== $value ) {
 				update_post_meta( $post_id, $key, $value );
 			} else {
