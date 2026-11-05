@@ -25,7 +25,7 @@ Nothing to do. The new documents (`readme.txt`, `SSOT.md`, this file) ship in th
 
 ### To 0.10.6
 - If the site's `.htaccess` has `ErrorDocument` lines that name `/wp-content/themes/tbe/errors/`, replace them with the lines from Appearance, TBE, Error pages. Those name `/wp-content/tbe-errors/`, which carry the real theme folder.
-- Untick Settings, Reading, "Discourage search engines from indexing this site" when the site should be found. While it is ticked, every page says `noindex, nofollow`. The sitemap at `/wp-sitemap.xml` works either way.
+- Untick Settings, Reading, "Discourage search engines from indexing this site" when the site should be found. While it is ticked, every page says `noindex, nofollow`. WordPress's sitemap at `/wp-sitemap.xml` stays open either way; while an SEO plugin serves its own, the sitemap is at the plugin's address instead.
 - Asset addresses change once, to file hashes. Nothing to clear.
 
 ### To 0.10.5

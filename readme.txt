@@ -46,7 +46,7 @@ On activation the theme publishes its starter commentary and adds 13 glossary te
 4. Open any admin screen once. The theme refreshes its error pages and settles in.
 5. Read UPGRADING.md in the theme folder for anything a version asks you to do by hand. Delete TBE-old when all is well.
 
-The temporary folder and rename is the safe way. Uploading straight over the old folder is riskier: while most files are still missing, visitors see a short "back shortly" page and you can still log in, but functions.php holds that safety check itself, so for the moment functions.php is half written, visitors can see an error page instead. If you do upload over the old folder, send functions.php last.
+The temporary folder and rename is the safe way. Uploading straight over the old folder is riskier. While other theme files are still missing, visitors see a short "back shortly" page and you can still log in. But functions.php holds that safety check itself, so while functions.php is half written, the theme cannot show that page: visitors get a plain PHP error from the server instead. If you do upload over the old folder, send functions.php last.
 
 Never upload a fresh copy of WordPress itself without the site's wp-config.php in place, or the site starts its installer.
 
@@ -72,7 +72,7 @@ A passage with no verses, such as John 3, makes a chapter introduction. A book n
 
 == Search engines ==
 
-If Settings, Reading, "Discourage search engines from indexing this site" is ticked, every page tells search engines to stay away. The dashboard reminds you while it is ticked. Untick it when the site should be found. The sitemap at /wp-sitemap.xml works either way.
+If Settings, Reading, "Discourage search engines from indexing this site" is ticked, every page tells search engines to stay away. The dashboard reminds you while it is ticked. Untick it when the site should be found. WordPress's own sitemap at /wp-sitemap.xml stays open either way. While an SEO plugin serves its own sitemap, the sitemap is at the plugin's address instead.
 
 == Frequently Asked Questions ==
 

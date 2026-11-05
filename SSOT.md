@@ -105,4 +105,4 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 | `CHANGELOG.md` | Everyone | No |
 | `UPGRADING.md` | Site owners and developers: upgrade notes and the roadmap | No |
 
-The theme's `.htaccess` refuses every `*.md` file, in any letter case, and every dot file and folder (`.claude/` included). The documents ship in the theme folder; `.claude/` is `export-ignore` in `.gitattributes`. `.claude/skills/theme-docs/SKILL.md` is the standard the five documents follow.
+The theme's `.htaccess` refuses every `*.md` file, in any letter case, and every dot file and folder (`.claude/` included) except `.well-known`, which stays open for certificate checks. The documents ship in the theme folder; `.claude/` is `export-ignore` in `.gitattributes`. `.claude/skills/theme-docs/SKILL.md` is the standard the five documents follow.

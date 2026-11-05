@@ -29,7 +29,7 @@ Fixes from the live logs of thebible.exposed. Nothing was renamed or removed.
 ### Upgrading from 0.10.5
 - Upload as before. The asset addresses change once, to file hashes.
 - If `.htaccess` has `ErrorDocument` lines that name `/wp-content/themes/tbe/errors/`, replace them with the lines from Appearance, TBE, Error pages, which name `/wp-content/tbe-errors/`.
-- Untick Settings, Reading, "Discourage search engines from indexing this site" when the site should be found. The sitemap works either way.
+- Untick Settings, Reading, "Discourage search engines from indexing this site" when the site should be found. WordPress's sitemap stays open either way, and while an SEO plugin serves its own, that one is used.
 
 ## 0.10.5
 
