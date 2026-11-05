@@ -101,6 +101,15 @@ The reference implementation is the injil.help theme (menj/injil.help), which ke
 - **Facts must match the code on main.** If a document and the code disagree, fix the document or the code in the same change.
 - **Packaging:** the docs ship in the theme zip, but the theme `.htaccess` refuses `*.md` on the live site, except files the settings pages link to on purpose. `.claude/` is always `export-ignore`.
 
+## Licence
+
+Every theme is licensed under the GNU General Public License, version 3 or later. The owner set this on 2026-11-05.
+- `style.css` carries `License: GNU General Public License v3 or later` and `License URI: https://www.gnu.org/licenses/gpl-3.0.html`.
+- `readme.txt` carries the same two lines in its header.
+- A `LICENSE` file at the theme root holds the full, unmodified GPLv3 text from https://www.gnu.org/licenses/gpl-3.0.txt.
+- `README.md` and `SSOT.md` state the licence in one line each.
+- Third-party fonts, images and libraries keep their own notices in the credits.
+
 ## Release checklist
 
 Before merging a change:
@@ -110,4 +119,5 @@ Before merging a change:
 4. `README.md` covers any new hook, filter, constant, setting, file or rule.
 5. `SSOT.md` covers any new fixed fact or owner decision.
 6. Every path named in a document exists (`git grep` or `ls`).
-7. The repo's own checks pass (tests, the style linter, and banned-word greps).
+7. The licence lines match the Licence section above.
+8. The repo's own checks pass (tests, the style linter, and banned-word greps).

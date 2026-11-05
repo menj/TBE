@@ -17,7 +17,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 | Parent theme | Twenty Twenty-Five (`twentytwentyfive`). It must stay installed. |
 | Version | `Version:` in `style.css`, `TBE_VERSION` in `functions.php`, `Stable tag:` in `readme.txt` and the top heading of `CHANGELOG.md`, always equal |
 | Requires | WordPress 6.7, PHP 8.0, with the `dom` and `mbstring` extensions |
-| Licence | GPL v2 or later. Fonts, texts, data and images keep their own licences. |
+| Licence | GNU General Public License v3 or later (owner decision, 5 November 2026), full text in `LICENSE`. Fonts, texts, data and images keep their own licences. |
 
 ## Purpose and position
 
@@ -32,6 +32,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 - 4 November 2026: the structured data names Mohd Elfie Nieshaem Juferi as the author of every entry, whoever the WordPress user is. Nothing visible changes (`tbe_ld_person()`, `tools/test_schema_author.php`).
 - 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
+- 5 November 2026: every theme is licensed under the GNU General Public License, version 3 or later (0.10.9).
 
 ## Content facts
 
