@@ -47,6 +47,11 @@ function tbe_error_pages(): array {
 			$v( 'No reply', 'We asked the server a question and it did not answer. Sound familiar, anyone who has asked God about the problem of evil?', 'Please try again in a moment.' ),
 			$v( 'Bad gateway', 'The server behind this site did not reply. Like Jesus, it will be back, and sooner than promised.', 'Please try again in a moment.' ),
 		) ),
+		'504' => array( 'links' => false, 'variants' => array(
+			$v( 'The server took too long', 'We waited for the server behind this site and it never replied, like the disciples waiting for a return within their generation.', 'Please try again in a moment.' ),
+			$v( 'Gateway timeout', 'The server behind this site ran out of time. It happens; the end of the world has been running late for two thousand years.', 'Please try again in a moment.' ),
+			$v( 'Still waiting', 'The server behind this site did not answer in time. Unlike the Parousia, it should not take centuries.', 'Please try again in a moment.' ),
+		) ),
 		'503' => array( 'links' => false, 'variants' => array(
 			$v( 'Back shortly', 'The site is being updated. Unlike the Second Coming, we are giving you a date: a few minutes from now.', 'Thank you for your patience.' ),
 			$v( 'Down for maintenance', 'We are fixing things. The disciples were told the end was near within their lifetime; we are more reliable than that.', 'Please try again in a few minutes.' ),
@@ -95,6 +100,7 @@ function tbe_error_short_titles(): array {
 		'404'         => 'Page not found',
 		'500'         => 'Something went wrong',
 		'502'         => 'Bad gateway',
+		'504'         => 'Gateway timeout',
 		'503'         => 'Back shortly',
 		'maintenance' => 'Back shortly',
 		'db-error'    => 'We cannot reach our database',
@@ -133,10 +139,10 @@ function tbe_error_variant( string $key ): array {
  * The first variant is written into the page, and all of them are embedded so a script swaps in a random one
  * on each load (static pages and drop-ins cannot choose at request time without PHP).
  *
- * @param string $key      A page key (400 ... 503, maintenance, db-error, php-error).
+ * @param string $key      A page key (400 ... 504, maintenance, db-error, php-error).
  * @param string $font_url Root-relative address of Angel.woff2 (the site name's font).
  */
-function tbe_error_page_html( string $key, string $font_url = '/wp-content/themes/TBE/assets/fonts/Angel.woff2' ): string {
+function tbe_error_page_html( string $key, string $font_url = '/wp-content/themes/tbe/assets/fonts/Angel.woff2' ): string {
 	$page     = tbe_error_page( $key );
 	$code     = $page['code'];
 	$first    = $page['variants'][0];
