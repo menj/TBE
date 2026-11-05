@@ -12,7 +12,7 @@ How to move a site from one version to the next, and where the theme is going. C
 6. Read the note for each version you pass below, and do what it asks.
 7. Delete `TBE-old` once the site looks right.
 
-Uploading straight over the old folder also works. While a file is missing, visitors get the static 503 page with `Retry-After: 300`, the owner can still log in, and every asset address keeps its old version until its own file is in place.
+The temporary folder and rename is the safe way. Uploading straight over the old folder is riskier. While a file in `inc/` is missing or half-written, visitors get the static 503 page with `Retry-After: 300`, the owner can still log in, and every asset address keeps its old version until its own file is in place. But the guard lives in `functions.php`, so it cannot cover `functions.php` itself: while that file is half-written, a visitor can get a PHP parse error. Upload `functions.php` last if you overwrite in place.
 
 Never upload WordPress core without `wp-config.php` in place, or the site starts its installer.
 

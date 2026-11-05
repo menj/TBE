@@ -46,7 +46,7 @@ On activation the theme publishes its starter commentary and adds 13 glossary te
 4. Open any admin screen once. The theme refreshes its error pages and settles in.
 5. Read UPGRADING.md in the theme folder for anything a version asks you to do by hand. Delete TBE-old when all is well.
 
-If you upload straight over the old folder instead, that works too: while a file is still missing, visitors see a short "back shortly" page and you can still log in.
+The temporary folder and rename is the safe way. Uploading straight over the old folder is riskier: while most files are still missing, visitors see a short "back shortly" page and you can still log in, but functions.php holds that safety check itself, so for the moment functions.php is half written, visitors can see an error page instead. If you do upload over the old folder, send functions.php last.
 
 Never upload a fresh copy of WordPress itself without the site's wp-config.php in place, or the site starts its installer.
 
