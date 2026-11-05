@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.12
+
+The docs name the subfolder favicon step. No feature removed.
+
+### Changed
+- `readme.txt` and `README.md` say that a site in a subfolder needs a copy of `favicon.ico` at the domain root, because browsers ask for it there and WordPress never sees the request.
+
 ## 0.10.11
 
 ### Added

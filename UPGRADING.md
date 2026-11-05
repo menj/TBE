@@ -20,6 +20,10 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.12
+Nothing to do on a site at the domain root. On a site in a subfolder, put a copy of `assets/img/brand/favicon.ico` in the domain root (or, with a Site Icon set, that icon converted to an ICO file named `favicon.ico`), since browsers ask for `/favicon.ico` there.
+
+
 ### To 0.10.11
 Nothing to do. The new files are `icon-192.png`, `icon-maskable-512.png` and `site.webmanifest` in `assets/img/brand/`. The next admin page writes the error pages again with the icon. If a `favicon.ico` file sits in the site root, the web server sends it and the theme never answers.
 
