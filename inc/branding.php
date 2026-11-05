@@ -9,15 +9,16 @@
 defined( 'ABSPATH' ) || exit;
 
 function tbe_brand_url( string $file ): string {
-	// The version in the address makes browsers fetch a changed icon instead of showing the one they cached.
-	return add_query_arg( 'ver', TBE_VERSION, TBE_URI . '/assets/img/brand/' . $file );
+	// The version in the address makes browsers fetch a changed icon instead of showing the one they cached. It is
+	// the file's own time, so the address changes only once the new file is up (tbe_asset_version()).
+	return add_query_arg( 'ver', tbe_asset_version( 'assets/img/brand/' . $file ) ?? TBE_VERSION, TBE_URI . '/assets/img/brand/' . $file );
 }
 
 add_action(
 	'wp_head',
 	static function () {
 		// The site name is above the fold on every page; fetch its font early so the title does not jump when it loads.
-		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( TBE_URI . '/assets/fonts/Angel.woff2' ) );
+		echo tbe_font_preload( 'assets/fonts/Angel.woff2' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in tbe_font_preload().
 		if ( ! has_site_icon() ) {
 			printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "\n", esc_url( tbe_brand_url( 'favicon.svg' ) ) );
 			printf( '<link rel="icon" href="%s" sizes="32x32" type="image/png">' . "\n", esc_url( tbe_brand_url( 'favicon-32.png' ) ) );

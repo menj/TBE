@@ -210,6 +210,6 @@ add_action(
 		if ( 'edit.php' !== $hook || ! $screen || ! in_array( $screen->post_type, tbe_unlist_post_types(), true ) ) {
 			return;
 		}
-		wp_enqueue_script( 'tbe-unlist', TBE_URI . '/assets/js/unlist-admin.js', array( 'jquery', 'inline-edit-post' ), TBE_VERSION, true );
+		tbe_enqueue_theme_script( 'tbe-unlist', 'assets/js/unlist-admin.js', array( 'jquery', 'inline-edit-post' ), true );
 	}
 );

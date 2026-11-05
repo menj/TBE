@@ -204,8 +204,8 @@ add_action(
 		if ( 'appearance_page_tbe-settings' !== $hook ) {
 			return;
 		}
-		wp_enqueue_style( 'tbe-admin', TBE_URI . '/assets/css/admin.css', array(), TBE_VERSION );
-		wp_enqueue_script( 'tbe-admin', TBE_URI . '/assets/js/admin.js', array(), TBE_VERSION, array( 'in_footer' => true ) );
+		tbe_enqueue_theme_style( 'tbe-admin', 'assets/css/admin.css', array() );
+		tbe_enqueue_theme_script( 'tbe-admin', 'assets/js/admin.js', array(), array( 'in_footer' => true ) );
 		wp_localize_script( 'tbe-admin', 'tbeAdmin', array( 'schemes' => tbe_schemes() ) );
 	}
 );

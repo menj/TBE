@@ -1,8 +1,9 @@
 <?php
 /**
  * Write the static error pages in errors/ (400, 401, 403, 404, 500, 502, 503, 504) from inc/error-page-html.php.
- * These are the copies for a site at the domain root with the theme in /wp-content/themes/tbe/; the theme writes
- * a copy for the site's own addresses into wp-content/tbe-errors/.
+ * These are the theme's own copies: links from the domain root, and the font named relative to errors/, since the
+ * theme folder may be tbe or TBE. The theme writes a copy for the site's own addresses and its real theme folder
+ * into wp-content/tbe-errors/, and the ErrorDocument lines on the Error pages tab name those.
  * Usage: php tools/build_error_pages.php (add --check to fail when a page is stale)
  */
 

@@ -6,9 +6,11 @@
  *    (the database is down) and php-error.php (a fatal PHP error). The theme writes them itself, on
  *    activation and after an update, and removes its own copies when another theme is activated.
  *  - Static pages for the errors the web server answers before WordPress runs (400, 401, 403, 404, 500, 502,
- *    503, 504), for use with ErrorDocument lines in .htaccess. errors/ holds the copies for a site at the domain
- *    root with the theme in /wp-content/themes/tbe/; the theme writes a copy of each into wp-content/tbe-errors/
- *    with this site's home address and font path, so they also work in a subfolder. See Appearance → TBE → Error pages.
+ *    503, 504), for use with ErrorDocument lines in .htaccess. The theme writes a copy of each into
+ *    wp-content/tbe-errors/ with this site's home address and the real theme folder (TBE on the live site), and
+ *    those are the copies the ErrorDocument lines name. errors/ holds the theme's own copies, with links from the
+ *    domain root and the font named relative to errors/, so they hold whatever the theme folder is called.
+ *    See Appearance → TBE → Error pages.
  *
  * @package tbe-child
  */
@@ -84,9 +86,17 @@ function tbe_error_files_owner(): bool {
 	return get_current_blog_id() === tbe_error_files_first_theme_site();
 }
 
+/**
+ * The theme's folder name as WordPress knows it (TBE on the live site), read from the stylesheet directory when
+ * the theme loaded. On switch_theme get_stylesheet() already names the new theme, so it cannot be asked then.
+ */
+function tbe_theme_folder(): string {
+	return basename( defined( 'TBE_DIR' ) ? TBE_DIR : dirname( __DIR__ ) );
+}
+
 /** Whether a site of the network runs this theme, as its stylesheet or its template. */
 function tbe_error_files_site_runs_theme( int $id ): bool {
-	$slug = basename( dirname( __DIR__ ) );
+	$slug = tbe_theme_folder();
 	return in_array( $slug, array( get_blog_option( $id, 'stylesheet' ), get_blog_option( $id, 'template' ) ), true );
 }
 

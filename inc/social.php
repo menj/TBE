@@ -64,7 +64,7 @@ function tbe_social_markup( ?array $profiles = null ): string {
 	if ( '' === $items ) {
 		return '';
 	}
-	wp_enqueue_style( 'tbe-social', TBE_URI . '/assets/css/social.css', array( 'tbe-base' ), TBE_VERSION );
+	tbe_enqueue_theme_style( 'tbe-social', 'assets/css/social.css', array( 'tbe-base' ) );
 	return '<nav class="tbe-social" aria-label="' . esc_attr__( 'Our profiles', 'tbe-child' ) . '"><ul class="tbe-social__list">' . $items . '</ul></nav>';
 }
 
@@ -81,7 +81,7 @@ add_action(
 	'wp_enqueue_scripts',
 	static function () {
 		if ( array_filter( (array) tbe_setting( 'social_profiles' ) ) ) {
-			wp_enqueue_style( 'tbe-social', TBE_URI . '/assets/css/social.css', array( 'tbe-base' ), TBE_VERSION );
+			tbe_enqueue_theme_style( 'tbe-social', 'assets/css/social.css', array( 'tbe-base' ) );
 		}
 	}
 );

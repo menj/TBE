@@ -9,6 +9,14 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * The font address in the theme's own copies in errors/: relative to that folder, so it holds whatever the theme
+ * folder is called (tbe, TBE). It resolves only where the page is opened at its own address; a page the web
+ * server sends for another address (ErrorDocument) needs the full path, which the copies in wp-content/tbe-errors/
+ * carry.
+ */
+const TBE_ERROR_FONT_RELATIVE = '../assets/fonts/Angel.woff2';
+
+/**
  * Every page: its code, whether the site's own links can be offered (not when the site itself is down),
  * and several variants of the message, so a different line greets each visit.
  */
@@ -140,10 +148,12 @@ function tbe_error_variant( string $key ): array {
  * on each load (static pages and drop-ins cannot choose at request time without PHP).
  *
  * @param string $key      A page key (400 ... 504, maintenance, db-error, php-error).
- * @param string $font_url Root-relative address of Angel.woff2 (the site name's font).
+ * @param string $font_url Address of Angel.woff2 (the site name's font). The default is relative to errors/, since
+ *                         the theme folder may be named tbe, TBE or anything else; the copies the theme writes for
+ *                         the site get the real address (tbe_error_font_url()).
  * @param string $home     Root-relative address of the home page, with a trailing slash. The links start from it.
  */
-function tbe_error_page_html( string $key, string $font_url = '/wp-content/themes/tbe/assets/fonts/Angel.woff2', string $home = '/' ): string {
+function tbe_error_page_html( string $key, string $font_url = TBE_ERROR_FONT_RELATIVE, string $home = '/' ): string {
 	$page     = tbe_error_page( $key );
 	$code     = $page['code'];
 	$first    = $page['variants'][0];

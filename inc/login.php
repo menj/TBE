@@ -41,8 +41,8 @@ function tbe_login_assets(): void {
 		return;
 	}
 	// In <head>, so a dark choice saved on the site applies before first paint.
-	wp_enqueue_script( 'tbe-theme', TBE_URI . '/assets/js/theme.js', array(), TBE_VERSION, array( 'in_footer' => false ) );
-	wp_enqueue_style( 'tbe-login', TBE_URI . '/assets/css/login.css', array( 'login' ), TBE_VERSION );
+	tbe_enqueue_theme_script( 'tbe-theme', 'assets/js/theme.js', array(), array( 'in_footer' => false ) );
+	tbe_enqueue_theme_style( 'tbe-login', 'assets/css/login.css', array( 'login' ) );
 	wp_add_inline_style( 'tbe-login', tbe_scheme_css() );
 }
 add_action( 'login_enqueue_scripts', 'tbe_login_assets' );

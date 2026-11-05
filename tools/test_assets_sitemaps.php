@@ -1,0 +1,138 @@
+<?php
+/**
+ * Self-test for 0.10.6: asset versions by file time (inc/enqueue.php, inc/branding.php) and the sitemaps
+ * (inc/sitemaps.php). Run: php tools/test_assets_sitemaps.php
+ *
+ * WordPress is stubbed. The test checks that every stylesheet and script address carries its own file's time,
+ * that the address changes when the file changes and not before, that a missing file leaves an empty handle and
+ * no address, and that no theme file is enqueued with the theme version any more. For the sitemaps it checks that
+ * WordPress's own stay on when "Search engine visibility" is ticked, that an SEO plugin's sitemap wins, that the
+ * filter can turn them off, and that robots.txt names the live sitemap once. Exit code 0 on success.
+ *
+ * @package tbe-child
+ */
+
+// Run from the command line only: on a web server this file does nothing.
+if ( 'cli' !== PHP_SAPI ) {
+	exit;
+}
+
+define( 'ABSPATH', __DIR__ . '/' );
+define( 'TBE_VERSION', '9.9.9' );
+$t_dir = sys_get_temp_dir() . '/tbe-assets-' . getmypid();
+@mkdir( $t_dir . '/assets/css', 0700, true );
+@mkdir( $t_dir . '/assets/js', 0700, true );
+@mkdir( $t_dir . '/assets/fonts', 0700, true );
+define( 'TBE_DIR', $t_dir );
+define( 'TBE_URI', 'https://tbe.test/wp-content/themes/TBE' );
+
+$GLOBALS['t'] = array( 'hooks' => array(), 'styles' => array(), 'scripts' => array(), 'options' => array( 'blog_public' => '0' ), 'filters' => array() );
+function add_action( $h, $f, $p = 10 ) { $GLOBALS['t']['hooks'][ $h ][] = array( $f, $p ); }
+function add_filter( $h, $f, $p = 10 ) { $GLOBALS['t']['hooks'][ $h ][] = array( $f, $p ); }
+function apply_filters( $h, $v ) { return array_key_exists( $h, $GLOBALS['t']['filters'] ) ? $GLOBALS['t']['filters'][ $h ] : $v; }
+function wp_enqueue_style( $h, $src = '', $deps = array(), $ver = false ) {
+	if ( '' !== $src ) {
+		$GLOBALS['t']['styles'][ $h ] = array( $src, $deps, $ver );
+	}
+	$GLOBALS['t']['enqueued'][] = $h;
+}
+function wp_register_style( $h, $src, $deps = array(), $ver = false ) { $GLOBALS['t']['styles'][ $h ] = array( $src, $deps, $ver ); }
+function wp_enqueue_script( $h, $src = '', $deps = array(), $ver = false, $args = array() ) {
+	if ( '' !== $src ) {
+		$GLOBALS['t']['scripts'][ $h ] = array( $src, $deps, $ver, $args );
+	}
+	$GLOBALS['t']['enqueued'][] = $h;
+}
+function wp_register_script( $h, $src, $deps = array(), $ver = false, $args = array() ) { $GLOBALS['t']['scripts'][ $h ] = array( $src, $deps, $ver, $args ); }
+function esc_url( $u ) { return (string) $u; }
+function esc_url_raw( $u ) { return (string) $u; }
+function add_query_arg( $k, $v, $u ) { return $u . '?' . $k . '=' . $v; }
+function home_url( $p = '' ) { return 'https://tbe.test' . $p; }
+function get_option( $k, $d = false ) { return $GLOBALS['t']['options'][ $k ] ?? $d; }
+function get_sitemap_url( $name ) { return 'index' === $name ? 'https://tbe.test/wp-sitemap.xml' : false; }
+// WordPress's sitemap server, as core builds it: blog_public, then the wp_sitemaps_enabled filter.
+class T_Sitemaps {
+	public function sitemaps_enabled() {
+		$v = (bool) get_option( 'blog_public' );
+		foreach ( $GLOBALS['t']['hooks']['wp_sitemaps_enabled'] ?? array() as $h ) {
+			$v = call_user_func( $h[0], $v );
+		}
+		return $v;
+	}
+}
+function wp_sitemaps_get_server() { return new T_Sitemaps(); }
+
+$fail = 0;
+function check( $ok, $label ) {
+	global $fail;
+	echo ( $ok ? 'ok   ' : 'FAIL ' ) . $label . "\n";
+	$fail += $ok ? 0 : 1;
+}
+
+require __DIR__ . '/../inc/enqueue.php';
+require __DIR__ . '/../inc/sitemaps.php';
+
+// Asset versions.
+file_put_contents( "$t_dir/assets/css/base.css", 'body{}' );
+touch( "$t_dir/assets/css/base.css", 1700000000 );
+clearstatcache();
+check( '1700000000' === tbe_asset_version( 'assets/css/base.css' ), 'the version is the file\'s own time' );
+check( null === tbe_asset_version( 'assets/css/missing.css' ), 'a missing file has no version' );
+tbe_enqueue_theme_style( 'tbe-base', 'assets/css/base.css', array( 'parent' ) );
+check( array( TBE_URI . '/assets/css/base.css', array( 'parent' ), '1700000000' ) === $GLOBALS['t']['styles']['tbe-base'], 'a stylesheet goes out with its file time as ?ver=' );
+touch( "$t_dir/assets/css/base.css", 1700000600 );
+clearstatcache();
+tbe_enqueue_theme_style( 'tbe-base', 'assets/css/base.css', array( 'parent' ) );
+check( '1700000600' === $GLOBALS['t']['styles']['tbe-base'][2], 'a changed file gets a new address, so cache busting holds' );
+tbe_enqueue_theme_style( 'tbe-reader', 'assets/css/reader.css', array( 'tbe-base' ) );
+check( false === $GLOBALS['t']['styles']['tbe-reader'][0] && array( 'tbe-base' ) === $GLOBALS['t']['styles']['tbe-reader'][1] && in_array( 'tbe-reader', $GLOBALS['t']['enqueued'], true ), 'a missing stylesheet leaves an empty handle with its dependencies, and no address' );
+file_put_contents( "$t_dir/assets/js/theme.js", '//' );
+touch( "$t_dir/assets/js/theme.js", 1700001200 );
+clearstatcache();
+tbe_enqueue_theme_script( 'tbe-theme', 'assets/js/theme.js', array(), array( 'in_footer' => false ) );
+check( array( TBE_URI . '/assets/js/theme.js', array(), '1700001200', array( 'in_footer' => false ) ) === $GLOBALS['t']['scripts']['tbe-theme'], 'a script goes out with its file time and its loading arguments' );
+tbe_enqueue_theme_script( 'tbe-reader', 'assets/js/reader.js', array(), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+check( false === $GLOBALS['t']['scripts']['tbe-reader'][0], 'a missing script leaves an empty handle, and no address that answers 404' );
+check( '' === tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ), 'no preload for a font that is not there yet' );
+file_put_contents( "$t_dir/assets/fonts/SBL_BLit.woff2", 'x' );
+clearstatcache();
+check( false !== strpos( tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ), 'href="' . TBE_URI . '/assets/fonts/SBL_BLit.woff2"' ), 'a preload once it is' );
+
+// No theme file is enqueued with the theme version or straight from TBE_URI any more.
+$left = array();
+foreach ( glob( __DIR__ . '/../inc/*.php' ) as $f ) {
+	if ( preg_match_all( '~wp_enqueue_(?:style|script)\(\s*\'[^\']+\',\s*TBE_URI~', (string) file_get_contents( $f ), $m ) ) {
+		$left[] = basename( $f );
+	}
+}
+check( array() === $left, 'every theme stylesheet and script goes through the file-time helpers (' . implode( ', ', $left ) . ')' );
+$brand = (string) file_get_contents( __DIR__ . '/../inc/branding.php' );
+check( false !== strpos( $brand, "tbe_asset_version( 'assets/img/brand/' . \$file )" ) && false !== strpos( $brand, "tbe_font_preload( 'assets/fonts/Angel.woff2' )" ), 'the icons are versioned by file time and the Angel preload waits for its file' );
+
+// Sitemaps.
+$priority = null;
+foreach ( $GLOBALS['t']['hooks']['wp_sitemaps_enabled'] ?? array() as $h ) {
+	$priority = 'tbe_core_sitemaps_enabled' === $h[0] ? $h[1] : $priority;
+}
+check( 1 === $priority, 'the sitemap filter runs at priority 1, so an SEO plugin at 10 still wins' );
+check( wp_sitemaps_get_server()->sitemaps_enabled(), 'with "Discourage search engines" ticked, WordPress\'s sitemaps stay on' );
+check( 'https://tbe.test/wp-sitemap.xml' === tbe_active_sitemap_url(), 'the live sitemap is /wp-sitemap.xml' );
+$robots = "User-agent: *\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n";
+check( $robots . "\nSitemap: https://tbe.test/wp-sitemap.xml\n" === tbe_robots_sitemap( $robots ), 'robots.txt names it, where WordPress would not on a site marked not public' );
+$core = $robots . "\nSitemap: https://tbe.test/wp-sitemap.xml\n";
+check( $core === tbe_robots_sitemap( $core ), 'a line already there is not repeated' );
+$GLOBALS['t']['filters']['tbe_plugin_sitemap_url'] = 'https://tbe.test/sitemap_index.xml';
+check( false === tbe_core_sitemaps_enabled( false ) && true === tbe_core_sitemaps_enabled( true ), 'with an SEO plugin\'s sitemap the theme leaves WordPress\'s decision alone' );
+check( 'https://tbe.test/sitemap_index.xml' === tbe_active_sitemap_url() && false !== strpos( tbe_robots_sitemap( $robots ), 'Sitemap: https://tbe.test/sitemap_index.xml' ) && false === strpos( tbe_robots_sitemap( $robots ), 'wp-sitemap' ), 'robots.txt names the plugin\'s sitemap instead' );
+unset( $GLOBALS['t']['filters']['tbe_plugin_sitemap_url'] );
+$GLOBALS['t']['filters']['tbe_core_sitemaps'] = false;
+check( ! wp_sitemaps_get_server()->sitemaps_enabled() && '' === tbe_active_sitemap_url() && $robots === tbe_robots_sitemap( $robots ), 'tbe_core_sitemaps turns them off, and robots.txt then names none' );
+unset( $GLOBALS['t']['filters']['tbe_core_sitemaps'] );
+check( '' === tbe_plugin_sitemap_url(), 'no SEO plugin, no plugin sitemap' );
+
+array_map( 'unlink', array_merge( glob( "$t_dir/assets/*/*" ) ) );
+array_map( 'rmdir', glob( "$t_dir/assets/*" ) );
+rmdir( "$t_dir/assets" );
+rmdir( $t_dir );
+echo $fail ? "$fail failed\n" : "all passed\n";
+exit( $fail ? 1 : 0 );
