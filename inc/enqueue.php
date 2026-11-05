@@ -8,24 +8,25 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * The version in a theme file's address: the time the file was last written and its size, as "time-size"
- * (0.10.6). The owner uploads by FTP, style.css and functions.php first, so a version taken from the theme went
- * out before the new files were there and visitors got 404s for the stylesheets and scripts. An address now
- * changes only once its own file has changed on the server, and a browser still fetches a changed file at once.
- * The size is there for a file caught while FTP is still writing it: the part written so far is shorter than the
- * whole file, so even when the last write falls in the same second, the finished file gets an address of its own
- * and a partial copy a browser cached is never reused. Null when the file is missing.
+ * The version in a theme file's address: a hash of the file's contents (0.10.6). The owner uploads by FTP,
+ * style.css and functions.php first, so a version taken from the theme went out before the new files were there
+ * and visitors got 404s for the stylesheets and scripts. An address now changes only once its own file has
+ * changed on the server, and it changes whenever the contents do: a file caught while FTP is still writing it,
+ * a file replaced twice in one second, or one uploaded with its old time kept, each gets an address of its own.
+ * The hash is xxh3 where PHP has it (8.1 and later), else crc32b; both read the theme's stylesheets, scripts and
+ * fonts (about 1.5 MB) in a millisecond or two, from the server's file cache. Null when the file is missing.
  *
  * @param string $rel The file's path inside the theme folder, such as assets/css/base.css.
  */
 function tbe_asset_version( string $rel ): ?string {
 	$file = TBE_DIR . '/' . ltrim( $rel, '/' );
-	if ( ! is_file( $file ) ) {
-		return null;
-	}
-	$time = @filemtime( $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
-	$size = @filesize( $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
-	return false === $time || false === $size ? null : $time . '-' . $size;
+	$hash = is_file( $file ) ? @hash_file( tbe_asset_hash_algo(), $file ) : false; // phpcs:ignore WordPress.PHP.NoSilencedErrors
+	return false === $hash ? null : $hash;
+}
+
+/** The hash for asset versions: xxh3 where PHP has it, else crc32b. */
+function tbe_asset_hash_algo(): string {
+	return in_array( 'xxh3', hash_algos(), true ) ? 'xxh3' : 'crc32b';
 }
 
 /**

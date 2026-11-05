@@ -1,11 +1,12 @@
 <?php
 /**
- * Self-test for 0.10.6: asset versions by file time (inc/enqueue.php, inc/branding.php) and the sitemaps
+ * Self-test for 0.10.6: asset versions by content hash (inc/enqueue.php, inc/branding.php) and the sitemaps
  * (inc/sitemaps.php). Run: php tools/test_assets_sitemaps.php
  *
  * WordPress is stubbed. The test checks that every stylesheet, script and brand icon address carries its own
- * file's time and size, that the address changes when the file changes and not before, that a part-written file
- * and the finished one never share an address, that a missing file leaves an empty handle, or no tag, and no
+ * file's hash, that the address changes when the contents change and not before, that a part-written file and
+ * the finished one, or two files of one size written in the same second, never share an address, that
+ * /favicon.ico answers 304 to a matching ETag, that a missing file leaves an empty handle, or no tag, and no
  * address, and that no theme file is enqueued with the theme version any more. For the sitemaps it checks that
  * WordPress's own stay on when "Search engine visibility" is ticked, that an SEO plugin's sitemap wins, that the
  * filter can turn them off, and that robots.txt names the live sitemap once. Exit code 0 on success.
@@ -65,6 +66,7 @@ class T_Sitemaps {
 function wp_sitemaps_get_server() { return new T_Sitemaps(); }
 
 $fail = 0;
+function t_hash( $s ) { return hash( in_array( 'xxh3', hash_algos(), true ) ? 'xxh3' : 'crc32b', $s ); }
 function check( $ok, $label ) {
 	global $fail;
 	echo ( $ok ? 'ok   ' : 'FAIL ' ) . $label . "\n";
@@ -78,14 +80,18 @@ require __DIR__ . '/../inc/sitemaps.php';
 file_put_contents( "$t_dir/assets/css/base.css", 'body{}' );
 touch( "$t_dir/assets/css/base.css", 1700000000 );
 clearstatcache();
-check( '1700000000-6' === tbe_asset_version( 'assets/css/base.css' ), 'the version is the file\'s own time and size' );
+check( t_hash( 'body{}' ) === tbe_asset_version( 'assets/css/base.css' ), 'the version is a hash of the file\'s contents' );
 check( null === tbe_asset_version( 'assets/css/missing.css' ), 'a missing file has no version' );
 tbe_enqueue_theme_style( 'tbe-base', 'assets/css/base.css', array( 'parent' ) );
-check( array( TBE_URI . '/assets/css/base.css', array( 'parent' ), '1700000000-6' ) === $GLOBALS['t']['styles']['tbe-base'], 'a stylesheet goes out with its file time as ?ver=' );
+check( array( TBE_URI . '/assets/css/base.css', array( 'parent' ), t_hash( 'body{}' ) ) === $GLOBALS['t']['styles']['tbe-base'], 'a stylesheet goes out with its hash as ?ver=' );
 touch( "$t_dir/assets/css/base.css", 1700000600 );
 clearstatcache();
 tbe_enqueue_theme_style( 'tbe-base', 'assets/css/base.css', array( 'parent' ) );
-check( '1700000600-6' === $GLOBALS['t']['styles']['tbe-base'][2], 'a changed file gets a new address, so cache busting holds' );
+check( t_hash( 'body{}' ) === $GLOBALS['t']['styles']['tbe-base'][2], 'a new time alone keeps the address' );
+file_put_contents( "$t_dir/assets/css/base.css", 'html{}' );
+touch( "$t_dir/assets/css/base.css", 1700000600 );
+clearstatcache();
+check( t_hash( 'html{}' ) === tbe_asset_version( 'assets/css/base.css' ), 'new contents of the same size, written in the same second, get a new address, so cache busting holds' );
 // A file caught part-written, then finished in the same second: the two addresses differ.
 file_put_contents( "$t_dir/assets/css/base.css", 'bo' );
 touch( "$t_dir/assets/css/base.css", 1700000900 );
@@ -94,14 +100,14 @@ $part = tbe_asset_version( 'assets/css/base.css' );
 file_put_contents( "$t_dir/assets/css/base.css", 'body{}' );
 touch( "$t_dir/assets/css/base.css", 1700000900 );
 clearstatcache();
-check( '1700000900-2' === $part && '1700000900-6' === tbe_asset_version( 'assets/css/base.css' ), 'a part-written file and the finished one never share an address, even in the same second' );
+check( t_hash( 'bo' ) === $part && t_hash( 'body{}' ) === tbe_asset_version( 'assets/css/base.css' ), 'a part-written file and the finished one never share an address, even in the same second' );
 tbe_enqueue_theme_style( 'tbe-reader', 'assets/css/reader.css', array( 'tbe-base' ) );
 check( false === $GLOBALS['t']['styles']['tbe-reader'][0] && array( 'tbe-base' ) === $GLOBALS['t']['styles']['tbe-reader'][1] && in_array( 'tbe-reader', $GLOBALS['t']['enqueued'], true ), 'a missing stylesheet leaves an empty handle with its dependencies, and no address' );
 file_put_contents( "$t_dir/assets/js/theme.js", '//' );
 touch( "$t_dir/assets/js/theme.js", 1700001200 );
 clearstatcache();
 tbe_enqueue_theme_script( 'tbe-theme', 'assets/js/theme.js', array(), array( 'in_footer' => false ) );
-check( array( TBE_URI . '/assets/js/theme.js', array(), '1700001200-2', array( 'in_footer' => false ) ) === $GLOBALS['t']['scripts']['tbe-theme'], 'a script goes out with its file time and its loading arguments' );
+check( array( TBE_URI . '/assets/js/theme.js', array(), t_hash( '//' ), array( 'in_footer' => false ) ) === $GLOBALS['t']['scripts']['tbe-theme'], 'a script goes out with its hash and its loading arguments' );
 tbe_enqueue_theme_script( 'tbe-reader', 'assets/js/reader.js', array(), array( 'in_footer' => true, 'strategy' => 'defer' ) );
 check( false === $GLOBALS['t']['scripts']['tbe-reader'][0], 'a missing script leaves an empty handle, and no address that answers 404' );
 check( '' === tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ), 'no preload for a font that is not there yet' );
@@ -109,7 +115,7 @@ file_put_contents( "$t_dir/assets/fonts/SBL_BLit.woff2", 'x' );
 clearstatcache();
 touch( "$t_dir/assets/fonts/SBL_BLit.woff2", 1700001500 );
 clearstatcache();
-$font = TBE_URI . '/assets/fonts/SBL_BLit.woff2?ver=1700001500-1';
+$font = TBE_URI . '/assets/fonts/SBL_BLit.woff2?ver=' . t_hash( 'x' );
 check( false !== strpos( tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ), 'href="' . $font . '"' ), 'a preload once it is, at the versioned address' );
 
 // The @font-face rules come from PHP: versioned, and only for fonts whose files are there.
@@ -155,7 +161,22 @@ touch( "$t_dir/assets/img/brand/favicon.svg", 1700002000 );
 clearstatcache();
 ob_start();
 tbe_brand_tag( '<link rel="icon" href="%s">', 'favicon.svg' );
-check( '<link rel="icon" href="' . TBE_URI . '/assets/img/brand/favicon.svg?ver=1700002000-6">' . "\n" === ob_get_clean(), 'once it is up, the tag carries its file time and size' );
+check( '<link rel="icon" href="' . TBE_URI . '/assets/img/brand/favicon.svg?ver=' . t_hash( '<svg/>' ) . '">' . "\n" === ob_get_clean(), 'once it is up, the tag carries its hash' );
+// /favicon.ico: missing, it is left to WordPress; present, it carries an ETag and answers 304 to it.
+$fsrc = '<?php define( "ABSPATH", "/" ); define( "TBE_DIR", ' . var_export( $t_dir, true ) . ' ); define( "TBE_URI", "u" );'
+	. ' function add_action() {} function add_filter() {} function has_site_icon() { return false; } function wp_unslash( $s ) { return $s; }'
+	. ' function status_header( $c ) { echo "status:$c"; } function wp_register_style() {} function wp_enqueue_style() {} function wp_register_script() {} function wp_enqueue_script() {}'
+	. ' require ' . var_export( __DIR__ . '/../inc/enqueue.php', true ) . '; require ' . var_export( __DIR__ . '/../inc/branding.php', true ) . ';'
+	. ' $_SERVER["HTTP_IF_NONE_MATCH"] = getenv( "T_INM" ) ?: ""; tbe_serve_favicon(); echo "fell-through";';
+file_put_contents( "$t_dir/fav.php", $fsrc );
+$run = static function ( $inm ) use ( $t_dir ) {
+	return (string) shell_exec( 'T_INM=' . escapeshellarg( $inm ) . ' ' . escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( "$t_dir/fav.php" ) . ' 2>&1' );
+};
+check( 'fell-through' === $run( '' ), 'a missing /favicon.ico is left to WordPress' );
+file_put_contents( "$t_dir/assets/img/brand/favicon.ico", 'ICO1' );
+check( 'ICO1' === $run( '"nope"' ), 'present, the icon is sent' );
+check( 'status:304' === $run( '"' . t_hash( 'ICO1' ) . '"' ), 'and a browser holding the same icon gets 304' );
+unlink( "$t_dir/fav.php" );
 $brand = (string) file_get_contents( __DIR__ . '/../inc/branding.php' );
 check( false !== strpos( $brand, "tbe_font_preload( 'assets/fonts/Angel.woff2' )" ) && false === strpos( $brand, 'esc_url( tbe_brand_url(' ), 'the Angel preload waits for its file, and every brand tag goes through tbe_brand_tag()' );
 

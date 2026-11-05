@@ -9,8 +9,8 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * The address of a brand file, versioned by the file's own time and size (tbe_asset_version()), so it changes only
- * once the new file is up. '' while the file is missing (an upload still running): the tag is then left out.
+ * The address of a brand file, versioned by a hash of the file (tbe_asset_version()), so it changes only once the
+ * new file is up. '' while the file is missing (an upload still running): the tag is then left out.
  */
 function tbe_brand_url( string $file ): string {
 	$ver = tbe_asset_version( 'assets/img/brand/' . $file );
@@ -59,12 +59,24 @@ add_action(
 
 /** Browsers ask for /favicon.ico on their own; answer with the brand icon unless a Site Icon is set. */
 function tbe_serve_favicon(): void {
-	if ( has_site_icon() ) {
+	$file = TBE_DIR . '/assets/img/brand/favicon.ico';
+	$etag = tbe_asset_version( 'assets/img/brand/favicon.ico' );
+	// While the file is missing (an upload still running), WordPress answers as it would without the theme.
+	if ( has_site_icon() || null === $etag ) {
 		return;
 	}
+	// Browsers ask for /favicon.ico at a fixed address, so it cannot carry a version: a day's cache, then a
+	// check against the file's hash, which answers 304 while it is unchanged and sends a changed icon at once.
+	$etag = '"' . $etag . '"';
 	header( 'Content-Type: image/x-icon' );
-	header( 'Cache-Control: public, max-age=604800' );
-	readfile( TBE_DIR . '/assets/img/brand/favicon.ico' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	header( 'Cache-Control: public, max-age=86400' );
+	header( 'ETag: ' . $etag );
+	if ( $etag === trim( (string) wp_unslash( $_SERVER['HTTP_IF_NONE_MATCH'] ?? '' ) ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		status_header( 304 );
+		exit;
+	}
+	header( 'Content-Length: ' . (string) filesize( $file ) );
+	readfile( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 	exit;
 }
 // WordPress 5.4 renamed the action from do_faviconico to do_favicon; answer on both.
