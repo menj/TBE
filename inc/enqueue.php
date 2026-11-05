@@ -160,6 +160,32 @@ function tbe_font_preload( string $rel ): string {
 	return sprintf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( $url ) );
 }
 
+/**
+ * The theme's editor styles (base.css, scripture.css) in the classic editor's TinyMCE, which loads them by address:
+ * each gets its file's hash as its version, and one whose file is missing is left out. The block editor needs
+ * nothing of the kind: get_block_editor_theme_styles() reads each file from disk and puts its text inline, and
+ * skips a file that is not there, so no address is requested or cached.
+ *
+ * @param string $css Comma-separated stylesheet addresses.
+ */
+function tbe_mce_css( $css ): string {
+	$out  = array();
+	$base = TBE_URI . '/';
+	foreach ( array_filter( array_map( 'trim', explode( ',', (string) $css ) ) ) as $url ) {
+		if ( 0 !== strpos( $url, $base ) ) {
+			$out[] = $url;
+			continue;
+		}
+		$rel = rawurldecode( (string) strtok( substr( $url, strlen( $base ) ), '?' ) );
+		$new = tbe_asset_url( $rel );
+		if ( '' !== $new ) {
+			$out[] = str_replace( ',', '%2C', $new );
+		}
+	}
+	return implode( ',', $out );
+}
+add_filter( 'mce_css', 'tbe_mce_css', 20 );
+
 /** The editor loads base.css and scripture.css as editor styles; the fonts they use come with them. */
 add_filter(
 	'block_editor_settings_all',

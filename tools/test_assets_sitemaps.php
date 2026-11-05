@@ -133,6 +133,8 @@ foreach ( $GLOBALS['t']['hooks']['block_editor_settings_all'] ?? array() as $h )
 	$editor = call_user_func( $h[0], array( 'styles' => array() ) );
 }
 check( is_array( $editor ) && false !== strpos( (string) ( end( $editor['styles'] )['css'] ?? '' ), 'SBL BibLit' ), 'the editor gets the same rules' );
+$mce = tbe_mce_css( 'https://tbe.test/wp-includes/css/dashicons.css,' . TBE_URI . '/assets/fonts/SBL_BLit.woff2?ver=6.9,' . TBE_URI . '/assets/css/scripture.css?ver=6.9' );
+check( 'https://tbe.test/wp-includes/css/dashicons.css,' . $font === $mce, 'TinyMCE gets the theme\'s editor styles at their hashed addresses, a missing one left out, and other stylesheets untouched' );
 $css_files = '';
 foreach ( glob( __DIR__ . '/../assets/css/*.css' ) as $f ) {
 	$css_files .= (string) file_get_contents( $f );
