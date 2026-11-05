@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.9
+Stable tag: 0.10.10
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -41,7 +41,7 @@ On activation the theme publishes its starter commentary and adds 13 glossary te
 == Updating ==
 
 1. Turn on "show hidden files" in your FTP program.
-2. Upload the new version to a temporary folder next to the old one, for example wp-content/themes/TBE-new.
+2. Upload the new version to a temporary folder next to the old one, for example wp-content/themes/TBE-new. Send its .htaccess files first: the one at the top of the folder, then the one in tools. On Apache they close the theme's private files to visitors while the rest arrives.
 3. When every file is up, rename the old folder (for example to TBE-old), then rename TBE-new to TBE. The site switches over in a moment.
 4. Open any admin screen once. The theme refreshes its error pages and settles in.
 5. Read UPGRADING.md in the theme folder for anything a version asks you to do by hand. Delete TBE-old when all is well.
@@ -109,6 +109,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.10 =
+* The FTP update steps send the theme's .htaccess files first, so its private files stay closed while the rest uploads.
+
 = 0.10.9 =
 * The theme is now licensed under the GNU General Public License, version 3 or later. The full text is in the LICENSE file.
 
@@ -129,6 +132,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.10 =
+Nothing to do by hand. The FTP update steps now send the .htaccess files first.
 
 = 0.10.9 =
 Nothing to do by hand. The licence is now GPL version 3 or later.
