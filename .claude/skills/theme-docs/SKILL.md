@@ -47,7 +47,7 @@ The reference implementation is the injil.help theme (menj/injil.help), which ke
 - Install, build, test and release commands.
 - Architecture: the boot sequence, a file map, templates, parts, patterns and blocks.
 - Settings: option names and where each tab's code lives.
-- Hooks and filters, and constants: every constant the theme reads and what it controls. That includes the `*_KEEP_*`, `*_ALLOW_*` and `*_BLOCK_*` switches and any other setting constant, such as a lock or a threshold. Search the code for `defined(` to find them all.
+- Hooks and filters, and constants: every constant the theme offers for `wp-config.php` and what it controls. That includes the `*_KEEP_*`, `*_ALLOW_*` and `*_BLOCK_*` switches and any other setting constant, such as a lock or a threshold. Search the code for `defined(` to find them, and leave out WordPress core and plugin constants.
 - Security:
   - the upload guard;
   - REST users hidden;
