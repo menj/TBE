@@ -8,10 +8,26 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * The address of a brand file, versioned by the file's own time and size (tbe_asset_version()), so it changes only
+ * once the new file is up. '' while the file is missing (an upload still running): the tag is then left out.
+ */
 function tbe_brand_url( string $file ): string {
-	// The version in the address makes browsers fetch a changed icon instead of showing the one they cached. It is
-	// the file's own time, so the address changes only once the new file is up (tbe_asset_version()).
-	return add_query_arg( 'ver', tbe_asset_version( 'assets/img/brand/' . $file ) ?? TBE_VERSION, TBE_URI . '/assets/img/brand/' . $file );
+	$ver = tbe_asset_version( 'assets/img/brand/' . $file );
+	return null === $ver ? '' : add_query_arg( 'ver', $ver, TBE_URI . '/assets/img/brand/' . $file );
+}
+
+/**
+ * Print one brand tag, or nothing while its file is missing.
+ *
+ * @param string $format printf format with one %s for the address.
+ * @param string $file   File in assets/img/brand/.
+ */
+function tbe_brand_tag( string $format, string $file ): void {
+	$url = tbe_brand_url( $file );
+	if ( '' !== $url ) {
+		printf( $format . "\n", esc_url( $url ) ); // phpcs:ignore WordPress.Security.EscapeOutput -- the format is the theme's own; the address is escaped.
+	}
 }
 
 add_action(
@@ -20,9 +36,9 @@ add_action(
 		// The site name is above the fold on every page; fetch its font early so the title does not jump when it loads.
 		echo tbe_font_preload( 'assets/fonts/Angel.woff2' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in tbe_font_preload().
 		if ( ! has_site_icon() ) {
-			printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "\n", esc_url( tbe_brand_url( 'favicon.svg' ) ) );
-			printf( '<link rel="icon" href="%s" sizes="32x32" type="image/png">' . "\n", esc_url( tbe_brand_url( 'favicon-32.png' ) ) );
-			printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( tbe_brand_url( 'apple-touch-icon.png' ) ) );
+			tbe_brand_tag( '<link rel="icon" href="%s" type="image/svg+xml">', 'favicon.svg' );
+			tbe_brand_tag( '<link rel="icon" href="%s" sizes="32x32" type="image/png">', 'favicon-32.png' );
+			tbe_brand_tag( '<link rel="apple-touch-icon" href="%s">', 'apple-touch-icon.png' );
 		}
 		$colors = tbe_active_colors();
 		printf( '<meta name="theme-color" content="%s">' . "\n", esc_attr( (string) ( $colors['accent'] ?? '#6e1f2e' ) ) );
@@ -30,10 +46,13 @@ add_action(
 		if ( ! apply_filters( 'tbe_social_meta', ! defined( 'WPSEO_VERSION' ) && ! defined( 'RANK_MATH_VERSION' ) ) ) {
 			return;
 		}
-		printf( '<meta property="og:image" content="%s">' . "\n", esc_url( tbe_brand_url( 'social-preview.png' ) ) );
+		if ( '' === tbe_brand_url( 'social-preview.png' ) ) {
+			return;
+		}
+		tbe_brand_tag( '<meta property="og:image" content="%s">', 'social-preview.png' );
 		echo '<meta property="og:image:width" content="1200">' . "\n" . '<meta property="og:image:height" content="630">' . "\n";
 		echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
-		printf( '<meta name="twitter:image" content="%s">' . "\n", esc_url( tbe_brand_url( 'social-preview.png' ) ) );
+		tbe_brand_tag( '<meta name="twitter:image" content="%s">', 'social-preview.png' );
 	},
 	2
 );

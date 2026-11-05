@@ -8,17 +8,24 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * The version in a theme file's address: the time the file was last written (0.10.6). The owner uploads by FTP,
- * style.css and functions.php first, so a version taken from the theme went out before the new files were
- * there and visitors got 404s for the stylesheets and scripts. An address now changes only once its own file
- * has changed on the server, and a browser still fetches a changed file at once. Null when the file is missing.
+ * The version in a theme file's address: the time the file was last written and its size, as "time-size"
+ * (0.10.6). The owner uploads by FTP, style.css and functions.php first, so a version taken from the theme went
+ * out before the new files were there and visitors got 404s for the stylesheets and scripts. An address now
+ * changes only once its own file has changed on the server, and a browser still fetches a changed file at once.
+ * The size is there for a file caught while FTP is still writing it: the part written so far is shorter than the
+ * whole file, so even when the last write falls in the same second, the finished file gets an address of its own
+ * and a partial copy a browser cached is never reused. Null when the file is missing.
  *
  * @param string $rel The file's path inside the theme folder, such as assets/css/base.css.
  */
 function tbe_asset_version( string $rel ): ?string {
 	$file = TBE_DIR . '/' . ltrim( $rel, '/' );
-	$time = is_file( $file ) ? @filemtime( $file ) : false; // phpcs:ignore WordPress.PHP.NoSilencedErrors
-	return false === $time ? null : (string) $time;
+	if ( ! is_file( $file ) ) {
+		return null;
+	}
+	$time = @filemtime( $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+	$size = @filesize( $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+	return false === $time || false === $size ? null : $time . '-' . $size;
 }
 
 /**

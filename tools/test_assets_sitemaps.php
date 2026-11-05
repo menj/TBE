@@ -3,9 +3,10 @@
  * Self-test for 0.10.6: asset versions by file time (inc/enqueue.php, inc/branding.php) and the sitemaps
  * (inc/sitemaps.php). Run: php tools/test_assets_sitemaps.php
  *
- * WordPress is stubbed. The test checks that every stylesheet and script address carries its own file's time,
- * that the address changes when the file changes and not before, that a missing file leaves an empty handle and
- * no address, and that no theme file is enqueued with the theme version any more. For the sitemaps it checks that
+ * WordPress is stubbed. The test checks that every stylesheet, script and brand icon address carries its own
+ * file's time and size, that the address changes when the file changes and not before, that a part-written file
+ * and the finished one never share an address, that a missing file leaves an empty handle, or no tag, and no
+ * address, and that no theme file is enqueued with the theme version any more. For the sitemaps it checks that
  * WordPress's own stay on when "Search engine visibility" is ticked, that an SEO plugin's sitemap wins, that the
  * filter can turn them off, and that robots.txt names the live sitemap once. Exit code 0 on success.
  *
@@ -76,21 +77,30 @@ require __DIR__ . '/../inc/sitemaps.php';
 file_put_contents( "$t_dir/assets/css/base.css", 'body{}' );
 touch( "$t_dir/assets/css/base.css", 1700000000 );
 clearstatcache();
-check( '1700000000' === tbe_asset_version( 'assets/css/base.css' ), 'the version is the file\'s own time' );
+check( '1700000000-6' === tbe_asset_version( 'assets/css/base.css' ), 'the version is the file\'s own time and size' );
 check( null === tbe_asset_version( 'assets/css/missing.css' ), 'a missing file has no version' );
 tbe_enqueue_theme_style( 'tbe-base', 'assets/css/base.css', array( 'parent' ) );
-check( array( TBE_URI . '/assets/css/base.css', array( 'parent' ), '1700000000' ) === $GLOBALS['t']['styles']['tbe-base'], 'a stylesheet goes out with its file time as ?ver=' );
+check( array( TBE_URI . '/assets/css/base.css', array( 'parent' ), '1700000000-6' ) === $GLOBALS['t']['styles']['tbe-base'], 'a stylesheet goes out with its file time as ?ver=' );
 touch( "$t_dir/assets/css/base.css", 1700000600 );
 clearstatcache();
 tbe_enqueue_theme_style( 'tbe-base', 'assets/css/base.css', array( 'parent' ) );
-check( '1700000600' === $GLOBALS['t']['styles']['tbe-base'][2], 'a changed file gets a new address, so cache busting holds' );
+check( '1700000600-6' === $GLOBALS['t']['styles']['tbe-base'][2], 'a changed file gets a new address, so cache busting holds' );
+// A file caught part-written, then finished in the same second: the two addresses differ.
+file_put_contents( "$t_dir/assets/css/base.css", 'bo' );
+touch( "$t_dir/assets/css/base.css", 1700000900 );
+clearstatcache();
+$part = tbe_asset_version( 'assets/css/base.css' );
+file_put_contents( "$t_dir/assets/css/base.css", 'body{}' );
+touch( "$t_dir/assets/css/base.css", 1700000900 );
+clearstatcache();
+check( '1700000900-2' === $part && '1700000900-6' === tbe_asset_version( 'assets/css/base.css' ), 'a part-written file and the finished one never share an address, even in the same second' );
 tbe_enqueue_theme_style( 'tbe-reader', 'assets/css/reader.css', array( 'tbe-base' ) );
 check( false === $GLOBALS['t']['styles']['tbe-reader'][0] && array( 'tbe-base' ) === $GLOBALS['t']['styles']['tbe-reader'][1] && in_array( 'tbe-reader', $GLOBALS['t']['enqueued'], true ), 'a missing stylesheet leaves an empty handle with its dependencies, and no address' );
 file_put_contents( "$t_dir/assets/js/theme.js", '//' );
 touch( "$t_dir/assets/js/theme.js", 1700001200 );
 clearstatcache();
 tbe_enqueue_theme_script( 'tbe-theme', 'assets/js/theme.js', array(), array( 'in_footer' => false ) );
-check( array( TBE_URI . '/assets/js/theme.js', array(), '1700001200', array( 'in_footer' => false ) ) === $GLOBALS['t']['scripts']['tbe-theme'], 'a script goes out with its file time and its loading arguments' );
+check( array( TBE_URI . '/assets/js/theme.js', array(), '1700001200-2', array( 'in_footer' => false ) ) === $GLOBALS['t']['scripts']['tbe-theme'], 'a script goes out with its file time and its loading arguments' );
 tbe_enqueue_theme_script( 'tbe-reader', 'assets/js/reader.js', array(), array( 'in_footer' => true, 'strategy' => 'defer' ) );
 check( false === $GLOBALS['t']['scripts']['tbe-reader'][0], 'a missing script leaves an empty handle, and no address that answers 404' );
 check( '' === tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ), 'no preload for a font that is not there yet' );
@@ -106,8 +116,20 @@ foreach ( glob( __DIR__ . '/../inc/*.php' ) as $f ) {
 	}
 }
 check( array() === $left, 'every theme stylesheet and script goes through the file-time helpers (' . implode( ', ', $left ) . ')' );
+require __DIR__ . '/../inc/branding.php';
+@mkdir( "$t_dir/assets/img/brand", 0700, true );
+check( '' === tbe_brand_url( 'favicon.svg' ), 'a missing brand icon has no address' );
+ob_start();
+tbe_brand_tag( '<link rel="icon" href="%s">', 'favicon.svg' );
+check( '' === ob_get_clean(), 'and its tag is left out' );
+file_put_contents( "$t_dir/assets/img/brand/favicon.svg", '<svg/>' );
+touch( "$t_dir/assets/img/brand/favicon.svg", 1700002000 );
+clearstatcache();
+ob_start();
+tbe_brand_tag( '<link rel="icon" href="%s">', 'favicon.svg' );
+check( '<link rel="icon" href="' . TBE_URI . '/assets/img/brand/favicon.svg?ver=1700002000-6">' . "\n" === ob_get_clean(), 'once it is up, the tag carries its file time and size' );
 $brand = (string) file_get_contents( __DIR__ . '/../inc/branding.php' );
-check( false !== strpos( $brand, "tbe_asset_version( 'assets/img/brand/' . \$file )" ) && false !== strpos( $brand, "tbe_font_preload( 'assets/fonts/Angel.woff2' )" ), 'the icons are versioned by file time and the Angel preload waits for its file' );
+check( false !== strpos( $brand, "tbe_font_preload( 'assets/fonts/Angel.woff2' )" ) && false === strpos( $brand, 'esc_url( tbe_brand_url(' ), 'the Angel preload waits for its file, and every brand tag goes through tbe_brand_tag()' );
 
 // Sitemaps.
 $priority = null;
@@ -130,7 +152,9 @@ check( ! wp_sitemaps_get_server()->sitemaps_enabled() && '' === tbe_active_sitem
 unset( $GLOBALS['t']['filters']['tbe_core_sitemaps'] );
 check( '' === tbe_plugin_sitemap_url(), 'no SEO plugin, no plugin sitemap' );
 
-array_map( 'unlink', array_merge( glob( "$t_dir/assets/*/*" ) ) );
+array_map( 'unlink', glob( "$t_dir/assets/img/brand/*" ) );
+rmdir( "$t_dir/assets/img/brand" );
+array_map( 'unlink', array_filter( glob( "$t_dir/assets/*/*" ), 'is_file' ) );
 array_map( 'rmdir', glob( "$t_dir/assets/*" ) );
 rmdir( "$t_dir/assets" );
 rmdir( $t_dir );

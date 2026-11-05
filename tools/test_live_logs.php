@@ -111,6 +111,10 @@ file_put_contents( $docroot . '/wp-content/plugins/p/endpoint.php', '<?php' );
 $_SERVER['DOCUMENT_ROOT'] = $docroot;
 check( tbe_probe_has_file( '/wp-content/plugins/p/endpoint.php', '/wp-content/plugins/p/endpoint.php' ) && ! tbe_probe_has_file( '/info.php', '/info.php' ), 'a plugin\'s own PHP endpoint, a real file, is never caught' );
 unlink( $docroot . '/wp-content/plugins/p/endpoint.php' );
+foreach ( array( '/wp-content/plugins/p', '/wp-content/plugins', '/wp-content', '' ) as $d ) {
+	rmdir( $docroot . $d );
+}
+check( ! file_exists( $docroot ), 'the test leaves no folder behind' );
 unset( $_SERVER['DOCUMENT_ROOT'] );
 $src = (string) file_get_contents( __DIR__ . '/../inc/hardening.php' );
 check( false !== strpos( $src, "add_action( 'parse_request', 'tbe_short_circuit_probe', 0 );" ), 'the probe check runs on parse_request at priority 0, before the REST API at 10' );
