@@ -5,38 +5,11 @@
  * The browser picks the right face per character, so Hebrew and Greek quoted inside
  * the text fall through to SBL Hebrew and SBL Greek automatically.
  */
-@font-face {
-	font-family: "SBL BibLit";
-	src: url("../fonts/SBL_BLit.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "SBL Hebrew";
-	src: url("../fonts/SBL_Hbrw.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-	unicode-range: U+0590-05FF, U+FB1D-FB4F;
-}
-@font-face {
-	font-family: "SBL Greek";
-	src: url("../fonts/SBL_grk.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-	unicode-range: U+0370-03FF, U+1F00-1FFF;
-}
+/* The @font-face rule for "SBL BibLit" is written by inc/enqueue.php (tbe_font_face_css()), with the file's version, and left out while the file is missing. */
+/* The @font-face rule for "SBL Hebrew" is written by inc/enqueue.php (tbe_font_face_css()), with the file's version, and left out while the file is missing. */
+/* The @font-face rule for "SBL Greek" is written by inc/enqueue.php (tbe_font_face_css()), with the file's version, and left out while the file is missing. */
 
-@font-face {
-	font-family: "Estrangela";
-	src: url("../fonts/Estrangela.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-	unicode-range: U+0700-074F;
-}
+/* The @font-face rule for "Estrangela" is written by inc/enqueue.php (tbe_font_face_css()), with the file's version, and left out while the file is missing. */
 
 :root {
 	--tbe-scripture: "SBL BibLit", "SBL Hebrew", "SBL Greek", "Iowan Old Style", "Palatino Linotype", Georgia, serif;

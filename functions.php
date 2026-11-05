@@ -7,13 +7,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TBE_VERSION', '0.10.5' );
+define( 'TBE_VERSION', '0.10.6' );
 define( 'TBE_DIR', get_stylesheet_directory() );
 define( 'TBE_URI', get_stylesheet_directory_uri() );
 
 /** The theme's files in inc/, in the order they load, without ".php". */
 function tbe_theme_files(): array {
-	return array( 'settings', 'bible', 'canon', 'interlinear', 'dss', 'audio', 'esv-api', 'quran', 'commentary', 'entry-fields', 'starter-commentary', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'enqueue', 'branding', 'error-pages', 'social', 'progress', 'unlist', 'search-permalinks', 'login', 'site-links', 'hardening', 'dev-files' );
+	return array( 'settings', 'bible', 'canon', 'interlinear', 'dss', 'audio', 'esv-api', 'quran', 'commentary', 'entry-fields', 'starter-commentary', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'enqueue', 'branding', 'error-pages', 'social', 'progress', 'unlist', 'search-permalinks', 'login', 'site-links', 'hardening', 'sitemaps', 'dev-files' );
 }
 
 /**
@@ -87,12 +87,16 @@ function tbe_incomplete_theme( string $what, bool $all = false ): void {
 		header( 'X-Robots-Tag: noindex' );
 		header( 'Cache-Control: no-store, max-age=0' );
 	}
-	// The site's own copy of the static page, then the theme's, then a plain one.
-	foreach ( array( WP_CONTENT_DIR . '/tbe-errors/503.html', TBE_DIR . '/errors/503.html' ) as $page ) {
-		if ( is_readable( $page ) ) {
-			readfile( $page ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-			exit;
-		}
+	// The site's own copy of the static page, then the theme's, then a plain one. The theme's copy names its font
+	// relative to errors/, which would resolve against this request's address, so it gets the theme's real one
+	// (its ?ver= stays).
+	if ( is_readable( WP_CONTENT_DIR . '/tbe-errors/503.html' ) ) {
+		readfile( WP_CONTENT_DIR . '/tbe-errors/503.html' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		exit;
+	}
+	if ( is_readable( TBE_DIR . '/errors/503.html' ) ) {
+		echo str_replace( 'url("../assets/fonts/', 'url("' . TBE_URI . '/assets/fonts/', (string) file_get_contents( TBE_DIR . '/errors/503.html' ) ); // phpcs:ignore WordPress.Security.EscapeOutput, WordPress.WP.AlternativeFunctions
+		exit;
 	}
 	echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Back shortly</title></head><body><h1>Back shortly</h1><p>The site is being updated. Please try again in a few minutes.</p></body></html>';
 	exit;

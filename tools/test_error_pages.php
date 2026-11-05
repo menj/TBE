@@ -5,8 +5,9 @@
  * WordPress is stubbed. The test checks that each drop-in has its own status, wording and headers and runs
  * without WordPress; that the installer writes missing and outdated copies of its own, replaces another
  * theme's marked leftover, and leaves a file with no marker alone; that every title reads "<page> | The Bible Exposed" under 60
- * characters; that errors/ matches the builder; and that the copies in wp-content/tbe-errors/ follow the site's
- * home address and font path and are removed on a switch. Exit code 0 on success.
+ * characters; that errors/ matches the builder and names its font relative to errors/; that no code names the
+ * theme folder; and that the copies in wp-content/tbe-errors/ follow the site's home address and the real theme
+ * folder (TBE, as on the live site) and are removed on a switch. Exit code 0 on success.
  *
  * @package tbe-child
  */
@@ -18,6 +19,8 @@ if ( 'cli' !== PHP_SAPI ) {
 
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'TBE_VERSION', 'test' );
+// The live folder name: upper case, as on thebible.exposed.
+define( 'TBE_DIR', '/srv/site/wp-content/themes/TBE' );
 $t_dir = sys_get_temp_dir() . '/tbe-err-' . getmypid();
 @mkdir( $t_dir );
 define( 'WP_CONTENT_DIR', $t_dir );
@@ -26,7 +29,7 @@ function add_action() {}
 function add_filter() {}
 function __( $s ) { return $s; }
 function tbe_setting() { return 1; }
-function get_stylesheet_directory_uri() { return empty( $GLOBALS['t_cdn'] ) ? $GLOBALS['t_root'] . '/wp-content/themes/tbe' : 'https://cdn.tbe.test/wp-content/themes/tbe'; }
+function get_stylesheet_directory_uri() { return empty( $GLOBALS['t_cdn'] ) ? $GLOBALS['t_root'] . '/wp-content/themes/TBE' : 'https://cdn.tbe.test/wp-content/themes/TBE'; }
 function home_url( $p = '' ) { return $GLOBALS['t_root'] . $p; }
 function content_url( $p = '' ) { return $GLOBALS['t_root'] . '/wp-content' . $p; }
 function is_multisite() { return $GLOBALS['t_multi'] ?? false; }
@@ -52,12 +55,17 @@ function get_option( $k, $d = false ) { return $GLOBALS['t_opt'][ $k ] ?? $d; }
 function wp_delete_file( $p ) { @unlink( $p ); }
 require __DIR__ . '/../inc/error-pages.php';
 
+// The font's version, from the theme's own Angel.woff2.
+$t_fv = substr( md5_file( __DIR__ . '/../assets/fonts/Angel.woff2' ), 0, 12 );
+
 $fail = 0;
 function check( $ok, $label ) {
 	global $fail;
 	echo ( $ok ? 'ok   ' : 'FAIL ' ) . $label . "\n";
 	$fail += $ok ? 0 : 1;
 }
+
+check( 12 === strlen( $t_fv ) && $t_fv === tbe_error_font_version( __DIR__ . '/../assets/fonts/Angel.woff2' ) && '' === tbe_error_font_version( __DIR__ . '/missing.woff2' ), 'the font version is the first 12 characters of its MD5, empty for a missing file' );
 
 $src = array();
 foreach ( array_keys( tbe_dropin_specs() ) as $file ) {
@@ -94,19 +102,20 @@ file_put_contents( "$t_dir/php-error.php", str_replace( 'Something went wrong', 
 check( 'outdated' === tbe_dropin_state( 'php-error.php' ), 'an older copy of its own reads as outdated' );
 check( 'written' === tbe_install_dropins()['php-error.php'] && file_get_contents( "$t_dir/php-error.php" ) === $src['php-error.php'], 'the installer refreshes it' );
 check( array() === glob( "$t_dir/*.tmp" ), 'no temporary file is left' );
-check( 'ours' === tbe_dropin_state( 'tbe-errors/404.html' ) && file_get_contents( "$t_dir/tbe-errors/404.html" ) === '<!-- TBE error page ' . TBE_DROPIN_VERSION . ". Written by the TBE theme; safe to delete. -->\n" . tbe_error_page_html( '404' ) . "\n", 'the static copies are written; at the root they match errors/' );
+check( 'ours' === tbe_dropin_state( 'tbe-errors/404.html' ) && file_get_contents( "$t_dir/tbe-errors/404.html" ) === '<!-- TBE error page ' . TBE_DROPIN_VERSION . ". Written by the TBE theme; safe to delete. -->\n" . tbe_error_page_html( '404', '/wp-content/themes/TBE/assets/fonts/Angel.woff2?ver=' . $t_fv ) . "\n", 'the static copies are written, with the real theme folder in the font path' );
+check( 'TBE' === tbe_theme_folder(), 'the folder name is read from the stylesheet directory, upper case kept' );
 check( false !== strpos( tbe_htaccess_snippet(), 'ErrorDocument 404 /wp-content/tbe-errors/404.html' ), '.htaccess lines point at the site copies' );
 $GLOBALS['t_root'] = 'https://tbe.test/blog';
 check( 'outdated' === tbe_dropin_state( 'tbe-errors/404.html' ), 'a subfolder install makes the copies outdated' );
 tbe_install_dropins();
 $h = (string) file_get_contents( "$t_dir/tbe-errors/404.html" );
-check( false !== strpos( $h, 'href="/blog/"' ) && false !== strpos( $h, 'href="/blog/bible/"' ) && false !== strpos( $h, 'url("/blog/wp-content/themes/tbe/assets/fonts/Angel.woff2")' ) && false === strpos( $h, 'href="/bible/"' ), 'a subfolder copy has its own home links and font path' );
+check( false !== strpos( $h, 'href="/blog/"' ) && false !== strpos( $h, 'href="/blog/bible/"' ) && false !== strpos( $h, 'url("/blog/wp-content/themes/TBE/assets/fonts/Angel.woff2?ver=' . $t_fv . '")' ) && false === strpos( $h, 'href="/bible/"' ), 'a subfolder copy has its own home links and font path' );
 check( false !== strpos( (string) file_get_contents( "$t_dir/php-error.php" ), 'href="/blog/"' ), 'the drop-ins link to the subfolder home too' );
 check( false !== strpos( tbe_htaccess_snippet(), 'ErrorDocument 404 /blog/wp-content/tbe-errors/404.html' ), '.htaccess lines follow wp-content' );
 $GLOBALS['t_multi'] = true;
 $GLOBALS['t_main']  = false;
 $GLOBALS['t_root']  = 'https://tbe.test/other';
-$GLOBALS['t_sites'] = array( 1 => 'tbe', 2 => 'tbe', 3 => 'tbe' );
+$GLOBALS['t_sites'] = array( 1 => 'TBE', 2 => 'TBE', 3 => 'TBE' );
 $GLOBALS['t_blog']  = 2;
 check( array() === tbe_install_dropins() && false !== strpos( (string) file_get_contents( "$t_dir/tbe-errors/404.html" ), 'href="/blog/"' ), 'a network subsite writes nothing over the main site\'s files' );
 // The subsite switches away while the main site and site 3 still run the theme: the shared files stay.
@@ -121,7 +130,7 @@ tbe_remove_dropins();
 check( file_exists( "$t_dir/tbe-errors/404.html" ), 'the main site switching away keeps the files while a subsite runs the theme' );
 // With the main site on another theme, one writer only: the lowest-ID subsite that runs this one.
 $GLOBALS['t_main']  = false;
-$GLOBALS['t_sites'] = array( 1 => 'twentytwentyfive', 2 => 'twentytwentyfive', 4 => 'tbe', 7 => 'tbe' );
+$GLOBALS['t_sites'] = array( 1 => 'twentytwentyfive', 2 => 'twentytwentyfive', 4 => 'TBE', 7 => 'TBE' );
 $GLOBALS['t_blog']  = 7;
 check( ! tbe_error_files_owner() && array() === tbe_install_dropins(), 'a higher-ID subsite does not write while a lower one runs the theme' );
 $GLOBALS['t_blog'] = 4;
@@ -129,7 +138,7 @@ check( tbe_error_files_owner(), 'the lowest-ID subsite that runs the theme write
 check( 'written' === ( tbe_install_dropins()['tbe-errors/404.html'] ?? '' ) && false !== strpos( (string) file_get_contents( "$t_dir/tbe-errors/404.html" ), 'href="/other/"' ), 'that subsite writes the files with its own home address' );
 // A large network is paged: the only site running the theme sits past the first 500.
 $GLOBALS['t_sites'] = array_fill_keys( range( 1, 1203 ), 'twentytwentyfive' );
-$GLOBALS['t_sites'][1201] = 'tbe';
+$GLOBALS['t_sites'][1201] = 'TBE';
 $GLOBALS['t_blog']  = 1201;
 check( 1201 === tbe_error_files_first_theme_site() && tbe_error_files_owner(), 'the site scan pages through every site' );
 $GLOBALS['t_blog'] = 2;
@@ -153,13 +162,28 @@ check( ! file_exists( "$t_dir/tbe-errors/404.html" ) && file_exists( "$t_dir/tbe
 unlink( "$t_dir/tbe-errors/500.html" );
 rmdir( "$t_dir/tbe-errors" );
 $GLOBALS['t_cdn'] = true;
-check( 'https://cdn.tbe.test/wp-content/themes/tbe/assets/fonts/Angel.woff2' === tbe_error_font_url(), 'a theme served from another host gets the full font address' );
+check( 'https://cdn.tbe.test/wp-content/themes/TBE/assets/fonts/Angel.woff2?ver=' . $t_fv === tbe_error_font_url(), 'a theme served from another host gets the full font address' );
 unset( $GLOBALS['t_cdn'] );
 
 foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504' ) as $code ) {
 	$h = (string) file_get_contents( __DIR__ . "/../errors/$code.html" );
 	check( $h === tbe_error_page_html( $code ) . "\n", "errors/$code.html matches the builder" );
+	check( false !== strpos( $h, 'url("../assets/fonts/Angel.woff2?ver=' . $t_fv . '")' ) && ! preg_match( '~themes/(tbe|TBE)/~i', $h ), "errors/$code.html names the font relative to errors/, with no theme folder" );
 }
+
+// No file in the theme names the theme folder: it is read at run time. The tests' stub addresses are left out.
+$hits = array();
+$top  = dirname( __DIR__ );
+foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $top, FilesystemIterator::SKIP_DOTS ) ) as $f ) {
+	$rel = substr( (string) $f, strlen( $top ) + 1 );
+	if ( preg_match( '~^(\.git/|assets/(audio|fonts|img)/|data/)~', $rel ) || ! preg_match( '~\.(php|html|js|css|json|htaccess)$|^\.htaccess$~', $rel ) || 0 === strpos( $rel, 'tools/test_' ) ) {
+		continue;
+	}
+	if ( preg_match( '~themes/tbe/~i', (string) file_get_contents( (string) $f ) ) ) {
+		$hits[] = $rel;
+	}
+}
+check( array() === $hits, 'no code names the theme folder (' . implode( ', ', $hits ) . ')' );
 
 array_map( 'unlink', glob( "$t_dir/*" ) );
 rmdir( $t_dir );

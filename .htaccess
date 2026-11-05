@@ -21,7 +21,8 @@
 
 # The tests, tools, documentation and command-line scripts, at the top of the
 # theme folder. RedirectMatch reads the whole request path, so this matches
-# /wp-content/themes/tbe/tools/ with or without a site subfolder in front.
+# /wp-content/themes/<theme folder>/tools/, whatever the folder is called (TBE
+# on the live site), with or without a site subfolder in front.
 # tools/ also carries its own .htaccess, which refuses it wherever the theme
 # folder sits.
 <IfModule mod_alias.c>

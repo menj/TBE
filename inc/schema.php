@@ -66,15 +66,22 @@ function tbe_ld_site_nodes(): array {
 		'@id'   => tbe_ld_org_id(),
 		'name'  => get_bloginfo( 'name' ),
 		'url'   => home_url( '/' ),
-		'logo'  => array(
+	);
+	// The brand images, versioned like the head tags (tbe_brand_url()), and left out while a file is missing.
+	$logo  = function_exists( 'tbe_brand_url' ) ? tbe_brand_url( 'icon-512.png' ) : '';
+	$image = function_exists( 'tbe_brand_url' ) ? tbe_brand_url( 'social-preview.png' ) : '';
+	if ( '' !== $logo ) {
+		$nodes[0]['logo'] = array(
 			'@type'      => 'ImageObject',
-			'url'        => TBE_URI . '/assets/img/brand/icon-512.png',
+			'url'        => $logo,
 			'width'      => 512,
 			'height'     => 512,
-			'contentUrl' => TBE_URI . '/assets/img/brand/icon-512.png',
-		),
-		'image' => TBE_URI . '/assets/img/brand/social-preview.png',
-	);
+			'contentUrl' => $logo,
+		);
+	}
+	if ( '' !== $image ) {
+		$nodes[0]['image'] = $image;
+	}
 	$nodes[] = array(
 		'@type'           => 'WebSite',
 		'@id'             => tbe_ld_site_id(),

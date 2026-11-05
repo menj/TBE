@@ -6,9 +6,11 @@
  *    (the database is down) and php-error.php (a fatal PHP error). The theme writes them itself, on
  *    activation and after an update, and removes its own copies when another theme is activated.
  *  - Static pages for the errors the web server answers before WordPress runs (400, 401, 403, 404, 500, 502,
- *    503, 504), for use with ErrorDocument lines in .htaccess. errors/ holds the copies for a site at the domain
- *    root with the theme in /wp-content/themes/tbe/; the theme writes a copy of each into wp-content/tbe-errors/
- *    with this site's home address and font path, so they also work in a subfolder. See Appearance → TBE → Error pages.
+ *    503, 504), for use with ErrorDocument lines in .htaccess. The theme writes a copy of each into
+ *    wp-content/tbe-errors/ with this site's home address and the real theme folder (TBE on the live site), and
+ *    those are the copies the ErrorDocument lines name. errors/ holds the theme's own copies, with links from the
+ *    domain root and the font named relative to errors/, so they hold whatever the theme folder is called.
+ *    See Appearance → TBE → Error pages.
  *
  * @package tbe-child
  */
@@ -52,18 +54,20 @@ function tbe_error_home_path(): string {
 	return '' !== $path ? $path : '/';
 }
 
-/** What the files embed besides the theme version: the home address and the theme folder. */
+/** What the files embed besides the theme version: the home address, the theme folder and the font's version. */
 function tbe_dropin_stamp(): string {
-	return TBE_VERSION . '|' . TBE_DROPIN_VERSION . '|' . md5( home_url( '/' ) . '|' . get_stylesheet_directory_uri() );
+	return TBE_VERSION . '|' . TBE_DROPIN_VERSION . '|' . md5( home_url( '/' ) . '|' . get_stylesheet_directory_uri() . '|' . tbe_error_font_url() );
 }
 
 /**
  * The address of Angel.woff2: root-relative when the theme is served from the site's own host, in full when a
- * plugin serves theme files from another host (a CDN), so the font is asked for where it is.
+ * plugin serves theme files from another host (a CDN), so the font is asked for where it is, and versioned.
  */
 function tbe_error_font_url(): string {
 	$url = get_stylesheet_directory_uri() . '/assets/fonts/Angel.woff2';
-	return wp_parse_url( $url, PHP_URL_HOST ) === wp_parse_url( home_url( '/' ), PHP_URL_HOST ) ? (string) wp_parse_url( $url, PHP_URL_PATH ) : $url;
+	$url = wp_parse_url( $url, PHP_URL_HOST ) === wp_parse_url( home_url( '/' ), PHP_URL_HOST ) ? (string) wp_parse_url( $url, PHP_URL_PATH ) : $url;
+	// With the font's version, so a changed font gets a new address (tbe_error_versioned_font()).
+	return tbe_error_versioned_font( $url, dirname( __DIR__ ) . '/assets/fonts/Angel.woff2' );
 }
 
 /**
@@ -84,9 +88,17 @@ function tbe_error_files_owner(): bool {
 	return get_current_blog_id() === tbe_error_files_first_theme_site();
 }
 
+/**
+ * The theme's folder name as WordPress knows it (TBE on the live site), read from the stylesheet directory when
+ * the theme loaded. On switch_theme get_stylesheet() already names the new theme, so it cannot be asked then.
+ */
+function tbe_theme_folder(): string {
+	return basename( defined( 'TBE_DIR' ) ? TBE_DIR : dirname( __DIR__ ) );
+}
+
 /** Whether a site of the network runs this theme, as its stylesheet or its template. */
 function tbe_error_files_site_runs_theme( int $id ): bool {
-	$slug = basename( dirname( __DIR__ ) );
+	$slug = tbe_theme_folder();
 	return in_array( $slug, array( get_blog_option( $id, 'stylesheet' ), get_blog_option( $id, 'template' ) ), true );
 }
 

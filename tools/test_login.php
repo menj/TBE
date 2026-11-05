@@ -19,6 +19,7 @@ if ( 'cli' !== PHP_SAPI ) {
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'TBE_VERSION', 'test' );
 define( 'TBE_URI', 'https://tbe.test/t' );
+define( 'TBE_DIR', dirname( __DIR__ ) );
 
 $GLOBALS['t_set']    = array( 'login_design' => 1, 'login_logo' => '', 'login_message' => '' );
 $GLOBALS['t_plugin'] = false;
@@ -40,8 +41,9 @@ function esc_url( $s ) { return (string) $s; }
 function sanitize_key( $s ) { return strtolower( preg_replace( '/[^a-z0-9_\-]/i', '', (string) $s ) ); }
 function wp_unslash( $s ) { return $s; }
 function __( $s ) { return $s; }
-function wp_enqueue_style( $h ) { $GLOBALS['t_enq'][] = $h; }
-function wp_enqueue_script( $h ) { $GLOBALS['t_enq'][] = $h; }
+function wp_enqueue_style( $h, $src = '', $deps = array(), $ver = false ) { $GLOBALS['t_enq'][] = $h; $GLOBALS['t_ver'][ $h ] = $ver; }
+function wp_enqueue_script( $h, $src = '', $deps = array(), $ver = false ) { $GLOBALS['t_enq'][] = $h; $GLOBALS['t_ver'][ $h ] = $ver; }
+require dirname( __DIR__ ) . '/inc/enqueue.php';
 function wp_add_inline_style( $h, $css ) { $GLOBALS['t_inline'] = $css; }
 require dirname( __DIR__ ) . '/inc/login.php';
 
@@ -56,6 +58,7 @@ ok( tbe_login_design_on(), 'on by default' );
 ok( in_array( 'tbe_login_assets', $GLOBALS['t_hooks']['login_enqueue_scripts'] ?? array(), true ), 'assets on login_enqueue_scripts' );
 tbe_login_assets();
 ok( array( 'tbe-theme', 'tbe-login' ) === $GLOBALS['t_enq'], 'stylesheet and light/dark script enqueued' );
+ok( hash_file( tbe_asset_hash_algo(), TBE_DIR . '/assets/css/login.css' ) === $GLOBALS['t_ver']['tbe-login'], 'the stylesheet is versioned by a hash of its file' );
 ok( str_contains( $GLOBALS['t_inline'], '--tbe-accent' ), 'active scheme printed' );
 ok( 'https://tbe.test/' === tbe_login_header_url( 'https://wordpress.org/' ), 'mark links home' );
 $h = tbe_login_header_text( 'Powered by WordPress' );

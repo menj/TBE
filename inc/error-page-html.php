@@ -9,6 +9,42 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * The font address in the theme's own copies in errors/: relative to that folder, so it holds whatever the theme
+ * folder is called (tbe, TBE). It resolves only where the page is opened at its own address; a page the web
+ * server sends for another address (ErrorDocument) needs the full path, which the copies in wp-content/tbe-errors/
+ * carry.
+ */
+const TBE_ERROR_FONT_RELATIVE = '../assets/fonts/Angel.woff2';
+
+/**
+ * The version in an error page's font address: the first 12 characters of the font file's MD5, '' when the file
+ * is missing. MD5 rather than the hash of the theme's other assets (tbe_asset_version()), since the copies in
+ * errors/ are built ahead and checked with --check, and must come out the same on every PHP version.
+ *
+ * @param string $file The font file.
+ */
+function tbe_error_font_version( string $file ): string {
+	$md5 = is_file( $file ) ? md5_file( $file ) : false;
+	return false === $md5 ? '' : substr( $md5, 0, 12 );
+}
+
+/**
+ * A font address with its version: a changed font gets a new address, so no browser keeps the old one.
+ *
+ * @param string $url  The address without a version.
+ * @param string $file The font file.
+ */
+function tbe_error_versioned_font( string $url, string $file ): string {
+	$ver = tbe_error_font_version( $file );
+	return '' === $ver ? $url : $url . '?ver=' . $ver;
+}
+
+/** The font address in the theme's own copies in errors/: relative, with the version. */
+function tbe_error_root_font_url(): string {
+	return tbe_error_versioned_font( TBE_ERROR_FONT_RELATIVE, dirname( __DIR__ ) . '/assets/fonts/Angel.woff2' );
+}
+
+/**
  * Every page: its code, whether the site's own links can be offered (not when the site itself is down),
  * and several variants of the message, so a different line greets each visit.
  */
@@ -140,10 +176,14 @@ function tbe_error_variant( string $key ): array {
  * on each load (static pages and drop-ins cannot choose at request time without PHP).
  *
  * @param string $key      A page key (400 ... 504, maintenance, db-error, php-error).
- * @param string $font_url Root-relative address of Angel.woff2 (the site name's font).
+ * @param string|null $font_url Address of Angel.woff2 (the site name's font). The default is relative to errors/,
+ *                              with the font's version (tbe_error_root_font_url()), since the theme folder may be
+ *                              named tbe, TBE or anything else; the copies the theme writes for the site get the
+ *                              real address (tbe_error_font_url()).
  * @param string $home     Root-relative address of the home page, with a trailing slash. The links start from it.
  */
-function tbe_error_page_html( string $key, string $font_url = '/wp-content/themes/tbe/assets/fonts/Angel.woff2', string $home = '/' ): string {
+function tbe_error_page_html( string $key, ?string $font_url = null, string $home = '/' ): string {
+	$font_url = $font_url ?? tbe_error_root_font_url();
 	$page     = tbe_error_page( $key );
 	$code     = $page['code'];
 	$first    = $page['variants'][0];

@@ -10,13 +10,7 @@
  * 10:1, the accent focus ring 9:1. Night study and dark mode: ink 13:1, paper on the gold button 8:1.
  */
 
-@font-face {
-	font-family: "Angel";
-	src: url("../fonts/Angel.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-}
+/* The @font-face rule for "Angel" is written by inc/enqueue.php (tbe_font_face_css()), with the file's version, and left out while the file is missing. */
 
 :root {
 	--tbe-paper: #f4eedc;

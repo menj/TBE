@@ -6,7 +6,8 @@
  * WordPress is stubbed. The test checks that the REST user routes are refused to visitors and kept for a
  * logged-in user, that ?author=N is caught, that XML-RPC is off unless TBE_ALLOW_XMLRPC or Jetpack keeps it on,
  * the .htaccess lines the Error pages tab shows, the clean-up of the development files under its lease, the
- * incomplete-upload guard, and the command-line guard on every script in tools/. Exit code 0 on success.
+ * incomplete-upload guard, the scanner-probe short 404 (which paths it catches and which it never does), and the
+ * command-line guard on every script in tools/. Exit code 0 on success.
  *
  * @package tbe-child
  */
@@ -93,6 +94,31 @@ eval( 'class Jetpack {}' ); // phpcs:ignore Squiz.PHP.Eval
 check( true === t_filter( 'xmlrpc_enabled', true ) && tbe_xmlrpc_allowed(), 'Jetpack keeps it on' );
 $src = (string) file_get_contents( __DIR__ . '/../inc/hardening.php' );
 check( false !== strpos( $src, "defined( 'TBE_ALLOW_XMLRPC' ) && TBE_ALLOW_XMLRPC" ), 'so does TBE_ALLOW_XMLRPC' );
+
+// Scanner probes (0.10.6): the paths from the live logs get the short 404; the site's own paths never do.
+$probes = array( '/.env', '/.env.production', '/.env.bak', '/sitemaps/.env', '/wp/.env', '/.git/config', '/.git/HEAD', '/.aws/credentials', '/.DS_Store', '/%2eenv', '/phpinfo.php', '/phpinfo', '/_profiler/phpinfo', '/php-info.php', '/info.php', '/test.php', '/i.php', '/server-status.php', '/webmail/phpinfo.php', '/phpinfo.php~', '/_environment', '/webroot/_environment', '/webroot/index.php/_environment', '/wp-config.php', '/wp-config.php.bak', '/wp-config.bak', '/wp-config.php~', '/x.php/extra', '/WP-LOGIN.PHP', '/wp-content/plugins/hellopress/wp_filemanager.php', '/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php' );
+foreach ( $probes as $p ) {
+	check( tbe_is_probe( $p ), "probe: $p" );
+}
+$pages = array( '/', '/bible/', '/bible/john/3/', '/bible/interlinear/', '/credits/', '/commentary/', '/glossary/', '/search/grace/', '/wp-sitemap.xml', '/sitemap.xml', '/robots.txt', '/feed/', '/index.php', '/wp-login.php', '/wp-cron.php', '/xmlrpc.php', '/wp-comments-post.php', '/wp-admin/', '/wp-admin/admin-ajax.php', '/wp-admin/post.php', '/wp-json/wp/v2/posts', '/.well-known/acme-challenge/token', '/.well-known/security.txt', '/.well-known/pki-validation/x.php', '/wp-content/themes/TBE/assets/js/reader.js', '/commentary/environment-and-law/', '/image.webp' );
+foreach ( $pages as $p ) {
+	check( ! tbe_is_probe( $p ), "not a probe: $p" );
+}
+check( '/.env' === tbe_probe_path( '/.env?x=1', '/' ) && '/.env' === tbe_probe_path( '/blog/.env', '/blog/' ) && null === tbe_probe_path( '/other/.env', '/blog/' ) && null === tbe_probe_path( '/blogx/.env', '/blog' ), 'the path is read below the home address; a path outside the site is left alone' );
+$docroot = sys_get_temp_dir() . '/tbe-docroot-' . getmypid();
+@mkdir( $docroot . '/wp-content/plugins/p', 0700, true );
+file_put_contents( $docroot . '/wp-content/plugins/p/endpoint.php', '<?php' );
+$_SERVER['DOCUMENT_ROOT'] = $docroot;
+check( tbe_probe_has_file( '/wp-content/plugins/p/endpoint.php', '/wp-content/plugins/p/endpoint.php' ) && ! tbe_probe_has_file( '/info.php', '/info.php' ), 'a plugin\'s own PHP endpoint, a real file, is never caught' );
+unlink( $docroot . '/wp-content/plugins/p/endpoint.php' );
+foreach ( array( '/wp-content/plugins/p', '/wp-content/plugins', '/wp-content', '' ) as $d ) {
+	rmdir( $docroot . $d );
+}
+check( ! file_exists( $docroot ), 'the test leaves no folder behind' );
+unset( $_SERVER['DOCUMENT_ROOT'] );
+$src = (string) file_get_contents( __DIR__ . '/../inc/hardening.php' );
+check( false !== strpos( $src, "add_action( 'parse_request', 'tbe_short_circuit_probe', 0 );" ), 'the probe check runs on parse_request at priority 0, before the REST API at 10' );
+check( false !== strpos( $src, "! empty( \$wp->query_vars['rest_route'] )" ) && false !== strpos( $src, 'tbe_incomplete_is_login()' ), 'REST routes and the login screen are skipped' );
 
 // The .htaccess lines.
 check( '' === tbe_core_prefix( '/srv/site', '/srv/site/' ) && 'wp/' === tbe_core_prefix( '/srv/site/', '/srv/site/wp/' ) && null === tbe_core_prefix( '/srv/site/', '/opt/wp/' ), 'WordPress at the root, in a subfolder, or outside' );

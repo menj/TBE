@@ -54,9 +54,9 @@ add_action(
 		if ( ! tbe_progress_wanted() ) {
 			return;
 		}
-		wp_enqueue_style( 'tbe-progress', TBE_URI . '/assets/css/progress.css', array( 'tbe-base' ), TBE_VERSION );
+		tbe_enqueue_theme_style( 'tbe-progress', 'assets/css/progress.css', array( 'tbe-base' ) );
 		wp_add_inline_style( 'tbe-progress', tbe_progress_css() );
-		wp_enqueue_script( 'tbe-progress', TBE_URI . '/assets/js/progress.js', array(), TBE_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		tbe_enqueue_theme_script( 'tbe-progress', 'assets/js/progress.js', array(), array( 'in_footer' => true, 'strategy' => 'defer' ) );
 	}
 );
 

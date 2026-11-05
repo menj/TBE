@@ -36,8 +36,8 @@ add_action(
 		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) || ! $screen || 'tbe_commentary' !== $screen->post_type ) {
 			return;
 		}
-		wp_enqueue_style( 'tbe-admin', TBE_URI . '/assets/css/admin.css', array(), TBE_VERSION );
-		wp_enqueue_script( 'tbe-admin-entry', TBE_URI . '/assets/js/admin-entry.js', array(), TBE_VERSION, array( 'in_footer' => true ) );
+		tbe_enqueue_theme_style( 'tbe-admin', 'assets/css/admin.css', array() );
+		tbe_enqueue_theme_script( 'tbe-admin-entry', 'assets/js/admin-entry.js', array(), array( 'in_footer' => true ) );
 	}
 );
 
