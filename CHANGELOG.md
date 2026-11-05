@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.10
+
+### Changed
+- The FTP update steps in `readme.txt` and `UPGRADING.md` send the theme's `.htaccess` files first (the theme folder's, then `tools/.htaccess`), so its private files stay closed to visitors while the rest uploads.
+- The FTP update steps do the two renames straight after each other, with the admin closed, and point Nginx sites to the server lines in `README.md`.
+- `.claude/skills/theme-docs/SKILL.md` takes the refreshed standard.
+
 ## 0.10.9
 
 ### Changed

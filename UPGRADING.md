@@ -6,8 +6,8 @@ How to move a site from one version to the next, and where the theme is going. C
 
 1. Back up the database and `wp-content/`.
 2. In the FTP program, turn on "show hidden files" (FileZilla: Server, Force showing hidden files), so `.htaccess` and `tools/.htaccess` go up.
-3. Upload the new version to a temporary folder beside the old one, for example `wp-content/themes/TBE-new/`.
-4. Rename the old folder to `TBE-old`, then `TBE-new` to `TBE`. The live folder is `TBE`, upper case.
+3. Upload the new version to a temporary folder beside the old one, for example `wp-content/themes/TBE-new/`. Send its `.htaccess` files first, the theme folder's and then `tools/.htaccess`, so on Apache the paths they refuse stay closed while the rest arrives. On Nginx, which ignores them, add the lines under "Nginx" in `README.md` before the first FTP update; they cover `TBE-new` and `TBE-old` too.
+4. Rename the old folder to `TBE-old` and, straight after, `TBE-new` to `TBE`, with the admin closed from before the first rename until the second is done: while no folder is named `TBE`, an admin page can switch the site to another theme. The live folder is `TBE`, upper case.
 5. Open any admin screen once. The theme flushes its rewrite rules, refreshes the error pages in `wp-content/` and removes `.git`, `.claude` and `tools/` from a live site (keep them with `define( 'TBE_KEEP_DOTFILES', true );` in `wp-config.php`).
 6. Read the note for each version you pass below, and do what it asks.
 7. Delete `TBE-old` once the site looks right.
@@ -19,6 +19,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 ## Version notes
 
 Only the versions that need something done by hand are listed.
+
+### To 0.10.10
+Nothing to do. The FTP steps above now send the `.htaccess` files first.
 
 ### To 0.10.9
 Nothing to do. The licence is now GPL version 3 or later; the full text is in `LICENSE`.
