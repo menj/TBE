@@ -165,9 +165,11 @@ $GLOBALS['t_cdn'] = true;
 check( 'https://cdn.tbe.test/wp-content/themes/TBE/assets/fonts/Angel.woff2?ver=' . $t_fv === tbe_error_font_url(), 'a theme served from another host gets the full font address' );
 unset( $GLOBALS['t_cdn'] );
 
+check( false !== strpos( tbe_error_icon_link(), rawurlencode( trim( (string) preg_replace( '/>\s+</', '><', (string) file_get_contents( __DIR__ . '/../assets/img/brand/favicon.svg' ) ) ) ) ), 'the error-page icon is assets/img/brand/favicon.svg' );
 foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504' ) as $code ) {
 	$h = (string) file_get_contents( __DIR__ . "/../errors/$code.html" );
 	check( $h === tbe_error_page_html( $code ) . "\n", "errors/$code.html matches the builder" );
+	check( false !== strpos( $h, '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg' ), "errors/$code.html carries the mark as a data: tab icon" );
 	check( false !== strpos( $h, 'url("../assets/fonts/Angel.woff2?ver=' . $t_fv . '")' ) && ! preg_match( '~themes/(tbe|TBE)/~i', $h ), "errors/$code.html names the font relative to errors/, with no theme folder" );
 }
 

@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.11
+Nothing to do. The new files are `icon-192.png`, `icon-maskable-512.png` and `site.webmanifest` in `assets/img/brand/`. The next admin page writes the error pages again with the icon. If a `favicon.ico` file sits in the site root, the web server sends it and the theme never answers.
+
 ### To 0.10.10
 Nothing to do. The FTP steps above now send the `.htaccess` files first.
 
