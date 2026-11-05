@@ -6,7 +6,7 @@
  *    (the database is down) and php-error.php (a fatal PHP error). The theme writes them itself, on
  *    activation and after an update, and removes its own copies when another theme is activated.
  *  - Static pages in errors/ for the errors the web server answers before WordPress runs (400, 401, 403,
- *    404, 500, 502, 503), for use with ErrorDocument lines in .htaccess. See Appearance → TBE → Error pages.
+ *    404, 500, 502, 503, 504), for use with ErrorDocument lines in .htaccess. See Appearance → TBE → Error pages.
  *
  * @package tbe-child
  */
@@ -39,8 +39,8 @@ function tbe_dropin_source( string $file ): string {
 
 /**
  * 'missing', 'ours' (written by this theme, current), 'outdated' (written by this theme, an older copy), 'theme'
- * (written by another theme) or 'foreign' (anyone else's). Only 'missing', 'ours' and 'outdated' are written:
- * from 0.10.0 a file another theme wrote is left alone too, since the theme never overwrites a file it did not write.
+ * (written by another theme, marked safe to delete) or 'foreign' (anyone else's). All but 'foreign' are written:
+ * a sibling theme's leftover says it is safe to delete, so from 0.10.2 it is replaced; a file with no marker is never touched.
  */
 function tbe_dropin_state( string $file ): string {
 	$path = WP_CONTENT_DIR . '/' . $file;
@@ -64,7 +64,7 @@ function tbe_install_dropins(): array {
 	$result = array();
 	foreach ( array_keys( tbe_dropin_specs() ) as $file ) {
 		$state = tbe_dropin_state( $file );
-		if ( 'foreign' === $state || 'theme' === $state ) {
+		if ( 'foreign' === $state ) {
 			$result[ $file ] = 'kept';
 			continue;
 		}
@@ -145,7 +145,7 @@ add_filter(
 function tbe_htaccess_snippet(): string {
 	$base  = wp_parse_url( get_stylesheet_directory_uri(), PHP_URL_PATH ) . '/errors/';
 	$lines = array( '# The Bible Exposed: themed pages for errors the web server answers before WordPress runs' );
-	foreach ( array( 400, 401, 403, 404, 500, 502, 503 ) as $code ) {
+	foreach ( array( 400, 401, 403, 404, 500, 502, 503, 504 ) as $code ) {
 		$lines[] = 'ErrorDocument ' . $code . ' ' . $base . $code . '.html';
 	}
 	return implode( "\n", $lines );
@@ -174,10 +174,10 @@ function tbe_render_errors_tab(): void {
 		'missing' => __( 'not installed', 'tbe-child' ),
 		'ours'     => __( 'installed (this theme), current', 'tbe-child' ),
 		'outdated' => __( 'installed (this theme), outdated: press the button to refresh it', 'tbe-child' ),
-		'theme'    => __( 'written by another theme; left alone', 'tbe-child' ),
+		'theme'    => __( 'written by another theme: press the button to replace it', 'tbe-child' ),
 		'foreign' => __( 'your own file; left alone', 'tbe-child' ),
 	);
-	echo '<h2>' . esc_html__( 'Errors WordPress answers', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Three pages are written into wp-content so they can show even when WordPress itself is down: maintenance, database error and fatal error. They are installed on activation and after every update, and removed if another theme is activated. A file the theme did not write, yours or another theme’s, is never overwritten.', 'tbe-child' ) . '</p><table class="widefat striped tbe-table-admin"><thead><tr><th>' . esc_html__( 'File', 'tbe-child' ) . '</th><th>' . esc_html__( 'Shown when', 'tbe-child' ) . '</th><th>' . esc_html__( 'Status', 'tbe-child' ) . '</th></tr></thead><tbody>';
+	echo '<h2>' . esc_html__( 'Errors WordPress answers', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Three pages are written into wp-content so they can show even when WordPress itself is down: maintenance, database error and fatal error. They are installed on activation and after every update, and removed if another theme is activated. A copy another theme left behind is replaced; a file of your own, with no theme’s mark, is never overwritten.', 'tbe-child' ) . '</p><table class="widefat striped tbe-table-admin"><thead><tr><th>' . esc_html__( 'File', 'tbe-child' ) . '</th><th>' . esc_html__( 'Shown when', 'tbe-child' ) . '</th><th>' . esc_html__( 'Status', 'tbe-child' ) . '</th></tr></thead><tbody>';
 	$when = array(
 		'maintenance.php' => __( 'WordPress is updating (503)', 'tbe-child' ),
 		'db-error.php'    => __( 'the database cannot be reached (503)', 'tbe-child' ),
@@ -190,6 +190,6 @@ function tbe_render_errors_tab(): void {
 	wp_nonce_field( 'tbe_install_dropins' );
 	echo '<button class="button button-primary">' . esc_html__( 'Install or refresh these pages', 'tbe-child' ) . '</button></form>';
 
-	echo '<h2 style="margin-top:2rem">' . esc_html__( 'Errors the web server answers', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Errors such as 400, 401, 403, 404 for files, 500, 502 and 503 are produced by the web server before WordPress starts, so the theme cannot change them on its own. Static pages for each are in the theme’s errors folder. To use them, paste these lines at the top of your .htaccess file (or set each page under Error Pages in cPanel):', 'tbe-child' ) . '</p>';
-	echo '<textarea readonly rows="9" class="large-text code" onclick="this.select()">' . esc_textarea( tbe_htaccess_snippet() ) . '</textarea>';
+	echo '<h2 style="margin-top:2rem">' . esc_html__( 'Errors the web server answers', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Errors such as 400, 401, 403, 404 for files, 500, 502, 503 and 504 are produced by the web server before WordPress starts, so the theme cannot change them on its own. Static pages for each are in the theme’s errors folder. To use them, paste these lines at the top of your .htaccess file (or set each page under Error Pages in cPanel):', 'tbe-child' ) . '</p>';
+	echo '<textarea readonly rows="10" class="large-text code" onclick="this.select()">' . esc_textarea( tbe_htaccess_snippet() ) . '</textarea>';
 }

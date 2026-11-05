@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.2
+
+The error pages, after a check on a live copy of WordPress. Nothing was renamed or removed.
+
+- A drop-in another theme left behind, marked "Written by the … theme; safe to delete", is now replaced when the theme installs its own. It used to be detected and kept, so a site that switched from a sibling theme went on showing that theme's pages. A file with no such mark is still never touched. The Error pages tab says "written by another theme: press the button to replace it".
+- A 504 page (gateway timeout), `errors/504.html`, in the same design as the 502 page, with its own three wordings. The `.htaccess` lines in the tab and the README gain `ErrorDocument 504`.
+- The README and the static pages named the theme folder `TBE`. The folder is `tbe` (the install steps say so, and the tab builds its lines from the real folder), so the README's `ErrorDocument` paths and the font address in `errors/*.html` now read `/wp-content/themes/tbe/`.
+- `tools/test_error_pages.php` checks the 504 page and the replacement of another theme's leftover.
+
 ## 0.10.1
 
 The structured data names the author. Nothing visible changes, and nothing was renamed or removed.
