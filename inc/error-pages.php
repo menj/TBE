@@ -150,6 +150,16 @@ function tbe_error_files_in_use_elsewhere(): bool {
 	return $found;
 }
 
+/** Whether any of the theme's files is missing from wp-content. */
+function tbe_error_files_missing(): bool {
+	foreach ( tbe_error_files() as $file ) {
+		if ( ! file_exists( WP_CONTENT_DIR . '/' . $file ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
 /** The text of one file: for a drop-in, headers first, then the page; for a static copy, the marker, then the page. */
 function tbe_dropin_source( string $file ): string {
 	$font = tbe_error_font_url();
@@ -254,7 +264,9 @@ add_action(
 add_action(
 	'admin_init',
 	static function () {
-		if ( current_user_can( 'manage_options' ) && tbe_error_files_owner() && tbe_setting( 'error_pages' ) && get_option( 'tbe_dropins' ) !== tbe_dropin_stamp() ) {
+		// Also when a file has gone missing (deleted by hand, or removed by another site of a network whose scan
+		// missed this one), since the stamp alone would say all is well.
+		if ( current_user_can( 'manage_options' ) && tbe_error_files_owner() && tbe_setting( 'error_pages' ) && ( get_option( 'tbe_dropins' ) !== tbe_dropin_stamp() || tbe_error_files_missing() ) ) {
 			tbe_install_dropins();
 		}
 	},

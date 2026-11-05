@@ -135,6 +135,7 @@ check( ! tbe_error_files_in_use_elsewhere(), 'no other site runs the theme: not 
 $GLOBALS['t_blog'] = 4;
 tbe_remove_dropins();
 check( ! file_exists( "$t_dir/tbe-errors/404.html" ), 'the last site to switch away removes the files, even a subsite' );
+check( tbe_error_files_missing(), 'missing files are noticed, so the next admin page writes them back' );
 $GLOBALS['t_multi'] = false;
 $GLOBALS['t_root']  = 'https://tbe.test/blog';
 tbe_install_dropins();
