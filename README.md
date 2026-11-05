@@ -1,4 +1,4 @@
-# TBE — The Bible Exposed (child theme)
+# TBE: The Bible Exposed (child theme)
 
 Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 
@@ -6,9 +6,9 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 
 ## Before you upload
 - **Install Twenty Twenty-Five first.** This is a child theme; WordPress refuses it without its parent.
-- **Hosting:** PHP 8.0+ with the `dom` and `mbstring` extensions (almost every host has both; without `dom` the glossary tooltips and scripture hover cards quietly switch off). The ZIP is about 14 MB, so check the host's upload limit (Appearance → Themes → Add New → Upload shows it), or upload by SFTP into the theme folder under `wp-content/themes/`. The folder may be called `tbe` or `TBE` (the live site uses `TBE`); the theme reads its own folder name at run time, and the Error pages tab gives the exact `.htaccess` lines for it.
+- **Hosting:** PHP 8.0+ with the `dom` and `mbstring` extensions (almost every host has both; without `dom` the glossary tooltips and scripture hover cards quietly switch off). The ZIP is about 21 MB, so check the host's upload limit (Appearance → Themes → Add New → Upload shows it), or upload by SFTP into the theme folder under `wp-content/themes/`. The folder may be called `tbe` or `TBE` (the live site uses `TBE`); the theme reads its own folder name at run time, and the Error pages tab gives the exact `.htaccess` lines for it.
 - After activating, go to Settings → Permalinks and press **Save** once. Pretty permalinks (not "Plain") are required for `/bible/…`.
-- **Uploading by FTP:** turn on "show hidden files" in the FTP client (in FileZilla: Server, Force showing hidden files), so the theme's `.htaccess` and `tools/.htaccess` go up with the rest. They keep the web server from serving `.git`, `tools/` and the Markdown files while they are on the server. Upload `inc/` before `functions.php` if you can; if a visitor arrives while a file is still missing, they get the 503 page with `Retry-After`, never a fatal error. Each stylesheet, script, font and icon address carries a hash of its own file as `?ver=`, so an address changes only once its new file is on the server, and a font, brand icon or preload whose file is not there yet is left out. The theme writes the `@font-face` rules itself (`tbe_font_face_css()` in `inc/enqueue.php`), so a font's address carries its version too.
+- **Uploading by FTP:** turn on "show hidden files" in the FTP client (in FileZilla: Server, Force showing hidden files), so the theme's `.htaccess` and `tools/.htaccess` go up with the rest. They keep the web server from serving `.git`, `tools/` and the Markdown files while they are on the server. Upload `functions.php` last, or use the temporary folder and rename in UPGRADING.md. While a file in `inc/` is missing or half-written, a visitor gets the 503 page with `Retry-After`, never a fatal error. The guard lives in `functions.php`, so it cannot cover `functions.php` itself: a visitor who arrives while that one file is half-written can get a PHP parse error. Each stylesheet, script, font and icon address carries a hash of its own file as `?ver=`, so an address changes only once its new file is on the server, and a font, brand icon or preload whose file is not there yet is left out. The theme writes the `@font-face` rules itself (`tbe_font_face_css()` in `inc/enqueue.php`), so a font's address carries its version too.
 
 ## Install
 1. Install and keep **Twenty Twenty-Five** (the parent) on the site.
@@ -20,19 +20,66 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
    Never commit the token. It is not stored in the database or shown in the admin.
 4. Visit Settings → Permalinks and press Save once if `/bible/` returns a 404.
 
-## What is where
+## Architecture
+
+**Boot sequence.** WordPress loads Twenty Twenty-Five, then this theme's `functions.php`, which:
+1. defines `TBE_VERSION`, `TBE_DIR` and `TBE_URI` (the last two from the stylesheet directory, so the folder name is never written down);
+2. checks that every file in `tbe_theme_files()` and `tbe_theme_support_files()` is readable, and sends the static 503 page if one is missing (`tbe_incomplete_theme()`);
+3. loads the files in `inc/` in the order `tbe_theme_files()` gives, inside a `try`, so a half-written file is caught too;
+4. adds editor-style support and, on `init` at 99, flushes the rewrite rules once whenever `TBE_VERSION` changes (option `tbe_rewrite_version`).
+
+**File map.**
+
 | Path | Purpose |
 |---|---|
-| `assets/css/` | `base.css` (tokens, chrome), `reader.css` (scripture + commentary), `admin.css` |
-| `assets/js/` | `theme.js` (light/dark), `reader.js` (reader tools), `admin.js` (settings) |
+| `functions.php` | Version, paths, the upload guard and the loader |
+| `style.css` | The theme header only |
+| `theme.json` | Block settings and styles on top of the parent's |
+| `inc/settings.php` | The settings screen, defaults and colour schemes |
+| `inc/bible.php`, `inc/canon.php` | Book data, the reference parser and the canon labels |
+| `inc/routes.php`, `inc/reader.php` | The `/bible/` routes and the reader views |
+| `inc/interlinear.php`, `inc/dss.php`, `inc/audio.php` | Interlinear pages, Dead Sea Scroll variants and recorded readings |
+| `inc/esv-api.php`, `inc/quran.php` | The live ESV fallback and the Qur'an references |
+| `inc/commentary.php`, `inc/entry-fields.php`, `inc/starter-commentary.php` | The commentary post type, its boxes, and the starter packs |
+| `inc/glossary.php`, `inc/enrich.php` | The glossary, tooltips and scripture hover cards |
+| `inc/search.php`, `inc/search-permalinks.php` | The Bible search and the `/search/term/` addresses |
+| `inc/schema.php` | The JSON-LD graph |
+| `inc/blocks.php`, `inc/site-links.php` | The theme's blocks and the template links under `home_url()` |
+| `inc/enqueue.php` | Stylesheets, scripts, fonts and their versions |
+| `inc/branding.php` | Favicon, touch icon, social preview and theme colour |
+| `inc/error-pages.php`, `inc/error-page-html.php` | Drop-ins, static error pages and the Error pages tab |
+| `inc/social.php`, `inc/progress.php`, `inc/unlist.php`, `inc/unlist-admin.php`, `inc/login.php` | Profile links, the reading bar, unlisted posts and the login screen |
+| `inc/hardening.php`, `inc/sitemaps.php`, `inc/dev-files.php` | Hardening and probes, sitemaps, and the dev-file clean-up |
+| `assets/css/` | `base.css` (tokens, chrome), `reader.css`, `scripture.css`, `components.css`, `interlinear.css`, `polish.css` (loaded last), `progress.css`, `social.css`, `login.css`, `admin.css` |
+| `assets/js/` | `theme.js` (light and dark), `reader.js`, `tooltips.js`, `interlinear.js`, `audio.js`, `progress.js`, `admin.js`, `admin-entry.js`, `unlist-admin.js` |
+| `assets/fonts/`, `assets/img/`, `assets/audio/` | Fonts with their licences, brand and social images, recordings |
 | `data/esv/{book}/{chapter}.json` | Bundled ESV text, one file per chapter (1,189) |
-| `data/books.json` | The 66 books, chapter counts, order |
-| `inc/` | Settings, Bible data and reference parser, commentary post type, routes, reader, blocks |
-| `templates/`, `parts/` | Block-theme templates: front page, Bible reader, commentary single/archive, header, footer |
-| `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request every 15-30 s; stops on any rate-limit reply; `--max N` per run) |
+| `data/books.json`, `data/canons.json`, `data/jewish-names.json` | The 66 books and their order, the canons, the Jewish book names |
 | `data/interlinear/` | Hebrew Old Testament and Greek New Testament, word by word (STEP Bible, CC BY 4.0; see its README.txt) |
+| `data/jps/`, `data/jps-versification.json`, `data/dss/`, `data/audio/` | JPS 1917 text, Dead Sea Scroll comparisons, word timings |
+| `data/commentary/` | The starter commentary packs |
+| `templates/`, `parts/` | Block templates (front page, reader, commentary and glossary single and archive, 404), header and footer |
+| `errors/` | The theme's own static error pages, built by `tools/build_error_pages.php` |
+| `tools/` | Build scripts and self-tests, refused on the web and removed from a live site |
+| `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request every 15-30 s; stops on any rate-limit reply; `--max N` per run) |
 | `tools/build_interlinear.py` | Downloads the open STEPBible data and builds `data/interlinear/` |
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
+
+## At a glance
+- Version 0.10.7. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
+- Apache 2.2 or 2.4 reads the theme's `.htaccess` and `tools/.htaccess` as they are. On Nginx those files do nothing; add the lines under "Nginx" below to the server block.
+- Multisite works: each site keeps its own settings, and one site writes the shared error pages (see Error pages).
+- The theme makes no remote call from a visitor's browser. The server calls the ESV API only for a chapter the bundle lacks, and only with a token.
+
+## Test and release
+```bash
+set -e
+for t in tools/test_*.php; do php "$t"; done
+for f in functions.php inc/*.php tools/*.php; do php -l "$f" >/dev/null; done
+php tools/build_error_pages.php --check
+python3 tools/check_packs.py
+```
+With `set -e` the first failure stops the run with a non-zero exit code. A release bumps `Version:` in `style.css`, `TBE_VERSION` in `functions.php` and `Stable tag:` in `readme.txt`, adds the entry to `CHANGELOG.md` and its short form to `readme.txt`, and adds a note to `UPGRADING.md` when the owner must act. `SSOT.md` holds the full checklist.
 
 ## The home page as a story
 `templates/front-page.html` reads top to bottom as one argument, the way the site works: make the claim, open the text, show what the notes find, then hand the reader the whole text.
@@ -47,7 +94,19 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 The buttons sat in the hero until 0.10.4 and now close the page; the header menu carries the same links at the top. The templates write their links as root paths (`/bible/`); `inc/site-links.php` turns them into full addresses under `home_url()` as each block renders, so a subfolder install keeps them inside the site. A new template link to another section goes in `tbe_site_link_sections()`. Each section heading is an ornamented `h2` followed by one line (`.tbe-section-lede`). A front-page template saved in the Site Editor keeps its own layout; reset it (Appearance → Editor → Templates → Front page → Reset) to take this one.
 
 ## Settings (Appearance → TBE)
-Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice), **Login screen** (the theme's dress on wp-login.php on or off, a logo URL, a line above the form). The search base is set under Settings → Permalinks.
+Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice), **Login screen** (the theme's dress on wp-login.php on or off, a logo URL, a line above the form), **Starter commentary** (import the packs again as drafts) and **Error pages** (the drop-ins, the static copies and the `.htaccess` lines). The search base is set under Settings → Permalinks.
+
+Every setting is one key in the option `tbe_settings`, read with `tbe_setting( $key )` and merged with the defaults in `inc/settings.php`, which also draws the tabs (`tbe_render_settings_page()`). The Error pages tab is drawn by `tbe_render_errors_tab()` in `inc/error-pages.php`; the Starter commentary tab by `inc/starter-commentary.php`. The keys, by tab:
+
+| Tab | Keys |
+|---|---|
+| General | `tagline`, `allow_toggle`, `schema`, `pack_sync`, `error_pages` |
+| Appearance | `scheme`, `colors` |
+| Reader and commentary | `font_scale`, `verse_numbers`, `layout`, `boxes_open`, `glossary_tooltips`, `ref_cards`, `label_textual`, `label_critical`, `label_islamic`, `label_reflection` |
+| Reading bar | `progress`, `progress_types`, `progress_position`, `progress_height`, `progress_color`, `progress_track` |
+| Profile links | `social_profiles` |
+| ESV and licence | `esv_live_fallback`, `copyright` |
+| Login screen | `login_design`, `login_logo`, `login_message` |
 
 ## Built in from four plugins (0.8.0)
 The theme does the work of the Minimalist Social Icons Pack, Reading Progress Bar, Unlist Posts & Pages and Pretty Search Permalinks. None of them existed in the theme before. The last three turn themselves off while their plugin is active, so nothing runs twice.
@@ -110,11 +169,36 @@ Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Test
 ## Cross-references between the Testaments
 `data/commentary/cross-references.json` holds 32 critical cross-references, each written once and filed on **both** passages, so the note appears under the New Testament verse and under the Old Testament verse it cites. They cover how Paul reworks the Law (Galatians 3:10-17, Romans 3, 9 and 10, 1 Corinthians 9), how New Testament authors quote the Old Testament differently from its wording (Ephesians 4:8, Hebrews 10:5, Acts 7, Luke 3:36), and Jesus’ own use of Scripture (Matthew 5, 15 and 22, Mark 2 and 12, Luke 4, John 10 and 17). Each note sets the two ESV texts side by side and says plainly where they differ. They are tagged **Cross-reference**, imported and kept in step like the other starter commentary, and carry no typology: they compare wording and context only.
 
+## Hooks, filters and constants
+
+| Name | Kind | What it does |
+|---|---|---|
+| `TBE_ESV_API_TOKEN` | constant | The ESV API token for the live fallback. Set it in `wp-config.php` only. |
+| `TBE_KEEP_DOTFILES` | constant | Keeps `.git`, `.claude`, `tools/` and the other dev files on a live site. A local or development site keeps them anyway. |
+| `TBE_ALLOW_XMLRPC` | constant | Keeps XML-RPC on. Jetpack keeps it on without this. |
+| `tbe_core_sitemaps` | filter | `false` turns WordPress's sitemaps off. |
+| `tbe_plugin_sitemap_url` | filter | The address of an SEO plugin's sitemap the theme does not detect. |
+| `tbe_login_plugin_active` | filter | `true` makes the login design step aside. |
+| `tbe_search_permalinks_enabled` | filter | `false` turns the `/search/term/` addresses off. |
+| `tbe_search_reserved_bases` | filter | Slugs the search base may not take. |
+| `tbe_social_meta` | filter | `false` drops the theme's `og:image` and Twitter tags. |
+| `tbe_social_networks` | filter | The list of profile networks. |
+| `tbe_unlist_enabled` | filter | `false` turns unlisted posts off. |
+| `tbe/social`, `[tbe_social]` | block, shortcode | The profile links row. |
+
+Constants the theme defines for itself: `TBE_VERSION`, `TBE_DIR`, `TBE_URI`, `TBE_DROPIN_VERSION`, `TBE_STATIC_ERRORS`, `TBE_ERROR_FONT_RELATIVE`, `TBE_UNLISTED`, `TBE_UNLISTED_META`, `TBE_SEARCH_MAX_HITS`, `TBE_SEARCH_PER_PAGE`.
+
+## Performance
+- Assets are versioned by a hash of each file (`tbe_asset_version()`): about 1 ms for every stylesheet, script, font and icon together, and a browser keeps each file until it really changes.
+- The Bible font and Angel are preloaded at the same versioned address their `@font-face` rules name.
+- Scanner probes get a 10-byte 404 before the query runs, where they used to render a 74 KB page with every query of a page view.
+- Search results are cached per query and theme version (`inc/search.php`).
+
 ## Sitemaps (0.10.6)
 WordPress serves `/wp-sitemap.xml` only while Settings, Reading, "Search engine visibility" is unticked. On the live site the box was ticked, so `/sitemap.xml` answered 301 to `/wp-sitemap.xml`, which answered 404, `robots.txt` named no sitemap, and every page carried `noindex, nofollow`. `inc/sitemaps.php` keeps WordPress's sitemaps on either way (`tbe_core_sitemaps_enabled()` on `wp_sitemaps_enabled` at priority 1), unless an SEO plugin serves its own: Yoast SEO, Rank Math, All in One SEO, SEOPress or The SEO Framework, while its sitemap is on (`tbe_plugin_sitemap_url()`). A plugin that turns WordPress's sitemaps off still does so. `robots.txt` names the live sitemap, the plugin's or WordPress's, once (`tbe_robots_sitemap()`). The box itself stays as the owner set it; while it is ticked, the dashboard and Appearance, TBE say so, with a link to Settings, Reading. To serve no sitemap at all, add `add_filter( 'tbe_core_sitemaps', '__return_false' );`.
 
 ## Hardening (0.10.5)
-Fixes from the live logs of the sister sites, where an FTP upload of a working copy, password guessing and bots asking for WordPress's own files showed up again and again.
+Fixes from the live logs, where an FTP upload of a working copy, password guessing and bots asking for WordPress's own files showed up again and again.
 
 - **Development files.** The theme's `.htaccess` refuses every file and folder whose name begins with a dot (`.well-known` stays open), the `tests`, `tools`, `bin` and `docs` folders, and every Markdown file. `tools/.htaccess` refuses its folder wherever the theme sits. Where mod_alias is missing, mod_rewrite refuses the same paths. On the first request after the version changes, `inc/dev-files.php` removes the hidden entries and `tools/` from a live site, once, under a lease that only one request can hold. A local or development site keeps them, and so does `define( 'TBE_KEEP_DOTFILES', true );` in `wp-config.php`. Every PHP script in `tools/` exits unless it runs from the command line.
 - **A theme caught half uploaded.** `functions.php` checks every file in `inc/` before it loads any (`tbe_theme_files()`, `tbe_theme_support_files()`), and loads them inside a `try`. A missing or half-written file gives the static 503 page with `Retry-After: 300` and one line in the error log every ten minutes (`tbe_incomplete_theme()`). A missing file leaves the admin alone; the login screen, AJAX, cron and the command line never get the page.
@@ -148,6 +232,36 @@ Fixes from the live logs of the sister sites, where an FTP upload of a working c
 
   `php tools/test_live_logs.php` checks all of the above.
 
+## Nginx
+Nginx reads no `.htaccess`. These lines in the site's `server` block do the same work as the theme's `.htaccess`, `tools/.htaccess`, the "Block xmlrpc.php" and "TBE: deny direct core files" sections, and the `ErrorDocument` lines, for WordPress at the domain root:
+
+```nginx
+# Dot files and folders anywhere (.git, .env, .claude), but .well-known.
+location ~ /\.(?!well-known(/|$)) { deny all; }
+# The theme's dev folders and Markdown documents, whatever the folder is called.
+location ~ ^/wp-content/themes/[^/]+/(tests|tools|bin|docs)(/|$) { deny all; }
+location ~* ^/wp-content/themes/[^/]+/.*\.md$ { deny all; }
+# XML-RPC. Nginx cannot read TBE_ALLOW_XMLRPC or see Jetpack: leave this
+# line out on a site that needs XML-RPC (Jetpack, an old mobile app).
+location = /xmlrpc.php { deny all; }
+# WordPress files never meant to be opened by address.
+location ~ ^/wp-includes/(?!js/tinymce/|ms-files\.php$).+\.php$ { deny all; }
+location ~ ^/(wp-settings|wp-config-sample)\.php$ { deny all; }
+location = /readme.html { deny all; }
+location = /wp-admin/install.php { deny all; }
+# The theme's error pages.
+error_page 400 /wp-content/tbe-errors/400.html;
+error_page 401 /wp-content/tbe-errors/401.html;
+error_page 403 /wp-content/tbe-errors/403.html;
+error_page 404 /wp-content/tbe-errors/404.html;
+error_page 500 /wp-content/tbe-errors/500.html;
+error_page 502 /wp-content/tbe-errors/502.html;
+error_page 503 /wp-content/tbe-errors/503.html;
+error_page 504 /wp-content/tbe-errors/504.html;
+```
+
+Put them above the `location ~ \.php$` block. These lines are not tested by the theme's tools; check them on a staging server first.
+
 ## Error pages
 Errors get their own pages, in the site's look (the broken cross, Angel, burgundy and gold, light and dark) and with a dry edge aimed at the doctrines, not the people.
 
@@ -179,7 +293,7 @@ The brand mark is a hollow, inverted cross that is broken through the shaft, dra
 ## Starter commentary
 Entry keys must start with the pack id (`combat-kit:…`, `cross-references:…`), because that is how a later update finds, updates and removes the imported entries; `python3 tools/check_packs.py` checks this.
 
-`data/commentary/` holds ready-made entries. They are imported and **published automatically** when the theme is activated (or the first time an administrator opens the dashboard after uploading it). **Appearance → TBE → Starter commentary** remains for importing again as drafts. The first pack is a set of critical-commentary notes (its source is on the Credits and references page): 70 entries, one per topic or per item, each attached to the first passage it discusses (those anchored in the New Testament show once the NT text is added), filed under **Critical Commentary**, tagged by topic, and credited. The entries are written for this site: each restates an argument from the source in our own words and quotes scripture only from the bundled ESV. The source is named on the Credits and references page, and nowhere else.
+`data/commentary/` holds ready-made entries. They are imported and **published automatically** when the theme is activated (or the first time an administrator opens the dashboard after uploading it). **Appearance → TBE → Starter commentary** remains for importing again as drafts. The first pack is a set of critical-commentary notes (its source is on the Credits and references page): 70 entries, one per topic or per item, each attached to the first passage it discusses, filed under **Critical Commentary**, tagged by topic, and credited. The entries are written for this site: each restates an argument from the source in our own words and quotes scripture only from the bundled ESV. The source is named on the Credits and references page, and nowhere else.
 
 **Staying in step with the theme.** Once a pack has been imported it follows the theme. After a theme update, an entry whose text changed is overwritten with the new text, entries new to the pack arrive as drafts, and entries the pack no longer contains go to the Trash (restorable). A pack that was never imported is left alone, and the theme only ever touches entries it created. To keep your own changes to one entry, tick **Keep my edits** in its Starter commentary box. The whole behaviour can be switched off under Appearance → TBE → General.
 

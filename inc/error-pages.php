@@ -188,7 +188,7 @@ function tbe_dropin_source( string $file ): string {
 /**
  * 'missing', 'ours' (written by this theme, current), 'outdated' (written by this theme, an older copy), 'theme'
  * (written by another theme, marked safe to delete) or 'foreign' (anyone else's). All but 'foreign' are written:
- * a sibling theme's leftover says it is safe to delete, so from 0.10.2 it is replaced; a file with no marker is never touched.
+ * another theme's leftover says it is safe to delete, so from 0.10.2 it is replaced; a file with no marker is never touched.
  */
 function tbe_dropin_state( string $file ): string {
 	$path = WP_CONTENT_DIR . '/' . $file;

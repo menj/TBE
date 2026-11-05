@@ -39,8 +39,10 @@
 	</IfModule>
 </IfModule>
 
-# Markdown: README.md and CHANGELOG.md are for whoever works on the theme.
-<FilesMatch "\.md$">
+# Markdown, in any letter case: README.md, SSOT.md, CHANGELOG.md and
+# UPGRADING.md are for whoever works on the theme. readme.txt stays open, in
+# WordPress's own readme format for site owners.
+<FilesMatch "(?i)\.md$">
 	<IfModule mod_authz_core.c>
 		Require all denied
 	</IfModule>

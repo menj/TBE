@@ -1,0 +1,124 @@
+=== TBE ===
+Contributors: menj
+Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-styles
+Requires at least: 6.7
+Tested up to: 7.1
+Requires PHP: 8.0
+Stable tag: 0.10.7
+Template: twentytwentyfive
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Child theme of Twenty Twenty-Five, built for one site: The Bible Exposed at thebible.exposed.
+
+== Description ==
+
+TBE turns a WordPress site into a Bible reader with commentary. It carries the whole ESV, the Hebrew Old Testament and the Greek New Testament word by word, and a commentary you write in the block editor, filed under the verses it discusses.
+
+What a visitor gets:
+
+* The 66 books of the ESV, one verse per line, at /bible/.
+* A word-by-word Hebrew or Greek page for every chapter, with gloss, transliteration, Strong's number and grammar.
+* Commentary boxes under the verses they discuss, with footnotes that pop up on hover.
+* A glossary, an index of the commentary and a passage search.
+* Recorded readings of Genesis 1 (Hebrew) and Matthew 1 (Greek), with each word lit as it is read.
+* A Christian and Jewish side-by-side view for Genesis (ESV and JPS 1917), and Dead Sea Scroll readings for Isaiah 1 to 5.
+* Light and dark modes, and four colour schemes.
+
+The theme is made for thebible.exposed and is not meant for other sites.
+
+== Installation ==
+
+1. Install Twenty Twenty-Five first, and keep it. TBE does not work without it.
+2. If you use FTP, turn on "show hidden files" in your FTP program first (in FileZilla: Server, Force showing hidden files), so the .htaccess files go up with the rest.
+3. Upload the theme folder to wp-content/themes/. Name it TBE, as on the live site.
+4. Activate TBE under Appearance, Themes.
+5. Go to Settings, Permalinks and press Save once. Do not use "Plain" permalinks.
+6. Optional: the theme can fetch ESV text live from Crossway as a fallback. That needs an ESV API token in the site's configuration file; ask your developer, or see README.md.
+
+On activation the theme publishes its starter commentary and adds 13 glossary terms as drafts for you to check.
+
+== Updating ==
+
+1. Turn on "show hidden files" in your FTP program.
+2. Upload the new version to a temporary folder next to the old one, for example wp-content/themes/TBE-new.
+3. When every file is up, rename the old folder (for example to TBE-old), then rename TBE-new to TBE. The site switches over in a moment.
+4. Open any admin screen once. The theme refreshes its error pages and settles in.
+5. Read UPGRADING.md in the theme folder for anything a version asks you to do by hand. Delete TBE-old when all is well.
+
+The temporary folder and rename is the safe way. Uploading straight over the old folder is riskier. While other theme files are still missing, visitors see a short "back shortly" page and you can still log in. But functions.php holds that safety check itself, so while functions.php is half written, the theme cannot show that page: visitors get a plain PHP error from the server instead. If you do upload over the old folder, send functions.php last.
+
+Never upload a fresh copy of WordPress itself without the site's wp-config.php in place, or the site starts its installer.
+
+== Settings ==
+
+Everything lives under Appearance, TBE:
+
+* General: the tagline, structured data, the light and dark switch, and whether starter commentary follows theme updates.
+* Appearance: the colour scheme, or your own colours.
+* Reader and commentary: text size, verse numbers and section names.
+* Reading bar: the thin bar that shows how far down a page you are.
+* Profile links: the addresses of the site's social profiles, shown in the footer.
+* ESV and licence: the token status, the live fallback and the copyright line.
+* Login screen: the site's look on the login page.
+* Starter commentary: import the ready-made notes again, as drafts.
+* Error pages: the site's own pages for errors, and lines to paste into .htaccess.
+
+== Writing commentary ==
+
+Go to Commentary, Add New. Type the passage (for example John 1:1-18), pick one or more sections, and write. The note shows under the first verse of the passage, with a mark beside the verse.
+
+A passage with no verses, such as John 3, makes a chapter introduction. A book name alone, such as John, makes a book introduction.
+
+== Search engines ==
+
+If Settings, Reading, "Discourage search engines from indexing this site" is ticked, every page tells search engines to stay away. The dashboard reminds you while it is ticked. Untick it when the site should be found. WordPress's own sitemap at /wp-sitemap.xml stays open either way. While an SEO plugin serves its own sitemap, the sitemap is at the plugin's address instead.
+
+== Frequently Asked Questions ==
+
+= /bible/ shows "page not found". =
+Go to Settings, Permalinks and press Save.
+
+= Can I use an SEO plugin? =
+Yes. While Yoast SEO, Rank Math, All in One SEO, SEOPress or The SEO Framework serves a sitemap, the theme uses that one.
+
+= Where do the error pages come from? =
+Appearance, TBE, Error pages writes them into wp-content, and gives you a few lines to paste into the site's .htaccess file so the web server uses them too.
+
+= A visitor saw "Back shortly" during an update. =
+That is the theme waiting for the rest of its files. It goes away by itself once the upload finishes.
+
+= Can I turn the reading bar or the login design off? =
+Yes, on the Reading bar and Login screen tabs.
+
+== Credits ==
+
+TBE is distributed under the GNU General Public License v2 or later.
+
+* The ESV text is copyright Crossway, used by permission. The copyright line in the footer is set under ESV and licence.
+* The Hebrew and Greek word-by-word data is from STEPBible (www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
+* The JPS 1917 translation is in the public domain and comes through Sefaria.
+* The Dead Sea Scroll comparison is built from the CACCHT project's data (ETCBC, after Martin Abegg), CC BY-NC 4.0.
+* Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic under the SIL Open Font License.
+* Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
+
+== Changelog ==
+
+= 0.10.7 =
+* The theme's documents are complete: this readme, the facts file, the upgrade notes and the roadmap.
+
+= 0.10.6 =
+* The theme reads its own folder name, so the TBE folder works everywhere.
+* Stylesheets, scripts and fonts no longer go missing for visitors while an upload is running.
+* The sitemap answers even while search engines are discouraged, and robots.txt names it.
+* Scanner requests for files such as .env or phpinfo.php get a tiny "not found" reply.
+
+The full history is in CHANGELOG.md.
+
+== Upgrade Notice ==
+
+= 0.10.7 =
+Nothing to do by hand.
+
+= 0.10.6 =
+If your .htaccess has error-page lines that point into the theme folder, replace them with the lines on Appearance, TBE, Error pages. Untick "Discourage search engines" under Settings, Reading when the site should be found.
