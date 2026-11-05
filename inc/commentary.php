@@ -190,7 +190,9 @@ add_filter(
 			esc_url( $url ),
 			esc_html( (string) get_post_meta( $id, 'tbe_passage', true ) )
 		);
-		return $intro . $content . tbe_render_entry_extras( $id );
+		// The Qur'an references move to the notes and sources block when the template has one (0.10.8).
+		$moved = function_exists( 'tbe_article_template_has_sources' ) && tbe_article_template_has_sources();
+		return $intro . $content . tbe_render_entry_extras( $id, $moved ? 2 : 4, ! $moved );
 	},
 	20
 );

@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.10.8
+
+The single commentary entry gets the pieces a long article needs, in reading order. No sales prompt, no byline: the author stays in the structured data only. Nothing was renamed or removed.
+
+### Added
+- A breadcrumb above the title (the site, Commentary, the entry), the same trail as the `BreadcrumbList` in the structured data.
+- The excerpt under the title as a dek, then a meta row: published, updated when that is a later day, "Last reviewed" when the new Key points and review box gives a date, and the reading time.
+- An "In short" box with the entry's key points, one a line in that box. A `tbe/answer-box` block can carry its own summary and points.
+- A contents list of the entry's level-two headings, from three of them up. The headings get ids from their text. Inline by default; a sticky bar that opens on a tap is the other style.
+- A notes and sources section: the entry's footnotes move there, with the passage in the ESV, the word-by-word page where there is one, and the Qur'an cross-references. The footnotes also feed the Article `citation`.
+- A next step at the end: "Read the passage" in the reader, the Hebrew or Greek word by word, the next entry on the same book, and "Ask a question" when the settings name a page. An optional one-line next step goes before the third section.
+- Related entries on the same book as cards, scored by chapter, shared tags and shared sections.
+- A FAQ style for Details blocks and a "Questions and answers" pattern. The page's graph gains a `FAQPage` only when those questions are on the page.
+- `speakable` on the page, naming the dek and the "In short" box when they are there.
+- Tables in an entry scroll on their own on a phone, as a labelled region a keyboard can reach, with the caption in the theme's style.
+- Contextual links (`inc/contextual-links.php`): the first mention of a phrase in the shared link map (`data/link-map.json`) links to the page that treats it, once a target and at most once a paragraph, never inside scripture, headings, tables, quotations or links. Scripture cards and glossary tooltips come first. Lines of your own go in the settings.
+- A Commentary pages tab under Appearance, TBE, for all of the above.
+- `tools/test_article.php` checks the heading ids, the mid-article next step and the contextual links.
+
+### Changed
+- On an entry's own page the "Textual variants" title is a level-two heading, so the headings run in order; inside the reader's boxes it stays as it was.
 ## 0.10.7
 
 The theme's documents, brought to one standard. Nothing in the site changed for visitors, and nothing was renamed or removed.

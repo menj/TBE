@@ -45,13 +45,15 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `inc/search.php`, `inc/search-permalinks.php` | The Bible search and the `/search/term/` addresses |
 | `inc/schema.php` | The JSON-LD graph |
 | `inc/blocks.php`, `inc/site-links.php` | The theme's blocks and the template links under `home_url()` |
+| `inc/article.php` | The single commentary page: breadcrumb, dek, meta row, answer box, contents, notes and sources, next step, related entries, the FAQ style and pattern, and the Key points and review box |
+| `inc/contextual-links.php`, `data/link-map.json` | Contextual links in an entry, from the shared link map and the settings |
 | `inc/enqueue.php` | Stylesheets, scripts, fonts and their versions |
 | `inc/branding.php` | Favicon, touch icon, social preview and theme colour |
 | `inc/error-pages.php`, `inc/error-page-html.php` | Drop-ins, static error pages and the Error pages tab |
 | `inc/social.php`, `inc/progress.php`, `inc/unlist.php`, `inc/unlist-admin.php`, `inc/login.php` | Profile links, the reading bar, unlisted posts and the login screen |
 | `inc/hardening.php`, `inc/sitemaps.php`, `inc/dev-files.php` | Hardening and probes, sitemaps, and the dev-file clean-up |
-| `assets/css/` | `base.css` (tokens, chrome), `reader.css`, `scripture.css`, `components.css`, `interlinear.css`, `polish.css` (loaded last), `progress.css`, `social.css`, `login.css`, `admin.css` |
-| `assets/js/` | `theme.js` (light and dark), `reader.js`, `tooltips.js`, `interlinear.js`, `audio.js`, `progress.js`, `admin.js`, `admin-entry.js`, `unlist-admin.js` |
+| `assets/css/` | `base.css` (tokens, chrome), `reader.css`, `scripture.css`, `components.css`, `interlinear.css`, `polish.css` (loaded last), `article.css` (single commentary pages), `progress.css`, `social.css`, `login.css`, `admin.css` |
+| `assets/js/` | `theme.js` (light and dark), `reader.js`, `tooltips.js`, `interlinear.js`, `audio.js`, `article.js` (the sticky contents bar), `progress.js`, `admin.js`, `admin-entry.js`, `unlist-admin.js` |
 | `assets/fonts/`, `assets/img/`, `assets/audio/` | Fonts with their licences, brand and social images, recordings |
 | `data/esv/{book}/{chapter}.json` | Bundled ESV text, one file per chapter (1,189) |
 | `data/books.json`, `data/canons.json`, `data/jewish-names.json` | The 66 books and their order, the canons, the Jewish book names |
@@ -66,7 +68,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## At a glance
-- Version 0.10.7. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
+- Version 0.10.8. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
 - Apache 2.2 or 2.4 reads the theme's `.htaccess` and `tools/.htaccess` as they are. On Nginx those files do nothing; add the lines under "Nginx" below to the server block.
 - Multisite works: each site keeps its own settings, and one site writes the shared error pages (see Error pages).
 - The theme makes no remote call from a visitor's browser. The server calls the ESV API only for a chapter the bundle lacks, and only with a token.
@@ -94,7 +96,7 @@ With `set -e` the first failure stops the run with a non-zero exit code. A relea
 The buttons sat in the hero until 0.10.4 and now close the page; the header menu carries the same links at the top. The templates write their links as root paths (`/bible/`); `inc/site-links.php` turns them into full addresses under `home_url()` as each block renders, so a subfolder install keeps them inside the site. A new template link to another section goes in `tbe_site_link_sections()`. Each section heading is an ornamented `h2` followed by one line (`.tbe-section-lede`). A front-page template saved in the Site Editor keeps its own layout; reset it (Appearance → Editor → Templates → Front page → Reset) to take this one.
 
 ## Settings (Appearance → TBE)
-Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice), **Login screen** (the theme's dress on wp-login.php on or off, a logo URL, a line above the form), **Starter commentary** (import the packs again as drafts) and **Error pages** (the drop-ins, the static copies and the `.htaccess` lines). The search base is set under Settings → Permalinks.
+Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Commentary pages** (contents and its style, the answer box, the next step and its mid-article line, related entries, an Ask a question page, contextual links), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice), **Login screen** (the theme's dress on wp-login.php on or off, a logo URL, a line above the form), **Starter commentary** (import the packs again as drafts) and **Error pages** (the drop-ins, the static copies and the `.htaccess` lines). The search base is set under Settings → Permalinks.
 
 Every setting is one key in the option `tbe_settings`, read with `tbe_setting( $key )` and merged with the defaults in `inc/settings.php`, which also draws the tabs (`tbe_render_settings_page()`). The Error pages tab is drawn by `tbe_render_errors_tab()` in `inc/error-pages.php`; the Starter commentary tab by `inc/starter-commentary.php`. The keys, by tab:
 
@@ -103,6 +105,7 @@ Every setting is one key in the option `tbe_settings`, read with `tbe_setting( $
 | General | `tagline`, `allow_toggle`, `schema`, `pack_sync`, `error_pages` |
 | Appearance | `scheme`, `colors` |
 | Reader and commentary | `font_scale`, `verse_numbers`, `layout`, `boxes_open`, `glossary_tooltips`, `ref_cards`, `label_textual`, `label_critical`, `label_islamic`, `label_reflection` |
+| Commentary pages | `toc`, `toc_style`, `answer_box`, `next_step`, `mid_next`, `related_count`, `ask_url`, `ctx_out`, `ctx_out_max`, `ctx_own_max`, `ctx_extra` |
 | Reading bar | `progress`, `progress_types`, `progress_position`, `progress_height`, `progress_color`, `progress_track` |
 | Profile links | `social_profiles` |
 | ESV and licence | `esv_live_fallback`, `copyright` |
@@ -138,7 +141,7 @@ Modelled on the verse-by-verse commentary book format, with web-only improvement
 Every page outputs one JSON-LD graph (`inc/schema.php`), switchable under Appearance → TBE → General:
 - **Site-wide:** `Organization`, `WebSite` with a `SearchAction`, the page itself (`WebPage`, `CollectionPage`, `ItemPage` or `SearchResultsPage`), a `BreadcrumbList`, the header and footer (`WPHeader`, `WPFooter`) and each navigation link (`SiteNavigationElement`).
 - **The Bible:** the ESV edition as a `Book` (publisher and copyright holder Crossway), each biblical book as a `Book`, each chapter as a `Chapter`, each verse as a `Quotation`.
-- **Commentary:** each note is an `Article` about the verses it covers, with its sections, themes, author and dates; its variants table is a `Table`; its Qur'an cross-references are `citation`s; the glossary terms it uses are `mentions`.
+- **Commentary:** each note is an `Article` about the verses it covers, with its sections, themes, author and dates; its variants table is a `Table`; its Qur'an cross-references and its footnotes are `citation`s; the glossary terms it uses are `mentions`. On the note's own page the `ItemPage` carries `speakable` (`.tbe-dek`, `.tbe-answer`, when shown), and a `FAQPage` node lists the questions of its FAQ-style Details blocks, only when there are some on the page (`tbe_article_ld()`).
 - **Glossary:** a `DefinedTermSet` of `DefinedTerm`s (with alternate names).
 - **Interlinear:** the Hebrew of each verse as a `Quotation` (`inLanguage` `he`, a `workTranslation` link to the ESV verse) and the STEPBible `Dataset` it came from.
 - **Search and index:** results and the commentary index as `ItemList`s.
@@ -185,6 +188,9 @@ Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Test
 | `tbe_social_networks` | filter | The list of profile networks. |
 | `tbe_unlist_enabled` | filter | `false` turns unlisted posts off. |
 | `tbe/social`, `[tbe_social]` | block, shortcode | The profile links row. |
+| `tbe_contextual_links_map` | filter | The link map read from `data/link-map.json` (`sites`, `links` with `site`, `path`, `phrases`). |
+| `tbe_contextual_links_enabled` | filter | `false` turns contextual links off for one entry (second argument, the post). |
+| `tbe/breadcrumbs`, `tbe/dek`, `tbe/article-meta`, `tbe/answer-box`, `tbe/contents`, `tbe/sources`, `tbe/next-step`, `tbe/related` | blocks | The pieces of the single commentary page. `tbe/answer-box` takes `summary` and `points` (one a line); `tbe/next-step` takes `variant` (`end` or `mid`). |
 
 Constants the theme defines for itself: `TBE_VERSION`, `TBE_DIR`, `TBE_URI`, `TBE_DROPIN_VERSION`, `TBE_STATIC_ERRORS`, `TBE_ERROR_FONT_RELATIVE`, `TBE_UNLISTED`, `TBE_UNLISTED_META`, `TBE_SEARCH_MAX_HITS`, `TBE_SEARCH_PER_PAGE`.
 
@@ -298,11 +304,24 @@ Entry keys must start with the pack id (`combat-kit:…`, `cross-references:…`
 **Staying in step with the theme.** Once a pack has been imported it follows the theme. After a theme update, an entry whose text changed is overwritten with the new text, entries new to the pack arrive as drafts, and entries the pack no longer contains go to the Trash (restorable). A pack that was never imported is left alone, and the theme only ever touches entries it created. To keep your own changes to one entry, tick **Keep my edits** in its Starter commentary box. The whole behaviour can be switched off under Appearance → TBE → General.
 
 
+## The commentary page (0.10.8)
+`templates/single-tbe_commentary.html` places the pieces in reading order: `tbe/breadcrumbs`, the title, the section chips, `tbe/dek` (the excerpt), `tbe/article-meta`, `tbe/answer-box`, `tbe/contents`, the content, `tbe/sources`, `tbe/next-step`, the tags and `tbe/related`. Each renders nothing when it has nothing to show. There is no byline: the author is named in the structured data only.
+
+- The meta row shows the published date, the updated date when it falls on a later day, "Last reviewed" from post meta `tbe_reviewed` (`Y-m-d`), and the reading time at 220 words a minute.
+- The answer box lists post meta `tbe_takeaways`, one point a line. Both meta keys are set in the Key points and review box and shown in REST.
+- The contents list comes from the level-two headings in the stored text (`tbe_article_headings()`), from three up; the rendered headings get the same ids (`tbe_article_heading_ids()`, `the_content` at 12).
+- The footnotes block renders empty in the body and its list prints in `tbe/sources`, when the current template has that block. The Qur'an cross-references move there too, and the variants title becomes a level-two heading.
+- Related entries come from the same book, scored 3 for the same chapter, 2 a shared tag and 1 a shared section, nearer chapters first; mirror copies of cross-references are left out.
+- Tables (`core/table`) in an entry become a focusable region labelled by their caption.
+
+Contextual links run on `the_content` at 100, after the scripture cards and glossary tooltips, on the entry's own page only. Each target is linked once, a paragraph gets one new link at most, and nothing inside a link, heading, table, quotation, figure, footnote, the passage line, the apparatus or text marked Hebrew, Greek, Arabic or Syriac is touched. Outbound links carry `tbe-ctx-link--out` and `rel="noopener"`. `php tools/test_article.php` checks the ids, the mid-article line and the links.
+
 ## Writing commentary
 Commentary → Add New. Fill the **Passage** box (for example `John 1:1-18`, `Psalm 23`, `Jude 5`), choose one or more **Sections** (Textual Criticism, Critical Commentary, Islamic Perspective, Reflection), and write the entry in the block editor. Entries appear in a box under the verse they begin at, with a ✦ marker beside it.
 
 - Passage `John 3` (no verses) makes a **chapter introduction**; a bare book name such as `John` makes a **book introduction**.
-- Use the **Footnote** block for notes; they pop up on hover.
+- Use the **Footnote** block for notes; they pop up on hover, and on the entry's page they list under Notes and sources.
+- Fill **Key points and review** for the "In short" box and the "Last reviewed" date. For questions and answers, insert the **Questions and answers** pattern (Details blocks in the FAQ style).
 - Add **Textual variants** (unit, reading, witnesses, notes) and **Qur'an cross-references** (`2:255`, `112:1-4`, `19`) in the boxes below the editor.
 - Glossary: Glossary → Add New. Give a short **Excerpt** (shown in the tooltip) and optional spellings/abbreviations. The theme adds 13 starter terms as **drafts** for you to review and publish.
 

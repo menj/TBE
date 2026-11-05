@@ -20,6 +20,10 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.8
+- Nothing to do by hand. If the commentary template was saved in the Site Editor (Appearance, Editor, Templates, Single item: Commentary entry), reset it to take the new layout.
+- The Commentary pages tab under Appearance, TBE has the new settings. The defaults show everything except the one-line next step in the middle of an entry.
+
 ### To 0.10.7
 Nothing to do. The new documents (`readme.txt`, `SSOT.md`, this file) ship in the theme folder; the web server refuses the Markdown ones.
 
@@ -59,6 +63,7 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 ### Ideas
 - A spam check for comments and posts. Why: the theme has no spam filter of its own, and would need one before comments open.
 - An image sitemap, named in `robots.txt`. Why: the reader and the brand pages carry images that `/wp-sitemap.xml` does not list.
-- Contextual links from glossary terms and scripture references to the commentary that treats them. Why: the glossary already marks the terms in each note; the link would close the loop.
+- Links from glossary terms and scripture references to the commentary that treats them. Why: 0.10.8 links phrases from the shared map, and the glossary already marks the terms in each note; a term's link to its main note would close the loop.
+- Phrases for this site in the shared link map. Why: the map has no entries for thebible.exposed yet, so links to it come only from the lines on the Commentary pages tab.
 - A share row under each note. Why: the commentary is the part readers quote.
 - Updates pulled from GitHub with Git Updater. Why: it replaces the FTP upload that caused the asset 404s and the half-uploaded theme seen in the November logs.

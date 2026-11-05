@@ -377,6 +377,19 @@ function tbe_ld_note_nodes( WP_Post $entry, ?string $about_chapter_url = null ):
 			);
 		}
 	}
+	// The entry's footnotes, shown in its notes and sources block, as citations too (0.10.8).
+	if ( function_exists( 'tbe_article_footnotes' ) ) {
+		foreach ( tbe_article_footnotes( $entry->ID ) as $note ) {
+			$cite = array(
+				'@type' => 'CreativeWork',
+				'name'  => $note['text'],
+			);
+			if ( '' !== $note['url'] ) {
+				$cite['url'] = $note['url'];
+			}
+			$citations[] = $cite;
+		}
+	}
 	if ( $citations ) {
 		$article['citation'] = $citations;
 	}
@@ -626,6 +639,17 @@ function tbe_ld_graph(): array {
 		$extra   = array_merge( $extra, $notes );
 		$page['mainEntity'] = tbe_ld_ref( $notes[0]['@id'] );
 		$page['@type']      = 'ItemPage';
+		// The FAQ the entry shows, and the parts of the page read aloud (0.10.8).
+		if ( function_exists( 'tbe_article_ld' ) ) {
+			$article_ld = tbe_article_ld( $entry, $url, $page_id );
+			$extra      = array_merge( $extra, $article_ld['nodes'] );
+			if ( $article_ld['speakable'] ) {
+				$page['speakable'] = array(
+					'@type'       => 'SpeakableSpecification',
+					'cssSelector' => $article_ld['speakable'],
+				);
+			}
+		}
 		$book = (string) get_post_meta( $entry->ID, 'tbe_book', true );
 		if ( $book ) {
 			[ $bn ] = tbe_ld_book_node( TBE_Bible::book( $book ) );
