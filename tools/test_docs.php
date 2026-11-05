@@ -51,7 +51,31 @@ foreach ( $docs as $doc ) {
 $ht = $read( '.htaccess' );
 check( false !== strpos( $ht, '<FilesMatch "(?i)\.md$">' ), 'the theme .htaccess refuses Markdown in any letter case' );
 check( false !== strpos( $ht, 'RedirectMatch 403 /\.(?!well-known(/|$))[^/]+(/|$)' ), 'and every dot file and folder, .claude/ among them' );
-check( false === strpos( $ht, 'readme' ) || false !== strpos( $ht, 'readme.txt stays open' ), 'readme.txt is left open' );
+// readme.txt stays open: no FilesMatch, RedirectMatch or RewriteRule pattern in the file matches it.
+$denies = 0;
+preg_match_all( '~^\s*<FilesMatch "([^"]+)">~m', $ht, $fm );
+foreach ( $fm[1] as $rx ) {
+	$denies += preg_match( '~' . str_replace( '~', '\~', $rx ) . '~', 'readme.txt' );
+}
+preg_match_all( '~^\s*RedirectMatch 403 (\S+)~m', $ht, $rm );
+foreach ( $rm[1] as $rx ) {
+	$denies += preg_match( '~' . str_replace( '~', '\~', $rx ) . '~', '/wp-content/themes/TBE/readme.txt' );
+}
+preg_match_all( '~^\s*RewriteRule (\S+) - \[F~m', $ht, $rr );
+foreach ( $rr[1] as $rx ) {
+	$denies += preg_match( '~' . str_replace( '~', '\~', $rx ) . '~', 'readme.txt' );
+}
+check( count( $fm[1] ) > 0 && count( $rm[1] ) > 0 && 0 === $denies, 'no rule in the theme .htaccess refuses readme.txt (' . ( count( $fm[1] ) + count( $rm[1] ) + count( $rr[1] ) ) . ' patterns checked)' );
+// And the same patterns do refuse the Markdown documents and .claude/.
+$md = 0;
+foreach ( $fm[1] as $rx ) {
+	$md += preg_match( '~' . str_replace( '~', '\~', $rx ) . '~', 'SSOT.md' ) + preg_match( '~' . str_replace( '~', '\~', $rx ) . '~', 'x.MD' );
+}
+$claude = 0;
+foreach ( $rm[1] as $rx ) {
+	$claude += preg_match( '~' . str_replace( '~', '\~', $rx ) . '~', '/wp-content/themes/TBE/.claude/CLAUDE.md' );
+}
+check( $md >= 2 && $claude >= 1, 'the same patterns refuse SSOT.md, x.MD and .claude/' );
 check( 1 === preg_match( '~^/\.claude export-ignore$~m', $read( '.gitattributes' ) ), '.claude/ is export-ignore' );
 check( '' !== $read( '.claude/skills/theme-docs/SKILL.md' ) && false !== strpos( $read( '.claude/CLAUDE.md' ), '.claude/skills/theme-docs/SKILL.md' ), 'the standard and the pointer to it are there' );
 

@@ -28,9 +28,10 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 ## Owner decisions
 
+`.claude/CLAUDE.md` records no owner decisions yet. The ones below come from the code and the changelog, with the date each was made. A new one goes into `.claude/CLAUDE.md` first, then here word for word.
+
 - 4 November 2026: the structured data names Mohd Elfie Nieshaem Juferi as the author of every entry, whoever the WordPress user is. Nothing visible changes (`tbe_ld_person()`, `tools/test_schema_author.php`).
-- The live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
-- "Discourage search engines" under Settings, Reading stays the owner's own choice. The theme keeps the sitemap open either way and says on the dashboard when the box is ticked; it never changes the setting (0.10.6).
+- 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
 
 ## Content facts
 
@@ -77,6 +78,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Never remove a feature. A rename comes with a redirect or a fallback.
 - Prose in the five documents, admin strings and commit messages is plain, direct English: no contractions, no em dashes, none of the banned words and constructions of the `anti-ai-writing-style` skill, short paragraphs.
 - Never describe the site as related to other sites. Links to other sites are fine.
+- "Discourage search engines" under Settings, Reading is the owner's setting. The theme keeps the sitemap open either way and says on the dashboard when the box is ticked; it never changes the setting (0.10.6).
 - The title tags the theme builds (the reader views, the login screen and the error pages) read `<page> | The Bible Exposed` and stay under 60 characters. That leaves 32 characters for the page part. A new view keeps the same rule.
 - Every theme stylesheet and script goes through `tbe_enqueue_theme_style()` or `tbe_enqueue_theme_script()`, every font through `tbe_font_faces()`, every brand image through `tbe_brand_url()`. Each address carries a hash of its own file, and a missing file is left out. No stylesheet carries an `@font-face` rule of its own.
 - The theme writes no `.htaccess` outside its own folder. Lines for the site's `.htaccess` are shown on Appearance, TBE, Error pages.
