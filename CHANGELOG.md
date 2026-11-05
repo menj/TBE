@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.10.7
+
+The theme's documents, brought to one standard. Nothing in the site changed for visitors, and nothing was renamed or removed.
+
+### Added
+- `readme.txt`, for site owners in plain words: what the theme does, installing and updating by FTP (with the temporary folder and rename), each settings tab, questions, credits and an upgrade notice.
+- `SSOT.md`, the fixed facts and rules: identity (the live folder is `TBE`), purpose, owner decisions with their dates, content counts, addresses, the option, filter, constant and token names that must not change, the credits that must stay, the contributor rules and the release checklist.
+- `UPGRADING.md`, the steps for updating a site, one note per version that needs action, and a roadmap (Next, Later, Ideas) with the evidence for each item.
+- `.claude/CLAUDE.md` and `.claude/skills/theme-docs/SKILL.md`, the documentation standard the five documents follow. `.gitattributes` marks `/.claude` `export-ignore`.
+
+### Changed
+- README.md gains an "At a glance" section (version, requirements, Apache and Nginx, multisite), the boot sequence and a full file map, the settings and their option, the hooks, filters and constants, the commands to test and release, Nginx lines for the `.htaccess` rules, and a performance note. Its file table lists every stylesheet and script, its settings list names the Starter commentary and Error pages tabs, and the ZIP size reads about 21 MB (it said 14). The note that New Testament notes wait for the New Testament text is gone: all 66 books are bundled.
+- The theme's `.htaccess` refuses `*.md` in any letter case (`(?i)\.md$`). Dot folders, `.claude/` among them, were refused already. Checked on Apache 2.4: the four Markdown documents, an `x.MD` file, `.claude/`, `.git/config` and `tools/` answer 403; `readme.txt`, the stylesheets and `errors/` answer 200.
+- The changelog no longer names other sites, and gains the 0.7.0 and 0.7.1 entries from the history.
+- `tools/test_docs.php` checks that the five documents are there, that the version agrees across `style.css`, `functions.php`, `readme.txt`, `CHANGELOG.md`, README.md and UPGRADING.md, that they carry no em dash or contraction, and the `.htaccess` and `.gitattributes` rules. The README title loses its em dash.
+
 ## 0.10.6
 
 Fixes from the live logs of thebible.exposed. Nothing was renamed or removed.
@@ -7,7 +23,7 @@ Fixes from the live logs of thebible.exposed. Nothing was renamed or removed.
 - The live theme folder is `TBE`, and 0.10.2 had set the README's `ErrorDocument` paths and the font address in `errors/*.html` to `/wp-content/themes/tbe/`, which answers 404 there. No code names the folder now. The copies in `wp-content/tbe-errors/` and the drop-ins already took it from `get_stylesheet_directory_uri()`, and the Error pages tab builds its lines from `content_url()`; the network check now reads the folder name from the stylesheet directory too (`tbe_theme_folder()`), so `TBE` matches `TBE` on a case-sensitive server. The theme's own `errors/*.html` cannot know the folder, so they name the font relative to `errors/` (`TBE_ERROR_FONT_RELATIVE`, `../assets/fonts/Angel.woff2`); the 503 page the upload guard sends from `errors/` gets the real address on the way out. The README says the folder may be `TBE` and that the `ErrorDocument` lines name the copies in `wp-content/tbe-errors/`, which the Error pages tab gives exactly. `tools/test_error_pages.php` runs with the folder named `TBE` and fails if any code names `themes/tbe/`.
 - The owner uploads `style.css` and `functions.php` first, so the new `?ver=` went out before the new asset files were there, and visitors and Googlebot got 404s for the stylesheets, scripts and fonts. Every stylesheet, script, font and brand icon now carries a hash of its own file as its version (`tbe_asset_version()`, xxh3, or crc32b before PHP 8.1; under a millisecond for all of them), with `tbe_enqueue_theme_style()` and `tbe_enqueue_theme_script()`. An address changes only once its file has changed on the server, and it changes whenever the contents do, so a part-written file, a file replaced twice in one second and one uploaded with its old time each get an address of their own. While a file is missing, its handle is an empty one: the stylesheets that depend on it and its inline CSS still load, and no address that answers 404 goes out. The `@font-face` rules moved from the stylesheets into PHP (`tbe_font_faces()`, `tbe_font_face_css()`): each goes inline with the stylesheet that uses it, and to the block editor, at a versioned address, and a font whose file is missing is left out, so the text falls back to the next face in its stack. The font preloads name the same versioned addresses. The brand icons, the social preview image and the JSON-LD logo and image wait for their files too (`tbe_font_preload()`, `tbe_brand_tag()`, `tbe_brand_url()`). In the classic editor, TinyMCE loads `base.css` and `scripture.css` by address; they get their hashes too, and a missing one is left out (`tbe_mce_css()`). The block editor reads the editor styles from disk and puts them inline, so it requests no address. Both editors get the font rules: the block editor through `block_editor_settings_all`, TinyMCE through its `content_style` (`tbe_mce_font_faces()`). The error pages version their font too, with the first 12 characters of its MD5 (`tbe_error_font_version()`), the same on every PHP version so `--check` holds; a new font makes the copies in `wp-content/tbe-errors/` outdated, and the next admin page writes them again. `/favicon.ico`, which cannot carry a version, is cached for a day instead of a week and carries the file's hash as its `ETag`, so a browser holding the same icon gets 304 and a changed one is sent at once; while the file is missing, WordPress answers as it would without the theme.
 - `/wp-sitemap.xml` answered the theme's 404. The cause was Settings, Reading, "Search engine visibility": the box was ticked on the live site, so WordPress turned its sitemaps off (the 404), left the sitemap out of `robots.txt` (67 bytes, no `Sitemap:` line) and put `noindex, nofollow` on every page. No filter, route, query trap or `site-links` rule of the theme was involved. `inc/sitemaps.php` keeps WordPress's sitemaps on either way (`tbe_core_sitemaps_enabled()` on `wp_sitemaps_enabled` at priority 1), unless Yoast SEO, Rank Math, All in One SEO, SEOPress or The SEO Framework serves its own (`tbe_plugin_sitemap_url()`). `robots.txt` names the live sitemap once (`tbe_robots_sitemap()`). The box stays as the owner set it; while it is ticked, the dashboard and Appearance, TBE say so (`tbe_search_visibility_notice()`). `add_filter( 'tbe_core_sitemaps', '__return_false' );` turns the sitemaps off.
-- Scanner probes rendered the full 74 KB theme 404. `tbe_short_circuit_probe()` now answers them with `Not found.` (10 bytes, `404`, `noindex`, `no-store`) on `parse_request` at priority 0, before the REST API, the query and the template, as lailatulqadar 1.18.7 does. A probe (`tbe_is_probe()`) is a dot file or folder anywhere in the path (`/.env*`, `/.git*`, `/.aws`); a PHP file, or a backup of one, that is not a WordPress entry point or in `wp-admin/`; or `wp-config`, `phpinfo` or `_environment`, bare or with an extension. `.well-known`, the admin, AJAX, cron, the login screen, REST routes and any path with a real file behind it are never caught.
+- Scanner probes rendered the full 74 KB theme 404. `tbe_short_circuit_probe()` now answers them with `Not found.` (10 bytes, `404`, `noindex`, `no-store`) on `parse_request` at priority 0, before the REST API, the query and the template. A probe (`tbe_is_probe()`) is a dot file or folder anywhere in the path (`/.env*`, `/.git*`, `/.aws`); a PHP file, or a backup of one, that is not a WordPress entry point or in `wp-admin/`; or `wp-config`, `phpinfo` or `_environment`, bare or with an extension. `.well-known`, the admin, AJAX, cron, the login screen, REST routes and any path with a real file behind it are never caught.
 - `tools/test_assets_sitemaps.php` is new and checks the asset versions and the sitemaps; `tools/test_live_logs.php` checks the probe paths from the logs and the site's own paths; `tools/test_login.php` checks the login stylesheet's version. Checked on WordPress 7.1.4 under PHP's built-in server, with the theme in a folder named `TBE` and "Discourage search engines" ticked: `/wp-sitemap.xml` answers 200, `robots.txt` names it, the probes answer 10 bytes, the site's pages, the REST API, `wp-login.php` and the theme 404 for other paths answer as before, and with `reader.css`, `reader.js` and `SBL_BLit.woff2` taken away the chapter page names none of them.
 
 ### Upgrading from 0.10.5
@@ -17,7 +33,7 @@ Fixes from the live logs of thebible.exposed. Nothing was renamed or removed.
 
 ## 0.10.5
 
-Fixes from the live logs of the sister sites. Nothing was renamed or removed.
+Fixes from the live logs. Nothing was renamed or removed.
 
 - The owner uploads by FTP from a working copy, which puts `.git` and `tools/` on the live server. A new theme `.htaccess` refuses every dot entry (`.well-known` stays open), the `tests`, `tools`, `bin` and `docs` folders and every Markdown file, with a mod_rewrite fallback where mod_alias is missing. `tools/.htaccess` refuses its folder wherever the theme sits.
 - `inc/dev-files.php` removes the hidden entries and `tools/` on the first request of any kind after the version changes (`tbe_cleanup_on_version_change()` on `init`). One request runs it, under a lease taken with `add_option()`, renewed once a minute while the walk runs and taken over after five minutes by one compare-and-set UPDATE (`tbe_swap_lock()`). The version is recorded only when nothing is left; an entry that cannot be removed is tried again five minutes later and logged once a day. A local or development site keeps everything, and so does `TBE_KEEP_DOTFILES`.
@@ -58,9 +74,9 @@ The web server error pages work on a site in a subfolder. Nothing was renamed or
 
 The error pages, after a check on a live copy of WordPress. Nothing was renamed or removed.
 
-- A drop-in another theme left behind, marked "Written by the … theme; safe to delete", is now replaced when the theme installs its own. It used to be detected and kept, so a site that switched from a sibling theme went on showing that theme's pages. A file with no such mark is still never touched. The Error pages tab says "written by another theme: press the button to replace it".
+- A drop-in another theme left behind, marked "Written by the … theme; safe to delete", is now replaced when the theme installs its own. It used to be detected and kept, so a site that switched from another theme went on showing that theme's pages. A file with no such mark is still never touched. The Error pages tab says "written by another theme: press the button to replace it".
 - A 504 page (gateway timeout), `errors/504.html`, in the same design as the 502 page, with its own three wordings. The `.htaccess` lines in the tab and the README gain `ErrorDocument 504`.
-- The README and the static pages named the theme folder `TBE`. The folder is `tbe` (the install steps say so, and the tab builds its lines from the real folder), so the README's `ErrorDocument` paths and the font address in `errors/*.html` now read `/wp-content/themes/tbe/`.
+- The README and the static pages named the theme folder `TBE`. The folder is `tbe` (the install steps say so, and the tab builds its lines from the real folder), so the README's `ErrorDocument` paths and the font address in `errors/*.html` now read `/wp-content/themes/tbe/`. (Corrected in 0.10.6: the live folder is `TBE`, and no file names the folder any more.)
 - `tools/test_error_pages.php` checks the 504 page and the replacement of another theme's leftover.
 
 ## 0.10.1
@@ -100,15 +116,15 @@ A login screen in the site's dress. Nothing was renamed or removed.
 
 ## 0.8.2
 
-Two fixes to the search base, from the review of the same code on injil.help.
+Two fixes to the search base, from a second code review.
 
-- A page whose address is the base now refuses it, as on injil.help, and the fallback candidates are checked the same way, so a page at `/search/` keeps its child paths.
+- A page whose address is the base now refuses it, and the fallback candidates are checked the same way, so a page at `/search/` keeps its child paths.
 - When `search`, `find` and `search-results` are all taken, the fallback numbers the last (`search-results-2`, `search-results-3` and on) until one is free.
 - `tools/test_plugin_features.php` checks both.
 
 ## 0.8.1
 
-Fixes to the search base from the review of the same code on injil.help. Nothing was renamed or removed.
+Fixes to the search base from a code review. Nothing was renamed or removed.
 
 - The list of refused bases also takes the live category and tag bases from Settings → Permalinks and the rewrite slug of every registered post type and taxonomy (`tbe_search_live_slugs()`).
 - A base stored before it was refused left the saved rewrite rules on the old base. The option `tbe_search_rules_base` records the base the rules were built with, and `init` flushes once when the base in force differs.
@@ -127,3 +143,14 @@ The features of four plugins, built into the theme. Nothing was renamed or remov
 - Search addresses: `/?s=term` redirects to `/search/term/`, with the base set under Settings → Permalinks. A base such as `bible`, which the reader's own routes use, is refused and `search` is kept.
 - Each of the last three steps aside while its plugin is active.
 - `tools/test_plugin_features.php` tests the unlisted filtering and the search redirect.
+
+## 0.7.1
+
+- The site name in the hero stays on one line. Its size follows the space inside the side padding (Angel is about 8em wide), so it fits from 200 pixels up with no sideways scroll.
+
+## 0.7.0
+
+The first version in this repository.
+
+- The ESV reader, the Hebrew and Greek interlinear, the commentary post type with its sections, the glossary, the search and the index, the settings screen under Appearance, and the error pages.
+- `data/canons.json` records which tradition counts each book as scripture: Jewish, Protestant, Catholic, Orthodox and Ethiopian. Every book page says who counts it, the book list has a filter that dims the books a tradition does not count, and the deuterocanonical, further Orthodox and Ethiopian books sit below the New Testament as prepared sections, marked "Not on the site yet".

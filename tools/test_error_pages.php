@@ -93,7 +93,7 @@ foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504', 'mainte
 
 check( 'missing' === tbe_dropin_state( 'php-error.php' ), 'missing reads as missing' );
 file_put_contents( "$t_dir/db-error.php", "<?php // someone else's\n" );
-file_put_contents( "$t_dir/maintenance.php", "<?php\n// Abrahamic maintenance drop-in 2.75.0. Written by the Abrahamic theme; safe to delete.\n" );
+file_put_contents( "$t_dir/maintenance.php", "<?php\n// Other maintenance drop-in 2.75.0. Written by the Other theme; safe to delete.\n" );
 $res = tbe_install_dropins();
 check( 'written' === $res['php-error.php'] && 'ours' === tbe_dropin_state( 'php-error.php' ), 'a missing file is written and reads as current' );
 check( 'kept' === $res['db-error.php'] && "<?php // someone else's\n" === file_get_contents( "$t_dir/db-error.php" ), 'a foreign file is left alone' );
