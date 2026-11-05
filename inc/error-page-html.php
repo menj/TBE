@@ -144,6 +144,19 @@ function tbe_error_short_titles(): array {
 	);
 }
 
+/**
+ * The brand mark as the tab icon, a data address: an error page answers at any path, in a subfolder install too,
+ * and while WordPress or PHP is down, so it carries the icon inside the page and asks the server for nothing.
+ */
+function tbe_error_icon_link(): string {
+	$svg = @file_get_contents( dirname( __DIR__ ) . '/assets/img/brand/favicon.svg' ); // phpcs:ignore WordPress.WP.AlternativeFunctions, WordPress.PHP.NoSilencedErrors
+	if ( ! is_string( $svg ) || '' === $svg ) {
+		return '';
+	}
+	$svg = trim( (string) preg_replace( '/>\s+</', '><', $svg ) );
+	return '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,' . htmlspecialchars( rawurlencode( $svg ), ENT_QUOTES, 'UTF-8' ) . '">';
+}
+
 /** The title tag of a page: "<title> | The Bible Exposed", under 60 characters. */
 function tbe_error_title_tag( string $key, string $title ): string {
 	return ( mb_strlen( $title ) <= 32 ? $title : ( tbe_error_short_titles()[ $key ] ?? 'Error' ) ) . ' | The Bible Exposed';
@@ -201,7 +214,7 @@ function tbe_error_page_html( string $key, ?string $font_url = null, string $hom
 	$script   = '(function(){var S=' . json_encode( tbe_error_short_titles()[ $key ] ?? 'Error', JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE ) . ',V=' . $json . ';var v=V[Math.floor(Math.random()*V.length)];var h=document.getElementById("t"),b=document.getElementById("b");if(!h||!b){return;}h.textContent=v.title;document.title=(v.title.length<=32?v.title:S)+" | The Bible Exposed";b.textContent="";v.lines.forEach(function(l){var p=document.createElement("p");p.textContent=l;b.appendChild(p);});})();';
 
 	return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
-		. '<title>' . $e( tbe_error_title_tag( $key, $first['title'] ) ) . '</title><style>'
+		. '<title>' . $e( tbe_error_title_tag( $key, $first['title'] ) ) . '</title>' . tbe_error_icon_link() . '<style>'
 		. '@font-face{font-family:"Angel";src:url("' . $e( $font_url ) . '") format("woff2");font-display:swap}'
 		. ':root{--paper:#f4eedc;--card:#fbf7ea;--ink:#231d14;--muted:#6b604f;--accent:#6e1f2e;--rubric:#9b2c2c;--gold:#a67c2e;--line:#d9cdb0}'
 		. '@media (prefers-color-scheme:dark){:root{--paper:#17120f;--card:#201915;--ink:#ece3cf;--muted:#a79c88;--accent:#d4a24c;--rubric:#d9786b;--gold:#d1a64c;--line:#3a2f27}}'

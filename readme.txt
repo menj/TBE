@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.10
+Stable tag: 0.10.11
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -109,6 +109,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.11 =
+* The browser icon set is complete: a 192px icon, a maskable icon and a web app manifest join the brand icons, and the touch icon sits on a solid background. The icons show on the login screen and in the admin too, and the error pages show the mark in the tab. A Site Icon you set still wins.
+
 = 0.10.10 =
 * The FTP update steps send the theme's .htaccess files first, so its private files stay closed while the rest uploads.
 
@@ -132,6 +135,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.11 =
+Nothing to do by hand. The next admin page writes the error pages again with the icon.
 
 = 0.10.10 =
 Nothing to do by hand. The FTP update steps now send the .htaccess files first.

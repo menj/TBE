@@ -168,6 +168,7 @@ unset( $GLOBALS['t_cdn'] );
 foreach ( array( '400', '401', '403', '404', '500', '502', '503', '504' ) as $code ) {
 	$h = (string) file_get_contents( __DIR__ . "/../errors/$code.html" );
 	check( $h === tbe_error_page_html( $code ) . "\n", "errors/$code.html matches the builder" );
+	check( false !== strpos( $h, '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg' ), "errors/$code.html carries the mark as a data: tab icon" );
 	check( false !== strpos( $h, 'url("../assets/fonts/Angel.woff2?ver=' . $t_fv . '")' ) && ! preg_match( '~themes/(tbe|TBE)/~i', $h ), "errors/$code.html names the font relative to errors/, with no theme folder" );
 }
 

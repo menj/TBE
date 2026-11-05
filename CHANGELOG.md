@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.11
+
+### Added
+- `assets/img/brand/icon-192.png`, `icon-maskable-512.png` (the mark at 80% on the brand red) and `site.webmanifest`, rendered from `favicon.svg`.
+- `tbe_brand_icon_tags()` prints the icon tags, now with the manifest, and `theme-color`, on the login screen and the admin as well as the site. The icon tags still print only while no Site Icon is set.
+- The error pages and drop-ins carry the mark as their tab icon, as a `data:` address (`tbe_error_icon_link()`), so it shows on any path and in a subfolder install.
+
+### Changed
+- `apple-touch-icon.png` is rendered again from `favicon.svg` on a solid background; it had transparent corners.
+- `/favicon.ico` answers a list of ETags, a weak one or `*` with a 304, and a HEAD request gets the headers alone. `template_redirect` at priority 0 serves it, since WordPress ends a HEAD request before `do_favicon`.
+
 ## 0.10.10
 
 ### Changed

@@ -34,6 +34,8 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
 - 5 November 2026: every theme is licensed under the GNU General Public License, version 3 or later (0.10.9). This one came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`; the owner adds it there, and this line is then its copy.
 
+- 5 November 2026: the owner asked for a complete favicon set: "make sure you have favicon too." Every brand icon is drawn from `assets/img/brand/favicon.svg`, and a Site Icon set by the owner always wins (0.10.11). This came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`.
+
 ## Content facts
 
 - The ESV is bundled: 66 books, 1,189 chapter files in `data/esv/{book}/{chapter}.json`. The live API fallback needs `TBE_ESV_API_TOKEN` in `wp-config.php`. The token is never committed, stored in the database or shown in the admin.

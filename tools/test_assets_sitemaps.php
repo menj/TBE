@@ -169,17 +169,22 @@ check( '<link rel="icon" href="' . TBE_URI . '/assets/img/brand/favicon.svg?ver=
 // /favicon.ico: missing, it is left to WordPress; present, it carries an ETag and answers 304 to it.
 $fsrc = '<?php define( "ABSPATH", "/" ); define( "TBE_DIR", ' . var_export( $t_dir, true ) . ' ); define( "TBE_URI", "u" );'
 	. ' function add_action() {} function add_filter() {} function has_site_icon() { return false; } function wp_unslash( $s ) { return $s; }'
-	. ' function status_header( $c ) { echo "status:$c"; } function wp_register_style() {} function wp_enqueue_style() {} function wp_register_script() {} function wp_enqueue_script() {}'
+	. ' function status_header( $c ) { if ( 200 !== $c ) { echo "status:$c"; } } function wp_register_style() {} function wp_enqueue_style() {} function wp_register_script() {} function wp_enqueue_script() {}'
 	. ' require ' . var_export( __DIR__ . '/../inc/enqueue.php', true ) . '; require ' . var_export( __DIR__ . '/../inc/branding.php', true ) . ';'
-	. ' $_SERVER["HTTP_IF_NONE_MATCH"] = getenv( "T_INM" ) ?: ""; tbe_serve_favicon(); echo "fell-through";';
+	. ' $_SERVER["HTTP_IF_NONE_MATCH"] = getenv( "T_INM" ) ?: ""; $_SERVER["REQUEST_METHOD"] = getenv( "T_HEAD" ) ? "HEAD" : "GET"; tbe_serve_favicon(); echo "fell-through";';
 file_put_contents( "$t_dir/fav.php", $fsrc );
 $run = static function ( $inm ) use ( $t_dir ) {
 	return (string) shell_exec( 'T_INM=' . escapeshellarg( $inm ) . ' ' . escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( "$t_dir/fav.php" ) . ' 2>&1' );
+};
+$run_head = static function () use ( $t_dir ) {
+	return (string) shell_exec( 'T_HEAD=1 ' . escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( "$t_dir/fav.php" ) . ' 2>&1' );
 };
 check( 'fell-through' === $run( '' ), 'a missing /favicon.ico is left to WordPress' );
 file_put_contents( "$t_dir/assets/img/brand/favicon.ico", 'ICO1' );
 check( 'ICO1' === $run( '"nope"' ), 'present, the icon is sent' );
 check( 'status:304' === $run( '"' . t_hash( 'ICO1' ) . '"' ), 'and a browser holding the same icon gets 304' );
+check( 'status:304' === $run( '"nope", W/"' . t_hash( 'ICO1' ) . '"' ) && 'status:304' === $run( '*' ), 'a list, a weak validator or * gets 304 too' );
+check( '' === $run_head(), 'a HEAD request gets the headers without the icon' );
 unlink( "$t_dir/fav.php" );
 $brand = (string) file_get_contents( __DIR__ . '/../inc/branding.php' );
 check( false !== strpos( $brand, "tbe_font_preload( 'assets/fonts/Angel.woff2' )" ) && false === strpos( $brand, 'esc_url( tbe_brand_url(' ), 'the Angel preload waits for its file, and every brand tag goes through tbe_brand_tag()' );
