@@ -64,6 +64,9 @@ function tbe_view_credits(): string {
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Canons', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The lists of which churches count which books as scripture were checked against the comparison tables in the %s (CC BY-SA 4.0) and the sources it cites. The lists differ between authorities, which each section says.', 'tbe-child' ), '<a href="https://en.wikipedia.org/wiki/Biblical_canon" rel="noopener">Wikipedia article “Biblical canon”</a>' ) ) . '</p>';
 
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Ethiopian Orthodox books', 'tbe-child' ) . '</h2><p>'
+		. esc_html__( 'The names and the 81-book list of the Ethiopian Orthodox canon, and the short notes on its books, follow the Ethiopian Orthodox Tewahedo Church website, used with the church’s permission.', 'tbe-child' ) . '</p>';
+
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The readings of the scrolls are compared using the %s: Jarod Jacobs, Martijn Naaijer and Dirk Roorda, built on the data files of Martin Abegg, licensed CC BY-NC 4.0 (version 2.0, doi:10.5281/zenodo.23731063). So far the Great Isaiah Scroll (1QIsa-a) is compared with Isaiah 1 to 5. The scroll photographs belong to the Israel Antiquities Authority and are not reproduced here.', 'tbe-child' ), '<a href="https://github.com/ETCBC/dss" rel="noopener">CACCHT / ETCBC Dead Sea Scrolls dataset</a>' ) ) . '</p>';
 
@@ -77,7 +80,7 @@ function tbe_view_credits(): string {
 		. '<blockquote class="tbe-credits__quote"><p class="tbe-hadith-ar" lang="ar" dir="rtl">' . esc_html( 'حَدَّثَنَا عَلِيُّ بْنُ عَبْدِ اللَّهِ، حَدَّثَنَا سُفْيَانُ، حَدَّثَنَا الزُّهْرِيُّ، قَالَ أَخْبَرَنِي سَعِيدُ بْنُ الْمُسَيَّبِ، سَمِعَ أَبَا هُرَيْرَةَ ـ رضى الله عنه ـ عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَ: «لاَ تَقُومُ السَّاعَةُ حَتَّى يَنْزِلَ فِيكُمُ ابْنُ مَرْيَمَ حَكَمًا مُقْسِطًا، فَيَكْسِرَ الصَّلِيبَ، وَيَقْتُلَ الْخِنْزِيرَ، وَيَضَعَ الْجِزْيَةَ، وَيَفِيضَ الْمَالُ حَتَّى لاَ يَقْبَلَهُ أَحَدٌ».' ) . '</p><p>' . esc_html__( 'Narrated Abu Huraira: Allah’s Messenger (peace be upon him) said, “The Hour will not be established until the son of Mary (i.e. Jesus) descends amongst you as a just ruler, he will break the cross, kill the pigs, and abolish the Jizya tax. Money will be in abundance so that nobody will accept it (as charitable gifts).”', 'tbe-child' ) . '</p>'
 		. '<cite>' . esc_html__( 'Sahih al-Bukhari 2476, in the chapter “The breaking of the cross and the killing of the pigs”. In-book reference: Book 46, Hadith 37. USC-MSA web (English) reference: Vol. 3, Book 43, Hadith 656 (deprecated numbering scheme).', 'tbe-child' ) . '</cite></blockquote>';
 
-	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typefaces', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit, SBL Hebrew and SBL Greek fonts, by the Society of Biblical Literature.', 'tbe-child' ) . '</p><p>'
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typefaces', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit, SBL Hebrew and SBL Greek fonts, by the Society of Biblical Literature. Ge’ez text is set in Abyssinica SIL, by SIL Global (SIL Open Font License).', 'tbe-child' ) . '</p><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The site name is set in Angel, a freeware font by JuliaL of %s.', 'tbe-child' ), '<a href="http://nocturne.simplenet.com/angel/" rel="noopener">Tangled in Destiny</a>' ) ) . '</p>';
 
 	$packs = tbe_packs();

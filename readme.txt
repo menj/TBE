@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.13
+Stable tag: 0.10.14
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -108,10 +108,13 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The Hebrew and Greek word-by-word data is from STEPBible (www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
 * The JPS 1917 translation is in the public domain and comes through Sefaria.
 * The Dead Sea Scroll comparison is built from the CACCHT project's data (ETCBC, after Martin Abegg), CC BY-NC 4.0.
-* Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic under the SIL Open Font License.
+* Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic and Abyssinica SIL under the SIL Open Font License.
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
 == Changelog ==
+
+= 0.10.14 =
+* The Ethiopian books show the church's own names and short notes, credited on the Credits page.
 
 = 0.10.13 =
 * The canon lists are checked and completed, and a new section names the early Christian writings once read as scripture.
@@ -145,6 +148,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.14 =
+Nothing to do by hand.
 
 = 0.10.13 =
 Nothing to do by hand.

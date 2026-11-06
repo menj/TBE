@@ -91,6 +91,7 @@ function tbe_font_faces(): array {
 		'biblit'     => array( 'SBL BibLit', 'assets/fonts/SBL_BLit.woff2', '' ),
 		'hebrew'     => array( 'SBL Hebrew', 'assets/fonts/SBL_Hbrw.woff2', 'U+0590-05FF, U+FB1D-FB4F' ),
 		'greek'      => array( 'SBL Greek', 'assets/fonts/SBL_grk.woff2', 'U+0370-03FF, U+1F00-1FFF' ),
+		'geez'       => array( 'Abyssinica SIL', 'assets/fonts/AbyssinicaSIL-Ethiopic.woff2', 'U+1200-139F, U+2D80-2DDF, U+AB00-AB2F' ),
 		'estrangela' => array( 'Estrangela', 'assets/fonts/Estrangela.woff2', 'U+0700-074F' ),
 	);
 }
@@ -101,7 +102,7 @@ function tbe_font_face_handles(): array {
 		'tbe-base'      => array( 'angel' ),
 		'tbe-login'     => array( 'angel' ),
 		'tbe-reader'    => array( 'naskh' ),
-		'tbe-scripture' => array( 'biblit', 'hebrew', 'greek', 'estrangela' ),
+		'tbe-scripture' => array( 'biblit', 'hebrew', 'greek', 'estrangela', 'geez' ),
 	);
 }
 
