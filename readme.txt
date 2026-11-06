@@ -108,7 +108,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The Hebrew and Greek word-by-word data is from STEPBible (www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
 * The JPS 1917 translation is in the public domain and comes through Sefaria.
 * The Dead Sea Scroll comparison is built from the CACCHT project's data (ETCBC, after Martin Abegg), CC BY-NC 4.0.
-* Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic under the SIL Open Font License.
+* Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic and Abyssinica SIL under the SIL Open Font License.
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
 == Changelog ==

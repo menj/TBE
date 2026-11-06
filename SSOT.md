@@ -72,7 +72,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The ESV copyright line (Crossway), editable under ESV and licence but never removed.
 - STEPBible and Tyndale House Cambridge for the interlinear data.
 - Sefaria for the JPS 1917 text, and CACCHT (ETCBC, Martin Abegg's data) for the scroll comparison.
-- The licences in `assets/fonts/` for SBL, Angel and Noto Naskh Arabic, and the Angel credit with its link on the Credits page.
+- The licences in `assets/fonts/` for SBL, Angel and Noto Naskh Arabic and Abyssinica SIL, and the Angel credit with its link on the Credits page.
 - The Minimalist Social Icons Pack 2.8 for the profile icons.
 - The source of the critical-commentary pack, on the Credits and references page and nowhere else.
 
