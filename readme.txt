@@ -23,7 +23,7 @@ What a visitor gets:
 * A glossary, an index of the commentary and a passage search.
 * Recorded readings of Genesis 1 (Hebrew) and Matthew 1 (Greek), with each word lit as it is read.
 * A Christian and Jewish side-by-side view for Genesis (ESV and JPS 1917), and Dead Sea Scroll readings for Isaiah 1 to 5.
-* Light and dark modes, and four colour schemes.
+* Three colour schemes, or your own colours. The site is light only.
 
 The theme is made for thebible.exposed and is not meant for other sites.
 
@@ -54,7 +54,7 @@ Never upload a fresh copy of WordPress itself without the site's wp-config.php i
 
 Everything lives under Appearance, TBE:
 
-* General: the tagline, structured data, the light and dark switch, and whether starter commentary follows theme updates.
+* General: the tagline, structured data and whether starter commentary follows theme updates.
 * Appearance: the colour scheme, or your own colours.
 * Reader and commentary: text size, verse numbers and section names.
 * Commentary pages: the contents list (in the page, or a bar that stays at the top), the "In short" box, the next step at the end, related entries, an optional "Ask a question" page, and links from known phrases to the pages that treat them.

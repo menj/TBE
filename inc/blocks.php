@@ -31,18 +31,6 @@ add_action(
 		);
 
 		register_block_type(
-			'tbe/theme-toggle',
-			array(
-				'render_callback' => static function (): string {
-					if ( ! tbe_setting( 'allow_toggle' ) ) {
-						return '';
-					}
-					return '<button type="button" class="tbe-btn tbe-toggle" data-tbe-theme-toggle aria-label="' . esc_attr__( 'Switch between light and dark', 'tbe-child' ) . '"><span aria-hidden="true">◐</span></button>';
-				},
-			)
-		);
-
-		register_block_type(
 			'tbe/tagline',
 			array(
 				'render_callback' => static function (): string {

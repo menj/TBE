@@ -1,6 +1,6 @@
 /* The Bible Exposed: the commentary page (0.10.8). Breadcrumbs, dek, meta row, answer box, contents, tables,
    FAQ, notes and sources, next step and related entries. Colours come from the scheme tokens in base.css and the
-   shapes from polish.css, so custom colours and dark mode carry through. */
+   shapes from polish.css, so custom colours carry through. */
 
 .tbe-article { --tbe-article-gap: clamp(1.75rem, 4vw, 2.5rem); }
 .tbe-answer, .tbe-contents, .tbe-next, .tbe-related__card, .tbe-article .wp-block-details.is-style-faq { box-sizing: border-box; }

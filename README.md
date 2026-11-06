@@ -54,7 +54,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `inc/social.php`, `inc/progress.php`, `inc/unlist.php`, `inc/unlist-admin.php`, `inc/login.php` | Profile links, the reading bar, unlisted posts and the login screen |
 | `inc/hardening.php`, `inc/sitemaps.php`, `inc/dev-files.php` | Hardening and probes, sitemaps, and the dev-file clean-up |
 | `assets/css/` | `base.css` (tokens, chrome), `reader.css`, `scripture.css`, `components.css`, `interlinear.css`, `polish.css` (loaded last), `article.css` (single commentary pages), `progress.css`, `social.css`, `login.css`, `admin.css` |
-| `assets/js/` | `theme.js` (light and dark), `reader.js`, `tooltips.js`, `interlinear.js`, `audio.js`, `article.js` (the sticky contents bar), `progress.js`, `admin.js`, `admin-entry.js`, `unlist-admin.js` |
+| `assets/js/` | `reader.js`, `tooltips.js`, `interlinear.js`, `audio.js`, `article.js` (the sticky contents bar), `progress.js`, `admin.js`, `admin-entry.js`, `unlist-admin.js` |
 | `assets/fonts/`, `assets/img/`, `assets/audio/` | Fonts with their licences, brand and social images, recordings |
 | `data/esv/{book}/{chapter}.json` | Bundled ESV text, one file per chapter (1,189) |
 | `data/books.json`, `data/canons.json`, `data/jewish-names.json` | The 66 books and their order, the canons, the Jewish book names |
@@ -97,13 +97,13 @@ With `set -e` the first failure stops the run with a non-zero exit code. A relea
 The buttons sat in the hero until 0.10.4 and now close the page; the header menu carries the same links at the top. The templates write their links as root paths (`/bible/`); `inc/site-links.php` turns them into full addresses under `home_url()` as each block renders, so a subfolder install keeps them inside the site. A new template link to another section goes in `tbe_site_link_sections()`. Each section heading is an ornamented `h2` followed by one line (`.tbe-section-lede`). A front-page template saved in the Site Editor keeps its own layout; reset it (Appearance → Editor → Templates → Front page → Reset) to take this one.
 
 ## Settings (Appearance → TBE)
-Tabbed: **General** (tagline, structured data, light/dark toggle), **Appearance** (four colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Commentary pages** (contents and its style, the answer box, the next step and its mid-article line, related entries, an Ask a question page, contextual links), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice), **Login screen** (the theme's dress on wp-login.php on or off, a logo URL, a line above the form), **Starter commentary** (import the packs again as drafts) and **Error pages** (the drop-ins, the static copies and the `.htaccess` lines). The search base is set under Settings → Permalinks.
+Tabbed: **General** (tagline, structured data), **Appearance** (three colour schemes, burgundy and gold by default, or fully custom colours), **Reader and commentary** (text size, verse numbers, section names), **Commentary pages** (contents and its style, the answer box, the next step and its mid-article line, related entries, an Ask a question page, contextual links), **Reading bar** (on or off, where it shows, top or bottom, height, colours), **Profile links** (the address of each of the site's profiles), **ESV and licence** (token status, local-text count, live fallback, copyright notice), **Login screen** (the theme's dress on wp-login.php on or off, a logo URL, a line above the form), **Starter commentary** (import the packs again as drafts) and **Error pages** (the drop-ins, the static copies and the `.htaccess` lines). The search base is set under Settings → Permalinks.
 
 Every setting is one key in the option `tbe_settings`, read with `tbe_setting( $key )` and merged with the defaults in `inc/settings.php`, which also draws the tabs (`tbe_render_settings_page()`). The Error pages tab is drawn by `tbe_render_errors_tab()` in `inc/error-pages.php`; the Starter commentary tab by `inc/starter-commentary.php`. The keys, by tab:
 
 | Tab | Keys |
 |---|---|
-| General | `tagline`, `allow_toggle`, `schema`, `pack_sync`, `error_pages` |
+| General | `tagline`, `schema`, `pack_sync`, `error_pages` |
 | Appearance | `scheme`, `colors` |
 | Reader and commentary | `font_scale`, `verse_numbers`, `layout`, `boxes_open`, `glossary_tooltips`, `ref_cards`, `label_textual`, `label_critical`, `label_islamic`, `label_reflection` |
 | Commentary pages | `toc`, `toc_style`, `answer_box`, `next_step`, `mid_next`, `related_count`, `ask_url`, `ctx_out`, `ctx_out_max`, `ctx_own_max`, `ctx_extra` |

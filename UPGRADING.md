@@ -21,7 +21,7 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 Only the versions that need something done by hand are listed.
 
 ### To 0.10.15
-Nothing to do. New files: `inc/frontend-edit.php`, `assets/js/frontend-edit.js`, `assets/css/frontend-edit.css`.
+Nothing to do. Dark mode is gone: a site that had chosen the Night study scheme falls back to its custom colours (check Appearance, TBE). `assets/js/theme.js` is deleted, so remove it from the server when uploading. New files: `inc/frontend-edit.php`, `assets/js/frontend-edit.js`, `assets/css/frontend-edit.css`.
 
 ### To 0.10.14
 Nothing to do. The change is data and one Credits paragraph.

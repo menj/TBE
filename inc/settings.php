@@ -63,24 +63,6 @@ function tbe_schemes(): array {
 				'line'    => '#d3c6a6',
 			),
 		),
-		'night'      => array(
-			'label'  => __( 'Night study — dark', 'tbe-child' ),
-			'colors' => tbe_dark_colors(),
-		),
-	);
-}
-
-/** Palette used for dark mode (toggle and the "Night study" scheme). */
-function tbe_dark_colors(): array {
-	return array(
-		'paper'   => '#17120f',
-		'surface' => '#201915',
-		'ink'     => '#ece3cf',
-		'muted'   => '#a79c88',
-		'accent'  => '#d4a24c',
-		'rubric'  => '#d9786b',
-		'gold'    => '#d1a64c',
-		'line'    => '#3a2f27',
 	);
 }
 
@@ -88,7 +70,6 @@ function tbe_defaults(): array {
 	return array(
 		// General.
 		'tagline'          => __( 'Textual criticism, critical commentary and reflection on the Bible.', 'tbe-child' ),
-		'allow_toggle'     => 0,
 		'schema'           => 1,
 		'pack_sync'        => 1,
 		'error_pages'      => 1,
@@ -171,10 +152,6 @@ function tbe_scheme_css(): string {
 	}
 	$scale = max( 80, min( 140, (int) tbe_setting( 'font_scale' ) ) );
 	$css  .= '--tbe-scale:' . ( $scale / 100 ) . ';}';
-	if ( 'night' === tbe_setting( 'scheme' ) ) {
-		$css .= 'html:not([data-theme="light"]){color-scheme:dark;}';
-		$css .= 'html:not([data-theme="light"]) .tbe-footer{--tbe-f-bg:color-mix(in srgb,var(--tbe-gold) 9%,#0b0807);}';
-	}
 	return $css;
 }
 
@@ -254,7 +231,6 @@ function tbe_sanitize_settings( $input ): array {
 	switch ( $tab ) {
 		case 'general':
 			$new['tagline']        = sanitize_text_field( $input['tagline'] ?? '' );
-			$new['allow_toggle']   = $flag( 'allow_toggle' );
 			$new['schema']         = $flag( 'schema' );
 			$new['pack_sync']      = $flag( 'pack_sync' );
 			$new['error_pages']    = $flag( 'error_pages' );
@@ -373,7 +349,6 @@ function tbe_render_settings_page(): void {
 				case 'general':
 					tbe_field_text( 'tagline', __( 'Tagline', 'tbe-child' ), $s['tagline'], __( 'Shown on the home page hero.', 'tbe-child' ) );
 					tbe_field_check( 'schema', __( 'Output schema.org structured data (JSON-LD) for search engines', 'tbe-child' ), $s['schema'] );
-					tbe_field_check( 'allow_toggle', __( 'Show the light / dark toggle to visitors', 'tbe-child' ), $s['allow_toggle'] );
 					tbe_field_check( 'error_pages', __( 'Install the themed maintenance, database-error and fatal-error pages into wp-content (see the Error pages tab)', 'tbe-child' ), $s['error_pages'] );
 					tbe_field_check( 'pack_sync', __( 'Keep imported starter commentary in step with the theme: a changed entry overwrites the old one, and an entry the theme no longer includes goes to the Trash', 'tbe-child' ), $s['pack_sync'] );
 					break;
@@ -420,7 +395,7 @@ function tbe_render_settings_page(): void {
 					break;
 
 				case 'login':
-					tbe_field_check( 'login_design', __( 'Dress the login screen in the site design: the broken-cross mark, the name in Angel and the active colour scheme, light or dark as the visitor chose', 'tbe-child' ), $s['login_design'] );
+					tbe_field_check( 'login_design', __( 'Dress the login screen in the site design: the broken-cross mark, the name in Angel and the active colour scheme', 'tbe-child' ), $s['login_design'] );
 					echo '<p class="description">' . esc_html__( 'Covers the log-in, lost-password, reset and registration screens and the box shown when a session expires. A plugin that styles the login screen, such as LoginPress, takes over while it is active. WPS Hide Login keeps working: it moves the address and the design follows.', 'tbe-child' ) . '</p>';
 					tbe_field_text( 'login_logo', __( 'Logo URL', 'tbe-child' ), $s['login_logo'], __( 'Optional. A square image shown at 72 pixels in place of the mark.', 'tbe-child' ) );
 					tbe_field_text( 'login_message', __( 'Line above the form', 'tbe-child' ), $s['login_message'], __( 'Optional plain text on the log-in screen only, for example who may sign in.', 'tbe-child' ) );
