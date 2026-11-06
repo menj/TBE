@@ -69,7 +69,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## At a glance
-- Version 0.10.15. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
+- Version 0.10.16. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
 - Apache 2.2 or 2.4 reads the theme's `.htaccess` and `tools/.htaccess` as they are. On Nginx those files do nothing; add the lines under "Nginx" below to the server block.
 - Multisite works: each site keeps its own settings, and one site writes the shared error pages (see Error pages).
 - The theme makes no remote call from a visitor's browser. The server calls the ESV API only for a chapter the bundle lacks, and only with a token.
@@ -163,6 +163,9 @@ A chapter can have a recording, timed word by word. The interlinear page then sh
 
 ## Front-end editing
 `inc/frontend-edit.php`, `assets/js/frontend-edit.js` and `assets/css/frontend-edit.css` give signed-in users a drawer for commentary notes. On a note, "Edit this note" opens it for a user who may edit it; on a Bible chapter, "Add a note here" opens a blank note with the chapter filled in for a user who may create notes. The drawer is built from WordPress's own packages (`wp-block-editor`, `wp-components`, `wp-block-library`, `wp-format-library`, `wp-api-fetch`), loaded only for those users, and saves through `/wp/v2/tbe_commentary` as the signed-in user. **Save** keeps the note's state; **Publish** (shown only to users who may publish) makes a draft public. New notes start as drafts. The passage goes with the request as `tbe_passage_text`: `rest_pre_insert_tbe_commentary` refuses one that is not a real reference, and `rest_after_insert_tbe_commentary` stores it with `tbe_store_passage()`, the function the meta box uses as well.
+
+## Introductions and essays
+An entry whose passage is only a book name introduces that book and shows at the top of the book page; an entry for a chapter with no verse shows at the top of that chapter. An entry with no passage at all is a thematic essay. A chapter page lists up to four essays under "Related essays" when they share a tag with the notes on that chapter (`tbe_essays_for_entries()`, `tbe_render_related_essays()`).
 
 ## Canons and labels
 `data/canons.json` records which tradition counts which book as scripture: **Jewish** (the Tanakh), **Protestant**, **Catholic**, **Orthodox** (Eastern) and **Ethiopian** (Tewahedo). Every book page says who counts it ("Counted as scripture by …", each label explaining itself on hover), and the book list has a row of buttons that dims the books a tradition does not count (choose *Jewish* and the New Testament fades). The 66 books follow their testament (`inc/canon.php`). Below the New Testament the list carries **prepared sections**, clearly marked "Not on the site yet": the deuterocanonical books, the further Orthodox books and the Ethiopian Orthodox books (1 Enoch, Jubilees, 1 to 3 Meqabyan). Nothing is readable there yet. A last section lists the **early Christian writings once read as scripture** (1 and 2 Clement, the Didache, Barnabas, the Shepherd of Hermas, the Apocalypse of Peter, 3 Corinthians and Laodiceans), each labelled "Once read as scripture" because no church counts them today; writings that were never put forward as scripture are not listed. Church lists differ, so each section says so, and the Ethiopian list is flagged as still to be confirmed. To add a book later, give it an entry in `canons.json`, add its chapters, and register it as a reader book.

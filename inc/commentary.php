@@ -271,6 +271,55 @@ function tbe_commentary_for_book( string $book ): array {
 }
 
 
+/**
+ * Essays for a chapter: published entries filed under no passage (the thematic essays) that share a tag with the
+ * notes on that chapter, most recent first (0.10.16).
+ *
+ * @param WP_Post[] $entries The notes on the chapter.
+ * @param int       $limit   How many essays at most.
+ * @return WP_Post[]
+ */
+function tbe_essays_for_entries( array $entries, int $limit = 4 ): array {
+	$tags = array();
+	foreach ( $entries as $entry ) {
+		foreach ( (array) wp_get_post_tags( $entry->ID, array( 'fields' => 'ids' ) ) as $id ) {
+			$tags[ (int) $id ] = true;
+		}
+	}
+	if ( ! $tags ) {
+		return array();
+	}
+	$query = new WP_Query(
+		array(
+			'post_type'      => 'tbe_commentary',
+			'post_status'    => 'publish',
+			'posts_per_page' => max( 1, $limit ),
+			'no_found_rows'  => true,
+			'tag__in'        => array_keys( $tags ),
+			'meta_query'     => array( array( 'key' => 'tbe_book', 'compare' => 'NOT EXISTS' ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
+		)
+	);
+	return $query->posts;
+}
+
+/** The "Related essays" cards, or nothing. */
+function tbe_render_related_essays( array $entries ): string {
+	$essays = tbe_essays_for_entries( $entries );
+	if ( ! $essays ) {
+		return '';
+	}
+	$out = '<section class="tbe-related tbe-related--essays" aria-labelledby="tbe-essays-title"><h2 id="tbe-essays-title" class="tbe-related__title">' . esc_html__( 'Related essays', 'tbe-child' ) . '</h2><ul class="tbe-related__list">';
+	foreach ( $essays as $essay ) {
+		$excerpt = trim( (string) $essay->post_excerpt );
+		$out    .= '<li class="tbe-related__card"><h3 class="tbe-related__name"><a href="' . esc_url( get_permalink( $essay ) ) . '">' . esc_html( get_the_title( $essay ) ) . '</a></h3>';
+		if ( '' !== $excerpt ) {
+			$out .= '<p class="tbe-related__excerpt">' . esc_html( wp_trim_words( $excerpt, 24 ) ) . '</p>';
+		}
+		$out .= '</li>';
+	}
+	return $out . '</ul></section>';
+}
+
 /** A tag page lists commentary entries and index terms along with ordinary posts. */
 add_action(
 	'pre_get_posts',

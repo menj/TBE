@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.16
+Nothing to do. To use the new strip, write a commentary entry with no passage (an essay) and give it the same tags as the notes on the chapters it relates to.
+
 ### To 0.10.15
 Nothing to do. Dark mode is gone: a site that had chosen the Night study scheme falls back to its custom colours (check Appearance, TBE). `assets/js/theme.js` is deleted, so remove it from the server when uploading. New files: `inc/frontend-edit.php`, `assets/js/frontend-edit.js`, `assets/css/frontend-edit.css`.
 

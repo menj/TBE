@@ -759,6 +759,11 @@ function tbe_article_ld( WP_Post $post, string $url, string $page_id ): array {
 add_action(
 	'wp_enqueue_scripts',
 	static function () {
+		$request = function_exists( 'tbe_request' ) ? tbe_request() : null;
+		if ( $request && 'chapter' === $request['view'] ) {
+			// The chapter page shows the related-essay cards (0.10.16).
+			tbe_enqueue_theme_style( 'tbe-article', 'assets/css/article.css', array( 'tbe-polish' ) );
+		}
 		if ( ! is_singular( 'tbe_commentary' ) ) {
 			return;
 		}

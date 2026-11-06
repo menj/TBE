@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.16
+
+Thematic essays reach the chapters they relate to. Nothing was removed.
+
+### Added
+- A "Related essays" strip on a Bible chapter page: published commentary entries filed under no passage (the thematic essays) that share a tag with the notes on that chapter, at most four (`tbe_essays_for_entries()`, `tbe_render_related_essays()` in `inc/commentary.php`). `assets/css/article.css` now loads on chapter pages for its cards.
+- Book and chapter introductions already worked (an entry whose passage is a book name, or a chapter with no verse); this release only documents them.
+
 ## 0.10.15
 
 Front-end editing for people who may edit. Nothing was renamed or removed.
