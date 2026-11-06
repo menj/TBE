@@ -14,18 +14,6 @@
 	--tbe-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Dark mode, toggled by the visitor (theme.js sets data-theme on <html>). */
-html[data-theme="dark"] {
-	--tbe-paper: #17120f;
-	--tbe-surface: #201915;
-	--tbe-ink: #ece3cf;
-	--tbe-muted: #a79c88;
-	--tbe-accent: #d4a24c;
-	--tbe-rubric: #d9786b;
-	--tbe-gold: #d1a64c;
-	--tbe-line: #3a2f27;
-	color-scheme: dark;
-}
 
 body {
 	background: var(--tbe-paper);
@@ -206,7 +194,7 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .tbe-cards .wp-block-post-title a { text-decoration: none; }
 
 /* Footer ----------------------------------------------------------------- */
-/* Footer: a dark band tinted by the scheme's accent, so it holds in light, dark and custom colours. ---- */
+/* Footer: a dark band tinted by the scheme's accent, so it holds in every colour scheme. ---- */
 .tbe-footer {
 	--tbe-f-bg: color-mix(in srgb, var(--tbe-accent) 32%, #0e0a08);
 	--tbe-f-text: #efe6d0;
@@ -219,8 +207,6 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 	border-top: 3px solid var(--tbe-gold);
 	font-size: 0.9rem;
 }
-/* Dark mode and the Night scheme have a gold accent: tint the band with a little gold over near-black instead. */
-html[data-theme="dark"] .tbe-footer { --tbe-f-bg: color-mix(in srgb, var(--tbe-gold) 9%, #0b0807); }
 .tbe-footer a { color: inherit; text-decoration: none; }
 .tbe-footer__inner { max-width: 72rem; margin-inline: auto; padding: clamp(2.5rem, 6vw, 4rem) 1.5rem 2rem; }
 .tbe-footer__grid { display: grid; grid-template-columns: minmax(0, 1.7fr) repeat(2, minmax(0, 1fr)); gap: 2.5rem 3.5rem; align-items: start; }

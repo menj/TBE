@@ -1,8 +1,7 @@
 <?php
 /**
  * The login screen in the site's dress: the broken-cross mark and the name in Angel, linking home,
- * on the paper and burgundy of the active colour scheme, light or dark as the visitor chose on the
- * site (theme.js reads the same saved choice). Covers every screen wp-login.php serves: log in,
+ * on the paper and burgundy of the active colour scheme. Covers every screen wp-login.php serves: log in,
  * lost password, reset password, registration and the interim login shown when a session expires.
  *
  * Appearance → TBE → Login screen: a switch (login_design, on by default), an optional logo URL
@@ -35,13 +34,11 @@ function tbe_login_is_interim(): bool {
 	return isset( $_REQUEST['interim-login'] ); // phpcs:ignore WordPress.Security.NonceVerification
 }
 
-/** Stylesheet, colour scheme and the light/dark script, on the login screen only. */
+/** Stylesheet and colour scheme, on the login screen only. */
 function tbe_login_assets(): void {
 	if ( ! tbe_login_design_on() ) {
 		return;
 	}
-	// In <head>, so a dark choice saved on the site applies before first paint.
-	tbe_enqueue_theme_script( 'tbe-theme', 'assets/js/theme.js', array(), array( 'in_footer' => false ) );
 	tbe_enqueue_theme_style( 'tbe-login', 'assets/css/login.css', array( 'login' ) );
 	wp_add_inline_style( 'tbe-login', tbe_scheme_css() );
 }

@@ -1,4 +1,4 @@
-/* Profile links (inc/social.php). The icons are currentColor, so every scheme and dark mode colour them. */
+/* Profile links (inc/social.php). The icons are currentColor, so every scheme colours them. */
 .tbe-social__list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
 .tbe-social__link { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border-radius: var(--tbe-radius-pill, 999px); color: inherit; opacity: 0.85; transition: opacity 0.15s, background-color 0.15s; }
 .tbe-social__link:hover { opacity: 1; background: color-mix(in srgb, currentColor 12%, transparent); }

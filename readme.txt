@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.14
+Stable tag: 0.10.15
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -23,7 +23,7 @@ What a visitor gets:
 * A glossary, an index of the commentary and a passage search.
 * Recorded readings of Genesis 1 (Hebrew) and Matthew 1 (Greek), with each word lit as it is read.
 * A Christian and Jewish side-by-side view for Genesis (ESV and JPS 1917), and Dead Sea Scroll readings for Isaiah 1 to 5.
-* Light and dark modes, and four colour schemes.
+* Three colour schemes, or your own colours. The site is light only.
 
 The theme is made for thebible.exposed and is not meant for other sites.
 
@@ -54,7 +54,7 @@ Never upload a fresh copy of WordPress itself without the site's wp-config.php i
 
 Everything lives under Appearance, TBE:
 
-* General: the tagline, structured data, the light and dark switch, and whether starter commentary follows theme updates.
+* General: the tagline, structured data and whether starter commentary follows theme updates.
 * Appearance: the colour scheme, or your own colours.
 * Reader and commentary: text size, verse numbers and section names.
 * Commentary pages: the contents list (in the page, or a bar that stays at the top), the "In short" box, the next step at the end, related entries, an optional "Ask a question" page, and links from known phrases to the pages that treat them.
@@ -113,6 +113,10 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.15 =
+* The site is light only; the light and dark switch is off by default.
+* People who may edit can edit a commentary note, or add one for a chapter, from the front of the site in a drawer that uses WordPress's own block editor.
+
 = 0.10.14 =
 * The Ethiopian books show the church's own names and short notes, credited on the Credits page.
 
@@ -148,6 +152,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.15 =
+Nothing to do by hand.
 
 = 0.10.14 =
 Nothing to do by hand.

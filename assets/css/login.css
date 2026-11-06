@@ -3,11 +3,10 @@
  *
  * Loaded only through login_enqueue_scripts while Appearance → TBE → Login screen is on; every
  * rule is scoped to body.tbe-login. The tokens repeat base.css, and the active scheme arrives
- * after this file from tbe_scheme_css(), so the four schemes and custom colours follow. Dark mode
- * is the site's own: theme.js sets data-theme="dark" on <html> from the visitor's saved choice.
+ * after this file from tbe_scheme_css(), so the three schemes and custom colours follow.
  *
  * Contrast, Manuscript scheme: ink on surface 14:1, muted 5.6:1, surface on the accent button
- * 10:1, the accent focus ring 9:1. Night study and dark mode: ink 13:1, paper on the gold button 8:1.
+ * 10:1, the accent focus ring 9:1.
  */
 
 /* The @font-face rule for "Angel" is written by inc/enqueue.php (tbe_font_face_css()), with the file's version, and left out while the file is missing. */
@@ -23,17 +22,6 @@
 	--tbe-line: #d9cdb0;
 	--tbe-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 	--tbe-book: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-}
-html[data-theme="dark"] {
-	--tbe-paper: #17120f;
-	--tbe-surface: #201915;
-	--tbe-ink: #ece3cf;
-	--tbe-muted: #a79c88;
-	--tbe-accent: #d4a24c;
-	--tbe-rubric: #d9786b;
-	--tbe-gold: #d1a64c;
-	--tbe-line: #3a2f27;
-	color-scheme: dark;
 }
 
 body.tbe-login {

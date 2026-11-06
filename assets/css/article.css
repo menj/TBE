@@ -1,6 +1,6 @@
 /* The Bible Exposed: the commentary page (0.10.8). Breadcrumbs, dek, meta row, answer box, contents, tables,
    FAQ, notes and sources, next step and related entries. Colours come from the scheme tokens in base.css and the
-   shapes from polish.css, so custom colours and dark mode carry through. */
+   shapes from polish.css, so custom colours carry through. */
 
 .tbe-article { --tbe-article-gap: clamp(1.75rem, 4vw, 2.5rem); }
 .tbe-answer, .tbe-contents, .tbe-next, .tbe-related__card, .tbe-article .wp-block-details.is-style-faq { box-sizing: border-box; }
@@ -162,3 +162,7 @@ a.tbe-ctx-link--out::after { content: " ↗"; font-size: 0.75em; }
 @media (prefers-reduced-motion: reduce) {
 	.tbe-related__card { transition: none; }
 }
+
+/* A button with a small icon before its words (0.10.15): the icon takes the button's colour. */
+.tbe-btn--icon { display: inline-flex; align-items: center; gap: .5rem; }
+.tbe-btn--icon .tbe-icon { flex: none; }

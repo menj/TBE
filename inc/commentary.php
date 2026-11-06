@@ -147,27 +147,34 @@ add_action(
 		if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ! current_user_can( 'edit_post', $post_id ) ) {
 			return;
 		}
-		$text   = sanitize_text_field( wp_unslash( $_POST['tbe_passage'] ?? '' ) );
-		$parsed = '' !== $text ? TBE_Bible::parse_reference( $text ) : null;
-		if ( $parsed && ! preg_match( '/\d/', preg_replace( '/^\s*(?:[1-3]|i{1,3}|first|second|third)\b\.?/i', '', $text ) ) ) {
-			// A book name with no chapter number: the entry introduces the whole book.
-			$parsed['chapter'] = 0;
-			$parsed['vstart']  = 0;
-			$parsed['vend']    = 0;
-		}
-		if ( $parsed ) {
-			update_post_meta( $post_id, 'tbe_passage', tbe_passage_label( $parsed['book'], $parsed['chapter'], $parsed['vstart'], $parsed['vend'] ) );
-			update_post_meta( $post_id, 'tbe_book', $parsed['book'] );
-			update_post_meta( $post_id, 'tbe_chapter', $parsed['chapter'] );
-			update_post_meta( $post_id, 'tbe_vstart', $parsed['vstart'] );
-			update_post_meta( $post_id, 'tbe_vend', $parsed['vend'] );
-		} else {
-			foreach ( array( 'tbe_passage', 'tbe_book', 'tbe_chapter', 'tbe_vstart', 'tbe_vend' ) as $key ) {
-				delete_post_meta( $post_id, $key );
-			}
-		}
+		tbe_store_passage( $post_id, sanitize_text_field( wp_unslash( $_POST['tbe_passage'] ?? '' ) ) );
 	}
 );
+
+/**
+ * Parse a passage reference typed by an editor and store it (the label and its parts) on an entry; an empty or
+ * unknown reference clears them. Used by the meta box and by the front-end editor (0.10.15).
+ */
+function tbe_store_passage( int $post_id, string $text ): void {
+	$parsed = '' !== $text ? TBE_Bible::parse_reference( $text ) : null;
+	if ( $parsed && ! preg_match( '/\d/', preg_replace( '/^\s*(?:[1-3]|i{1,3}|first|second|third)\b\.?/i', '', $text ) ) ) {
+		// A book name with no chapter number: the entry introduces the whole book.
+		$parsed['chapter'] = 0;
+		$parsed['vstart']  = 0;
+		$parsed['vend']    = 0;
+	}
+	if ( $parsed ) {
+		update_post_meta( $post_id, 'tbe_passage', tbe_passage_label( $parsed['book'], $parsed['chapter'], $parsed['vstart'], $parsed['vend'] ) );
+		update_post_meta( $post_id, 'tbe_book', $parsed['book'] );
+		update_post_meta( $post_id, 'tbe_chapter', $parsed['chapter'] );
+		update_post_meta( $post_id, 'tbe_vstart', $parsed['vstart'] );
+		update_post_meta( $post_id, 'tbe_vend', $parsed['vend'] );
+	} else {
+		foreach ( array( 'tbe_passage', 'tbe_book', 'tbe_chapter', 'tbe_vstart', 'tbe_vend' ) as $key ) {
+			delete_post_meta( $post_id, $key );
+		}
+	}
+}
 
 /**
  * Whether a the_content call renders the body of the entry this page is about. Block templates render the Post

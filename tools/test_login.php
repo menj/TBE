@@ -57,7 +57,7 @@ function ok( $c, $what ) {
 ok( tbe_login_design_on(), 'on by default' );
 ok( in_array( 'tbe_login_assets', $GLOBALS['t_hooks']['login_enqueue_scripts'] ?? array(), true ), 'assets on login_enqueue_scripts' );
 tbe_login_assets();
-ok( array( 'tbe-theme', 'tbe-login' ) === $GLOBALS['t_enq'], 'stylesheet and light/dark script enqueued' );
+ok( array( 'tbe-login' ) === $GLOBALS['t_enq'], 'stylesheet enqueued' );
 ok( hash_file( tbe_asset_hash_algo(), TBE_DIR . '/assets/css/login.css' ) === $GLOBALS['t_ver']['tbe-login'], 'the stylesheet is versioned by a hash of its file' );
 ok( str_contains( $GLOBALS['t_inline'], '--tbe-accent' ), 'active scheme printed' );
 ok( 'https://tbe.test/' === tbe_login_header_url( 'https://wordpress.org/' ), 'mark links home' );

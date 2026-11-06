@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.15
+
+Front-end editing for people who may edit. Nothing was renamed or removed.
+
+### Changed
+- The site is light only, as the owner decided on 6 November 2026. All dark mode is removed: the switch and the `tbe/theme-toggle` block, `assets/js/theme.js`, the `allow_toggle` setting, the "Night study" scheme and every `data-theme="dark"` and `prefers-color-scheme: dark` rule (login screen and error pages included). A site that had chosen Night study falls back to its custom colours, which start from the Manuscript scheme.
+
+### Added
+- `inc/frontend-edit.php`, `assets/js/frontend-edit.js` and `assets/css/frontend-edit.css`. A signed-in user who can edit a commentary note sees an "Edit this note" button on it, and one who can create notes sees "Add a note here" on a Bible chapter. Both open a drawer with the title, the passage and WordPress's own block editor, built from core's `wp-block-editor`, `wp-components`, `wp-block-library`, `wp-format-library` and `wp-api-fetch` packages (no outside library), and save through the core REST API. New notes are saved as drafts, and a Publish button (shown to users who may publish) makes a note public. The scripts load only for those users.
+- The "Ask a question" button on a commentary note carries an envelope icon (inline SVG, `.tbe-btn--icon` in `assets/css/article.css`), and the editor button an open-book icon.
+- `tbe_store_passage()` in `inc/commentary.php` holds the passage check that the meta box already used; the drawer uses it through `rest_after_insert_tbe_commentary` (request parameter `tbe_passage_text`).
+
 ## 0.10.14
 
 The Ethiopian sections take the church's own names and short notes. Nothing was removed.

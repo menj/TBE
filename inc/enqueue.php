@@ -232,9 +232,6 @@ add_action(
 		tbe_enqueue_theme_style( 'tbe-components', 'assets/css/components.css', array( 'tbe-reader' ) );
 		wp_add_inline_style( 'tbe-base', tbe_scheme_css() );
 
-		// Runs in <head> so a saved light/dark choice is applied before first paint.
-		tbe_enqueue_theme_script( 'tbe-theme', 'assets/js/theme.js', array(), array( 'in_footer' => false ) );
-
 		tbe_enqueue_theme_script( 'tbe-tooltips', 'assets/js/tooltips.js', array(), array( 'in_footer' => true, 'strategy' => 'defer' ) );
 
 		$request = tbe_request();

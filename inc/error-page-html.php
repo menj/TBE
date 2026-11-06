@@ -215,7 +215,6 @@ function tbe_error_page_html( string $key, ?string $font_url = null, string $hom
 		. '<title>' . $e( tbe_error_title_tag( $key, $first['title'] ) ) . '</title>' . tbe_error_icon_link() . '<style>'
 		. '@font-face{font-family:"Angel";src:url("' . $e( $font_url ) . '") format("woff2");font-display:swap}'
 		. ':root{--paper:#f4eedc;--card:#fbf7ea;--ink:#231d14;--muted:#6b604f;--accent:#6e1f2e;--rubric:#9b2c2c;--gold:#a67c2e;--line:#d9cdb0}'
-		. '@media (prefers-color-scheme:dark){:root{--paper:#17120f;--card:#201915;--ink:#ece3cf;--muted:#a79c88;--accent:#d4a24c;--rubric:#d9786b;--gold:#d1a64c;--line:#3a2f27}}'
 		. '*{box-sizing:border-box}html,body{height:100%;margin:0}'
 		. 'body{display:flex;align-items:center;justify-content:center;padding:24px;background:var(--paper);color:var(--ink);font:1.1rem/1.65 Georgia,"Times New Roman",serif}'
 		. 'main{width:min(34rem,100%);padding:2.6rem 2.2rem 2.4rem;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:30px;text-align:center;box-shadow:0 18px 50px -24px rgba(35,29,20,.45)}'
