@@ -26,10 +26,10 @@ function tbe_frontend_edit_context(): ?array {
 	$type    = get_post_type_object( 'tbe_commentary' );
 	if ( $request && 'chapter' === $request['view'] && $type && current_user_can( $type->cap->create_posts ) ) {
 		return array(
-			'mode'    => 'new',
-			'id'      => 0,
+			'mode'       => 'new',
+			'id'         => 0,
 			'canPublish' => current_user_can( $type->cap->publish_posts ),
-			'passage' => TBE_Bible::label( $request['book']['slug'], $request['chapter'] ),
+			'passage'    => TBE_Bible::label( $request['book']['slug'], $request['chapter'] ),
 		);
 	}
 	return null;
@@ -54,22 +54,21 @@ add_action(
 				array(
 					'context' => $context,
 					'i18n'    => array(
-						'edit'     => __( 'Edit this note', 'tbe-child' ),
-						'add'      => __( 'Add a note here', 'tbe-child' ),
-						'title'    => __( 'Title', 'tbe-child' ),
-						'passage'  => __( 'Passage', 'tbe-child' ),
-						'hint'     => __( 'For example John 1:1-18 or Isaiah 21:13', 'tbe-child' ),
-						'save'     => __( 'Save', 'tbe-child' ),
-						'saving'   => __( 'Saving…', 'tbe-child' ),
-						'saved'    => __( 'Saved.', 'tbe-child' ),
-						'saveDraft' => __( 'Save', 'tbe-child' ),
-						'publish'  => __( 'Publish', 'tbe-child' ),
+						'edit'      => __( 'Edit this note', 'tbe-child' ),
+						'add'       => __( 'Add a note here', 'tbe-child' ),
+						'title'     => __( 'Title', 'tbe-child' ),
+						'passage'   => __( 'Passage', 'tbe-child' ),
+						'hint'      => __( 'For example John 1:1-18 or Isaiah 21:13', 'tbe-child' ),
+						'save'      => __( 'Save', 'tbe-child' ),
+						'saving'    => __( 'Saving…', 'tbe-child' ),
+						'saved'     => __( 'Saved.', 'tbe-child' ),
+						'publish'   => __( 'Publish', 'tbe-child' ),
 						'published' => __( 'Published. Visitors can read it now.', 'tbe-child' ),
-						'close'    => __( 'Close', 'tbe-child' ),
-						'loading'  => __( 'Loading…', 'tbe-child' ),
-						'failed'   => __( 'Could not save. Check the passage and try again.', 'tbe-child' ),
-						'draft'    => __( 'It is a draft: visitors cannot see it until it is published.', 'tbe-child' ),
-						'unsaved'  => __( 'Close without saving?', 'tbe-child' ),
+						'close'     => __( 'Close', 'tbe-child' ),
+						'loading'   => __( 'Loading…', 'tbe-child' ),
+						'failed'    => __( 'Could not save. Check the passage and try again.', 'tbe-child' ),
+						'draft'     => __( 'It is a draft: visitors cannot see it until it is published.', 'tbe-child' ),
+						'unsaved'   => __( 'Close without saving?', 'tbe-child' ),
 					),
 				)
 			) . ';',
@@ -86,6 +85,22 @@ add_action(
 			echo '<div id="tbe-edit-root"></div>';
 		}
 	}
+);
+
+/** A passage the drawer sends that is not a real reference is refused, so a typo never silently clears it. */
+add_filter(
+	'rest_pre_insert_tbe_commentary',
+	static function ( $prepared, $request ) {
+		if ( $request instanceof WP_REST_Request && $request->has_param( 'tbe_passage_text' ) ) {
+			$text = trim( sanitize_text_field( (string) $request->get_param( 'tbe_passage_text' ) ) );
+			if ( '' !== $text && ! TBE_Bible::parse_reference( $text ) ) {
+				return new WP_Error( 'tbe_bad_passage', __( 'That passage was not recognised.', 'tbe-child' ), array( 'status' => 400 ) );
+			}
+		}
+		return $prepared;
+	},
+	10,
+	2
 );
 
 /** The passage typed in the drawer goes through the same check as the meta box. */

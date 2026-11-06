@@ -163,6 +163,6 @@ a.tbe-ctx-link--out::after { content: " ↗"; font-size: 0.75em; }
 	.tbe-related__card { transition: none; }
 }
 
-/* A button with a small icon before its words (0.10.16): the icon takes the button's colour. */
+/* A button with a small icon before its words (0.10.15): the icon takes the button's colour. */
 .tbe-btn--icon { display: inline-flex; align-items: center; gap: .5rem; }
 .tbe-btn--icon .tbe-icon { flex: none; }

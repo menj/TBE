@@ -44,6 +44,7 @@
 			if ( publish === true ) { body.status = 'publish'; } else if ( ! id[0] ) { body.status = 'draft'; }
 			wp.apiFetch( { path: path, method: 'POST', data: body } ).then( function ( post ) {
 				id[1]( post.id ); state[1]( post.status ); dirty[1]( false ); busy[1]( false );
+				props.onSaved( { id: post.id, status: post.status, title: title[0], passage: passage[0], blocks: blocks } );
 				status[1]( post.status === 'publish' ? t.published : t.saved + ' ' + t.draft );
 			} ).catch( function () { busy[1]( false ); status[1]( t.failed ); } );
 		}
@@ -54,7 +55,10 @@
 		}
 
 		useEffect( function () {
-			function key( e ) { if ( e.key === 'Escape' ) { close(); } }
+			function key( e ) {
+				/* Escape also closes the editor's own menus; leave those to them. */
+				if ( e.key === 'Escape' && ! e.defaultPrevented && ! e.target.closest( '.components-popover, [role="menu"], [role="listbox"]' ) ) { close(); }
+			}
 			document.addEventListener( 'keydown', key );
 			return function () { document.removeEventListener( 'keydown', key ); };
 		} );
@@ -62,7 +66,7 @@
 		return el( 'div', { className: 'tbe-edit__drawer', role: 'dialog', 'aria-label': ctx.mode === 'edit' ? t.edit : t.add },
 			el( 'div', { className: 'tbe-edit__bar' },
 				el( 'span', { className: 'tbe-edit__status', 'aria-live': 'polite' }, status[0] ),
-				el( 'button', { type: 'button', className: 'tbe-edit__btn tbe-edit__btn--primary', disabled: busy[0], onClick: function () { save( false ); } }, state[0] === 'publish' ? t.save : t.saveDraft ),
+				el( 'button', { type: 'button', className: 'tbe-edit__btn tbe-edit__btn--primary', disabled: busy[0], onClick: function () { save( false ); } }, t.save ),
 				( state[0] !== 'publish' && ctx.canPublish ) ? el( 'button', { type: 'button', className: 'tbe-edit__btn tbe-edit__btn--primary', disabled: busy[0], onClick: function () { save( true ); } }, t.publish ) : null,
 				el( 'button', { type: 'button', className: 'tbe-edit__btn', onClick: close }, t.close )
 			),
@@ -83,10 +87,11 @@
 	}
 
 	function App() {
-		var open = useState( false ), data = useState( null ), loading = useState( false );
+		var open = useState( false ), data = useState( null ), loading = useState( false ), saved = useState( false );
 
 		function start() {
 			open[1]( true );
+			if ( data[0] ) { return; }
 			if ( ctx.mode === 'new' ) {
 				data[1]( { id: 0, status: 'draft', title: '', passage: ctx.passage || '', blocks: [ wp.blocks.createBlock( 'core/paragraph' ) ] } );
 				return;
@@ -107,10 +112,14 @@
 		return el( wp.element.Fragment, null,
 			el( 'button', { type: 'button', className: 'tbe-edit__open', onClick: start }, el( BookIcon ), ctx.mode === 'edit' ? t.edit : t.add ),
 			open[0] ? ( data[0] && ! loading[0]
-				? el( Editor, { initial: data[0].blocks, title: data[0].title, passage: data[0].passage, id: data[0].id, status: data[0].status, onClose: function () { open[1]( false ); }, onSaved: function () {} } )
+				? el( Editor, { initial: data[0].blocks, title: data[0].title, passage: data[0].passage, id: data[0].id, status: data[0].status, onClose: function () { if ( saved[0] && ctx.mode === 'edit' ) { window.location.reload(); return; } open[1]( false ); }, onSaved: function ( next ) { data[1]( next ); saved[1]( true ); } } )
 				: el( 'div', { className: 'tbe-edit__drawer tbe-edit__drawer--loading' }, t.loading ) ) : null
 		);
 	}
 
-	wp.element.render( el( App ), root );
+	if ( wp.element.createRoot ) {
+		wp.element.createRoot( root ).render( el( App ) );
+	} else {
+		wp.element.render( el( App ), root );
+	}
 }() );

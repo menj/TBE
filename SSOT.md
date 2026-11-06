@@ -52,6 +52,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 - Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/` and `/credits/` (`inc/routes.php`).
 - Commentary: post type `tbe_commentary` at `/commentary/`, its sections at `/section/`. Glossary: post type `tbe_term` at `/glossary/`.
+- Front-end editing: only a signed-in user who may edit a note (or create notes) gets the drawer, which saves through the core REST API (`/wp/v2/tbe_commentary`); new notes are drafts until Publish, and a passage that is not a real reference is refused (0.10.15).
 - Search: `/search/{term}/`. The base is set under Settings, Permalinks (option `tbe_search_base`).
 - Sitemap: WordPress's `/wp-sitemap.xml`, unless an SEO plugin serves its own. `robots.txt` names the live sitemap. There is no users sitemap.
 - Error pages: the drop-ins in `wp-content/` and the static copies in `wp-content/tbe-errors/`.
