@@ -25,19 +25,18 @@
 		var blocks = s[0], setBlocks = s[1];
 		var title = useState( props.title ), passage = useState( props.passage );
 		var status = useState( '' ), busy = useState( false ), dirty = useState( false );
-		var id = useState( props.id );
+		var id = useState( props.id ), state = useState( props.status );
 
 		function change( next ) { setBlocks( next ); dirty[1]( true ); }
 
-		function save() {
+		function save( publish ) {
 			busy[1]( true ); status[1]( t.saving );
 			var body = { title: title[0], content: wp.blocks.serialize( blocks ), tbe_passage_text: passage[0] };
 			var path = '/wp/v2/tbe_commentary' + ( id[0] ? '/' + id[0] : '' );
-			if ( ! id[0] ) { body.status = 'draft'; }
+			if ( publish === true ) { body.status = 'publish'; } else if ( ! id[0] ) { body.status = 'draft'; }
 			wp.apiFetch( { path: path, method: 'POST', data: body } ).then( function ( post ) {
-				id[1]( post.id ); dirty[1]( false ); busy[1]( false );
-				status[1]( t.saved + ( ctx.mode === 'new' ? ' ' + t.draft : '' ) );
-				if ( ctx.mode === 'edit' ) { props.onSaved( post ); }
+				id[1]( post.id ); state[1]( post.status ); dirty[1]( false ); busy[1]( false );
+				status[1]( post.status === 'publish' ? t.published : t.saved + ' ' + t.draft );
 			} ).catch( function () { busy[1]( false ); status[1]( t.failed ); } );
 		}
 
@@ -55,7 +54,8 @@
 		return el( 'div', { className: 'tbe-edit__drawer', role: 'dialog', 'aria-label': ctx.mode === 'edit' ? t.edit : t.add },
 			el( 'div', { className: 'tbe-edit__bar' },
 				el( 'span', { className: 'tbe-edit__status', 'aria-live': 'polite' }, status[0] ),
-				el( 'button', { type: 'button', className: 'tbe-edit__btn tbe-edit__btn--primary', disabled: busy[0], onClick: save }, t.save ),
+				el( 'button', { type: 'button', className: 'tbe-edit__btn tbe-edit__btn--primary', disabled: busy[0], onClick: function () { save( false ); } }, state[0] === 'publish' ? t.save : t.saveDraft ),
+				( state[0] !== 'publish' && ctx.canPublish ) ? el( 'button', { type: 'button', className: 'tbe-edit__btn tbe-edit__btn--primary', disabled: busy[0], onClick: function () { save( true ); } }, t.publish ) : null,
 				el( 'button', { type: 'button', className: 'tbe-edit__btn', onClick: close }, t.close )
 			),
 			el( 'div', { className: 'tbe-edit__fields' },
@@ -80,13 +80,14 @@
 		function start() {
 			open[1]( true );
 			if ( ctx.mode === 'new' ) {
-				data[1]( { id: 0, title: '', passage: ctx.passage || '', blocks: [ wp.blocks.createBlock( 'core/paragraph' ) ] } );
+				data[1]( { id: 0, status: 'draft', title: '', passage: ctx.passage || '', blocks: [ wp.blocks.createBlock( 'core/paragraph' ) ] } );
 				return;
 			}
 			loading[1]( true );
 			wp.apiFetch( { path: '/wp/v2/tbe_commentary/' + ctx.id + '?context=edit' } ).then( function ( post ) {
 				data[1]( {
 					id: post.id,
+					status: post.status,
 					title: ( post.title && post.title.raw ) || '',
 					passage: ( post.meta && post.meta.tbe_passage ) || '',
 					blocks: wp.blocks.parse( ( post.content && post.content.raw ) || '' )
@@ -98,7 +99,7 @@
 		return el( wp.element.Fragment, null,
 			el( 'button', { type: 'button', className: 'tbe-edit__open', onClick: start }, ctx.mode === 'edit' ? t.edit : t.add ),
 			open[0] ? ( data[0] && ! loading[0]
-				? el( Editor, { initial: data[0].blocks, title: data[0].title, passage: data[0].passage, id: data[0].id, onClose: function () { open[1]( false ); }, onSaved: function () {} } )
+				? el( Editor, { initial: data[0].blocks, title: data[0].title, passage: data[0].passage, id: data[0].id, status: data[0].status, onClose: function () { open[1]( false ); }, onSaved: function () {} } )
 				: el( 'div', { className: 'tbe-edit__drawer tbe-edit__drawer--loading' }, t.loading ) ) : null
 		);
 	}

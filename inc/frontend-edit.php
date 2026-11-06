@@ -18,7 +18,7 @@ function tbe_frontend_edit_context(): ?array {
 	if ( is_singular( 'tbe_commentary' ) ) {
 		$id = (int) get_queried_object_id();
 		if ( $id && current_user_can( 'edit_post', $id ) ) {
-			return array( 'mode' => 'edit', 'id' => $id );
+			return array( 'mode' => 'edit', 'id' => $id, 'canPublish' => current_user_can( 'publish_post', $id ) );
 		}
 		return null;
 	}
@@ -28,6 +28,7 @@ function tbe_frontend_edit_context(): ?array {
 		return array(
 			'mode'    => 'new',
 			'id'      => 0,
+			'canPublish' => current_user_can( $type->cap->publish_posts ),
 			'passage' => TBE_Bible::label( $request['book']['slug'], $request['chapter'] ),
 		);
 	}
@@ -61,10 +62,13 @@ add_action(
 						'save'     => __( 'Save', 'tbe-child' ),
 						'saving'   => __( 'Saving…', 'tbe-child' ),
 						'saved'    => __( 'Saved.', 'tbe-child' ),
+						'saveDraft' => __( 'Save draft', 'tbe-child' ),
+						'publish'  => __( 'Publish', 'tbe-child' ),
+						'published' => __( 'Published. Visitors can read it now.', 'tbe-child' ),
 						'close'    => __( 'Close', 'tbe-child' ),
 						'loading'  => __( 'Loading…', 'tbe-child' ),
 						'failed'   => __( 'Could not save. Check the passage and try again.', 'tbe-child' ),
-						'draft'    => __( 'New notes are saved as drafts. Publish them from the admin.', 'tbe-child' ),
+						'draft'    => __( 'It is a draft: visitors cannot see it until it is published.', 'tbe-child' ),
 						'unsaved'  => __( 'Close without saving?', 'tbe-child' ),
 					),
 				)
