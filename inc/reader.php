@@ -233,6 +233,7 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 		$out .= tbe_render_box( $entry, $slug, $chapter, true );
 	}
 	$out .= tbe_render_notes_contents( $starts, $slug, $chapter );
+	$out .= tbe_render_related_essays( $entries );
 
 	if ( ! $verses ) {
 		return $out . '<p class="tbe-notice">' . esc_html__( 'The text of this chapter is not available right now.', 'tbe-child' ) . '</p></div>';
