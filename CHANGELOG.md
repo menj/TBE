@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.14
+
+The Ethiopian sections take the church's own names and short notes. Nothing was removed.
+
+### Changed
+- `data/canons.json`: the Ethiopian books carry the church's names (Sirate Tsion, Tizaz, Gitsew, Abtilis, Dominos, Bengorion) and short notes from the church's pages.
+- The Credits page thanks the Ethiopian Orthodox Tewahedo Church, whose site is used with its permission.
+
 ## 0.10.13
 
 The canon lists are checked against Wikipedia's "Biblical canon" article (facts only). Nothing was removed.

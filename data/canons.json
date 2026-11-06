@@ -225,7 +225,7 @@
      ],
      "language": "Ge'ez; Aramaic fragments at Qumran",
      "status": "planned",
-     "note": ""
+     "note": "Kept whole only in Ge'ez; Europe knew it only from Jude until James Bruce brought manuscripts in 1773."
     },
     {
      "slug": "jubilees",
@@ -235,7 +235,7 @@
      ],
      "language": "Ge'ez; Hebrew fragments at Qumran",
      "status": "planned",
-     "note": ""
+     "note": "Called Kufale in the Ethiopian church. The Ge'ez version is the only complete text."
     },
     {
      "slug": "1-meqabyan",
@@ -295,7 +295,7 @@
      ],
      "language": "Hebrew original, Ge'ez version",
      "status": "planned",
-     "note": "Broader canon only."
+     "note": "Broader canon only. The church lists it as \"The Book of Josephas the Son of Bengorion\"."
     }
    ]
   },
@@ -315,7 +315,7 @@
      ],
      "language": "Ge'ez",
      "status": "planned",
-     "note": "Broader canon only."
+     "note": "Broader canon only. The church's own names: Sirate Tsion (order of Zion), Tizaz (the Herald), Gitsew, Abtilis. Contents vary between manuscripts."
     },
     {
      "slug": "covenant",
@@ -325,7 +325,7 @@
      ],
      "language": "Ge'ez",
      "status": "planned",
-     "note": "Broader canon only."
+     "note": "Broader canon only. The church lists it as two books, \"The I book of Dominos\" and \"The II book of Dominos\"."
     },
     {
      "slug": "clement",
@@ -335,7 +335,7 @@
      ],
      "language": "Ge'ez",
      "status": "planned",
-     "note": "Broader canon only. Not the Clement known in the West."
+     "note": "Broader canon only. Not the Clement known in the West. The church lists it as \"The book of Clement\"."
     },
     {
      "slug": "didascalia",
@@ -345,7 +345,7 @@
      ],
      "language": "Ge'ez",
      "status": "planned",
-     "note": "Broader canon only. Not the Didascalia known in the West."
+     "note": "Broader canon only. Not the Didascalia known in the West. The church lists it as \"Didascalia\"."
     }
    ]
   },

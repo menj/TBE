@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.13
+Stable tag: 0.10.14
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -113,6 +113,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.14 =
+* The Ethiopian books show the church's own names and short notes, credited on the Credits page.
+
 = 0.10.13 =
 * The canon lists are checked and completed, and a new section names the early Christian writings once read as scripture.
 
@@ -145,6 +148,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.14 =
+Nothing to do by hand.
 
 = 0.10.13 =
 Nothing to do by hand.
