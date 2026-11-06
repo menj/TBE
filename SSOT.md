@@ -47,11 +47,11 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries) and `cross-references` (32 cross-references, each filed on both passages, so 64 entries). Every entry key starts with its pack id.
 - Glossary: 13 starter terms, created as drafts (`tbe_seed_terms()`).
 - Canons in `data/canons.json`: Jewish, Protestant, Catholic, Orthodox and Ethiopian. The deuterocanonical, further Orthodox and Ethiopian books are prepared sections marked "Not on the site yet". The Ethiopian list is still to be confirmed.
-- The brand mark is a broken inverted cross. It follows Sahih al-Bukhari 2476, cited on the Credits page.
+- The brand mark is a broken inverted cross. It follows Sahih al-Bukhari 2476, cited on the Sources page.
 
 ## Addresses
 
-- Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/` and `/credits/` (`inc/routes.php`).
+- Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/` and `/sources/` (the old `/credits/` answers 301) (`inc/routes.php`).
 - Commentary: post type `tbe_commentary` at `/commentary/`, its sections at `/section/`. Glossary: post type `tbe_term` at `/glossary/`.
 - Front-end editing: only a signed-in user who may edit a note (or create notes) gets the drawer, which saves through the core REST API (`/wp/v2/tbe_commentary`); new notes are drafts until Publish, and a passage that is not a real reference is refused (0.10.15).
 - Search: `/search/{term}/`. The base is set under Settings, Permalinks (option `tbe_search_base`).
@@ -74,9 +74,9 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The ESV copyright line (Crossway), editable under ESV and licence but never removed.
 - STEPBible and Tyndale House Cambridge for the interlinear data.
 - Sefaria for the JPS 1917 text, and CACCHT (ETCBC, Martin Abegg's data) for the scroll comparison.
-- The licences in `assets/fonts/` for SBL, Angel and Noto Naskh Arabic and Abyssinica SIL, and the Angel credit with its link on the Credits page.
+- The licences in `assets/fonts/` for SBL, Angel and Noto Naskh Arabic and Abyssinica SIL, and the Angel credit with its link on the Sources page.
 - The Minimalist Social Icons Pack 2.8 for the profile icons.
-- The source of the critical-commentary pack, on the Credits and references page and nowhere else.
+- The source of the critical-commentary pack, on the Sources page and nowhere else.
 
 ## Contributor rules
 

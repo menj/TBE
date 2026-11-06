@@ -54,10 +54,10 @@ function tbe_book_subtitle( array $book ): string {
 	return '<p class="tbe-title-sub"><span class="tbe-title-sub__he" lang="he" dir="rtl">' . esc_html( (string) $name['he'] ) . '</span><span class="tbe-title-sub__tr">' . esc_html( (string) $name['tr'] ) . '</span></p>';
 }
 
-/** Credits and references: every source the site draws on, including each bundled commentary pack. */
+/** Sources: the credits for everything the site draws on, including each bundled commentary pack, and further resources. */
 function tbe_view_credits(): string {
 	$out  = '<div class="tbe-reader tbe-credits">';
-	$out .= '<h1 class="tbe-title">' . esc_html__( 'Credits and references', 'tbe-child' ) . '</h1>';
+	$out .= '<h1 class="tbe-title">' . esc_html__( 'Sources', 'tbe-child' ) . '</h1>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Scripture', 'tbe-child' ) . '</h2><p>' . esc_html( (string) tbe_setting( 'copyright' ) ) . '</p>';
 
@@ -95,7 +95,20 @@ function tbe_view_credits(): string {
 		}
 		$out .= '</ul>';
 	}
-	return $out . '</div>';
+
+	$links = array(
+		array( 'https://www.stepbible.org/', 'STEP Bible', __( 'Free Bible study tools and the Hebrew and Greek data behind the word-by-word pages.', 'tbe-child' ) ),
+		array( 'https://www.sefaria.org/', 'Sefaria', __( 'The Jewish library in Hebrew and English, with the JPS 1917 Tanakh.', 'tbe-child' ) ),
+		array( 'https://github.com/ETCBC/dss', 'ETCBC, Dead Sea Scrolls data', __( 'The scroll transcriptions behind the variant comparison.', 'tbe-child' ) ),
+		array( 'https://betamasaheft.eu/', 'Beta maṣāḥǝft', __( 'A research project on the manuscripts and texts of Ethiopia and Eritrea.', 'tbe-child' ) ),
+		array( 'https://www.ethiopianorthodox.org/english/', 'Ethiopian Orthodox Tewahedo Church', __( 'The church’s own pages on its canon and history.', 'tbe-child' ) ),
+		array( 'https://en.wikipedia.org/wiki/Biblical_canon', 'Biblical canon (Wikipedia)', __( 'Comparison tables of which churches count which books.', 'tbe-child' ) ),
+	);
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Resources', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Where to read further, and to check the texts for yourself.', 'tbe-child' ) . '</p><ul class="tbe-credits__list">';
+	foreach ( $links as $link ) {
+		$out .= '<li><a href="' . esc_url( $link[0] ) . '" rel="noopener">' . esc_html( $link[1] ) . '</a> <span class="tbe-muted">' . esc_html( $link[2] ) . '</span></li>';
+	}
+	return $out . '</ul></div>';
 }
 
 /** Every chapter that has a Hebrew interlinear, by book; a note marks the ones with a recorded reading. */
@@ -531,7 +544,7 @@ function tbe_copyright_html(): string {
 	// Pages carry the short form (up to "All rights reserved."); the full notice stays on the Credits page.
 	$end = stripos( $text, 'All rights reserved.' );
 	if ( false !== $end && strlen( $text ) > $end + 20 ) {
-		return '<p class="tbe-copyright">' . wp_kses_post( substr( $text, 0, $end + 20 ) ) . ' <a href="' . esc_url( home_url( '/credits/' ) ) . '">' . esc_html__( 'Full notice', 'tbe-child' ) . '</a></p>';
+		return '<p class="tbe-copyright">' . wp_kses_post( substr( $text, 0, $end + 20 ) ) . ' <a href="' . esc_url( home_url( '/sources/' ) ) . '">' . esc_html__( 'Full notice', 'tbe-child' ) . '</a></p>';
 	}
 	return '<p class="tbe-copyright">' . wp_kses_post( $text ) . '</p>';
 }

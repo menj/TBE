@@ -70,7 +70,7 @@ function tbe_search_reserved_bases() {
 		'tbe_search_reserved_bases',
 		array_merge(
 			tbe_search_live_slugs(),
-			array( 'bible', 'interlinear', 'credits', 'commentary', 'section', 'glossary', 'wp-admin', 'wp-content', 'wp-includes', 'wp-json', 'feed', 'page', 'comments', 'category', 'tag', 'author', 'embed', 'trackback', 'attachment', 'type' )
+			array( 'bible', 'interlinear', 'credits', 'sources', 'commentary', 'section', 'glossary', 'wp-admin', 'wp-content', 'wp-includes', 'wp-json', 'feed', 'page', 'comments', 'category', 'tag', 'author', 'embed', 'trackback', 'attachment', 'type' )
 		)
 	);
 }

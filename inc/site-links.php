@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 /** The root paths the theme's templates link to: the first segment of each. */
 function tbe_site_link_sections(): array {
-	return array( 'bible', 'commentary', 'glossary', 'credits' );
+	return array( 'bible', 'commentary', 'glossary', 'credits', 'sources' );
 }
 
 /**

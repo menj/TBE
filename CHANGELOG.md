@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.17
+
+The Credits page becomes Sources, and gains a Resources section. Nothing was removed.
+
+### Changed
+- The page is at `/sources/`, titled "Sources", and the footer link reads "Sources". The old `/credits/` answers 301 to it. `sources` joins the reserved search bases and the site-link sections.
+- A new "Resources" section lists six places to read further: STEP Bible, Sefaria, the ETCBC Dead Sea Scrolls data, Beta maṣāḥǝft, the Ethiopian Orthodox Tewahedo Church and Wikipedia's "Biblical canon".
+
 ## 0.10.16
 
 Thematic essays reach the chapters they relate to. Nothing was removed.

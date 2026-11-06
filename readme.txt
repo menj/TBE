@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.16
+Stable tag: 0.10.17
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -113,6 +113,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.17 =
+* The Credits page is now Sources, at /sources/, with a Resources section; the old address redirects.
+
 = 0.10.16 =
 * A chapter page lists thematic essays that share a tag with the notes on it.
 
@@ -155,6 +158,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.17 =
+Nothing to do by hand. The first page load after the update refreshes the address rules.
 
 = 0.10.16 =
 Nothing to do by hand.

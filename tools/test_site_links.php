@@ -41,7 +41,7 @@ foreach ( array( 'https://tbe.test', 'https://tbe.test/blog' ) as $home ) {
 	$GLOBALS['t_home'] = $home;
 	$out = tbe_site_links( $all );
 	check( ! preg_match( '~href="/[^/]~', $out ), "no root link is left under $home" );
-	check( false !== strpos( $out, 'href="' . $home . '/bible/interlinear/"' ) && false !== strpos( $out, 'href="' . $home . '/credits/"' ), "links point under $home" );
+	check( false !== strpos( $out, 'href="' . $home . '/bible/interlinear/"' ) && false !== strpos( $out, 'href="' . $home . '/sources/"' ), "links point under $home" );
 	check( tbe_site_links( $out ) === $out, "a rewritten link is not rewritten again under $home" );
 }
 $GLOBALS['t_home'] = 'https://tbe.test/blog';

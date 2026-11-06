@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.17
+Nothing to do. The theme refreshes its address rules on the first load after the update. If a page cache sits in front of the site, clear it so the footer shows "Sources".
+
 ### To 0.10.16
 Nothing to do. To use the new strip, write a commentary entry with no passage (an essay) and give it the same tags as the notes on the chapters it relates to.
 
