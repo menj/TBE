@@ -100,7 +100,7 @@ $probes = array( '/.env', '/.env.production', '/.env.bak', '/sitemaps/.env', '/w
 foreach ( $probes as $p ) {
 	check( tbe_is_probe( $p ), "probe: $p" );
 }
-$pages = array( '/', '/bible/', '/bible/john/3/', '/bible/interlinear/', '/credits/', '/commentary/', '/glossary/', '/search/grace/', '/wp-sitemap.xml', '/sitemap.xml', '/robots.txt', '/feed/', '/index.php', '/wp-login.php', '/wp-cron.php', '/xmlrpc.php', '/wp-comments-post.php', '/wp-admin/', '/wp-admin/admin-ajax.php', '/wp-admin/post.php', '/wp-json/wp/v2/posts', '/.well-known/acme-challenge/token', '/.well-known/security.txt', '/.well-known/pki-validation/x.php', '/wp-content/themes/TBE/assets/js/reader.js', '/commentary/environment-and-law/', '/image.webp' );
+$pages = array( '/', '/bible/', '/bible/john/3/', '/bible/interlinear/', '/sources/', '/commentary/', '/glossary/', '/search/grace/', '/wp-sitemap.xml', '/sitemap.xml', '/robots.txt', '/feed/', '/index.php', '/wp-login.php', '/wp-cron.php', '/xmlrpc.php', '/wp-comments-post.php', '/wp-admin/', '/wp-admin/admin-ajax.php', '/wp-admin/post.php', '/wp-json/wp/v2/posts', '/.well-known/acme-challenge/token', '/.well-known/security.txt', '/.well-known/pki-validation/x.php', '/wp-content/themes/TBE/assets/js/reader.js', '/commentary/environment-and-law/', '/image.webp' );
 foreach ( $pages as $p ) {
 	check( ! tbe_is_probe( $p ), "not a probe: $p" );
 }
