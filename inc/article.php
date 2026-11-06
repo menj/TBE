@@ -475,7 +475,7 @@ function tbe_render_next_step( array $attrs = array() ): string {
 		$out .= '<a class="tbe-btn" href="' . esc_url( TBE_Interlinear::url( $book, $chapter ) ) . '">' . esc_html( 'NT' === $data['testament'] ? __( 'Read the Greek word by word', 'tbe-child' ) : __( 'Read the Hebrew word by word', 'tbe-child' ) ) . '</a>';
 	}
 	if ( '' !== $ask ) {
-		$out .= '<a class="tbe-btn" href="' . $ask . '">' . esc_html__( 'Ask a question', 'tbe-child' ) . '</a>';
+		$out .= '<a class="tbe-btn tbe-btn--icon" href="' . $ask . '"><svg class="tbe-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>' . esc_html__( 'Ask a question', 'tbe-child' ) . '</a>';
 	}
 	$out .= '</p>';
 	$next = tbe_article_next_in_book( $post );
