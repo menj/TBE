@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.13
+Nothing to do. The canon lists are data only.
+
 ### To 0.10.12
 Nothing to do on a site at the domain root. On a site in a subfolder, put a copy of `assets/img/brand/favicon.ico` in the domain root (or, with a Site Icon set, that icon converted to an ICO file named `favicon.ico`), since browsers ask for `/favicon.ico` there.
 

@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.12
+Stable tag: 0.10.13
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -113,6 +113,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.13 =
+* The canon lists are checked and completed, and a new section names the early Christian writings once read as scripture.
+
 = 0.10.12 =
 * The readme says where the browser icon goes on a site in a subfolder: a copy of favicon.ico in the domain root.
 
@@ -142,6 +145,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.13 =
+Nothing to do by hand.
 
 = 0.10.12 =
 Upload the whole theme folder. On a site in a subfolder, also put a copy of assets/img/brand/favicon.ico in the domain root folder (or, with a Site Icon set, that icon converted to an ICO file named favicon.ico); otherwise nothing to do.

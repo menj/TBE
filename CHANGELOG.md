@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.13
+
+The canon lists are checked against Wikipedia's "Biblical canon" article (facts only). Nothing was removed.
+
+### Changed
+- `data/canons.json`: the deuterocanonical, further Orthodox and Ethiopian sections are corrected and completed, and a new section lists the early Christian writings once read as scripture (1 and 2 Clement, the Didache, Barnabas, the Shepherd of Hermas, the Apocalypse of Peter, 3 Corinthians, Laodiceans), each with the badge "Once read as scripture".
+- `inc/canon.php` prints that badge and a short note on each prepared book; `assets/css/reader.css` styles them.
+- The Credits page thanks Wikipedia for the canon lists (CC BY-SA 4.0).
+
 ## 0.10.12
 
 The docs name the subfolder favicon step. No feature removed.
