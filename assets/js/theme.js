@@ -23,8 +23,9 @@
 		}
 	}
 
+	/* The site is light by default (0.10.15). A dark choice saved earlier is not applied. */
 	var saved = read();
-	if ( saved ) {
+	if ( 'light' === saved ) {
 		root.setAttribute( 'data-theme', saved );
 	}
 

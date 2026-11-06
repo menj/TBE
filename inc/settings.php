@@ -88,7 +88,7 @@ function tbe_defaults(): array {
 	return array(
 		// General.
 		'tagline'          => __( 'Textual criticism, critical commentary and reflection on the Bible.', 'tbe-child' ),
-		'allow_toggle'     => 1,
+		'allow_toggle'     => 0,
 		'schema'           => 1,
 		'pack_sync'        => 1,
 		'error_pages'      => 1,

@@ -114,6 +114,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 == Changelog ==
 
 = 0.10.15 =
+* The site is light only; the light and dark switch is off by default.
 * People who may edit can edit a commentary note, or add one for a chapter, from the front of the site in a drawer that uses WordPress's own block editor.
 
 = 0.10.14 =

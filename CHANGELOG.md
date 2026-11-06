@@ -4,6 +4,9 @@
 
 Front-end editing for people who may edit. Nothing was renamed or removed.
 
+### Changed
+- The site is light only, as the owner decided on 6 November 2026. The light/dark switch is gone from the header, `allow_toggle` defaults to off, and a dark choice a visitor saved earlier is no longer applied. The "Night study" scheme, the dark colour rules and the `tbe/theme-toggle` block stay in the code for anyone who turns the switch back on.
+
 ### Added
 - `inc/frontend-edit.php`, `assets/js/frontend-edit.js` and `assets/css/frontend-edit.css`. A signed-in user who can edit a commentary note sees an "Edit this note" button on it, and one who can create notes sees "Add a note here" on a Bible chapter. Both open a drawer with the title, the passage and WordPress's own block editor, built from core's `wp-block-editor`, `wp-components`, `wp-block-library`, `wp-format-library` and `wp-api-fetch` packages (no outside library), and save through the core REST API. New notes are saved as drafts, and a Publish button (shown to users who may publish) makes a note public. The scripts load only for those users.
 - The "Ask a question" button on a commentary note carries an envelope icon (inline SVG, `.tbe-btn--icon` in `assets/css/article.css`), and the editor button an open-book icon.
