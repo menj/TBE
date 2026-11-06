@@ -20,6 +20,14 @@
 		wp.blockLibrary.registerCoreBlocks();
 	}
 
+	/* An open book, drawn as an inline SVG so it takes the button's colour in every scheme. */
+	function BookIcon() {
+		return el( 'svg', { className: 'tbe-edit__icon', viewBox: '0 0 24 24', width: 18, height: 18, 'aria-hidden': 'true', focusable: 'false', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' },
+			el( 'path', { d: 'M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z' } ),
+			el( 'path', { d: 'M12 6.5v13' } )
+		);
+	}
+
 	function Editor( props ) {
 		var s = useState( props.initial );
 		var blocks = s[0], setBlocks = s[1];
@@ -97,7 +105,7 @@
 		}
 
 		return el( wp.element.Fragment, null,
-			el( 'button', { type: 'button', className: 'tbe-edit__open', onClick: start }, ctx.mode === 'edit' ? t.edit : t.add ),
+			el( 'button', { type: 'button', className: 'tbe-edit__open', onClick: start }, el( BookIcon ), ctx.mode === 'edit' ? t.edit : t.add ),
 			open[0] ? ( data[0] && ! loading[0]
 				? el( Editor, { initial: data[0].blocks, title: data[0].title, passage: data[0].passage, id: data[0].id, status: data[0].status, onClose: function () { open[1]( false ); }, onSaved: function () {} } )
 				: el( 'div', { className: 'tbe-edit__drawer tbe-edit__drawer--loading' }, t.loading ) ) : null

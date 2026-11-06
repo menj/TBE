@@ -3,6 +3,7 @@
 	position: fixed; right: 1rem; bottom: 1rem; z-index: 99990;
 	padding: .6rem 1.1rem; border: 1px solid var(--tbe-gold); border-radius: 999px;
 	background: var(--tbe-accent); color: #fff; font: 600 .85rem/1 var(--tbe-ui); cursor: pointer;
+	display: inline-flex; align-items: center; gap: .5rem;
 	box-shadow: 0 4px 14px rgba(0, 0, 0, .25); transition: transform .15s ease, box-shadow .15s ease;
 }
 .tbe-edit__open:hover, .tbe-edit__open:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, .3); }
