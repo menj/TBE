@@ -40,6 +40,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `inc/routes.php`, `inc/reader.php` | The `/bible/` routes and the reader views |
 | `inc/interlinear.php`, `inc/dss.php`, `inc/audio.php` | Interlinear pages, Dead Sea Scroll variants and recorded readings |
 | `inc/esv-api.php`, `inc/quran.php` | The live ESV fallback and the Qur'an references |
+| `inc/frontend-edit.php` | Front-end editing: the Edit / Add a note drawer built on core's block editor packages, for users who can edit |
 | `inc/commentary.php`, `inc/entry-fields.php`, `inc/starter-commentary.php` | The commentary post type, its boxes, and the starter packs |
 | `inc/glossary.php`, `inc/enrich.php` | The glossary, tooltips and scripture hover cards |
 | `inc/search.php`, `inc/search-permalinks.php` | The Bible search and the `/search/term/` addresses |
@@ -68,7 +69,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## At a glance
-- Version 0.10.14. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
+- Version 0.10.15. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
 - Apache 2.2 or 2.4 reads the theme's `.htaccess` and `tools/.htaccess` as they are. On Nginx those files do nothing; add the lines under "Nginx" below to the server block.
 - Multisite works: each site keeps its own settings, and one site writes the shared error pages (see Error pages).
 - The theme makes no remote call from a visitor's browser. The server calls the ESV API only for a chapter the bundle lacks, and only with a token.

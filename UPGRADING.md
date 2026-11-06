@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.15
+Nothing to do. New files: `inc/frontend-edit.php`, `assets/js/frontend-edit.js`, `assets/css/frontend-edit.css`.
+
 ### To 0.10.14
 Nothing to do. The change is data and one Credits paragraph.
 
