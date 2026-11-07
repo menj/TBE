@@ -80,13 +80,18 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - Answer credential-file probes with the short 404. Why: the November logs show `/google-credentials.json`, `/sa.json`, `/key.json`, `/google-key.json`, `/gcp-key.json`, `/gcp-sa.json`, `/firebase-key.json` and `/firebase-adminsdk.json` (4 or 5 requests each) and `/info` (12) still rendering the 74 KB theme 404.
 - Serve `/favicon.png` from the brand icon, as `/favicon.ico` is. Why: 5 requests in the logs got the full 404 page.
 - Test the Nginx lines in README.md on a real Nginx. Why: they are written from the Apache rules and marked untested.
+- Settle the Qur'an cross-references. Why: the owner's rule that nothing Islamic goes on the site for now (restated 7 November 2026) meets references still shown on entry pages, in the reader, in the structured data and in link tips, and SSOT.md still calls the position "Islamic-leaning". The owner decides whether the public pages hide them; the admin field keeps what is saved.
+- A lexicon page for each Strong's number. Why: every interlinear word carries its number, but it shows only in a tooltip with nothing to link to. STEPBible's Hebrew and Greek lexicons (TBESH, TBESG) are CC BY 4.0, the same terms as the interlinear data.
+- A manuscripts section at `/manuscripts/`. Why: the interlinear data already records about 4,100 Greek words outside NA28, about 3,850 variant readings and about 1,500 Hebrew written-and-read (ketiv and qere) places, and the reader shows them only as outlines and tooltips. The first pages are a per-book table, the well-known passages (Mark 16:9-20, John 7:53-8:11, 1 John 5:7-8 and others) as commentary entries, and a Hebrew page with the Dead Sea Scrolls differences.
 
 ### Later
-- More recorded readings. Why: only Genesis 1 (Hebrew) and Matthew 1 (Greek) have audio; `tools/align_audio.py` is ready for more, but each needs a recording with a licence.
-- More Dead Sea Scrolls comparisons. Why: only Isaiah 1 to 5 is compared; it waits on checking the spelling heuristic against more chapters.
+- More recorded readings. Why: only Genesis 1 (Hebrew) and Matthew 1 (Greek) have audio; `tools/align_audio.py` is ready for more, but each needs a recording with a licence, which the owner supplies.
+- Isaiah 6 to 66 in the Dead Sea Scrolls comparison, then other scrolls. Why: only Isaiah 1 to 5 is compared; `tools/build_dss_variants.py` takes a chapter range, and each batch needs its spelling differences spot-checked.
 - The JPS 1917 parallel beyond Genesis. Why: `tools/fetch_jps.py --books` adds a book at a time, and each needs its versification checked against `data/jps-versification.json`.
 - The deuterocanonical, further Orthodox and Ethiopian books. Why: they are listed as prepared sections, "Not on the site yet", and the Ethiopian list is still to be confirmed.
-- A Syriac interlinear. Why: the Estrangela font is bundled and unused, waiting on an open Syriac dataset.
+- The Ge'ez texts of the Ethiopian books. Why: the Ge'ez font is bundled and unused, and the texts need a licensed source. The owner asks the Ethiopian Orthodox Tewahedo Church first, since its permission so far covers names and notes from its site.
+- Manuscript-level evidence in the manuscripts section. Why: the interlinear data compares printed editions (NA28, SBL, Westcott-Hort, Textus Receptus, Byzantine), so it cannot name single manuscripts such as Sinaiticus or Vaticanus. The NA28 apparatus is copyrighted; the Center for New Testament Restoration's transcriptions are a candidate once their licence is confirmed. Until then, the owner's own notes carry it.
+- A Syriac interlinear. Why: the Estrangela font is bundled and unused, waiting on an open Syriac dataset. The owner has said not to build it yet.
 
 ### Ideas
 - A spam check for comments and posts. Why: the theme has no spam filter of its own, and would need one before comments open.
