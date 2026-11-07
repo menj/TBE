@@ -1,0 +1,8 @@
+{
+ "_note": "Manuscript photographs from Wikimedia Commons, chosen by hand and checked by eye to show the passage. tools/fetch_manuscript_images.py fills in src, size, licence, author and page.",
+ "images": [
+  {"passage": "mark-16-9-20", "ms": "03", "file": "File:Mark16-B.JPG", "caption": "Codex Vaticanus: Mark ends at 16:8, “for they were afraid”, and the closing title “According to Mark” follows."},
+  {"passage": "mark-16-9-20", "ms": "01", "file": "File:Shorter ending of Mark 16 from Codex Sinaiticus.png", "caption": "Codex Sinaiticus: Mark ends at 16:8, and the closing title follows."},
+  {"passage": "mark-16-9-20", "ms": "02", "file": "File:Codex Alexandrinus - Gospel of Mark.png", "caption": "Codex Alexandrinus: the text runs on past 16:8 into verses 9 to 20."}
+ ]
+}

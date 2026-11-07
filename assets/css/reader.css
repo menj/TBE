@@ -336,3 +336,7 @@
 }
 .tbe-ms__note p { margin: 0 0 0.3rem; }
 .tbe-ms__note ul { margin: 0; padding-inline-start: 1.1rem; }
+.tbe-ms__gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: 1.25rem; align-items: start; }
+.tbe-ms__figure { margin: 0; }
+.tbe-ms__figure img { display: block; width: 100%; height: auto; border: 1px solid var(--tbe-line); border-radius: var(--tbe-radius, 4px); background: #fff; }
+.tbe-ms__figure figcaption { margin-top: 0.45rem; font-size: 0.9rem; line-height: 1.45; }

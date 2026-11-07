@@ -134,6 +134,25 @@ final class TBE_Manuscripts {
 		return array( $name, '' );
 	}
 
+	/**
+	 * The photographs of one passage's manuscripts, from data/manuscripts/images.json: only those fetched (with a
+	 * licence) whose file is in the theme.
+	 */
+	public static function images( string $id ): array {
+		static $all = null;
+		if ( null === $all ) {
+			$file = TBE_DIR . '/data/manuscripts/images.json';
+			$read = is_readable( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : null; // phpcs:ignore WordPress.WP.AlternativeFunctions
+			$all  = is_array( $read ) ? (array) ( $read['images'] ?? array() ) : array();
+		}
+		return array_values(
+			array_filter(
+				$all,
+				static fn( $i ) => ( $i['passage'] ?? '' ) === $id && ! empty( $i['license'] ) && ! empty( $i['src'] ) && is_readable( TBE_DIR . '/' . $i['src'] )
+			)
+		);
+	}
+
 	/** The printed editions, in the order shown. */
 	public static function editions(): array {
 		return array(
@@ -190,6 +209,28 @@ function tbe_manuscripts_credit(): string {
 			'<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>'
 		)
 	) . '</p>';
+}
+
+/** The photographs of a passage's manuscripts, each with its caption and its Commons credit. */
+function tbe_manuscripts_gallery( string $id ): string {
+	$images = TBE_Manuscripts::images( $id );
+	if ( ! $images ) {
+		return '';
+	}
+	$uri = defined( 'TBE_URI' ) ? TBE_URI : '';
+	$out = '<h2 class="tbe-ornament">' . esc_html__( 'The pages themselves', 'tbe-child' ) . '</h2><div class="tbe-ms__gallery">';
+	foreach ( $images as $i ) {
+		[ $name ] = TBE_Manuscripts::witness( (string) $i['ms'] );
+		$credit   = sprintf(
+			/* translators: 1: licence, 2: link to the file on Wikimedia Commons */
+			__( '%1$s, from %2$s.', 'tbe-child' ),
+			esc_html( (string) $i['license'] ),
+			'<a href="' . esc_url( (string) $i['page'] ) . '" rel="noopener">' . esc_html__( 'Wikimedia Commons', 'tbe-child' ) . '</a>'
+		);
+		$out .= '<figure class="tbe-ms__figure"><a href="' . esc_url( (string) $i['page'] ) . '" rel="noopener"><img src="' . esc_url( $uri . '/' . $i['src'] ) . '" width="' . (int) $i['width'] . '" height="' . (int) $i['height'] . '" loading="lazy" decoding="async" alt="' . esc_attr( sprintf( /* translators: %s: manuscript name */ __( 'A page of %s', 'tbe-child' ), $name ) ) . '"></a>'
+			. '<figcaption>' . esc_html( (string) $i['caption'] ) . ' <span class="tbe-muted">' . $credit . '</span></figcaption></figure>';
+	}
+	return $out . '</div>';
 }
 
 /** /manuscripts/: every passage, with how many early manuscripts have it. */
@@ -259,6 +300,8 @@ function tbe_view_manuscript_passage( array $p ): string {
 		}
 		$out .= '</ul>' . ( $long ? '</details>' : '' ) . '</div>';
 	}
+
+	$out .= tbe_manuscripts_gallery( $id );
 
 	// The table.
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'The early manuscripts', 'tbe-child' ) . '</h2>';

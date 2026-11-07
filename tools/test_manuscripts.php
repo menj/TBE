@@ -78,6 +78,17 @@ check( false !== strpos( $mark, 'Codex Vaticanus' ) && false !== strpos( $mark, 
 check( '' !== tbe_manuscripts_chapter_note( 'mark', 16 ) && '' === tbe_manuscripts_chapter_note( 'mark', 1 ), 'the chapter note shows only where a passage is' );
 check( 'John 7:53–8:11' === TBE_Manuscripts::label( $all['john-7-53-8-11'] ) && 'Mark 9:44, 46' === TBE_Manuscripts::label( $all['mark-9-44-46'] ), 'passage labels' );
 
+$imgs = json_decode( (string) file_get_contents( TBE_DIR . '/data/manuscripts/images.json' ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+check( is_array( $imgs ) && ! empty( $imgs['images'] ), 'the photograph list reads' );
+$bad = array_filter( (array) $imgs['images'], static fn( $i ) => ! isset( $all[ $i['passage'] ?? '' ]['mss'][ $i['ms'] ?? '' ] ) || '' === trim( (string) ( $i['caption'] ?? '' ) ) );
+check( ! $bad, 'every photograph names a passage and a manuscript on it, with a caption' );
+$shown = TBE_Manuscripts::images( 'mark-16-9-20' );
+foreach ( $shown as $i ) {
+	check( preg_match( '/^(public domain|pd\b|cc0|cc by(-sa)? [0-9.]+)/i', (string) $i['license'] ) && 0 === strpos( (string) $i['page'], 'https://commons.wikimedia.org/' ), 'photograph ' . $i['src'] . ' is free and links to Commons' );
+}
+check( ! $shown || false !== strpos( tbe_manuscripts_gallery( 'mark-16-9-20' ), 'Wikimedia Commons' ), 'the gallery credits Commons' );
+check( '' === tbe_manuscripts_gallery( 'romans-16-24' ), 'no gallery where there is no photograph' );
+
 $routes = (string) file_get_contents( TBE_DIR . '/inc/routes.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 check( false !== strpos( $routes, "'^manuscripts/?$'" ) && false !== strpos( $routes, "'^manuscripts/([a-z0-9-]+)/?$'" ), 'the routes answer /manuscripts/ and each passage' );
 $reader = (string) file_get_contents( TBE_DIR . '/inc/reader.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
