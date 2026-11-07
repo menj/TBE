@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.17
+Stable tag: 0.10.18
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -23,6 +23,7 @@ What a visitor gets:
 * A glossary, an index of the commentary and a passage search.
 * Recorded readings of Genesis 1 (Hebrew) and Matthew 1 (Greek), with each word lit as it is read.
 * A Christian and Jewish side-by-side view for Genesis (ESV and JPS 1917), and Dead Sea Scroll readings for Isaiah 1 to 5.
+* A Manuscripts section at /manuscripts/: twenty passages that the King James Version prints and the earliest Greek manuscripts leave out, such as the long ending of Mark and the woman caught in adultery, with each manuscript's own words line by line.
 * Three colour schemes, or your own colours. The site is light only.
 
 The theme is made for thebible.exposed and is not meant for other sites.
@@ -108,10 +109,14 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The Hebrew and Greek word-by-word data is from STEPBible (www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
 * The JPS 1917 translation is in the public domain and comes through Sefaria.
 * The Dead Sea Scroll comparison is built from the CACCHT project's data (ETCBC, after Martin Abegg), CC BY-NC 4.0.
+* The Manuscripts pages are built from the transcriptions of the early Greek manuscripts by Alan Bunning and the Center for New Testament Restoration, CC BY-SA 4.0, and share that licence. Their English wording is from the public-domain KJV, World English Bible and Berean Standard Bible.
 * Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic and Abyssinica SIL under the SIL Open Font License.
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
 == Changelog ==
+
+= 0.10.18 =
+* A new Manuscripts section shows, manuscript by manuscript, which early Greek copies have twenty disputed passages, with their own text. A chapter that holds one says so under its heading.
 
 = 0.10.17 =
 * The Credits page is now Sources, at /sources/, with a Resources section; the old address redirects.
@@ -158,6 +163,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.18 =
+Nothing to do by hand. The first page load after the update adds the /manuscripts/ addresses.
 
 = 0.10.17 =
 Nothing to do by hand. The first page load after the update refreshes the address rules.

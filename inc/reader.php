@@ -31,6 +31,10 @@ function tbe_render_reader(): string {
 			return tbe_view_interlinear_index();
 		case 'credits':
 			return tbe_view_credits();
+		case 'manuscripts':
+			return tbe_view_manuscripts();
+		case 'manuscript':
+			return tbe_view_manuscript_passage( $request['passage'] );
 		default:
 			return tbe_view_missing();
 	}
@@ -70,6 +74,9 @@ function tbe_view_credits(): string {
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The readings of the scrolls are compared using the %s: Jarod Jacobs, Martijn Naaijer and Dirk Roorda, built on the data files of Martin Abegg, licensed CC BY-NC 4.0 (version 2.0, doi:10.5281/zenodo.23731063). So far the Great Isaiah Scroll (1QIsa-a) is compared with Isaiah 1 to 5. The scroll photographs belong to the Israel Antiquities Authority and are not reproduced here.', 'tbe-child' ), '<a href="https://github.com/ETCBC/dss" rel="noopener">CACCHT / ETCBC Dead Sea Scrolls dataset</a>' ) ) . '</p>';
 
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Greek manuscripts', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: 1: link to CNTR, 2: link to the licence */ __( 'The manuscript pages are built from the electronic transcriptions of the early Greek manuscripts by Alan Bunning and the %1$s, licensed %2$s. The tables and texts built from them are shared under the same licence. The English wording beside them comes from the public-domain King James Version (Pure Cambridge Edition), World English Bible and Berean Standard Bible, as set out on the Center’s translation pages.', 'tbe-child' ), '<a href="https://greekcntr.org/" rel="noopener">Center for New Testament Restoration</a>', '<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>' ) ) . '</p>';
+
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Jewish translation', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The Jewish text beside the ESV is The Holy Scriptures: A New Translation (JPS 1917), published by the Jewish Publication Society and in the public domain. The digital text comes from %s, by way of the Open Siddur Project.', 'tbe-child' ), '<a href="https://www.sefaria.org" rel="noopener">Sefaria</a>' ) ) . '</p>';
 
@@ -99,6 +106,7 @@ function tbe_view_credits(): string {
 	$links = array(
 		array( 'https://www.stepbible.org/', 'STEP Bible', __( 'Free Bible study tools and the Hebrew and Greek data behind the word-by-word pages.', 'tbe-child' ) ),
 		array( 'https://www.sefaria.org/', 'Sefaria', __( 'The Jewish library in Hebrew and English, with the JPS 1917 Tanakh.', 'tbe-child' ) ),
+		array( 'https://greekcntr.org/', 'Center for New Testament Restoration', __( 'The early Greek manuscripts, transcribed, compared verse by verse and set beside translations.', 'tbe-child' ) ),
 		array( 'https://github.com/ETCBC/dss', 'ETCBC, Dead Sea Scrolls data', __( 'The scroll transcriptions behind the variant comparison.', 'tbe-child' ) ),
 		array( 'https://betamasaheft.eu/', 'Beta maṣāḥǝft', __( 'A research project on the manuscripts and texts of Ethiopia and Eritrea.', 'tbe-child' ) ),
 		array( 'https://www.ethiopianorthodox.org/english/', 'Ethiopian Orthodox Tewahedo Church', __( 'The church’s own pages on its canon and history.', 'tbe-child' ) ),
@@ -141,7 +149,7 @@ function tbe_view_interlinear_index(): string {
 function tbe_view_books(): string {
 	$out  = '<div class="tbe-reader tbe-books">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'The Books of the Bible', 'tbe-child' ) . '</h1>';
-	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
+	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Manuscripts::url() ) . '">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
 
 	$out .= tbe_canon_filter();
 
@@ -245,6 +253,7 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 	foreach ( $intro as $entry ) {
 		$out .= tbe_render_box( $entry, $slug, $chapter, true );
 	}
+	$out .= tbe_manuscripts_chapter_note( $slug, $chapter );
 	$out .= tbe_render_notes_contents( $starts, $slug, $chapter );
 	$out .= tbe_render_related_essays( $entries );
 

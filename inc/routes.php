@@ -1,6 +1,7 @@
 <?php
 /**
- * Pretty URLs for the reader: /bible/, /bible/john/, /bible/john/3/
+ * Pretty URLs for the reader: /bible/, /bible/john/, /bible/john/3/, and the manuscripts: /manuscripts/,
+ * /manuscripts/mark-16-9-20/
  *
  * @package tbe-child
  */
@@ -12,6 +13,8 @@ add_action(
 	static function () {
 		add_rewrite_rule( '^bible/?$', 'index.php?tbe_view=books', 'top' );
 		add_rewrite_rule( '^bible/search/?$', 'index.php?tbe_view=search', 'top' );
+		add_rewrite_rule( '^manuscripts/?$', 'index.php?tbe_view=manuscripts', 'top' );
+		add_rewrite_rule( '^manuscripts/([a-z0-9-]+)/?$', 'index.php?tbe_view=manuscript&tbe_ms=$matches[1]', 'top' );
 		add_rewrite_rule( '^sources/?$', 'index.php?tbe_view=credits', 'top' );
 		add_rewrite_rule( '^credits/?$', 'index.php?tbe_view=credits-old', 'top' );
 		add_rewrite_rule( '^bible/index/?$', 'index.php?tbe_view=index', 'top' );
@@ -25,7 +28,7 @@ add_action(
 add_filter(
 	'query_vars',
 	static function ( array $vars ): array {
-		return array_merge( $vars, array( 'tbe_view', 'tbe_book', 'tbe_chapter', 'q' ) );
+		return array_merge( $vars, array( 'tbe_view', 'tbe_book', 'tbe_chapter', 'tbe_ms', 'q' ) );
 	}
 );
 
@@ -39,8 +42,12 @@ function tbe_request(): ?array {
 	if ( '' === $view ) {
 		return $request = null;
 	}
-	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view || 'credits' === $view ) {
+	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view || 'credits' === $view || 'manuscripts' === $view ) {
 		return $request = array( 'view' => $view );
+	}
+	if ( 'manuscript' === $view ) {
+		$passage = TBE_Manuscripts::passage( sanitize_key( (string) get_query_var( 'tbe_ms' ) ) );
+		return $request = $passage ? array( 'view' => 'manuscript', 'passage' => $passage ) : array( 'view' => 'missing' );
 	}
 	if ( 'search' === $view ) {
 		return $request = array(
@@ -148,6 +155,12 @@ add_filter(
 				break;
 			case 'interlinear-index':
 				$parts['title'] = __( 'Interlinear', 'tbe-child' );
+				break;
+			case 'manuscripts':
+				$parts['title'] = __( 'Manuscripts', 'tbe-child' );
+				break;
+			case 'manuscript':
+				$parts['title'] = sprintf( /* translators: %s: passage such as Mark 16:9–20 */ __( 'Manuscripts: %s', 'tbe-child' ), TBE_Manuscripts::label( $request['passage'] ) );
 				break;
 			case 'book':
 				$parts['title'] = $request['book']['name'];

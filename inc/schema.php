@@ -55,6 +55,19 @@ function tbe_ld_chapter_id( string $slug, int $chapter ): string {
 	return TBE_Bible::url( $slug, $chapter ) . '#chapter';
 }
 
+/** The CNTR transcriptions behind the manuscripts pages, as a Dataset node. */
+function tbe_ld_cntr_node(): array {
+	return array(
+		'@type'      => 'Dataset',
+		'@id'        => home_url( '/#cntr-data' ),
+		'name'       => 'CNTR Electronic Transcriptions of the early Greek New Testament manuscripts',
+		'url'        => 'https://github.com/Center-for-New-Testament-Restoration/transcriptions',
+		'license'    => 'https://creativecommons.org/licenses/by-sa/4.0/',
+		'creator'    => array( '@type' => 'Organization', 'name' => 'Center for New Testament Restoration', 'url' => 'https://greekcntr.org/' ),
+		'inLanguage' => 'grc',
+	);
+}
+
 function tbe_ld_terms_set_id(): string {
 	return home_url( '/glossary/#terms' );
 }
@@ -630,6 +643,21 @@ function tbe_ld_graph(): array {
 		$posts         = get_posts( array( 'post_type' => 'tbe_commentary', 'post_status' => 'publish', 'numberposts' => 500 ) );
 		$extra[]            = tbe_ld_post_list( $url . '#notes', $posts, 'Index of commentary' );
 		$page['mainEntity'] = tbe_ld_ref( $url . '#notes' );
+
+	} elseif ( $request && 'manuscripts' === $request['view'] ) {
+		$page['@type'] = 'CollectionPage';
+		$trail[]       = array( __( 'Manuscripts', 'tbe-child' ), TBE_Manuscripts::url() );
+		$page['isBasedOn'] = tbe_ld_ref( home_url( '/#cntr-data' ) );
+		$extra[]       = tbe_ld_cntr_node();
+
+	} elseif ( $request && 'manuscript' === $request['view'] ) {
+		$passage       = $request['passage'];
+		$trail[]       = array( __( 'Manuscripts', 'tbe-child' ), TBE_Manuscripts::url() );
+		$trail[]       = array( TBE_Manuscripts::label( $passage ), TBE_Manuscripts::url( (string) $passage['id'] ) );
+		$page['about'] = tbe_ld_ref( tbe_ld_chapter_id( (string) $passage['book'], (int) $passage['ref'][0] ) );
+		$page['isBasedOn'] = tbe_ld_ref( home_url( '/#cntr-data' ) );
+		$page['license']   = 'https://creativecommons.org/licenses/by-sa/4.0/';
+		$extra[]       = tbe_ld_cntr_node();
 
 	} elseif ( is_singular( 'tbe_commentary' ) ) {
 		$entry   = get_queried_object();

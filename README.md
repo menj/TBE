@@ -39,6 +39,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `inc/bible.php`, `inc/canon.php` | Book data, the reference parser and the canon labels |
 | `inc/routes.php`, `inc/reader.php` | The `/bible/` routes and the reader views |
 | `inc/interlinear.php`, `inc/dss.php`, `inc/audio.php` | Interlinear pages, Dead Sea Scroll variants and recorded readings |
+| `inc/manuscripts.php` | The `/manuscripts/` pages and the note under a chapter (class `TBE_Manuscripts`) |
 | `inc/esv-api.php`, `inc/quran.php` | The live ESV fallback and the Qur'an references |
 | `inc/frontend-edit.php` | Front-end editing: the Edit / Add a note drawer built on core's block editor packages, for users who can edit |
 | `inc/commentary.php`, `inc/entry-fields.php`, `inc/starter-commentary.php` | The commentary post type, its boxes, and the starter packs |
@@ -60,16 +61,18 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `data/books.json`, `data/canons.json`, `data/jewish-names.json` | The 66 books and their order, the canons, the Jewish book names |
 | `data/interlinear/` | Hebrew Old Testament and Greek New Testament, word by word (STEP Bible, CC BY 4.0; see its README.txt) |
 | `data/jps/`, `data/jps-versification.json`, `data/dss/`, `data/audio/` | JPS 1917 text, Dead Sea Scroll comparisons, word timings |
+| `data/manuscripts/passages.json` | The manuscripts section: each passage, each early manuscript's reading and text, the editions and the English (CNTR, CC BY-SA 4.0; see its README.txt) |
 | `data/commentary/` | The starter commentary packs |
 | `templates/`, `parts/` | Block templates (front page, reader, commentary and glossary single and archive, 404), header and footer |
 | `errors/` | The theme's own static error pages, built by `tools/build_error_pages.php` |
 | `tools/` | Build scripts and self-tests, refused on the web and removed from a live site |
 | `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request every 15-30 s; stops on any rate-limit reply; `--max N` per run) |
 | `tools/build_interlinear.py` | Downloads the open STEPBible data and builds `data/interlinear/` |
+| `tools/build_manuscripts.py` | Clones the CNTR transcriptions, reads CNTR's translation pages, and builds `data/manuscripts/passages.json` |
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## At a glance
-- Version 0.10.17. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
+- Version 0.10.18. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
 - Apache 2.2 or 2.4 reads the theme's `.htaccess` and `tools/.htaccess` as they are. On Nginx those files do nothing; add the lines under "Nginx" below to the server block.
 - Multisite works: each site keeps its own settings, and one site writes the shared error pages (see Error pages).
 - The theme makes no remote call from a visitor's browser. The server calls the ESV API only for a chapter the bundle lacks, and only with a token.
@@ -172,6 +175,11 @@ An entry whose passage is only a book name introduces that book and shows at the
 
 ## Dead Sea Scrolls variants
 On the Hebrew interlinear, words where a Dead Sea Scroll reads differently from the Masoretic text are outlined in teal, with a note under the verse ("The scroll reads … where the Masoretic text has …", "The scroll adds …", "The scroll has no …"). **Two levels:** differences of *meaning* (a different word, one added or left out, a different form) show by default; differences of *spelling* only (the same word written with different vowel letters, a longer pronoun, a different word division) appear with the **Spelling too** button. Readings the editors have restored, or are unsure of, are marked. Words are matched by `tools/build_dss_variants.py` against the dataset from the CACCHT project (ETCBC, built on Martin Abegg's data, CC BY-NC 4.0; Zenodo v2.0); the data is not stored here, only the comparison, in `data/dss/{book}/{chapter}.json`. **Isaiah 1 to 5 so far**, against the Great Isaiah Scroll (1QIsa-a). The spelling rules are a heuristic: they can hide a real difference as spelling and show a spelling one as meaning, which is why the spelling view exists.
+
+## Manuscripts (0.10.18)
+`/manuscripts/` lists twenty passages that the King James Version prints and the earliest Greek manuscripts leave out; `/manuscripts/{id}/` shows one (`inc/manuscripts.php`, routes in `inc/routes.php`, view names `manuscripts` and `manuscript`, query var `tbe_ms`). A passage page has the KJV wording and the WEB and BSB, a table of every CNTR "class 1" manuscript (papyri and parchment up to about AD 400) that covers the place, the four printed editions (Textus Receptus, Robinson-Pierpont, Westcott-Hort, CNTR's Statistical Restoration), and each manuscript's first-hand text line by line, with the verse either side. A chapter that holds a passage shows `tbe_manuscripts_chapter_note()` under its heading.
+
+The data is `data/manuscripts/passages.json`, built by `python3 tools/build_manuscripts.py` (or `--src DIR` for a local copy; `--no-translations` skips the English). It clones https://github.com/Center-for-New-Testament-Restoration/transcriptions into `tools/.cache/cntr` and fetches one translation page a second from `https://greekcntr.org/translation/data/{verse}.html` into `tools/.cache/cntr-translation`. A whole verse counts from CNTR's own marks (`-` absent; `-~`, `+~` or an empty line lost); a few words inside a verse count by their key words in the first scribe's text, and a damaged verse without them counts as lost. To add a passage, add a line to `PASSAGES` in the script and a title and sentence to `TBE_Manuscripts::about()`. The transcriptions are CC BY-SA 4.0, so `passages.json` and the pages built from it carry that licence and the credit to Alan Bunning and the CNTR (`tbe_manuscripts_credit()`). The NET Bible on CNTR's translation pages is left out: CNTR shows it by the publisher's permission, which does not pass on.
 
 ## Parallel view: Christian and Jewish translations
 Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Testament is added a book at a time with `python3 tools/fetch_jps.py --books exodus`) show a choice above the text: **Christian · ESV**, **Jewish · JPS 1917**, or **Side by side**, verse by verse, so the differences are plain (heaven and earth, "expanse" and "firmament", "first day" and "one day"). The choice is remembered, and on a phone the two stack. The JPS 1917 is in the public domain; it comes from Sefaria's API and is credited on the Sources page. Old Testament book pages and titles also give the Jewish name of the book (Bereshit, Shemot...) in Hebrew and transliteration beneath the title (`data/jewish-names.json`).

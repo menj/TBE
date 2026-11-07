@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.10.18
+
+A Manuscripts section. Nothing was removed.
+
+### Added
+- `/manuscripts/` lists twenty passages that the King James Version prints and the earliest Greek manuscripts leave out: the long ending of Mark, the woman caught in adultery, Luke 22:43-44, "Father, forgive them", the ending of the Lord's Prayer, the three witnesses of 1 John 5:7, John 5:4, Acts 8:37 and twelve shorter verses. Each has a page at `/manuscripts/{passage}/`.
+- A passage page gives the KJV wording and two modern translations, a table of every early Greek manuscript (up to about AD 400) that survives at the place and whether it has the passage, what four printed Greek editions do, and each manuscript's own text, line by line as on the page, with the verses either side. A page that is lost counts neither way.
+- A Bible chapter that holds one of the passages shows a short note under its heading, with the count and a link. The book list links to the section.
+- `inc/manuscripts.php` (class `TBE_Manuscripts`), `data/manuscripts/passages.json` with its `README.txt`, `tools/build_manuscripts.py` and `tools/test_manuscripts.php`. The data is built from the Center for New Testament Restoration's transcriptions (Alan Bunning, CC BY-SA 4.0), and the English from the public-domain KJV, WEB and BSB on its translation pages. The Sources page credits it, and its Resources list links to it. The structured data names it as a Dataset.
+
 ## 0.10.17
 
 The Credits page becomes Sources, and gains a Resources section. Nothing was removed.

@@ -7,13 +7,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TBE_VERSION', '0.10.17' );
+define( 'TBE_VERSION', '0.10.18' );
 define( 'TBE_DIR', get_stylesheet_directory() );
 define( 'TBE_URI', get_stylesheet_directory_uri() );
 
 /** The theme's files in inc/, in the order they load, without ".php". */
 function tbe_theme_files(): array {
-	return array( 'settings', 'bible', 'canon', 'interlinear', 'dss', 'audio', 'esv-api', 'quran', 'commentary', 'frontend-edit', 'entry-fields', 'starter-commentary', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'article', 'contextual-links', 'enqueue', 'branding', 'error-pages', 'social', 'progress', 'unlist', 'search-permalinks', 'login', 'site-links', 'hardening', 'sitemaps', 'dev-files' );
+	return array( 'settings', 'bible', 'canon', 'interlinear', 'dss', 'manuscripts', 'audio', 'esv-api', 'quran', 'commentary', 'frontend-edit', 'entry-fields', 'starter-commentary', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'article', 'contextual-links', 'enqueue', 'branding', 'error-pages', 'social', 'progress', 'unlist', 'search-permalinks', 'login', 'site-links', 'hardening', 'sitemaps', 'dev-files' );
 }
 
 /**
