@@ -153,6 +153,38 @@ final class TBE_Manuscripts {
 		);
 	}
 
+	/**
+	 * The evidence two printed apparatuses give for a passage, from data/manuscripts/editions.json: 'ubs' (The
+	 * Greek New Testament, United Bible Societies) and 'swanson' (Swanson, New Testament Greek Manuscripts:
+	 * Matthew). Each has its page, the page image and the readings with their manuscripts.
+	 *
+	 * @return array{sources:array,ubs:?array,swanson:?array}
+	 */
+	public static function apparatus( string $id ): array {
+		static $all = null;
+		if ( null === $all ) {
+			$file = TBE_DIR . '/data/manuscripts/editions.json';
+			$read = is_readable( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : null; // phpcs:ignore WordPress.WP.AlternativeFunctions
+			$all  = is_array( $read ) ? $read : array();
+		}
+		return array(
+			'sources' => (array) ( $all['sources'] ?? array() ),
+			'ubs'     => $all['ubs'][ $id ] ?? null,
+			'swanson' => $all['swanson'][ $id ] ?? null,
+		);
+	}
+
+	/** What a UBS letter rating says about the printed text. */
+	public static function rating( string $letter ): string {
+		$words = array(
+			'A' => __( 'the editors are certain of their text', 'tbe-child' ),
+			'B' => __( 'the editors are almost certain of their text', 'tbe-child' ),
+			'C' => __( 'the editors found it hard to decide', 'tbe-child' ),
+			'D' => __( 'the editors found it very hard to decide', 'tbe-child' ),
+		);
+		return $words[ $letter ] ?? '';
+	}
+
 	/** The printed editions, in the order shown. */
 	public static function editions(): array {
 		return array(
@@ -231,6 +263,64 @@ function tbe_manuscripts_gallery( string $id ): string {
 			. '<figcaption>' . esc_html( (string) $i['caption'] ) . ' <span class="tbe-muted">' . $credit . '</span></figcaption></figure>';
 	}
 	return $out . '</div>';
+}
+
+/** One printed apparatus's evidence: its readings, its page image and a link to the whole book. */
+function tbe_manuscripts_book( array $entry, array $source, string $intro ): string {
+	$uri  = defined( 'TBE_URI' ) ? TBE_URI : '';
+	$pdf  = (string) ( $source['pdf'] ?? '' );
+	$out  = '<div class="tbe-ms__book"><p>' . $intro . '</p><dl class="tbe-ms__readings">';
+	foreach ( (array) $entry['readings'] as $r ) {
+		$out .= '<dt>' . esc_html( (string) $r[0] ) . '</dt><dd>' . esc_html( (string) $r[1] ) . '</dd>';
+	}
+	$out .= '</dl>';
+	if ( ! empty( $entry['img'] ) && is_readable( TBE_DIR . '/' . $entry['img'] ) ) {
+		$link = '' !== $pdf ? $pdf . '#page=' . (int) $entry['pdf'] : $uri . '/' . $entry['img'];
+		$out .= '<details class="tbe-ms__scan"><summary>' . esc_html( sprintf( /* translators: %d: page number */ __( 'See the page (page %d)', 'tbe-child' ), (int) $entry['page'] ) ) . '</summary>'
+			. '<a href="' . esc_url( $link ) . '" rel="noopener"><img src="' . esc_url( $uri . '/' . $entry['img'] ) . '" width="' . (int) $entry['w'] . '" height="' . (int) $entry['h'] . '" loading="lazy" decoding="async" alt="' . esc_attr( sprintf( /* translators: 1: book title, 2: page number */ __( '%1$s, page %2$d', 'tbe-child' ), (string) ( $source['title'] ?? '' ), (int) $entry['page'] ) ) . '"></a></details>';
+	}
+	return $out . '</div>';
+}
+
+/** The evidence from the printed apparatuses: later manuscripts as well as early ones. */
+function tbe_manuscripts_apparatus( string $id ): string {
+	$app = TBE_Manuscripts::apparatus( $id );
+	if ( ! $app['ubs'] && ! $app['swanson'] ) {
+		return '';
+	}
+	$out = '<h2 class="tbe-ornament">' . esc_html__( 'Later manuscripts too', 'tbe-child' ) . '</h2>';
+	$out .= '<p class="tbe-muted">' . esc_html__( 'The table above stops at about AD 400. The printed apparatuses below cite the later Greek manuscripts as well, by their standard numbers.', 'tbe-child' ) . '</p>';
+	if ( $app['ubs'] ) {
+		$src    = (array) ( $app['sources']['ubs'] ?? array() );
+		$letter = (string) $app['ubs']['rating'];
+		$intro  = sprintf(
+			/* translators: 1: book title, 2: page number, 3: rating letter, 4: what the rating means */
+			esc_html__( '%1$s (United Bible Societies), page %2$d. Rating %3$s: %4$s.', 'tbe-child' ),
+			'<cite>' . esc_html( (string) ( $src['title'] ?? '' ) ) . '</cite>',
+			(int) $app['ubs']['page'],
+			'<strong>{' . esc_html( $letter ) . '}</strong>',
+			esc_html( TBE_Manuscripts::rating( $letter ) )
+		);
+		$out .= tbe_manuscripts_book( $app['ubs'], $src, $intro );
+	}
+	if ( $app['swanson'] ) {
+		$src   = (array) ( $app['sources']['swanson'] ?? array() );
+		$intro = sprintf(
+			/* translators: 1: author, 2: book title, 3: page number */
+			esc_html__( '%1$s, %2$s, page %3$d.', 'tbe-child' ),
+			esc_html( (string) ( $src['author'] ?? '' ) ),
+			'<cite>' . esc_html( (string) ( $src['title'] ?? '' ) ) . '</cite>',
+			(int) $app['swanson']['page']
+		);
+		$out .= tbe_manuscripts_book( $app['swanson'], $src, $intro );
+	}
+	$out .= '<details class="tbe-ms__key"><summary>' . esc_html__( 'How to read the manuscript numbers', 'tbe-child' ) . '</summary><ul>'
+		. '<li>' . esc_html__( '𝔓 and a number: a papyrus. A capital letter, or a number starting with 0: a parchment manuscript in capitals. A plain number: a later manuscript in small letters. l and a number: a lectionary, a book of readings for church services.', 'tbe-child' ) . '</li>'
+		. '<li>' . esc_html__( 'ℵ is Codex Sinaiticus, A Alexandrinus, B Vaticanus, C Ephraemi, D Bezae, W Washingtonianus.', 'tbe-child' ) . '</li>'
+		. '<li>' . esc_html__( 'f1 and f13: two families of closely related later manuscripts. Byz: the Byzantine text, the reading of most later manuscripts. Lect: most lectionaries.', 'tbe-child' ) . '</li>'
+		. '<li>' . esc_html__( 'After a manuscript: * the first scribe; c, 1, 2 a later corrector; mg in the margin; v.r. as a variant reading; vid apparently, where the page is damaged; txt in the text. A manuscript in brackets reads almost the same.', 'tbe-child' ) . '</li>'
+		. '</ul></details>';
+	return $out;
 }
 
 /** /manuscripts/: every passage, with how many early manuscripts have it. */
@@ -323,6 +413,8 @@ function tbe_view_manuscript_passage( array $p ): string {
 		$out .= '<li class="tbe-ms__ed tbe-ms__ed--' . esc_attr( $state ) . '"><strong>' . esc_html( $name ) . ':</strong> ' . esc_html( 'p' === $state ? __( 'prints it as part of the text', 'tbe-child' ) : __( 'does not print it as part of the text', 'tbe-child' ) ) . '</li>';
 	}
 	$out .= '</ul><p class="tbe-muted">' . esc_html__( 'Westcott and Hort print some of these passages in double brackets, as later additions; here that counts as not part of the text.', 'tbe-child' ) . '</p>';
+
+	$out .= tbe_manuscripts_apparatus( $id );
 
 	// Each manuscript's own words.
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'What each manuscript says', 'tbe-child' ) . '</h2>';

@@ -109,14 +109,14 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The Hebrew and Greek word-by-word data is from STEPBible (www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
 * The JPS 1917 translation is in the public domain and comes through Sefaria.
 * The Dead Sea Scroll comparison is built from the CACCHT project's data (ETCBC, after Martin Abegg), CC BY-NC 4.0.
-* The Manuscripts pages are built from the transcriptions of the early Greek manuscripts by Alan Bunning and the Center for New Testament Restoration, CC BY-SA 4.0, and share that licence. Their English wording is from the public-domain KJV, World English Bible and Berean Standard Bible. The manuscript photographs come from Wikimedia Commons, each credited under the picture.
+* The Manuscripts pages are built from the transcriptions of the early Greek manuscripts by Alan Bunning and the Center for New Testament Restoration, CC BY-SA 4.0, and share that licence. Their English wording is from the public-domain KJV, World English Bible and Berean Standard Bible. The manuscript photographs come from Wikimedia Commons, each credited under the picture. The evidence of later manuscripts comes from the United Bible Societies Greek New Testament and from Reuben J. Swanson's New Testament Greek Manuscripts: Matthew, used by the owner's permission.
 * Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic and Abyssinica SIL under the SIL Open Font License.
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
 == Changelog ==
 
 = 0.10.18 =
-* A new Manuscripts section shows, manuscript by manuscript, which early Greek copies have twenty disputed passages, with their own text. A chapter that holds one says so under its heading.
+* A new Manuscripts section shows, manuscript by manuscript, which early Greek copies have twenty disputed passages, with their own text, photographs of the pages, and the evidence of later manuscripts from two printed editions. A chapter that holds one says so under its heading.
 
 = 0.10.17 =
 * The Credits page is now Sources, at /sources/, with a Resources section; the old address redirects.

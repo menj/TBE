@@ -1,0 +1,532 @@
+{
+ "_note": "Evidence for each manuscripts passage from two printed apparatuses, transcribed from their pages. Used with the owner's permission (owner decision, 7 November 2026).",
+ "sources": {
+  "ubs": {
+   "title": "The Greek New Testament",
+   "publisher": "United Bible Societies",
+   "pdf": "https://thebible.exposed/pdf/greek-nt.pdf"
+  },
+  "swanson": {
+   "title": "New Testament Greek Manuscripts: Variant Readings Arranged in Horizontal Lines against Codex Vaticanus. Matthew",
+   "author": "Reuben J. Swanson",
+   "publisher": "Sheffield Academic Press and William Carey International University Press, 1995",
+   "pdf": "https://thebible.exposed/pdf/nt-variant-readings.pdf"
+  }
+ },
+ "ubs": {
+  "mark-16-9-20": {
+   "rating": "A",
+   "pdf": 288,
+   "page": 187,
+   "readings": [
+    [
+     "Ends at 16:8",
+     "ℵ B 304"
+    ],
+    [
+     "Shorter ending, then verses 9-20",
+     "L Ψ 083 099 274mg 579 l1602"
+    ],
+    [
+     "Verses 9-20 with a critical note or sign",
+     "f1 205"
+    ],
+    [
+     "Verses 9-20",
+     "A C D W (with a long addition after 16:14) Δ Θ f13 28 33 157 180 565 597 700 892 1006 1010 1071 1241 1243 1292 1342 1424 1505 Byz [E G H Σ] Lect"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-288.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "john-7-53-8-11": {
+   "rating": "A",
+   "pdf": 439,
+   "page": 338,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓66 𝔓75 ℵ A(vid) B C(vid) L N T W Δ Θ Ψ 0141 33 157 565 1241 1333 1424* Lect"
+    ],
+    [
+     "Have it",
+     "D 180 205 579 597 700 892 1006 1010 1071 1243 1292 1342 1424mg 1505 Byz [(F) G H M]"
+    ],
+    [
+     "Have it marked with asterisks or obeli",
+     "S 28 1424mg (E from 8:2)"
+    ],
+    [
+     "Have it somewhere else",
+     "f13 after Luke 21:38; 225 after John 7:36; 1 after John 21:25"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-439.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "luke-22-43-44": {
+   "rating": "A",
+   "pdf": 390,
+   "page": 289,
+   "readings": [
+    [
+     "Leave them out",
+     "(𝔓69vid) 𝔓75 ℵ1 A B N T W 579 1071* Lect(1/2)"
+    ],
+    [
+     "Have them",
+     "ℵ*,2 D L Δ* Θ Ψ 0233 f1 13c 157 180 205 565 597 700 828(1/2) 892* 1006 1010 1071c 1241 1243 1292 1342 1424 1505 Byz [E F G H Q] l184(1/2)"
+    ],
+    [
+     "Have them marked with asterisks or obeli",
+     "Δc 0171vid 892c"
+    ],
+    [
+     "Move them after Matthew 26:39",
+     "f13 13* 828(1/2) Lect(1/2) l184(1/2)"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-390.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "luke-23-34": {
+   "rating": "A",
+   "pdf": 396,
+   "page": 295,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓75 ℵ1 B D* W Θ 070 579 597* 1241"
+    ],
+    [
+     "Have it",
+     "ℵ*,2 A C D2 L Δ Ψ 0250 f1 f13 28 33 157 180 205 565 597c 700 828 892 1006 1010 1071 1243 1292 1342 1424 1505 Byz [F G H N] Lect"
+    ],
+    [
+     "Have it marked with asterisks",
+     "E"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-396.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "matthew-6-13": {
+   "rating": "A",
+   "pdf": 119,
+   "page": 18,
+   "readings": [
+    [
+     "End at “from evil”",
+     "ℵ B D Z 0170 f1 205 l547"
+    ],
+    [
+     "End “from evil. Amen”",
+     "17"
+    ],
+    [
+     "Add “For thine is the kingdom, and the power, and the glory, for ever. Amen”",
+     "L W Δ Θ 0233 f13 28 33 180 565 579 597 700 892 1006 1010 1071 1241 1243 1292 (1342) 1424 1505 Byz [E G Σ] Lect"
+    ],
+    [
+     "Add the same, naming the Father, the Son and the Holy Spirit",
+     "157 (1253)"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-119.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "1-john-5-7-8": {
+   "rating": "A",
+   "pdf": 894,
+   "page": 793,
+   "readings": [
+    [
+     "Leave out the three in heaven",
+     "ℵ A B (Ψ) 048vid 5 33 81 88txt 221txt 307 429txt 436 442 636txt 642 1175 1243 1448 1611 1735 1739 1881 2344 2492 Byz [K L P] Lect"
+    ],
+    [
+     "Have the three in heaven",
+     "61 88v.r. 221v.r. 429v.r. 629 636v.r. 918 2318 2473 l(AD)"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-894.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "john-5-4": {
+   "rating": "A",
+   "pdf": 423,
+   "page": 322,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓66 𝔓75 ℵ B C* D T Wsupp 0141 33 157"
+    ],
+    [
+     "Have it",
+     "A C3 L Δ Θ Ψ 078 0233 f1 f13 28 180 205 565 579 597 700 892 1006 1010 1071 1241 1243 1292 1342 1424 1505 Byz [E F G H] Lect"
+    ],
+    [
+     "Have it marked with asterisks or obeli",
+     "Π 047"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-423.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "acts-8-37": {
+   "rating": "A",
+   "pdf": 527,
+   "page": 426,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓45 𝔓74 ℵ A B C Ψ 33vid 81 181 614 1175 1409 2344 Byz [L P] Lect"
+    ],
+    [
+     "Have it",
+     "E 36 307 453 610 945 1678 1739 1891 l592 l1178 l(AD)"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-527.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "matthew-17-21": {
+   "rating": "A",
+   "pdf": 165,
+   "page": 64,
+   "readings": [
+    [
+     "Leave it out",
+     "ℵ* B Θ 33 579 892* l253"
+    ],
+    [
+     "Have it",
+     "ℵ2 C D L W Δ f1 f13 28 157 180 205 565 597 700 892c 1006 1010 1071 1241 1243 1292 1342 1424 1505 Byz [E F G H O Σ] Lect"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-165.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "matthew-18-11": {
+   "rating": "B",
+   "pdf": 167,
+   "page": 66,
+   "readings": [
+    [
+     "Leave it out",
+     "ℵ B L* Θ* f13 1* 33 892*"
+    ],
+    [
+     "Have it: “to save that which was lost”",
+     "D W Δ Θc 078vid 1c 28 180 205 565 597 700 1006 1071 1241 1292 1424 Byz [E F H N Σ] Lect(pt, AD)"
+    ],
+    [
+     "Have it: “to seek and to save that which was lost”",
+     "G Lc 157 579 892c 1010 1243 1342 1505 Lect(pt)"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-167.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "matthew-23-14": {
+   "rating": "A",
+   "pdf": 188,
+   "page": 87,
+   "readings": [
+    [
+     "Leave it out",
+     "ℵ B D L Θ f1 33 205 892*"
+    ],
+    [
+     "Have it before verse 13",
+     "W Δ 0102 0107 28 157 180 565 579 597 700 892c 1006 1010 1071 1241 1243 1292 1342 1424 1505 Byz [E F G H O Σ] Lect"
+    ],
+    [
+     "Have it after verse 13",
+     "0233 f13 l547 (l673)"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-188.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "mark-7-16": {
+   "rating": "A",
+   "pdf": 246,
+   "page": 145,
+   "readings": [
+    [
+     "Leave it out",
+     "ℵ B L Δ* 0274 28 1342 Lect(1/2)"
+    ],
+    [
+     "Have it",
+     "A D W Δc Θ f1 f13 33 157 180 205 565 579 597 700 892 1006 1010 1241 1243c 1292 1424 1505 Byz [E F G H Σ] Lect(1/2) l(AD)"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-246.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "mark-9-44-46": {
+   "rating": "A",
+   "pdf": 257,
+   "page": 156,
+   "readings": [
+    [
+     "Leave out verse 44",
+     "ℵ B C L W Δ Ψ 0274 f1 28 205 565 892"
+    ],
+    [
+     "Have verse 44",
+     "A D Θ f13 157 180 579 597 700 1006 1010 1071 1241 1243 1292 1342 1424 1505 Byz [E F G H N Σ] Lect"
+    ],
+    [
+     "Leave out verse 46",
+     "ℵ B C L W Δ Ψ 0274 f1 28 205 565 892"
+    ],
+    [
+     "Have verse 46",
+     "A D Θ f13 157 180 579 597 700 1006 1010 1071 1241 1243 1292 1342 1424 1505 Byz [E F G H N Σ] Lect"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-257.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "mark-11-26": {
+   "rating": "A",
+   "pdf": 267,
+   "page": 166,
+   "readings": [
+    [
+     "Leave it out",
+     "ℵ B L W Δ Ψ 157 205 565 597 700 892 1342"
+    ],
+    [
+     "Have it",
+     "A C D Θ 0233 f1 f13 28 33 180 579 1006 1010 1071 1241 1243 1292 1424 1505 Byz [E F G H N Σ] Lect"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-267.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "mark-15-28": {
+   "rating": "A",
+   "pdf": 286,
+   "page": 185,
+   "readings": [
+    [
+     "Leave it out",
+     "ℵ A B C D Ψ 157 Lect"
+    ],
+    [
+     "Have it",
+     "L Δ Θ 083 0250 f1 f13 28 33 180 205 565 579 597 700 892 1006 1010 1071 1241 1243 1292 1342 1424 1505 Byz [E F G H] l184 l211 l292 l384 l524 l(AD)"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-286.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "luke-17-36": {
+   "rating": "A",
+   "pdf": 371,
+   "page": 270,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓75 ℵ A B L W Δ Θ Ψ f1 28 33 157 205 565 597 892 1010 1241 1292 1342 1424 1505 Byz [E G H N Q] l184 l292 l514 l950 l1552"
+    ],
+    [
+     "Have it",
+     "D 579 1071* 1243 180 700 1006 1071c Lect(l68 l76 l673 l813 l1223 l(AD))"
+    ],
+    [
+     "Have a shorter form",
+     "f13"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-371.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "luke-23-17": {
+   "rating": "A",
+   "pdf": 395,
+   "page": 294,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓75 A B L T 070 892* 1241"
+    ],
+    [
+     "Have it",
+     "ℵ W Δ Θ Ψ f1 f13 28 157 180 205 565 579 597 700 892c 1006 1010 1071 1243 1292 1342 1424 1505 Byz [E F G H N] Lect"
+    ],
+    [
+     "Have it after verse 19",
+     "D"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-395.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "acts-15-34": {
+   "rating": "A",
+   "pdf": 556,
+   "page": 455,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓74 ℵ A B E Ψ 81 Byz [L P]"
+    ],
+    [
+     "Have it",
+     "C 33 36 181 307 453 610 614 945 1175 1409 1678 1739 1891 2344 l1178"
+    ],
+    [
+     "Have a longer form, naming Judas",
+     "𝔓127vid D"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-556.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "acts-28-29": {
+   "rating": "A",
+   "pdf": 602,
+   "page": 501,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓74 ℵ A B E Ψ 048 33 81 181 1175 1739 2344 2464 (l60)"
+    ],
+    [
+     "Have it",
+     "36 307 453 610 614 945 1409 1678 1891 Byz [L P] Lect"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-602.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "romans-16-24": {
+   "rating": "A",
+   "pdf": 648,
+   "page": 547,
+   "readings": [
+    [
+     "Leave it out",
+     "𝔓46 𝔓61 ℵ A B C 0150 81 1739 1962 2127 2464"
+    ],
+    [
+     "Have it here",
+     "D (F G) Ψ 6 365 424 1175 1241 1881 (1912) (2200) Byz [L] Lect"
+    ],
+    [
+     "Have it after 16:27",
+     "P 33 104 256 263 436 459 1319 1573 1852"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-648.jpg",
+   "w": 613,
+   "h": 984
+  }
+ },
+ "swanson": {
+  "matthew-6-13": {
+   "pdf": 77,
+   "page": 47,
+   "readings": [
+    [
+     "End at “from evil”",
+     "B ℵ D 1 1582* 118"
+    ],
+    [
+     "Add “For thine is the kingdom, and the power, and the glory, for ever. Amen”",
+     "E G K L M S U W Δ Θ Π Ω 1582c 118(2) f13 2 33 28 565 579 700 788 1071 1424"
+    ],
+    [
+     "Add the same, naming the Father, the Son and the Holy Spirit",
+     "157"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/swanson-77.jpg",
+   "w": 953,
+   "h": 1453
+  },
+  "matthew-17-21": {
+   "pdf": 197,
+   "page": 167,
+   "readings": [
+    [
+     "Leave it out",
+     "B ℵ* Θ 33 579 788"
+    ],
+    [
+     "Have it",
+     "ℵc 118 and all the other manuscripts collated"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/swanson-197.jpg",
+   "w": 953,
+   "h": 1453
+  },
+  "matthew-18-11": {
+   "pdf": 203,
+   "page": 173,
+   "readings": [
+    [
+     "Leave it out",
+     "B ℵ L* Θ* 1* 1582 f13 33 788"
+    ],
+    [
+     "Have it",
+     "D K M* N U W Θc Π 1582c 118 124 2 28 565 700 1071 1424 and the Byzantine majority"
+    ],
+    [
+     "Have it with “to seek and to save”",
+     "G 157 579 1346"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/swanson-203.jpg",
+   "w": 953,
+   "h": 1453
+  },
+  "matthew-23-14": {
+   "pdf": 256,
+   "page": 226,
+   "readings": [
+    [
+     "Leave it out",
+     "B ℵ D L Θ f1 33"
+    ],
+    [
+     "Have it before verse 13",
+     "K M U W Γ Δ Π 2* 28 157 565 579 700 1071 1424"
+    ],
+    [
+     "Have it after verse 13",
+     "f13 124"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/swanson-256.jpg",
+   "w": 930,
+   "h": 1455
+  }
+ }
+}

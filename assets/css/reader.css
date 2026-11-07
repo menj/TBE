@@ -340,3 +340,10 @@
 .tbe-ms__figure { margin: 0; }
 .tbe-ms__figure img { display: block; width: 100%; height: auto; border: 1px solid var(--tbe-line); border-radius: var(--tbe-radius, 4px); background: #fff; }
 .tbe-ms__figure figcaption { margin-top: 0.45rem; font-size: 0.9rem; line-height: 1.45; }
+.tbe-ms__book { margin-block: 1rem 1.5rem; }
+.tbe-ms__readings { margin: 0.5rem 0; }
+.tbe-ms__readings dt { font-weight: 600; margin-top: 0.6rem; }
+.tbe-ms__readings dd { margin: 0.15rem 0 0; padding-inline-start: 1rem; font-family: var(--tbe-scripture, serif); overflow-wrap: anywhere; }
+.tbe-ms__scan summary, .tbe-ms__key summary { cursor: pointer; font-family: var(--tbe-ui); font-size: 0.9rem; color: var(--tbe-accent); }
+.tbe-ms__scan img { display: block; width: 100%; max-width: 40rem; height: auto; margin-top: 0.6rem; border: 1px solid var(--tbe-line); background: #fff; }
+.tbe-ms__key { margin-block: 1rem; font-size: 0.92rem; }

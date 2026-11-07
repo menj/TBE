@@ -89,6 +89,22 @@ foreach ( $shown as $i ) {
 check( ! $shown || false !== strpos( tbe_manuscripts_gallery( 'mark-16-9-20' ), 'Wikimedia Commons' ), 'the gallery credits Commons' );
 check( '' === tbe_manuscripts_gallery( 'romans-16-24' ), 'no gallery where there is no photograph' );
 
+$app = TBE_Manuscripts::apparatus( 'mark-16-9-20' );
+check( 'A' === ( $app['ubs']['rating'] ?? '' ) && false !== strpos( (string) $app['ubs']['readings'][0][1], 'ℵ B' ), 'UBS: Mark 16:9-20 is rated {A} and ℵ B end at 16:8' );
+$every = array_filter( array_keys( $all ), static fn( $id ) => ! TBE_Manuscripts::apparatus( $id )['ubs'] );
+check( ! $every, 'every passage has its UBS evidence' );
+check( null !== TBE_Manuscripts::apparatus( 'matthew-6-13' )['swanson'] && null === TBE_Manuscripts::apparatus( 'mark-16-9-20' )['swanson'], 'Swanson covers the Matthew passages only' );
+foreach ( array( 'ubs', 'swanson' ) as $book ) {
+	foreach ( array_keys( $all ) as $id ) {
+		$e = TBE_Manuscripts::apparatus( $id )[ $book ];
+		if ( $e && ! is_readable( TBE_DIR . '/' . $e['img'] ) ) {
+			check( false, "page image for $book $id" );
+		}
+	}
+}
+$html = tbe_view_manuscript_passage( $all['matthew-6-13'] );
+check( false !== strpos( $html, 'Later manuscripts too' ) && false !== strpos( $html, 'Swanson' ) && false !== strpos( $html, '{A}' ) && false !== strpos( $html, 'greek-nt.pdf#page=119' ), 'the passage page shows both apparatuses, the rating and a link to the page' );
+
 $routes = (string) file_get_contents( TBE_DIR . '/inc/routes.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 check( false !== strpos( $routes, "'^manuscripts/?$'" ) && false !== strpos( $routes, "'^manuscripts/([a-z0-9-]+)/?$'" ), 'the routes answer /manuscripts/ and each passage' );
 $reader = (string) file_get_contents( TBE_DIR . '/inc/reader.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions

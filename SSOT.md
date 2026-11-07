@@ -34,6 +34,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
 - 5 November 2026: every theme is licensed under the GNU General Public License, version 3 or later (0.10.9). This one came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`; the owner adds it there, and this line is then its copy.
 
+- 7 November 2026: the owner holds the rights to the books the site serves under `/pdf/` and uses on its pages: Reuben J. Swanson, *New Testament Greek Manuscripts: Matthew* (`nt-variant-readings.pdf`), the United Bible Societies *Greek New Testament* (`greek-nt.pdf`) and Bruce M. Metzger, *Lexical Aids for Students of New Testament Greek* (`lexical-aids.pdf`). In the owner's words: "i have the full copyright". Their evidence and page images may be used on the site. Recorded in `.claude/CLAUDE.md`.
 - 6 November 2026: the site is light only. "I do not want dark mode." No dark mode exists in the theme: no switch, no `theme.js`, no Night scheme, no dark rules (0.10.15).
 - 5 November 2026: the owner asked for a complete favicon set: "make sure you have favicon too." Every brand icon is drawn from `assets/img/brand/favicon.svg`, and a Site Icon set by the owner always wins (0.10.11). This came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`.
 
@@ -44,6 +45,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Recorded readings: Genesis 1 (Hebrew) and Matthew 1 (Greek) only.
 - Dead Sea Scrolls comparison: Isaiah 1 to 5 against 1QIsa-a only. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
 - JPS 1917 parallel text: Genesis only (`data/jps/`).
+- Manuscripts evidence from the printed apparatuses: `data/manuscripts/editions.json` (UBS for all twenty passages, Swanson for the four in Matthew) with page images in `assets/img/manuscripts/books/`.
 - Manuscripts: twenty New Testament passages in `data/manuscripts/passages.json`, built from the CNTR transcriptions (CC BY-SA 4.0). That file and the pages built from it stay under CC BY-SA 4.0, whatever the theme's licence.
 - Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries) and `cross-references` (32 cross-references, each filed on both passages, so 64 entries). Every entry key starts with its pack id.
 - Glossary: 13 starter terms, created as drafts (`tbe_seed_terms()`).
@@ -75,6 +77,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The ESV copyright line (Crossway), editable under ESV and licence but never removed.
 - STEPBible and Tyndale House Cambridge for the interlinear data.
 - Sefaria for the JPS 1917 text, and CACCHT (ETCBC, Martin Abegg's data) for the scroll comparison.
+- The titles, editors and publishers of the United Bible Societies *Greek New Testament* and Swanson's *New Testament Greek Manuscripts: Matthew*, on the Sources page and beside their evidence on each manuscripts page.
 - The credit under each manuscript photograph: its licence and a link to its Wikimedia Commons page.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
 - The licences in `assets/fonts/` for SBL, Angel and Noto Naskh Arabic and Abyssinica SIL, and the Angel credit with its link on the Sources page.
