@@ -25,6 +25,36 @@
    "ms": "02",
    "file": "File:Codex Alexandrinus - Gospel of Mark.png",
    "caption": "Codex Alexandrinus: the text runs on past 16:8 into verses 9 to 20."
+  },
+  {
+   "passage": "mark-16-9-20",
+   "ms": "032",
+   "file": "File:Codex Washingtonianus W (032) Mk 16,12-17.JPG",
+   "caption": "Codex Washingtonianus: Mark 16:12-17, the long ending, with a saying after 16:14 found in no other Greek manuscript (the “Freer Logion”)."
+  },
+  {
+   "passage": "matthew-6-13",
+   "ms": "01",
+   "file": "File:Codex Sinaiticus Matthew 6,4-32.JPG",
+   "caption": "Codex Sinaiticus: the Lord’s Prayer ends “but deliver us from evil”, with no “for thine is the kingdom”."
+  },
+  {
+   "passage": "matthew-6-13",
+   "ms": "032",
+   "file": "File:Codex Washingtonianus 032.jpg",
+   "caption": "Codex Washingtonianus: the Lord’s Prayer with the closing words “for thine is the kingdom and the power and the glory for ever, amen”."
+  },
+  {
+   "passage": "1-john-5-7-8",
+   "ms": "01",
+   "file": "File:CODEX SINAITICUS 1 John 5 7 8 Comma Johanneum.JPG",
+   "caption": "Codex Sinaiticus, 1 John 5:7-8: “there are three that testify, the Spirit and the water and the blood”, with nothing of the Father, the Word and the Holy Ghost."
+  },
+  {
+   "passage": "john-7-53-8-11",
+   "ms": "01",
+   "file": "File:Adulterae.JPG",
+   "caption": "Codex Sinaiticus: John 7:52 runs straight on to 8:12, with no story of the woman between."
   }
  ]
 }
