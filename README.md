@@ -68,6 +68,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/` | Build scripts and self-tests, refused on the web and removed from a live site |
 | `tools/fetch_esv.py` | Downloads the ESV text slowly and resumably (default one request every 15-30 s; stops on any rate-limit reply; `--max N` per run) |
 | `tools/build_interlinear.py` | Downloads the open STEPBible data and builds `data/interlinear/` |
+| `tools/commons_api.py` | A polite Wikimedia Commons client: search, licence and author (Commons, else Toolforge), download a resized copy |
 | `tools/fetch_manuscript_images.py`, `data/manuscripts/images.json`, `assets/img/manuscripts/` | The manuscript photographs from Wikimedia Commons, their list and credits |
 | `tools/build_manuscripts.py` | Clones the CNTR transcriptions, reads CNTR's translation pages, and builds `data/manuscripts/passages.json` |
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
@@ -182,7 +183,23 @@ On the Hebrew interlinear, words where a Dead Sea Scroll reads differently from 
 
 The data is `data/manuscripts/passages.json`, built by `python3 tools/build_manuscripts.py` (or `--src DIR` for a local copy; `--no-translations` skips the English). It clones https://github.com/Center-for-New-Testament-Restoration/transcriptions into `tools/.cache/cntr` and fetches one translation page a second from `https://greekcntr.org/translation/data/{verse}.html` into `tools/.cache/cntr-translation`. A whole verse counts from CNTR's own marks (`-` absent; `-~`, `+~` or an empty line lost); a few words inside a verse count by their key words in the first scribe's text, and a damaged verse without them counts as lost. To add a passage, add a line to `PASSAGES` in the script and a title and sentence to `TBE_Manuscripts::about()`. The transcriptions are CC BY-SA 4.0, so `passages.json` and the pages built from it carry that licence and the credit to Alan Bunning and the CNTR (`tbe_manuscripts_credit()`). The NET Bible on CNTR's translation pages is left out: CNTR shows it by the publisher's permission, which does not pass on.
 
-Photographs: `data/manuscripts/images.json` lists Wikimedia Commons files by passage and manuscript, with a caption. Each is chosen by hand and checked by eye to show the passage. `python3 tools/fetch_manuscript_images.py` reads each file's licence and author from the Commons API, refuses anything but public domain, CC0, CC BY or CC BY-SA, saves a JPEG no wider than 1200 pixels to `assets/img/manuscripts/{passage}-{ms}.jpg`, and writes the licence, author and Commons page back into the list. It sends a named User-Agent, one request at a time, and backs off on a 429. `tbe_manuscripts_gallery()` shows only entries that have a licence and a file, each linked to its Commons page.
+Photographs: `data/manuscripts/images.json` lists Wikimedia Commons files by passage and manuscript, with a caption. Each is chosen by hand and checked by eye to show the passage. `python3 tools/fetch_manuscript_images.py` refuses anything but public domain, CC0, CC BY or CC BY-SA, saves a JPEG no wider than 1200 pixels to `assets/img/manuscripts/{passage}-{ms}.jpg`, and writes the size, licence, author and Commons page back into the list. A run cut short by a rate limit exits 1; run it again and it picks up where it stopped.
+
+It talks to Wikimedia through `tools/commons_api.py`, which also works on its own:
+
+```bash
+python3 tools/commons_api.py search "Codex Bezae John"
+```
+
+```bash
+python3 tools/commons_api.py info "File:Mark16-B.JPG"
+```
+
+```bash
+python3 tools/commons_api.py download "File:Mark16-B.JPG" /tmp/mark16.jpg --width 1200
+```
+
+`info` reads the Commons API and falls back to Magnus Manske's Commons API on Toolforge (`https://magnustools.toolforge.org/commonsapi/`) when Commons answers with a rate limit; Toolforge's licence templates become short names (`licence_name()`). `download` refuses a file that is not free unless given `--any-licence`. Every request names the client and the site in its User-Agent, waits at least 5 seconds after the last one to the same host, honours `Retry-After` on a 429 (else waits 60, 120, 240 and 480 seconds), and is cached in `tools/.cache/commons/`. `tbe_manuscripts_gallery()` shows only entries that have a licence and a file, each linked to its Commons page.
 
 ## Parallel view: Christian and Jewish translations
 Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Testament is added a book at a time with `python3 tools/fetch_jps.py --books exodus`) show a choice above the text: **Christian · ESV**, **Jewish · JPS 1917**, or **Side by side**, verse by verse, so the differences are plain (heaven and earth, "expanse" and "firmament", "first day" and "one day"). The choice is remembered, and on a phone the two stack. The JPS 1917 is in the public domain; it comes from Sefaria's API and is credited on the Sources page. Old Testament book pages and titles also give the Jewish name of the book (Bereshit, Shemot...) in Hebrew and transliteration beneath the title (`data/jewish-names.json`).

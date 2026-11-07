@@ -21,7 +21,7 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 Only the versions that need something done by hand are listed.
 
 ### To 0.10.18
-Nothing to do. The theme refreshes its address rules on the first load after the update, which adds `/manuscripts/`. New files: `inc/manuscripts.php`, `data/manuscripts/`, `assets/img/manuscripts/`, `tools/build_manuscripts.py`, `tools/fetch_manuscript_images.py`, `tools/test_manuscripts.php`. To rebuild the data after CNTR publishes a new release, run `python3 tools/build_manuscripts.py` on a copy with the tools folder.
+Nothing to do. The theme refreshes its address rules on the first load after the update, which adds `/manuscripts/`. New files: `inc/manuscripts.php`, `data/manuscripts/`, `assets/img/manuscripts/`, `tools/build_manuscripts.py`, `tools/commons_api.py`, `tools/fetch_manuscript_images.py`, `tools/test_manuscripts.php`. To rebuild the data after CNTR publishes a new release, run `python3 tools/build_manuscripts.py` on a copy with the tools folder.
 
 ### To 0.10.17
 Nothing to do. The theme refreshes its address rules on the first load after the update. If a page cache sits in front of the site, clear it so the footer shows "Sources".
