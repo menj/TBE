@@ -68,7 +68,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Post meta: `_tbe_unlisted`, `tbe_takeaways`, `tbe_reviewed`.
 - Post types and taxonomy: `tbe_commentary`, `tbe_term`, the `section` rewrite slug.
 - Constants a site sets in `wp-config.php`: `TBE_ESV_API_TOKEN`, `TBE_KEEP_DOTFILES`, `TBE_ALLOW_XMLRPC`.
-- Filters: `tbe_core_sitemaps`, `tbe_plugin_sitemap_url`, `tbe_login_plugin_active`, `tbe_search_permalinks_enabled`, `tbe_search_reserved_bases`, `tbe_social_meta`, `tbe_social_networks`, `tbe_unlist_enabled`, `tbe_contextual_links_map`, `tbe_contextual_links_enabled`.
+- Filters: `tbe_core_sitemaps`, `tbe_plugin_sitemap_url`, `tbe_login_plugin_active`, `tbe_search_permalinks_enabled`, `tbe_search_reserved_bases`, `tbe_social_meta`, `tbe_social_networks`, `tbe_unlist_enabled`, `tbe_contextual_links_map`, `tbe_contextual_links_enabled`, `tbe_toc_post_types`. Shortcodes: `[wp_toc]` and `[auto_toc]`, kept compatible with the WP TOC plugin.
 - Block and shortcode: `tbe/social`, `[tbe_social]`. The commentary page blocks: `tbe/breadcrumbs`, `tbe/dek`, `tbe/article-meta`, `tbe/answer-box`, `tbe/contents`, `tbe/sources`, `tbe/next-step`, `tbe/related`. The block style `is-style-faq` on `core/details` and the pattern `tbe/faq`.
 - Design tokens in `assets/css/base.css`: `--tbe-paper`, `--tbe-surface`, `--tbe-ink`, `--tbe-muted`, `--tbe-accent`, `--tbe-rubric`, `--tbe-gold`, `--tbe-line`, `--tbe-scale`, `--tbe-ui`, and the radius tokens in `assets/css/polish.css`.
 - The default scheme: paper `#f4eedc`, ink `#231d14`, accent (burgundy) `#6e1f2e`, gold `#a67c2e`.

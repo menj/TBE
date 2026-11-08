@@ -785,6 +785,16 @@ function tbe_ld_graph(): array {
 
 	$chrome = tbe_ld_chrome_nodes( $page_id );
 	$page['hasPart'] = array( tbe_ld_ref( $page_id . '-header' ), tbe_ld_ref( $page_id . '-footer' ) );
+
+	// The sections the contents box lists, as parts of the page with their anchors (inc/toc.php).
+	if ( is_singular() && function_exists( 'tbe_toc_sections' ) && get_queried_object() instanceof WP_Post ) {
+		$base = (string) get_permalink( get_queried_object() );
+		foreach ( tbe_toc_sections( get_queried_object() ) as $section ) {
+			$sid               = $base . '#' . $section[0];
+			$extra[]           = array( '@type' => 'WebPageElement', '@id' => $sid, 'name' => $section[1], 'url' => $sid, 'isPartOf' => tbe_ld_ref( $page_id ) );
+			$page['hasPart'][] = tbe_ld_ref( $sid );
+		}
+	}
 	$page['significantLink'] = $page['significantLink'] ?? array_map( static fn( $n ) => $n['url'], array_filter( $chrome, static fn( $n ) => 'SiteNavigationElement' === $n['@type'] ) );
 
 	// Any glossary term mentioned by a note must be defined in the graph, with its term set.

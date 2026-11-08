@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.20
+Stable tag: 0.10.21
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -73,7 +73,7 @@ Go to Commentary, Add New. Type the passage (for example John 1:1-18), pick one 
 
 A passage with no verses, such as John 3, makes a chapter introduction. A book name alone, such as John, makes a book introduction.
 
-Each entry's own page shows, in order: the breadcrumb, the title, the excerpt under it, the dates and reading time, the "In short" box, the contents, the text, the notes and sources, the next step and related entries on the same book. Fill the Key points and review box beside the editor for the "In short" list and the "Last reviewed" date. An entry with three or more sections (level-two headings) gets a contents list.
+Each entry's own page shows, in order: the breadcrumb, the title, the excerpt under it, the dates and reading time, the "In short" box, the contents, the text, the notes and sources, the next step and related entries on the same book. Fill the Key points and review box beside the editor for the "In short" list and the "Last reviewed" date. An entry with three or more sections gets a contents list, with sub-sections (level-three headings) nested under their section. Pages, posts and glossary terms get one too. To put it somewhere else, type [wp_toc] where it should go; to leave a heading out, add no-toc under Advanced, Additional CSS class(es).
 
 For questions and answers, insert the "Questions and answers" pattern: each question is a Details block in the FAQ style. Search engines are told about the questions only when they are on the page.
 
@@ -115,6 +115,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
 == Changelog ==
+
+= 0.10.21 =
+* A contents list on pages, posts and glossary terms too, with sub-sections nested; [wp_toc] places it by hand, and a heading marked no-toc stays out.
 
 = 0.10.20 =
 * On the home page the menu is centred above the cross and the name, with no empty space beside it.
@@ -172,6 +175,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.21 =
+Nothing to do by hand. If you use the WP TOC plugin, you can deactivate it: the theme now does the same.
 
 = 0.10.20 =
 Nothing to do by hand.

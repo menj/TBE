@@ -42,6 +42,7 @@ function untrailingslashit( $s ) { return rtrim( (string) $s, '/' ); }
 function tbe_setting( $k ) { return $GLOBALS['t_set'][ $k ] ?? null; }
 class WP_Post { public $post_content = ''; public $ID = 1; public $post_type = 'tbe_commentary'; } // phpcs:ignore
 require __DIR__ . '/../inc/article.php';
+require __DIR__ . '/../inc/toc.php';
 require __DIR__ . '/../inc/contextual-links.php';
 
 $fail = 0;

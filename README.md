@@ -39,6 +39,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `inc/bible.php`, `inc/canon.php` | Book data, the reference parser and the canon labels |
 | `inc/routes.php`, `inc/reader.php` | The `/bible/` routes and the reader views |
 | `inc/interlinear.php`, `inc/dss.php`, `inc/audio.php` | Interlinear pages, Dead Sea Scroll variants and recorded readings |
+| `inc/toc.php` | The contents box: heading anchors, nesting, `[wp_toc]`, the automatic contents on pages, posts and glossary terms |
 | `inc/lexicon.php`, `data/lexicon/` | The Strong's lexicon pages and their data (STEPBible TBESG and TBESH, CC BY 4.0; Metzger's frequency list) |
 | `tools/build_lexicon.py`, `tools/build_metzger.py` | Build `data/lexicon/` from STEPBible and from Metzger's scan |
 | `inc/manuscripts.php` | The `/manuscripts/` pages and the note under a chapter (class `TBE_Manuscripts`) |
@@ -77,7 +78,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## At a glance
-- Version 0.10.20. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
+- Version 0.10.21. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
 - Apache 2.2 or 2.4 reads the theme's `.htaccess` and `tools/.htaccess` as they are. On Nginx those files do nothing; add the lines under "Nginx" below to the server block.
 - Multisite works: each site keeps its own settings, and one site writes the shared error pages (see Error pages).
 - The theme makes no remote call from a visitor's browser. The server calls the ESV API only for a chapter the bundle lacks, and only with a token.
@@ -190,6 +191,11 @@ On the Hebrew interlinear, words where a Dead Sea Scroll reads differently from 
 
 A passage of kind `words` may list several spellings separated by `|`; they match as whole words (`has_words()`), so 1 Timothy 3:16 counts both ΘΕΟΣ and its short form ΘΣ as “God” without mistaking ΟΣ inside ΘΕΟΣ. A verse counts as lost, never as lacking the words, only where part of it is lost (`*`, `&`), unreadable (U+FFFD) or supplied whole by the editors (`~`, `+`); a letter the editors restored inside a surviving word (`^`) leaves the reading clear.
 
+## Contents (0.10.21)
+`inc/toc.php` builds the contents box, bringing the features of [WP TOC](https://github.com/menj/wp-toc) (GPL-3.0-or-later, by MENJ) into the theme so there is one look and one set of anchors, from PHP 8.0 (the plugin needs 8.4). `tbe_toc_heading_list()` gives every level-two to level-four heading of the main text an anchor: the author's id is kept and reserved; made ids come from the heading text (letters outside ASCII kept) and are numbered when taken, level two first, so the 0.10.18 anchors stay put. `tbe_article_heading_list()` and `tbe_article_heading_ids()` in `inc/article.php` are built on it. A heading with the class `no-toc` or `data-no-toc` is left out. `tbe_toc_items()` takes levels two and three by default, `tbe_toc_tree()` nests them (a skipped level or deeper first heading nests cleanly; `depth` limits it), and `tbe_toc_box()` prints the box inline, sticky (commentary setting) or collapsible.
+
+Commentary entries show it where the template puts `tbe/contents`; pages, posts and glossary terms (`tbe_toc_post_types`) get it before the first heading once they have three entries (the_content at 13). `[wp_toc]` and `[auto_toc]` leave a mark that the same filter replaces once the headings have anchors; a post with one shows no automatic contents. The structured data adds each section as a `WebPageElement` in the page's `hasPart` (`tbe_toc_sections()`). The styles are in `assets/css/article.css`, loaded where a box shows. When the plugin is active (`WP_TOC_VERSION`), the theme registers no shortcodes and inserts nothing outside commentary entries, and filters `wp_toc_enabled` to keep the plugin off them.
+
 ## Manuscripts (0.10.18)
 `/manuscripts/` lists twenty-two passages where the Greek manuscripts disagree, most of them words the King James Version prints and the earliest manuscripts leave out; `/manuscripts/{id}/` shows one (`inc/manuscripts.php`, routes in `inc/routes.php`, view names `manuscripts` and `manuscript`, query var `tbe_ms`). A passage page has the KJV wording and the WEB and BSB, a table of every CNTR "class 1" manuscript (papyri and parchment up to about AD 400) that covers the place, the four printed editions (Textus Receptus, Robinson-Pierpont, Westcott-Hort, CNTR's Statistical Restoration), and each manuscript's first-hand text line by line, with the verse either side. A chapter that holds a passage shows `tbe_manuscripts_chapter_note()` under its heading.
 
@@ -237,6 +243,8 @@ Chapters that have a JPS 1917 text (**Genesis so far**; the rest of the Old Test
 | `tbe_social_networks` | filter | The list of profile networks. |
 | `tbe_unlist_enabled` | filter | `false` turns unlisted posts off. |
 | `tbe/social`, `[tbe_social]` | block, shortcode | The profile links row. |
+| `tbe_toc_post_types` | filter | Post types that get the automatic contents before their first heading, besides commentary entries (default `post`, `page`, `tbe_term`). |
+| `[wp_toc]`, `[auto_toc]` | shortcode | The contents, placed by hand, with WP TOC's attributes `tags`, `title`, `depth`, `min`, `collapsible`, `collapsed`. |
 | `tbe_contextual_links_map` | filter | The link map read from `data/link-map.json` (`sites`, `links` with `site`, `path`, `phrases`). |
 | `tbe_contextual_links_enabled` | filter | `false` turns contextual links off for one entry (second argument, the post). |
 | `tbe/breadcrumbs`, `tbe/dek`, `tbe/article-meta`, `tbe/answer-box`, `tbe/contents`, `tbe/sources`, `tbe/next-step`, `tbe/related` | blocks | The pieces of the single commentary page. `tbe/answer-box` takes `summary` and `points` (one a line); `tbe/next-step` takes `variant` (`end` or `mid`). |

@@ -467,7 +467,7 @@ function tbe_sanitize_ctx_lines( string $text ): string {
 
 function tbe_render_article_tab( array $s ): void {
 	echo '<p class="description">' . esc_html__( 'The pieces around a single commentary entry. The excerpt shows under the title, the dates and reading time under that. The notes and sources block and the related entries need no switch: each shows when the entry has something to put in it.', 'tbe-child' ) . '</p>';
-	tbe_field_check( 'toc', __( 'Show the contents when an entry has three or more sections (level-two headings)', 'tbe-child' ), $s['toc'] );
+	tbe_field_check( 'toc', __( 'Show the contents when an entry, page, post or glossary term has three or more sections (level-two and level-three headings)', 'tbe-child' ), $s['toc'] );
 	printf(
 		'<div class="tbe-field"><label for="tbe-toc-style">%1$s</label><select id="tbe-toc-style" name="tbe_settings[toc_style]"><option value="inline" %2$s>%3$s</option><option value="sticky" %4$s>%5$s</option></select></div>',
 		esc_html__( 'Contents style', 'tbe-child' ),

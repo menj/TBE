@@ -166,3 +166,9 @@ a.tbe-ctx-link--out::after { content: " ↗"; font-size: 0.75em; }
 /* A button with a small icon before its words (0.10.15): the icon takes the button's colour. */
 .tbe-btn--icon { display: inline-flex; align-items: center; gap: .5rem; }
 .tbe-btn--icon .tbe-icon { flex: none; }
+
+/* Contents, nested and collapsible (0.10.21): level-three sections under their level-two section; a box that opens
+   and closes when [wp_toc collapsible="true"] asks for it. */
+.tbe-contents ol ol { margin-block-start: 0.3rem; padding-inline-start: 1.1rem; font-size: 0.95em; list-style-type: lower-alpha; }
+.tbe-contents--collapsible > summary { cursor: pointer; list-style-position: inside; }
+.tbe-contents--collapsible[open] > summary { margin-block-end: 0.5rem; }
