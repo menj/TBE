@@ -21,7 +21,7 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 Only the versions that need something done by hand are listed.
 
 ### To 0.10.18
-Nothing to do. The theme refreshes its address rules on the first load after the update, which adds `/manuscripts/`. New files: `inc/manuscripts.php`, `data/manuscripts/`, `assets/img/manuscripts/`, `tools/build_manuscripts.py`, `tools/commons_api.py`, `tools/fetch_manuscript_images.py`, `tools/test_manuscripts.php`. To rebuild the data after CNTR publishes a new release, run `python3 tools/build_manuscripts.py` on a copy with the tools folder.
+Nothing to do. The theme refreshes its address rules on the first load after the update, which adds `/manuscripts/` and `/lexicon/`. New files: `inc/lexicon.php`, `data/lexicon/`, `tools/build_lexicon.py`, `tools/build_metzger.py`, `tools/test_lexicon.php`, `inc/manuscripts.php`, `data/manuscripts/`, `assets/img/manuscripts/`, `tools/build_manuscripts.py`, `tools/commons_api.py`, `tools/fetch_manuscript_images.py`, `tools/test_manuscripts.php`. To rebuild the data after CNTR publishes a new release, run `python3 tools/build_manuscripts.py` on a copy with the tools folder.
 
 ### To 0.10.17
 Nothing to do. The theme refreshes its address rules on the first load after the update. If a page cache sits in front of the site, clear it so the footer shows "Sources".
@@ -84,7 +84,6 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - Serve `/favicon.png` from the brand icon, as `/favicon.ico` is. Why: 5 requests in the logs got the full 404 page.
 - Test the Nginx lines in README.md on a real Nginx. Why: they are written from the Apache rules and marked untested.
 - Settle the Qur'an cross-references. Why: the owner's rule that nothing Islamic goes on the site for now (restated 7 November 2026) meets references still shown on entry pages, in the reader, in the structured data and in link tips, and SSOT.md still calls the position "Islamic-leaning". The owner decides whether the public pages hide them; the admin field keeps what is saved.
-- A lexicon page for each Strong's number. Why: every interlinear word carries its number, but it shows only in a tooltip with nothing to link to. STEPBible's Hebrew and Greek lexicons (TBESH, TBESG) are CC BY 4.0, the same terms as the interlinear data.
 - A Hebrew page in the manuscripts section. Why: 0.10.18 covers the Greek New Testament only, while the interlinear data records about 1,500 Hebrew written-and-read (ketiv and qere) places and the Dead Sea Scrolls comparison has Isaiah 1 to 5.
 - More passages in the manuscripts section, and a per-book table of every place the editions differ. Why: 0.10.18 has twenty passages; the interlinear data records about 4,100 Greek words outside NA28 and about 3,850 variant readings, and `tools/build_manuscripts.py` takes a new passage in one line.
 
@@ -95,7 +94,6 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - The deuterocanonical, further Orthodox and Ethiopian books. Why: they are listed as prepared sections, "Not on the site yet", and the Ethiopian list is still to be confirmed.
 - The Ge'ez texts of the Ethiopian books. Why: the Ge'ez font is bundled and unused, and the texts need a licensed source. The owner asks the Ethiopian Orthodox Tewahedo Church first, since its permission so far covers names and notes from its site.
 - The Greek Old Testament manuscripts in the Freer collection (Deuteronomy, Joshua, Psalms). Why: Henry A. Sanders, "The Old Testament Manuscripts in the Freer Collection" (University of Michigan, 1917, public domain) describes and collates them, but the scanned copy's Greek text is too poorly read by machine to use without checking by hand. Its plates are public domain too.
-- A Greek word list from Metzger's *Lexical Aids for Students of New Testament Greek*, with the lexicon pages. Why: the owner holds its rights and serves it at `/pdf/lexical-aids.pdf`; it lists the New Testament's words by how often they occur, which suits the Strong's lexicon in Next. The scan has no text layer, so it must be read from the page images.
 - Swanson's other volumes (Mark, Luke, John) for the passages outside Matthew. Why: the Matthew volume covers four of the twenty passages; the others list the same kind of evidence.
 - More manuscript photographs. Why: only Mark 16 has them in 0.10.18. Commons has pages of other manuscripts (Bezae, Washingtonianus, the papyri), and each must be found, checked by eye to show the passage, and added to `data/manuscripts/images.json`.
 - A Syriac interlinear. Why: the Estrangela font is bundled and unused, waiting on an open Syriac dataset. The owner has said not to build it yet.

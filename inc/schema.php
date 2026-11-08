@@ -644,6 +644,27 @@ function tbe_ld_graph(): array {
 		$extra[]            = tbe_ld_post_list( $url . '#notes', $posts, 'Index of commentary' );
 		$page['mainEntity'] = tbe_ld_ref( $url . '#notes' );
 
+	} elseif ( $request && in_array( $request['view'], array( 'lexicon', 'lexicon-letter', 'lexicon-frequency' ), true ) ) {
+		$page['@type'] = 'CollectionPage';
+		$trail[]       = array( __( 'Lexicon', 'tbe-child' ), TBE_Lexicon::url() );
+
+	} elseif ( $request && 'lexicon-entry' === $request['view'] ) {
+		$entry   = $request['entry'];
+		$sense   = $entry['s'][0];
+		$trail[] = array( __( 'Lexicon', 'tbe-child' ), TBE_Lexicon::url() );
+		$trail[] = array( (string) $sense['w'], TBE_Lexicon::url( (string) $entry['num'] ) );
+		$extra[] = array(
+			'@type'            => 'DefinedTerm',
+			'@id'              => TBE_Lexicon::url( (string) $entry['num'] ) . '#term',
+			'name'             => (string) $sense['w'],
+			'alternateName'    => (string) $sense['t'],
+			'termCode'         => (string) $entry['num'],
+			'description'      => (string) $sense['g'],
+			'inLanguage'       => 'H' === $entry['num'][0] ? 'he' : 'grc',
+			'inDefinedTermSet' => array( '@type' => 'DefinedTermSet', 'name' => 'Strong’s concordance numbers', 'url' => TBE_Lexicon::url() ),
+		);
+		$page['mainEntity'] = tbe_ld_ref( TBE_Lexicon::url( (string) $entry['num'] ) . '#term' );
+
 	} elseif ( $request && 'manuscripts' === $request['view'] ) {
 		$page['@type'] = 'CollectionPage';
 		$trail[]       = array( __( 'Manuscripts', 'tbe-child' ), TBE_Manuscripts::url() );

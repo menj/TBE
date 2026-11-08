@@ -2,7 +2,7 @@
 
 ## 0.10.18
 
-A Manuscripts section. Nothing was removed.
+A Manuscripts section and a Strong's lexicon. Nothing was removed.
 
 ### Added
 - `/manuscripts/` lists twenty passages that the King James Version prints and the earliest Greek manuscripts leave out: the long ending of Mark, the woman caught in adultery, Luke 22:43-44, "Father, forgive them", the ending of the Lord's Prayer, the three witnesses of 1 John 5:7, John 5:4, Acts 8:37 and twelve shorter verses. Each has a page at `/manuscripts/{passage}/`.
@@ -10,6 +10,10 @@ A Manuscripts section. Nothing was removed.
 - Photographs of the manuscript pages where Wikimedia Commons has them, each under "The pages themselves" with a caption, its licence and a link to its Commons page. Mark 16 has three: Vaticanus and Sinaiticus ending at 16:8, and Alexandrinus running on. The list is `data/manuscripts/images.json`, chosen by hand and checked by eye; `tools/fetch_manuscript_images.py` fetches each one, refuses any file that is not public domain, CC0, CC BY or CC BY-SA, and saves a copy no wider than 1200 pixels in `assets/img/manuscripts/`.
 - `tools/commons_api.py`, a Wikimedia Commons client for the command line and for the other tools: `search`, `info` (licence, author, size, page; from Commons, or from Magnus Manske's Commons API on Toolforge when Commons refuses) and `download`. It names itself, spaces its requests, honours `Retry-After` and caches every answer.
 - "Later manuscripts too" on every passage page: the evidence of the United Bible Societies *Greek New Testament* (its {A} to {D} rating, and the Greek manuscripts on each side, later ones included) and, for the four Matthew passages, of Swanson's *New Testament Greek Manuscripts: Matthew*. Each comes with the page number, a scan of the page and a link to the page in the full book, and a short key to the manuscript numbers. The evidence is in `data/manuscripts/editions.json` and the scans in `assets/img/manuscripts/books/`; the Sources page names both books. Used by the owner's permission.
+- A Strong's lexicon at `/lexicon/`: a page for each of the 9,362 Greek and 8,723 Hebrew Strong's numbers (`/lexicon/g3056/`) with the word, transliteration, gloss, part of speech, every sense and its definition (its scripture references linked to the reader), how often the word is used and up to 120 places, each linked to its interlinear chapter. Lists by letter (`/lexicon/greek/alpha/`, `/lexicon/hebrew/aleph/`) and a look-up box (`/lexicon/?n=G3056`).
+- Metzger's *Lexical Aids for Students of New Testament Greek*, Part I, at `/lexicon/greek/frequency/`: 967 words in 35 groups from "more than 500 times" down to "10 times", with his meanings and English derivatives, 961 of them linked to their entries; each Greek entry names its Metzger group and links to the page in the scan. Read from the scan by OCR, used by the owner's permission.
+- Every Strong's number on the interlinear pages links to its lexicon entry. The book list links to the lexicon, and the Sources page credits it.
+- `inc/lexicon.php` (class `TBE_Lexicon`), `data/lexicon/` with its `README.txt`, `tools/build_lexicon.py` (STEPBible's TBESG and TBESH, CC BY 4.0), `tools/build_metzger.py` and `tools/test_lexicon.php`.
 - A Bible chapter that holds one of the passages shows a short note under its heading, with the count and a link. The book list links to the section.
 - `inc/manuscripts.php` (class `TBE_Manuscripts`), `data/manuscripts/passages.json` with its `README.txt`, `tools/build_manuscripts.py` and `tools/test_manuscripts.php`. The data is built from the Center for New Testament Restoration's transcriptions (Alan Bunning, CC BY-SA 4.0), and the English from the public-domain KJV, WEB and BSB on its translation pages. The Sources page credits it, and its Resources list links to it. The structured data names it as a Dataset.
 

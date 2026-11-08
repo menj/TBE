@@ -45,6 +45,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Recorded readings: Genesis 1 (Hebrew) and Matthew 1 (Greek) only.
 - Dead Sea Scrolls comparison: Isaiah 1 to 5 against 1QIsa-a only. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
 - JPS 1917 parallel text: Genesis only (`data/jps/`).
+- Lexicon: every Hebrew and Greek Strong's number in `data/lexicon/`, from STEPBible's TBESG and TBESH (CC BY 4.0), and Metzger's frequency list in `data/lexicon/metzger.json`.
 - Manuscripts evidence from the printed apparatuses: `data/manuscripts/editions.json` (UBS for all twenty passages, Swanson for the four in Matthew) with page images in `assets/img/manuscripts/books/`.
 - Manuscripts: twenty New Testament passages in `data/manuscripts/passages.json`, built from the CNTR transcriptions (CC BY-SA 4.0). That file and the pages built from it stay under CC BY-SA 4.0, whatever the theme's licence.
 - Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries) and `cross-references` (32 cross-references, each filed on both passages, so 64 entries). Every entry key starts with its pack id.
@@ -54,7 +55,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 ## Addresses
 
-- Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/` and `/sources/` (the old `/credits/` answers 301), and `/manuscripts/` with `/manuscripts/{passage}/` (`inc/routes.php`).
+- Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/` and `/sources/` (the old `/credits/` answers 301), and `/manuscripts/` with `/manuscripts/{passage}/`, and `/lexicon/` with `/lexicon/{number}/`, `/lexicon/{greek|hebrew}/{letter}/` and `/lexicon/greek/frequency/` (`inc/routes.php`).
 - Commentary: post type `tbe_commentary` at `/commentary/`, its sections at `/section/`. Glossary: post type `tbe_term` at `/glossary/`.
 - Front-end editing: only a signed-in user who may edit a note (or create notes) gets the drawer, which saves through the core REST API (`/wp/v2/tbe_commentary`); new notes are drafts until Publish, and a passage that is not a real reference is refused (0.10.15).
 - Search: `/search/{term}/`. The base is set under Settings, Permalinks (option `tbe_search_base`).
@@ -77,6 +78,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The ESV copyright line (Crossway), editable under ESV and licence but never removed.
 - STEPBible and Tyndale House Cambridge for the interlinear data.
 - Sefaria for the JPS 1917 text, and CACCHT (ETCBC, Martin Abegg's data) for the scroll comparison.
+- STEP Bible for the lexicon's definitions (CC BY 4.0), with Abbott-Smith and the abridged Brown-Driver-Briggs named, and Metzger's *Lexical Aids* for the frequency list, on the Sources page and on every lexicon page.
 - The titles, editors and publishers of the United Bible Societies *Greek New Testament* and Swanson's *New Testament Greek Manuscripts: Matthew*, on the Sources page and beside their evidence on each manuscripts page.
 - The credit under each manuscript photograph: its licence and a link to its Wikimedia Commons page.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.

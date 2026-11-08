@@ -33,6 +33,14 @@ function tbe_render_reader(): string {
 			return tbe_view_credits();
 		case 'manuscripts':
 			return tbe_view_manuscripts();
+		case 'lexicon':
+			return tbe_view_lexicon();
+		case 'lexicon-frequency':
+			return tbe_view_lexicon_frequency();
+		case 'lexicon-letter':
+			return tbe_view_lexicon_letter( $request['lang'], $request['letter'] );
+		case 'lexicon-entry':
+			return tbe_view_lexicon_entry( $request['entry'] );
 		case 'manuscript':
 			return tbe_view_manuscript_passage( $request['passage'] );
 		default:
@@ -76,6 +84,9 @@ function tbe_view_credits(): string {
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Greek manuscripts', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: 1: link to CNTR, 2: link to the licence */ __( 'The manuscript pages are built from the electronic transcriptions of the early Greek manuscripts by Alan Bunning and the %1$s, licensed %2$s. The tables and texts built from them are shared under the same licence. The English wording beside them comes from the public-domain King James Version (Pure Cambridge Edition), World English Bible and Berean Standard Bible, as set out on the Center’s translation pages. The photographs of manuscript pages come from Wikimedia Commons; each is credited under the picture with its licence and a link to its page there.', 'tbe-child' ), '<a href="https://greekcntr.org/" rel="noopener">Center for New Testament Restoration</a>', '<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>' ) ) . '</p>';
+
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Lexicon', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: 1: link to STEP Bible, 2: link to Metzger */ __( 'The lexicon’s definitions come from the Translators Brief lexicons of Extended Strongs by %1$s (CC BY 4.0): the Greek after G. Abbott-Smith’s Manual Greek Lexicon of the New Testament, the Hebrew after the abridged Brown-Driver-Briggs. The list of Greek words by frequency, and the frequency note on each Greek word, come from %2$s by Bruce M. Metzger (new edition, 1969), read from the scan by machine.', 'tbe-child' ), '<a href="https://www.STEPBible.org" rel="noopener">STEP Bible</a>', '<a href="' . esc_url( home_url( '/pdf/lexical-aids.pdf' ) ) . '"><cite>Lexical Aids for Students of New Testament Greek</cite></a>' ) ) . '</p>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Printed apparatuses', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: 1: link to the Greek New Testament, 2: link to Swanson */ __( 'The evidence of the later manuscripts on the manuscript pages, and the page images, come from %1$s (United Bible Societies) and from %2$s, edited by Reuben J. Swanson (Sheffield Academic Press and William Carey International University Press, 1995).', 'tbe-child' ), '<a href="' . esc_url( home_url( '/pdf/greek-nt.pdf' ) ) . '"><cite>The Greek New Testament</cite></a>', '<a href="' . esc_url( home_url( '/pdf/nt-variant-readings.pdf' ) ) . '"><cite>New Testament Greek Manuscripts: Variant Readings Arranged in Horizontal Lines against Codex Vaticanus. Matthew</cite></a>' ) ) . '</p>';
@@ -152,7 +163,7 @@ function tbe_view_interlinear_index(): string {
 function tbe_view_books(): string {
 	$out  = '<div class="tbe-reader tbe-books">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'The Books of the Bible', 'tbe-child' ) . '</h1>';
-	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Manuscripts::url() ) . '">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
+	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Manuscripts::url() ) . '">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Lexicon::url() ) . '">' . esc_html__( 'Lexicon', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
 
 	$out .= tbe_canon_filter();
 

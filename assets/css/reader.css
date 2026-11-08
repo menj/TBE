@@ -347,3 +347,27 @@
 .tbe-ms__scan summary, .tbe-ms__key summary { cursor: pointer; font-family: var(--tbe-ui); font-size: 0.9rem; color: var(--tbe-accent); }
 .tbe-ms__scan img { display: block; width: 100%; max-width: 40rem; height: auto; margin-top: 0.6rem; border: 1px solid var(--tbe-line); background: #fff; }
 .tbe-ms__key { margin-block: 1rem; font-size: 0.92rem; }
+
+/* Lexicon (0.10.18): /lexicon/, the lists by letter, Metzger's frequency list and each entry. */
+.tbe-lex__lookup { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: center; margin: 1rem auto 1.5rem; font-family: var(--tbe-ui); }
+.tbe-lex__lookup input { padding: 0.45rem 0.7rem; border: 1px solid var(--tbe-line); border-radius: var(--tbe-radius, 4px); font: inherit; width: 11rem; background: #fff; }
+.tbe-lex__letters { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; list-style: none; padding: 0; margin: 0.5rem 0 1.5rem; }
+.tbe-lex__letters a { display: inline-flex; align-items: center; justify-content: center; min-width: 2.6rem; height: 2.6rem; border: 1px solid var(--tbe-line); border-radius: var(--tbe-radius, 4px); font-family: var(--tbe-scripture, serif); font-size: 1.35rem; text-decoration: none; color: var(--tbe-ink); background: var(--tbe-surface); }
+.tbe-lex__letters a:hover, .tbe-lex__letters [aria-current] a { border-color: var(--tbe-gold); color: var(--tbe-accent); }
+.tbe-lex__letters--small a { min-width: 2rem; height: 2rem; font-size: 1.05rem; }
+.tbe-lex__list { list-style: none; padding: 0; columns: 2 18rem; column-gap: 2rem; }
+.tbe-lex__list li { break-inside: avoid; padding: 0.25rem 0; border-bottom: 1px solid color-mix(in srgb, var(--tbe-line) 60%, transparent); }
+.tbe-lex__list a { text-decoration: none; }
+.tbe-lex__word { font-family: var(--tbe-scripture, serif); font-size: 1.1rem; color: var(--tbe-ink); }
+.tbe-lex__gloss { color: var(--tbe-muted); }
+.tbe-lex__num { font-family: var(--tbe-ui); font-size: 0.75rem; }
+.tbe-lex__head { font-family: var(--tbe-scripture, serif); }
+.tbe-lex__meta { font-size: 1.1rem; }
+.tbe-lex__metzger { max-width: 44rem; margin: 1rem auto; padding: 0.6rem 1rem; border-inline-start: 3px solid var(--tbe-gold); background: var(--tbe-surface); border-radius: var(--tbe-radius, 4px); }
+.tbe-lex__metzger p { margin: 0; }
+.tbe-lex__sense { font-size: 1.15rem; margin-top: 1.6rem; }
+.tbe-lex__def { max-width: 46rem; margin-inline: auto; line-height: 1.65; }
+.tbe-lex__refs { line-height: 1.9; }
+.tbe-lex__credit { margin-top: 2rem; font-size: 0.85rem; }
+.tbe-il__strongs a { color: inherit; text-decoration: none; }
+.tbe-il__strongs a:hover { text-decoration: underline; }

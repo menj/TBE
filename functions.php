@@ -13,7 +13,7 @@ define( 'TBE_URI', get_stylesheet_directory_uri() );
 
 /** The theme's files in inc/, in the order they load, without ".php". */
 function tbe_theme_files(): array {
-	return array( 'settings', 'bible', 'canon', 'interlinear', 'dss', 'manuscripts', 'audio', 'esv-api', 'quran', 'commentary', 'frontend-edit', 'entry-fields', 'starter-commentary', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'article', 'contextual-links', 'enqueue', 'branding', 'error-pages', 'social', 'progress', 'unlist', 'search-permalinks', 'login', 'site-links', 'hardening', 'sitemaps', 'dev-files' );
+	return array( 'settings', 'bible', 'canon', 'interlinear', 'dss', 'manuscripts', 'lexicon', 'audio', 'esv-api', 'quran', 'commentary', 'frontend-edit', 'entry-fields', 'starter-commentary', 'glossary', 'enrich', 'search', 'schema', 'routes', 'reader', 'blocks', 'article', 'contextual-links', 'enqueue', 'branding', 'error-pages', 'social', 'progress', 'unlist', 'search-permalinks', 'login', 'site-links', 'hardening', 'sitemaps', 'dev-files' );
 }
 
 /**
