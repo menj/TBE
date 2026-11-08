@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.20
+Nothing to do. Clear any page cache so the home page shows the centred menu.
+
 ### To 0.10.19
 Nothing to do. If a page cache sits in front of the site, clear it so the home page shows the new header.
 

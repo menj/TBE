@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.19
+Stable tag: 0.10.20
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -116,6 +116,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.20 =
+* On the home page the menu is centred above the cross and the name, with no empty space beside it.
+
 = 0.10.19 =
 * The home page shows the cross and the name once, in the hero, and its search box is full width again.
 
@@ -169,6 +172,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.20 =
+Nothing to do by hand.
 
 = 0.10.19 =
 Nothing to do by hand.
