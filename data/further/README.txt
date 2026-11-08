@@ -31,3 +31,6 @@ apocalypse-of-peter.json
   The Apocalypse of Peter in Andrew Rutherfurd's translation (The Ante-Nicene Fathers, Additional Volume, 1896),
   public domain, supplied by the site owner; built by tools/build_apocalypse_peter.py. Chapter 1 is the Akhmim
   fragment, chapter 2 the passages quoted by the Fathers.
+  Since 9 November 2026 chapters 1 to 17 are the Ethiopic text in J. K. Elliott's translation as printed in
+  Bart D. Ehrman, Lost Scriptures (Oxford University Press, 2003), used with the owner's permission; built by
+  tools/build_apocalypse_peter_ethiopic.py, which puts the Greek after it as chapters 18 and 19.

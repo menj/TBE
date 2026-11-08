@@ -11,7 +11,7 @@ The first books beyond the 66 can be read on the site: Jubilees and 1, 2 and 3 M
 - The structured data gives each book as a `Book` translated from Ge'ez, with its licence, its Wikisource source and each chapter as a `Chapter`.
 - Jubilees in R. H. Charles's translation of 1902 (public domain), 50 chapters, read from the scan on the Internet Archive with his notes, chapter summaries and margin dates left out (`tools/build_jubilees.py`).
 - The Shepherd of Hermas in J. B. Lightfoot's translation (public domain): its five Visions, twelve Mandates and ten Parables are its chapters, and each paragraph shows its printed reference, such as "3[11]:2" (`tools/build_hermas.py`).
-- The Apocalypse of Peter in Andrew Rutherfurd's translation (public domain): the Akhmim fragment and the passages the Fathers quote (`tools/build_apocalypse_peter.py`).
+- The Apocalypse of Peter: the full Ethiopic text in seventeen chapters, in J. K. Elliott's translation as printed in Bart D. Ehrman's *Lost Scriptures* (2003), used with the owner's permission, then the Greek Akhmim fragment and the passages the Fathers quote in Andrew Rutherfurd's public-domain translation (`tools/build_apocalypse_peter_ethiopic.py`, `tools/build_apocalypse_peter.py`).
 - `inc/further.php` (class `TBE_Further`), `data/further/`, `tools/build_meqabyan.py` and `tools/test_further.php`.
 
 ## 0.10.21

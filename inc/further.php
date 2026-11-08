@@ -105,9 +105,13 @@ final class TBE_Further {
 function tbe_further_credit( array $book ): string {
 	$src     = (array) ( $book['source'] ?? array() );
 	$link    = '<a href="' . esc_url( (string) ( $src['url'] ?? '' ) ) . '" rel="noopener">' . esc_html( (string) ( $src['title'] ?? '' ) ) . '</a>';
-	$licence = '' !== (string) ( $src['licence_url'] ?? '' )
-		? sprintf( /* translators: %s: link to the licence */ __( 'It is shared under %s.', 'tbe-child' ), '<a href="' . esc_url( (string) $src['licence_url'] ) . '" rel="noopener">' . esc_html( (string) ( $src['licence'] ?? '' ) ) . '</a>' )
-		: __( 'It is in the public domain.', 'tbe-child' );
+	if ( '' !== (string) ( $src['licence_url'] ?? '' ) ) {
+		$licence = sprintf( /* translators: %s: link to the licence */ __( 'It is shared under %s.', 'tbe-child' ), '<a href="' . esc_url( (string) $src['licence_url'] ) . '" rel="noopener">' . esc_html( (string) ( $src['licence'] ?? '' ) ) . '</a>' );
+	} elseif ( 'public domain' === strtolower( (string) ( $src['licence'] ?? '' ) ) ) {
+		$licence = __( 'It is in the public domain.', 'tbe-child' );
+	} else {
+		$licence = esc_html( (string) ( $src['licence'] ?? '' ) ) . '.'; // such as "Used by permission"
+	}
 	return '<aside class="tbe-notice tbe-further__credit"><p>' . wp_kses_post(
 		sprintf(
 			/* translators: 1: who made the translation, 2: link to the source, 3: the licence sentence, 4: notes on the text */

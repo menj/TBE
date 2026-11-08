@@ -30,6 +30,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 `.claude/CLAUDE.md` records no owner decisions yet. The ones below come from the code and the changelog, with the date each was made. A new one goes into `.claude/CLAUDE.md` first, then here word for word.
 
+- 9 November 2026: the owner holds the rights to use Bart D. Ehrman, *Lost Scriptures* (Oxford University Press, 2003), and the translation of the Apocalypse of Peter by J. K. Elliott that it prints: "i have all rights". The Ethiopic chapters of the Apocalypse of Peter on the site come from it.
 - 4 November 2026: the structured data names Mohd Elfie Nieshaem Juferi as the author of every entry, whoever the WordPress user is. Nothing visible changes (`tbe_ld_person()`, `tools/test_schema_author.php`).
 - 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
 - 5 November 2026: every theme is licensed under the GNU General Public License, version 3 or later (0.10.9). This one came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`; the owner adds it there, and this line is then its copy.
@@ -85,6 +86,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The credit under each manuscript photograph: its author where known, its licence and a link to its page on Wikimedia Commons or the Internet Archive.
 - C. J. Cornthwaite, named on the Sources page as the source of the `gospels-and-canon` pack's arguments.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
+- J. K. Elliott as translator and Bart D. Ehrman's *Lost Scriptures* (Oxford University Press) as the source of the Ethiopic Apocalypse of Peter, on the Sources page and on the book.
 - R. H. Charles, J. B. Lightfoot and Andrew Rutherfurd as translators of Jubilees, Hermas and the Apocalypse of Peter, on the Sources page and on each book.
 - Wikisource contributors for the 1 to 3 Meqabyan translation, with the CC BY-SA 4.0 licence and a link to each page, on the Sources page and on every page of those books. The licence requires it.
 - The licences in `assets/fonts/` for SBL, Angel, Noto Naskh Arabic, Abyssinica SIL and Montserrat, and the Angel credit with its link on the Sources page.
