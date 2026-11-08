@@ -82,7 +82,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The titles, editors and publishers of the United Bible Societies *Greek New Testament* and Swanson's *New Testament Greek Manuscripts: Matthew*, on the Sources page and beside their evidence on each manuscripts page.
 - The credit under each manuscript photograph: its licence and a link to its Wikimedia Commons page.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
-- The licences in `assets/fonts/` for SBL, Angel and Noto Naskh Arabic and Abyssinica SIL, and the Angel credit with its link on the Sources page.
+- The licences in `assets/fonts/` for SBL, Angel, Noto Naskh Arabic, Abyssinica SIL and Montserrat, and the Angel credit with its link on the Sources page.
 - The Minimalist Social Icons Pack 2.8 for the profile icons.
 - The source of the critical-commentary pack, on the Sources page and nowhere else.
 

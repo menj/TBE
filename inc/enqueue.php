@@ -87,6 +87,7 @@ function tbe_asset_url( string $rel ): string {
 function tbe_font_faces(): array {
 	return array(
 		'angel'      => array( 'Angel', 'assets/fonts/Angel.woff2', '' ),
+		'montserrat' => array( 'Montserrat', 'assets/fonts/Montserrat-Regular.woff2', 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2190-2193, U+2212, U+2215, U+FEFF, U+FFFD' ),
 		'naskh'      => array( 'Noto Naskh Arabic', 'assets/fonts/NotoNaskhArabic-Regular.woff2', 'U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF' ),
 		'biblit'     => array( 'SBL BibLit', 'assets/fonts/SBL_BLit.woff2', '' ),
 		'hebrew'     => array( 'SBL Hebrew', 'assets/fonts/SBL_Hbrw.woff2', 'U+0590-05FF, U+FB1D-FB4F' ),
@@ -99,8 +100,8 @@ function tbe_font_faces(): array {
 /** The fonts each stylesheet carries the rules for. */
 function tbe_font_face_handles(): array {
 	return array(
-		'tbe-base'      => array( 'angel' ),
-		'tbe-login'     => array( 'angel' ),
+		'tbe-base'      => array( 'angel', 'montserrat' ),
+		'tbe-login'     => array( 'angel', 'montserrat' ),
 		'tbe-reader'    => array( 'naskh' ),
 		'tbe-scripture' => array( 'biblit', 'hebrew', 'greek', 'estrangela', 'geez' ),
 	);
