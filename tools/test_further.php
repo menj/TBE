@@ -46,15 +46,20 @@ function check( $ok, $label ) {
 	$fail += $ok ? 0 : 1;
 }
 
-$books = TBE_Further::books();
-check( array( '1-meqabyan', '2-meqabyan', '3-meqabyan' ) === array_keys( $books ), 'the three books of Meqabyan are on the site, in canon order' );
-check( 7 === $books['1-meqabyan']['count'] && 21 === $books['2-meqabyan']['count'] && 10 === $books['3-meqabyan']['count'], 'chapters: 7, 21 and 10, as on Wikisource' );
+$books  = TBE_Further::books();
 $verses = static fn( $slug ) => array_sum( array_map( static fn( $c ) => count( $c['verses'] ), $books[ $slug ]['chapters'] ) );
+check( array( 'jubilees', '1-meqabyan', '2-meqabyan', '3-meqabyan', 'hermas', 'apocalypse-of-peter' ) === array_keys( $books ), 'Jubilees, 1 to 3 Meqabyan, Hermas and the Apocalypse of Peter are on the site, in canon order' );
+check( 50 === $books['jubilees']['count'] && $verses( 'jubilees' ) > 1250, 'Jubilees: 50 chapters and its verses (' . $verses( 'jubilees' ) . ')' );
+check( 27 === $books['hermas']['count'] && 'Vision 1' === $books['hermas']['chapters'][0]['title'] && 'Parable 10' === $books['hermas']['chapters'][26]['title'], 'Hermas: five Visions, twelve Mandates and ten Parables' );
+check( '6[14]:1' === $books['hermas']['chapters'][2]['verses'][array_search( '6[14]:1', array_column( $books['hermas']['chapters'][2]['verses'], 'l' ), true )]['l'] && 1 === count( array_keys( array_column( $books['hermas']['chapters'][2]['verses'], 'l' ), '5[13]:1', true ) ), 'Hermas: the repeated reference in Vision 3 is numbered on (6[14])' );
+check( 2 === $books['apocalypse-of-peter']['count'] && 33 === end( $books['apocalypse-of-peter']['chapters'][0]['verses'] )['n'], 'Apocalypse of Peter: the Akhmim fragment to verse 33 and the quoted passages' );
+check( 7 === $books['1-meqabyan']['count'] && 21 === $books['2-meqabyan']['count'] && 10 === $books['3-meqabyan']['count'], 'chapters: 7, 21 and 10, as on Wikisource' );
 check( 240 === $verses( '1-meqabyan' ) && 421 === $verses( '2-meqabyan' ) && 208 === $verses( '3-meqabyan' ), 'verses: 240, 421 and 208' );
 check( null === TBE_Further::book( 'genesis' ) && null === TBE_Further::book( '../canons' ) && null === TBE_Further::book( '1-enoch' ), 'only listed books with a text file are read' );
 
 $bad = array();
-foreach ( $books as $slug => $book ) {
+foreach ( array( '1-meqabyan', '2-meqabyan', '3-meqabyan' ) as $slug ) {
+	$book = $books[ $slug ];
 	foreach ( $book['chapters'] as $i => $ch ) {
 		if ( $ch['n'] !== $i + 1 ) {
 			$bad[] = "$slug chapter $i";
@@ -75,7 +80,7 @@ check( 17 === $one['verses'][16]['n'] && str_starts_with( $one['verses'][16]['t'
 
 $list = tbe_canon_sections();
 check( false !== strpos( $list, '<a href="https://thebible.exposed/bible/1-meqabyan/"><span class="tbe-booklist__name">1 Meqabyan</span><span class="tbe-booklist__count">7 chapters</span></a>' ), 'the book list links 1 Meqabyan with its chapters' );
-check( 3 === substr_count( $list, 'meqabyan/"' ) && false !== strpos( $list, 'mätṣḥäfä henok</span></span><span class="tbe-booklist__count">Not on the site yet' ), 'the other prepared books are still marked "Not on the site yet"' );
+check( 3 === substr_count( $list, 'meqabyan/"' ) && false !== strpos( $list, 'bible/jubilees/"' ) && false !== strpos( $list, 'bible/hermas/"' ) && false !== strpos( $list, 'mätṣḥäfä henok</span></span><span class="tbe-booklist__count">Not on the site yet' ), 'the other prepared books are still marked "Not on the site yet"' );
 check( false !== strpos( $list, 'Zëna Ayhud (Pseudo-Josephus) <span class="tbe-booklist__geez" lang="gez">ዜና፡ አይሁድ</span></span>' ), 'Zëna Ayhud carries its Ge\'ez name' );
 check( false !== strpos( $list, '1 Enoch (Henok) <span class="tbe-booklist__geez" lang="gez">መጽሐፈ ሄኖክ</span> <span class="tbe-booklist__geez tbe-booklist__geez--latin" lang="gez-Latn">mätṣḥäfä henok</span>' ), '1 Enoch carries its Ge\'ez name and transliteration' );
 check( false !== strpos( $list, 'Jubilees (Kufale) <span class="tbe-booklist__geez" lang="gez">መጽሐፈ ኩፋሌ</span> <span class="tbe-booklist__geez tbe-booklist__geez--latin" lang="gez-Latn">mäṣḥafä kufale</span>' ), 'Jubilees carries its Ge\'ez name and transliteration' );
@@ -87,13 +92,16 @@ foreach ( $books as $slug => $book ) {
 	for ( $c = 1; $c <= $book['count']; $c++ ) {
 		$html = tbe_view_further_chapter( $book, $c );
 		$ch   = TBE_Further::chapter( $book, $c );
-		if ( substr_count( $html, 'class="tbe-verse' ) !== count( $ch['verses'] ) || false === strpos( $html, 'CC BY-SA 4.0' ) || false === strpos( $html, 'wikisource.org' ) ) {
+		if ( substr_count( $html, 'class="tbe-verse' ) !== count( $ch['verses'] ) || false === stripos( $html, esc_html( (string) $book['source']['licence'] ) ) || false === strpos( $html, (string) $book['source']['url'] ) ) {
 			check( false, "chapter page renders: $slug $c" );
 		}
 	}
 }
 check( true, 'every chapter renders all its verses with the credit and licence' );
-check( array( array( '1-meqabyan', 7 ), array( '2-meqabyan', 2 ) ) === TBE_Further::neighbours( '2-meqabyan', 1 ) && array( array( '3-meqabyan', 9 ), null ) === TBE_Further::neighbours( '3-meqabyan', 10 ), 'the pager crosses from one book to the next and stops at the last' );
+check( false !== strpos( tbe_view_further_chapter( $books['hermas'], 3 ), '>6[14]:1</a>' ) && false !== strpos( tbe_view_further_chapter( $books['hermas'], 3 ), '<p class="tbe-eyebrow">Vision 3</p>' ), 'Hermas shows its printed references and part titles' );
+check( 'Shepherd of Hermas, Mandate 4' === TBE_Further::label( 'hermas', 9 ), 'a titled chapter is labelled by its title' );
+check( false !== strpos( tbe_further_credit( $books['jubilees'] ), 'public domain' ) && false !== strpos( tbe_further_credit( $books['jubilees'] ), 'not a translation authorised' ) && false === strpos( tbe_further_credit( $books['hermas'] ), 'Tewahedo' ), 'credits: Jubilees public domain and unofficial; Hermas makes no claim about the Ethiopian church' );
+check( array( array( '1-meqabyan', 7 ), array( '2-meqabyan', 2 ) ) === TBE_Further::neighbours( '2-meqabyan', 1 ) && array( array( '3-meqabyan', 9 ), null ) === TBE_Further::neighbours( '3-meqabyan', 10 ) && array( array( '3-meqabyan', 10 ), null ) !== TBE_Further::neighbours( 'hermas', 1 ) && null === TBE_Further::neighbours( 'hermas', 1 )[0], 'the pager crosses from one book to the next of its section and stops at the last' );
 check( false !== strpos( tbe_view_further_chapter( $books['2-meqabyan'], 16 ), 'id="v10"' ) && false === strpos( tbe_view_further_chapter( $books['2-meqabyan'], 16 ), 'id="v9"' ), 'a verse Wikisource skips (2 Meqabyan 16:9) is not invented' );
 
 $routes = (string) file_get_contents( TBE_DIR . '/inc/routes.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions

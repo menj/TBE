@@ -678,7 +678,11 @@ function tbe_ld_graph(): array {
 			'inLanguage'      => 'en',
 			'license'         => (string) ( $book['source']['licence_url'] ?? '' ),
 			'isBasedOn'       => (string) ( $book['source']['url'] ?? '' ),
-			'translator'      => array( '@type' => 'Organization', 'name' => 'Wikisource contributors', 'url' => 'https://en.wikisource.org/' ),
+			'translator'      => array(
+				'@type' => (string) ( $book['source']['translator']['type'] ?? 'Organization' ),
+				'name'  => (string) ( $book['source']['translator']['name'] ?? '' ),
+				'url'   => (string) ( $book['source']['translator']['url'] ?? '' ),
+			),
 			'translationOfWork' => array( '@type' => 'Book', 'name' => (string) $book['name'], 'inLanguage' => 'gez' ),
 		);
 		if ( 'further-chapter' === $request['view'] ) {

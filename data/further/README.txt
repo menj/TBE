@@ -14,3 +14,20 @@ Further books: books counted as scripture by some churches beyond the 66, read o
   copy taken then.
 
 A book is readable when its file is here and its slug is listed in a prepared section of data/canons.json.
+
+jubilees.json
+  Jubilees in R. H. Charles's translation from Ge'ez, The Book of Jubilees or the Little Genesis (London: Adam
+  and Charles Black, 1902), public domain. Read by tools/build_jubilees.py from the OCR, with word positions, of
+  the scan on the Internet Archive (item bookofjubileesor00char): the translation only, without Charles's notes,
+  chapter summaries and margin dates. Where the scan lost a verse number, that verse's words stay with the verse
+  before; the script lists each place, and the few spots it mends by hand.
+
+hermas.json
+  The Shepherd of Hermas in J. B. Lightfoot's translation (The Apostolic Fathers, 1891), public domain, supplied
+  by the site owner; built by tools/build_hermas.py. Five Visions, twelve Mandates and ten Parables, each a
+  chapter, with each paragraph's printed reference; repeated references in the copy are numbered on.
+
+apocalypse-of-peter.json
+  The Apocalypse of Peter in Andrew Rutherfurd's translation (The Ante-Nicene Fathers, Additional Volume, 1896),
+  public domain, supplied by the site owner; built by tools/build_apocalypse_peter.py. Chapter 1 is the Akhmim
+  fragment, chapter 2 the passages quoted by the Fathers.

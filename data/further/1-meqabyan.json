@@ -6,7 +6,15 @@
  "source": {
   "title": "Translation:1 Meqabyan",
   "url": "https://en.wikisource.org/wiki/Translation:1_Meqabyan",
-  "credit": "Translated from Ge'ez by Wikisource contributors",
+  "credit": "A working English translation from Ge’ez by Wikisource contributors",
+  "short": "Wikisource",
+  "church": "It is not a translation authorised by the Ethiopian Orthodox Tewahedo Church.",
+  "note": "Verse numbers follow the Wikisource page; where it skips a number, so does this page.",
+  "translator": {
+   "type": "Organization",
+   "name": "Wikisource contributors",
+   "url": "https://en.wikisource.org/"
+  },
   "licence": "CC BY-SA 4.0",
   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/"
  },

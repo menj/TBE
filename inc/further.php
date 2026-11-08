@@ -2,7 +2,9 @@
 /**
  * Further books: books counted as scripture by some churches beyond the 66, read on the site from data/further/.
  * The first are the three books of Meqabyan of the Ethiopian Orthodox Tewahedo canon, in the English translation
- * from Ge'ez made by Wikisource contributors (CC BY-SA 4.0), built by tools/build_meqabyan.py (0.10.22).
+ * from Ge'ez made by Wikisource contributors (CC BY-SA 4.0), built by tools/build_meqabyan.py, and Jubilees in
+ * R. H. Charles's translation of 1902 (public domain), built by tools/build_jubilees.py (0.10.22). Each file
+ * names its source (title, url, credit, short, note, licence, licence_url, translator).
  *
  * A book is readable when data/further/{slug}.json exists and its slug is listed in one of the prepared sections
  * of data/canons.json. It answers at /bible/{slug}/ and /bible/{slug}/{chapter}/, the same addresses as the 66,
@@ -76,9 +78,10 @@ final class TBE_Further {
 		return array();
 	}
 
-	/** The chapters before and after, crossing into the next further book: [ [slug, chapter]|null, ... ]. */
+	/** The chapters before and after, crossing into the next further book of the same section: [ [slug, chapter]|null, ... ]. */
 	public static function neighbours( string $slug, int $chapter ): array {
-		$books = self::books();
+		$section = self::canon( $slug )['section'] ?? '';
+		$books   = array_filter( self::books(), static fn( $b ) => ( self::canon( (string) $b['slug'] )['section'] ?? '' ) === $section );
 		$slugs = array_keys( $books );
 		$i     = (int) array_search( $slug, $slugs, true );
 		$prev  = $chapter > 1 ? array( $slug, $chapter - 1 ) : ( $i > 0 ? array( $slugs[ $i - 1 ], $books[ $slugs[ $i - 1 ] ]['count'] ) : null );
@@ -86,23 +89,41 @@ final class TBE_Further {
 		return array( $prev, $next );
 	}
 
+	/** "1 Meqabyan 3", or for a book whose chapters have titles, "Shepherd of Hermas, Mandate 4". */
 	public static function label( string $slug, int $chapter = 0 ): string {
 		$book = self::book( $slug );
-		return ( $book ? (string) $book['name'] : $slug ) . ( $chapter ? ' ' . $chapter : '' );
+		$name = $book ? (string) $book['name'] : $slug;
+		if ( ! $chapter ) {
+			return $name;
+		}
+		$title = $book ? (string) ( self::chapter( $book, $chapter )['title'] ?? '' ) : '';
+		return '' !== $title ? $name . ', ' . $title : $name . ' ' . $chapter;
 	}
 }
 
-/** Where the translation comes from and under which licence, shown on every page of a further book. */
+/** Where the translation comes from and under which licence, shown on the book page and its first chapter. */
 function tbe_further_credit( array $book ): string {
-	$src = (array) ( $book['source'] ?? array() );
+	$src     = (array) ( $book['source'] ?? array() );
+	$link    = '<a href="' . esc_url( (string) ( $src['url'] ?? '' ) ) . '" rel="noopener">' . esc_html( (string) ( $src['title'] ?? '' ) ) . '</a>';
+	$licence = '' !== (string) ( $src['licence_url'] ?? '' )
+		? sprintf( /* translators: %s: link to the licence */ __( 'It is shared under %s.', 'tbe-child' ), '<a href="' . esc_url( (string) $src['licence_url'] ) . '" rel="noopener">' . esc_html( (string) ( $src['licence'] ?? '' ) ) . '</a>' )
+		: __( 'It is in the public domain.', 'tbe-child' );
 	return '<aside class="tbe-notice tbe-further__credit"><p>' . wp_kses_post(
 		sprintf(
-			/* translators: 1: link to the Wikisource page, 2: link to the licence */
-			__( 'A working English translation from Ge’ez by Wikisource contributors (%1$s), shared under %2$s. It is not a translation authorised by the Ethiopian Orthodox Tewahedo Church. Verse numbers follow the Wikisource page; where it skips a number, so does this page.', 'tbe-child' ),
-			'<a href="' . esc_url( (string) ( $src['url'] ?? '' ) ) . '" rel="noopener">' . esc_html( (string) ( $src['title'] ?? '' ) ) . '</a>',
-			'<a href="' . esc_url( (string) ( $src['licence_url'] ?? '' ) ) . '" rel="noopener">' . esc_html( (string) ( $src['licence'] ?? '' ) ) . '</a>'
+			/* translators: 1: who made the translation, 2: link to the source, 3: the licence sentence, 4: notes on the text */
+			__( '%1$s (%2$s). %3$s %4$s', 'tbe-child' ),
+			esc_html( (string) ( $src['credit'] ?? '' ) ),
+			$link,
+			$licence,
+			esc_html( trim( (string) ( $src['church'] ?? '' ) . ' ' . (string) ( $src['note'] ?? '' ) ) )
 		)
 	) . '</p></aside>';
+}
+
+/** The short credit under every other chapter: who made the translation and its licence. */
+function tbe_further_credit_line( array $book ): string {
+	$src = (array) ( $book['source'] ?? array() );
+	return '<p class="tbe-copyright">' . wp_kses_post( sprintf( /* translators: 1: link to the source, 2: licence */ __( 'Translation: %1$s, %2$s.', 'tbe-child' ), '<a href="' . esc_url( (string) ( $src['url'] ?? '' ) ) . '" rel="noopener">' . esc_html( (string) ( $src['short'] ?? $src['title'] ?? '' ) ) . '</a>', esc_html( (string) ( $src['licence'] ?? '' ) ) ) ) . '</p>';
 }
 
 function tbe_further_breadcrumb( array $book, int $chapter = 0 ): string {
@@ -141,8 +162,13 @@ function tbe_view_further_book( array $book ): string {
 	}
 	$out .= tbe_further_credit( $book );
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Chapters', 'tbe-child' ) . '</h2><ol class="tbe-chapters">';
+	$titled = '' !== (string) ( $book['chapters'][0]['title'] ?? '' );
+	if ( $titled ) {
+		$out = substr( $out, 0, -strlen( '<ol class="tbe-chapters">' ) ) . '<ol class="tbe-further__parts">';
+	}
 	for ( $i = 1; $i <= $book['count']; $i++ ) {
-		$out .= '<li><a href="' . esc_url( TBE_Bible::url( (string) $book['slug'], $i ) ) . '">' . $i . '</a></li>';
+		$label = $titled ? esc_html( (string) $book['chapters'][ $i - 1 ]['title'] ) : (string) $i;
+		$out  .= '<li><a href="' . esc_url( TBE_Bible::url( (string) $book['slug'], $i ) ) . '">' . $label . '</a></li>';
 	}
 	return $out . '</ol></div>';
 }
@@ -153,7 +179,8 @@ function tbe_view_further_chapter( array $book, int $chapter ): string {
 	$layout = 'flow' === tbe_setting( 'layout' ) ? 'flow' : 'verse';
 	$out    = '<div class="tbe-reader tbe-chapter tbe-further tbe-layout-' . esc_attr( $layout ) . '" data-book="' . esc_attr( $slug ) . '" data-chapter="' . (int) $chapter . '">';
 	$out   .= tbe_further_breadcrumb( $book, $chapter );
-	$out   .= '<p class="tbe-eyebrow">' . esc_html( sprintf( /* translators: %d: chapter number */ __( 'Chapter %d', 'tbe-child' ), $chapter ) ) . '</p>';
+	$title  = (string) ( $ch['title'] ?? '' );
+	$out   .= '<p class="tbe-eyebrow">' . esc_html( '' !== $title ? $title : sprintf( /* translators: %d: chapter number */ __( 'Chapter %d', 'tbe-child' ), $chapter ) ) . '</p>';
 	$out   .= '<h1 class="tbe-title">' . esc_html( (string) $book['name'] ) . '</h1>';
 	$out   .= '<div class="tbe-toolbar" role="group" aria-label="' . esc_attr__( 'Reading tools', 'tbe-child' ) . '">'
 		. '<button type="button" class="tbe-btn" data-tbe-size="-1" aria-label="' . esc_attr__( 'Smaller text', 'tbe-child' ) . '" data-tbe-tip="' . esc_attr__( 'Smaller text', 'tbe-child' ) . '">A−</button>'
@@ -163,6 +190,9 @@ function tbe_view_further_chapter( array $book, int $chapter ): string {
 		. '</div>';
 	if ( 1 === $chapter ) {
 		$out .= tbe_further_credit( $book );
+	}
+	if ( 1 === $chapter && '' !== (string) ( $book['prologue'] ?? '' ) ) {
+		$out .= '<p class="tbe-further__heading">' . esc_html( (string) $book['prologue'] ) . '</p>';
 	}
 	$class = 'tbe-text' . ( tbe_setting( 'verse_numbers' ) ? '' : ' tbe-hide-numbers' );
 	$out  .= '<div class="' . esc_attr( $class ) . '" lang="en" dir="ltr">';
@@ -177,7 +207,7 @@ function tbe_view_further_chapter( array $book, int $chapter ): string {
 	$out .= $next ? '<a class="tbe-pager__next" rel="next" href="' . esc_url( TBE_Bible::url( $next[0], $next[1] ) ) . '">' . esc_html( TBE_Further::label( $next[0], $next[1] ) ) . ' <span aria-hidden="true">→</span></a>' : '<span></span>';
 	$out .= '</nav>';
 	if ( 1 !== $chapter ) {
-		$out .= '<p class="tbe-copyright">' . wp_kses_post( sprintf( /* translators: 1: link to the Wikisource page, 2: licence */ __( 'Translation: %1$s, %2$s.', 'tbe-child' ), '<a href="' . esc_url( (string) ( $book['source']['url'] ?? '' ) ) . '" rel="noopener">Wikisource</a>', esc_html( (string) ( $book['source']['licence'] ?? '' ) ) ) ) . '</p>';
+		$out .= tbe_further_credit_line( $book );
 	}
 	return $out . '</div>';
 }

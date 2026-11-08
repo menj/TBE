@@ -111,7 +111,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The JPS 1917 translation is in the public domain and comes through Sefaria.
 * The Dead Sea Scroll comparison is built from the CACCHT project's data (ETCBC, after Martin Abegg), CC BY-NC 4.0.
 * The Manuscripts pages are built from the transcriptions of the early Greek manuscripts by Alan Bunning and the Center for New Testament Restoration, CC BY-SA 4.0, and share that licence. Their English wording is from the public-domain KJV, World English Bible and Berean Standard Bible. The lexicon's definitions are from STEP Bible's brief lexicons (CC BY 4.0), and its Greek frequency list from Bruce M. Metzger's Lexical Aids for Students of New Testament Greek. The manuscript photographs come from Wikimedia Commons, each credited under the picture. The evidence of later manuscripts comes from the United Bible Societies Greek New Testament and from Reuben J. Swanson's New Testament Greek Manuscripts: Matthew, used by the owner's permission.
-* The text of 1, 2 and 3 Meqabyan is the English translation from Ge'ez made by Wikisource contributors, CC BY-SA 4.0, and shares that licence.
+* The text of 1, 2 and 3 Meqabyan is the English translation from Ge'ez made by Wikisource contributors, CC BY-SA 4.0, and shares that licence. Jubilees (R. H. Charles, 1902), the Shepherd of Hermas (J. B. Lightfoot, 1891) and the Apocalypse of Peter (Andrew Rutherfurd, 1896) are public-domain translations.
 * Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic, Abyssinica SIL and Montserrat under the SIL Open Font License.
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
@@ -119,6 +119,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 = 0.10.22 =
 * 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon can be read, in the English translation from Ge'ez made on Wikisource.
+* Jubilees (R. H. Charles), the Shepherd of Hermas (J. B. Lightfoot) and the Apocalypse of Peter (Andrew Rutherfurd) can be read too.
 * 1 Enoch, Jubilees and Zëna Ayhud show their Ge'ez names on the book list.
 
 = 0.10.21 =

@@ -378,3 +378,6 @@
 .tbe-booklist--planned li > a { flex-direction: row; }
 .tbe-further__credit { max-width: 42rem; margin: 0 auto 1.6rem; font-size: 0.9rem; }
 .tbe-further__heading { font-style: italic; text-align: center; color: var(--tbe-muted); margin-block: 0 1.2rem; }
+.tbe-further__parts { list-style: none; padding: 0; display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); }
+.tbe-further__parts a { display: block; text-align: center; padding: 0.55rem 0.4rem; background: var(--tbe-surface); border: 1px solid var(--tbe-line); border-radius: var(--tbe-radius, 14px); text-decoration: none; color: var(--tbe-ink); }
+.tbe-further__parts a:hover { border-color: var(--tbe-accent); }
