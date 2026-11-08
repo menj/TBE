@@ -206,7 +206,9 @@ function tbe_toc_has_shortcode( WP_Post $post ): bool {
 	return ! tbe_toc_plugin_active() && ( has_shortcode( $post->post_content, 'wp_toc' ) || has_shortcode( $post->post_content, 'auto_toc' ) );
 }
 
-const TBE_TOC_PLACEHOLDER = '#<!--tbe-toc:([0-9a-f]*)-->#';
+// The mark [wp_toc] leaves. wpautop runs before shortcodes, so a shortcode on its own line arrives wrapped in a
+// paragraph: the wrapper goes with the mark, so the contents box never sits inside a <p>.
+const TBE_TOC_PLACEHOLDER = '#(?:<p>\s*)?<!--tbe-toc:([0-9a-f]*)-->(?:\s*(?:<br\s*/?>\s*)?</p>)?#';
 
 add_action(
 	'init',

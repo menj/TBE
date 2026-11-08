@@ -91,6 +91,7 @@ foreach ( array_slice( $GLOBALS['t_filters']['init'], -1 ) as $cb ) { // inc/toc
 check( isset( $GLOBALS['t_short']['wp_toc'], $GLOBALS['t_short']['auto_toc'] ), 'both [wp_toc] and [auto_toc] are registered' );
 $mark = $GLOBALS['t_short']['wp_toc']( array( 'title' => 'On this page', 'min' => '2' ) );
 check( 1 === preg_match( TBE_TOC_PLACEHOLDER, $mark ), 'the shortcode leaves a mark for the content filter' );
+check( 1 === preg_match( TBE_TOC_PLACEHOLDER, "<p>$mark</p>", $pm ) && "<p>$mark</p>" === $pm[0], 'a mark wrapped in a paragraph takes the paragraph with it, so the box never sits inside a <p>' );
 
 $src = (string) file_get_contents( TBE_DIR . '/inc/toc.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 check( false !== strpos( $src, "add_filter( 'wp_toc_enabled'" ) && false !== strpos( $src, "defined( 'WP_TOC_VERSION' )" ), 'with the WP TOC plugin active the theme gives way, and keeps it off commentary entries' );
