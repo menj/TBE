@@ -149,9 +149,9 @@ function tbe_toc_tree( array $items, int $depth = 0 ): array {
 		if ( $depth > 0 && count( $stack ) > $depth ) {
 			continue;
 		}
-		$parent                = &$stack[ count( $stack ) - 1 ];
-		$parent['children'][]  = array( 'level' => $item['level'], 'id' => $item['id'], 'text' => $item['text'], 'children' => array() );
-		$stack[]               = &$parent['children'][ count( $parent['children'] ) - 1 ];
+		$parent               = &$stack[ count( $stack ) - 1 ];
+		$parent['children'][] = array( 'level' => $item['level'], 'id' => $item['id'], 'text' => $item['text'], 'children' => array() );
+		$stack[]              = &$parent['children'][ count( $parent['children'] ) - 1 ];
 		unset( $parent );
 	}
 	return $root['children'];
@@ -168,7 +168,9 @@ function tbe_toc_list( array $nodes ): string {
 
 /**
  * The contents box. $style: 'inline' (a box with its title), 'sticky' (a bar that opens on a tap, commentary only)
- * or 'collapsible' (a box that opens and closes, open unless $collapsed).
+ * or 'collapsible' (a box that opens and closes, open unless $collapsed). An empty $title hides the inline box's
+ * title, as title="" does in WP TOC; the box keeps "Contents" as its accessible name, and the sticky and collapsible
+ * boxes, which need a label to tap, show "Contents".
  */
 function tbe_toc_box( array $tree, string $title, string $style = 'inline', bool $collapsed = false ): string {
 	if ( ! $tree ) {
@@ -176,13 +178,17 @@ function tbe_toc_box( array $tree, string $title, string $style = 'inline', bool
 	}
 	static $n = 0;
 	++$n;
-	$title = '' !== trim( $title ) ? $title : __( 'Contents', 'tbe-child' );
-	$label = ' aria-label="' . esc_attr( $title ) . '"';
+	$hidden = '' === trim( $title );
+	$title  = $hidden ? __( 'Contents', 'tbe-child' ) : $title;
+	$label  = ' aria-label="' . esc_attr( $title ) . '"';
 	if ( 'sticky' === $style ) {
 		return '<details class="tbe-contents tbe-contents--sticky" data-tbe-contents><summary>' . esc_html( $title ) . '</summary><nav' . $label . '>' . tbe_toc_list( $tree ) . '</nav></details>';
 	}
 	if ( 'collapsible' === $style ) {
 		return '<details class="tbe-contents tbe-contents--inline tbe-contents--collapsible"' . ( $collapsed ? '' : ' open' ) . '><summary class="tbe-contents__title">' . esc_html( $title ) . '</summary><nav' . $label . '>' . tbe_toc_list( $tree ) . '</nav></details>';
+	}
+	if ( $hidden ) {
+		return '<nav class="tbe-contents tbe-contents--inline"' . $label . '>' . tbe_toc_list( $tree ) . '</nav>';
 	}
 	$id = 1 === $n ? 'tbe-contents-title' : 'tbe-contents-title-' . $n;
 	return '<nav class="tbe-contents tbe-contents--inline" aria-labelledby="' . $id . '"><h2 id="' . $id . '" class="tbe-contents__title no-toc">' . esc_html( $title ) . '</h2>' . tbe_toc_list( $tree ) . '</nav>';
@@ -240,7 +246,9 @@ add_filter(
 			return (string) preg_replace_callback(
 				TBE_TOC_PLACEHOLDER,
 				static function ( $m ) use ( $content ) {
-					$raw   = json_decode( (string) hex2bin( $m[1] ), true );
+					// The mark is hex: an odd length or stray characters (a tampered mark) fall back to the defaults.
+					$hex   = (string) $m[1];
+					$raw   = ( '' !== $hex && 0 === strlen( $hex ) % 2 && ctype_xdigit( $hex ) ) ? json_decode( (string) hex2bin( $hex ), true ) : null;
 					$atts  = tbe_toc_atts( is_array( $raw ) ? $raw : array() );
 					$items = tbe_toc_items( $content, $atts['levels'] );
 					if ( count( $items ) < $atts['min'] ) {
@@ -259,7 +267,7 @@ add_filter(
 			return $content;
 		}
 		// Before the first heading that is in the contents.
-		$pos = preg_match( '#<h' . $items[0]['level'] . '\s[^>]*id="' . preg_quote( esc_attr( $items[0]['id'] ), '#' ) . '"#', $content, $m, PREG_OFFSET_CAPTURE ) ? $m[0][1] : 0;
+		$pos = preg_match( '#<h' . $items[0]['level'] . '\s[^>]*id\s*=\s*(["\'])' . preg_quote( $items[0]['id'], '#' ) . '\1#', $content, $m, PREG_OFFSET_CAPTURE ) ? $m[0][1] : 0;
 		tbe_toc_enqueue();
 		return substr( $content, 0, $pos ) . tbe_toc_box( tbe_toc_tree( $items ), __( 'Contents', 'tbe-child' ) ) . substr( $content, $pos );
 	},

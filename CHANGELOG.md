@@ -7,7 +7,7 @@ The contents box brings in the features of WP TOC (github.com/menj/wp-toc), buil
 ### Added
 - Level-three headings get anchors and appear in the contents, nested under their level-two heading. Level-two anchors are made first and stay exactly as before, so links already shared still work.
 - Pages, posts and glossary terms get the same contents box before their first heading once they have three entries, as commentary entries already did (filter `tbe_toc_post_types`).
-- `[wp_toc]` and `[auto_toc]` place the contents exactly where they are typed, with WP TOC's attributes: `tags` (default `h2,h3`), `title`, `depth`, `min`, `collapsible`, `collapsed`. A post that has one shows no automatic contents.
+- `[wp_toc]` and `[auto_toc]` place the contents exactly where they are typed, with WP TOC's attributes: `tags` (default `h2,h3`), `title` (`title=""` hides it), `depth`, `min`, `collapsible`, `collapsed`. A post that has one shows no automatic contents.
 - A heading with the class `no-toc` or a `data-no-toc` attribute is left out of the contents.
 - The structured data lists each section as a `WebPageElement` part of the page, with its anchor.
 - `inc/toc.php` and `tools/test_toc.php`.
