@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.19
+
+Two fixes to the home page. Nothing was removed.
+
+### Fixed
+- The header no longer repeats the cross and the name on the home page, where the hero carries them; the menu stays where it is (`body:has(.tbe-hero)` in `assets/css/base.css`). Every other page keeps the header lockup.
+- The home-page search box has its full width again (up to 32rem); the 0.10.18 lockup grid had shrunk it, cutting off its placeholder.
+
 ## 0.10.18
 
 A Manuscripts section and a Strong's lexicon. Nothing was removed.
