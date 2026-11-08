@@ -1,6 +1,7 @@
 <?php
 /**
- * Pretty URLs for the reader: /bible/, /bible/john/, /bible/john/3/
+ * Pretty URLs for the reader: /bible/, /bible/john/, /bible/john/3/, and the manuscripts: /manuscripts/,
+ * /manuscripts/mark-16-9-20/
  *
  * @package tbe-child
  */
@@ -12,6 +13,12 @@ add_action(
 	static function () {
 		add_rewrite_rule( '^bible/?$', 'index.php?tbe_view=books', 'top' );
 		add_rewrite_rule( '^bible/search/?$', 'index.php?tbe_view=search', 'top' );
+		add_rewrite_rule( '^lexicon/?$', 'index.php?tbe_view=lexicon', 'top' );
+		add_rewrite_rule( '^lexicon/greek/frequency/?$', 'index.php?tbe_view=lexicon-frequency', 'top' );
+		add_rewrite_rule( '^lexicon/(greek|hebrew)/([a-z]+)/?$', 'index.php?tbe_view=lexicon-letter&tbe_lang=$matches[1]&tbe_ms=$matches[2]', 'top' );
+		add_rewrite_rule( '^lexicon/([gh][0-9]{1,4})/?$', 'index.php?tbe_view=lexicon-entry&tbe_ms=$matches[1]', 'top' );
+		add_rewrite_rule( '^manuscripts/?$', 'index.php?tbe_view=manuscripts', 'top' );
+		add_rewrite_rule( '^manuscripts/([a-z0-9-]+)/?$', 'index.php?tbe_view=manuscript&tbe_ms=$matches[1]', 'top' );
 		add_rewrite_rule( '^sources/?$', 'index.php?tbe_view=credits', 'top' );
 		add_rewrite_rule( '^credits/?$', 'index.php?tbe_view=credits-old', 'top' );
 		add_rewrite_rule( '^bible/index/?$', 'index.php?tbe_view=index', 'top' );
@@ -25,7 +32,7 @@ add_action(
 add_filter(
 	'query_vars',
 	static function ( array $vars ): array {
-		return array_merge( $vars, array( 'tbe_view', 'tbe_book', 'tbe_chapter', 'q' ) );
+		return array_merge( $vars, array( 'tbe_view', 'tbe_book', 'tbe_chapter', 'tbe_ms', 'tbe_lang', 'q' ) );
 	}
 );
 
@@ -39,8 +46,21 @@ function tbe_request(): ?array {
 	if ( '' === $view ) {
 		return $request = null;
 	}
-	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view || 'credits' === $view ) {
+	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view || 'credits' === $view || 'manuscripts' === $view || 'lexicon' === $view || 'lexicon-frequency' === $view ) {
 		return $request = array( 'view' => $view );
+	}
+	if ( 'lexicon-entry' === $view ) {
+		$entry = TBE_Lexicon::entry( (string) get_query_var( 'tbe_ms' ) );
+		return $request = $entry ? array( 'view' => 'lexicon-entry', 'entry' => $entry ) : array( 'view' => 'missing' );
+	}
+	if ( 'lexicon-letter' === $view ) {
+		$lang = 'hebrew' === get_query_var( 'tbe_lang' ) ? 'hebrew' : 'greek';
+		$slug = sanitize_key( (string) get_query_var( 'tbe_ms' ) );
+		return $request = isset( TBE_Lexicon::letters( $lang )[ $slug ] ) ? array( 'view' => 'lexicon-letter', 'lang' => $lang, 'letter' => $slug ) : array( 'view' => 'missing' );
+	}
+	if ( 'manuscript' === $view ) {
+		$passage = TBE_Manuscripts::passage( sanitize_key( (string) get_query_var( 'tbe_ms' ) ) );
+		return $request = $passage ? array( 'view' => 'manuscript', 'passage' => $passage ) : array( 'view' => 'missing' );
 	}
 	if ( 'search' === $view ) {
 		return $request = array(
@@ -64,6 +84,22 @@ function tbe_request(): ?array {
 }
 
 /** The "go to passage or search" box: a reference jumps to the reader, anything else searches. */
+/** The lexicon's look-up box: /lexicon/?n=G3056 goes to /lexicon/g3056/. */
+add_action(
+	'template_redirect',
+	static function () {
+		if ( 'lexicon' !== (string) get_query_var( 'tbe_view' ) || empty( $_GET['n'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			return;
+		}
+		$num = TBE_Lexicon::normalise( (string) preg_replace( '/\s+/', '', sanitize_text_field( wp_unslash( $_GET['n'] ) ) ) ); // phpcs:ignore WordPress.Security.NonceVerification
+		if ( '' !== $num ) {
+			wp_safe_redirect( TBE_Lexicon::url( $num ), 302 );
+			exit;
+		}
+	},
+	0
+);
+
 /** The old /credits/ address answers 301 to /sources/ (0.10.17). */
 add_action(
 	'template_redirect',
@@ -148,6 +184,24 @@ add_filter(
 				break;
 			case 'interlinear-index':
 				$parts['title'] = __( 'Interlinear', 'tbe-child' );
+				break;
+			case 'manuscripts':
+				$parts['title'] = __( 'Manuscripts', 'tbe-child' );
+				break;
+			case 'lexicon':
+				$parts['title'] = __( 'Lexicon', 'tbe-child' );
+				break;
+			case 'lexicon-frequency':
+				$parts['title'] = __( 'Greek words by frequency', 'tbe-child' );
+				break;
+			case 'lexicon-letter':
+				$parts['title'] = sprintf( /* translators: 1: letter, 2: Greek or Hebrew */ __( '%1$s: %2$s lexicon', 'tbe-child' ), TBE_Lexicon::letters( $request['lang'] )[ $request['letter'] ], 'hebrew' === $request['lang'] ? __( 'Hebrew', 'tbe-child' ) : __( 'Greek', 'tbe-child' ) );
+				break;
+			case 'lexicon-entry':
+				$parts['title'] = sprintf( /* translators: 1: word, 2: gloss, 3: Strong's number */ __( '%1$s, %2$s (%3$s)', 'tbe-child' ), (string) $request['entry']['s'][0]['w'], (string) $request['entry']['s'][0]['g'], (string) $request['entry']['num'] );
+				break;
+			case 'manuscript':
+				$parts['title'] = sprintf( /* translators: %s: passage such as Mark 16:9–20 */ __( 'Manuscripts: %s', 'tbe-child' ), TBE_Manuscripts::label( $request['passage'] ) );
 				break;
 			case 'book':
 				$parts['title'] = $request['book']['name'];

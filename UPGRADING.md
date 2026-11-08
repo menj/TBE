@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.18
+Nothing to do. The theme refreshes its address rules on the first load after the update, which adds `/manuscripts/` and `/lexicon/`. New files: `inc/lexicon.php`, `data/lexicon/`, `tools/build_lexicon.py`, `tools/build_metzger.py`, `tools/test_lexicon.php`, `inc/manuscripts.php`, `data/manuscripts/`, `assets/img/manuscripts/`, `tools/build_manuscripts.py`, `tools/commons_api.py`, `tools/fetch_manuscript_images.py`, `tools/test_manuscripts.php`. To rebuild the data after CNTR publishes a new release, run `python3 tools/build_manuscripts.py` on a copy with the tools folder.
+
 ### To 0.10.17
 Nothing to do. The theme refreshes its address rules on the first load after the update. If a page cache sits in front of the site, clear it so the footer shows "Sources".
 
@@ -80,13 +83,20 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - Answer credential-file probes with the short 404. Why: the November logs show `/google-credentials.json`, `/sa.json`, `/key.json`, `/google-key.json`, `/gcp-key.json`, `/gcp-sa.json`, `/firebase-key.json` and `/firebase-adminsdk.json` (4 or 5 requests each) and `/info` (12) still rendering the 74 KB theme 404.
 - Serve `/favicon.png` from the brand icon, as `/favicon.ico` is. Why: 5 requests in the logs got the full 404 page.
 - Test the Nginx lines in README.md on a real Nginx. Why: they are written from the Apache rules and marked untested.
+- Settle the Qur'an cross-references. Why: the owner's rule that nothing Islamic goes on the site for now (restated 7 November 2026) meets references still shown on entry pages, in the reader, in the structured data and in link tips, and SSOT.md still calls the position "Islamic-leaning". The owner decides whether the public pages hide them; the admin field keeps what is saved.
+- A Hebrew page in the manuscripts section. Why: 0.10.18 covers the Greek New Testament only, while the interlinear data records about 1,500 Hebrew written-and-read (ketiv and qere) places and the Dead Sea Scrolls comparison has Isaiah 1 to 5.
+- More passages in the manuscripts section, and a per-book table of every place the editions differ. Why: 0.10.18 has twenty-two passages; the interlinear data records about 4,100 Greek words outside NA28 and about 3,850 variant readings, and `tools/build_manuscripts.py` takes a new passage in one line.
 
 ### Later
-- More recorded readings. Why: only Genesis 1 (Hebrew) and Matthew 1 (Greek) have audio; `tools/align_audio.py` is ready for more, but each needs a recording with a licence.
-- More Dead Sea Scrolls comparisons. Why: only Isaiah 1 to 5 is compared; it waits on checking the spelling heuristic against more chapters.
+- More recorded readings. Why: only Genesis 1 (Hebrew) and Matthew 1 (Greek) have audio; `tools/align_audio.py` is ready for more, but each needs a recording with a licence, which the owner supplies.
+- Isaiah 6 to 66 in the Dead Sea Scrolls comparison, then other scrolls. Why: only Isaiah 1 to 5 is compared; `tools/build_dss_variants.py` takes a chapter range, and each batch needs its spelling differences spot-checked.
 - The JPS 1917 parallel beyond Genesis. Why: `tools/fetch_jps.py --books` adds a book at a time, and each needs its versification checked against `data/jps-versification.json`.
 - The deuterocanonical, further Orthodox and Ethiopian books. Why: they are listed as prepared sections, "Not on the site yet", and the Ethiopian list is still to be confirmed.
-- A Syriac interlinear. Why: the Estrangela font is bundled and unused, waiting on an open Syriac dataset.
+- The Ge'ez texts of the Ethiopian books. Why: the Ge'ez font is bundled and unused, and the texts need a licensed source. The owner asks the Ethiopian Orthodox Tewahedo Church first, since its permission so far covers names and notes from its site.
+- The Greek Old Testament manuscripts in the Freer collection (Deuteronomy, Joshua, Psalms). Why: Henry A. Sanders, "The Old Testament Manuscripts in the Freer Collection" (University of Michigan, 1917, public domain) describes and collates them, but the scanned copy's Greek text is too poorly read by machine to use without checking by hand. Its plates are public domain too.
+- Swanson's other volumes (Mark, Luke, John) for the passages outside Matthew. Why: the Matthew volume covers four of the twenty-two passages; the others list the same kind of evidence.
+- More manuscript photographs. Why: Codex Bezae now shows on every passage it holds, but the papyri and Sinaiticus, Vaticanus and Alexandrinus are on few pages. The public-domain facsimiles of Bezae and Washingtonianus on the Internet Archive cover every passage those manuscripts hold, and each page needs only its leaf found by the plate caption, checked by eye and added to `data/manuscripts/images.json`. Alexandrinus at Mark 16 waits on Wikimedia.
+- A Syriac interlinear. Why: the Estrangela font is bundled and unused, waiting on an open Syriac dataset. The owner has said not to build it yet.
 
 ### Ideas
 - A spam check for comments and posts. Why: the theme has no spam filter of its own, and would need one before comments open.

@@ -20,7 +20,7 @@
 	--tbe-rubric: #9b2c2c;
 	--tbe-gold: #a67c2e;
 	--tbe-line: #d9cdb0;
-	--tbe-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--tbe-ui: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 	--tbe-book: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
 }
 

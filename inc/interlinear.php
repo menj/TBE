@@ -349,6 +349,18 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	return $out . '</div>';
 }
 
+/** A word's Strong's numbers ("H9003/H7225G") with each number linked to its lexicon page. */
+function tbe_il_strongs_links( string $strongs ): string {
+	if ( ! class_exists( 'TBE_Lexicon' ) ) {
+		return esc_html( $strongs );
+	}
+	return (string) preg_replace_callback(
+		'/[GH]\d{4}[A-Za-z]?/',
+		static fn( $m ) => '<a href="' . esc_url( TBE_Lexicon::url( substr( $m[0], 0, 5 ) ) ) . '">' . esc_html( $m[0] ) . '</a>',
+		esc_html( $strongs )
+	);
+}
+
 /** One word: gloss, original, transliteration, Strong's number, root word, grammar. */
 function tbe_render_il_word( array $w, bool $hebrew, array &$counts, ?array $timing = null, ?array $dss = null ): string {
 	[ $text, $translit, $gloss, $strongs, $morph, $lemma ] = array_pad( $w, 6, '' );
@@ -413,7 +425,7 @@ function tbe_render_il_word( array $w, bool $hebrew, array &$counts, ?array $tim
 		esc_html( (string) $gloss ),
 		$word_html,
 		esc_html( (string) $translit ),
-		esc_html( (string) $strongs ),
+		tbe_il_strongs_links( (string) $strongs ),
 		esc_attr( $script_class ),
 		esc_attr( $script_lang ),
 		esc_html( (string) $lemma ),

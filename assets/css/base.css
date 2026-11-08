@@ -11,7 +11,7 @@
 	--tbe-gold: #a67c2e;
 	--tbe-line: #d9cdb0;
 	--tbe-scale: 1;
-	--tbe-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--tbe-ui: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 
@@ -102,9 +102,10 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .tbe-footer__name .wp-block-site-title,
 .tbe-footer__name .wp-block-site-title a,
 .tbe-brand { font-family: "Angel", Georgia, serif; font-weight: 400; letter-spacing: 0.02em; }
-/* One line at every width: the name is about 8em wide in Angel, so its size
-   follows the viewport and stops where it still fits the 44rem column. */
-.tbe-hero h1.tbe-brand { font-size: min(5.2rem, calc((100vw - 2rem) / 10.5)); line-height: 1.05; white-space: nowrap; max-width: none; }
+/* One line at every width. In Angel the name is about 9.6em wide; with the cross (1.6em tall) beside it the lockup is about
+   10.9em, so the size follows the viewport and stops at 4.6rem. */
+.tbe-hero { --tbe-brand-size: min(4.6rem, calc((100vw - 2rem) / 11.7)); }
+.tbe-hero h1.tbe-brand { font-size: var(--tbe-brand-size); line-height: 1.05; white-space: nowrap; }
 
 /* Brand mark: the hollow inverted cross, coloured by the active scheme. */
 .tbe-lockup { gap: 0.7rem; }
@@ -115,16 +116,29 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 	.tbe-brandmark--hero { display: block; }
 }
 .tbe-brandmark--hero {
-	width: clamp(4.5rem, 11vw, 6.5rem);
+	height: calc(var(--tbe-brand-size, 4rem) * 1.6);
+	width: auto;
 	aspect-ratio: 362 / 729;
-	margin: 0 auto 1.5rem;
+	margin: 0;
 	background: linear-gradient(180deg, var(--tbe-gold), var(--tbe-accent));
 	-webkit-mask: url("../img/brand/mark-textured.png") center / contain no-repeat;
 	mask: url("../img/brand/mark-textured.png") center / contain no-repeat;
 }
 
 /* Hero ------------------------------------------------------------------- */
-.tbe-hero { padding-block: clamp(2.5rem, 8vw, 5rem); text-align: center; }
+/* The cross and the name side by side as one centred lockup; the tagline and the search run full width below. */
+.tbe-hero {
+	padding-block: clamp(2.5rem, 8vw, 5rem);
+	text-align: center;
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: center;
+	align-items: center;
+	column-gap: calc(var(--tbe-brand-size) * 0.3);
+}
+.tbe-hero > * { grid-column: 1 / -1; }
+.tbe-hero > .tbe-brandmark--hero { grid-column: 1; grid-row: 1; justify-self: end; }
+.tbe-hero > h1.tbe-brand { grid-column: 2; grid-row: 1; justify-self: start; max-width: none !important; margin: 0 !important; }
 .tbe-hero h1 { font-size: clamp(2.4rem, 7vw, 4rem); font-weight: 400; margin: 0; }
 .tbe-hero .tbe-tagline {
 	max-width: 34rem;

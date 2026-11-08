@@ -31,6 +31,18 @@ function tbe_render_reader(): string {
 			return tbe_view_interlinear_index();
 		case 'credits':
 			return tbe_view_credits();
+		case 'manuscripts':
+			return tbe_view_manuscripts();
+		case 'lexicon':
+			return tbe_view_lexicon();
+		case 'lexicon-frequency':
+			return tbe_view_lexicon_frequency();
+		case 'lexicon-letter':
+			return tbe_view_lexicon_letter( $request['lang'], $request['letter'] );
+		case 'lexicon-entry':
+			return tbe_view_lexicon_entry( $request['entry'] );
+		case 'manuscript':
+			return tbe_view_manuscript_passage( $request['passage'] );
 		default:
 			return tbe_view_missing();
 	}
@@ -70,6 +82,15 @@ function tbe_view_credits(): string {
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The readings of the scrolls are compared using the %s: Jarod Jacobs, Martijn Naaijer and Dirk Roorda, built on the data files of Martin Abegg, licensed CC BY-NC 4.0 (version 2.0, doi:10.5281/zenodo.23731063). So far the Great Isaiah Scroll (1QIsa-a) is compared with Isaiah 1 to 5. The scroll photographs belong to the Israel Antiquities Authority and are not reproduced here.', 'tbe-child' ), '<a href="https://github.com/ETCBC/dss" rel="noopener">CACCHT / ETCBC Dead Sea Scrolls dataset</a>' ) ) . '</p>';
 
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Greek manuscripts', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: 1: link to CNTR, 2: link to the licence */ __( 'The manuscript pages are built from the electronic transcriptions of the early Greek manuscripts by Alan Bunning and the %1$s, licensed %2$s. The tables and texts built from them are shared under the same licence. The English wording beside them comes from the public-domain King James Version (Pure Cambridge Edition), World English Bible and Berean Standard Bible, as set out on the Center’s translation pages. The photographs of manuscript pages come from Wikimedia Commons and from public-domain photographic facsimiles on the Internet Archive: Codex Bezae Cantabrigiensis (Cambridge University Press, 1899) and Henry A. Sanders’ Facsimile of the Washington Manuscript of the Four Gospels (University of Michigan, 1912). Each is credited under the picture, with its licence and a link to its page.', 'tbe-child' ), '<a href="https://greekcntr.org/" rel="noopener">Center for New Testament Restoration</a>', '<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>' ) ) . '</p>';
+
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Lexicon', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: 1: link to STEP Bible, 2: link to Metzger */ __( 'The lexicon’s definitions come from the Translators Brief lexicons of Extended Strongs by %1$s (CC BY 4.0): the Greek after G. Abbott-Smith’s Manual Greek Lexicon of the New Testament, the Hebrew after the abridged Brown-Driver-Briggs. The list of Greek words by frequency, and the frequency note on each Greek word, come from %2$s by Bruce M. Metzger (new edition, 1969), read from the scan by machine.', 'tbe-child' ), '<a href="https://www.STEPBible.org" rel="noopener">STEP Bible</a>', '<a href="' . esc_url( home_url( '/pdf/lexical-aids.pdf' ) ) . '"><cite>Lexical Aids for Students of New Testament Greek</cite></a>' ) ) . '</p>';
+
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Printed apparatuses', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: 1: link to the Greek New Testament, 2: link to Swanson */ __( 'The evidence of the later manuscripts on the manuscript pages, and the page images, come from %1$s (United Bible Societies) and from %2$s, edited by Reuben J. Swanson (Sheffield Academic Press and William Carey International University Press, 1995).', 'tbe-child' ), '<a href="' . esc_url( home_url( '/pdf/greek-nt.pdf' ) ) . '"><cite>The Greek New Testament</cite></a>', '<a href="' . esc_url( home_url( '/pdf/nt-variant-readings.pdf' ) ) . '"><cite>New Testament Greek Manuscripts: Variant Readings Arranged in Horizontal Lines against Codex Vaticanus. Matthew</cite></a>' ) ) . '</p>';
+
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Jewish translation', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The Jewish text beside the ESV is The Holy Scriptures: A New Translation (JPS 1917), published by the Jewish Publication Society and in the public domain. The digital text comes from %s, by way of the Open Siddur Project.', 'tbe-child' ), '<a href="https://www.sefaria.org" rel="noopener">Sefaria</a>' ) ) . '</p>';
 
@@ -80,7 +101,7 @@ function tbe_view_credits(): string {
 		. '<blockquote class="tbe-credits__quote"><p class="tbe-hadith-ar" lang="ar" dir="rtl">' . esc_html( 'حَدَّثَنَا عَلِيُّ بْنُ عَبْدِ اللَّهِ، حَدَّثَنَا سُفْيَانُ، حَدَّثَنَا الزُّهْرِيُّ، قَالَ أَخْبَرَنِي سَعِيدُ بْنُ الْمُسَيَّبِ، سَمِعَ أَبَا هُرَيْرَةَ ـ رضى الله عنه ـ عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَ: «لاَ تَقُومُ السَّاعَةُ حَتَّى يَنْزِلَ فِيكُمُ ابْنُ مَرْيَمَ حَكَمًا مُقْسِطًا، فَيَكْسِرَ الصَّلِيبَ، وَيَقْتُلَ الْخِنْزِيرَ، وَيَضَعَ الْجِزْيَةَ، وَيَفِيضَ الْمَالُ حَتَّى لاَ يَقْبَلَهُ أَحَدٌ».' ) . '</p><p>' . esc_html__( 'Narrated Abu Huraira: Allah’s Messenger (peace be upon him) said, “The Hour will not be established until the son of Mary (i.e. Jesus) descends amongst you as a just ruler, he will break the cross, kill the pigs, and abolish the Jizya tax. Money will be in abundance so that nobody will accept it (as charitable gifts).”', 'tbe-child' ) . '</p>'
 		. '<cite>' . esc_html__( 'Sahih al-Bukhari 2476, in the chapter “The breaking of the cross and the killing of the pigs”. In-book reference: Book 46, Hadith 37. USC-MSA web (English) reference: Vol. 3, Book 43, Hadith 656 (deprecated numbering scheme).', 'tbe-child' ) . '</cite></blockquote>';
 
-	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typefaces', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit, SBL Hebrew and SBL Greek fonts, by the Society of Biblical Literature. Ge’ez text is set in Abyssinica SIL, by SIL Global (SIL Open Font License).', 'tbe-child' ) . '</p><p>'
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typefaces', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit, SBL Hebrew and SBL Greek fonts, by the Society of Biblical Literature. Ge’ez text is set in Abyssinica SIL, by SIL Global (SIL Open Font License). Labels, buttons and menus are set in Montserrat, by Julieta Ulanovsky and the Montserrat Project Authors (SIL Open Font License).', 'tbe-child' ) . '</p><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The site name is set in Angel, a freeware font by JuliaL of %s.', 'tbe-child' ), '<a href="http://nocturne.simplenet.com/angel/" rel="noopener">Tangled in Destiny</a>' ) ) . '</p>';
 
 	$packs = tbe_packs();
@@ -99,6 +120,7 @@ function tbe_view_credits(): string {
 	$links = array(
 		array( 'https://www.stepbible.org/', 'STEP Bible', __( 'Free Bible study tools and the Hebrew and Greek data behind the word-by-word pages.', 'tbe-child' ) ),
 		array( 'https://www.sefaria.org/', 'Sefaria', __( 'The Jewish library in Hebrew and English, with the JPS 1917 Tanakh.', 'tbe-child' ) ),
+		array( 'https://greekcntr.org/', 'Center for New Testament Restoration', __( 'The early Greek manuscripts, transcribed, compared verse by verse and set beside translations.', 'tbe-child' ) ),
 		array( 'https://github.com/ETCBC/dss', 'ETCBC, Dead Sea Scrolls data', __( 'The scroll transcriptions behind the variant comparison.', 'tbe-child' ) ),
 		array( 'https://betamasaheft.eu/', 'Beta maṣāḥǝft', __( 'A research project on the manuscripts and texts of Ethiopia and Eritrea.', 'tbe-child' ) ),
 		array( 'https://www.ethiopianorthodox.org/english/', 'Ethiopian Orthodox Tewahedo Church', __( 'The church’s own pages on its canon and history.', 'tbe-child' ) ),
@@ -141,7 +163,7 @@ function tbe_view_interlinear_index(): string {
 function tbe_view_books(): string {
 	$out  = '<div class="tbe-reader tbe-books">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'The Books of the Bible', 'tbe-child' ) . '</h1>';
-	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
+	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Manuscripts::url() ) . '">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Lexicon::url() ) . '">' . esc_html__( 'Lexicon', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
 
 	$out .= tbe_canon_filter();
 
@@ -245,6 +267,7 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 	foreach ( $intro as $entry ) {
 		$out .= tbe_render_box( $entry, $slug, $chapter, true );
 	}
+	$out .= tbe_manuscripts_chapter_note( $slug, $chapter );
 	$out .= tbe_render_notes_contents( $starts, $slug, $chapter );
 	$out .= tbe_render_related_essays( $entries );
 
