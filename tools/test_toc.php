@@ -49,6 +49,12 @@ function post_password_required( $post = null ) { return false; }
 function get_post() { return $GLOBALS['t_post']; }
 function tbe_enqueue_theme_style() { $GLOBALS['t_enqueued'] = true; }
 class WP_Post { public $post_type = 'page'; public $post_content = ''; } // phpcs:ignore
+function has_shortcode( $content, $tag ) { return false !== strpos( (string) $content, '[' . $tag ); }
+function shortcode_parse_atts( $text ) {
+	preg_match_all( '/(\w+)="([^"]*)"/', (string) $text, $m, PREG_SET_ORDER );
+	return array_column( $m, 2, 1 );
+}
+function get_post_type( $id ) { return $GLOBALS['t_types'][ (int) $id ] ?? 'page'; }
 require __DIR__ . '/../inc/article.php';
 require __DIR__ . '/../inc/toc.php';
 
@@ -67,6 +73,9 @@ check( array( 'overview', 'notes', 'own' ) === array_column( tbe_article_heading
 $out = tbe_toc_apply_ids( $html );
 check( 1 === substr_count( $out, 'id="own"' ) && false !== strpos( $out, '<h3 id="overview-2">' ) && false !== strpos( $out, '<h4 id="deep">' ), 'the rendered headings carry the ids, an author id once' );
 check( $out === tbe_toc_apply_ids( $out ), 'anchoring twice changes nothing' );
+check( 'overview' === tbe_toc_heading_list( '<h2>Overview</h2><h3 id="overview">x</h3><h4 id="overview-2">y</h4>' )[0]['id'], 'a deeper heading with its own id never moves a level-two anchor' );
+$h5 = tbe_toc_apply_ids( '<h2>A</h2><h5>Fifth</h5><h1>First</h1>' );
+check( false !== strpos( $h5, '<h5 id="fifth">' ) && false !== strpos( $h5, '<h1 id="first">' ), 'every level gets an anchor, so any shortcode tags link somewhere' );
 
 // Contents entries and nesting.
 $items = tbe_toc_items( $out );
@@ -96,7 +105,8 @@ $bare = tbe_toc_box( $tree, '' );
 check( false === strpos( $bare, '<h2' ) && false !== strpos( $bare, 'aria-label="Contents"' ), 'title="" hides the title, as in WP TOC, and keeps an accessible name' );
 
 // Shortcodes and the content filter.
-foreach ( array_slice( $GLOBALS['t_filters']['init'], -1 ) as $cb ) { // inc/toc.php's own init hook, added last
+$init_hooks = array_slice( $GLOBALS['t_filters']['init'], -1 ); // inc/toc.php's own init hook, added last
+foreach ( $init_hooks as $cb ) {
 	if ( ! function_exists( 'add_shortcode' ) ) {
 		function add_shortcode( $tag, $cb ) { $GLOBALS['t_short'][ $tag ] = $cb; }
 	}
@@ -128,8 +138,27 @@ check( false === strpos( $filter( $page ), '<nav class="tbe-contents' ), 'a post
 $GLOBALS['t_set'] = array( 'toc' => 0 );
 check( "<p>x</p>$two" === $filter( "<p>x</p><p>$mark</p>$two" ), 'contents switched off: the shortcode leaves nothing behind' );
 
-$src = (string) file_get_contents( TBE_DIR . '/inc/toc.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-check( false !== strpos( $src, "add_filter( 'wp_toc_enabled'" ) && false !== strpos( $src, "defined( 'WP_TOC_VERSION' )" ), 'with the WP TOC plugin active the theme gives way, and keeps it off commentary entries' );
+// The structured data lists exactly what the box shows.
+$GLOBALS['t_set'] = array( 'toc' => 1 );
+$doc = new WP_Post();
+$doc->post_content = '<h2>One</h2><h3>One a</h3><h2>Two</h2><h4>Two deep</h4><h2>Three</h2>';
+check( array( 'One', 'One a', 'Two', 'Three' ) === array_column( tbe_toc_sections( $doc ), 1 ), 'sections: the default entries, nested order' );
+$doc->post_content = '[wp_toc tags="h2,h4" depth="1"]' . $doc->post_content;
+check( array( 'One', 'Two', 'Three' ) === array_column( tbe_toc_sections( $doc ), 1 ), 'sections follow the shortcode tags and depth' );
+$doc->post_content = '[wp_toc min="9"]<h2>One</h2><h2>Two</h2><h2>Three</h2>';
+check( array() === tbe_toc_sections( $doc ), 'and its min: no box, no sections' );
+
+// With the WP TOC plugin active the theme gives way, and keeps the plugin off commentary entries.
+define( 'WP_TOC_VERSION', 'test' );
+$GLOBALS['t_filters'] = array();
+foreach ( $init_hooks as $cb ) {
+	$cb();
+}
+$enabled = $GLOBALS['t_filters']['wp_toc_enabled'][0] ?? null;
+$GLOBALS['t_types'] = array( 7 => 'tbe_commentary', 8 => 'page' );
+check( is_callable( $enabled ) && false === $enabled( true, 7 ) && true === $enabled( true, 8 ), 'plugin active: it stays off commentary entries and runs on pages' );
+$GLOBALS['t_post']->post_type = 'page';
+check( $page === $filter( $page ) && "<p>x</p>" === $filter( "<p>x</p><p>$mark</p>" ), 'plugin active: the theme adds no box and no anchors, and strips any mark of its own' );
 $fn = (string) file_get_contents( TBE_DIR . '/functions.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 check( false !== strpos( $fn, "'toc'" ), 'functions.php loads inc/toc.php' );
 

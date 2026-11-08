@@ -36,23 +36,25 @@ function tbe_toc_post_types(): array {
 /**
  * The headings of a piece of HTML, in order, each with the anchor it has or will get.
  *
+ * Level-two anchors are made exactly as before 0.10.21: only level-two ids the author set are reserved, then each
+ * level-two heading takes its slug in order. Only then are the deeper headings' own ids reserved and their slugs
+ * made, level three first, so no deeper heading, with an id of its own or a made one, ever moves a level-two anchor
+ * that links already point to. (An author id on a deeper heading that repeats a made level-two id stays as the
+ * author set it, as it did before.)
+ *
  * @param string $html   Stored or rendered text.
- * @param int[]  $levels Heading levels that get an anchor.
+ * @param int[]  $levels Heading levels that get an anchor (all six by default, so any shortcode "tags" links).
  * @return array<int,array{level:int,id:string,text:string,own:bool,skip:bool}> Every h1-h6, in order. A heading
  *         outside $levels, left out with no-toc, or with no text has id '' unless the author set one.
  */
-function tbe_toc_heading_list( string $html, array $levels = array( 2, 3, 4 ) ): array {
+function tbe_toc_heading_list( string $html, array $levels = array( 1, 2, 3, 4, 5, 6 ) ): array {
 	if ( ! preg_match_all( '#<h([1-6])(\s[^>]*)?>(.*?)</h\1>#is', $html, $found, PREG_SET_ORDER ) ) {
 		return array();
 	}
-	$seen = array();
 	$list = array();
 	foreach ( $found as $m ) {
-		$attrs = (string) ( $m[2] ?? '' );
-		$own   = preg_match( '/\sid\s*=\s*["\']([^"\']+)["\']/i', $attrs, $idm ) ? trim( $idm[1] ) : '';
-		if ( '' !== $own ) {
-			$seen[ $own ] = true;
-		}
+		$attrs  = (string) ( $m[2] ?? '' );
+		$own    = preg_match( '/\sid\s*=\s*["\']([^"\']+)["\']/i', $attrs, $idm ) ? trim( $idm[1] ) : '';
 		$skip   = (bool) preg_match( '/\sclass\s*=\s*["\'][^"\']*(?<![\w-])no-toc(?![\w-])/i', $attrs ) || (bool) preg_match( '/\sdata-no-toc(\s|=|$)/i', $attrs );
 		$list[] = array(
 			'level' => (int) $m[1],
@@ -62,8 +64,20 @@ function tbe_toc_heading_list( string $html, array $levels = array( 2, 3, 4 ) ):
 			'skip'  => $skip,
 		);
 	}
-	// Level two first, then three, then four, so a deeper heading never takes a level-two heading's old id.
-	foreach ( array( 2, 3, 4, 5, 6 ) as $level ) {
+	$seen = array();
+	foreach ( $list as $h ) {
+		if ( 2 === $h['level'] && $h['own'] ) {
+			$seen[ $h['id'] ] = true;
+		}
+	}
+	foreach ( array( 2, 3, 4, 5, 6, 1 ) as $level ) {
+		if ( 3 === $level ) {
+			foreach ( $list as $h ) {
+				if ( 2 !== $h['level'] && $h['own'] ) {
+					$seen[ $h['id'] ] = true;
+				}
+			}
+		}
 		if ( ! in_array( $level, $levels, true ) ) {
 			continue;
 		}
@@ -77,7 +91,7 @@ function tbe_toc_heading_list( string $html, array $levels = array( 2, 3, 4 ) ):
 }
 
 /** Give the headings of a piece of HTML their anchors, matching tbe_toc_heading_list(). */
-function tbe_toc_apply_ids( string $html, array $levels = array( 2, 3, 4 ) ): string {
+function tbe_toc_apply_ids( string $html, array $levels = array( 1, 2, 3, 4, 5, 6 ) ): string {
 	$list = tbe_toc_heading_list( $html, $levels );
 	$i    = 0;
 	return (string) preg_replace_callback(
@@ -97,7 +111,7 @@ function tbe_toc_apply_ids( string $html, array $levels = array( 2, 3, 4 ) ): st
 function tbe_toc_items( string $html, array $levels = array( 2, 3 ) ): array {
 	return array_values(
 		array_filter(
-			tbe_toc_heading_list( $html, array_unique( array_merge( array( 2, 3, 4 ), $levels ) ) ),
+			tbe_toc_heading_list( $html ),
 			static fn( $h ) => in_array( $h['level'], $levels, true ) && ! $h['skip'] && '' !== $h['id'] && '' !== $h['text']
 		)
 	);
@@ -274,9 +288,20 @@ add_filter(
 	13
 );
 
+/** The entries of a tree, in order, as they show in the box. */
+function tbe_toc_flatten( array $nodes ): array {
+	$out = array();
+	foreach ( $nodes as $n ) {
+		$out[] = array( $n['id'], $n['text'] );
+		$out   = array_merge( $out, tbe_toc_flatten( $n['children'] ) );
+	}
+	return $out;
+}
+
 /**
- * The sections of the page being viewed, for the structured data: array( id, text ) in order, when the page shows
- * contents (three entries or more, or a shortcode).
+ * The sections of the page being viewed, for the structured data: array( id, text ) in order, exactly the entries
+ * its contents box shows. A post with [wp_toc] or [auto_toc] is read with that shortcode's tags, min and depth (the
+ * first one, when there are several); any other post with the defaults, from three entries up.
  *
  * @return array<int,array{0:string,1:string}>
  */
@@ -284,10 +309,17 @@ function tbe_toc_sections( WP_Post $post ): array {
 	if ( ! tbe_setting( 'toc' ) || post_password_required( $post ) ) {
 		return array();
 	}
+	$content = (string) $post->post_content;
+	if ( tbe_toc_has_shortcode( $post ) && preg_match( '/\[(?:wp_toc|auto_toc)(\s[^\]]*)?\]/', $content, $sc ) ) {
+		$raw   = function_exists( 'shortcode_parse_atts' ) ? shortcode_parse_atts( trim( (string) ( $sc[1] ?? '' ) ) ) : array();
+		$atts  = tbe_toc_atts( is_array( $raw ) ? $raw : array() );
+		$items = tbe_toc_items( $content, $atts['levels'] );
+		return count( $items ) < $atts['min'] ? array() : tbe_toc_flatten( tbe_toc_tree( $items, $atts['depth'] ) );
+	}
 	$shows = 'tbe_commentary' === $post->post_type || ( ! tbe_toc_plugin_active() && in_array( $post->post_type, tbe_toc_post_types(), true ) );
-	$items = tbe_toc_items( (string) $post->post_content );
-	if ( ! $shows || ( count( $items ) < 3 && ! tbe_toc_has_shortcode( $post ) ) ) {
+	$items = tbe_toc_items( $content );
+	if ( ! $shows || count( $items ) < 3 ) {
 		return array();
 	}
-	return array_map( static fn( $h ) => array( $h['id'], $h['text'] ), $items );
+	return tbe_toc_flatten( tbe_toc_tree( $items ) );
 }
