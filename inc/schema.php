@@ -665,6 +665,41 @@ function tbe_ld_graph(): array {
 		);
 		$page['mainEntity'] = tbe_ld_ref( TBE_Lexicon::url( (string) $entry['num'] ) . '#term' );
 
+	} elseif ( $request && in_array( $request['view'], array( 'further-book', 'further-chapter' ), true ) ) {
+		$book    = $request['book'];
+		$slug    = (string) $book['slug'];
+		$trail[] = array( __( 'Books', 'tbe-child' ), home_url( '/bible/' ) );
+		$trail[] = array( (string) $book['name'], TBE_Bible::url( $slug ) );
+		$work    = array(
+			'@type'           => 'Book',
+			'@id'             => TBE_Bible::url( $slug ) . '#book',
+			'name'            => (string) $book['name'],
+			'url'             => TBE_Bible::url( $slug ),
+			'inLanguage'      => 'en',
+			'license'         => (string) ( $book['source']['licence_url'] ?? '' ),
+			'isBasedOn'       => (string) ( $book['source']['url'] ?? '' ),
+			'translator'      => array( '@type' => 'Organization', 'name' => 'Wikisource contributors', 'url' => 'https://en.wikisource.org/' ),
+			'translationOfWork' => array( '@type' => 'Book', 'name' => (string) $book['name'], 'inLanguage' => 'gez' ),
+		);
+		if ( 'further-chapter' === $request['view'] ) {
+			$chapter = (int) $request['chapter'];
+			$trail[] = array( TBE_Further::label( $slug, $chapter ), TBE_Bible::url( $slug, $chapter ) );
+			$extra[] = $work;
+			$extra[] = array(
+				'@type'        => 'Chapter',
+				'@id'          => TBE_Bible::url( $slug, $chapter ) . '#chapter',
+				'name'         => TBE_Further::label( $slug, $chapter ),
+				'position'     => $chapter,
+				'isPartOf'     => tbe_ld_ref( $work['@id'] ),
+				'license'      => $work['license'],
+			);
+			$page['mainEntity'] = tbe_ld_ref( TBE_Bible::url( $slug, $chapter ) . '#chapter' );
+		} else {
+			$extra[]            = $work;
+			$page['mainEntity'] = tbe_ld_ref( $work['@id'] );
+		}
+		$page['license'] = $work['license'];
+
 	} elseif ( $request && 'manuscripts' === $request['view'] ) {
 		$page['@type'] = 'CollectionPage';
 		$trail[]       = array( __( 'Manuscripts', 'tbe-child' ), TBE_Manuscripts::url() );

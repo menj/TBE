@@ -220,6 +220,8 @@
     {
      "slug": "1-enoch",
      "name": "1 Enoch (Henok)",
+     "geez": "መጽሐፈ ሄኖክ",
+     "geez_latin": "mätṣḥäfä henok",
      "traditions": [
       "ethiopian"
      ],
@@ -244,7 +246,7 @@
       "ethiopian"
      ],
      "language": "Ge'ez",
-     "status": "planned",
+     "status": "available",
      "note": "Not the Maccabees of the Greek Bible."
     },
     {
@@ -254,7 +256,7 @@
       "ethiopian"
      ],
      "language": "Ge'ez",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -264,7 +266,7 @@
       "ethiopian"
      ],
      "language": "Ge'ez",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -290,6 +292,7 @@
     {
      "slug": "zena-ayhud",
      "name": "Zëna Ayhud (Pseudo-Josephus)",
+     "geez": "ዜና፡ አይሁድ",
      "traditions": [
       "ethiopian"
      ],

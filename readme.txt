@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.21
+Stable tag: 0.10.22
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -111,10 +111,15 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The JPS 1917 translation is in the public domain and comes through Sefaria.
 * The Dead Sea Scroll comparison is built from the CACCHT project's data (ETCBC, after Martin Abegg), CC BY-NC 4.0.
 * The Manuscripts pages are built from the transcriptions of the early Greek manuscripts by Alan Bunning and the Center for New Testament Restoration, CC BY-SA 4.0, and share that licence. Their English wording is from the public-domain KJV, World English Bible and Berean Standard Bible. The lexicon's definitions are from STEP Bible's brief lexicons (CC BY 4.0), and its Greek frequency list from Bruce M. Metzger's Lexical Aids for Students of New Testament Greek. The manuscript photographs come from Wikimedia Commons, each credited under the picture. The evidence of later manuscripts comes from the United Bible Societies Greek New Testament and from Reuben J. Swanson's New Testament Greek Manuscripts: Matthew, used by the owner's permission.
+* The text of 1, 2 and 3 Meqabyan is the English translation from Ge'ez made by Wikisource contributors, CC BY-SA 4.0, and shares that licence.
 * Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic, Abyssinica SIL and Montserrat under the SIL Open Font License.
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
 
 == Changelog ==
+
+= 0.10.22 =
+* 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon can be read, in the English translation from Ge'ez made on Wikisource.
+* 1 Enoch and Zëna Ayhud show their Ge'ez names on the book list.
 
 = 0.10.21 =
 * A contents list on pages, posts and glossary terms too, with sub-sections nested; [wp_toc] places it by hand, and a heading marked no-toc stays out.
@@ -175,6 +180,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.22 =
+Nothing to do by hand.
 
 = 0.10.21 =
 The theme now needs PHP 8.4 or later. Check the PHP version with your host before updating. If you use the WP TOC plugin, you can deactivate it: the theme now does the same.

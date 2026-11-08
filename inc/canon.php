@@ -1,7 +1,8 @@
 <?php
 /**
- * Canons: which tradition counts which book as scripture, and the prepared sections for books that are not on
- * the site yet (deuterocanonical, further Orthodox and Ethiopian Orthodox). Data: data/canons.json.
+ * Canons: which tradition counts which book as scripture, and the prepared sections for books beyond the 66
+ * (deuterocanonical, further Orthodox and Ethiopian Orthodox). Data: data/canons.json. A book in those sections
+ * whose text is in data/further/ is linked (see inc/further.php); the rest are marked "Not on the site yet".
  *
  * The 66 books follow their testament: the Old Testament is counted by the Jewish, Protestant, Catholic,
  * Orthodox and Ethiopian traditions; the New Testament by all of them except the Jewish.
@@ -52,6 +53,19 @@ function tbe_canon_badge( string $text ): string {
 	return '' === $text ? '' : '<ul class="tbe-canon"><li class="tbe-canon__chip tbe-canon__chip--past">' . esc_html( $text ) . '</li></ul>';
 }
 
+/**
+ * A book's name in Ge'ez script, set beside its English name when data/canons.json gives one ("geez"), with its
+ * transliteration when given ("geez_latin").
+ */
+function tbe_canon_geez( array $book ): string {
+	$geez  = trim( (string) ( $book['geez'] ?? '' ) );
+	$latin = trim( (string) ( $book['geez_latin'] ?? '' ) );
+	if ( '' === $geez ) {
+		return '';
+	}
+	return ' <span class="tbe-booklist__geez" lang="gez">' . esc_html( $geez ) . '</span>' . ( '' === $latin ? '' : ' <span class="tbe-booklist__geez tbe-booklist__geez--latin" lang="gez-Latn">' . esc_html( $latin ) . '</span>' );
+}
+
 /** On a book's page: who counts it as scripture. */
 function tbe_canon_line( array $book ): string {
 	$chips = tbe_canon_chips( TBE_Canon::for_book( $book ) );
@@ -67,13 +81,18 @@ function tbe_canon_filter(): string {
 	return $out . '</div>';
 }
 
-/** The prepared sections on the book list: books planned for the site, clearly marked as not here yet. */
+/** The prepared sections on the book list: books on the site are linked, the rest clearly marked as not here yet. */
 function tbe_canon_sections(): string {
 	$out = '';
 	foreach ( TBE_Canon::data()['sections'] as $section ) {
 		$items = '';
 		foreach ( (array) $section['books'] as $book ) {
-			$items .= '<li data-canon="' . esc_attr( implode( ' ', (array) $book['traditions'] ) ) . '"><span class="tbe-booklist__item tbe-booklist__item--planned"><span class="tbe-booklist__name">' . esc_html( (string) $book['name'] ) . '</span><span class="tbe-booklist__count">' . esc_html__( 'Not on the site yet', 'tbe-child' ) . '</span>' . ( ! empty( $book['note'] ) ? '<span class="tbe-booklist__note">' . esc_html( (string) $book['note'] ) . '</span>' : '' ) . '</span>' . tbe_canon_chips( (array) $book['traditions'] ) . tbe_canon_badge( (string) ( $book['badge'] ?? '' ) ) . '</li>';
+			$further = class_exists( 'TBE_Further' ) ? TBE_Further::book( (string) ( $book['slug'] ?? '' ) ) : null;
+			if ( $further ) {
+				$items .= '<li data-canon="' . esc_attr( implode( ' ', (array) $book['traditions'] ) ) . '"><a href="' . esc_url( TBE_Bible::url( (string) $further['slug'] ) ) . '"><span class="tbe-booklist__name">' . esc_html( (string) $book['name'] ) . tbe_canon_geez( $book ) . '</span><span class="tbe-booklist__count">' . esc_html( sprintf( /* translators: %d: number of chapters */ _n( '%d chapter', '%d chapters', (int) $further['count'], 'tbe-child' ), $further['count'] ) ) . '</span></a>' . ( ! empty( $book['note'] ) ? '<span class="tbe-booklist__note">' . esc_html( (string) $book['note'] ) . '</span>' : '' ) . tbe_canon_chips( (array) $book['traditions'] ) . '</li>';
+				continue;
+			}
+			$items .= '<li data-canon="' . esc_attr( implode( ' ', (array) $book['traditions'] ) ) . '"><span class="tbe-booklist__item tbe-booklist__item--planned"><span class="tbe-booklist__name">' . esc_html( (string) $book['name'] ) . tbe_canon_geez( $book ) . '</span><span class="tbe-booklist__count">' . esc_html__( 'Not on the site yet', 'tbe-child' ) . '</span>' . ( ! empty( $book['note'] ) ? '<span class="tbe-booklist__note">' . esc_html( (string) $book['note'] ) . '</span>' : '' ) . '</span>' . tbe_canon_chips( (array) $book['traditions'] ) . tbe_canon_badge( (string) ( $book['badge'] ?? '' ) ) . '</li>';
 		}
 		$out .= '<section class="tbe-testament tbe-extra" id="' . esc_attr( (string) $section['id'] ) . '" data-canon="' . esc_attr( implode( ' ', (array) $section['traditions'] ) ) . '"><h2 class="tbe-ornament">' . esc_html( (string) $section['title'] ) . '</h2><p class="tbe-center tbe-muted tbe-extra__intro">' . esc_html( (string) $section['intro'] ) . '</p><ul class="tbe-booklist tbe-booklist--planned">' . $items . '</ul></section>';
 	}

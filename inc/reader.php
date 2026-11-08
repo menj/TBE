@@ -43,6 +43,10 @@ function tbe_render_reader(): string {
 			return tbe_view_lexicon_entry( $request['entry'] );
 		case 'manuscript':
 			return tbe_view_manuscript_passage( $request['passage'] );
+		case 'further-book':
+			return tbe_view_further_book( $request['book'] );
+		case 'further-chapter':
+			return tbe_view_further_chapter( $request['book'], $request['chapter'] );
 		default:
 			return tbe_view_missing();
 	}
@@ -77,7 +81,8 @@ function tbe_view_credits(): string {
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The lists of which churches count which books as scripture were checked against the comparison tables in the %s (CC BY-SA 4.0) and the sources it cites. The lists differ between authorities, which each section says.', 'tbe-child' ), '<a href="https://en.wikipedia.org/wiki/Biblical_canon" rel="noopener">Wikipedia article “Biblical canon”</a>' ) ) . '</p>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Ethiopian Orthodox books', 'tbe-child' ) . '</h2><p>'
-		. esc_html__( 'The names and the 81-book list of the Ethiopian Orthodox canon, and the short notes on its books, follow the Ethiopian Orthodox Tewahedo Church website, used with the church’s permission.', 'tbe-child' ) . '</p>';
+		. esc_html__( 'The names and the 81-book list of the Ethiopian Orthodox canon, and the short notes on its books, follow the Ethiopian Orthodox Tewahedo Church website, used with the church’s permission.', 'tbe-child' ) . '</p><p>'
+		. wp_kses_post( sprintf( /* translators: 1: link to Wikisource, 2: link to the licence */ __( 'The text of 1, 2 and 3 Meqabyan is the English translation from Ge’ez made by contributors to %1$s, shared under %2$s. It is a working translation, not one authorised by the church. The text is given as Wikisource has it, divided into chapters and verses.', 'tbe-child' ), '<a href="https://en.wikisource.org/wiki/Translation:1_Meqabyan" rel="noopener">Wikisource</a>', '<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>' ) ) . '</p>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The readings of the scrolls are compared using the %s: Jarod Jacobs, Martijn Naaijer and Dirk Roorda, built on the data files of Martin Abegg, licensed CC BY-NC 4.0 (version 2.0, doi:10.5281/zenodo.23731063). So far the Great Isaiah Scroll (1QIsa-a) is compared with Isaiah 1 to 5. The scroll photographs belong to the Israel Antiquities Authority and are not reproduced here.', 'tbe-child' ), '<a href="https://github.com/ETCBC/dss" rel="noopener">CACCHT / ETCBC Dead Sea Scrolls dataset</a>' ) ) . '</p>';
