@@ -14,6 +14,7 @@ The contents box brings in the features of WP TOC (github.com/menj/wp-toc), buil
 - `inc/toc.php` and `tools/test_toc.php`.
 
 ### Changed
+- The home page's lockup sits closer under the header: the hero's top padding is now 1.5 to 2.5rem (was up to 5rem), and the main area adds no space of its own above it.
 - When the WP TOC plugin itself is active, the theme leaves posts, pages and the shortcodes to it and keeps it off commentary entries, so only one contents box ever shows.
 - The theme requires PHP 8.4 or later, as the owner decided ("Requires PHP: 8.4" in `style.css` and `readme.txt`). WordPress will not activate it on older PHP; a copy already installed keeps working and shows administrators a notice on every admin screen until PHP is upgraded.
 
