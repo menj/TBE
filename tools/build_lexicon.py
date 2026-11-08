@@ -110,7 +110,8 @@ def main():
             if len(row) < 8 or not re.match(r"^[GH]\d{4}[a-z]?$", row[0]):
                 continue
             num = row[0][:5]
-            sense = {"e": row[2].strip().rstrip(","), "w": row[3].strip(), "t": row[4].strip(), "p": row[5].strip(),
+            # Column 2 holds the sense's own extended number ("H0430G = a Name of"); column 3 can name another entry.
+            sense = {"e": row[1].split("=")[0].strip(), "w": row[3].strip(), "t": row[4].strip(), "p": row[5].strip(),
                      "g": row[6].strip(), "d": definition(row[7], books)}
             if not sense["d"]:
                 del sense["d"]

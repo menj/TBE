@@ -27,7 +27,15 @@ URL = "https://thebible.exposed/pdf/lexical-aids.pdf"
 OUT = os.path.join(ROOT, "data", "lexicon", "metzger.json")
 PART_I = range(9, 26)  # the scan's images that hold Part I
 # Meanings the OCR mangled past mending by rule, set by hand from the page image: Strong's number -> meaning.
-CORRECTIONS = {"G2362": "a throne (throne)"}
+CORRECTIONS = {
+    "G2362": "a throne (throne)",
+    "G1519": "with the acc., into (eisegesis, faulty interpretation of a text by reading into it one’s own ideas)",
+    "G2222": "life (Zoe [girl’s name])",
+}
+# Headwords the OCR misread so far that they matched the wrong number: wrong number -> (right number, meaning).
+REMAP = {"G9818": ("G3141", "testimony, evidence (cf. martyrdom)")}
+# Entries the OCR ran into the one before; each goes in after that one: previous number -> (number, meaning).
+INSERT = {"G1519": ("G1537", "with the gen., out of, from (ecstasy, state of being [literally, standing, στῆναι] out of one’s senses; exodus, a going [literally, a way, ὁδός] out)")}
 
 GREEK = re.compile(r"^[Ͱ-Ͽἀ-῿]")
 HEAD = re.compile(r"WORDS\s+OC[CG][UV]RR?ING\s+(.*?)\s+TIMES", re.I)
@@ -95,7 +103,7 @@ def gloss(text):
     while len(parts) > 1 and (form.match(parts[0]) or not re.search(r"[A-Za-z]{2,}|^I\b", parts[0])):
         parts.pop(0)
     out = re.sub(r"(\w)- (\w)", r"\1\2", ", ".join(parts))  # words split across lines
-    for bad, good in ((r"(^|, )6,", r"\1ὁ,"), (r"^Lam\b", "I am"), (r"^\[ ", "I "), (r"^1 ", "I "), (r"^l ", "I "), (r" α ", " a "),
+    for bad, good in ((r"(^|, )6,", r"\1ὁ,"), (r"; 1 ", "; I "), (r"^Lam\b", "I am"), (r"^\[ ", "I "), (r"^1 ", "I "), (r"^l ", "I "), (r" α ", " a "),
                       (r"^α ", "a "), (r"\s+", " ")):
         out = re.sub(bad, good, out)
     return out.strip()
@@ -177,6 +185,8 @@ def match(groups):
                 if cands:
                     w["n"] = min(cands, key=lambda c: abs(c[1] - mid))[0]
                     break
+            if w["n"] in REMAP:
+                w["n"], w["g"] = REMAP[w["n"]]
             if w["n"]:
                 found += 1
                 w["w"] = next(r[1] for r in index if r[0] == w["n"])  # the lexicon's spelling, not the OCR's
@@ -203,6 +213,15 @@ def main():
         for w in g["words"]:
             w["g"] = gloss(w["g"])
     words, found = match(groups)
+    index = {r[0]: r[1] for r in json.load(open(os.path.join(ROOT, "data", "lexicon", "g-index.json"), encoding="utf8"))}
+    for g in groups:
+        for i, w in enumerate(list(g["words"])):
+            if w["n"] in INSERT:
+                num, meaning = INSERT[w["n"]]
+                extra = {"w": index[num], "g": meaning, "p": w["p"], "n": num}
+                g["words"].insert(g["words"].index(w) + 1, extra)
+                words.setdefault(num, {"w": extra["w"], "g": meaning, "group": g["title"], "p": w["p"]})
+                found += 1
     total = sum(len(g["words"]) for g in groups)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     data = {"source": "Bruce M. Metzger, Lexical Aids for Students of New Testament Greek (new edition, 1969), Part I.",
