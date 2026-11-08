@@ -13,7 +13,8 @@ The contents box brings in the features of WP TOC (github.com/menj/wp-toc), buil
 - `inc/toc.php` and `tools/test_toc.php`.
 
 ### Changed
-- When the WP TOC plugin itself is active, the theme leaves posts, pages and the shortcodes to it and keeps it off commentary entries, so only one contents box ever shows. The plugin needs PHP 8.4; the theme's own contents work from PHP 8.0.
+- When the WP TOC plugin itself is active, the theme leaves posts, pages and the shortcodes to it and keeps it off commentary entries, so only one contents box ever shows.
+- The theme requires PHP 8.4 or later, as the owner decided ("Requires PHP: 8.4" in `style.css` and `readme.txt`). WordPress will not activate it on older PHP; a copy already installed keeps working and shows administrators a notice on every admin screen until PHP is upgraded.
 
 ## 0.10.20
 

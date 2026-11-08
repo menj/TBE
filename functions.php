@@ -9,6 +9,23 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'TBE_VERSION', '0.10.21' );
 define( 'TBE_DIR', get_stylesheet_directory() );
+define( 'TBE_MIN_PHP', '8.4' );
+
+/**
+ * The theme requires PHP 8.4 (owner decision, 8 November 2026). WordPress refuses to activate it on older PHP from
+ * the "Requires PHP" header; a copy already active keeps working, and administrators see this notice on every admin
+ * screen until the server is upgraded.
+ */
+function tbe_php_notice(): void {
+	if ( version_compare( PHP_VERSION, TBE_MIN_PHP, '>=' ) || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	printf(
+		'<div class="notice notice-error"><p>%s</p></div>',
+		esc_html( sprintf( /* translators: 1: required PHP version, 2: running PHP version */ __( 'The Bible Exposed theme requires PHP %1$s or later. This server runs PHP %2$s. Ask your host to upgrade PHP.', 'tbe-child' ), TBE_MIN_PHP, PHP_VERSION ) )
+	);
+}
+add_action( 'admin_notices', 'tbe_php_notice' );
 define( 'TBE_URI', get_stylesheet_directory_uri() );
 
 /** The theme's files in inc/, in the order they load, without ".php". */

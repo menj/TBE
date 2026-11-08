@@ -3,7 +3,7 @@ Contributors: menj
 Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-styles
 Requires at least: 6.7
 Tested up to: 7.1
-Requires PHP: 8.0
+Requires PHP: 8.4
 Stable tag: 0.10.21
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
@@ -177,7 +177,7 @@ The full history is in CHANGELOG.md.
 == Upgrade Notice ==
 
 = 0.10.21 =
-Nothing to do by hand. If you use the WP TOC plugin, you can deactivate it: the theme now does the same.
+The theme now needs PHP 8.4 or later. Check the PHP version with your host before updating. If you use the WP TOC plugin, you can deactivate it: the theme now does the same.
 
 = 0.10.20 =
 Nothing to do by hand.

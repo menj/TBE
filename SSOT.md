@@ -16,7 +16,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 | Repository | https://github.com/menj/TBE, branch `main` |
 | Parent theme | Twenty Twenty-Five (`twentytwentyfive`). It must stay installed. |
 | Version | `Version:` in `style.css`, `TBE_VERSION` in `functions.php`, `Stable tag:` in `readme.txt` and the top heading of `CHANGELOG.md`, always equal |
-| Requires | WordPress 6.7, PHP 8.0, with the `dom` and `mbstring` extensions |
+| Requires | WordPress 6.7, PHP 8.4, with the `dom` and `mbstring` extensions |
 | Licence | GNU General Public License v3 or later (owner decision, 5 November 2026), full text in `LICENSE`. Fonts, texts, data and images keep their own licences. |
 
 ## Purpose and position
@@ -34,6 +34,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
 - 5 November 2026: every theme is licensed under the GNU General Public License, version 3 or later (0.10.9). This one came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`; the owner adds it there, and this line is then its copy.
 
+- 8 November 2026: the theme requires PHP 8.4 or later ("the theme needs to be updated to PHP 8.4 minimum"), the same floor as WP TOC, whose features are built in (0.10.21). Recorded in `.claude/CLAUDE.md`.
 - 7 November 2026: the owner holds the rights to the books the site serves under `/pdf/` and uses on its pages: Reuben J. Swanson, *New Testament Greek Manuscripts: Matthew* (`nt-variant-readings.pdf`), the United Bible Societies *Greek New Testament* (`greek-nt.pdf`) and Bruce M. Metzger, *Lexical Aids for Students of New Testament Greek* (`lexical-aids.pdf`). In the owner's words: "i have the full copyright". Their evidence and page images may be used on the site. Recorded in `.claude/CLAUDE.md`.
 - 6 November 2026: the site is light only. "I do not want dark mode." No dark mode exists in the theme: no switch, no `theme.js`, no Night scheme, no dark rules (0.10.15).
 - 5 November 2026: the owner asked for a complete favicon set: "make sure you have favicon too." Every brand icon is drawn from `assets/img/brand/favicon.svg`, and a Site Icon set by the owner always wins (0.10.11). This came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`.

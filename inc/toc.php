@@ -2,7 +2,7 @@
 /**
  * Contents (table of contents), built into the theme (0.10.21). It brings the features of WP TOC
  * (https://github.com/menj/wp-toc, GPL-3.0-or-later, by MENJ) into the theme's own contents box, so there is one
- * look and one set of anchors, and the theme keeps its PHP 8.0 floor (WP TOC needs PHP 8.4):
+ * look and one set of anchors:
  *
  * - Every level-two and level-three heading (and level four, when asked for) in the main text of a single page
  *   gets an anchor. An id the author set is kept and reserved; made ids come from the heading's own text, letters
