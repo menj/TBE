@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.20
+
+### Fixed
+- On the home page the menu is centred in the header, above the centred cross and name, instead of sitting on the right beside an empty space where the header lockup had been hidden in 0.10.19. Every other page keeps the lockup on the left and the menu on the right.
+
 ## 0.10.19
 
 Two fixes to the home page. Nothing was removed.
