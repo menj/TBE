@@ -382,6 +382,60 @@ main select:hover, main select:focus-visible { border-color: var(--tbe-gold); bo
 a.tbe-term:hover, a.tbe-term:focus-visible, a.tbe-ref:hover, a.tbe-ref:focus-visible { text-decoration-color: transparent; }
 
 /* Respect reduced motion: keep the colour change, drop the movement ---------- */
+/* The broken cross (0.10.18) ------------------------------------------------
+   On the home page it drops into place once, with a small bounce; hovering the cross or the name swings it from its
+   top like a hanging sign, and its gold-to-burgundy colour shifts. The small cross in the header and footer tilts on hover. */
+@keyframes tbe-cross-in {
+	0% { opacity: 0; transform: translateY(-28%) rotate(-8deg); }
+	60% { opacity: 1; transform: translateY(4%) rotate(3deg); }
+	80% { transform: translateY(-1.5%) rotate(-1deg); }
+	100% { opacity: 1; transform: none; }
+}
+.tbe-brandmark--hero {
+	transform-origin: 50% 2%;
+	background-size: 100% 160%;
+	background-position: 50% 0;
+	/* "backwards": the drop-in holds its first frame during the delay and then lets go, so hover can move it. */
+	animation: tbe-cross-in 0.9s var(--tbe-ease) 0.1s backwards;
+	transition: transform 0.9s var(--tbe-spring), background-position 0.6s var(--tbe-ease), filter 0.3s var(--tbe-ease);
+}
+/* Hovering the cross or the name swings the cross on its top; the spring easing makes it overshoot and settle. */
+.tbe-brandmark--hero:hover,
+.tbe-hero:has(> .tbe-brand:hover) > .tbe-brandmark--hero {
+	transform: rotate(7deg);
+	background-position: 50% 100%;
+	filter: drop-shadow(0 6px 10px color-mix(in srgb, var(--tbe-gold) 45%, transparent));
+}
+.tbe-brandmark svg { transition: transform 0.35s var(--tbe-spring), color 0.25s var(--tbe-ease); transform-origin: 50% 10%; }
+.tbe-lockup:hover .tbe-brandmark svg, .tbe-footer__brand:hover .tbe-brandmark svg { transform: rotate(-8deg) scale(1.06); }
+.tbe-lockup:hover .tbe-brandmark { color: var(--tbe-rubric); }
+
+/* Manuscripts and lexicon (0.10.18) ------------------------------------------ */
+.tbe-ms__figure img, .tbe-ms__scan img, .tbe-ms__text, .tbe-ms__note, .tbe-lex__metzger, .tbe-lex__letters a,
+.tbe-lex__list li, .tbe-lex__list .tbe-lex__word, .tbe-ms__readings dd, .tbe-ms__eds li {
+	transition: background-color 0.2s var(--tbe-ease), border-color 0.2s var(--tbe-ease), color 0.2s var(--tbe-ease),
+		box-shadow 0.25s var(--tbe-ease), transform 0.25s var(--tbe-ease);
+}
+.tbe-ms__figure a:hover img, .tbe-ms__scan a:hover img { transform: translateY(-3px); box-shadow: var(--tbe-glow-gold); border-color: var(--tbe-gold); }
+.tbe-ms__figure:hover figcaption { color: var(--tbe-ink); }
+.tbe-ms__text:hover, .tbe-ms__text[open] { border-color: color-mix(in srgb, var(--tbe-gold) 60%, var(--tbe-line)); box-shadow: var(--tbe-glow-gold); }
+.tbe-ms__text > summary:hover strong { color: var(--tbe-accent); }
+.tbe-ms__note:hover, .tbe-lex__metzger:hover { box-shadow: var(--tbe-glow-gold); background: var(--tbe-wash-gold); }
+.tbe-ms__readings dd:hover { background: var(--tbe-wash-gold); border-radius: var(--tbe-radius-sm); }
+.tbe-ms__eds li:hover { color: var(--tbe-ink); }
+.tbe-lex__letters a:hover, .tbe-lex__letters a:focus-visible {
+	transform: translateY(-3px) scale(1.06);
+	background: var(--tbe-gradient-gold);
+	border-color: transparent;
+	color: #fff;
+	box-shadow: var(--tbe-glow-gold);
+}
+.tbe-lex__letters li:nth-child(3n+2) a:hover { background: var(--tbe-gradient); box-shadow: var(--tbe-glow-accent); }
+.tbe-lex__list li:hover { background: var(--tbe-wash-gold); border-radius: var(--tbe-radius-sm); }
+.tbe-lex__list li { padding-inline: 0.4rem; }
+.tbe-lex__list a:hover .tbe-lex__word { color: var(--tbe-accent); }
+.tbe-lex__lookup input:hover, .tbe-lex__lookup input:focus { border-color: var(--tbe-gold); box-shadow: var(--tbe-glow-gold); outline: none; }
+
 @media (prefers-reduced-motion: reduce) {
 	.tbe-btn:hover, .tbe-booklist a:hover, .tbe-chapters a:hover, .tbe-cards .wp-block-post-template > li:hover,
 	.tbe-il__w:hover, .tbe-il__play:hover, .tbe-pager a:hover, .tbe-az a:hover, .tbe-tags a:hover, .tbe-mark:hover,
@@ -389,6 +443,10 @@ a.tbe-term:hover, a.tbe-term:focus-visible, a.tbe-ref:hover, a.tbe-ref:focus-vis
 	.tbe-hits li:hover, .tbe-glossary__item:hover, .tbe-footer__col a:hover { transform: none; }
 	.tbe-btn--solid::after, .wp-block-button__link::after, .tbe-booklist a::after { transition: none; }
 	.tbe-cards .wp-block-post-template > li::before { transition: none; }
+	.tbe-brandmark--hero { animation: none; }
+	.tbe-brandmark--hero:hover, .tbe-hero:has(> .tbe-brand:hover) > .tbe-brandmark--hero { transform: none; }
+	.tbe-lockup:hover .tbe-brandmark svg, .tbe-footer__brand:hover .tbe-brandmark svg,
+	.tbe-ms__figure a:hover img, .tbe-ms__scan a:hover img, .tbe-lex__letters a:hover { transform: none; }
 }
 
 /* Justified running text (0.10.18): commentary, the Bible text, lexicon definitions and the prose of the reader
