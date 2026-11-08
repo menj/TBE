@@ -232,6 +232,8 @@
     {
      "slug": "jubilees",
      "name": "Jubilees (Kufale)",
+     "geez": "መጽሐፈ ኩፋሌ",
+     "geez_latin": "mäṣḥafä kufale",
      "traditions": [
       "ethiopian"
      ],

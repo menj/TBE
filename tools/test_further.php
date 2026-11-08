@@ -78,6 +78,7 @@ check( false !== strpos( $list, '<a href="https://thebible.exposed/bible/1-meqab
 check( 3 === substr_count( $list, 'meqabyan/"' ) && false !== strpos( $list, 'mätṣḥäfä henok</span></span><span class="tbe-booklist__count">Not on the site yet' ), 'the other prepared books are still marked "Not on the site yet"' );
 check( false !== strpos( $list, 'Zëna Ayhud (Pseudo-Josephus) <span class="tbe-booklist__geez" lang="gez">ዜና፡ አይሁድ</span></span>' ), 'Zëna Ayhud carries its Ge\'ez name' );
 check( false !== strpos( $list, '1 Enoch (Henok) <span class="tbe-booklist__geez" lang="gez">መጽሐፈ ሄኖክ</span> <span class="tbe-booklist__geez tbe-booklist__geez--latin" lang="gez-Latn">mätṣḥäfä henok</span>' ), '1 Enoch carries its Ge\'ez name and transliteration' );
+check( false !== strpos( $list, 'Jubilees (Kufale) <span class="tbe-booklist__geez" lang="gez">መጽሐፈ ኩፋሌ</span> <span class="tbe-booklist__geez tbe-booklist__geez--latin" lang="gez-Latn">mäṣḥafä kufale</span>' ), 'Jubilees carries its Ge\'ez name and transliteration' );
 
 $page = tbe_view_further_book( $books['2-meqabyan'] );
 check( false !== strpos( $page, '<h1 class="tbe-title">2 Meqabyan</h1>' ) && false !== strpos( $page, 'https://thebible.exposed/bible/2-meqabyan/21/' ) && false === strpos( $page, 'https://thebible.exposed/bible/2-meqabyan/22/' ) && false !== strpos( $page, 'Ethiopian Orthodox books' ), 'the book page lists its chapters under its section' );

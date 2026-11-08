@@ -7,7 +7,7 @@ The first books beyond the 66 can be read on the site: 1, 2 and 3 Meqabyan of th
 ### Added
 - 1, 2 and 3 Meqabyan at `/bible/1-meqabyan/` to `/bible/3-meqabyan/`, chapter by chapter, in the English translation from Ge'ez made by Wikisource contributors (CC BY-SA 4.0): 7, 21 and 10 chapters. Each book says where the translation comes from, under which licence, and that the church has not authorised it. The pager runs from one book into the next.
 - On the book list, the three books are linked in the Ethiopian Orthodox section with their chapter counts; the other prepared books stay marked "Not on the site yet".
-- The Ge'ez names of 1 Enoch (መጽሐፈ ሄኖክ, *mätṣḥäfä henok*) and Zëna Ayhud (ዜና፡ አይሁድ) beside their English names (`geez` and `geez_latin` in `data/canons.json`).
+- The Ge'ez names of 1 Enoch (መጽሐፈ ሄኖክ, *mätṣḥäfä henok*), Jubilees (መጽሐፈ ኩፋሌ, *mäṣḥafä kufale*) and Zëna Ayhud (ዜና፡ አይሁድ) beside their English names (`geez` and `geez_latin` in `data/canons.json`).
 - The structured data gives each book as a `Book` translated from Ge'ez, with its licence, its Wikisource source and each chapter as a `Chapter`.
 - `inc/further.php` (class `TBE_Further`), `data/further/`, `tools/build_meqabyan.py` and `tools/test_further.php`.
 

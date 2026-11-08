@@ -119,7 +119,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 = 0.10.22 =
 * 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon can be read, in the English translation from Ge'ez made on Wikisource.
-* 1 Enoch and Zëna Ayhud show their Ge'ez names on the book list.
+* 1 Enoch, Jubilees and Zëna Ayhud show their Ge'ez names on the book list.
 
 = 0.10.21 =
 * A contents list on pages, posts and glossary terms too, with sub-sections nested; [wp_toc] places it by hand, and a heading marked no-toc stays out.
