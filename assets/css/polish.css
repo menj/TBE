@@ -390,3 +390,23 @@ a.tbe-term:hover, a.tbe-term:focus-visible, a.tbe-ref:hover, a.tbe-ref:focus-vis
 	.tbe-btn--solid::after, .wp-block-button__link::after, .tbe-booklist a::after { transition: none; }
 	.tbe-cards .wp-block-post-template > li::before { transition: none; }
 }
+
+/* Justified running text (0.10.18): commentary, the Bible text, lexicon definitions and the prose of the reader
+   pages. Hyphenation keeps narrow columns even. Centred lines, headings, lists, tables, captions, the Greek set
+   line by line on the manuscripts pages, and any paragraph aligned in the editor keep their own alignment. */
+.wp-block-post-content p:not([class*="has-text-align"]),
+.tbe-box__body p:not([class*="has-text-align"]),
+.tbe-text,
+.tbe-lex__def,
+.tbe-reader > p:not(.tbe-center):not(.tbe-eyebrow):not(.tbe-title-sub):not(.tbe-notice),
+.tbe-credits p,
+.tbe-ms__en p,
+.tbe-ms__book > p,
+.tbe-ms__note p,
+.tbe-extra__intro {
+	text-align: justify;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	hyphenate-limit-chars: 7 3 3;
+}
+.tbe-text .tbe-center, .tbe-ms__greek, .tbe-ms__ref { text-align: start; -webkit-hyphens: manual; hyphens: manual; }
