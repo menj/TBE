@@ -48,7 +48,9 @@ function check( $ok, $label ) {
 
 $books  = TBE_Further::books();
 $verses = static fn( $slug ) => array_sum( array_map( static fn( $c ) => count( $c['verses'] ), $books[ $slug ]['chapters'] ) );
-check( array( 'jubilees', '1-meqabyan', '2-meqabyan', '3-meqabyan', 'hermas', 'apocalypse-of-peter' ) === array_keys( $books ), 'Jubilees, 1 to 3 Meqabyan, Hermas and the Apocalypse of Peter are on the site, in canon order' );
+check( array( '1-enoch', 'jubilees', '1-meqabyan', '2-meqabyan', '3-meqabyan', 'hermas', 'apocalypse-of-peter' ) === array_keys( $books ), 'Jubilees, 1 to 3 Meqabyan, Hermas and the Apocalypse of Peter are on the site, in canon order' );
+check( 105 === $books['1-enoch']['count'] && $verses( '1-enoch' ) > 1000 && str_starts_with( $books['1-enoch']['chapters'][0]['verses'][0]['t'], 'The word of the blessing of Enoch, how he blessed the elect and the righteous, who were to exist in the time of trouble; rejecting all the wicked and ungodly.' ), '1 Enoch: Laurence\'s 105 chapters, and its first verse as printed' );
+check( 'Laurence has no chapter XI.' === $books['1-enoch']['chapters'][10]['heading'] && ! $books['1-enoch']['chapters'][10]['verses'], '1 Enoch: chapter XI, which Laurence does not have, says so' );
 check( 50 === $books['jubilees']['count'] && $verses( 'jubilees' ) > 1250, 'Jubilees: 50 chapters and its verses (' . $verses( 'jubilees' ) . ')' );
 check( 27 === $books['hermas']['count'] && 'Vision 1' === $books['hermas']['chapters'][0]['title'] && 'Parable 10' === $books['hermas']['chapters'][26]['title'], 'Hermas: five Visions, twelve Mandates and ten Parables' );
 check( '6[14]:1' === $books['hermas']['chapters'][2]['verses'][array_search( '6[14]:1', array_column( $books['hermas']['chapters'][2]['verses'], 'l' ), true )]['l'] && 1 === count( array_keys( array_column( $books['hermas']['chapters'][2]['verses'], 'l' ), '5[13]:1', true ) ), 'Hermas: the repeated reference in Vision 3 is numbered on (6[14])' );
@@ -56,7 +58,7 @@ check( 19 === $books['apocalypse-of-peter']['count'] && 'Ethiopic, chapter 1' ==
 check( ! preg_grep( '/^\\d+$|\\b(Ps|Matt) \\d+:/', array_column( array_merge( ...array_column( array_slice( $books['apocalypse-of-peter']['chapters'], 0, 17 ), 'verses' ) ), 't' ) ), 'Apocalypse of Peter: no footnote of the printed page is left in the text' );
 check( 7 === $books['1-meqabyan']['count'] && 21 === $books['2-meqabyan']['count'] && 10 === $books['3-meqabyan']['count'], 'chapters: 7, 21 and 10, as on Wikisource' );
 check( 240 === $verses( '1-meqabyan' ) && 421 === $verses( '2-meqabyan' ) && 208 === $verses( '3-meqabyan' ), 'verses: 240, 421 and 208' );
-check( null === TBE_Further::book( 'genesis' ) && null === TBE_Further::book( '../canons' ) && null === TBE_Further::book( '1-enoch' ), 'only listed books with a text file are read' );
+check( null === TBE_Further::book( 'genesis' ) && null === TBE_Further::book( '../canons' ) && null === TBE_Further::book( 'sinodos' ), 'only listed books with a text file are read' );
 
 $bad = array();
 foreach ( array( '1-meqabyan', '2-meqabyan', '3-meqabyan' ) as $slug ) {
@@ -81,7 +83,7 @@ check( 17 === $one['verses'][16]['n'] && str_starts_with( $one['verses'][16]['t'
 
 $list = tbe_canon_sections();
 check( false !== strpos( $list, '<a href="https://thebible.exposed/bible/1-meqabyan/"><span class="tbe-booklist__name">1 Meqabyan</span><span class="tbe-booklist__count">7 chapters</span></a>' ), 'the book list links 1 Meqabyan with its chapters' );
-check( 3 === substr_count( $list, 'meqabyan/"' ) && false !== strpos( $list, 'bible/jubilees/"' ) && false !== strpos( $list, 'bible/hermas/"' ) && false !== strpos( $list, 'mätṣḥäfä henok</span></span><span class="tbe-booklist__count">Not on the site yet' ), 'the other prepared books are still marked "Not on the site yet"' );
+check( 3 === substr_count( $list, 'meqabyan/"' ) && false !== strpos( $list, 'bible/jubilees/"' ) && false !== strpos( $list, 'bible/hermas/"' ) && false !== strpos( $list, 'Jubilees (Kufale) <span class="tbe-booklist__geez" lang="gez">መጽሐፈ ኩፋሌ</span> <span class="tbe-booklist__geez tbe-booklist__geez--latin" lang="gez-Latn">mäṣḥafä kufale</span></span><span class="tbe-booklist__count">50 chapters' ), 'the other prepared books are still marked "Not on the site yet"' );
 check( false !== strpos( $list, 'Zëna Ayhud (Pseudo-Josephus) <span class="tbe-booklist__geez" lang="gez">ዜና፡ አይሁድ</span></span>' ), 'Zëna Ayhud carries its Ge\'ez name' );
 check( false !== strpos( $list, '1 Enoch (Henok) <span class="tbe-booklist__geez" lang="gez">መጽሐፈ ሄኖክ</span> <span class="tbe-booklist__geez tbe-booklist__geez--latin" lang="gez-Latn">mätṣḥäfä henok</span>' ), '1 Enoch carries its Ge\'ez name and transliteration' );
 check( false !== strpos( $list, 'Jubilees (Kufale) <span class="tbe-booklist__geez" lang="gez">መጽሐፈ ኩፋሌ</span> <span class="tbe-booklist__geez tbe-booklist__geez--latin" lang="gez-Latn">mäṣḥafä kufale</span>' ), 'Jubilees carries its Ge\'ez name and transliteration' );

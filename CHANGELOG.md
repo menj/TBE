@@ -2,13 +2,14 @@
 
 ## 0.10.22
 
-The first books beyond the 66 can be read on the site: Jubilees and 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon, and the Shepherd of Hermas and the Apocalypse of Peter, once read as scripture. Nothing was removed.
+The first books beyond the 66 can be read on the site: 1 Enoch, Jubilees and 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon, and the Shepherd of Hermas and the Apocalypse of Peter, once read as scripture. Nothing was removed.
 
 ### Added
 - 1, 2 and 3 Meqabyan at `/bible/1-meqabyan/` to `/bible/3-meqabyan/`, chapter by chapter, in the English translation from Ge'ez made by Wikisource contributors (CC BY-SA 4.0): 7, 21 and 10 chapters. Each book says where the translation comes from, under which licence, and that the church has not authorised it. The pager runs from one book into the next.
 - On the book list, the three books are linked in the Ethiopian Orthodox section with their chapter counts; the other prepared books stay marked "Not on the site yet".
 - The Ge'ez names of 1 Enoch (መጽሐፈ ሄኖክ, *mätṣḥäfä henok*), Jubilees (መጽሐፈ ኩፋሌ, *mäṣḥafä kufale*) and Zëna Ayhud (ዜና፡ አይሁድ) beside their English names (`geez` and `geez_latin` in `data/canons.json`).
 - The structured data gives each book as a `Book` translated from Ge'ez, with its licence, its Wikisource source and each chapter as a `Chapter`.
+- 1 Enoch in Richard Laurence's translation of 1883 (public domain), the one Wikisource carries: 105 chapters in Laurence's own numbering, read from the scan on the Internet Archive without his notes (`tools/build_enoch.py`). Laurence has no chapter XI, and the page for it says so.
 - Jubilees in R. H. Charles's translation of 1902 (public domain), 50 chapters, read from the scan on the Internet Archive with his notes, chapter summaries and margin dates left out (`tools/build_jubilees.py`).
 - The Shepherd of Hermas in J. B. Lightfoot's translation (public domain): its five Visions, twelve Mandates and ten Parables are its chapters, and each paragraph shows its printed reference, such as "3[11]:2" (`tools/build_hermas.py`).
 - The Apocalypse of Peter: the full Ethiopic text in seventeen chapters, in J. K. Elliott's translation as printed in Bart D. Ehrman's *Lost Scriptures* (2003), used with the owner's permission, then the Greek Akhmim fragment and the passages the Fathers quote in Andrew Rutherfurd's public-domain translation (`tools/build_apocalypse_peter_ethiopic.py`, `tools/build_apocalypse_peter.py`).

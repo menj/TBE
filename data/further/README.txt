@@ -34,3 +34,8 @@ apocalypse-of-peter.json
   Since 9 November 2026 chapters 1 to 17 are the Ethiopic text in J. K. Elliott's translation as printed in
   Bart D. Ehrman, Lost Scriptures (Oxford University Press, 2003), used with the owner's permission; built by
   tools/build_apocalypse_peter_ethiopic.py, which puts the Greek after it as chapters 18 and 19.
+
+1-enoch.json
+  1 Enoch in Richard Laurence's translation, The Book of Enoch the Prophet (London: Kegan Paul, Trench and Co.,
+  1883), public domain; read by tools/build_enoch.py from the OCR with word positions of the Cornell copy on the
+  Internet Archive (item cu31924090062823). Laurence's own chapter numbering (1 to 105; he has no chapter XI).

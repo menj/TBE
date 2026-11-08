@@ -53,7 +53,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries), `cross-references` (32 cross-references, each filed on both passages, so 64 entries) and `gospels-and-canon` (8 entries, after two videos by C. J. Cornthwaite, restated in the site's own words). Every entry key starts with its pack id.
 - Glossary: 13 starter terms, created as drafts (`tbe_seed_terms()`).
 - Canons in `data/canons.json`: Jewish, Protestant, Catholic, Orthodox and Ethiopian. The deuterocanonical, further Orthodox and Ethiopian books are prepared sections marked "Not on the site yet", except 1 to 3 Meqabyan.
-- Further books: 1, 2 and 3 Meqabyan (7, 21 and 10 chapters) in `data/further/`, the Wikisource translation from Ge'ez (CC BY-SA 4.0). Those files and the pages built from them stay under CC BY-SA 4.0, whatever the theme's licence. Jubilees (50 chapters, R. H. Charles 1902), the Shepherd of Hermas (27 parts, J. B. Lightfoot) and the Apocalypse of Peter (Andrew Rutherfurd) are public domain. The Ethiopian list is still to be confirmed.
+- Further books: 1, 2 and 3 Meqabyan (7, 21 and 10 chapters) in `data/further/`, the Wikisource translation from Ge'ez (CC BY-SA 4.0). Those files and the pages built from them stay under CC BY-SA 4.0, whatever the theme's licence. 1 Enoch (105 chapters, Richard Laurence 1883), Jubilees (50 chapters, R. H. Charles 1902), the Shepherd of Hermas (27 parts, J. B. Lightfoot) and the Apocalypse of Peter (Andrew Rutherfurd) are public domain. The Ethiopian list is still to be confirmed.
 - The brand mark is a broken inverted cross. It follows Sahih al-Bukhari 2476, cited on the Sources page.
 
 ## Addresses
@@ -87,7 +87,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - C. J. Cornthwaite, named on the Sources page as the source of the `gospels-and-canon` pack's arguments.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
 - J. K. Elliott as translator and Bart D. Ehrman's *Lost Scriptures* (Oxford University Press) as the source of the Ethiopic Apocalypse of Peter, on the Sources page and on the book.
-- R. H. Charles, J. B. Lightfoot and Andrew Rutherfurd as translators of Jubilees, Hermas and the Apocalypse of Peter, on the Sources page and on each book.
+- Richard Laurence, R. H. Charles, J. B. Lightfoot and Andrew Rutherfurd as translators of Jubilees, Hermas and the Apocalypse of Peter, on the Sources page and on each book.
 - Wikisource contributors for the 1 to 3 Meqabyan translation, with the CC BY-SA 4.0 licence and a link to each page, on the Sources page and on every page of those books. The licence requires it.
 - The licences in `assets/fonts/` for SBL, Angel, Noto Naskh Arabic, Abyssinica SIL and Montserrat, and the Angel credit with its link on the Sources page.
 - The Minimalist Social Icons Pack 2.8 for the profile icons.
