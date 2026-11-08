@@ -24,7 +24,7 @@ What a visitor gets:
 * Recorded readings of Genesis 1 (Hebrew) and Matthew 1 (Greek), with each word lit as it is read.
 * A Christian and Jewish side-by-side view for Genesis (ESV and JPS 1917), and Dead Sea Scroll readings for Isaiah 1 to 5.
 * A lexicon at /lexicon/: every Hebrew and Greek word by its Strong's number, with its meaning, how often it is used and where, and Metzger's list of Greek words by how often they occur. Each Strong's number on the word-by-word pages opens its entry.
-* A Manuscripts section at /manuscripts/: twenty passages that the King James Version prints and the earliest Greek manuscripts leave out, such as the long ending of Mark and the woman caught in adultery, with each manuscript's own words line by line.
+* A Manuscripts section at /manuscripts/: twenty-two places where the Greek manuscripts disagree, most of them passages that the King James Version prints and the earliest Greek manuscripts leave out, such as the long ending of Mark and the woman caught in adultery, with each manuscript's own words line by line.
 * Three colour schemes, or your own colours. The site is light only.
 
 The theme is made for thebible.exposed and is not meant for other sites.
@@ -118,7 +118,8 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 = 0.10.18 =
 * A lexicon page for every Strong's number, with Metzger's frequency list for Greek.
-* A new Manuscripts section shows, manuscript by manuscript, which early Greek copies have twenty disputed passages, with their own text, photographs of the pages, and the evidence of later manuscripts from two printed editions. A chapter that holds one says so under its heading.
+* New commentary on how the gospels rework one another and on how the New Testament came together.
+* A new Manuscripts section shows, manuscript by manuscript, which early Greek copies have twenty-two disputed passages, with their own text, photographs of the pages, and the evidence of later manuscripts from two printed editions. A chapter that holds one says so under its heading.
 
 = 0.10.17 =
 * The Credits page is now Sources, at /sources/, with a Resources section; the old address redirects.

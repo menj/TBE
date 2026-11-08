@@ -88,6 +88,8 @@ final class TBE_Manuscripts {
 			'luke-22-43-44'  => array( __( 'The angel and the sweat like blood', 'tbe-child' ), __( 'Two verses on the Mount of Olives: an angel strengthens Jesus, and his sweat falls like drops of blood.', 'tbe-child' ) ),
 			'luke-23-34'     => array( __( '“Father, forgive them”', 'tbe-child' ), __( 'The prayer from the cross, “Father, forgive them, for they know not what they do”, at the start of Luke 23:34.', 'tbe-child' ) ),
 			'matthew-6-13'   => array( __( 'The ending of the Lord’s Prayer', 'tbe-child' ), __( 'The closing words “For thine is the kingdom, and the power, and the glory, for ever. Amen.”', 'tbe-child' ) ),
+			'luke-3-22'      => array( __( '“Today I have begotten you”', 'tbe-child' ), __( 'At Jesus’ baptism, does the voice from heaven say “You are my beloved Son; with you I am well pleased”, or quote Psalm 2:7, “You are my Son; today I have begotten you”? The second reading could be taken to mean that Jesus became God’s Son at his baptism. Here “has it” means a manuscript reads “today I have begotten you”.', 'tbe-child' ) ),
+			'1-timothy-3-16' => array( __( '“God was manifested in the flesh”', 'tbe-child' ), __( 'Does the hymn begin “God was manifested in the flesh” or “He who was manifested in the flesh”? In capitals the two differ by a stroke: ΟΣ, “who”, and ΘΣ, the usual short form of ΘΕΟΣ, “God”. Here “has it” means a manuscript reads “God”.', 'tbe-child' ) ),
 			'1-john-5-7-8'   => array( __( 'The three witnesses in heaven', 'tbe-child' ), __( 'The words “in heaven, the Father, the Word, and the Holy Ghost: and these three are one”, the only verse that names the three together as one.', 'tbe-child' ) ),
 			'john-5-4'       => array( __( 'The angel at the pool', 'tbe-child' ), __( 'The verse that explains the pool of Bethesda: an angel stirred the water, and the first one in was healed.', 'tbe-child' ) ),
 			'acts-8-37'      => array( __( 'The Ethiopian’s confession', 'tbe-child' ), __( 'Philip’s condition for baptism and the answer “I believe that Jesus Christ is the Son of God.”', 'tbe-child' ) ),
@@ -327,7 +329,7 @@ function tbe_manuscripts_apparatus( string $id ): string {
 function tbe_view_manuscripts(): string {
 	$out  = '<div class="tbe-reader tbe-ms">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</h1>';
-	$out .= '<p class="tbe-center tbe-muted">' . esc_html__( 'Places where the Greek manuscripts of the New Testament disagree: verses and words that the King James Version prints and the earliest surviving copies leave out. Each page sets the manuscripts side by side, in their own words, line by line.', 'tbe-child' ) . '</p>';
+	$out .= '<p class="tbe-center tbe-muted">' . esc_html__( 'Places where the Greek manuscripts of the New Testament disagree: mostly verses and words that the King James Version prints and the earliest surviving copies leave out, and a few readings that scribes changed. Each page sets the manuscripts side by side, in their own words, line by line.', 'tbe-child' ) . '</p>';
 	$passages = TBE_Manuscripts::passages();
 	if ( ! $passages ) {
 		return $out . '<p class="tbe-notice">' . esc_html__( 'The manuscript data has not been built yet.', 'tbe-child' ) . '</p></div>';
@@ -378,7 +380,10 @@ function tbe_view_manuscript_passage( array $p ): string {
 			$out .= '<p><span class="tbe-vn">' . esc_html( TBE_Manuscripts::key_label( (string) $key ) ) . '</span> ' . esc_html( $kjv ) . '</p>';
 		}
 		$long = count( $en ) > 2;
-		$out .= '<p class="tbe-muted">' . esc_html__( 'King James Version. Modern translations made from the early manuscripts print these words in brackets, move them to a footnote, or leave them out.', 'tbe-child' ) . '</p>';
+		$notes = array(
+			'luke-3-22' => __( 'King James Version, which here follows nearly every Greek manuscript. Codex Bezae, several Latin manuscripts and early writers from Justin onward read the words of Psalm 2:7 in its place: “You are my Son; today I have begotten you.”', 'tbe-child' ),
+		);
+		$out .= '<p class="tbe-muted">' . esc_html( $notes[ $id ] ?? __( 'King James Version. Modern translations made from the early manuscripts print these words in brackets, move them to a footnote, or leave them out.', 'tbe-child' ) ) . '</p>';
 		$out .= ( $long ? '<details class="tbe-ms__more"><summary>' . esc_html__( 'Two modern translations', 'tbe-child' ) . '</summary>' : '' ) . '<ul class="tbe-ms__modern">';
 		foreach ( array( 'WEB' => __( 'World English Bible', 'tbe-child' ), 'BSB' => __( 'Berean Standard Bible', 'tbe-child' ) ) as $code => $name ) {
 			$texts = array();

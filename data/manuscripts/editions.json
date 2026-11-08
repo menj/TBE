@@ -445,6 +445,54 @@
    "img": "assets/img/manuscripts/books/ubs-648.jpg",
    "w": 613,
    "h": 984
+  },
+  "luke-3-22": {
+   "rating": "B",
+   "pdf": 305,
+   "page": 204,
+   "readings": [
+    [
+     "“You are my beloved Son; with you I am well pleased”",
+     "𝔓4 ℵ A B L W Δ Θ Ψ 070 0233vid f1 f13 28 33 157 180 205 565 579 597 (700) 892 1006 1010 1071 1241 1243 1292 1342 1424 1505 Byz [E G H N] Lect"
+    ],
+    [
+     "“…in whom I am well pleased”",
+     "X 1253"
+    ],
+    [
+     "“This is my beloved Son…”, as in Matthew",
+     "1574"
+    ],
+    [
+     "“You are my Son; today I have begotten you” (Psalm 2:7)",
+     "D, and among early writers Justin, Clement, Methodius, Hilary, Tyconius and Augustine’s Latin manuscripts"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-305.jpg",
+   "w": 613,
+   "h": 984
+  },
+  "1-timothy-3-16": {
+   "rating": "A",
+   "pdf": 796,
+   "page": 695,
+   "readings": [
+    [
+     "“Who was manifested in the flesh”",
+     "ℵ* A* C* F G 33 365 1175 2127 l60 (256 l597 “who, God”)"
+    ],
+    [
+     "“Which was manifested”",
+     "D* (061)"
+    ],
+    [
+     "“God was manifested in the flesh”",
+     "ℵ2 Ac C2 D2 Ψ 075 0150 6 81 104 263 424 436 459 1241 1319 1573 1739 1852 1881 1912 1962 2200 Byz [K L P] Lect"
+    ]
+   ],
+   "img": "assets/img/manuscripts/books/ubs-796.jpg",
+   "w": 613,
+   "h": 984
   }
  },
  "swanson": {

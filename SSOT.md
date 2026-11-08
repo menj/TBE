@@ -46,9 +46,9 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Dead Sea Scrolls comparison: Isaiah 1 to 5 against 1QIsa-a only. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
 - JPS 1917 parallel text: Genesis only (`data/jps/`).
 - Lexicon: every Hebrew and Greek Strong's number in `data/lexicon/`, from STEPBible's TBESG and TBESH (CC BY 4.0), and Metzger's frequency list in `data/lexicon/metzger.json`.
-- Manuscripts evidence from the printed apparatuses: `data/manuscripts/editions.json` (UBS for all twenty passages, Swanson for the four in Matthew) with page images in `assets/img/manuscripts/books/`.
-- Manuscripts: twenty New Testament passages in `data/manuscripts/passages.json`, built from the CNTR transcriptions (CC BY-SA 4.0). That file and the pages built from it stay under CC BY-SA 4.0, whatever the theme's licence.
-- Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries) and `cross-references` (32 cross-references, each filed on both passages, so 64 entries). Every entry key starts with its pack id.
+- Manuscripts evidence from the printed apparatuses: `data/manuscripts/editions.json` (UBS for all twenty-two passages, Swanson for the four in Matthew) with page images in `assets/img/manuscripts/books/`.
+- Manuscripts: twenty-two New Testament passages in `data/manuscripts/passages.json`, built from the CNTR transcriptions (CC BY-SA 4.0). That file and the pages built from it stay under CC BY-SA 4.0, whatever the theme's licence.
+- Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries), `cross-references` (32 cross-references, each filed on both passages, so 64 entries) and `gospels-and-canon` (8 entries, after two videos by C. J. Cornthwaite, restated in the site's own words). Every entry key starts with its pack id.
 - Glossary: 13 starter terms, created as drafts (`tbe_seed_terms()`).
 - Canons in `data/canons.json`: Jewish, Protestant, Catholic, Orthodox and Ethiopian. The deuterocanonical, further Orthodox and Ethiopian books are prepared sections marked "Not on the site yet". The Ethiopian list is still to be confirmed.
 - The brand mark is a broken inverted cross. It follows Sahih al-Bukhari 2476, cited on the Sources page.
@@ -81,6 +81,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - STEP Bible for the lexicon's definitions (CC BY 4.0), with Abbott-Smith and the abridged Brown-Driver-Briggs named, and Metzger's *Lexical Aids* for the frequency list, on the Sources page and on every lexicon page.
 - The titles, editors and publishers of the United Bible Societies *Greek New Testament* and Swanson's *New Testament Greek Manuscripts: Matthew*, on the Sources page and beside their evidence on each manuscripts page.
 - The credit under each manuscript photograph: its licence and a link to its Wikimedia Commons page.
+- C. J. Cornthwaite, named on the Sources page as the source of the `gospels-and-canon` pack's arguments.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
 - The licences in `assets/fonts/` for SBL, Angel, Noto Naskh Arabic, Abyssinica SIL and Montserrat, and the Angel credit with its link on the Sources page.
 - The Minimalist Social Icons Pack 2.8 for the profile icons.

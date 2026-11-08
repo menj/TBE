@@ -85,7 +85,7 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - Test the Nginx lines in README.md on a real Nginx. Why: they are written from the Apache rules and marked untested.
 - Settle the Qur'an cross-references. Why: the owner's rule that nothing Islamic goes on the site for now (restated 7 November 2026) meets references still shown on entry pages, in the reader, in the structured data and in link tips, and SSOT.md still calls the position "Islamic-leaning". The owner decides whether the public pages hide them; the admin field keeps what is saved.
 - A Hebrew page in the manuscripts section. Why: 0.10.18 covers the Greek New Testament only, while the interlinear data records about 1,500 Hebrew written-and-read (ketiv and qere) places and the Dead Sea Scrolls comparison has Isaiah 1 to 5.
-- More passages in the manuscripts section, and a per-book table of every place the editions differ. Why: 0.10.18 has twenty passages; the interlinear data records about 4,100 Greek words outside NA28 and about 3,850 variant readings, and `tools/build_manuscripts.py` takes a new passage in one line.
+- More passages in the manuscripts section, and a per-book table of every place the editions differ. Why: 0.10.18 has twenty-two passages; the interlinear data records about 4,100 Greek words outside NA28 and about 3,850 variant readings, and `tools/build_manuscripts.py` takes a new passage in one line.
 
 ### Later
 - More recorded readings. Why: only Genesis 1 (Hebrew) and Matthew 1 (Greek) have audio; `tools/align_audio.py` is ready for more, but each needs a recording with a licence, which the owner supplies.
@@ -94,7 +94,7 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - The deuterocanonical, further Orthodox and Ethiopian books. Why: they are listed as prepared sections, "Not on the site yet", and the Ethiopian list is still to be confirmed.
 - The Ge'ez texts of the Ethiopian books. Why: the Ge'ez font is bundled and unused, and the texts need a licensed source. The owner asks the Ethiopian Orthodox Tewahedo Church first, since its permission so far covers names and notes from its site.
 - The Greek Old Testament manuscripts in the Freer collection (Deuteronomy, Joshua, Psalms). Why: Henry A. Sanders, "The Old Testament Manuscripts in the Freer Collection" (University of Michigan, 1917, public domain) describes and collates them, but the scanned copy's Greek text is too poorly read by machine to use without checking by hand. Its plates are public domain too.
-- Swanson's other volumes (Mark, Luke, John) for the passages outside Matthew. Why: the Matthew volume covers four of the twenty passages; the others list the same kind of evidence.
+- Swanson's other volumes (Mark, Luke, John) for the passages outside Matthew. Why: the Matthew volume covers four of the twenty-two passages; the others list the same kind of evidence.
 - More manuscript photographs. Why: only Mark 16 has them in 0.10.18. Commons has pages of other manuscripts (Bezae, Washingtonianus, the papyri), and each must be found, checked by eye to show the passage, and added to `data/manuscripts/images.json`.
 - A Syriac interlinear. Why: the Estrangela font is bundled and unused, waiting on an open Syriac dataset. The owner has said not to build it yet.
 

@@ -25,7 +25,7 @@ OUT = os.path.join(ROOT, "data", "manuscripts", "passages.json")
 REPO = "https://github.com/Center-for-New-Testament-Restoration/transcriptions"
 
 # Book numbers in CNTR's verse ids (40 = Matthew ... 66 = Revelation) and our slugs.
-BOOKS = {40: "matthew", 41: "mark", 42: "luke", 43: "john", 44: "acts", 45: "romans", 62: "1-john"}
+BOOKS = {40: "matthew", 41: "mark", 42: "luke", 43: "john", 44: "acts", 45: "romans", 54: "1-timothy", 62: "1-john"}
 
 # The passages. "verses": whole verses, judged from CNTR's own marks. "words": key words inside one verse.
 PASSAGES = [
@@ -34,6 +34,9 @@ PASSAGES = [
     {"id": "luke-22-43-44", "kind": "verses", "ref": [42, 22, 43, 22, 44]},
     {"id": "luke-23-34", "kind": "words", "ref": [42, 23, 34, 23, 34], "words": "πατερ αφεσ αυτοισ"},
     {"id": "matthew-6-13", "kind": "words", "ref": [40, 6, 13, 6, 13], "words": "οτι σου εστιν η βασιλεια"},
+    # "words" may list several spellings, separated by "|": a match on any one counts. They match whole words.
+    {"id": "luke-3-22", "kind": "words", "ref": [42, 3, 22, 3, 22], "words": "σημερον γεγεννηκα σε"},
+    {"id": "1-timothy-3-16", "kind": "words", "ref": [54, 3, 16, 3, 16], "words": "θεος εφανερωθη|θσ εφανερωθη"},
     {"id": "1-john-5-7-8", "kind": "words", "ref": [62, 5, 7, 5, 7], "words": "εν τω ουρανω"},
     {"id": "john-5-4", "kind": "verses", "ref": [43, 5, 4, 5, 4]},
     {"id": "acts-8-37", "kind": "verses", "ref": [44, 8, 37, 8, 37]},
@@ -153,6 +156,12 @@ def plain(text):
     return re.sub(r"\s+", " ", re.sub(r"[^α-ω ]", " ", text)).strip()
 
 
+def has_words(words, text):
+    """Whether any of the "|"-separated spellings stands in the text as whole words."""
+    hay = " %s " % plain(text)
+    return any(" %s " % plain(w) in hay for w in words.split("|"))
+
+
 def verse_state(raw):
     """p present, a absent, l lost, for one verse line."""
     body = raw.strip()
@@ -164,7 +173,9 @@ def verse_state(raw):
 
 
 def damaged(raw):
-    return bool(re.search(r"[*&^\ufffd]", raw))
+    """Whether part of the verse is lost (* &), unreadable (U+FFFD) or supplied whole by the editors (~ +). A
+    letter the editors restored inside a word that survives (^) leaves the reading clear, so it does not count."""
+    return bool(re.search(r"[*&~+\ufffd]", raw))
 
 
 def verse_ids(ref, only=None):
@@ -209,7 +220,7 @@ def judge(p, text):
         raw = text[have[0]]
         if verse_state(raw) != "p":
             state = "l" if verse_state(raw) == "l" else "a"
-        elif plain(p["words"]) in plain(clean(raw)):
+        elif has_words(p["words"], clean(raw)):
             state = "p"
         else:
             state = "l" if damaged(raw) else "a"
@@ -272,7 +283,7 @@ def main():
         for ed, text in editions.items():
             raw = " ".join(text.get(v, "") for v in ids).strip()
             if p["kind"] == "words":
-                row["eds"][ed] = "p" if plain(p["words"]) in plain(raw) else "a"
+                row["eds"][ed] = "p" if has_words(p["words"], raw) else "a"
             else:
                 row["eds"][ed] = "p" if plain(raw) else "a"
         if not args.no_translations:
