@@ -186,15 +186,17 @@ def thumb_url(url, width):
     return "%s/thumb/%s/%s/%dpx-%s" % (m.group(1), m.group(2), m.group(3), width, m.group(3)) if m else url
 
 
-def download(name, path, width=WIDTH):
-    """Save the file as a JPEG no wider than width (metadata dropped). Returns (width, height, info)."""
+def download(name, path, width=WIDTH, local=None):
+    """Save the file as a JPEG no wider than width (metadata dropped). Returns (width, height, info).
+    With local, the image is read from that copy of the same file instead of upload.wikimedia.org; the licence,
+    author and page still come from Commons."""
     from PIL import Image
 
     meta = info(name, width)
     url = meta["url"]
     if meta["width"] > width:
         url = meta["thumb"] or thumb_url(url, width)
-    img = Image.open(io.BytesIO(get(url))).convert("RGB")
+    img = Image.open(local if local else io.BytesIO(get(url))).convert("RGB")
     if img.width > width:
         img = img.resize((width, round(img.height * width / img.width)), Image.LANCZOS)
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)

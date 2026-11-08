@@ -12,7 +12,9 @@ yet fetched, this script uses tools/commons_api.py to:
 The client spaces its requests, honours Wikimedia's Retry-After, and caches every answer, so a run cut short by
 a rate limit picks up where it stopped. Files already fetched are skipped; --force fetches them again.
 
-Usage:  python3 tools/fetch_manuscript_images.py [--force]
+Usage:  python3 tools/fetch_manuscript_images.py [--force] [--local "File:Name.jpg=path/to/copy.jpg" ...]
+        --local uses a copy of the image already downloaded from Commons, when upload.wikimedia.org keeps
+        refusing; the licence, author and page are still read from Commons.
 """
 import argparse, json, os, sys
 
@@ -33,7 +35,9 @@ def save(entries):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--local", action="append", default=[], help='"File:Name=path": read this image from a local copy')
     args = ap.parse_args()
+    local = dict(item.split("=", 1) for item in args.local)
 
     entries = json.load(open(LIST, encoding="utf8"))
     failed = 0
@@ -48,7 +52,7 @@ def main():
             if not commons_api.is_free(meta["licence"]):
                 print("  skipped: the licence is", repr(meta["licence"]))
                 continue
-            w, h, meta = commons_api.download(e["file"], path)
+            w, h, meta = commons_api.download(e["file"], path, local=local.get(e["file"]))
         except commons_api.RateLimited:
             print("  Wikimedia kept refusing; run again later to fetch it")
             failed += 1
