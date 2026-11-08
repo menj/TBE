@@ -147,7 +147,10 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 	font-style: italic;
 	font-size: 1.2rem;
 }
-.tbe-hero .tbe-search { margin-block: 2rem 1.5rem; }
+.tbe-hero .tbe-search { margin-block: 2rem 1.5rem; width: 100%; max-width: 32rem; justify-self: center; }
+/* The hero carries the cross and the name, so on its page the header shows the menu only. The lockup keeps its space,
+   so the menu stays where it is on every other page. */
+body:has(.tbe-hero) .tbe-header .tbe-lockup { visibility: hidden; }
 
 /* Ornamented headings ---------------------------------------------------- */
 .tbe-ornament {

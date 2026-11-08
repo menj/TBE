@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.18
+Stable tag: 0.10.19
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -116,6 +116,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.19 =
+* The home page shows the cross and the name once, in the hero, and its search box is full width again.
+
 = 0.10.18 =
 * A lexicon page for every Strong's number, with Metzger's frequency list for Greek.
 * New commentary on how the gospels rework one another and on how the New Testament came together.
@@ -166,6 +169,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.19 =
+Nothing to do by hand.
 
 = 0.10.18 =
 Nothing to do by hand. The first page load after the update adds the /manuscripts/ addresses.
