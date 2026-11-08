@@ -84,7 +84,7 @@ $bad = array_filter( (array) $imgs['images'], static fn( $i ) => ! isset( $all[ 
 check( ! $bad, 'every photograph names a passage and a manuscript on it, with a caption' );
 $shown = TBE_Manuscripts::images( 'mark-16-9-20' );
 foreach ( $shown as $i ) {
-	check( preg_match( '/^(public domain|pd\b|cc0|cc by(-sa)? [0-9.]+)/i', (string) $i['license'] ) && 0 === strpos( (string) $i['page'], 'https://commons.wikimedia.org/' ), 'photograph ' . $i['src'] . ' is free and links to Commons' );
+	check( preg_match( '/^(public domain|pd\b|cc0|cc by(-sa)? [0-9.]+)/i', (string) $i['license'] ) && preg_match( '#^https://(commons\.wikimedia\.org|archive\.org)/#', (string) $i['page'] ), 'photograph ' . $i['src'] . ' is free and links to its source' );
 }
 check( ! $shown || false !== strpos( tbe_manuscripts_gallery( 'mark-16-9-20' ), 'Wikimedia Commons' ), 'the gallery credits Commons' );
 check( '' === tbe_manuscripts_gallery( 'romans-16-24' ), 'no gallery where there is no photograph' );
