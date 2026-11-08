@@ -255,11 +255,13 @@ function tbe_manuscripts_gallery( string $id ): string {
 	$out = '<h2 class="tbe-ornament">' . esc_html__( 'The pages themselves', 'tbe-child' ) . '</h2><div class="tbe-ms__gallery">';
 	foreach ( $images as $i ) {
 		[ $name ] = TBE_Manuscripts::witness( (string) $i['ms'] );
-		$credit   = sprintf(
-			/* translators: 1: licence, 2: link to the file on Wikimedia Commons */
+		$author   = trim( (string) ( $i['author'] ?? '' ) );
+		$by       = ( '' !== $author && false === stripos( $author, 'unknown' ) ) ? $author . '. ' : '';
+		$credit   = esc_html( $by ) . sprintf(
+			/* translators: 1: licence, 2: link to the image's page at its source */
 			__( '%1$s, from %2$s.', 'tbe-child' ),
 			esc_html( (string) $i['license'] ),
-			'<a href="' . esc_url( (string) $i['page'] ) . '" rel="noopener">' . esc_html__( 'Wikimedia Commons', 'tbe-child' ) . '</a>'
+			'<a href="' . esc_url( (string) $i['page'] ) . '" rel="noopener">' . esc_html( (string) ( $i['via'] ?? 'Wikimedia Commons' ) ) . '</a>'
 		);
 		$out .= '<figure class="tbe-ms__figure"><a href="' . esc_url( (string) $i['page'] ) . '" rel="noopener"><img src="' . esc_url( $uri . '/' . $i['src'] ) . '" width="' . (int) $i['width'] . '" height="' . (int) $i['height'] . '" loading="lazy" decoding="async" alt="' . esc_attr( sprintf( /* translators: %s: manuscript name */ __( 'A page of %s', 'tbe-child' ), $name ) ) . '"></a>'
 			. '<figcaption>' . esc_html( (string) $i['caption'] ) . ' <span class="tbe-muted">' . $credit . '</span></figcaption></figure>';

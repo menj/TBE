@@ -12,11 +12,15 @@ yet fetched, this script uses tools/commons_api.py to:
 The client spaces its requests, honours Wikimedia's Retry-After, and caches every answer, so a run cut short by
 a rate limit picks up where it stopped. Files already fetched are skipped; --force fetches them again.
 
-Usage:  python3 tools/fetch_manuscript_images.py [--force] [--local "File:Name.jpg=path/to/copy.jpg" ...]
+An entry with "archive": {"item", "leaf", "credit"} comes instead from a public-domain facsimile on the Internet
+Archive: the page image https://archive.org/download/{item}/page/n{leaf}_w1200.jpg, credited to the facsimile and
+linked to its page there. --skip-commons fetches only those, while Wikimedia is refusing.
+
+Usage:  python3 tools/fetch_manuscript_images.py [--force] [--skip-commons] [--local "File:Name.jpg=path/to/copy.jpg" ...]
         --local uses a copy of the image already downloaded from Commons, when upload.wikimedia.org keeps
         refusing; the licence, author and page are still read from Commons.
 """
-import argparse, json, os, sys
+import argparse, io, json, os, sys, time, urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import commons_api  # noqa: E402
@@ -32,9 +36,25 @@ def save(entries):
         f.write("\n")
 
 
+def archive_page(item, leaf, path, width=1200):
+    """Save one page of an Internet Archive book as a JPEG no wider than width. Returns (width, height)."""
+    from PIL import Image
+
+    url = "https://archive.org/download/%s/page/n%d_w%d.jpg" % (item, leaf, width)
+    req = urllib.request.Request(url, headers={"User-Agent": commons_api.UA})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        img = Image.open(io.BytesIO(r.read())).convert("RGB")
+    if img.width > width:
+        img = img.resize((width, round(img.height * width / img.width)), Image.LANCZOS)
+    os.makedirs(OUT, exist_ok=True)
+    img.save(path, "JPEG", quality=82, optimize=True, progressive=True)
+    return img.width, img.height
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--skip-commons", action="store_true", help="fetch only the Internet Archive pages")
     ap.add_argument("--local", action="append", default=[], help='"File:Name=path": read this image from a local copy')
     args = ap.parse_args()
     local = dict(item.split("=", 1) for item in args.local)
@@ -45,6 +65,19 @@ def main():
         name = "%s-%s.jpg" % (e["passage"], e["ms"].lower())
         path = os.path.join(OUT, name)
         if os.path.exists(path) and e.get("license") and not args.force:
+            continue
+        if e.get("archive"):
+            a = e["archive"]
+            print("archive.org", a["item"], "leaf", a["leaf"])
+            w, h = archive_page(a["item"], int(a["leaf"]), path)
+            e.update({"src": "assets/img/manuscripts/" + name, "width": w, "height": h, "license": "Public domain",
+                      "author": a["credit"], "via": "Internet Archive",
+                      "page": "https://archive.org/details/%s/page/n%d/mode/1up" % (a["item"], int(a["leaf"]))})
+            print("  saved", name, w, "x", h)
+            save(entries)
+            time.sleep(2)
+            continue
+        if args.skip_commons:
             continue
         print(e["file"])
         try:

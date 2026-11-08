@@ -95,7 +95,7 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - The Ge'ez texts of the Ethiopian books. Why: the Ge'ez font is bundled and unused, and the texts need a licensed source. The owner asks the Ethiopian Orthodox Tewahedo Church first, since its permission so far covers names and notes from its site.
 - The Greek Old Testament manuscripts in the Freer collection (Deuteronomy, Joshua, Psalms). Why: Henry A. Sanders, "The Old Testament Manuscripts in the Freer Collection" (University of Michigan, 1917, public domain) describes and collates them, but the scanned copy's Greek text is too poorly read by machine to use without checking by hand. Its plates are public domain too.
 - Swanson's other volumes (Mark, Luke, John) for the passages outside Matthew. Why: the Matthew volume covers four of the twenty-two passages; the others list the same kind of evidence.
-- More manuscript photographs. Why: only Mark 16 has them in 0.10.18. Commons has pages of other manuscripts (Bezae, Washingtonianus, the papyri), and each must be found, checked by eye to show the passage, and added to `data/manuscripts/images.json`.
+- More manuscript photographs. Why: 0.10.18 has them for six passages. The public-domain facsimiles of Bezae and Washingtonianus on the Internet Archive cover every passage those manuscripts hold, and each page needs only its leaf found by the plate caption, checked by eye and added to `data/manuscripts/images.json`. Alexandrinus at Mark 16 waits on Wikimedia.
 - A Syriac interlinear. Why: the Estrangela font is bundled and unused, waiting on an open Syriac dataset. The owner has said not to build it yet.
 
 ### Ideas

@@ -12,7 +12,8 @@
    "license": "Public domain",
    "license_url": "",
    "author": "Unknown authorUnknown author",
-   "page": "https://commons.wikimedia.org/wiki/File:Mark16-B.JPG"
+   "page": "https://commons.wikimedia.org/wiki/File:Mark16-B.JPG",
+   "via": "Wikimedia Commons"
   },
   {
    "passage": "mark-16-9-20",
@@ -24,7 +25,8 @@
    "height": 574,
    "license": "Public domain",
    "author": "Unknown author",
-   "page": "https://commons.wikimedia.org/wiki/File:Shorter_ending_of_Mark_16_from_Codex_Sinaiticus.png"
+   "page": "https://commons.wikimedia.org/wiki/File:Shorter_ending_of_Mark_16_from_Codex_Sinaiticus.png",
+   "via": "Wikimedia Commons"
   },
   {
    "passage": "mark-16-9-20",
@@ -42,7 +44,8 @@
    "height": 1842,
    "license": "Public domain",
    "author": "Unknown author",
-   "page": "https://commons.wikimedia.org/wiki/File:Codex_Washingtonianus_W_(032)_Mk_16,12-17.JPG"
+   "page": "https://commons.wikimedia.org/wiki/File:Codex_Washingtonianus_W_(032)_Mk_16,12-17.JPG",
+   "via": "Wikimedia Commons"
   },
   {
    "passage": "matthew-6-13",
@@ -54,25 +57,106 @@
    "height": 746,
    "license": "Public domain",
    "author": "Unknown author",
-   "page": "https://commons.wikimedia.org/wiki/File:Codex_Sinaiticus_Matthew_6,4-32.JPG"
-  },
-  {
-   "passage": "matthew-6-13",
-   "ms": "032",
-   "file": "File:Codex Washingtonianus 032.jpg",
-   "caption": "Codex Washingtonianus: the Lord’s Prayer with the closing words “for thine is the kingdom and the power and the glory for ever, amen”."
+   "page": "https://commons.wikimedia.org/wiki/File:Codex_Sinaiticus_Matthew_6,4-32.JPG",
+   "via": "Wikimedia Commons"
   },
   {
    "passage": "1-john-5-7-8",
    "ms": "01",
    "file": "File:CODEX SINAITICUS 1 John 5 7 8 Comma Johanneum.JPG",
-   "caption": "Codex Sinaiticus, 1 John 5:7-8: “there are three that testify, the Spirit and the water and the blood”, with nothing of the Father, the Word and the Holy Ghost."
+   "caption": "Codex Sinaiticus, 1 John 5:7-8: “there are three that testify, the Spirit and the water and the blood”, with nothing of the Father, the Word and the Holy Ghost.",
+   "src": "assets/img/manuscripts/1-john-5-7-8-01.jpg",
+   "width": 481,
+   "height": 419,
+   "license": "Public domain",
+   "author": "Pvasiliadis",
+   "page": "https://commons.wikimedia.org/wiki/File:CODEX_SINAITICUS_1_John_5_7_8_Comma_Johanneum.JPG",
+   "via": "Wikimedia Commons"
   },
   {
    "passage": "john-7-53-8-11",
    "ms": "01",
    "file": "File:Adulterae.JPG",
-   "caption": "Codex Sinaiticus: John 7:52 runs straight on to 8:12, with no story of the woman between."
+   "caption": "Codex Sinaiticus: John 7:52 runs straight on to 8:12, with no story of the woman between.",
+   "src": "assets/img/manuscripts/john-7-53-8-11-01.jpg",
+   "width": 371,
+   "height": 180,
+   "license": "CC BY-SA 3.0",
+   "author": "Alastair Haines",
+   "page": "https://commons.wikimedia.org/wiki/File:Adulterae.JPG",
+   "via": "Wikimedia Commons"
+  },
+  {
+   "passage": "john-7-53-8-11",
+   "ms": "05",
+   "file": "",
+   "archive": {
+    "item": "codexbezaecantab01univ",
+    "leaf": 255,
+    "credit": "Codex Bezae Cantabrigiensis, photographic facsimile (Cambridge University Press, 1899)"
+   },
+   "caption": "Codex Bezae, folio 133b: John 7:43 to 8:4. After 7:52 the text runs on, “and each went to his own house, but Jesus went to the Mount of Olives”, into the story of the woman.",
+   "src": "assets/img/manuscripts/john-7-53-8-11-05.jpg",
+   "width": 1200,
+   "height": 1646,
+   "license": "Public domain",
+   "author": "Codex Bezae Cantabrigiensis, photographic facsimile (Cambridge University Press, 1899)",
+   "via": "Internet Archive",
+   "page": "https://archive.org/details/codexbezaecantab01univ/page/n255/mode/1up"
+  },
+  {
+   "passage": "john-7-53-8-11",
+   "ms": "032",
+   "file": "",
+   "archive": {
+    "item": "facsimileofwashi02sand",
+    "leaf": 167,
+    "credit": "Facsimile of the Washington Manuscript of the Four Gospels in the Freer Collection, ed. Henry A. Sanders (University of Michigan, 1912)"
+   },
+   "caption": "Codex Washingtonianus: John 7:46 to 8:16. “Out of Galilee arises no prophet” (7:52) runs straight into “Again Jesus spoke to them” (8:12).",
+   "src": "assets/img/manuscripts/john-7-53-8-11-032.jpg",
+   "width": 1200,
+   "height": 1709,
+   "license": "Public domain",
+   "author": "Facsimile of the Washington Manuscript of the Four Gospels in the Freer Collection, ed. Henry A. Sanders (University of Michigan, 1912)",
+   "via": "Internet Archive",
+   "page": "https://archive.org/details/facsimileofwashi02sand/page/n167/mode/1up"
+  },
+  {
+   "passage": "matthew-6-13",
+   "ms": "032",
+   "file": "",
+   "archive": {
+    "item": "facsimileofwashi02sand",
+    "leaf": 40,
+    "credit": "Facsimile of the Washington Manuscript of the Four Gospels in the Freer Collection, ed. Henry A. Sanders (University of Michigan, 1912)"
+   },
+   "caption": "Codex Washingtonianus: Matthew 6:7-17. The Lord’s Prayer ends “for thine is the kingdom and the power and the glory for ever, amen”.",
+   "src": "assets/img/manuscripts/matthew-6-13-032.jpg",
+   "width": 1200,
+   "height": 1709,
+   "license": "Public domain",
+   "author": "Facsimile of the Washington Manuscript of the Four Gospels in the Freer Collection, ed. Henry A. Sanders (University of Michigan, 1912)",
+   "via": "Internet Archive",
+   "page": "https://archive.org/details/facsimileofwashi02sand/page/n40/mode/1up"
+  },
+  {
+   "passage": "luke-3-22",
+   "ms": "05",
+   "file": "",
+   "archive": {
+    "item": "codexbezaecantab02univ",
+    "leaf": 47,
+    "credit": "Codex Bezae Cantabrigiensis, photographic facsimile (Cambridge University Press, 1899)"
+   },
+   "caption": "Codex Bezae, folio 195b: Luke 3:19-23. The voice at the baptism says “You are my Son; today I have begotten you”, the words of Psalm 2:7.",
+   "src": "assets/img/manuscripts/luke-3-22-05.jpg",
+   "width": 1200,
+   "height": 1571,
+   "license": "Public domain",
+   "author": "Codex Bezae Cantabrigiensis, photographic facsimile (Cambridge University Press, 1899)",
+   "via": "Internet Archive",
+   "page": "https://archive.org/details/codexbezaecantab02univ/page/n47/mode/1up"
   }
  ]
 }
