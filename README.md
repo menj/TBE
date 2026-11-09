@@ -56,7 +56,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `inc/error-pages.php`, `inc/error-page-html.php` | Drop-ins, static error pages and the Error pages tab |
 | `inc/social.php`, `inc/progress.php`, `inc/unlist.php`, `inc/unlist-admin.php`, `inc/login.php` | Profile links, the reading bar, unlisted posts and the login screen |
 | `inc/hardening.php`, `inc/sitemaps.php`, `inc/dev-files.php` | Hardening and probes, sitemaps, and the dev-file clean-up |
-| `assets/css/` | `base.css` (tokens, chrome), `reader.css`, `scripture.css`, `components.css`, `interlinear.css`, `polish.css` (loaded last), `article.css` (single commentary pages), `progress.css`, `social.css`, `login.css`, `admin.css` |
+| `assets/css/` | `base.css` (tokens, chrome), `reader.css`, `scripture.css`, `components.css`, `interlinear.css`, `polish.css`, `mobile-first.css` (loaded last, phone patches) (loaded last), `article.css` (single commentary pages), `progress.css`, `social.css`, `login.css`, `admin.css` |
 | `assets/js/` | `reader.js`, `tooltips.js`, `interlinear.js`, `audio.js`, `article.js` (the sticky contents bar), `progress.js`, `admin.js`, `admin-entry.js`, `unlist-admin.js` |
 | `assets/fonts/`, `assets/img/`, `assets/audio/` | Fonts with their licences, brand and social images, recordings |
 | `data/esv/{book}/{chapter}.json` | Bundled ESV text, one file per chapter (1,189) |
@@ -77,7 +77,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## At a glance
-- Version 0.10.20. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
+- Version 0.10.21. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.0 or later with `dom` and `mbstring`.
 - Apache 2.2 or 2.4 reads the theme's `.htaccess` and `tools/.htaccess` as they are. On Nginx those files do nothing; add the lines under "Nginx" below to the server block.
 - Multisite works: each site keeps its own settings, and one site writes the shared error pages (see Error pages).
 - The theme makes no remote call from a visitor's browser. The server calls the ESV API only for a chapter the bundle lacks, and only with a token.

@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.20
+Stable tag: 0.10.21
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -116,6 +116,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.21 =
+* Phone layout pass: long words and web addresses wrap, wide tables and code blocks in posts scroll inside their own box, embeds scale with the column, and small links are easier to tap. Larger screens look the same.
+
 = 0.10.20 =
 * On the home page the menu is centred above the cross and the name, with no empty space beside it.
 
@@ -172,6 +175,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.21 =
+Nothing to do by hand.
 
 = 0.10.20 =
 Nothing to do by hand.

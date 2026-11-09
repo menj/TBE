@@ -1,0 +1,40 @@
+/* The Bible Exposed: mobile-first patches (0.10.21). Loaded last, after every other sheet.
+   Scoped rules only. Nothing here removes a desktop style. */
+
+/* A long word or address wraps inside its box instead of widening the page. */
+.wp-block-post-content :is(h1, h2, h3, h4, p, li, td, th, figcaption, blockquote, a),
+.wp-block-comment-content,
+.wp-block-comments-title,
+.wp-block-comment-author-name,
+.tbe-article :is(h1, h2, h3, p, li) { overflow-wrap: anywhere; }
+.wp-block-post-excerpt__excerpt,
+.wp-block-post-title,
+.wp-block-post-title a,
+.tbe-dek,
+.tbe-box :is(p, li) { overflow-wrap: break-word; }
+
+/* Tables and code blocks scroll inside their own box. */
+.wp-block-post-content pre,
+.tbe-prose pre { max-width: 100%; overflow-x: auto; }
+.tbe-scroll { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-block: 1.5rem; }
+.tbe-scroll table { margin: 0; }
+.tbe-scroll:focus-visible,
+.wp-block-post-content pre:focus-visible { outline: 2px solid var(--tbe-accent); outline-offset: 2px; }
+
+/* Embeds and media scale with the column. */
+.wp-block-post-content img { max-width: 100%; height: auto; }
+.wp-block-post-content :is(iframe, video, embed, object) { max-width: 100%; }
+.wp-block-post-content iframe[src*="youtube"],
+.wp-block-post-content iframe[src*="youtu.be"],
+.wp-block-post-content iframe[src*="vimeo"] { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+
+/* Tap targets of at least 24 by 24 CSS pixels (WCAG 2.5.8). */
+.wp-block-post-title a,
+.wp-block-post-author-name__link { padding-block: 2px; }
+.page-numbers { min-height: 24px; min-width: 24px; box-sizing: border-box; }
+.tbe-player__seek { min-height: 24px; }
+
+/* Touch: pagination and title links get a larger target. */
+@media (pointer: coarse) {
+	.page-numbers { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+}
