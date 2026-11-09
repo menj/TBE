@@ -69,9 +69,19 @@ function tbe_request(): ?array {
 			'page' => isset( $_GET['pg'] ) ? max( 1, absint( $_GET['pg'] ) ) : 1, // phpcs:ignore WordPress.Security.NonceVerification
 		);
 	}
-	$book = TBE_Bible::book( sanitize_key( (string) get_query_var( 'tbe_book' ) ) );
+	$slug = sanitize_key( (string) get_query_var( 'tbe_book' ) );
+	$book = TBE_Bible::book( $slug );
 	if ( ! $book ) {
-		return $request = array( 'view' => 'missing' );
+		// A further book, such as 1 Meqabyan, answers at the same addresses (0.10.22). It has no interlinear.
+		$further = TBE_Further::book( $slug );
+		if ( ! $further || 'interlinear' === $view ) {
+			return $request = array( 'view' => 'missing' );
+		}
+		if ( 'book' === $view ) {
+			return $request = array( 'view' => 'further-book', 'book' => $further );
+		}
+		$chapter = (int) get_query_var( 'tbe_chapter' );
+		return $request = $chapter >= 1 && $chapter <= $further['count'] ? array( 'view' => 'further-chapter', 'book' => $further, 'chapter' => $chapter ) : array( 'view' => 'missing' );
 	}
 	if ( 'book' === $view ) {
 		return $request = array( 'view' => 'book', 'book' => $book );
@@ -204,7 +214,11 @@ add_filter(
 				$parts['title'] = sprintf( /* translators: %s: passage such as Mark 16:9–20 */ __( 'Manuscripts: %s', 'tbe-child' ), TBE_Manuscripts::label( $request['passage'] ) );
 				break;
 			case 'book':
+			case 'further-book':
 				$parts['title'] = $request['book']['name'];
+				break;
+			case 'further-chapter':
+				$parts['title'] = TBE_Further::label( (string) $request['book']['slug'], (int) $request['chapter'] );
 				break;
 			case 'chapter':
 				$parts['title'] = TBE_Bible::label( $request['book']['slug'], $request['chapter'] );

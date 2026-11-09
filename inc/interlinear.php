@@ -302,7 +302,9 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	}
 	$dss = $hebrew ? tbe_dss_chapter( $slug, $chapter ) : null;
 	if ( $dss ) {
-		$out .= '<button type="button" class="tbe-btn tbe-btn--dss" data-tbe-il="dss" aria-pressed="true" data-tbe-tip="' . esc_attr__( 'Mark words where a Dead Sea Scroll reads differently from the Masoretic text', 'tbe-child' ) . '">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</button>';
+		$out .= tbe_dss_is_sp( $dss )
+			? '<button type="button" class="tbe-btn tbe-btn--dss" data-tbe-il="dss" aria-pressed="true" data-tbe-tip="' . esc_attr__( 'Mark words where the Samaritan Pentateuch reads differently from the Masoretic text', 'tbe-child' ) . '">' . esc_html__( 'Samaritan Pentateuch', 'tbe-child' ) . '</button>'
+			: '<button type="button" class="tbe-btn tbe-btn--dss" data-tbe-il="dss" aria-pressed="true" data-tbe-tip="' . esc_attr__( 'Mark words where a Dead Sea Scroll reads differently from the Masoretic text', 'tbe-child' ) . '">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</button>';
 		$out .= '<button type="button" class="tbe-btn tbe-btn--dss" data-tbe-il="dssSpelling" aria-pressed="false" data-tbe-tip="' . esc_attr__( 'Also show differences of spelling only', 'tbe-child' ) . '">' . esc_html__( 'Spelling too', 'tbe-child' ) . '</button>';
 	}
 	if ( $audio && current_user_can( 'edit_posts' ) ) {
@@ -311,6 +313,7 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	$out .= '</div>';
 
 	$class = 'tbe-il tbe-il--' . ( $hebrew ? 'he' : 'gr' ) . ' tbe-il--hide-lemma tbe-il--hide-morph';
+	$out  .= tbe_polyglot_note( $slug, $chapter );
 	$out  .= '<div class="' . esc_attr( $class ) . '" id="tbe-il">';
 
 	if ( $dss ) {
@@ -321,7 +324,7 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	foreach ( $data['v'] as $verse => $words ) {
 		$n    = (int) $verse;
 		$line = '';
-		$show = $dss ? tbe_dss_verse( (array) ( $dss['v'][ (string) $verse ] ?? array() ), $words, (string) $dss['scroll'] ) : array( 'words' => array(), 'notes' => '' );
+		$show = $dss ? tbe_dss_verse( (array) ( $dss['v'][ (string) $verse ] ?? array() ), $words, (string) $dss['scroll'], tbe_dss_is_sp( $dss ) ) : array( 'words' => array(), 'notes' => '' );
 		foreach ( $words as $idx => $w ) {
 			$line .= tbe_render_il_word( $w, $hebrew, $counts, $audio['words'][ $verse ][ $idx ] ?? null, $show['words'][ $idx ] ?? null );
 		}
@@ -339,6 +342,9 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	$source = $hebrew
 		? __( 'Hebrew: Westminster Leningrad Codex, tagged by Tyndale House.', 'tbe-child' )
 		: __( 'Greek: NA28 with variants from SBLGNT, the Textus Receptus and others, tagged by Tyndale House.', 'tbe-child' );
+	if ( tbe_dss_is_sp( $dss ) ) {
+		$source .= ' ' . __( 'Samaritan Pentateuch: Stefan Schorch’s edition (MS Dublin, Chester Beatty Library 751, and MS Garizim 1), from the CACCHT dataset of Christian Canu Højgaard, Martijn Naaijer and Stefan Schorch, CC BY-NC 4.0.', 'tbe-child' );
+	}
 	$out   .= '<p class="tbe-copyright">' . esc_html( $source ) . ' ' . wp_kses_post(
 		sprintf(
 			/* translators: %s: link to STEP Bible */

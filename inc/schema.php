@@ -665,6 +665,45 @@ function tbe_ld_graph(): array {
 		);
 		$page['mainEntity'] = tbe_ld_ref( TBE_Lexicon::url( (string) $entry['num'] ) . '#term' );
 
+	} elseif ( $request && in_array( $request['view'], array( 'further-book', 'further-chapter' ), true ) ) {
+		$book    = $request['book'];
+		$slug    = (string) $book['slug'];
+		$trail[] = array( __( 'Books', 'tbe-child' ), home_url( '/bible/' ) );
+		$trail[] = array( (string) $book['name'], TBE_Bible::url( $slug ) );
+		$work    = array(
+			'@type'           => 'Book',
+			'@id'             => TBE_Bible::url( $slug ) . '#book',
+			'name'            => (string) $book['name'],
+			'url'             => TBE_Bible::url( $slug ),
+			'inLanguage'      => 'en',
+			'license'         => (string) ( $book['source']['licence_url'] ?? '' ),
+			'isBasedOn'       => (string) ( $book['source']['url'] ?? '' ),
+			'translator'      => array(
+				'@type' => (string) ( $book['source']['translator']['type'] ?? 'Organization' ),
+				'name'  => (string) ( $book['source']['translator']['name'] ?? '' ),
+				'url'   => (string) ( $book['source']['translator']['url'] ?? '' ),
+			),
+			'translationOfWork' => array( '@type' => 'Book', 'name' => (string) $book['name'], 'inLanguage' => 'gez' ),
+		);
+		if ( 'further-chapter' === $request['view'] ) {
+			$chapter = (int) $request['chapter'];
+			$trail[] = array( TBE_Further::label( $slug, $chapter ), TBE_Bible::url( $slug, $chapter ) );
+			$extra[] = $work;
+			$extra[] = array(
+				'@type'        => 'Chapter',
+				'@id'          => TBE_Bible::url( $slug, $chapter ) . '#chapter',
+				'name'         => TBE_Further::label( $slug, $chapter ),
+				'position'     => $chapter,
+				'isPartOf'     => tbe_ld_ref( $work['@id'] ),
+				'license'      => $work['license'],
+			);
+			$page['mainEntity'] = tbe_ld_ref( TBE_Bible::url( $slug, $chapter ) . '#chapter' );
+		} else {
+			$extra[]            = $work;
+			$page['mainEntity'] = tbe_ld_ref( $work['@id'] );
+		}
+		$page['license'] = $work['license'];
+
 	} elseif ( $request && 'manuscripts' === $request['view'] ) {
 		$page['@type'] = 'CollectionPage';
 		$trail[]       = array( __( 'Manuscripts', 'tbe-child' ), TBE_Manuscripts::url() );
@@ -785,6 +824,16 @@ function tbe_ld_graph(): array {
 
 	$chrome = tbe_ld_chrome_nodes( $page_id );
 	$page['hasPart'] = array( tbe_ld_ref( $page_id . '-header' ), tbe_ld_ref( $page_id . '-footer' ) );
+
+	// The sections the contents box lists, as parts of the page with their anchors (inc/toc.php).
+	if ( is_singular() && function_exists( 'tbe_toc_sections' ) && get_queried_object() instanceof WP_Post ) {
+		$base = (string) get_permalink( get_queried_object() );
+		foreach ( tbe_toc_sections( get_queried_object() ) as $section ) {
+			$sid               = $base . '#' . $section[0];
+			$extra[]           = array( '@type' => 'WebPageElement', '@id' => $sid, 'name' => $section[1], 'url' => $sid, 'isPartOf' => tbe_ld_ref( $page_id ) );
+			$page['hasPart'][] = tbe_ld_ref( $sid );
+		}
+	}
 	$page['significantLink'] = $page['significantLink'] ?? array_map( static fn( $n ) => $n['url'], array_filter( $chrome, static fn( $n ) => 'SiteNavigationElement' === $n['@type'] ) );
 
 	// Any glossary term mentioned by a note must be defined in the graph, with its term set.

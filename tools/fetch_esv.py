@@ -10,7 +10,7 @@ stays far below that (default one request every 15-30 seconds, random). If the A
 answers 429 (rate limited) the script stops at once instead of retrying; just run it
 again later. --max N stops after N new chapters, handy for "a little each day".
 """
-import argparse, json, os, random, re, sys, time, urllib.parse, urllib.request, urllib.error
+import argparse, json, os, random, re, time, urllib.parse, urllib.request, urllib.error
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 OUT = os.path.join(ROOT, "esv")

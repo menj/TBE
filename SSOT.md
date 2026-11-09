@@ -16,7 +16,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 | Repository | https://github.com/menj/TBE, branch `main` |
 | Parent theme | Twenty Twenty-Five (`twentytwentyfive`). It must stay installed. |
 | Version | `Version:` in `style.css`, `TBE_VERSION` in `functions.php`, `Stable tag:` in `readme.txt` and the top heading of `CHANGELOG.md`, always equal |
-| Requires | WordPress 6.7, PHP 8.0, with the `dom` and `mbstring` extensions |
+| Requires | WordPress 6.7, PHP 8.4, with the `dom` and `mbstring` extensions |
 | Licence | GNU General Public License v3 or later (owner decision, 5 November 2026), full text in `LICENSE`. Fonts, texts, data and images keep their own licences. |
 
 ## Purpose and position
@@ -30,10 +30,13 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 `.claude/CLAUDE.md` records no owner decisions yet. The ones below come from the code and the changelog, with the date each was made. A new one goes into `.claude/CLAUDE.md` first, then here word for word.
 
+- 9 November 2026 (standing): the owner holds the licences for everything the owner pastes or uploads for the site, and it may be used without asking again: "everything i paste here are legal and LICENSED". Sources are still credited.
+- 9 November 2026: the owner holds the rights to use Bart D. Ehrman, *Lost Scriptures* (Oxford University Press, 2003), and the translation of the Apocalypse of Peter by J. K. Elliott that it prints: "i have all rights". The Ethiopic chapters of the Apocalypse of Peter on the site come from it.
 - 4 November 2026: the structured data names Mohd Elfie Nieshaem Juferi as the author of every entry, whoever the WordPress user is. Nothing visible changes (`tbe_ld_person()`, `tools/test_schema_author.php`).
 - 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
 - 5 November 2026: every theme is licensed under the GNU General Public License, version 3 or later (0.10.9). This one came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`; the owner adds it there, and this line is then its copy.
 
+- 8 November 2026: the theme requires PHP 8.4 or later ("the theme needs to be updated to PHP 8.4 minimum"), the same floor as WP TOC, whose features are built in (0.10.21). Recorded in `.claude/CLAUDE.md`.
 - 7 November 2026: the owner holds the rights to the books the site serves under `/pdf/` and uses on its pages: Reuben J. Swanson, *New Testament Greek Manuscripts: Matthew* (`nt-variant-readings.pdf`), the United Bible Societies *Greek New Testament* (`greek-nt.pdf`) and Bruce M. Metzger, *Lexical Aids for Students of New Testament Greek* (`lexical-aids.pdf`). In the owner's words: "i have the full copyright". Their evidence and page images may be used on the site. Recorded in `.claude/CLAUDE.md`.
 - 6 November 2026: the site is light only. "I do not want dark mode." No dark mode exists in the theme: no switch, no `theme.js`, no Night scheme, no dark rules (0.10.15).
 - 5 November 2026: the owner asked for a complete favicon set: "make sure you have favicon too." Every brand icon is drawn from `assets/img/brand/favicon.svg`, and a Site Icon set by the owner always wins (0.10.11). This came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`.
@@ -43,19 +46,23 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The ESV is bundled: 66 books, 1,189 chapter files in `data/esv/{book}/{chapter}.json`. The live API fallback needs `TBE_ESV_API_TOKEN` in `wp-config.php`. The token is never committed, stored in the database or shown in the admin.
 - The Hebrew Old Testament and the Greek New Testament, word by word, come from STEPBible (CC BY 4.0) in `data/interlinear/`.
 - Recorded readings: Genesis 1 (Hebrew) and Matthew 1 (Greek) only.
+- Samaritan Pentateuch comparison: Genesis to Deuteronomy against the Masoretic text, `data/sp/`, from the CACCHT dataset of Stefan Schorch's edition (CC BY-NC 4.0). That data and the pages built from it stay under CC BY-NC 4.0.
 - Dead Sea Scrolls comparison: Isaiah 1 to 5 against 1QIsa-a only. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
 - JPS 1917 parallel text: Genesis only (`data/jps/`).
+- Brown-Driver-Briggs (1906, public domain) for the Hebrew lexicon pages in `data/lexicon/bdb/`, from the Enhanced BDB pages at ericlevy.com.
 - Lexicon: every Hebrew and Greek Strong's number in `data/lexicon/`, from STEPBible's TBESG and TBESH (CC BY 4.0), and Metzger's frequency list in `data/lexicon/metzger.json`.
 - Manuscripts evidence from the printed apparatuses: `data/manuscripts/editions.json` (UBS for all twenty-two passages, Swanson for the four in Matthew) with page images in `assets/img/manuscripts/books/`.
 - Manuscripts: twenty-two New Testament passages in `data/manuscripts/passages.json`, built from the CNTR transcriptions (CC BY-SA 4.0). That file and the pages built from it stay under CC BY-SA 4.0, whatever the theme's licence.
 - Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries), `cross-references` (32 cross-references, each filed on both passages, so 64 entries) and `gospels-and-canon` (8 entries, after two videos by C. J. Cornthwaite, restated in the site's own words). Every entry key starts with its pack id.
 - Glossary: 13 starter terms, created as drafts (`tbe_seed_terms()`).
-- Canons in `data/canons.json`: Jewish, Protestant, Catholic, Orthodox and Ethiopian. The deuterocanonical, further Orthodox and Ethiopian books are prepared sections marked "Not on the site yet". The Ethiopian list is still to be confirmed.
+- Canons in `data/canons.json`: Jewish, Protestant, Catholic, Orthodox and Ethiopian. The deuterocanonical, further Orthodox and Ethiopian books are prepared sections marked "Not on the site yet", except 1 to 3 Meqabyan.
+- Further books from the KJV Apocrypha (public domain): Tobit, Judith, Wisdom, Sirach, Baruch, 1 and 2 Maccabees, the Additions to Esther and to Daniel, 1 Esdras, the Prayer of Manasseh and Ezra Sutu'el (2 Esdras 3 to 14).
+- Further books: 1, 2 and 3 Meqabyan (7, 21 and 10 chapters) in `data/further/`, the Wikisource translation from Ge'ez (CC BY-SA 4.0). Those files and the pages built from them stay under CC BY-SA 4.0, whatever the theme's licence. 1 Enoch (105 chapters, Richard Laurence 1883), Jubilees (50 chapters, R. H. Charles 1902), the Shepherd of Hermas (27 parts, J. B. Lightfoot) and the Apocalypse of Peter (Andrew Rutherfurd) are public domain. The Ethiopian list is still to be confirmed.
 - The brand mark is a broken inverted cross. It follows Sahih al-Bukhari 2476, cited on the Sources page.
 
 ## Addresses
 
-- Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/` and `/sources/` (the old `/credits/` answers 301), and `/manuscripts/` with `/manuscripts/{passage}/`, and `/lexicon/` with `/lexicon/{number}/`, `/lexicon/{greek|hebrew}/{letter}/` and `/lexicon/greek/frequency/` (`inc/routes.php`).
+- Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/`, the further books at `/bible/{slug}/` and `/bible/{slug}/{chapter}/` (0.10.22) and `/sources/` (the old `/credits/` answers 301), and `/manuscripts/` with `/manuscripts/{passage}/`, and `/lexicon/` with `/lexicon/{number}/`, `/lexicon/{greek|hebrew}/{letter}/` and `/lexicon/greek/frequency/` (`inc/routes.php`).
 - Commentary: post type `tbe_commentary` at `/commentary/`, its sections at `/section/`. Glossary: post type `tbe_term` at `/glossary/`.
 - Front-end editing: only a signed-in user who may edit a note (or create notes) gets the drawer, which saves through the core REST API (`/wp/v2/tbe_commentary`); new notes are drafts until Publish, and a passage that is not a real reference is refused (0.10.15).
 - Search: `/search/{term}/`. The base is set under Settings, Permalinks (option `tbe_search_base`).
@@ -68,7 +75,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Post meta: `_tbe_unlisted`, `tbe_takeaways`, `tbe_reviewed`.
 - Post types and taxonomy: `tbe_commentary`, `tbe_term`, the `section` rewrite slug.
 - Constants a site sets in `wp-config.php`: `TBE_ESV_API_TOKEN`, `TBE_KEEP_DOTFILES`, `TBE_ALLOW_XMLRPC`.
-- Filters: `tbe_core_sitemaps`, `tbe_plugin_sitemap_url`, `tbe_login_plugin_active`, `tbe_search_permalinks_enabled`, `tbe_search_reserved_bases`, `tbe_social_meta`, `tbe_social_networks`, `tbe_unlist_enabled`, `tbe_contextual_links_map`, `tbe_contextual_links_enabled`.
+- Filters: `tbe_core_sitemaps`, `tbe_plugin_sitemap_url`, `tbe_login_plugin_active`, `tbe_search_permalinks_enabled`, `tbe_search_reserved_bases`, `tbe_social_meta`, `tbe_social_networks`, `tbe_unlist_enabled`, `tbe_contextual_links_map`, `tbe_contextual_links_enabled`, `tbe_toc_post_types`. Shortcodes: `[wp_toc]` and `[auto_toc]`, kept compatible with the WP TOC plugin.
 - Block and shortcode: `tbe/social`, `[tbe_social]`. The commentary page blocks: `tbe/breadcrumbs`, `tbe/dek`, `tbe/article-meta`, `tbe/answer-box`, `tbe/contents`, `tbe/sources`, `tbe/next-step`, `tbe/related`. The block style `is-style-faq` on `core/details` and the pattern `tbe/faq`.
 - Design tokens in `assets/css/base.css`: `--tbe-paper`, `--tbe-surface`, `--tbe-ink`, `--tbe-muted`, `--tbe-accent`, `--tbe-rubric`, `--tbe-gold`, `--tbe-line`, `--tbe-scale`, `--tbe-ui`, and the radius tokens in `assets/css/polish.css`.
 - The default scheme: paper `#f4eedc`, ink `#231d14`, accent (burgundy) `#6e1f2e`, gold `#a67c2e`.
@@ -78,11 +85,16 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The ESV copyright line (Crossway), editable under ESV and licence but never removed.
 - STEPBible and Tyndale House Cambridge for the interlinear data.
 - Sefaria for the JPS 1917 text, and CACCHT (ETCBC, Martin Abegg's data) for the scroll comparison.
+- Stefan Schorch's edition and the CACCHT Samaritan Pentateuch dataset (Højgaard, Naaijer, Schorch) with CC BY-NC 4.0, on the Sources page and under each Pentateuch interlinear.
+- Brown, Driver and Briggs (Clarendon Press, 1906) and the ericlevy.com pages, under each Brown-Driver-Briggs article.
 - STEP Bible for the lexicon's definitions (CC BY 4.0), with Abbott-Smith and the abridged Brown-Driver-Briggs named, and Metzger's *Lexical Aids* for the frequency list, on the Sources page and on every lexicon page.
 - The titles, editors and publishers of the United Bible Societies *Greek New Testament* and Swanson's *New Testament Greek Manuscripts: Matthew*, on the Sources page and beside their evidence on each manuscripts page.
 - The credit under each manuscript photograph: its author where known, its licence and a link to its page on Wikimedia Commons or the Internet Archive.
 - C. J. Cornthwaite, named on the Sources page as the source of the `gospels-and-canon` pack's arguments.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
+- J. K. Elliott as translator and Bart D. Ehrman's *Lost Scriptures* (Oxford University Press) as the source of the Ethiopic Apocalypse of Peter, on the Sources page and on the book.
+- Richard Laurence, R. H. Charles, J. B. Lightfoot and Andrew Rutherfurd as translators of Jubilees, Hermas and the Apocalypse of Peter, on the Sources page and on each book.
+- Wikisource contributors for the 1 to 3 Meqabyan translation, with the CC BY-SA 4.0 licence and a link to each page, on the Sources page and on every page of those books. The licence requires it.
 - The licences in `assets/fonts/` for SBL, Angel, Noto Naskh Arabic, Abyssinica SIL and Montserrat, and the Angel credit with its link on the Sources page.
 - The Minimalist Social Icons Pack 2.8 for the profile icons.
 - The source of the critical-commentary pack, on the Sources page and nowhere else.

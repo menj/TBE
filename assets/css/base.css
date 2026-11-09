@@ -128,7 +128,8 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 /* Hero ------------------------------------------------------------------- */
 /* The cross and the name side by side as one centred lockup; the tagline and the search run full width below. */
 .tbe-hero {
-	padding-block: clamp(2.5rem, 8vw, 5rem);
+	/* Close under the header (0.10.21): the menu sits right above the lockup, with room below for what follows. */
+	padding-block: clamp(1.5rem, 4vw, 2.5rem) clamp(2.5rem, 8vw, 5rem);
 	text-align: center;
 	display: grid;
 	grid-template-columns: auto auto;
@@ -153,6 +154,8 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 body:has(.tbe-hero) .tbe-header .tbe-lockup { display: none; }
 body:has(.tbe-hero) .tbe-header { justify-content: center; }
 body:has(.tbe-hero) .tbe-header .wp-block-navigation { justify-content: center; }
+/* The hero's own padding is the only space between the header and the lockup. */
+body:has(.tbe-hero) .tbe-main { padding-block-start: 0; margin-block-start: 0; }
 
 /* Ornamented headings ---------------------------------------------------- */
 .tbe-ornament {

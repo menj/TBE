@@ -20,6 +20,12 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.22
+Nothing to do by hand. The new books (Jubilees, 1 to 3 Meqabyan, Hermas, the Apocalypse of Peter) answer at addresses the reader already serves, so the permalinks need no refresh.
+
+### To 0.10.21
+The theme now requires **PHP 8.4 or later**. Check the PHP version under Tools, Site Health, Info, Server before updating, and ask the host to upgrade if it is older; on older PHP the theme keeps working but every admin screen shows a notice until it is upgraded. The contents now cover pages, posts and glossary terms, nest level-three headings and read `[wp_toc]`. If the WP TOC plugin is installed, it can be deactivated: the theme does the same. While it stays active, the theme leaves posts and pages to it.
+
 ### To 0.10.20
 Nothing to do. Clear any page cache so the home page shows the centred menu.
 
@@ -97,7 +103,10 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - More recorded readings. Why: only Genesis 1 (Hebrew) and Matthew 1 (Greek) have audio; `tools/align_audio.py` is ready for more, but each needs a recording with a licence, which the owner supplies.
 - Isaiah 6 to 66 in the Dead Sea Scrolls comparison, then other scrolls. Why: only Isaiah 1 to 5 is compared; `tools/build_dss_variants.py` takes a chapter range, and each batch needs its spelling differences spot-checked.
 - The JPS 1917 parallel beyond Genesis. Why: `tools/fetch_jps.py --books` adds a book at a time, and each needs its versification checked against `data/jps-versification.json`.
-- The deuterocanonical, further Orthodox and Ethiopian books. Why: they are listed as prepared sections, "Not on the site yet", and the Ethiopian list is still to be confirmed.
+- The deuterocanonical, further Orthodox and remaining Ethiopian books. Why: 1 to 3 Meqabyan are readable since 0.10.22; the others are still listed as "Not on the site yet", and the Ethiopian list is still to be confirmed. Each needs a text with a licence; `inc/further.php` takes one as a JSON file.
+- A proofreading of 1 Enoch and Jubilees against the page images. Why: both are read from OCR. In 1 Enoch the scan lost the headings of chapters 36, 64, 65 and 101, and a few of Laurence's footnotes may remain in the text.
+- A proofreading of Jubilees against the page images. Why: it is read from OCR; about twenty verse numbers the scan lost are listed by `tools/build_jubilees.py`, and spelling slips may remain.
+- A check of 1 to 3 Meqabyan against a printed translation. Why: the Wikisource translation is a working one, its wording is uneven (1 Meqabyan reads "JAH", "irie" and "I-man"), it lacks 2 Meqabyan 16:9 and 21:9, and its pages were proposed for deletion in November 2026.
 - The Ge'ez texts of the Ethiopian books. Why: the Ge'ez font is bundled and unused, and the texts need a licensed source. The owner asks the Ethiopian Orthodox Tewahedo Church first, since its permission so far covers names and notes from its site.
 - The Greek Old Testament manuscripts in the Freer collection (Deuteronomy, Joshua, Psalms). Why: Henry A. Sanders, "The Old Testament Manuscripts in the Freer Collection" (University of Michigan, 1917, public domain) describes and collates them, but the scanned copy's Greek text is too poorly read by machine to use without checking by hand. Its plates are public domain too.
 - Swanson's other volumes (Mark, Luke, John) for the passages outside Matthew. Why: the Matthew volume covers four of the twenty-two passages; the others list the same kind of evidence.

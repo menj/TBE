@@ -275,6 +275,7 @@
 .tbe-canon__chip--catholic { --chip: var(--tbe-rubric); }
 .tbe-canon__chip--orthodox { --chip: var(--tbe-accent); }
 .tbe-canon__chip--ethiopian { --chip: #2a6f8a; }
+.tbe-canon__chip--samaritan { --chip: #5f7f3a; }
 .tbe-canon-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 0.9rem; margin: -0.4rem auto 1.6rem; }
 .tbe-canon-line__label { font: 500 0.75rem var(--tbe-ui); letter-spacing: 0.1em; text-transform: uppercase; color: var(--tbe-muted); }
 
@@ -371,3 +372,18 @@
 .tbe-lex__credit { margin-top: 2rem; font-size: 0.85rem; }
 .tbe-il__strongs a { color: inherit; text-decoration: none; }
 .tbe-il__strongs a:hover { text-decoration: underline; }
+
+/* Further books: 1 to 3 Meqabyan (0.10.22) */
+.tbe-booklist__geez { font-weight: 400; color: var(--tbe-muted); white-space: nowrap; }
+.tbe-booklist__geez--latin { font-style: italic; font-size: 0.85em; }
+.tbe-booklist--planned li > a { flex-direction: row; }
+.tbe-further__credit { max-width: 42rem; margin: 0 auto 1.6rem; font-size: 0.9rem; }
+.tbe-further__heading { font-style: italic; text-align: center; color: var(--tbe-muted); margin-block: 0 1.2rem; }
+.tbe-further__parts { list-style: none; padding: 0; display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); }
+.tbe-further__parts a { display: block; text-align: center; padding: 0.55rem 0.4rem; background: var(--tbe-surface); border: 1px solid var(--tbe-line); border-radius: var(--tbe-radius, 14px); text-decoration: none; color: var(--tbe-ink); }
+.tbe-further__parts a:hover { border-color: var(--tbe-accent); }
+
+/* Brown-Driver-Briggs on the Hebrew lexicon pages (0.10.22) */
+.tbe-lex__bdb p { line-height: 1.7; }
+.tbe-lex__bdb span[lang="he"] { font-family: var(--tbe-hebrew, "SBL Hebrew", serif); font-size: 1.12em; }
+.tbe-lex__bdb small { color: var(--tbe-muted); }

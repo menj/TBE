@@ -43,9 +43,27 @@ function tbe_render_reader(): string {
 			return tbe_view_lexicon_entry( $request['entry'] );
 		case 'manuscript':
 			return tbe_view_manuscript_passage( $request['passage'] );
+		case 'further-book':
+			return tbe_view_further_book( $request['book'] );
+		case 'further-chapter':
+			return tbe_view_further_chapter( $request['book'], $request['chapter'] );
 		default:
 			return tbe_view_missing();
 	}
+}
+
+/**
+ * The Polyglot Bible of the Creation story (Genesis 1:1 to 2:3): a word-by-word table of the Masoretic Hebrew, the
+ * Samaritan Pentateuch, the Ge'ez, Targum Onkelos, the Syriac Peshitta and the Greek, each with a transliteration
+ * in Hebrew letters, supplied by the owner as assets/pdf/polyglot-creation-story.pdf (0.10.22). Shown on the
+ * reading and interlinear pages of Genesis 1 and 2.
+ */
+function tbe_polyglot_note( string $slug, int $chapter ): string {
+	if ( 'genesis' !== $slug || $chapter > 2 ) {
+		return '';
+	}
+	$url = get_stylesheet_directory_uri() . '/assets/pdf/polyglot-creation-story.pdf';
+	return '<aside class="tbe-notice tbe-polyglot"><p><strong>' . esc_html__( 'Polyglot Bible: the Creation story', 'tbe-child' ) . '</strong> ' . esc_html__( 'Genesis 1:1 to 2:3 word by word in six versions side by side: the Masoretic Hebrew, the Samaritan Pentateuch, the Ge’ez, Targum Onkelos, the Syriac Peshitta and the Greek Septuagint, each with a transliteration in Hebrew letters.', 'tbe-child' ) . ' <a class="tbe-btn tbe-btn--solid" href="' . esc_url( $url ) . '">' . esc_html__( 'Open the Polyglot (PDF, 41 pages)', 'tbe-child' ) . '</a></p></aside>';
 }
 
 function tbe_view_missing(): string {
@@ -77,10 +95,14 @@ function tbe_view_credits(): string {
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The lists of which churches count which books as scripture were checked against the comparison tables in the %s (CC BY-SA 4.0) and the sources it cites. The lists differ between authorities, which each section says.', 'tbe-child' ), '<a href="https://en.wikipedia.org/wiki/Biblical_canon" rel="noopener">Wikipedia article “Biblical canon”</a>' ) ) . '</p>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Ethiopian Orthodox books', 'tbe-child' ) . '</h2><p>'
-		. esc_html__( 'The names and the 81-book list of the Ethiopian Orthodox canon, and the short notes on its books, follow the Ethiopian Orthodox Tewahedo Church website, used with the church’s permission.', 'tbe-child' ) . '</p>';
+		. esc_html__( 'The names and the 81-book list of the Ethiopian Orthodox canon, and the short notes on its books, follow the Ethiopian Orthodox Tewahedo Church website, used with the church’s permission.', 'tbe-child' ) . '</p><p>'
+		. wp_kses_post( sprintf( /* translators: 1: link to Wikisource, 2: link to the licence */ __( 'The text of 1, 2 and 3 Meqabyan is the English translation from Ge’ez made by contributors to %1$s, shared under %2$s. It is a working translation, not one authorised by the church. The text is given as Wikisource has it, divided into chapters and verses.', 'tbe-child' ), '<a href="https://en.wikisource.org/wiki/Translation:1_Meqabyan" rel="noopener">Wikisource</a>', '<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>' ) ) . '</p><p>'
+		. wp_kses_post( sprintf( /* translators: 1: link to Charles's Jubilees, 2: link to Lightfoot's Apostolic Fathers, 3: link to the Ante-Nicene Fathers */ __( 'The deuterocanonical books, 1 Esdras, the Prayer of Manasseh and Ezra Sutu’el (2 Esdras 3 to 14) are the King James Version with the Apocrypha (1769), in the public domain, from eBible.org. 1 Enoch is Richard Laurence’s translation, The Book of Enoch the Prophet (1883), read from the scan on the Internet Archive. Jubilees is R. H. Charles’s translation from Ge’ez, %1$s (1902), read from the scan on the Internet Archive without his notes. The Shepherd of Hermas is J. B. Lightfoot’s translation, in %2$s (1891), and the Greek Apocalypse of Peter is Andrew Rutherfurd’s, in %3$s (1896). All three are in the public domain. The Ethiopic Apocalypse of Peter is J. K. Elliott’s translation, as printed in Bart D. Ehrman, <cite>Lost Scriptures</cite> (Oxford University Press, 2003), used with permission.', 'tbe-child' ), '<a href="https://archive.org/details/bookofjubileesor00char" rel="noopener"><cite>The Book of Jubilees or the Little Genesis</cite></a>', '<a href="https://archive.org/details/apostolicfathers00ligh" rel="noopener"><cite>The Apostolic Fathers</cite></a>', '<a href="https://www.ccel.org/ccel/schaff/anf09.vii.ii.html" rel="noopener"><cite>The Ante-Nicene Fathers</cite>, Additional Volume</a>' ) ) . '</p>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Dead Sea Scrolls', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The readings of the scrolls are compared using the %s: Jarod Jacobs, Martijn Naaijer and Dirk Roorda, built on the data files of Martin Abegg, licensed CC BY-NC 4.0 (version 2.0, doi:10.5281/zenodo.23731063). So far the Great Isaiah Scroll (1QIsa-a) is compared with Isaiah 1 to 5. The scroll photographs belong to the Israel Antiquities Authority and are not reproduced here.', 'tbe-child' ), '<a href="https://github.com/ETCBC/dss" rel="noopener">CACCHT / ETCBC Dead Sea Scrolls dataset</a>' ) ) . '</p>';
+	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Samaritan Pentateuch', 'tbe-child' ) . '</h2><p>'
+		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The Hebrew interlinear of Genesis to Deuteronomy marks where the Samaritan Pentateuch reads differently from the Masoretic text. Its text is Stefan Schorch’s critical edition (de Gruyter, 2018 onwards), from MS Dublin, Chester Beatty Library 751, and MS Garizim 1, in the %s by Christian Canu Højgaard, Martijn Naaijer and Stefan Schorch (doi:10.5281/zenodo.7734632), licensed CC BY-NC 4.0. The comparison built from it shares that licence.', 'tbe-child' ), '<a href="https://github.com/DT-UCPH/sp" rel="noopener">CACCHT Samaritan Pentateuch dataset</a>' ) ) . '</p>';
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Greek manuscripts', 'tbe-child' ) . '</h2><p>'
 		. wp_kses_post( sprintf( /* translators: 1: link to CNTR, 2: link to the licence */ __( 'The manuscript pages are built from the electronic transcriptions of the early Greek manuscripts by Alan Bunning and the %1$s, licensed %2$s. The tables and texts built from them are shared under the same licence. The English wording beside them comes from the public-domain King James Version (Pure Cambridge Edition), World English Bible and Berean Standard Bible, as set out on the Center’s translation pages. The photographs of manuscript pages come from Wikimedia Commons and from public-domain photographic facsimiles on the Internet Archive: Codex Bezae Cantabrigiensis (Cambridge University Press, 1899) and Henry A. Sanders’ Facsimile of the Washington Manuscript of the Four Gospels (University of Michigan, 1912). Each is credited under the picture, with its licence and a link to its page.', 'tbe-child' ), '<a href="https://greekcntr.org/" rel="noopener">Center for New Testament Restoration</a>', '<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>' ) ) . '</p>';
@@ -268,6 +290,7 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 		$out .= tbe_render_box( $entry, $slug, $chapter, true );
 	}
 	$out .= tbe_manuscripts_chapter_note( $slug, $chapter );
+	$out .= tbe_polyglot_note( $slug, $chapter );
 	$out .= tbe_render_notes_contents( $starts, $slug, $chapter );
 	$out .= tbe_render_related_essays( $entries );
 
@@ -368,7 +391,8 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 			$boxes .= tbe_render_box( $entry, $slug, $chapter );
 		}
 		$jewish = isset( $jps[ $n ] ) ? '<span class="tbe-jps' . ( $is_poem ? ' tbe-jps--n' : '' ) . '" lang="en" data-n="' . $n . '">' . esc_html( $jps[ $n ] ) . '</span>' : '';
-		$number = '<a class="tbe-vn" href="#v' . $n . '"><span class="screen-reader-text">' . esc_html__( 'Verse', 'tbe-child' ) . ' </span>' . $n . '</a>';
+		$shown  = isset( $verse['l'] ) ? esc_html( (string) $verse['l'] ) : (string) $n; // a printed reference, such as Hermas's "3[11]:2"
+		$number = '<a class="tbe-vn" href="#v' . $n . '"><span class="screen-reader-text">' . esc_html__( 'Verse', 'tbe-child' ) . ' </span>' . $shown . '</a>';
 
 		if ( $is_poem ) {
 			if ( ! $in_poem ) {

@@ -1,10 +1,15 @@
 {
- "_note": "Which tradition counts which book as scripture. The 66 books follow their testament (see inc/canon.php); the books below are planned and have no text on the site yet. Lists vary between churches. Checked against the comparison tables in Wikipedia's 'Biblical canon' article (CC BY-SA 4.0) and the sources it cites.",
+ "_note": "Which tradition counts which book as scripture. The 66 books follow their testament (see inc/canon.php); a book below with a file in data/further/ can be read on the site; the rest are marked \"Not on the site yet\". Lists vary between churches. Checked against the comparison tables in Wikipedia's 'Biblical canon' article (CC BY-SA 4.0) and the sources it cites.",
  "traditions": {
   "jewish": {
    "name": "Jewish",
    "full": "Jewish (Tanakh)",
    "note": "The Tanakh counts 24 books, the same writings as the Protestant Old Testament, arranged as Torah, Prophets and Writings."
+  },
+  "samaritan": {
+   "name": "Samaritan",
+   "full": "Israelite Samaritan",
+   "note": "The Samaritans count only the five books of the Torah, in their own Hebrew text, the Samaritan Pentateuch. The Hebrew interlinear of Genesis to Deuteronomy marks where it differs from the Masoretic text."
   },
   "protestant": {
    "name": "Protestant",
@@ -46,7 +51,7 @@
       "ethiopian"
      ],
      "language": "Greek; Aramaic and Hebrew fragments at Qumran",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -58,7 +63,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -70,7 +75,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -82,7 +87,7 @@
       "ethiopian"
      ],
      "language": "Hebrew in part, and Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -94,7 +99,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -105,7 +110,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -116,7 +121,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -128,7 +133,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -140,7 +145,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "The Ethiopian Orthodox church is said to accept all the Catholic deuterocanonical books except the Maccabees."
     }
    ]
@@ -162,7 +167,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "Ezra Kali in the Ethiopian canon."
     },
     {
@@ -183,7 +188,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "In the Ethiopian canon it is part of 2 Chronicles."
     },
     {
@@ -220,21 +225,25 @@
     {
      "slug": "1-enoch",
      "name": "1 Enoch (Henok)",
+     "geez": "መጽሐፈ ሄኖክ",
+     "geez_latin": "mätṣḥäfä henok",
      "traditions": [
       "ethiopian"
      ],
      "language": "Ge'ez; Aramaic fragments at Qumran",
-     "status": "planned",
+     "status": "available",
      "note": "Kept whole only in Ge'ez; Europe knew it only from Jude until James Bruce brought manuscripts in 1773."
     },
     {
      "slug": "jubilees",
      "name": "Jubilees (Kufale)",
+     "geez": "መጽሐፈ ኩፋሌ",
+     "geez_latin": "mäṣḥafä kufale",
      "traditions": [
       "ethiopian"
      ],
      "language": "Ge'ez; Hebrew fragments at Qumran",
-     "status": "planned",
+     "status": "available",
      "note": "Called Kufale in the Ethiopian church. The Ge'ez version is the only complete text."
     },
     {
@@ -244,7 +253,7 @@
       "ethiopian"
      ],
      "language": "Ge'ez",
-     "status": "planned",
+     "status": "available",
      "note": "Not the Maccabees of the Greek Bible."
     },
     {
@@ -254,7 +263,7 @@
       "ethiopian"
      ],
      "language": "Ge'ez",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -264,7 +273,7 @@
       "ethiopian"
      ],
      "language": "Ge'ez",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -274,7 +283,7 @@
       "ethiopian"
      ],
      "language": "Latin and other languages; Hebrew original lost",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -290,6 +299,7 @@
     {
      "slug": "zena-ayhud",
      "name": "Zëna Ayhud (Pseudo-Josephus)",
+     "geez": "ዜና፡ አይሁድ",
      "traditions": [
       "ethiopian"
      ],
@@ -397,7 +407,7 @@
      "traditions": [],
      "badge": "Once read as scripture",
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "Written in the first half of the second century. In Codex Sinaiticus and in the list of Codex Claromontanus; read as scripture by some early church writers."
     },
     {
@@ -406,7 +416,7 @@
      "traditions": [],
      "badge": "Once read as scripture",
      "language": "Greek, Ethiopic",
-     "status": "planned",
+     "status": "available",
      "note": "Written in the early second century. Listed as accepted in the Muratorian fragment."
     },
     {

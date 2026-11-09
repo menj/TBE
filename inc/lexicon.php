@@ -131,6 +131,27 @@ final class TBE_Lexicon {
 		return nl2br( $html, false );
 	}
 
+	/**
+	 * The Brown-Driver-Briggs article for a Hebrew number, as paragraphs of simple HTML built by tools/build_bdb.py
+	 * (Hebrew spans, glosses in italics, sense numbers in bold); an empty list when there is none (0.10.22).
+	 *
+	 * @return string[]
+	 */
+	public static function bdb( string $num ): array {
+		$num = self::normalise( $num );
+		if ( '' === $num || 'H' !== $num[0] ) {
+			return array();
+		}
+		static $shards = array();
+		$key = intdiv( (int) substr( $num, 1 ), 100 );
+		if ( ! isset( $shards[ $key ] ) ) {
+			$file           = TBE_DIR . '/data/lexicon/bdb/' . $key . '.json';
+			$read           = is_readable( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : null; // phpcs:ignore WordPress.WP.AlternativeFunctions
+			$shards[ $key ] = is_array( $read ) ? $read : array();
+		}
+		return array_values( array_filter( (array) ( $shards[ $key ][ $num ] ?? array() ), 'is_string' ) );
+	}
+
 	/** Metzger's entry for a Greek number: his frequency group, gloss and page; null when he does not list it. */
 	public static function metzger( string $num ): ?array {
 		static $data = null;
@@ -257,6 +278,21 @@ function tbe_view_lexicon_entry( array $e ): string {
 		if ( ! empty( $s['d'] ) ) {
 			$out .= '<div class="tbe-lex__def">' . TBE_Lexicon::definition( (string) $s['d'] ) . '</div>';
 		}
+	}
+
+	$bdb = $he ? TBE_Lexicon::bdb( $num ) : array();
+	if ( $bdb ) {
+		$allowed = array(
+			'span'  => array( 'lang' => true, 'dir' => true ),
+			'i'     => array(),
+			'b'     => array(),
+			'small' => array(),
+		);
+		$out .= '<section class="tbe-lex__bdb"><h2 class="tbe-ornament">' . esc_html__( 'Brown-Driver-Briggs', 'tbe-child' ) . '</h2>';
+		foreach ( $bdb as $para ) {
+			$out .= '<p>' . wp_kses( $para, $allowed ) . '</p>';
+		}
+		$out .= '<p class="tbe-muted tbe-lex__bdb-credit">' . esc_html__( 'From Brown, Driver and Briggs, A Hebrew and English Lexicon of the Old Testament (Oxford: Clarendon Press, 1906), public domain, as set out in the Enhanced Brown-Driver-Briggs pages at ericlevy.com.', 'tbe-child' ) . '</p></section>';
 	}
 
 	if ( ! empty( $e['r'] ) ) {

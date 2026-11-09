@@ -13,14 +13,27 @@
 
 defined( 'ABSPATH' ) || exit;
 
-/** The variants of one chapter, or null when none have been built for it. */
+/**
+ * The variants of one chapter, or null when none have been built for it: a Dead Sea Scroll (data/dss/), else, in
+ * the Pentateuch, the Samaritan Pentateuch (data/sp/, built by tools/build_sp_variants.py from the CACCHT dataset
+ * of Stefan Schorch's edition, CC BY-NC 4.0; 0.10.22). The Samaritan data carries "source": "sp".
+ */
 function tbe_dss_chapter( string $slug, int $chapter ): ?array {
-	$file = TBE_DIR . '/data/dss/' . $slug . '/' . $chapter . '.json';
-	if ( ! is_readable( $file ) ) {
-		return null;
+	foreach ( array( 'dss', 'sp' ) as $dir ) {
+		$file = TBE_DIR . '/data/' . $dir . '/' . $slug . '/' . $chapter . '.json';
+		if ( is_readable( $file ) ) {
+			$data = json_decode( (string) file_get_contents( $file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+			if ( is_array( $data ) && isset( $data['v'] ) ) {
+				return $data + array( 'source' => $dir );
+			}
+		}
 	}
-	$data = json_decode( (string) file_get_contents( $file ), true );
-	return ( is_array( $data ) && isset( $data['v'] ) ) ? $data : null;
+	return null;
+}
+
+/** Whether the comparison is with the Samaritan Pentateuch rather than a scroll. */
+function tbe_dss_is_sp( ?array $dss ): bool {
+	return is_array( $dss ) && 'sp' === ( $dss['source'] ?? '' );
 }
 
 /**
@@ -47,7 +60,7 @@ function tbe_dss_parts( array $words ): array {
  *
  * @return array{words:array<int,array{kind:string,tip:string}>,notes:string}
  */
-function tbe_dss_verse( array $variants, array $words, string $scroll ): array {
+function tbe_dss_verse( array $variants, array $words, string $scroll, bool $sp = false ): array {
 	$parts = tbe_dss_parts( $words );
 	$marks = array();
 	$notes = '';
@@ -64,7 +77,19 @@ function tbe_dss_verse( array $variants, array $words, string $scroll ): array {
 		$hebrew = implode( ' ', array_map( static fn( $i ) => $parts[ $i ][1] ?? '', range( $a, max( $a, $b - 1 ) ) ) );
 		$read   = '<bdi class="tbe-dss__he" lang="he" dir="rtl">' . esc_html( (string) $v['ds'] ) . '</bdi>';
 		$mt     = '<bdi class="tbe-dss__he" lang="he" dir="rtl">' . esc_html( trim( $hebrew ) ) . '</bdi>';
-		if ( 'm' === $v['k'] ) {
+		if ( $sp ) {
+			if ( 'm' === $v['k'] ) {
+				if ( 'a' === $v['t'] ) {
+					$text = sprintf( /* translators: %s: Hebrew words */ __( 'The Samaritan text adds %s.', 'tbe-child' ), $read );
+				} elseif ( 'o' === $v['t'] ) {
+					$text = sprintf( /* translators: %s: Hebrew words */ __( 'The Samaritan text has no %s.', 'tbe-child' ), $mt );
+				} else {
+					$text = sprintf( /* translators: 1: Samaritan reading, 2: Masoretic reading */ __( 'The Samaritan text reads %1$s where the Masoretic text has %2$s.', 'tbe-child' ), $read, $mt );
+				}
+			} else {
+				$text = sprintf( /* translators: 1: Samaritan spelling, 2: Masoretic spelling */ __( 'Same word, spelled %1$s in the Samaritan text and %2$s in the Masoretic text.', 'tbe-child' ), $read, $mt );
+			}
+		} elseif ( 'm' === $v['k'] ) {
 			if ( 'a' === $v['t'] ) {
 				$text = sprintf( /* translators: %s: Hebrew words */ __( 'The scroll adds %s.', 'tbe-child' ), $read );
 			} elseif ( 'o' === $v['t'] ) {

@@ -1,5 +1,43 @@
 # Changelog
 
+## 0.10.22
+
+The first books beyond the 66 can be read on the site: 1 Enoch, Jubilees and 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon, and the Shepherd of Hermas and the Apocalypse of Peter, once read as scripture. Nothing was removed.
+
+### Added
+- 1, 2 and 3 Meqabyan at `/bible/1-meqabyan/` to `/bible/3-meqabyan/`, chapter by chapter, in the English translation from Ge'ez made by Wikisource contributors (CC BY-SA 4.0): 7, 21 and 10 chapters. Each book says where the translation comes from, under which licence, and that the church has not authorised it. The pager runs from one book into the next.
+- On the book list, the three books are linked in the Ethiopian Orthodox section with their chapter counts; the other prepared books stay marked "Not on the site yet".
+- The Ge'ez names of 1 Enoch (መጽሐፈ ሄኖክ, *mätṣḥäfä henok*), Jubilees (መጽሐፈ ኩፋሌ, *mäṣḥafä kufale*) and Zëna Ayhud (ዜና፡ አይሁድ) beside their English names (`geez` and `geez_latin` in `data/canons.json`).
+- The structured data gives each book as a `Book` translated from Ge'ez, with its licence, its Wikisource source and each chapter as a `Chapter`.
+- 1 Enoch in Richard Laurence's translation of 1883 (public domain), the one Wikisource carries: 105 chapters in Laurence's own numbering, read from the scan on the Internet Archive without his notes (`tools/build_enoch.py`). Laurence has no chapter XI, and the page for it says so.
+- Jubilees in R. H. Charles's translation of 1902 (public domain), 50 chapters, read from the scan on the Internet Archive with his notes, chapter summaries and margin dates left out (`tools/build_jubilees.py`).
+- The Shepherd of Hermas in J. B. Lightfoot's translation (public domain): its five Visions, twelve Mandates and ten Parables are its chapters, and each paragraph shows its printed reference, such as "3[11]:2" (`tools/build_hermas.py`).
+- The Apocalypse of Peter: the full Ethiopic text in seventeen chapters, in J. K. Elliott's translation as printed in Bart D. Ehrman's *Lost Scriptures* (2003), used with the owner's permission, then the Greek Akhmim fragment and the passages the Fathers quote in Andrew Rutherfurd's public-domain translation (`tools/build_apocalypse_peter_ethiopic.py`, `tools/build_apocalypse_peter.py`).
+- The deuterocanonical books in the King James Version (public domain, from eBible.org): Tobit, Judith, Wisdom, Sirach, Baruch with the Letter of Jeremiah, 1 and 2 Maccabees, the Additions to Esther and to Daniel, 1 Esdras and the Prayer of Manasseh, and Ezra Sutu'el (4 Ezra) as chapters 3 to 14 of 2 Esdras (`tools/build_kjva.py`).
+- Brown-Driver-Briggs on every Hebrew lexicon page that has an article: the full 1906 BDB entry (public domain) with its Hebrew, senses and references, from the Enhanced BDB pages at ericlevy.com, keyed by Strong's number (`tools/fetch_bdb.py`, `tools/build_bdb.py`, `data/lexicon/bdb/`). The TWOT and GK numbers of the electronic edition are left out.
+- The Polyglot Bible of the Creation story (Genesis 1:1 to 2:3 word by word in the Masoretic Hebrew, Samaritan, Ge'ez, Targum Onkelos, Peshitta and Greek), supplied by the owner, linked from the reading and interlinear pages of Genesis 1 and 2 (`assets/pdf/polyglot-creation-story.pdf`, `tbe_polyglot_note()`).
+- The Samaritan Pentateuch: the Hebrew interlinear of Genesis to Deuteronomy marks where it reads differently from the Masoretic text, with a button and notes under each verse, as Isaiah does with the Great Isaiah Scroll: 3,300 differences of meaning and 4,535 of spelling. The text is Stefan Schorch's edition in the CACCHT dataset (CC BY-NC 4.0); `tools/build_sp_variants.py` builds `data/sp/`, and `tools/test_sp.php` checks it (Gerizim for Ebal at Deuteronomy 27:4, the longer Genesis 1:14).
+- A Samaritan label on the book list: the Samaritans count the five books of the Torah, and the tradition buttons can show them.
+- `inc/further.php` (class `TBE_Further`), `data/further/`, `tools/build_meqabyan.py` and `tools/test_further.php`.
+
+## 0.10.21
+
+The contents box brings in the features of WP TOC (github.com/menj/wp-toc), built into the theme. Nothing was removed.
+
+### Added
+- Level-three headings get anchors and appear in the contents, nested under their level-two heading. Level-two anchors are made first and stay exactly as before, so links already shared still work.
+- Pages, posts and glossary terms get the same contents box before their first heading once they have three entries, as commentary entries already did (filter `tbe_toc_post_types`).
+- `[wp_toc]` and `[auto_toc]` place the contents exactly where they are typed, with WP TOC's attributes: `tags` (default `h2,h3`), `title` (`title=""` hides it), `depth`, `min`, `collapsible`, `collapsed`. A post that has one shows no automatic contents.
+- A heading with the class `no-toc` or a `data-no-toc` attribute is left out of the contents.
+- The structured data lists each section the box shows as a `WebPageElement` part of the page, with its anchor, following a shortcode's `tags`, `min` and `depth`.
+- Every heading gets an anchor, so `[wp_toc tags="h5"]` links work; a deeper heading's own id never moves a level-two anchor.
+- `inc/toc.php` and `tools/test_toc.php`.
+
+### Changed
+- The home page's lockup sits closer under the header: the hero's top padding is now 1.5 to 2.5rem (was up to 5rem), and the main area adds no space of its own above it.
+- When the WP TOC plugin itself is active, the theme leaves posts, pages and the shortcodes to it and keeps it off commentary entries, so only one contents box ever shows.
+- The theme requires PHP 8.4 or later, as the owner decided ("Requires PHP: 8.4" in `style.css` and `readme.txt`). WordPress will not activate it on older PHP; a copy already installed keeps working and shows administrators a notice on every admin screen until PHP is upgraded.
+
 ## 0.10.20
 
 ### Fixed
