@@ -6,6 +6,11 @@
    "full": "Jewish (Tanakh)",
    "note": "The Tanakh counts 24 books, the same writings as the Protestant Old Testament, arranged as Torah, Prophets and Writings."
   },
+  "samaritan": {
+   "name": "Samaritan",
+   "full": "Israelite Samaritan",
+   "note": "The Samaritans count only the five books of the Torah, in their own Hebrew text, the Samaritan Pentateuch. The Hebrew interlinear of Genesis to Deuteronomy marks where it differs from the Masoretic text."
+  },
   "protestant": {
    "name": "Protestant",
    "full": "Protestant",

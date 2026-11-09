@@ -275,6 +275,7 @@
 .tbe-canon__chip--catholic { --chip: var(--tbe-rubric); }
 .tbe-canon__chip--orthodox { --chip: var(--tbe-accent); }
 .tbe-canon__chip--ethiopian { --chip: #2a6f8a; }
+.tbe-canon__chip--samaritan { --chip: #5f7f3a; }
 .tbe-canon-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 0.9rem; margin: -0.4rem auto 1.6rem; }
 .tbe-canon-line__label { font: 500 0.75rem var(--tbe-ui); letter-spacing: 0.1em; text-transform: uppercase; color: var(--tbe-muted); }
 

@@ -28,10 +28,14 @@ final class TBE_Canon {
 		return $data;
 	}
 
-	/** The traditions that count one of the 66 books, in a fixed order. @return string[] */
+	/** The traditions that count one of the 66 books, in a fixed order; the Samaritans count the Torah only. @return string[] */
 	public static function for_book( array $book ): array {
-		$all = array( 'jewish', 'protestant', 'catholic', 'orthodox', 'ethiopian' );
-		return 'OT' === $book['testament'] ? $all : array_values( array_diff( $all, array( 'jewish' ) ) );
+		$all = array( 'jewish', 'samaritan', 'protestant', 'catholic', 'orthodox', 'ethiopian' );
+		if ( 'OT' !== $book['testament'] ) {
+			return array_values( array_diff( $all, array( 'jewish', 'samaritan' ) ) );
+		}
+		$torah = in_array( (string) ( $book['slug'] ?? '' ), array( 'genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy' ), true );
+		return $torah ? $all : array_values( array_diff( $all, array( 'samaritan' ) ) );
 	}
 }
 

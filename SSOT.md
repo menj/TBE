@@ -45,6 +45,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The ESV is bundled: 66 books, 1,189 chapter files in `data/esv/{book}/{chapter}.json`. The live API fallback needs `TBE_ESV_API_TOKEN` in `wp-config.php`. The token is never committed, stored in the database or shown in the admin.
 - The Hebrew Old Testament and the Greek New Testament, word by word, come from STEPBible (CC BY 4.0) in `data/interlinear/`.
 - Recorded readings: Genesis 1 (Hebrew) and Matthew 1 (Greek) only.
+- Samaritan Pentateuch comparison: Genesis to Deuteronomy against the Masoretic text, `data/sp/`, from the CACCHT dataset of Stefan Schorch's edition (CC BY-NC 4.0). That data and the pages built from it stay under CC BY-NC 4.0.
 - Dead Sea Scrolls comparison: Isaiah 1 to 5 against 1QIsa-a only. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
 - JPS 1917 parallel text: Genesis only (`data/jps/`).
 - Lexicon: every Hebrew and Greek Strong's number in `data/lexicon/`, from STEPBible's TBESG and TBESH (CC BY 4.0), and Metzger's frequency list in `data/lexicon/metzger.json`.
@@ -81,6 +82,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The ESV copyright line (Crossway), editable under ESV and licence but never removed.
 - STEPBible and Tyndale House Cambridge for the interlinear data.
 - Sefaria for the JPS 1917 text, and CACCHT (ETCBC, Martin Abegg's data) for the scroll comparison.
+- Stefan Schorch's edition and the CACCHT Samaritan Pentateuch dataset (Højgaard, Naaijer, Schorch) with CC BY-NC 4.0, on the Sources page and under each Pentateuch interlinear.
 - STEP Bible for the lexicon's definitions (CC BY 4.0), with Abbott-Smith and the abridged Brown-Driver-Briggs named, and Metzger's *Lexical Aids* for the frequency list, on the Sources page and on every lexicon page.
 - The titles, editors and publishers of the United Bible Societies *Greek New Testament* and Swanson's *New Testament Greek Manuscripts: Matthew*, on the Sources page and beside their evidence on each manuscripts page.
 - The credit under each manuscript photograph: its author where known, its licence and a link to its page on Wikimedia Commons or the Internet Archive.
