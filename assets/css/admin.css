@@ -80,6 +80,11 @@
 .tbe-admin .tbe-card .tbe-field > label:first-child, .tbe-admin .tbe-card .tbe-field > legend { grid-column: 1; margin: 0; font-weight: 600; }
 .tbe-admin .tbe-card .tbe-field > :not(label):not(legend) { grid-column: 2; }
 .tbe-admin .tbe-card .tbe-field > .description { margin: 0; grid-column: 2; }
+.tbe-admin .tbe-card .tbe-field > label.tbe-check { grid-column: 2; }
+/* Profile links sit in a grid of their own: keep each field stacked. */
+.tbe-admin .tbe-card .tbe-profiles .tbe-field { display: block; padding: 0; border: 0; }
+.tbe-admin .tbe-card .tbe-profiles .tbe-field > label:first-child { display: flex; margin-bottom: 0.35rem; }
+.tbe-admin .tbe-card .tbe-profiles .tbe-field > input { width: 100%; max-width: none; }
 .tbe-admin .tbe-card .tbe-field > input[type="text"], .tbe-admin .tbe-card .tbe-field > input[type="url"], .tbe-admin .tbe-card .tbe-field > select, .tbe-admin .tbe-card .tbe-field > textarea { width: 100%; max-width: 32rem; min-height: 40px; border-radius: 6px; }
 .tbe-admin .tbe-card .tbe-field > textarea { min-height: 0; resize: vertical; }
 .tbe-admin .tbe-card input:focus-visible, .tbe-admin .tbe-card select:focus-visible, .tbe-admin .tbe-card textarea:focus-visible { outline: 2px solid var(--tbe-a); outline-offset: 1px; box-shadow: none; border-color: var(--tbe-a); }
@@ -125,7 +130,7 @@
 	.tbe-admin__badge { order: 3; }
 	.tbe-card { padding: 1rem; }
 	.tbe-admin .tbe-card .tbe-field { grid-template-columns: 1fr; }
-	.tbe-admin .tbe-card .tbe-field > *, .tbe-admin .tbe-card .tbe-field > :not(label):not(legend), .tbe-admin .tbe-card .tbe-field > .description, .tbe-admin .tbe-card .tbe-field > label:first-child, .tbe-admin .tbe-card .tbe-field > legend, .tbe-choice__grid { grid-column: 1; }
+	.tbe-admin .tbe-card .tbe-field > *, .tbe-admin .tbe-card .tbe-field > :not(label):not(legend), .tbe-admin .tbe-card .tbe-field > .description, .tbe-admin .tbe-card .tbe-field > label.tbe-check, .tbe-admin .tbe-card .tbe-field > label:first-child, .tbe-admin .tbe-card .tbe-field > legend, .tbe-choice__grid { grid-column: 1; }
 	.tbe-admin .tbe-card .tbe-field > input[type="text"], .tbe-admin .tbe-card .tbe-field > input[type="url"], .tbe-admin .tbe-card .tbe-field > select { max-width: none; font-size: 16px; }
 	.tbe-choice__grid { grid-template-columns: 1fr; max-width: none; }
 	.tbe-range { max-width: none; }
