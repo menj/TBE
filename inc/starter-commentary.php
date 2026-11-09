@@ -188,6 +188,11 @@ function tbe_autosync_packs(): void {
 		if ( $seen === $fingerprint ) {
 			continue;
 		}
+		// A pack marked "manual" is never first-imported by the automatic sync: its entries need a human check,
+		// so they come in from the Starter commentary tab, where the editor chooses drafts or published.
+		if ( ! empty( $pack['manual'] ) && false === $seen && ! tbe_pack_posts( (string) $pack['id'] ) ) {
+			continue;
+		}
 		if ( 'partial' === $seen || ( false === $seen && ! tbe_pack_posts( (string) $pack['id'] ) ) ) {
 			// First import: published, in batches of about fifteen seconds; 'partial' marks one still under way.
 			$done   = tbe_import_pack( $pack, 'publish', microtime( true ) + 15 );

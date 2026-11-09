@@ -5,7 +5,7 @@
 Canon history, after Samuel Davidson, *The Canon of the Bible* (3rd revised ed., New York: Peter Eckler, 1877; Project Gutenberg eBook 30132). No feature removed and no public identifier renamed.
 
 ### Added
-- `data/commentary/canon-history.json`: a fourth starter pack, `canon-history`, with four entries: `luke-24-44`, `jude-14`, `hebrews-1-3` and `revelation-22-18`. Davidson is quoted exactly with his printed page numbers; scripture is the bundled ESV. The pack's `source` puts Davidson on the Sources page. The entries arrive as drafts like any pack.
+- `data/commentary/canon-history.json`: a fourth starter pack, `canon-history`, with four entries: `luke-24-44`, `jude-14`, `hebrews-1-3` and `revelation-22-18`. Davidson is quoted exactly with his printed page numbers; scripture is the bundled ESV. The pack's `source` puts Davidson on the Sources page. The pack carries `"manual": true`, which `tbe_autosync_packs()` (`inc/starter-commentary.php`) honours: it is never first-imported by the automatic sync, only from the Starter commentary tab, where the editor picks drafts or published.
 
 ### Changed
 - `data/canons.json`: the Jewish, Catholic, Orthodox and Ethiopian notes and the deuterocanon introduction carry short additions with page references (Josephus's twenty-two books, Trent in 1546, the Jerusalem synod of 1672, the fluctuating Ethiopic canon).

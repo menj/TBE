@@ -5,6 +5,7 @@
  "licence": "Public domain; passages quoted with their printed page numbers; scripture quoted from the ESV",
  "note": "Commentary written for this site; the source is named on the Sources page.",
  "held_back": 0,
+ "manual": true,
  "entries": [
   {
    "key": "canon-history:luke-24-44",

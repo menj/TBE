@@ -117,7 +117,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 == Changelog ==
 
 = 0.10.24 =
-* A fourth starter commentary pack, "How the canon was formed", with four notes: Luke 24:44, Jude 14 to 15, Hebrews 1:3 and Revelation 22:18 to 19, after Samuel Davidson's history of the canon (1877). The canon comparison page and the 2 Peter note cite his pages. Nothing removed, nothing renamed.
+* A fourth starter commentary pack, "How the canon was formed", with four notes: Luke 24:44, Jude 14 to 15, Hebrews 1:3 and Revelation 22:18 to 19, after Samuel Davidson's history of the canon (1877). The canon comparison page and the 2 Peter note cite his pages. Nothing removed, nothing renamed. The pack is imported by hand from the Starter commentary tab, not automatically.
 
 = 0.10.23 =
 * The TBE settings page has a new look: a header with the version, tabs with icons that scroll on a phone, cards, switches for on and off options, sliders that show their value, and cards for choosing between styles. Every option, name and saved value is unchanged.
@@ -186,7 +186,7 @@ The full history is in CHANGELOG.md.
 == Upgrade Notice ==
 
 = 0.10.24 =
-A new starter commentary pack is available under Appearance, TBE, Starter commentary. Nothing else to do by hand.
+A new starter commentary pack is waiting under Appearance, TBE, Starter commentary. Import it there when you have read it.
 
 = 0.10.23 =
 Settings page redesign only. Nothing to do by hand.
