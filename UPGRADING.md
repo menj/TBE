@@ -18,6 +18,10 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 ## Version notes
 
+### To 0.10.25
+
+Entries imported by an earlier version carry no `tbe_pack_body` fingerprint, so the sync treats them all as edited. After this update the Starter commentary tab lists every one whose text differs from the bundle under "Newer version available". Choose "Take the bundled text" for the ones you never edited, or "Keep mine". From then on an untouched entry updates by itself. Nothing is overwritten or trashed without your choice, and a dropped untouched entry goes to the Trash, never deleted.
+
 ### To 0.10.24
 
 The new pack is marked `manual` in its JSON: the automatic sync never first-imports it, because its notes need a human check. Import it from Appearance, TBE, Starter commentary, as drafts or published. Packs already imported are kept in step as before (the `2-peter-3-16` entry takes its new line, and the canon notes change at once). The page references to Davidson, and the Sources entry, need a human check against the book. Modern works (Barton, Beckwith) named in the plan are not cited.

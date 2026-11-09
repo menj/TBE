@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.24
+Stable tag: 0.10.25
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -116,6 +116,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.25 =
+* Starter commentary now protects your edits. An entry you have edited is never overwritten and never moved to the Trash by a theme update. A notice lists the entries that have a newer version or were dropped from the bundle, and the Starter commentary tab lets you take the bundled text or keep yours, shows what the next update would do and keeps a short log. An entry you have not edited still updates by itself, and a dropped one goes to the Trash. Nothing removed, nothing renamed.
+
 = 0.10.24 =
 * A fourth starter commentary pack, "How the canon was formed", with four notes: Luke 24:44, Jude 14 to 15, Hebrews 1:3 and Revelation 22:18 to 19, after Samuel Davidson's history of the canon (1877). The canon comparison page and the 2 Peter note cite his pages. Nothing removed, nothing renamed. The pack is imported by hand from the Starter commentary tab, not automatically.
 
@@ -184,6 +187,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.25 =
+Entries imported by an earlier version have no record of their original text, so they count as edited and are listed under Starter commentary for you to decide.
 
 = 0.10.24 =
 A new starter commentary pack is waiting under Appearance, TBE, Starter commentary. Import it there when you have read it.

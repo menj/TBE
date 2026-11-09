@@ -357,7 +357,7 @@ function tbe_render_settings_page(): void {
 					tbe_field_text( 'tagline', __( 'Tagline', 'tbe-child' ), $s['tagline'], __( 'Shown on the home page hero.', 'tbe-child' ) );
 					tbe_field_check( 'schema', __( 'Output schema.org structured data (JSON-LD) for search engines', 'tbe-child' ), $s['schema'] );
 					tbe_field_check( 'error_pages', __( 'Install the themed maintenance, database-error and fatal-error pages into wp-content (see the Error pages tab)', 'tbe-child' ), $s['error_pages'] );
-					tbe_field_check( 'pack_sync', __( 'Keep imported starter commentary in step with the theme: a changed entry overwrites the old one, and an entry the theme no longer includes goes to the Trash', 'tbe-child' ), $s['pack_sync'] );
+					tbe_field_check( 'pack_sync', __( 'Keep imported starter commentary in step with the theme: an entry you have not edited takes the new text, one the theme no longer includes goes to the Trash, and an entry you edited is never overwritten or trashed (it is listed for you to decide)', 'tbe-child' ), $s['pack_sync'] );
 					break;
 
 				case 'appearance':
