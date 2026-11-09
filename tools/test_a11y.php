@@ -26,7 +26,7 @@ $cmp = (string) file_get_contents( $root . '/assets/css/components.css' );
 
 $check( 'outside words are not dimmed with opacity (1.4.3)', ! preg_match( '/\.tbe-il__w--outside\s*\{[^}]*opacity/', $il ) );
 $check( 'the tooltip can be hovered (1.4.13)', (bool) preg_match( '/\.tbe-tooltip\s*\{[^}]*pointer-events:\s*auto/', $cmp ) );
-$check( 'the tooltip stays while the pointer is on it (1.4.13)', false !== strpos( $tt, 'tip.contains( event.relatedTarget )' ) );
+$check( 'the tooltip stays while the pointer is on it (1.4.13)', false !== strpos( $tt, 'closeSoon' ) && false !== strpos( $tt, 'cancelClose' ) );
 $check( 'Escape dismisses the tooltip (1.4.13)', false !== strpos( $tt, "'Escape' === event.key" ) );
 
 foreach ( glob( $root . '/assets/css/*.css' ) as $file ) {
