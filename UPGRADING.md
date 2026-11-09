@@ -18,6 +18,10 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 ## Version notes
 
+### To 0.10.24
+
+Run Appearance, TBE, Starter commentary to import the new pack, or let "Keep imported starter commentary in step" do it for the packs already imported (the `2-peter-3-16` entry takes its new line, and the canon notes change at once). The page references to Davidson, and the Sources entry, need a human check against the book. Modern works (Barton, Beckwith) named in the plan are not cited.
+
 ### To 0.10.23
 
 Drop-in update. The settings page is redrawn; option keys, sanitisers and saved values are untouched. Checked at 1280, 782 and 375 px: no horizontal scroll, every control labelled, tabs reachable by keyboard.
