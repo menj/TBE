@@ -109,10 +109,31 @@
 				show( el );
 			}
 		} );
+		// WCAG 1.4.13 (hoverable): leaving the trigger closes the tip after a short delay, and the delay is
+		// cancelled when the pointer reaches the tip or comes back, so the pointer can cross the gap between them.
+		var closeTimer = 0;
+		function cancelClose() {
+			window.clearTimeout( closeTimer );
+		}
+		function closeSoon() {
+			cancelClose();
+			closeTimer = window.setTimeout( hide, 250 );
+		}
+		document.addEventListener( 'mouseover', function ( event ) {
+			if ( current && trigger( event.target ) === current ) {
+				cancelClose();
+			}
+		} );
 		document.addEventListener( 'mouseout', function ( event ) {
 			var el = trigger( event.target );
 			if ( el && el === current && ! el.contains( event.relatedTarget ) ) {
-				hide();
+				closeSoon();
+			}
+		} );
+		tip.addEventListener( 'mouseover', cancelClose );
+		tip.addEventListener( 'mouseout', function ( event ) {
+			if ( current && ! tip.contains( event.relatedTarget ) && ! current.contains( event.relatedTarget ) ) {
+				closeSoon();
 			}
 		} );
 		document.addEventListener( 'focusin', function ( event ) {

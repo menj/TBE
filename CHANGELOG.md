@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.22
+
+WCAG 2.2 AA audit and fixes. No feature removed and no public identifier renamed.
+
+### Fixed
+- `assets/css/interlinear.css`: words outside the verse were dimmed with `opacity: 0.8`, which took the muted transliteration to a 3.77:1 contrast (WCAG 1.4.3, 18 nodes on an interlinear page). A dotted frame now marks them and the text keeps its full colour.
+- `assets/js/tooltips.js` and `assets/css/components.css`: the tooltip ignored the pointer (`pointer-events: none`) and closed when the pointer left the trigger. It now stays open while the pointer rests on it, and Escape still closes it (WCAG 1.4.13).
+
+### Added
+- `tools/axe-audit.js`: an axe-core and Playwright scan of a list of URLs at a given width.
+- `tools/test_a11y.php`: guards for both fixes and for removed focus outlines.
+
 ## 0.10.21
 
 Mobile-first audit and fixes. No feature removed and no public identifier renamed.

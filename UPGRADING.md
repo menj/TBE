@@ -18,6 +18,17 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 ## Version notes
 
+### To 0.10.22
+
+Drop-in update, no settings change. WCAG 2.2 AA register (scratch WordPress, `WP_DEBUG` on with an empty log; axe-core with wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice tags at 1280 and 375 px on 22 templates; keyboard walk, 320 px reflow, text-spacing override):
+
+| Id | Severity | WCAG | Component | Finding | Status |
+|---|---|---|---|---|---|
+| TB-01 | Serious | 1.4.3 | Interlinear page | Outside-verse words dimmed to 3.77:1 | Fixed |
+| TB-02 | Major | 1.4.13 | Tooltips | Not hoverable | Fixed |
+
+Everything else passed. Manual review still open: a screen-reader pass of the interlinear word grid and the manuscripts tables. Code audit: no unescaped output found, no remote assets, licences in `SSOT.md` and `assets/fonts/`. Folder name: tests and docs use `/wp-content/themes/TBE/`; no code requires it; nothing renamed. The text domain is `tbe-child`, not the folder name; it is unchanged because changing it would break translations.
+
 ### To 0.10.21
 Upload the whole theme folder, as `TBE`. The new file is `assets/css/mobile-first.css`. Nothing else to do; clear any page cache. Audit: scratch WordPress with seeded long titles, URLs, a wide table, code, an embed, a gallery and comments; Playwright at 320, 360, 375, 390, 414, 480, 768, 1024 and 1280 px over 18 page types (home, post, archive, search, 404, login, page, reader, interlinear, Bible search, lexicon and its entry, manuscripts, commentary, glossary, section); axe-core 4.
 
