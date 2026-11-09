@@ -6,7 +6,7 @@ Starter packs no longer overwrite or trash entries the owner edited. No setting 
 
 ### Changed
 - `inc/starter-commentary.php`: `tbe_sync_pack()` now plans first (`tbe_pack_plan()`, built on the pure `tbe_pack_decide()` and `tbe_pack_decide_removed()`). New entries arrive as drafts; an untouched entry updates; an untouched dropped entry goes to the Trash. An edited entry (stored title and body differ from the `tbe_pack_body` fingerprint, or no fingerprint was recorded) is never overwritten and never trashed.
-- The two defaults that destroyed owner work are gone: before, an entry was overwritten unless "Keep my edits" was ticked, and a dropped entry was trashed even if edited. The box is now "Do not ask me about newer versions" and only silences the notice.
+- The two defaults that destroyed owner work are gone: before, an entry was overwritten unless "Keep my edits" was ticked, and a dropped entry was trashed even if edited. The box is now "Do not ask me about newer versions" and only silences the notice for an entry the owner edited.
 - `tbe_write_entry()` records `tbe_pack_body`, the fingerprint of the stored body.
 - The "Keep imported starter commentary in step" setting keeps its key, `pack_sync`, and its text says what it now does.
 
@@ -14,6 +14,10 @@ Starter packs no longer overwrite or trash entries the owner edited. No setting 
 - One grouped admin notice: "Newer version available" and "Removed from the bundle", with a link to the tab.
 - On the Starter commentary tab: a dry run of the next sync per entry, "Take the bundled text" or "Keep mine" for each entry that waits (the choice is stored as `tbe_pack_ack` for that version, so a newer one asks again), "Run the sync now", and a log of the last changes (`tbe_pack_log`).
 - `tools/test_pack_sync.php`.
+
+### Fixed in review
+- "Run the sync now" no longer records a fingerprint for a pack that was never imported, so the first import of such a pack still runs.
+- The "Do not ask me about newer versions" box only affects an entry the owner edited. An untouched entry updates or goes to the Trash whether or not the box is ticked.
 
 ## 0.10.24
 

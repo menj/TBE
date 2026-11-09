@@ -34,12 +34,14 @@ $check( 'an untouched entry updates', tbe_pack_decide( true, 'b', 'a', false, fa
 $check( 'an edited entry is never overwritten, the owner is told', tbe_pack_decide( true, 'b', 'a', true, false, '' ), 'newer' );
 $check( 'an edited entry already decided for this version stays quiet', tbe_pack_decide( true, 'b', 'a', true, false, 'b' ), 'kept' );
 $check( 'a decision for an older version does not hide a newer one', tbe_pack_decide( true, 'c', 'a', true, false, 'b' ), 'newer' );
-$check( 'a locked entry is never touched', tbe_pack_decide( true, 'b', 'a', false, true, '' ), 'kept' );
+$check( 'a locked entry the owner never edited still updates', tbe_pack_decide( true, 'b', 'a', false, true, '' ), 'update' );
+$check( 'a locked edited entry stays and is left out of the notice', tbe_pack_decide( true, 'b', 'a', true, true, '' ), 'kept' );
 
 // tbe_pack_decide_removed( edited, locked, ack )
 $check( 'an untouched dropped entry goes to the Trash', tbe_pack_decide_removed( false, false, '' ), 'trash' );
 $check( 'an edited dropped entry is kept and listed', tbe_pack_decide_removed( true, false, '' ), 'removed' );
-$check( 'a locked dropped entry is kept and listed', tbe_pack_decide_removed( false, true, '' ), 'removed' );
+$check( 'a locked untouched dropped entry goes to the Trash', tbe_pack_decide_removed( false, true, '' ), 'trash' );
+$check( 'a locked edited dropped entry is kept and left out of the notice', tbe_pack_decide_removed( true, true, '' ), 'kept' );
 $check( 'a decided dropped entry stays quiet', tbe_pack_decide_removed( true, false, 'removed' ), 'kept' );
 
 $src = (string) file_get_contents( dirname( __DIR__ ) . '/inc/starter-commentary.php' );

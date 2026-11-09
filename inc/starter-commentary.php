@@ -157,7 +157,8 @@ function tbe_pack_is_edited( WP_Post $post ): bool {
  * current the stored copy came from this version of the entry
  * update  untouched by the owner, so it takes the new text
  * newer   edited by the owner and the theme has newer text: the owner decides
- * kept    edited, locked with "Keep my edits", or already decided for this version
+ * kept    edited and already decided for this version, or edited and marked "Do not ask me": the
+ *         entry stays as it is and is left out of the notice
  */
 function tbe_pack_decide( bool $exists, string $entry_hash, string $stored_hash, bool $edited, bool $locked, string $ack ): string {
 	if ( ! $exists ) {
@@ -166,21 +167,18 @@ function tbe_pack_decide( bool $exists, string $entry_hash, string $stored_hash,
 	if ( $stored_hash === $entry_hash ) {
 		return 'current';
 	}
-	if ( $locked ) {
-		return 'kept';
-	}
 	if ( ! $edited ) {
 		return 'update';
 	}
-	return $ack === $entry_hash ? 'kept' : 'newer';
+	return ( $locked || $ack === $entry_hash ) ? 'kept' : 'newer';
 }
 
 /** What a sync does with an imported entry the bundle no longer carries: trash (untouched), or ask. */
 function tbe_pack_decide_removed( bool $edited, bool $locked, string $ack ): string {
-	if ( ! $edited && ! $locked ) {
+	if ( ! $edited ) {
 		return 'trash';
 	}
-	return 'removed' === $ack ? 'kept' : 'removed';
+	return ( $locked || 'removed' === $ack ) ? 'kept' : 'removed';
 }
 
 /**
@@ -478,8 +476,10 @@ add_action(
 		}
 		check_admin_referer( 'tbe_pack_sync_now' );
 		foreach ( tbe_packs() as $pack ) {
-			tbe_sync_pack( $pack );
-			update_option( 'tbe_pack_sync_' . $pack['id'], md5( (string) wp_json_encode( $pack ) ), false );
+			// A pack that was never imported returns null and is left alone, fingerprint included.
+			if ( null !== tbe_sync_pack( $pack ) ) {
+				update_option( 'tbe_pack_sync_' . $pack['id'], md5( (string) wp_json_encode( $pack ) ), false );
+			}
 		}
 		wp_safe_redirect( add_query_arg( array( 'page' => 'tbe-settings', 'tab' => 'starter' ), admin_url( 'themes.php' ) ) );
 		exit;
