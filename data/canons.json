@@ -1,5 +1,5 @@
 {
- "_note": "Which tradition counts which book as scripture. The 66 books follow their testament (see inc/canon.php); the books below are planned and have no text on the site yet. Lists vary between churches. Checked against the comparison tables in Wikipedia's 'Biblical canon' article (CC BY-SA 4.0) and the sources it cites.",
+ "_note": "Which tradition counts which book as scripture. The 66 books follow their testament (see inc/canon.php); a book below with a file in data/further/ can be read on the site; the rest are marked \"Not on the site yet\". Lists vary between churches. Checked against the comparison tables in Wikipedia's 'Biblical canon' article (CC BY-SA 4.0) and the sources it cites.",
  "traditions": {
   "jewish": {
    "name": "Jewish",
@@ -51,7 +51,7 @@
       "ethiopian"
      ],
      "language": "Greek; Aramaic and Hebrew fragments at Qumran",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -63,7 +63,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -75,7 +75,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -87,7 +87,7 @@
       "ethiopian"
      ],
      "language": "Hebrew in part, and Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -99,7 +99,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -110,7 +110,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -121,7 +121,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -133,7 +133,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -145,7 +145,7 @@
       "ethiopian"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "The Ethiopian Orthodox church is said to accept all the Catholic deuterocanonical books except the Maccabees."
     }
    ]
@@ -167,7 +167,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "Ezra Kali in the Ethiopian canon."
     },
     {
@@ -188,7 +188,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "In the Ethiopian canon it is part of 2 Chronicles."
     },
     {
@@ -283,7 +283,7 @@
       "ethiopian"
      ],
      "language": "Latin and other languages; Hebrew original lost",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {

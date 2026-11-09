@@ -39,3 +39,8 @@ apocalypse-of-peter.json
   1 Enoch in Richard Laurence's translation, The Book of Enoch the Prophet (London: Kegan Paul, Trench and Co.,
   1883), public domain; read by tools/build_enoch.py from the OCR with word positions of the Cornell copy on the
   Internet Archive (item cu31924090062823). Laurence's own chapter numbering (1 to 105; he has no chapter XI).
+
+tobit.json, judith.json, wisdom.json, sirach.json, baruch.json, 1-maccabees.json, 2-maccabees.json,
+esther-additions.json, daniel-additions.json, 1-esdras.json, prayer-of-manasseh.json, 4-ezra.json
+  The King James Version with the Apocrypha (1769 Oxford text), public domain, from eBible.org's USFM files;
+  built by tools/build_kjva.py. 4-ezra.json (Ezra Sutu'el) is 2 Esdras chapters 3 to 14.

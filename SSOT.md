@@ -54,6 +54,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries), `cross-references` (32 cross-references, each filed on both passages, so 64 entries) and `gospels-and-canon` (8 entries, after two videos by C. J. Cornthwaite, restated in the site's own words). Every entry key starts with its pack id.
 - Glossary: 13 starter terms, created as drafts (`tbe_seed_terms()`).
 - Canons in `data/canons.json`: Jewish, Protestant, Catholic, Orthodox and Ethiopian. The deuterocanonical, further Orthodox and Ethiopian books are prepared sections marked "Not on the site yet", except 1 to 3 Meqabyan.
+- Further books from the KJV Apocrypha (public domain): Tobit, Judith, Wisdom, Sirach, Baruch, 1 and 2 Maccabees, the Additions to Esther and to Daniel, 1 Esdras, the Prayer of Manasseh and Ezra Sutu'el (2 Esdras 3 to 14).
 - Further books: 1, 2 and 3 Meqabyan (7, 21 and 10 chapters) in `data/further/`, the Wikisource translation from Ge'ez (CC BY-SA 4.0). Those files and the pages built from them stay under CC BY-SA 4.0, whatever the theme's licence. 1 Enoch (105 chapters, Richard Laurence 1883), Jubilees (50 chapters, R. H. Charles 1902), the Shepherd of Hermas (27 parts, J. B. Lightfoot) and the Apocalypse of Peter (Andrew Rutherfurd) are public domain. The Ethiopian list is still to be confirmed.
 - The brand mark is a broken inverted cross. It follows Sahih al-Bukhari 2476, cited on the Sources page.
 
