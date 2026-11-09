@@ -30,6 +30,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 `.claude/CLAUDE.md` records no owner decisions yet. The ones below come from the code and the changelog, with the date each was made. A new one goes into `.claude/CLAUDE.md` first, then here word for word.
 
+- 9 November 2026 (standing): the owner holds the licences for everything the owner pastes or uploads for the site, and it may be used without asking again: "everything i paste here are legal and LICENSED". Sources are still credited.
 - 9 November 2026: the owner holds the rights to use Bart D. Ehrman, *Lost Scriptures* (Oxford University Press, 2003), and the translation of the Apocalypse of Peter by J. K. Elliott that it prints: "i have all rights". The Ethiopic chapters of the Apocalypse of Peter on the site come from it.
 - 4 November 2026: the structured data names Mohd Elfie Nieshaem Juferi as the author of every entry, whoever the WordPress user is. Nothing visible changes (`tbe_ld_person()`, `tools/test_schema_author.php`).
 - 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
