@@ -604,7 +604,8 @@ function tbe_render_pack_dry_run( array $packs ): void {
 		if ( ! tbe_pack_posts( (string) $pack['id'] ) ) {
 			continue;
 		}
-		$rows = array_filter( tbe_pack_plan( $pack ), static fn( $i ) => 'current' !== $i['action'] );
+		$rows    = array_filter( tbe_pack_plan( $pack ), static fn( $i ) => 'current' !== $i['action'] );
+		$in_pack = array_map( static fn( $e ) => (string) $e['key'], $pack['entries'] );
 		if ( ! $rows ) {
 			continue;
 		}
@@ -613,7 +614,7 @@ function tbe_render_pack_dry_run( array $packs ): void {
 		foreach ( $rows as $row ) {
 			echo '<tr><td>' . esc_html( $row['title'] ) . '</td><td>' . esc_html( $labels[ $row['action'] ] ?? $row['action'] ) . '</td><td>';
 			if ( in_array( $row['action'], array( 'newer', 'removed', 'kept' ), true ) && $row['post_id'] ) {
-				foreach ( array( 'take' => ( 'removed' === $row['action'] ? __( 'Move to the Trash', 'tbe-child' ) : __( 'Take the bundled text', 'tbe-child' ) ), 'keep' => __( 'Keep mine', 'tbe-child' ) ) as $choice => $text ) {
+				foreach ( array( 'take' => ( in_array( $row['key'], $in_pack, true ) ? __( 'Take the bundled text', 'tbe-child' ) : __( 'Move to the Trash', 'tbe-child' ) ), 'keep' => __( 'Keep mine', 'tbe-child' ) ) as $choice => $text ) {
 					printf(
 						'<form method="post" action="%1$s" style="display:inline"><input type="hidden" name="action" value="tbe_pack_item"><input type="hidden" name="pack" value="%2$s"><input type="hidden" name="key" value="%3$s"><input type="hidden" name="choice" value="%4$s">%5$s<button type="submit" class="button button-small">%6$s</button></form> ',
 						esc_url( admin_url( 'admin-post.php' ) ),
@@ -646,7 +647,7 @@ function tbe_render_pack_dry_run( array $packs ): void {
 		return;
 	}
 	echo '<table class="widefat striped"><thead><tr><th scope="col">' . esc_html__( 'When', 'tbe-child' ) . '</th><th scope="col">' . esc_html__( 'Entry', 'tbe-child' ) . '</th><th scope="col">' . esc_html__( 'What happened', 'tbe-child' ) . '</th></tr></thead><tbody>';
-	foreach ( array_slice( $log, 0, 30 ) as $line ) {
+	foreach ( $log as $line ) {
 		echo '<tr><td>' . esc_html( wp_date( 'Y-m-d H:i', (int) $line['t'] ) ) . '</td><td>' . esc_html( (string) $line['key'] ) . '</td><td>' . esc_html( (string) $line['action'] ) . '</td></tr>';
 	}
 	echo '</tbody></table>';
