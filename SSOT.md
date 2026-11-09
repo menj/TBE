@@ -48,6 +48,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Samaritan Pentateuch comparison: Genesis to Deuteronomy against the Masoretic text, `data/sp/`, from the CACCHT dataset of Stefan Schorch's edition (CC BY-NC 4.0). That data and the pages built from it stay under CC BY-NC 4.0.
 - Dead Sea Scrolls comparison: Isaiah 1 to 5 against 1QIsa-a only. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
 - JPS 1917 parallel text: Genesis only (`data/jps/`).
+- Brown-Driver-Briggs (1906, public domain) for the Hebrew lexicon pages in `data/lexicon/bdb/`, from the Enhanced BDB pages at ericlevy.com.
 - Lexicon: every Hebrew and Greek Strong's number in `data/lexicon/`, from STEPBible's TBESG and TBESH (CC BY 4.0), and Metzger's frequency list in `data/lexicon/metzger.json`.
 - Manuscripts evidence from the printed apparatuses: `data/manuscripts/editions.json` (UBS for all twenty-two passages, Swanson for the four in Matthew) with page images in `assets/img/manuscripts/books/`.
 - Manuscripts: twenty-two New Testament passages in `data/manuscripts/passages.json`, built from the CNTR transcriptions (CC BY-SA 4.0). That file and the pages built from it stay under CC BY-SA 4.0, whatever the theme's licence.
@@ -84,6 +85,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - STEPBible and Tyndale House Cambridge for the interlinear data.
 - Sefaria for the JPS 1917 text, and CACCHT (ETCBC, Martin Abegg's data) for the scroll comparison.
 - Stefan Schorch's edition and the CACCHT Samaritan Pentateuch dataset (Højgaard, Naaijer, Schorch) with CC BY-NC 4.0, on the Sources page and under each Pentateuch interlinear.
+- Brown, Driver and Briggs (Clarendon Press, 1906) and the ericlevy.com pages, under each Brown-Driver-Briggs article.
 - STEP Bible for the lexicon's definitions (CC BY 4.0), with Abbott-Smith and the abridged Brown-Driver-Briggs named, and Metzger's *Lexical Aids* for the frequency list, on the Sources page and on every lexicon page.
 - The titles, editors and publishers of the United Bible Societies *Greek New Testament* and Swanson's *New Testament Greek Manuscripts: Matthew*, on the Sources page and beside their evidence on each manuscripts page.
 - The credit under each manuscript photograph: its author where known, its licence and a link to its page on Wikimedia Commons or the Internet Archive.

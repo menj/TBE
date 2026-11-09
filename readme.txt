@@ -113,6 +113,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The Manuscripts pages are built from the transcriptions of the early Greek manuscripts by Alan Bunning and the Center for New Testament Restoration, CC BY-SA 4.0, and share that licence. Their English wording is from the public-domain KJV, World English Bible and Berean Standard Bible. The lexicon's definitions are from STEP Bible's brief lexicons (CC BY 4.0), and its Greek frequency list from Bruce M. Metzger's Lexical Aids for Students of New Testament Greek. The manuscript photographs come from Wikimedia Commons, each credited under the picture. The evidence of later manuscripts comes from the United Bible Societies Greek New Testament and from Reuben J. Swanson's New Testament Greek Manuscripts: Matthew, used by the owner's permission.
 * The text of 1, 2 and 3 Meqabyan is the English translation from Ge'ez made by Wikisource contributors, CC BY-SA 4.0, and shares that licence. 1 Enoch (Richard Laurence, 1883), Jubilees (R. H. Charles, 1902), the Shepherd of Hermas (J. B. Lightfoot, 1891) and the Greek Apocalypse of Peter (Andrew Rutherfurd, 1896) are public-domain translations. The Ethiopic Apocalypse of Peter is J. K. Elliott's translation as printed in Bart D. Ehrman's Lost Scriptures (Oxford University Press, 2003), used by the owner's permission.
 * The deuterocanonical books and Ezra Sutu'el are the King James Version with the Apocrypha (1769), public domain, from eBible.org.
+* The Brown-Driver-Briggs articles are the 1906 Clarendon Press lexicon (public domain), as set out in the Enhanced Brown-Driver-Briggs pages at ericlevy.com.
 * The Samaritan Pentateuch comparison is built from the CACCHT dataset of Stefan Schorch's edition (Christian Canu Højgaard, Martijn Naaijer and Stefan Schorch), CC BY-NC 4.0, and shares that licence.
 * Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic, Abyssinica SIL and Montserrat under the SIL Open Font License.
 * Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
@@ -120,6 +121,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 == Changelog ==
 
 = 0.10.22 =
+* Hebrew lexicon pages give the full Brown-Driver-Briggs article.
 * The Hebrew interlinear of Genesis to Deuteronomy marks where the Samaritan Pentateuch differs from the Masoretic text.
 * 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon can be read, in the English translation from Ge'ez made on Wikisource.
 * The deuterocanonical books and Ezra Sutu'el (4 Ezra) can be read in the King James Version.

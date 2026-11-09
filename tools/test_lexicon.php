@@ -110,5 +110,11 @@ check( false !== strpos( $read( 'inc/interlinear.php' ), 'tbe_il_strongs_links('
 check( false !== strpos( $read( 'functions.php' ), "'lexicon'" ), 'functions.php loads inc/lexicon.php' );
 check( is_readable( TBE_DIR . '/data/lexicon/README.txt' ), 'the data folder says where the data comes from' );
 
+$bdb = TBE_Lexicon::bdb( 'H24' );
+check( $bdb && false !== strpos( $bdb[0], '<i>fresh, young ears</i>' ) && false === strpos( implode( ' ', $bdb ), 'TWOT' ), 'BDB: the article for H0024 (abib), without the TWOT and GK numbers' );
+$page = tbe_view_lexicon_entry( TBE_Lexicon::entry( 'H0024' ) );
+check( false !== strpos( $page, 'Brown-Driver-Briggs</h2>' ) && false !== strpos( $page, 'Clarendon Press, 1906' ), 'BDB: shown on the Hebrew page with its credit' );
+check( array() === TBE_Lexicon::bdb( 'G3056' ) && false === strpos( tbe_view_lexicon_entry( TBE_Lexicon::entry( 'G3056' ) ), 'tbe-lex__bdb' ), 'BDB: not on Greek pages' );
+
 echo $fail ? "\n$fail failed\n" : "\nall passed\n";
 exit( $fail ? 1 : 0 );
