@@ -111,7 +111,13 @@
 		} );
 		document.addEventListener( 'mouseout', function ( event ) {
 			var el = trigger( event.target );
-			if ( el && el === current && ! el.contains( event.relatedTarget ) ) {
+			// WCAG 1.4.13: the pointer may move from the trigger onto the tip without closing it.
+			if ( el && el === current && ! el.contains( event.relatedTarget ) && ! ( tip && tip.contains( event.relatedTarget ) ) ) {
+				hide();
+			}
+		} );
+		tip.addEventListener( 'mouseout', function ( event ) {
+			if ( current && ! tip.contains( event.relatedTarget ) && ! current.contains( event.relatedTarget ) ) {
 				hide();
 			}
 		} );

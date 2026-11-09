@@ -25,7 +25,8 @@
 	font-family: var(--tbe-ui);
 	font-size: 0.85rem;
 	line-height: 1.5;
-	pointer-events: none;
+	/* WCAG 1.4.13: hoverable. The pointer can rest on the tip; Escape dismisses it. */
+	pointer-events: auto;
 }
 .tbe-tooltip[hidden] { display: none; }
 .tbe-tooltip__title { display: block; margin-bottom: 0.2rem; font-weight: 600; letter-spacing: 0.02em; }
