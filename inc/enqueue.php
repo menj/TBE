@@ -300,8 +300,16 @@ function tbe_content_scroll_regions( $html ) {
 		return $html;
 	}
 	$html = (string) $html;
-	if ( false !== stripos( $html, '<table' ) && false === strpos( $html, 'tbe-scroll' ) && false === strpos( $html, 'tbe-tablewrap' ) ) {
-		$html = (string) preg_replace( '#<table\b.*?</table>#is', '<div class="tbe-scroll" role="group" tabindex="0" aria-label="' . esc_attr__( 'Table', 'tbe-child' ) . '">$0</div>', $html );
+	if ( false !== stripos( $html, '<table' ) ) {
+		$attrs = ' role="group" tabindex="0" aria-label="' . esc_attr__( 'Table', 'tbe-child' ) . '"';
+		$html  = (string) preg_replace_callback(
+			'#<div\b[^>]*\b(?:tbe-tablewrap|tbe-scroll)\b[^>]*>(?:(?!</table>).)*</table>.*?</div>|<table\b.*?</table>#is',
+			static function ( $m ) use ( $attrs ) {
+				// A table already in the theme's own box stays as it is.
+				return 0 === stripos( $m[0], '<table' ) ? '<div class="tbe-scroll"' . $attrs . '>' . $m[0] . '</div>' : $m[0];
+			},
+			$html
+		);
 	}
 	if ( false !== stripos( $html, '<pre' ) ) {
 		$html = (string) preg_replace( '#<pre\b(?![^>]*\btabindex\s*=)#i', '<pre tabindex="0"', $html );

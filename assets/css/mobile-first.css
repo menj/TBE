@@ -31,10 +31,14 @@
 /* Tap targets of at least 24 by 24 CSS pixels (WCAG 2.5.8). */
 .wp-block-post-title a,
 .wp-block-post-author-name__link { padding-block: 2px; }
-.page-numbers { min-height: 24px; min-width: 24px; box-sizing: border-box; }
+.page-numbers,
+.wp-block-query-pagination-next,
+.wp-block-query-pagination-previous { min-height: 24px; min-width: 24px; box-sizing: border-box; }
 .tbe-player__seek { min-height: 24px; }
 
 /* Touch: pagination and title links get a larger target. */
 @media (pointer: coarse) {
-	.page-numbers { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+	.page-numbers,
+	.wp-block-query-pagination-next,
+	.wp-block-query-pagination-previous { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
 }
