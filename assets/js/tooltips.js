@@ -117,7 +117,13 @@
 		}
 		function closeSoon() {
 			cancelClose();
-			closeTimer = window.setTimeout( hide, 250 );
+			closeTimer = window.setTimeout( function () {
+				// A trigger that still has keyboard focus keeps its tip.
+				if ( current && current.contains( document.activeElement ) ) {
+					return;
+				}
+				hide();
+			}, 250 );
 		}
 		document.addEventListener( 'mouseover', function ( event ) {
 			if ( current && trigger( event.target ) === current ) {

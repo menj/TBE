@@ -1,6 +1,5 @@
 /* Settings screen — minimal, tabbed. */
-.tbe-admin { max-width: 52rem; }
-.tbe-admin h1 { font-weight: 500; margin-bottom: 1rem; }
+.tbe-admin { max-width: 56rem; --tbe-a: #6e1f2e; --tbe-a-ink: #fff; --tbe-line: #dcdcde; --tbe-soft: #f6f0f1; }
 
 .tbe-tabs { display: flex; gap: 0.25rem; border-bottom: 1px solid #dcdcde; margin-bottom: 1.25rem; flex-wrap: wrap; }
 .tbe-tab {
@@ -58,3 +57,77 @@
 .tbe-profiles label { display: flex; align-items: center; gap: 0.4rem; }
 .tbe-profiles input { width: 100%; }
 .tbe-profile-icon svg { width: 18px; height: 18px; display: block; }
+
+/* ---- Settings UI: header, cards, rows, toggles, ranges, choice cards, footer ---- */
+.tbe-admin__head { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; margin: 1rem 0 0; border: 1px solid var(--tbe-line); border-bottom: 0; border-radius: 6px 6px 0 0; background: linear-gradient(135deg, #fff 0%, var(--tbe-soft) 100%); }
+.tbe-admin__icon.dashicons { width: 2.75rem; height: 2.75rem; font-size: 1.75rem; line-height: 2.75rem; text-align: center; border-radius: 8px; background: var(--tbe-a); color: var(--tbe-a-ink); flex: none; }
+.tbe-admin__titles { flex: 1; min-width: 0; }
+.tbe-admin .tbe-admin__head h1 { margin: 0; padding: 0; font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.tbe-admin__desc { margin: 0.25rem 0 0; color: #50575e; font-size: 0.875rem; }
+.tbe-admin__badge { flex: none; padding: 0.2rem 0.6rem; border: 1px solid var(--tbe-line); border-radius: 999px; background: #fff; font-size: 0.75rem; color: #50575e; }
+
+.tbe-tabs { margin: 0 0 1.25rem; padding: 0 0.5rem; background: #fff; border: 1px solid var(--tbe-line); border-radius: 0 0 6px 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+.tbe-tab { display: inline-flex; align-items: center; gap: 0.35rem; white-space: nowrap; min-height: 44px; }
+.tbe-tab .dashicons { width: 18px; height: 18px; font-size: 18px; }
+.tbe-tab:focus-visible, .tbe-admin a:focus-visible { outline: 2px solid var(--tbe-a); outline-offset: 2px; box-shadow: none; }
+
+.tbe-card { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04); border-radius: 6px; padding: 1.5rem 1.75rem; }
+.tbe-card > .description { margin-top: 0; }
+
+/* Field row: label left, control right on wide screens */
+.tbe-admin .tbe-card .tbe-field { display: grid; grid-template-columns: minmax(12rem, 16rem) 1fr; gap: 0.25rem 1.5rem; align-items: start; padding: 0.9rem 0; margin: 0; border-top: 1px solid #f0f0f1; }
+.tbe-admin .tbe-card .tbe-field:first-child, .tbe-admin .tbe-card > .description + .tbe-field { border-top: 0; }
+.tbe-admin .tbe-card .tbe-field > label:first-child, .tbe-admin .tbe-card .tbe-field > legend { grid-column: 1; margin: 0; font-weight: 600; }
+.tbe-admin .tbe-card .tbe-field > :not(label):not(legend) { grid-column: 2; }
+.tbe-admin .tbe-card .tbe-field > .description { margin: 0; grid-column: 2; }
+.tbe-admin .tbe-card .tbe-field > input[type="text"], .tbe-admin .tbe-card .tbe-field > input[type="url"], .tbe-admin .tbe-card .tbe-field > select, .tbe-admin .tbe-card .tbe-field > textarea { width: 100%; max-width: 32rem; min-height: 40px; border-radius: 6px; }
+.tbe-admin .tbe-card .tbe-field > textarea { min-height: 0; resize: vertical; }
+.tbe-admin .tbe-card input:focus-visible, .tbe-admin .tbe-card select:focus-visible, .tbe-admin .tbe-card textarea:focus-visible { outline: 2px solid var(--tbe-a); outline-offset: 1px; box-shadow: none; border-color: var(--tbe-a); }
+.tbe-admin .tbe-card h2 { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--tbe-line); }
+
+/* Toggle switch (a checkbox with role="switch") */
+.tbe-admin .tbe-card .tbe-field--toggle { display: block; }
+.tbe-admin .tbe-card .tbe-field--toggle > label.tbe-toggle { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; position: relative; margin: 0; font-weight: 400; }
+.tbe-toggle input { position: absolute; opacity: 0; width: 44px; height: 24px; margin: 0; cursor: pointer; }
+.tbe-toggle__track { flex: none; position: relative; width: 44px; height: 24px; border-radius: 12px; background: #8c8f94; transition: background 0.15s; }
+.tbe-toggle__track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform 0.15s; }
+.tbe-toggle input:checked + .tbe-toggle__track { background: var(--tbe-a); }
+.tbe-toggle input:checked + .tbe-toggle__track::after { transform: translateX(20px); }
+.tbe-toggle input:focus-visible + .tbe-toggle__track { outline: 2px solid var(--tbe-a); outline-offset: 2px; }
+.tbe-admin .button-primary { background: var(--tbe-a); border-color: var(--tbe-a); min-height: 40px; padding-inline: 1.25rem; font-weight: 600; border-radius: 6px; }
+.tbe-admin .button-primary:hover, .tbe-admin .button-primary:focus { background: #561823; border-color: #561823; color: #fff; }
+.tbe-admin .button-primary:focus-visible { outline: 2px solid var(--tbe-a); outline-offset: 2px; box-shadow: none; }
+.tbe-toggle__text { flex: 1; }
+.tbe-admin .tbe-card .tbe-field--toggle > label.tbe-toggle.is-on .tbe-toggle__text { font-weight: 500; }
+
+/* Range with a live value */
+.tbe-range { display: flex; align-items: center; gap: 0.75rem; max-width: 28rem; }
+.tbe-range input[type="range"] { flex: 1; height: 24px; accent-color: var(--tbe-a); }
+.tbe-range__value { min-width: 2.5rem; padding: 0.15rem 0.5rem; border: 1px solid var(--tbe-line); border-radius: 6px; background: var(--tbe-soft); text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* Visual selector cards */
+.tbe-choice { border: 0; padding-inline: 0; min-width: 0; }
+.tbe-choice__grid { grid-column: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.75rem; max-width: 36rem; }
+.tbe-choice__card { position: relative; display: flex; flex-direction: column; gap: 0.15rem; padding: 0.75rem 1rem; border: 1px solid var(--tbe-line); border-radius: 6px; background: #fff; cursor: pointer; }
+.tbe-choice__card input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.tbe-choice__name { font-weight: 600; }
+.tbe-choice__desc { font-size: 0.8125rem; color: #50575e; }
+.tbe-choice__card:has(input:checked) { border-color: var(--tbe-a); background: var(--tbe-soft); box-shadow: 0 0 0 1px var(--tbe-a); }
+.tbe-choice__card:has(input:focus-visible) { outline: 2px solid var(--tbe-a); outline-offset: 2px; }
+
+.tbe-scheme:has(input:focus-visible) { outline: 2px solid var(--tbe-a); outline-offset: 2px; }
+.tbe-color input[type="color"] { width: 3rem; height: 2.25rem; border-radius: 6px; cursor: pointer; }
+
+.tbe-admin__foot { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 1.25rem 0 0; padding-top: 0.75rem; border-top: 1px solid var(--tbe-line); font-size: 0.8125rem; color: #646970; }
+
+@media (max-width: 782px) {
+	.tbe-admin__head { flex-wrap: wrap; padding: 1rem; }
+	.tbe-admin__badge { order: 3; }
+	.tbe-card { padding: 1rem; }
+	.tbe-admin .tbe-card .tbe-field { grid-template-columns: 1fr; }
+	.tbe-admin .tbe-card .tbe-field > *, .tbe-admin .tbe-card .tbe-field > :not(label):not(legend), .tbe-admin .tbe-card .tbe-field > .description, .tbe-admin .tbe-card .tbe-field > label:first-child, .tbe-admin .tbe-card .tbe-field > legend, .tbe-choice__grid { grid-column: 1; }
+	.tbe-admin .tbe-card .tbe-field > input[type="text"], .tbe-admin .tbe-card .tbe-field > input[type="url"], .tbe-admin .tbe-card .tbe-field > select { max-width: none; font-size: 16px; }
+	.tbe-choice__grid { grid-template-columns: 1fr; max-width: none; }
+	.tbe-range { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) { .tbe-toggle__track, .tbe-toggle__track::after { transition: none; } }

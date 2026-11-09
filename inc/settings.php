@@ -323,24 +323,31 @@ function tbe_render_settings_page(): void {
 	$s    = tbe_settings();
 	?>
 	<div class="wrap tbe-admin">
-		<h1><?php esc_html_e( 'TBE settings', 'tbe-child' ); ?></h1>
+		<div class="tbe-admin__head">
+			<span class="dashicons dashicons-book-alt tbe-admin__icon" aria-hidden="true"></span>
+			<div class="tbe-admin__titles">
+				<h1><?php esc_html_e( 'TBE settings', 'tbe-child' ); ?></h1>
+				<p class="tbe-admin__desc"><?php esc_html_e( 'How the Bible reader, the commentary pages and the site look and behave.', 'tbe-child' ); ?></p>
+			</div>
+			<span class="tbe-admin__badge"><?php echo esc_html( sprintf( /* translators: %s: theme version */ __( 'Version %s', 'tbe-child' ), TBE_VERSION ) ); ?></span>
+		</div>
 
 		<nav class="tbe-tabs" aria-label="<?php esc_attr_e( 'Settings sections', 'tbe-child' ); ?>">
 			<?php foreach ( $tabs as $slug => $label ) : ?>
 				<a class="tbe-tab<?php echo $slug === $tab ? ' is-active' : ''; ?>"
 					href="<?php echo esc_url( add_query_arg( array( 'page' => 'tbe-settings', 'tab' => $slug ), admin_url( 'themes.php' ) ) ); ?>"
-					<?php echo $slug === $tab ? 'aria-current="page"' : ''; ?>><?php echo esc_html( $label ); ?></a>
+					<?php echo $slug === $tab ? 'aria-current="page"' : ''; ?>><span class="dashicons <?php echo esc_attr( tbe_settings_tab_icon( $slug ) ); ?>" aria-hidden="true"></span><?php echo esc_html( $label ); ?></a>
 			<?php endforeach; ?>
 		</nav>
 
 		<?php settings_errors(); ?>
 
 		<?php if ( 'starter' === $tab ) : ?>
-			<div class="tbe-panel"><?php tbe_render_starter_tab(); ?></div>
+			<div class="tbe-panel tbe-card"><?php tbe_render_starter_tab(); ?></div>
 		<?php elseif ( 'errors' === $tab ) : ?>
-			<div class="tbe-panel"><?php tbe_render_errors_tab(); ?></div>
+			<div class="tbe-panel tbe-card"><?php tbe_render_errors_tab(); ?></div>
 		<?php else : ?>
-		<form method="post" action="options.php" class="tbe-panel">
+		<form method="post" action="options.php" class="tbe-panel tbe-card">
 			<?php settings_fields( 'tbe_settings_group' ); ?>
 			<input type="hidden" name="tbe_settings[_tab]" value="<?php echo esc_attr( $tab ); ?>">
 
@@ -360,13 +367,14 @@ function tbe_render_settings_page(): void {
 				case 'reader':
 					tbe_field_number( 'font_scale', __( 'Reading size (%)', 'tbe-child' ), $s['font_scale'], 80, 140, __( '100 is the default. Visitors can adjust size themselves.', 'tbe-child' ) );
 					tbe_field_check( 'verse_numbers', __( 'Show verse numbers', 'tbe-child' ), $s['verse_numbers'] );
-					printf(
-						'<div class="tbe-field"><label for="tbe-layout">%1$s</label><select id="tbe-layout" name="tbe_settings[layout]"><option value="verse" %2$s>%3$s</option><option value="flow" %4$s>%5$s</option></select></div>',
-						esc_html__( 'Default text layout', 'tbe-child' ),
-						selected( $s['layout'], 'verse', false ),
-						esc_html__( 'Verse by verse, with notes under each verse', 'tbe-child' ),
-						selected( $s['layout'], 'flow', false ),
-						esc_html__( 'Continuous paragraphs', 'tbe-child' )
+					tbe_field_choice(
+						'layout',
+						__( 'Default text layout', 'tbe-child' ),
+						(string) $s['layout'],
+						array(
+							'verse' => array( __( 'Verse by verse', 'tbe-child' ), __( 'With notes under each verse', 'tbe-child' ) ),
+							'flow'  => array( __( 'Continuous', 'tbe-child' ), __( 'Paragraphs of running text', 'tbe-child' ) ),
+						)
 					);
 					tbe_field_check( 'boxes_open', __( 'Show commentary boxes open by default', 'tbe-child' ), $s['boxes_open'] );
 					tbe_field_check( 'glossary_tooltips', __( 'Underline glossary terms in commentary and show a tooltip', 'tbe-child' ), $s['glossary_tooltips'] );
@@ -405,8 +413,29 @@ function tbe_render_settings_page(): void {
 			?>
 		</form>
 		<?php endif; ?>
+		<div class="tbe-admin__foot">
+			<span><?php echo esc_html( sprintf( /* translators: %s: theme version */ __( 'TBE %s', 'tbe-child' ), TBE_VERSION ) ); ?></span>
+			<a href="<?php echo esc_url( home_url( '/sources/' ) ); ?>"><?php esc_html_e( 'Sources and credits', 'tbe-child' ); ?></a>
+		</div>
 	</div>
 	<?php
+}
+
+/** Dashicon for a settings tab. */
+function tbe_settings_tab_icon( string $slug ): string {
+	$icons = array(
+		'general'    => 'dashicons-admin-generic',
+		'appearance' => 'dashicons-art',
+		'reader'     => 'dashicons-book',
+		'article'    => 'dashicons-media-document',
+		'reading'    => 'dashicons-chart-bar',
+		'social'     => 'dashicons-share',
+		'esv'        => 'dashicons-text-page',
+		'login'      => 'dashicons-admin-users',
+		'starter'    => 'dashicons-download',
+		'errors'     => 'dashicons-warning',
+	);
+	return $icons[ $slug ] ?? 'dashicons-admin-generic';
 }
 
 function tbe_render_appearance_tab( array $s ): void {
@@ -468,13 +497,14 @@ function tbe_sanitize_ctx_lines( string $text ): string {
 function tbe_render_article_tab( array $s ): void {
 	echo '<p class="description">' . esc_html__( 'The pieces around a single commentary entry. The excerpt shows under the title, the dates and reading time under that. The notes and sources block and the related entries need no switch: each shows when the entry has something to put in it.', 'tbe-child' ) . '</p>';
 	tbe_field_check( 'toc', __( 'Show the contents when an entry has three or more sections (level-two headings)', 'tbe-child' ), $s['toc'] );
-	printf(
-		'<div class="tbe-field"><label for="tbe-toc-style">%1$s</label><select id="tbe-toc-style" name="tbe_settings[toc_style]"><option value="inline" %2$s>%3$s</option><option value="sticky" %4$s>%5$s</option></select></div>',
-		esc_html__( 'Contents style', 'tbe-child' ),
-		selected( $s['toc_style'], 'inline', false ),
-		esc_html__( 'In the page, above the text', 'tbe-child' ),
-		selected( $s['toc_style'], 'sticky', false ),
-		esc_html__( 'A bar that stays at the top of the window and opens on a tap', 'tbe-child' )
+	tbe_field_choice(
+		'toc_style',
+		__( 'Contents style', 'tbe-child' ),
+		(string) $s['toc_style'],
+		array(
+			'inline' => array( __( 'In the page', 'tbe-child' ), __( 'Above the text', 'tbe-child' ) ),
+			'sticky' => array( __( 'Sticky bar', 'tbe-child' ), __( 'Stays at the top of the window and opens on a tap', 'tbe-child' ) ),
+		)
 	);
 	tbe_field_check( 'answer_box', __( 'Show the "In short" box with the entry\'s key points', 'tbe-child' ), $s['answer_box'] );
 	tbe_field_check( 'next_step', __( 'Show the next step at the end: read the passage, and the next entry on the book', 'tbe-child' ), $s['next_step'] );
@@ -505,14 +535,16 @@ function tbe_render_reading_tab( array $s ): void {
 			<label class="tbe-check"><input type="checkbox" name="tbe_settings[progress_types][]" value="<?php echo esc_attr( $type ); ?>" <?php checked( in_array( $type, (array) $s['progress_types'], true ) ); ?>> <?php echo esc_html( $label ); ?></label>
 		<?php endforeach; ?>
 	</fieldset>
-	<div class="tbe-field">
-		<label for="tbe-progress-position"><?php esc_html_e( 'Position', 'tbe-child' ); ?></label>
-		<select id="tbe-progress-position" name="tbe_settings[progress_position]">
-			<option value="top" <?php selected( $s['progress_position'], 'top' ); ?>><?php esc_html_e( 'Top of the window, under the admin bar', 'tbe-child' ); ?></option>
-			<option value="bottom" <?php selected( $s['progress_position'], 'bottom' ); ?>><?php esc_html_e( 'Bottom of the window', 'tbe-child' ); ?></option>
-		</select>
-	</div>
 	<?php
+	tbe_field_choice(
+		'progress_position',
+		__( 'Position', 'tbe-child' ),
+		(string) $s['progress_position'],
+		array(
+			'top'    => array( __( 'Top', 'tbe-child' ), __( 'Top of the window, under the admin bar', 'tbe-child' ) ),
+			'bottom' => array( __( 'Bottom', 'tbe-child' ), __( 'Bottom of the window', 'tbe-child' ) ),
+		)
+	);
 	tbe_field_number( 'progress_height', __( 'Height (pixels)', 'tbe-child' ), $s['progress_height'], 1, 12, __( 'From 1 to 12. The default is 3.', 'tbe-child' ) );
 	$active = tbe_active_colors();
 	?>
@@ -572,6 +604,28 @@ function tbe_render_esv_tab( array $s ): void {
 
 /* Field helpers ----------------------------------------------------------- */
 
+/**
+ * A choice between styles, shown as a grid of selectable cards. It posts the same name and values as the
+ * select it replaces.
+ *
+ * @param array<string,array{0:string,1:string}> $choices Value => array( label, short description ).
+ */
+function tbe_field_choice( string $key, string $label, string $value, array $choices ): void {
+	echo '<fieldset class="tbe-field tbe-choice"><legend>' . esc_html( $label ) . '</legend><div class="tbe-choice__grid">';
+	foreach ( $choices as $val => $text ) {
+		printf(
+			'<label class="tbe-choice__card"><input type="radio" name="tbe_settings[%1$s]" value="%2$s" %3$s><span class="tbe-choice__name">%4$s</span><span class="tbe-choice__desc">%5$s</span></label>',
+			esc_attr( $key ),
+			esc_attr( (string) $val ),
+			checked( $value, (string) $val, false ),
+			esc_html( $text[0] ),
+			esc_html( $text[1] )
+		);
+	}
+	echo '</div></fieldset>';
+}
+
+
 function tbe_field_text( string $key, string $label, $value, string $help = '', string $class = '' ): void {
 	printf(
 		'<div class="tbe-field"><label for="tbe-%1$s">%2$s</label><input type="text" id="tbe-%1$s" name="tbe_settings[%1$s]" value="%3$s" class="regular-text %5$s">%4$s</div>',
@@ -585,7 +639,7 @@ function tbe_field_text( string $key, string $label, $value, string $help = '', 
 
 function tbe_field_number( string $key, string $label, $value, int $min, int $max, string $help = '' ): void {
 	printf(
-		'<div class="tbe-field"><label for="tbe-%1$s">%2$s</label><input type="number" id="tbe-%1$s" name="tbe_settings[%1$s]" value="%3$d" min="%4$d" max="%5$d" class="small-text">%6$s</div>',
+		'<div class="tbe-field"><label for="tbe-%1$s">%2$s</label><div class="tbe-range"><input type="range" id="tbe-%1$s" name="tbe_settings[%1$s]" value="%3$d" min="%4$d" max="%5$d" step="1" data-tbe-range="tbe-%1$s-value"><output id="tbe-%1$s-value" for="tbe-%1$s" class="tbe-range__value">%3$d</output></div>%6$s</div>',
 		esc_attr( $key ),
 		esc_html( $label ),
 		(int) $value,
@@ -597,7 +651,7 @@ function tbe_field_number( string $key, string $label, $value, int $min, int $ma
 
 function tbe_field_check( string $key, string $label, $value ): void {
 	printf(
-		'<div class="tbe-field"><label><input type="checkbox" name="tbe_settings[%1$s]" value="1" %3$s> %2$s</label></div>',
+		'<div class="tbe-field tbe-field--toggle"><label class="tbe-toggle"><input type="checkbox" role="switch" name="tbe_settings[%1$s]" value="1" %3$s><span class="tbe-toggle__track" aria-hidden="true"></span><span class="tbe-toggle__text">%2$s</span></label></div>',
 		esc_attr( $key ),
 		esc_html( $label ),
 		checked( ! empty( $value ), true, false )
