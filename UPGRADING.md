@@ -18,6 +18,10 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 ## Version notes
 
+### To 0.10.24
+
+The new pack is marked `manual` in its JSON: the automatic sync never first-imports it, because its notes need a human check. Import it from Appearance, TBE, Starter commentary, as drafts or published. Packs already imported are kept in step as before (the `2-peter-3-16` entry takes its new line, and the canon notes change at once). The page references to Davidson, and the Sources entry, need a human check against the book. Modern works (Barton, Beckwith) named in the plan are not cited.
+
 ### To 0.10.23
 
 Drop-in update. The settings page is redrawn; option keys, sanitisers and saved values are untouched. Checked at 1280, 782 and 375 px: no horizontal scroll, every control labelled, tabs reachable by keyboard.

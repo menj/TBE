@@ -4,7 +4,7 @@
   "jewish": {
    "name": "Jewish",
    "full": "Jewish (Tanakh)",
-   "note": "The Tanakh counts 24 books, the same writings as the Protestant Old Testament, arranged as Torah, Prophets and Writings."
+   "note": "The Tanakh counts 24 books, the same writings as the Protestant Old Testament, arranged as Torah, Prophets and Writings. Josephus, near the end of the first century, counts twenty-two books for the same writings (Davidson, pp. 28, 48)."
   },
   "protestant": {
    "name": "Protestant",
@@ -14,17 +14,17 @@
   "catholic": {
    "name": "Catholic",
    "full": "Roman Catholic",
-   "note": "73 books: the 66, plus the deuterocanonical books."
+   "note": "73 books: the 66, plus the deuterocanonical books. The Council of Trent fixed the list in 1546 (Davidson, p. 123)."
   },
   "orthodox": {
    "name": "Orthodox",
    "full": "Eastern Orthodox",
-   "note": "The Catholic books and more, based on the Septuagint; the lists differ somewhat between Orthodox churches."
+   "note": "The Catholic books and more, based on the Septuagint; the lists differ somewhat between Orthodox churches. A synod at Jerusalem under Dositheus in 1672 received the deuterocanonical books (Davidson, pp. 123 to 124)."
   },
   "ethiopian": {
    "name": "Ethiopian",
    "full": "Ethiopian Orthodox Tewahedo",
-   "note": "The widest canon. Authorities and printings differ on the list, and a narrower and a broader canon are distinguished."
+   "note": "The widest canon. Authorities and printings differ on the list, and a narrower and a broader canon are distinguished. Davidson calls its canon “fluctuating” (p. 105)."
   }
  },
  "sections": [
@@ -35,7 +35,7 @@
     "catholic",
     "orthodox"
    ],
-   "intro": "Books that the Catholic and Orthodox churches count as scripture and the Tanakh and most Protestant Bibles do not. Most survive in Greek, in the Septuagint.",
+   "intro": "Books that the Catholic and Orthodox churches count as scripture and the Tanakh and most Protestant Bibles do not. Most survive in Greek, in the Septuagint. The Council of Trent listed them in 1546 (Davidson, p. 123).",
    "books": [
     {
      "slug": "tobit",
