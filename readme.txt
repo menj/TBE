@@ -122,6 +122,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 = 0.10.22 =
 * Hebrew lexicon pages give the full Brown-Driver-Briggs article.
+* Genesis 1 and 2 link to a six-version Polyglot of the Creation story (PDF).
 * The Hebrew interlinear of Genesis to Deuteronomy marks where the Samaritan Pentateuch differs from the Masoretic text.
 * 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon can be read, in the English translation from Ge'ez made on Wikisource.
 * The deuterocanonical books and Ezra Sutu'el (4 Ezra) can be read in the King James Version.

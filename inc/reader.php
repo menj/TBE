@@ -52,6 +52,20 @@ function tbe_render_reader(): string {
 	}
 }
 
+/**
+ * The Polyglot Bible of the Creation story (Genesis 1:1 to 2:3): a word-by-word table of the Masoretic Hebrew, the
+ * Samaritan Pentateuch, the Ge'ez, Targum Onkelos, the Syriac Peshitta and the Greek, each with a transliteration
+ * in Hebrew letters, supplied by the owner as assets/pdf/polyglot-creation-story.pdf (0.10.22). Shown on the
+ * reading and interlinear pages of Genesis 1 and 2.
+ */
+function tbe_polyglot_note( string $slug, int $chapter ): string {
+	if ( 'genesis' !== $slug || $chapter > 2 ) {
+		return '';
+	}
+	$url = get_stylesheet_directory_uri() . '/assets/pdf/polyglot-creation-story.pdf';
+	return '<aside class="tbe-notice tbe-polyglot"><p><strong>' . esc_html__( 'Polyglot Bible: the Creation story', 'tbe-child' ) . '</strong> ' . esc_html__( 'Genesis 1:1 to 2:3 word by word in six versions side by side: the Masoretic Hebrew, the Samaritan Pentateuch, the Ge’ez, Targum Onkelos, the Syriac Peshitta and the Greek Septuagint, each with a transliteration in Hebrew letters.', 'tbe-child' ) . ' <a class="tbe-btn tbe-btn--solid" href="' . esc_url( $url ) . '">' . esc_html__( 'Open the Polyglot (PDF, 41 pages)', 'tbe-child' ) . '</a></p></aside>';
+}
+
 function tbe_view_missing(): string {
 	return '<div class="tbe-reader"><h1 class="tbe-title">' . esc_html__( 'Passage not found', 'tbe-child' ) . '</h1><p>'
 		. sprintf(
@@ -276,6 +290,7 @@ function tbe_view_chapter( array $book, int $chapter ): string {
 		$out .= tbe_render_box( $entry, $slug, $chapter, true );
 	}
 	$out .= tbe_manuscripts_chapter_note( $slug, $chapter );
+	$out .= tbe_polyglot_note( $slug, $chapter );
 	$out .= tbe_render_notes_contents( $starts, $slug, $chapter );
 	$out .= tbe_render_related_essays( $entries );
 

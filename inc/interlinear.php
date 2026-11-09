@@ -313,6 +313,7 @@ function tbe_view_interlinear( array $book, int $chapter ): string {
 	$out .= '</div>';
 
 	$class = 'tbe-il tbe-il--' . ( $hebrew ? 'he' : 'gr' ) . ' tbe-il--hide-lemma tbe-il--hide-morph';
+	$out  .= tbe_polyglot_note( $slug, $chapter );
 	$out  .= '<div class="' . esc_attr( $class ) . '" id="tbe-il">';
 
 	if ( $dss ) {
