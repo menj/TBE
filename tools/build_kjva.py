@@ -13,7 +13,7 @@ italics marks are left out; the words are the KJV's.
 
 Usage:  python3 tools/build_kjva.py
 """
-import io, json, os, re, sys, urllib.request, zipfile
+import json, os, re, sys, urllib.request, zipfile
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 CACHE = os.path.join(ROOT, "tools", ".cache", "kjva")
@@ -62,11 +62,11 @@ def clean(text):
 
 def chapters_of(src):
     """{chapter: [(verse, text)]} from a USFM book."""
-    out, ch, verse = {}, 0, None
+    out, ch = {}, 0
     for line in src.splitlines():
         m = re.match(r"\\c (\d+)", line)
         if m:
-            ch, verse = int(m.group(1)), None
+            ch = int(m.group(1))
             out[ch] = []
             continue
         if not ch:

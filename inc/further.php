@@ -140,8 +140,9 @@ function tbe_further_breadcrumb( array $book, int $chapter = 0 ): string {
 
 /** The eyebrow over a further book: the section of the book list it belongs to. */
 function tbe_further_eyebrow( array $book ): string {
+	$id = TBE_Further::canon( (string) $book['slug'] )['section'] ?? '';
 	foreach ( TBE_Canon::data()['sections'] as $section ) {
-		if ( ( TBE_Further::canon( (string) $book['slug'] )['section'] ?? '' ) === $section['id'] ) {
+		if ( $id === $section['id'] ) {
 			return '<p class="tbe-eyebrow">' . esc_html( (string) $section['title'] ) . '</p>';
 		}
 	}
@@ -165,11 +166,8 @@ function tbe_view_further_book( array $book ): string {
 		$out .= '<div class="tbe-canon-line"><span class="tbe-canon-line__label">' . esc_html__( 'Counted as scripture by', 'tbe-child' ) . '</span>' . $chips . '</div>';
 	}
 	$out .= tbe_further_credit( $book );
-	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Chapters', 'tbe-child' ) . '</h2><ol class="tbe-chapters">';
 	$titled = '' !== (string) ( $book['chapters'][0]['title'] ?? '' );
-	if ( $titled ) {
-		$out = substr( $out, 0, -strlen( '<ol class="tbe-chapters">' ) ) . '<ol class="tbe-further__parts">';
-	}
+	$out   .= '<h2 class="tbe-ornament">' . esc_html__( 'Chapters', 'tbe-child' ) . '</h2><ol class="' . ( $titled ? 'tbe-further__parts' : 'tbe-chapters' ) . '">';
 	for ( $i = 1; $i <= $book['count']; $i++ ) {
 		$label = $titled ? esc_html( (string) $book['chapters'][ $i - 1 ]['title'] ) : (string) $i;
 		$out  .= '<li><a href="' . esc_url( TBE_Bible::url( (string) $book['slug'], $i ) ) . '">' . $label . '</a></li>';

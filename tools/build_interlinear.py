@@ -14,7 +14,7 @@ Usage:  python3 tools/build_interlinear.py            # download if needed, then
         python3 tools/build_interlinear.py --src DIR  # use files already in DIR
 
 """
-import argparse, collections, json, os, re, sys, time, urllib.parse, urllib.request
+import argparse, collections, json, os, re, time, urllib.parse, urllib.request
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 OUT = os.path.join(ROOT, "data", "interlinear")

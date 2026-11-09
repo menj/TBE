@@ -12,7 +12,7 @@ scroll adds or leaves out, a different form) or a "spelling" difference (the sam
 vowel letters, a lengthened pronoun, a different word division). The page shows meaning differences by default
 and spelling differences on request.
 """
-import argparse, difflib, json, os, re, sys
+import argparse, difflib, json, os, re
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 POINTS = re.compile(r"[֑-ׇ]")
