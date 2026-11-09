@@ -18,6 +18,24 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 ## Version notes
 
+### To 0.10.21
+Upload the whole theme folder, as `TBE`. The new file is `assets/css/mobile-first.css`. Nothing else to do; clear any page cache. Audit: scratch WordPress with seeded long titles, URLs, a wide table, code, an embed, a gallery and comments; Playwright at 320, 360, 375, 390, 414, 480, 768, 1024 and 1280 px over 18 page types (home, post, archive, search, 404, login, page, reader, interlinear, Bible search, lexicon and its entry, manuscripts, commentary, glossary, section); axe-core 4.
+
+| Id | Severity | Risk of fix | Finding | Status |
+|---|---|---|---|---|
+| MF-01 | High | Low | Long words, links and images in post text, comments and commentary widened six page types (scrollWidth 1044 to 1888), every width | Fixed |
+| MF-02 | High | Medium | Bare tables and code blocks: no scroll box, no keyboard access | Fixed (filter and CSS) |
+| MF-03 | Medium | Low | Targets under 24 px: post title and author links, pagination, seek bar | Fixed |
+| MF-04 | Low | None | 25 verse-number links of 12 px in the reader, and cross-reference links | Left: inline in text, exempt under WCAG 2.5.8 |
+| MF-05 | Medium | Medium | Interlinear page: layout shift 0.054 and one colour-contrast failure on the highlighted word | Manual review |
+| MF-06 | Low | Medium | Small print (eyebrows, credits, copyright, chips at 12 to 14 px) | Manual review, design choice |
+| MF-07 | Low | Medium | wp-login.php: no `main` landmark (core markup) | Manual review |
+
+Overflow count per width before and after: 6 to 0 at every one of the nine widths. axe: `scrollable-region-focusable` gone, nothing new. Reader, interlinear, lexicon, Bible index and manuscripts pages are pixel-identical at 1024 and 1280 px. Pages that carried an overflowing word now wrap it, so they grow taller.
+
+Remaining risks: the filter changes the markup of tables in the main text; `overflow-wrap: anywhere` could split an unbroken string in a narrow card. Follow-up: interlinear shift and contrast, small print.
+
+
 Only the versions that need something done by hand are listed.
 
 ### To 0.10.20
@@ -85,6 +103,7 @@ Nothing to do. The new documents (`readme.txt`, `SSOT.md`, this file) ship in th
 These are plans, not promises. An item leaves this list when it ships, and CHANGELOG.md records it.
 
 ### Next
+- Interlinear page: reserve space for the word grid (layout shift 0.054 at 375 px) and lift the contrast of the highlighted word. Why: the 0.10.21 mobile audit found both; they touch the design, so they wait for the owner.
 - Untick "Discourage search engines" on the live site. Why: thebible.exposed serves `noindex, nofollow` on its home page and a 67-byte `robots.txt` (checked 5 November 2026), so nothing is indexed. This is the owner's step; the theme only reminds.
 - Answer credential-file probes with the short 404. Why: the November logs show `/google-credentials.json`, `/sa.json`, `/key.json`, `/google-key.json`, `/gcp-key.json`, `/gcp-sa.json`, `/firebase-key.json` and `/firebase-adminsdk.json` (4 or 5 requests each) and `/info` (12) still rendering the 74 KB theme 404.
 - Serve `/favicon.png` from the brand icon, as `/favicon.ico` is. Why: 5 requests in the logs got the full 404 page.

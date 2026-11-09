@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.10.21
+
+Mobile-first audit and fixes. No feature removed and no public identifier renamed.
+
+### Fixed
+- Long words, addresses and unwrapped images in post text, comments and the commentary dek widened the page on every phone width (scrollWidth 1044 to 1888 on six page types). `assets/css/mobile-first.css` (new, handle `tbe-mobile-first`, loaded last at priority 99) wraps them and caps images at the column.
+- Bare tables and code blocks in a post had no scroll box and no keyboard access (`scrollable-region-focusable`). `tbe_content_scroll_regions()` in `inc/enqueue.php` (`the_content`, priority 25, main query only) wraps a bare table in a labelled, focusable group and gives a code block `tabindex="0"`. Texts with the theme's own `tbe-tablewrap` or `tbe-scroll` are left alone.
+- Post title and author links, pagination and the audio seek bar take a 24 px minimum target (44 px for pagination on coarse pointers).
+- Embeds scale with the column (16:9 for YouTube and Vimeo frames).
+
+### Audit record
+Findings, remaining risks and follow-ups are in `UPGRADING.md` under To 0.10.21.
+
 ## 0.10.20
 
 ### Fixed

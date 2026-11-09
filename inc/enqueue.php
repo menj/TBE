@@ -276,3 +276,44 @@ add_action(
 		register_block_style( 'core/quote', array( 'name' => 'scripture', 'label' => __( 'Scripture', 'tbe-child' ) ) );
 	}
 );
+
+/**
+ * Mobile-first patches (0.10.21): one sheet after every other front-end sheet, so it only refines them.
+ */
+add_action(
+	'wp_enqueue_scripts',
+	static function () {
+		tbe_enqueue_theme_style( 'tbe-mobile-first', 'assets/css/mobile-first.css', array( 'tbe-polish' ) );
+	},
+	99
+);
+
+/**
+ * Give a table or a code block in the main text a way to scroll on its own on a narrow screen, and a way for a
+ * keyboard to reach it: a bare table is wrapped in a labelled group, a code block takes tabindex 0 unless it has one.
+ *
+ * @param string $html Rendered text.
+ * @return string
+ */
+function tbe_content_scroll_regions( $html ) {
+	if ( is_admin() || ! in_the_loop() || ! is_main_query() ) {
+		return $html;
+	}
+	$html = (string) $html;
+	if ( false !== stripos( $html, '<table' ) ) {
+		$attrs = ' role="group" tabindex="0" aria-label="' . esc_attr__( 'Table', 'tbe-child' ) . '"';
+		$html  = (string) preg_replace_callback(
+			'#<div\b[^>]*\b(?:tbe-tablewrap|tbe-scroll)\b[^>]*>(?:(?!</table>).)*</table>.*?</div>|<table\b.*?</table>#is',
+			static function ( $m ) use ( $attrs ) {
+				// A table already in the theme's own box stays as it is.
+				return 0 === stripos( $m[0], '<table' ) ? '<div class="tbe-scroll"' . $attrs . '>' . $m[0] . '</div>' : $m[0];
+			},
+			$html
+		);
+	}
+	if ( false !== stripos( $html, '<pre' ) ) {
+		$html = (string) preg_replace( '#<pre\b(?![^>]*\btabindex\s*=)#i', '<pre tabindex="0"', $html );
+	}
+	return $html;
+}
+add_filter( 'the_content', 'tbe_content_scroll_regions', 25 );
