@@ -18,6 +18,10 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 ## Version notes
 
+### To 0.10.23
+
+Drop-in update. The settings page is redrawn; option keys, sanitisers and saved values are untouched. Checked at 1280, 782 and 375 px: no horizontal scroll, every control labelled, tabs reachable by keyboard.
+
 ### To 0.10.22
 
 Drop-in update, no settings change. WCAG 2.2 AA register (scratch WordPress, `WP_DEBUG` on with an empty log; axe-core with wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice tags at 1280 and 375 px on 22 templates; keyboard walk, 320 px reflow, text-spacing override):

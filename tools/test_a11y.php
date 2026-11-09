@@ -38,5 +38,10 @@ foreach ( glob( $root . '/assets/css/*.css' ) as $file ) {
 	}
 }
 
+$set = (string) file_get_contents( $root . '/inc/settings.php' );
+$check( 'settings use switches for on and off options', false !== strpos( $set, 'role="switch"' ) );
+$check( 'settings use range sliders with a live value', false !== strpos( $set, 'type="range"' ) && false !== strpos( $set, 'tbe-range__value' ) );
+$check( 'settings use no form tables', false === strpos( $set, 'form-table' ) );
+
 echo $fail ? "$fail failed\n" : "test_a11y: all passed\n";
 exit( $fail ? 1 : 0 );

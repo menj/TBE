@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.10.23
+
+Settings page presentation. No setting renamed, no value changed, no feature removed.
+
+### Changed
+- `inc/settings.php`: a header (icon, title, short description, version badge) and a footer; dashicons on the tabs; the tab panel is a card; `tbe_field_check()` draws a switch (`role="switch"`); `tbe_field_number()` draws a range slider with a live value; the layout, contents style and reading bar position selects become cards (`tbe_field_choice()`) posting the same names and values.
+- `assets/css/admin.css`, `assets/js/admin.js`: field rows with the label beside the control above 782 px and stacked below it, a scrolling tab bar, focus rings, the live range value. Loaded on the TBE settings page only.
+- `inc/error-pages.php`: the two read-only rule boxes on the Error pages tab have accessible names.
+- `assets/js/tooltips.js`: a tooltip whose trigger still has keyboard focus stays open (a CodeAnt finding on 0.10.22).
+
 ## 0.10.22
 
 WCAG 2.2 AA audit and fixes. No feature removed and no public identifier renamed.

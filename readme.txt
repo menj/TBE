@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.10.22
+Stable tag: 0.10.23
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -116,6 +116,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.23 =
+* The TBE settings page has a new look: a header with the version, tabs with icons that scroll on a phone, cards, switches for on and off options, sliders that show their value, and cards for choosing between styles. Every option, name and saved value is unchanged.
+
 = 0.10.22 =
 * Accessibility pass (WCAG 2.2 AA): the interlinear words outside the verse keep readable text, and tooltips stay open while the pointer rests on them. Nothing removed, nothing renamed.
 
@@ -178,6 +181,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.23 =
+Settings page redesign only. Nothing to do by hand.
 
 = 0.10.22 =
 Nothing to do by hand.
