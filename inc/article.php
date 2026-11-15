@@ -53,27 +53,18 @@ function tbe_article_heading_text( string $html ): string {
 /**
  * The ids of the level-two headings in a piece of HTML, in order: the author's own id where a heading has one,
  * else one made from its text. The author's ids are reserved first, so a made id never repeats one. A heading
- * with no text gets ''.
+ * with no text gets ''. A heading marked no-toc is left out. Built on tbe_toc_heading_list() (inc/toc.php), which
+ * also anchors the level-three headings, so the two always agree.
  *
  * @param string $html Stored or rendered text.
  * @return array<int,array{0:string,1:string,2:bool}> Id, text, whether the author set the id.
  */
 function tbe_article_heading_list( string $html ): array {
-	if ( ! preg_match_all( '#<h2(\s[^>]*)?>(.*?)</h2>#is', $html, $found, PREG_SET_ORDER ) ) {
-		return array();
-	}
-	$seen = array();
-	$own  = array();
-	foreach ( $found as $i => $m ) {
-		if ( preg_match( '/\sid\s*=\s*["\']([^"\']+)["\']/i', (string) ( $m[1] ?? '' ), $idm ) ) {
-			$own[ $i ]          = $idm[1];
-			$seen[ $idm[1] ] = true;
-		}
-	}
 	$out = array();
-	foreach ( $found as $i => $m ) {
-		$text  = tbe_article_heading_text( $m[2] );
-		$out[] = isset( $own[ $i ] ) ? array( $own[ $i ], $text, true ) : array( '' === $text ? '' : tbe_article_slug( $text, $seen ), $text, false );
+	foreach ( tbe_toc_heading_list( $html ) as $h ) {
+		if ( 2 === $h['level'] && ! $h['skip'] ) {
+			$out[] = array( $h['id'], $h['text'], $h['own'] );
+		}
 	}
 	return $out;
 }
@@ -95,21 +86,9 @@ function tbe_article_headings( WP_Post $post ): array {
 	return $out;
 }
 
-/** Give each level-two heading of the rendered body an id, matching tbe_article_headings(). */
+/** Give the headings of the rendered body their ids, matching tbe_article_headings() and the contents. */
 function tbe_article_heading_ids( string $html ): string {
-	$list = tbe_article_heading_list( $html );
-	$i    = 0;
-	return (string) preg_replace_callback(
-		'#<h2(\s[^>]*)?>(.*?)</h2>#is',
-		static function ( $m ) use ( $list, &$i ) {
-			$h = $list[ $i++ ] ?? array( '', '', true );
-			if ( $h[2] || '' === $h[0] ) {
-				return $m[0];
-			}
-			return '<h2 id="' . esc_attr( $h[0] ) . '"' . (string) ( $m[1] ?? '' ) . '>' . $m[2] . '</h2>';
-		},
-		$html
-	);
+	return tbe_toc_apply_ids( $html );
 }
 
 add_filter(
@@ -309,24 +288,20 @@ function tbe_render_answer_box( array $attrs = array() ): string {
 	return $out . '</section>';
 }
 
-/** The contents: a list of the entry's sections, from three level-two headings up. Inline or sticky. */
+/**
+ * The contents: the entry's sections, level-two headings with their level-three headings nested, from three
+ * entries up; inline or sticky as set. None when the entry places its own with [wp_toc] (inc/toc.php).
+ */
 function tbe_render_contents(): string {
 	$post = tbe_article_post();
-	if ( ! $post || ! tbe_setting( 'toc' ) ) {
+	if ( ! $post || ! tbe_setting( 'toc' ) || tbe_toc_has_shortcode( $post ) ) {
 		return '';
 	}
-	$headings = tbe_article_headings( $post );
-	if ( count( $headings ) < 3 ) {
+	$items = tbe_toc_items( (string) $post->post_content );
+	if ( count( $items ) < 3 ) {
 		return '';
 	}
-	$items = '';
-	foreach ( $headings as $h ) {
-		$items .= '<li><a href="#' . esc_attr( $h[0] ) . '">' . esc_html( $h[1] ) . '</a></li>';
-	}
-	if ( 'sticky' === tbe_setting( 'toc_style' ) ) {
-		return '<details class="tbe-contents tbe-contents--sticky" data-tbe-contents><summary>' . esc_html__( 'Contents', 'tbe-child' ) . '</summary><nav aria-label="' . esc_attr__( 'Contents', 'tbe-child' ) . '"><ol>' . $items . '</ol></nav></details>';
-	}
-	return '<nav class="tbe-contents tbe-contents--inline" aria-labelledby="tbe-contents-title"><h2 id="tbe-contents-title" class="tbe-contents__title">' . esc_html__( 'Contents', 'tbe-child' ) . '</h2><ol>' . $items . '</ol></nav>';
+	return tbe_toc_box( tbe_toc_tree( $items ), __( 'Contents', 'tbe-child' ), 'sticky' === tbe_setting( 'toc_style' ) ? 'sticky' : 'inline' );
 }
 
 /** The sources of an entry: the passage in the ESV, the word-by-word data, the Qur'an references. @return string[] HTML list items. */
