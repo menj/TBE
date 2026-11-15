@@ -32,7 +32,7 @@ def main():
         "translation": "M. R. James, 1924",
         "source": {
             "title": "M. R. James, The Apocryphal New Testament (1924)",
-            "url": "https://archive.org/details/apocryphalnewtes0000mrja",
+            "url": "https://archive.org/details/JAMESApocryphalNewTestament1924",
             "credit": "The translation from Latin by M. R. James, The Apocryphal New Testament (Oxford: Clarendon Press, 1924)",
             "short": "M. R. James, 1924",
             "note": "The text above the verses is James's introduction.",
