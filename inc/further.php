@@ -3,7 +3,7 @@
  * Further books: books counted as scripture by some churches beyond the 66, read on the site from data/further/.
  * The first are the three books of Meqabyan of the Ethiopian Orthodox Tewahedo canon, in the English translation
  * from Ge'ez made by Wikisource contributors (CC BY-SA 4.0), built by tools/build_meqabyan.py, and Jubilees in
- * R. H. Charles's translation of 1902 (public domain), built by tools/build_jubilees.py (0.10.22). Each file
+ * R. H. Charles's translation of 1902 (public domain), built by tools/build_jubilees.py (0.10.26). Each file
  * names its source (title, url, credit, short, note, licence, licence_url, translator).
  *
  * A book is readable when data/further/{slug}.json exists and its slug is listed in one of the prepared sections

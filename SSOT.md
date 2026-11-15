@@ -36,7 +36,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - 5 November 2026: the live theme folder is `TBE`, and nothing in the theme may assume `tbe` (0.10.6).
 - 5 November 2026: every theme is licensed under the GNU General Public License, version 3 or later (0.10.9). This one came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`; the owner adds it there, and this line is then its copy.
 
-- 8 November 2026: the theme requires PHP 8.4 or later ("the theme needs to be updated to PHP 8.4 minimum"), the same floor as WP TOC, whose features are built in (0.10.21). Recorded in `.claude/CLAUDE.md`.
+- 8 November 2026: the theme requires PHP 8.4 or later ("the theme needs to be updated to PHP 8.4 minimum"), the same floor as WP TOC, whose features are built in (0.10.26). Recorded in `.claude/CLAUDE.md`.
 - 7 November 2026: the owner holds the rights to the books the site serves under `/pdf/` and uses on its pages: Reuben J. Swanson, *New Testament Greek Manuscripts: Matthew* (`nt-variant-readings.pdf`), the United Bible Societies *Greek New Testament* (`greek-nt.pdf`) and Bruce M. Metzger, *Lexical Aids for Students of New Testament Greek* (`lexical-aids.pdf`). In the owner's words: "i have the full copyright". Their evidence and page images may be used on the site. Recorded in `.claude/CLAUDE.md`.
 - 6 November 2026: the site is light only. "I do not want dark mode." No dark mode exists in the theme: no switch, no `theme.js`, no Night scheme, no dark rules (0.10.15).
 - 5 November 2026: the owner asked for a complete favicon set: "make sure you have favicon too." Every brand icon is drawn from `assets/img/brand/favicon.svg`, and a Site Icon set by the owner always wins (0.10.11). This came in the owner's brief for this session and is not yet in `.claude/CLAUDE.md`.
@@ -53,7 +53,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Lexicon: every Hebrew and Greek Strong's number in `data/lexicon/`, from STEPBible's TBESG and TBESH (CC BY 4.0), and Metzger's frequency list in `data/lexicon/metzger.json`.
 - Manuscripts evidence from the printed apparatuses: `data/manuscripts/editions.json` (UBS for all twenty-two passages, Swanson for the four in Matthew) with page images in `assets/img/manuscripts/books/`.
 - Manuscripts: twenty-two New Testament passages in `data/manuscripts/passages.json`, built from the CNTR transcriptions (CC BY-SA 4.0). That file and the pages built from it stay under CC BY-SA 4.0, whatever the theme's licence.
-- Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries), `cross-references` (32 cross-references, each filed on both passages, so 64 entries) and `gospels-and-canon` (8 entries, after two videos by C. J. Cornthwaite, restated in the site's own words). Every entry key starts with its pack id.
+- Starter commentary packs in `data/commentary/`: `combat-kit` (70 entries), `cross-references` (32 cross-references, each filed on both passages, so 64 entries) `gospels-and-canon` (8 entries, after two videos by C. J. Cornthwaite, restated in the site's own words) and `canon-history` (4 entries on Luke 24:44, Jude 14 to 15, Hebrews 1:3 and Revelation 22:18 to 19, after Samuel Davidson, *The Canon of the Bible*, 1877, each with its printed page numbers). Every entry key starts with its pack id.
 - Glossary: 13 starter terms, created as drafts (`tbe_seed_terms()`).
 - Canons in `data/canons.json`: Jewish, Protestant, Catholic, Orthodox and Ethiopian. The deuterocanonical, further Orthodox and Ethiopian books are prepared sections marked "Not on the site yet", except 1 to 3 Meqabyan.
 - Further books from the KJV Apocrypha (public domain): Tobit, Judith, Wisdom, Sirach, Baruch, 1 and 2 Maccabees, the Additions to Esther and to Daniel, 1 Esdras, the Prayer of Manasseh and Ezra Sutu'el (2 Esdras 3 to 14).
@@ -62,7 +62,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 ## Addresses
 
-- Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/`, the further books at `/bible/{slug}/` and `/bible/{slug}/{chapter}/` (0.10.22) and `/sources/` (the old `/credits/` answers 301), and `/manuscripts/` with `/manuscripts/{passage}/`, and `/lexicon/` with `/lexicon/{number}/`, `/lexicon/{greek|hebrew}/{letter}/` and `/lexicon/greek/frequency/` (`inc/routes.php`).
+- Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/`, the further books at `/bible/{slug}/` and `/bible/{slug}/{chapter}/` (0.10.26) and `/sources/` (the old `/credits/` answers 301), and `/manuscripts/` with `/manuscripts/{passage}/`, and `/lexicon/` with `/lexicon/{number}/`, `/lexicon/{greek|hebrew}/{letter}/` and `/lexicon/greek/frequency/` (`inc/routes.php`).
 - Commentary: post type `tbe_commentary` at `/commentary/`, its sections at `/section/`. Glossary: post type `tbe_term` at `/glossary/`.
 - Front-end editing: only a signed-in user who may edit a note (or create notes) gets the drawer, which saves through the core REST API (`/wp/v2/tbe_commentary`); new notes are drafts until Publish, and a passage that is not a real reference is refused (0.10.15).
 - Search: `/search/{term}/`. The base is set under Settings, Permalinks (option `tbe_search_base`).
@@ -91,6 +91,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The titles, editors and publishers of the United Bible Societies *Greek New Testament* and Swanson's *New Testament Greek Manuscripts: Matthew*, on the Sources page and beside their evidence on each manuscripts page.
 - The credit under each manuscript photograph: its author where known, its licence and a link to its page on Wikimedia Commons or the Internet Archive.
 - C. J. Cornthwaite, named on the Sources page as the source of the `gospels-and-canon` pack's arguments.
+- Samuel Davidson, *The Canon of the Bible* (3rd revised ed., 1877; Project Gutenberg eBook 30132), named on the Sources page, through the `canon-history` pack's `source`, as the source of that pack and of the page references in `data/canons.json` notes.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
 - M. R. James as translator of the Epistle to the Laodiceans, on the book.
 - J. K. Elliott as translator and Bart D. Ehrman's *Lost Scriptures* (Oxford University Press) as the source of the Ethiopic Apocalypse of Peter, on the Sources page and on the book.

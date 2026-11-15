@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.22
+Stable tag: 0.10.26
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -120,7 +120,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
-= 0.10.22 =
+= 0.10.26 =
 * Hebrew lexicon pages give the full Brown-Driver-Briggs article.
 * The Epistle to the Laodiceans can be read (M. R. James).
 * Genesis 1 and 2 link to a six-version Polyglot of the Creation story (PDF).
@@ -130,8 +130,22 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * 1 Enoch (Richard Laurence), Jubilees (R. H. Charles), the Shepherd of Hermas (J. B. Lightfoot) and the Apocalypse of Peter (Andrew Rutherfurd) can be read too.
 * 1 Enoch, Jubilees and Zëna Ayhud show their Ge'ez names on the book list.
 
-= 0.10.21 =
 * A contents list on pages, posts and glossary terms too, with sub-sections nested; [wp_toc] places it by hand, and a heading marked no-toc stays out.
+
+= 0.10.25 =
+* Starter commentary now protects your edits. An entry you have edited is never overwritten and never moved to the Trash by a theme update. A notice lists the entries that have a newer version or were dropped from the bundle, and the Starter commentary tab lets you take the bundled text or keep yours, shows what the next update would do and keeps a short log. An entry you have not edited still updates by itself, and a dropped one goes to the Trash. Nothing removed, nothing renamed.
+
+= 0.10.24 =
+* A fourth starter commentary pack, "How the canon was formed", with four notes: Luke 24:44, Jude 14 to 15, Hebrews 1:3 and Revelation 22:18 to 19, after Samuel Davidson's history of the canon (1877). The canon comparison page and the 2 Peter note cite his pages. Nothing removed, nothing renamed. The pack is imported by hand from the Starter commentary tab, not automatically.
+
+= 0.10.23 =
+* The TBE settings page has a new look: a header with the version, tabs with icons that scroll on a phone, cards, switches for on and off options, sliders that show their value, and cards for choosing between styles. Every option, name and saved value is unchanged.
+
+= 0.10.22 =
+* Accessibility pass (WCAG 2.2 AA): the interlinear words outside the verse keep readable text, and tooltips stay open while the pointer rests on them. Nothing removed, nothing renamed.
+
+= 0.10.21 =
+* Phone layout pass: long words and web addresses wrap, wide tables and code blocks in posts scroll inside their own box, embeds scale with the column, and small links are easier to tap. Larger screens look the same.
 
 = 0.10.20 =
 * On the home page the menu is centred above the cross and the name, with no empty space beside it.
@@ -190,11 +204,23 @@ The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
 
+= 0.10.26 =
+The theme now needs PHP 8.4 or later. Check the PHP version with your host before updating. If you use the WP TOC plugin, you can deactivate it: the theme now does the same. The new books answer at addresses the reader already serves, so the permalinks need no refresh.
+
+= 0.10.25 =
+Entries imported by an earlier version have no record of their original text, so they count as edited and are listed under Starter commentary for you to decide.
+
+= 0.10.24 =
+A new starter commentary pack is waiting under Appearance, TBE, Starter commentary. Import it there when you have read it.
+
+= 0.10.23 =
+Settings page redesign only. Nothing to do by hand.
+
 = 0.10.22 =
 Nothing to do by hand.
 
 = 0.10.21 =
-The theme now needs PHP 8.4 or later. Check the PHP version with your host before updating. If you use the WP TOC plugin, you can deactivate it: the theme now does the same.
+Nothing to do by hand.
 
 = 0.10.20 =
 Nothing to do by hand.

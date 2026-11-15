@@ -133,7 +133,7 @@ final class TBE_Lexicon {
 
 	/**
 	 * The Brown-Driver-Briggs article for a Hebrew number, as paragraphs of simple HTML built by tools/build_bdb.py
-	 * (Hebrew spans, glosses in italics, sense numbers in bold); an empty list when there is none (0.10.22).
+	 * (Hebrew spans, glosses in italics, sense numbers in bold); an empty list when there is none (0.10.26).
 	 *
 	 * @return string[]
 	 */

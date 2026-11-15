@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * The variants of one chapter, or null when none have been built for it: a Dead Sea Scroll (data/dss/), else, in
  * the Pentateuch, the Samaritan Pentateuch (data/sp/, built by tools/build_sp_variants.py from the CACCHT dataset
- * of Stefan Schorch's edition, CC BY-NC 4.0; 0.10.22). The Samaritan data carries "source": "sp".
+ * of Stefan Schorch's edition, CC BY-NC 4.0; 0.10.26). The Samaritan data carries "source": "sp".
  */
 function tbe_dss_chapter( string $slug, int $chapter ): ?array {
 	foreach ( array( 'dss', 'sp' ) as $dir ) {

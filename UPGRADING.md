@@ -20,11 +20,49 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.26
+The theme now requires **PHP 8.4 or later**. Check the PHP version under Tools, Site Health, Info, Server before updating, and ask the host to upgrade if it is older; on older PHP the theme keeps working but every admin screen shows a notice until it is upgraded. The contents now cover pages, posts and glossary terms, nest level-three headings and read `[wp_toc]`. If the WP TOC plugin is installed, it can be deactivated: the theme does the same. While it stays active, the theme leaves posts and pages to it. Nothing to do by hand. The new books (the KJV deuterocanon, 1 Enoch, Laodiceans and these) (Jubilees, 1 to 3 Meqabyan, Hermas, the Apocalypse of Peter) answer at addresses the reader already serves, so the permalinks need no refresh.
+
+### To 0.10.25
+
+Entries imported by an earlier version carry no `tbe_pack_body` fingerprint, so the sync treats them all as edited. After this update the Starter commentary tab lists every one whose text differs from the bundle under "Newer version available". Choose "Take the bundled text" for the ones you never edited, or "Keep mine". From then on an untouched entry updates by itself. Nothing is overwritten or trashed without your choice, and a dropped untouched entry goes to the Trash, never deleted.
+
+### To 0.10.24
+
+The new pack is marked `manual` in its JSON: the automatic sync never first-imports it, because its notes need a human check. Import it from Appearance, TBE, Starter commentary, as drafts or published. Packs already imported are kept in step as before (the `2-peter-3-16` entry takes its new line, and the canon notes change at once). The page references to Davidson, and the Sources entry, need a human check against the book. Modern works (Barton, Beckwith) named in the plan are not cited.
+
+### To 0.10.23
+
+Drop-in update. The settings page is redrawn; option keys, sanitisers and saved values are untouched. Checked at 1280, 782 and 375 px: no horizontal scroll, every control labelled, tabs reachable by keyboard.
+
 ### To 0.10.22
-Nothing to do by hand. The new books (Jubilees, 1 to 3 Meqabyan, Hermas, the Apocalypse of Peter) answer at addresses the reader already serves, so the permalinks need no refresh.
+
+Drop-in update, no settings change. WCAG 2.2 AA register (scratch WordPress, `WP_DEBUG` on with an empty log; axe-core with wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice tags at 1280 and 375 px on 22 templates; keyboard walk, 320 px reflow, text-spacing override):
+
+| Id | Severity | WCAG | Component | Finding | Status |
+|---|---|---|---|---|---|
+| TB-01 | Serious | 1.4.3 | Interlinear page | Outside-verse words dimmed to 3.77:1 | Fixed |
+| TB-02 | Major | 1.4.13 | Tooltips | Not hoverable | Fixed |
+
+Everything else passed. Manual review still open: a screen-reader pass of the interlinear word grid and the manuscripts tables. Code audit: no unescaped output found, no remote assets, licences in `SSOT.md` and `assets/fonts/`. Folder name: tests and docs use `/wp-content/themes/TBE/`; no code requires it; nothing renamed. The text domain is `tbe-child`, not the folder name; it is unchanged because changing it would break translations.
 
 ### To 0.10.21
-The theme now requires **PHP 8.4 or later**. Check the PHP version under Tools, Site Health, Info, Server before updating, and ask the host to upgrade if it is older; on older PHP the theme keeps working but every admin screen shows a notice until it is upgraded. The contents now cover pages, posts and glossary terms, nest level-three headings and read `[wp_toc]`. If the WP TOC plugin is installed, it can be deactivated: the theme does the same. While it stays active, the theme leaves posts and pages to it.
+Upload the whole theme folder, as `TBE`. The new file is `assets/css/mobile-first.css`. Nothing else to do; clear any page cache. Audit: scratch WordPress with seeded long titles, URLs, a wide table, code, an embed, a gallery and comments; Playwright at 320, 360, 375, 390, 414, 480, 768, 1024 and 1280 px over 18 page types (home, post, archive, search, 404, login, page, reader, interlinear, Bible search, lexicon and its entry, manuscripts, commentary, glossary, section); axe-core 4.
+
+| Id | Severity | Risk of fix | Finding | Status |
+|---|---|---|---|---|
+| MF-01 | High | Low | Long words, links and images in post text, comments and commentary widened six page types (scrollWidth 1044 to 1888), every width | Fixed |
+| MF-02 | High | Medium | Bare tables and code blocks: no scroll box, no keyboard access | Fixed (filter and CSS) |
+| MF-03 | Medium | Low | Targets under 24 px: post title and author links, pagination, seek bar | Fixed |
+| MF-04 | Low | None | 25 verse-number links of 12 px in the reader, and cross-reference links | Left: inline in text, exempt under WCAG 2.5.8 |
+| MF-05 | Medium | Medium | Interlinear page: layout shift 0.054 and one colour-contrast failure on the highlighted word | Manual review |
+| MF-06 | Low | Medium | Small print (eyebrows, credits, copyright, chips at 12 to 14 px) | Manual review, design choice |
+| MF-07 | Low | Medium | wp-login.php: no `main` landmark (core markup) | Manual review |
+
+Overflow count per width before and after: 6 to 0 at every one of the nine widths. axe: `scrollable-region-focusable` gone, nothing new. Reader, interlinear, lexicon, Bible index and manuscripts pages are pixel-identical at 1024 and 1280 px. Pages that carried an overflowing word now wrap it, so they grow taller.
+
+Remaining risks: the filter changes the markup of tables in the main text; `overflow-wrap: anywhere` could split an unbroken string in a narrow card. Follow-up: interlinear shift and contrast, small print.
+
 
 ### To 0.10.20
 Nothing to do. Clear any page cache so the home page shows the centred menu.
@@ -91,6 +129,7 @@ Nothing to do. The new documents (`readme.txt`, `SSOT.md`, this file) ship in th
 These are plans, not promises. An item leaves this list when it ships, and CHANGELOG.md records it.
 
 ### Next
+- Interlinear page: reserve space for the word grid (layout shift 0.054 at 375 px) and lift the contrast of the highlighted word. Why: the 0.10.21 mobile audit found both; they touch the design, so they wait for the owner.
 - Untick "Discourage search engines" on the live site. Why: thebible.exposed serves `noindex, nofollow` on its home page and a 67-byte `robots.txt` (checked 5 November 2026), so nothing is indexed. This is the owner's step; the theme only reminds.
 - Answer credential-file probes with the short 404. Why: the November logs show `/google-credentials.json`, `/sa.json`, `/key.json`, `/google-key.json`, `/gcp-key.json`, `/gcp-sa.json`, `/firebase-key.json` and `/firebase-adminsdk.json` (4 or 5 requests each) and `/info` (12) still rendering the 74 KB theme 404.
 - Serve `/favicon.png` from the brand icon, as `/favicon.ico` is. Why: 5 requests in the logs got the full 404 page.
@@ -103,7 +142,7 @@ These are plans, not promises. An item leaves this list when it ships, and CHANG
 - More recorded readings. Why: only Genesis 1 (Hebrew) and Matthew 1 (Greek) have audio; `tools/align_audio.py` is ready for more, but each needs a recording with a licence, which the owner supplies.
 - Isaiah 6 to 66 in the Dead Sea Scrolls comparison, then other scrolls. Why: only Isaiah 1 to 5 is compared; `tools/build_dss_variants.py` takes a chapter range, and each batch needs its spelling differences spot-checked.
 - The JPS 1917 parallel beyond Genesis. Why: `tools/fetch_jps.py --books` adds a book at a time, and each needs its versification checked against `data/jps-versification.json`.
-- The deuterocanonical, further Orthodox and remaining Ethiopian books. Why: 1 to 3 Meqabyan are readable since 0.10.22; the others are still listed as "Not on the site yet", and the Ethiopian list is still to be confirmed. Each needs a text with a licence; `inc/further.php` takes one as a JSON file.
+- The deuterocanonical, further Orthodox and remaining Ethiopian books. Why: 1 to 3 Meqabyan are readable since 0.10.26; the others are still listed as "Not on the site yet", and the Ethiopian list is still to be confirmed. Each needs a text with a licence; `inc/further.php` takes one as a JSON file.
 - A proofreading of 1 Enoch and Jubilees against the page images. Why: both are read from OCR. In 1 Enoch the scan lost the headings of chapters 36, 64, 65 and 101, and a few of Laurence's footnotes may remain in the text.
 - A proofreading of Jubilees against the page images. Why: it is read from OCR; about twenty verse numbers the scan lost are listed by `tools/build_jubilees.py`, and spelling slips may remain.
 - A check of 1 to 3 Meqabyan against a printed translation. Why: the Wikisource translation is a working one, its wording is uneven (1 Meqabyan reads "JAH", "irie" and "I-man"), it lacks 2 Meqabyan 16:9 and 21:9, and its pages were proposed for deletion in November 2026.

@@ -38,7 +38,7 @@
 .tbe-il__w--variant { border-style: dashed; border-color: var(--tbe-gold); }
 .tbe-il__flag { position: absolute; margin-top: -0.9rem; font-size: 0.7rem; color: var(--tbe-rubric); }
 .tbe-il__w { position: relative; }
-.tbe-il__w--outside { opacity: 0.8; }
+.tbe-il__w--outside { border-style: dotted; border-color: var(--tbe-muted); } /* Dimming with opacity dropped the muted text below 4.5:1 (WCAG 1.4.3); a dotted frame marks the words outside the verse instead. */
 
 /* Layers the reader can switch off */
 .tbe-il--hide-gloss .tbe-il__gloss,

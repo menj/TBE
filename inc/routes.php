@@ -72,7 +72,7 @@ function tbe_request(): ?array {
 	$slug = sanitize_key( (string) get_query_var( 'tbe_book' ) );
 	$book = TBE_Bible::book( $slug );
 	if ( ! $book ) {
-		// A further book, such as 1 Meqabyan, answers at the same addresses (0.10.22). It has no interlinear.
+		// A further book, such as 1 Meqabyan, answers at the same addresses (0.10.26). It has no interlinear.
 		$further = TBE_Further::book( $slug );
 		if ( ! $further || 'interlinear' === $view ) {
 			return $request = array( 'view' => 'missing' );

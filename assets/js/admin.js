@@ -5,7 +5,29 @@
 ( function () {
 	'use strict';
 
+	/** Live value beside each range slider, and an "is-on" class on switches. */
+	function enhance() {
+		document.querySelectorAll( 'input[type="range"][data-tbe-range]' ).forEach( function ( range ) {
+			var out = document.getElementById( range.getAttribute( 'data-tbe-range' ) );
+			if ( ! out ) {
+				return;
+			}
+			range.addEventListener( 'input', function () {
+				out.textContent = range.value;
+			} );
+		} );
+		document.querySelectorAll( '.tbe-toggle input' ).forEach( function ( box ) {
+			var label = box.closest( '.tbe-toggle' );
+			var sync = function () {
+				label.classList.toggle( 'is-on', box.checked );
+			};
+			box.addEventListener( 'change', sync );
+			sync();
+		} );
+	}
+
 	function init() {
+		enhance();
 		var radios = document.querySelectorAll( '.tbe-schemes input[type="radio"]' );
 		var custom = document.querySelector( '.tbe-custom' );
 		if ( ! radios.length || ! custom ) {

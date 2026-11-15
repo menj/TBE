@@ -55,7 +55,7 @@ function tbe_render_reader(): string {
 /**
  * The Polyglot Bible of the Creation story (Genesis 1:1 to 2:3): a word-by-word table of the Masoretic Hebrew, the
  * Samaritan Pentateuch, the Ge'ez, Targum Onkelos, the Syriac Peshitta and the Greek, each with a transliteration
- * in Hebrew letters, supplied by the owner as assets/pdf/polyglot-creation-story.pdf (0.10.22). Shown on the
+ * in Hebrew letters, supplied by the owner as assets/pdf/polyglot-creation-story.pdf (0.10.26). Shown on the
  * reading and interlinear pages of Genesis 1 and 2.
  */
 function tbe_polyglot_note( string $slug, int $chapter ): string {

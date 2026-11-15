@@ -1,6 +1,8 @@
 # Changelog
 
-## 0.10.22
+## 0.10.26
+
+Two pieces of work that waited on a branch while 0.10.21 to 0.10.25 were released: the further books and lexicon additions, and the contents box with WP TOC built in and the PHP 8.4 minimum.
 
 The first books beyond the 66 can be read on the site: 1 Enoch, Jubilees and 1, 2 and 3 Meqabyan of the Ethiopian Orthodox canon, and the Shepherd of Hermas and the Apocalypse of Peter, once read as scripture. Nothing was removed.
 
@@ -21,11 +23,7 @@ The first books beyond the 66 can be read on the site: 1 Enoch, Jubilees and 1, 
 - A Samaritan label on the book list: the Samaritans count the five books of the Torah, and the tradition buttons can show them.
 - `inc/further.php` (class `TBE_Further`), `data/further/`, `tools/build_meqabyan.py` and `tools/test_further.php`.
 
-## 0.10.21
-
-The contents box brings in the features of WP TOC (github.com/menj/wp-toc), built into the theme. Nothing was removed.
-
-### Added
+### Added: the contents box
 - Level-three headings get anchors and appear in the contents, nested under their level-two heading. Level-two anchors are made first and stay exactly as before, so links already shared still work.
 - Pages, posts and glossary terms get the same contents box before their first heading once they have three entries, as commentary entries already did (filter `tbe_toc_post_types`).
 - `[wp_toc]` and `[auto_toc]` place the contents exactly where they are typed, with WP TOC's attributes: `tags` (default `h2,h3`), `title` (`title=""` hides it), `depth`, `min`, `collapsible`, `collapsed`. A post that has one shows no automatic contents.
@@ -34,10 +32,75 @@ The contents box brings in the features of WP TOC (github.com/menj/wp-toc), buil
 - Every heading gets an anchor, so `[wp_toc tags="h5"]` links work; a deeper heading's own id never moves a level-two anchor.
 - `inc/toc.php` and `tools/test_toc.php`.
 
-### Changed
+### Changed: contents box, PHP and the home page
 - The home page's lockup sits closer under the header: the hero's top padding is now 1.5 to 2.5rem (was up to 5rem), and the main area adds no space of its own above it.
 - When the WP TOC plugin itself is active, the theme leaves posts, pages and the shortcodes to it and keeps it off commentary entries, so only one contents box ever shows.
 - The theme requires PHP 8.4 or later, as the owner decided ("Requires PHP: 8.4" in `style.css` and `readme.txt`). WordPress will not activate it on older PHP; a copy already installed keeps working and shows administrators a notice on every admin screen until PHP is upgraded.
+
+## 0.10.25
+
+Starter packs no longer overwrite or trash entries the owner edited. No setting key renamed and no feature removed.
+
+### Changed
+- `inc/starter-commentary.php`: `tbe_sync_pack()` now plans first (`tbe_pack_plan()`, built on the pure `tbe_pack_decide()` and `tbe_pack_decide_removed()`). New entries arrive as drafts; an untouched entry updates; an untouched dropped entry goes to the Trash. An edited entry (stored title and body differ from the `tbe_pack_body` fingerprint, or no fingerprint was recorded) is never overwritten and never trashed.
+- The two defaults that destroyed owner work are gone: before, an entry was overwritten unless "Keep my edits" was ticked, and a dropped entry was trashed even if edited. The box is now "Do not ask me about newer versions" and only silences the notice for an entry the owner edited.
+- `tbe_write_entry()` records `tbe_pack_body`, the fingerprint of the stored body.
+- The "Keep imported starter commentary in step" setting keeps its key, `pack_sync`, and its text says what it now does.
+
+### Added
+- One grouped admin notice: "Newer version available" and "Removed from the bundle", with a link to the tab.
+- On the Starter commentary tab: a dry run of the next sync per entry, "Take the bundled text" or "Keep mine" for each entry that waits (the choice is stored as `tbe_pack_ack` for that version, so a newer one asks again), "Run the sync now", and a log of the last changes (`tbe_pack_log`).
+- `tools/test_pack_sync.php`.
+
+### Fixed in review
+- "Run the sync now" no longer records a fingerprint for a pack that was never imported, so the first import of such a pack still runs.
+- The "Do not ask me about newer versions" box only affects an entry the owner edited. An untouched entry updates or goes to the Trash whether or not the box is ticked.
+
+## 0.10.24
+
+Canon history, after Samuel Davidson, *The Canon of the Bible* (3rd revised ed., New York: Peter Eckler, 1877; Project Gutenberg eBook 30132). No feature removed and no public identifier renamed.
+
+### Added
+- `data/commentary/canon-history.json`: a fourth starter pack, `canon-history`, with four entries: `luke-24-44`, `jude-14`, `hebrews-1-3` and `revelation-22-18`. Davidson is quoted exactly with his printed page numbers; scripture is the bundled ESV. The pack's `source` puts Davidson on the Sources page. The pack carries `"manual": true`, which `tbe_autosync_packs()` (`inc/starter-commentary.php`) honours: it is never first-imported by the automatic sync, only from the Starter commentary tab, where the editor picks drafts or published.
+
+### Changed
+- `data/canons.json`: the Jewish, Catholic, Orthodox and Ethiopian notes and the deuterocanon introduction carry short additions with page references (Josephus's twenty-two books, Trent in 1546, the Jerusalem synod of 1672, the fluctuating Ethiopic canon).
+- `data/commentary/gospels-and-canon.json`: the `2-peter-3-16` entry adds a line citing Davidson pp. 103 and 118 to 120. Davidson's date for 2 Peter is not used.
+
+## 0.10.23
+
+Settings page presentation. No setting renamed, no value changed, no feature removed.
+
+### Changed
+- `inc/settings.php`: a header (icon, title, short description, version badge) and a footer; dashicons on the tabs; the tab panel is a card; `tbe_field_check()` draws a switch (`role="switch"`); `tbe_field_number()` draws a range slider with a live value; the layout, contents style and reading bar position selects become cards (`tbe_field_choice()`) posting the same names and values.
+- `assets/css/admin.css`, `assets/js/admin.js`: field rows with the label beside the control above 782 px and stacked below it, a scrolling tab bar, focus rings, the live range value. Loaded on the TBE settings page only.
+- `inc/error-pages.php`: the two read-only rule boxes on the Error pages tab have accessible names.
+- `assets/js/tooltips.js`: a tooltip whose trigger still has keyboard focus stays open (a CodeAnt finding on 0.10.22).
+
+## 0.10.22
+
+WCAG 2.2 AA audit and fixes. No feature removed and no public identifier renamed.
+
+### Fixed
+- `assets/css/interlinear.css`: words outside the verse were dimmed with `opacity: 0.8`, which took the muted transliteration to a 3.77:1 contrast (WCAG 1.4.3, 18 nodes on an interlinear page). A dotted frame now marks them and the text keeps its full colour.
+- `assets/js/tooltips.js` and `assets/css/components.css`: the tooltip ignored the pointer (`pointer-events: none`) and closed when the pointer left the trigger. It now stays open while the pointer rests on it, and Escape still closes it (WCAG 1.4.13).
+
+### Added
+- `tools/axe-audit.js`: an axe-core and Playwright scan of a list of URLs at a given width.
+- `tools/test_a11y.php`: guards for both fixes and for removed focus outlines.
+
+## 0.10.21
+
+Mobile-first audit and fixes. No feature removed and no public identifier renamed.
+
+### Fixed
+- Long words, addresses and unwrapped images in post text, comments and the commentary dek widened the page on every phone width (scrollWidth 1044 to 1888 on six page types). `assets/css/mobile-first.css` (new, handle `tbe-mobile-first`, loaded last at priority 99) wraps them and caps images at the column.
+- Bare tables and code blocks in a post had no scroll box and no keyboard access (`scrollable-region-focusable`). `tbe_content_scroll_regions()` in `inc/enqueue.php` (`the_content`, priority 25, main query only) wraps a bare table in a labelled, focusable group and gives a code block `tabindex="0"`. Texts with the theme's own `tbe-tablewrap` or `tbe-scroll` are left alone.
+- Post title and author links, pagination and the audio seek bar take a 24 px minimum target (44 px for pagination on coarse pointers).
+- Embeds scale with the column (16:9 for YouTube and Vimeo frames).
+
+### Audit record
+Findings, remaining risks and follow-ups are in `UPGRADING.md` under To 0.10.21.
 
 ## 0.10.20
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contents (table of contents), built into the theme (0.10.21). It brings the features of WP TOC
+ * Contents (table of contents), built into the theme (0.10.26). It brings the features of WP TOC
  * (https://github.com/menj/wp-toc, GPL-3.0-or-later, by MENJ) into the theme's own contents box, so there is one
  * look and one set of anchors:
  *
@@ -36,7 +36,7 @@ function tbe_toc_post_types(): array {
 /**
  * The headings of a piece of HTML, in order, each with the anchor it has or will get.
  *
- * Level-two anchors are made exactly as before 0.10.21: only level-two ids the author set are reserved, then each
+ * Level-two anchors are made exactly as before 0.10.26: only level-two ids the author set are reserved, then each
  * level-two heading takes its slug in order. Only then are the deeper headings' own ids reserved and their slugs
  * made, level three first, so no deeper heading, with an id of its own or a made one, ever moves a level-two anchor
  * that links already point to. (An author id on a deeper heading that repeats a made level-two id stays as the
