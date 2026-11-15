@@ -44,3 +44,7 @@ tobit.json, judith.json, wisdom.json, sirach.json, baruch.json, 1-maccabees.json
 esther-additions.json, daniel-additions.json, 1-esdras.json, prayer-of-manasseh.json, 4-ezra.json
   The King James Version with the Apocrypha (1769 Oxford text), public domain, from eBible.org's USFM files;
   built by tools/build_kjva.py. 4-ezra.json (Ezra Sutu'el) is 2 Esdras chapters 3 to 14.
+
+laodiceans.json
+  The Epistle to the Laodiceans in M. R. James's translation (The Apocryphal New Testament, 1924), supplied by the
+  site owner; built by tools/build_laodiceans.py. James's introduction is the chapter heading.
