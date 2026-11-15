@@ -13,7 +13,8 @@ article to the lexicon page /lexicon/h0024/. The TWOT and GK numbers the electro
 references. An article that names several Strong's numbers is filed under each.
 
 Writes data/lexicon/bdb/{n // 100}.json: {"H0024": ["<p>...</p>", ...]}, as simple HTML: Hebrew in
-<span lang="he" dir="rtl">, glosses in <i>, sense numbers in <b>.
+<span lang="he" dir="rtl">, italic and bold as the letter's stylesheet sets them (the style ids differ from
+letter to letter).
 
 Usage:  python3 tools/build_bdb.py
 """
@@ -24,7 +25,6 @@ CACHE = os.path.join(ROOT, "tools", ".cache", "bdb")
 OUT = os.path.join(ROOT, "data", "lexicon", "bdb")
 ORDER = ["1/al", "2/bet", "3/gim", "4/dal", "5/he", "6/waw", "7/zay", "8/het", "9/tet", "10/yod", "11/kap", "12/lam",
          "13/mem", "14/num", "15/sam", "16/ayi", "17/pe", "18/sad", "19/kop", "20/res", "21/sin", "22/taw", "ext/aram"]
-HEBREW = {"textStyle4", "textStyle5", "textStyle8", "textStyle9"}
 SPAN = re.compile(r'<SPAN ID="(textStyle\d+)">(.*?)</SPAN>|<sup>(.*?)</sup>', re.S | re.I)
 
 
@@ -39,32 +39,46 @@ def spans(paragraph):
     return out
 
 
-def render(pieces):
-    """Simple HTML for a paragraph, without the TWOT and GK numbers."""
+def styles(css):
+    """{style id: "i" or "b"} from a letter's stylesheet; the ids differ from letter to letter."""
+    out = {}
+    for name, body in re.findall(r"#(textStyle\d+)\s*\{([^}]*)\}", css):
+        if "#008000" in body:
+            continue  # green: BDB's abbreviations (n.m., coll., q.v.), kept plain
+        if "italic" in body:
+            out[name] = "i"
+        elif re.search(r"font-weight:\s*(bold|[6-9]00)", body):
+            out[name] = "b"
+    return out
+
+
+def render(pieces, look):
+    """Simple HTML for a paragraph, without the TWOT and GK numbers and the Strong's label."""
     out, skip = [], False
     for style, text in pieces:
-        if skip and style == "textStyle6":
+        if skip and re.fullmatch(r"[\d,\sa-z]+", text.strip() or "x"):
             skip = False
             continue
         skip = False
-        if style == "textStyle3" and text.strip() in ("TWOT", "GK", "S"):
+        if text.strip() in ("TWOT", "GK", "S"):
             skip = True
             continue
         if style == "sup":
             if text.strip(" .") == "":
                 continue
             out.append("<small>" + html.escape(text.strip()) + "</small>")
-        elif style in HEBREW or re.search(r"[֐-׿]", text) and not re.search(r"[A-Za-z]", text):
+        elif re.search("[\u0590-\u05ff]", text) and not re.search("[A-Za-z]", text):
             out.append('<span lang="he" dir="rtl">' + html.escape(text.strip()) + "</span>")
-        elif style == "textStyle11":
-            out.append("<i>" + html.escape(text) + "</i>")
-        elif style == "textStyle15":
-            out.append("<b>" + html.escape(text) + "</b>")
-        elif style == "textStyle3" and text.strip() == "•":
+        elif text.strip() == "\u2022":
             continue  # the bullet the electronic edition puts before numbered headwords
+        elif look.get(style) == "i":
+            out.append("<i>" + html.escape(text) + "</i>")
+        elif look.get(style) == "b":
+            out.append("<b>" + html.escape(text) + "</b>")
         else:
             out.append(html.escape(text))
     s = " ".join(out)
+    s = re.sub(r"<([bi])>\s*([()\[\];,.])\s*</\1>", r"\2", s)  # a bracket or stop set in bold needs no tag
     s = re.sub(r"\s+([,.;:)])", r"\1", s)
     s = re.sub(r"\(\s+", "(", s)
     return re.sub(r"\s+", " ", s).strip()
@@ -74,12 +88,11 @@ def strongs(pieces):
     """The Strong's numbers the paragraph gives its headword: the numbers after an "S" label."""
     nums, take = [], False
     for style, text in pieces:
-        if style == "textStyle3":
-            take = text.strip() == "S"
+        if text.strip() == "S":
+            take = True
             continue
-        if take and style == "textStyle6":
+        if take and re.fullmatch(r"[\d,\s]+", text.strip() or "x"):
             nums += re.findall(r"\d+", text)
-            continue
         take = False
     return ["H%04d" % int(n) for n in nums]
 
@@ -88,6 +101,8 @@ def main():
     articles, current = {}, None
     for prefix in ORDER:
         folder, stem = prefix.rsplit("/", 1)
+        css = os.path.join(CACHE, folder, stem + ".css")
+        look = styles(open(css, encoding="latin-1").read()) if os.path.exists(css) else {}
         pages = sorted(glob.glob(os.path.join(CACHE, folder, stem + "[0-9]*.html")), key=lambda p: int(re.search(r"(\d+)\.html$", p).group(1)))
         for page in pages:
             body = open(page, encoding="latin-1").read()
@@ -96,7 +111,7 @@ def main():
                 if not pieces:
                     continue
                 nums = strongs(pieces)
-                text = render(pieces)
+                text = render(pieces, look)
                 if nums:
                     current = {"nums": nums, "p": [text]}
                     for n in nums:

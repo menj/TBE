@@ -40,6 +40,7 @@ def get(path):
 def main():
     for letter in LETTERS:
         folder = letter.rsplit("/", 1)[0]
+        get(letter + ".css")  # the letter's stylesheet: which text styles are italic or bold
         marks = get(letter + "-BkMrk.html").decode("latin-1")
         pages = sorted(set(re.findall(r'href="([a-z]+\d+\.html)', marks)), key=lambda p: int(re.search(r"\d+", p).group()))
         last = max((int(re.search(r"\d+", p).group()) for p in pages), default=0)
