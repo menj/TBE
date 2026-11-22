@@ -164,7 +164,26 @@
 			applyLayout( layoutButton, 'flow' === load( KEYS.layout ) );
 		}
 
+		// Print and "Save as PDF" (0.10.27): every note prints open, then each goes back as it was.
+		var reopened = [];
+		window.addEventListener( 'beforeprint', function () {
+			document.querySelectorAll( 'details:not([open])' ).forEach( function ( box ) {
+				box.open = true;
+				reopened.push( box );
+			} );
+		} );
+		window.addEventListener( 'afterprint', function () {
+			reopened.forEach( function ( box ) {
+				box.open = false;
+			} );
+			reopened = [];
+		} );
+
 		document.addEventListener( 'click', function ( event ) {
+			if ( event.target.closest( '[data-tbe-print]' ) ) {
+				window.print();
+				return;
+			}
 			var sizeButton = event.target.closest( '[data-tbe-size]' );
 			if ( sizeButton ) {
 				var current = parseFloat( getComputedStyle( root ).getPropertyValue( '--tbe-scale' ) ) || 1;

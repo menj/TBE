@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.27
+
+Print and "Save as PDF", and the new profile icons pack. Nothing removed, nothing renamed.
+
+### Added
+- A print stylesheet (`assets/css/print.css`, handle `tbe-print`, loaded last with `media="print"`), after the Hartija CSS Print Framework by Vladimir Carrer (MIT, `assets/css/LICENSE-HARTIJA.txt`). A page prints black on white in a serif face, without the header, menu, footer, toolbars, tooltips, progress bar or editing drawer; headings stay with what follows, the address of an outside link prints after it, table headers repeat on each page, and the source and licence lines always print.
+- A "Print or save as PDF" button on the toolbar of every Bible chapter and every further-book chapter. Notes and commentary print open, however they were set on screen, and close again afterwards; this also happens with the browser's own Print command on any page that loads `assets/js/reader.js`.
+- 33 more profile networks under Profile links, from the 2026 Minimalist Social and Platform Icons Pack (GPL): LinkedIn, Pinterest, Reddit, Discord, Signal, LINE, WeChat, Snapchat, Tumblr, Medium, Quora, Twitch, Vimeo, Spotify, SoundCloud, Suno, Flickr, Behance, Dribbble, Fiverr, GTribe, Goodreads, Issuu, Scribd, Academia.edu, WordPress, WordPress.org profile, Wikipedia, Wikidata, ORCID, VIAF, ISNI and OCLC. The twelve networks of before keep their order.
+- `tools/test_print_social.php`.
+
+### Changed
+- The twelve profile icons of before are the new pack's drawings. The LinkedIn and Scribd icons are Font Awesome's (CC BY 4.0), credited on the Sources page with the pack and Hartija.
+
+
 ## 0.10.26
 
 Two pieces of work that waited on a branch while 0.10.21 to 0.10.25 were released: the further books and lexicon additions, and the contents box with WP TOC built in and the PHP 8.4 minimum.

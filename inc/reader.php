@@ -125,6 +125,7 @@ function tbe_view_credits(): string {
 
 	$out .= '<h2 class="tbe-ornament">' . esc_html__( 'Typefaces', 'tbe-child' ) . '</h2><p>' . esc_html__( 'Bible text is set in the SBL BibLit, SBL Hebrew and SBL Greek fonts, by the Society of Biblical Literature. Ge’ez text is set in Abyssinica SIL, by SIL Global (SIL Open Font License). Labels, buttons and menus are set in Montserrat, by Julieta Ulanovsky and the Montserrat Project Authors (SIL Open Font License).', 'tbe-child' ) . '</p><p>'
 		. wp_kses_post( sprintf( /* translators: %s: link */ __( 'The site name is set in Angel, a freeware font by JuliaL of %s.', 'tbe-child' ), '<a href="http://nocturne.simplenet.com/angel/" rel="noopener">Tangled in Destiny</a>' ) ) . '</p>';
+	$out .= '<p>' . wp_kses_post( sprintf( /* translators: 1: link to Font Awesome, 2: link to the licence */ __( 'The profile icons are from the Minimalist Social and Platform Icons Pack, GPL. The LinkedIn and Scribd icons are by %1$s, %2$s. The print styles follow the Hartija CSS Print Framework by Vladimir Carrer, MIT licence.', 'tbe-child' ), '<a href="https://fontawesome.com" rel="noopener">Font Awesome</a>', '<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>' ) ) . '</p>';
 
 	$packs = tbe_packs();
 	if ( $packs ) {
@@ -313,6 +314,7 @@ function tbe_reader_toolbar(): string {
 		. '<button type="button" class="tbe-btn" data-tbe-layout aria-pressed="' . ( 'flow' === tbe_setting( 'layout' ) ? 'true' : 'false' ) . '" data-tbe-tip="' . esc_attr__( 'Switch between one verse per line and continuous paragraphs', 'tbe-child' ) . '">' . esc_html__( 'Continuous text', 'tbe-child' ) . '</button>'
 		. '<button type="button" class="tbe-btn" data-tbe-toggle-notes="open">' . esc_html__( 'Open all notes', 'tbe-child' ) . '</button>'
 		. '<button type="button" class="tbe-btn" data-tbe-toggle-notes="close">' . esc_html__( 'Close all notes', 'tbe-child' ) . '</button>'
+		. '<button type="button" class="tbe-btn tbe-print" data-tbe-print data-tbe-tip="' . esc_attr__( 'Print this page, or choose Save as PDF in the print window. Notes print open.', 'tbe-child' ) . '">' . esc_html__( 'Print or save as PDF', 'tbe-child' ) . '</button>'
 		. '</div>';
 }
 

@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.27
+Nothing to do by hand. Profile links offer 33 more networks, empty until an address is set. Print a chapter once to check the page: the browser's print window offers Save as PDF.
+
 ### To 0.10.26
 The theme now requires **PHP 8.4 or later**. Check the PHP version under Tools, Site Health, Info, Server before updating, and ask the host to upgrade if it is older; on older PHP the theme keeps working but every admin screen shows a notice until it is upgraded. The contents now cover pages, posts and glossary terms, nest level-three headings and read `[wp_toc]`. If the WP TOC plugin is installed, it can be deactivated: the theme does the same. While it stays active, the theme leaves posts and pages to it. Nothing to do by hand. The new books (the KJV deuterocanon, 1 Enoch, Laodiceans and these) (Jubilees, 1 to 3 Meqabyan, Hermas, the Apocalypse of Peter) answer at addresses the reader already serves, so the permalinks need no refresh.
 

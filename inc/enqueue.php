@@ -284,6 +284,12 @@ add_action(
 	'wp_enqueue_scripts',
 	static function () {
 		tbe_enqueue_theme_style( 'tbe-mobile-first', 'assets/css/mobile-first.css', array( 'tbe-polish' ) );
+		// Print and "Save as PDF" (0.10.27): last of all, for paper only.
+		tbe_enqueue_theme_style( 'tbe-print', 'assets/css/print.css', array( 'tbe-mobile-first' ) );
+		$styles = wp_styles();
+		if ( isset( $styles->registered['tbe-print'] ) && $styles->registered['tbe-print']->src ) {
+			$styles->registered['tbe-print']->args = 'print'; // the media attribute
+		}
 	},
 	99
 );
