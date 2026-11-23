@@ -95,6 +95,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - C. J. Cornthwaite, named on the Sources page as the source of the `gospels-and-canon` pack's arguments.
 - Samuel Davidson, *The Canon of the Bible* (3rd revised ed., 1877; Project Gutenberg eBook 30132), named on the Sources page, through the `canon-history` pack's `source`, as the source of that pack and of the page references in `data/canons.json` notes.
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
+- MENJ as translator of 4 Baruch, on the book; in structured data the translator is the site's author Person, Mohd Elfie Nieshaem Juferi (`site_author` on the translator in `data/further/4-baruch.json`).
 - M. R. James as translator of the Epistle to the Laodiceans, on the book.
 - J. K. Elliott as translator and Bart D. Ehrman's *Lost Scriptures* (Oxford University Press) as the source of the Ethiopic Apocalypse of Peter, on the Sources page and on the book.
 - Sir Lancelot Brenton (3 and 4 Maccabees, Psalm 151) and earlychristianwritings.com (the transcription of Lightfoot's Apostolic Fathers and James's Acts of Paul), on the Sources page and on each book.

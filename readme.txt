@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.30
+Stable tag: 0.10.31
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -120,6 +120,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * Print styles: after the Hartija CSS Print Framework by Vladimir Carrer, MIT.
 
 == Changelog ==
+
+= 0.10.31 =
+* Structured data: 4 Baruch's translator is named in full, and each further book gives its own original language.
 
 = 0.10.30 =
 * A new section of the book list: four books proposed as the lost Scrolls of Abraham and Moses (the Testament of Abraham, Sefer Yetzirah, the Testament of Moses and the Apocalypse of Moses), all public domain.
