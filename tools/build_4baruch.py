@@ -16,7 +16,7 @@ first full stop or colon in the line its number stands beside. Where the scan lo
 stays in the one before, which is labelled with both numbers ("23–24"). The Greek is not yet proofread against the scan.
 
 Requires: tesseract with the grc and eng languages, and Pillow.
-The English is the site's own translation, verse by verse, in tools/4baruch_en.json (keyed "chapter:verse"); each
+The English is MENJ's translation for the site, verse by verse, in tools/4baruch_en.json (keyed "chapter:verse"); each
 verse gets it as "t" and keeps the Greek as "o", which the reader prints under the English.
 
 Beside it, each chapter shows S. E. Robinson's translation (Charlesworth, The Old Testament Pseudepigrapha, 1985),
@@ -197,16 +197,16 @@ def main():
         "slug": "4-baruch",
         "name": "4 Baruch (The Rest of the Words of Baruch)",
         "language": "Greek",
-        "translation": "Translated for this site from J. Rendel Harris's Greek text (1889)",
+        "translation": "MENJ, from J. Rendel Harris's Greek text (1889)",
         "source": {
             "title": "J. Rendel Harris, The Rest of the Words of Baruch (1889)",
             "url": "https://archive.org/details/" + ITEM,
-            "credit": "Translated verse by verse for thebible.exposed from the Greek text edited by J. Rendel Harris, The Rest of the Words of Baruch: A Christian Apocalypse of the Year 136 A.D. (Cambridge: C. J. Clay and Sons, 1889)",
-            "short": "Site translation from Harris's Greek, 1889",
-            "note": "No English translation in the public domain was found, so the site made its own, verse by verse, and prints Harris's Greek under each verse. The Greek is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong; the translation follows the sense of Harris's text where the reading is damaged. Harris's critical notes are left out.",
+            "credit": "Translated verse by verse by MENJ for thebible.exposed from the Greek text edited by J. Rendel Harris, The Rest of the Words of Baruch: A Christian Apocalypse of the Year 136 A.D. (Cambridge: C. J. Clay and Sons, 1889)",
+            "short": "MENJ, from Harris's Greek (1889)",
+            "note": "No English translation in the public domain was found, so MENJ made one for the site, verse by verse, and prints Harris's Greek under each verse. The Greek is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong; the translation follows the sense of Harris's text where the reading is damaged. Harris's critical notes are left out.",
             "licence": "Public domain",
             "licence_url": "",
-            "translator": {"type": "Person", "name": "J. Rendel Harris", "url": "https://en.wikipedia.org/wiki/James_Rendel_Harris"},
+            "translator": {"type": "Person", "name": "MENJ", "url": "https://thebible.exposed/"},
         },
         "chapters": chapters,
         "parallel": {

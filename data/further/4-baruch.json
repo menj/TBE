@@ -2,19 +2,19 @@
  "slug": "4-baruch",
  "name": "4 Baruch (The Rest of the Words of Baruch)",
  "language": "Greek",
- "translation": "Translated for this site from J. Rendel Harris's Greek text (1889)",
+ "translation": "MENJ, from J. Rendel Harris's Greek text (1889)",
  "source": {
   "title": "J. Rendel Harris, The Rest of the Words of Baruch (1889)",
   "url": "https://archive.org/details/cu31924096046218",
-  "credit": "Translated verse by verse for thebible.exposed from the Greek text edited by J. Rendel Harris, The Rest of the Words of Baruch: A Christian Apocalypse of the Year 136 A.D. (Cambridge: C. J. Clay and Sons, 1889)",
-  "short": "Site translation from Harris's Greek, 1889",
-  "note": "No English translation in the public domain was found, so the site made its own, verse by verse, and prints Harris's Greek under each verse. The Greek is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong; the translation follows the sense of Harris's text where the reading is damaged. Harris's critical notes are left out.",
+  "credit": "Translated verse by verse by MENJ for thebible.exposed from the Greek text edited by J. Rendel Harris, The Rest of the Words of Baruch: A Christian Apocalypse of the Year 136 A.D. (Cambridge: C. J. Clay and Sons, 1889)",
+  "short": "MENJ, from Harris's Greek (1889)",
+  "note": "No English translation in the public domain was found, so MENJ made one for the site, verse by verse, and prints Harris's Greek under each verse. The Greek is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong; the translation follows the sense of Harris's text where the reading is damaged. Harris's critical notes are left out.",
   "licence": "Public domain",
   "licence_url": "",
   "translator": {
    "type": "Person",
-   "name": "J. Rendel Harris",
-   "url": "https://en.wikipedia.org/wiki/James_Rendel_Harris"
+   "name": "MENJ",
+   "url": "https://thebible.exposed/"
   }
  },
  "chapters": [

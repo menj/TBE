@@ -14,13 +14,13 @@ A new section of the book list: four books scholars have put forward as the lost
 
 ## 0.10.29
 
-Nine more books beyond the 66: eight in public-domain translations and 4 Baruch in the site's own translation. Nothing removed, nothing renamed.
+Nine more books beyond the 66: eight in public-domain translations and 4 Baruch in a new translation by MENJ. Nothing removed, nothing renamed.
 
 ### Added
 - 1 Clement, 2 Clement, the Didache and the Epistle of Barnabas in J. B. Lightfoot's translations (The Apostolic Fathers, 1891), from the transcriptions on earlychristianwritings.com (`tools/build_apostolic.py`). 1 Clement's greeting is the heading of its first chapter.
 - 3 Corinthians from the Acts of Paul in M. R. James's translation (1924): the Corinthians' letter, the deacons bringing it, and Paul's reply, as three titled chapters (`tools/build_3corinthians.py`).
 - 3 Maccabees, 4 Maccabees and Psalm 151 in Brenton's English Septuagint (1844), from eBible.org (`tools/build_brenton.py`).
-- 4 Baruch (The Rest of the Words of Baruch) in the site's own English translation, verse by verse, from J. Rendel Harris's Greek text (Cambridge, 1889), with the Greek under each verse; no public-domain English translation was found. The Greek is read from the scan with Tesseract and not yet proofread (`tools/build_4baruch.py`, `tools/4baruch_en.json`). A verse may now carry its original-language text as `o`, shown under the verse (`.tbe-orig`).
+- 4 Baruch (The Rest of the Words of Baruch) in MENJ's English translation, made verse by verse for the site from J. Rendel Harris's Greek text (Cambridge, 1889), with the Greek under each verse; no public-domain English translation was found. The Greek is read from the scan with Tesseract and not yet proofread (`tools/build_4baruch.py`, `tools/4baruch_en.json`). A verse may now carry its original-language text as `o`, shown under the verse (`.tbe-orig`).
 - S. E. Robinson's translation of 4 Baruch (in Charlesworth, The Old Testament Pseudepigrapha, 1985, supplied by the owner under licence) beside the site's, with his own verse numbers: side by side on wide screens, below on narrow ones. A further book's `parallel` field holds a second translation (`tbe_further_parallel()`, `tools/4baruch_robinson.json`).
 - The book list links all nine; `tools/test_further.php` checks them.
 - `/manuscripts/hebrew/`: the 1,528 places where the Hebrew Bible is written one way and read another (ketiv and qere, 1,323), or where a word is restored from other manuscripts, found only in some copies, or read otherwise in another edition, book by book with each place linked to its interlinear verse; 815 of them change the meaning. Genesis 18:22, a "correction of the scribes", is shown first. Built from the interlinear's own notes by `tools/build_hebrew_variants.py` into `data/manuscripts/hebrew.json`; the manuscripts index links it.
