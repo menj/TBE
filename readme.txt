@@ -22,7 +22,7 @@ What a visitor gets:
 * Commentary boxes under the verses they discuss, with footnotes that pop up on hover.
 * A glossary, an index of the commentary and a passage search.
 * Recorded readings of Genesis 1 (Hebrew) and Matthew 1 (Greek), with each word lit as it is read.
-* A Christian and Jewish side-by-side view for Genesis (ESV and JPS 1917), and Dead Sea Scroll readings for the whole of Isaiah.
+* A Christian and Jewish side-by-side view for Genesis to Deuteronomy (ESV and JPS 1917), and Dead Sea Scroll readings for the whole of Isaiah.
 * A lexicon at /lexicon/: every Hebrew and Greek word by its Strong's number, with its meaning, how often it is used and where, and Metzger's list of Greek words by how often they occur. Each Strong's number on the word-by-word pages opens its entry.
 * A Manuscripts section at /manuscripts/: twenty-two places where the Greek manuscripts disagree, most of them passages that the King James Version prints and the earliest Greek manuscripts leave out, such as the long ending of Mark and the woman caught in adultery, with each manuscript's own words line by line.
 * Three colour schemes, or your own colours. The site is light only.

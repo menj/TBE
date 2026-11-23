@@ -71,6 +71,10 @@ final class TBE_Bible {
 			$own = $shifted;
 		}
 		foreach ( $rules as $verse => $from ) {
+			if ( '' === $from ) {
+				unset( $own[ (int) $verse ] ); // no Hebrew verse of its own: its words are in the verse before (the Ten Commandments)
+				continue;
+			}
 			if ( is_string( $from ) && preg_match( '/^(\d+):(\d+)$/', $from, $m ) ) {
 				$other = self::jps_raw( $slug, (int) $m[1] );
 				if ( isset( $other[ (int) $m[2] ] ) ) {
