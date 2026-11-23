@@ -332,6 +332,7 @@ function tbe_view_manuscripts(): string {
 	$out  = '<div class="tbe-reader tbe-ms">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</h1>';
 	$out .= '<p class="tbe-center tbe-muted">' . esc_html__( 'Places where the Greek manuscripts of the New Testament disagree: mostly verses and words that the King James Version prints and the earliest surviving copies leave out, and a few readings that scribes changed. Each page sets the manuscripts side by side, in their own words, line by line.', 'tbe-child' ) . '</p>';
+	$out .= '<p class="tbe-center"><a class="tbe-btn" href="' . esc_url( home_url( '/manuscripts/hebrew/' ) ) . '">' . esc_html__( 'The Hebrew Bible: written one way, read another', 'tbe-child' ) . ' <span aria-hidden="true">→</span></a></p>';
 	$passages = TBE_Manuscripts::passages();
 	if ( ! $passages ) {
 		return $out . '<p class="tbe-notice">' . esc_html__( 'The manuscript data has not been built yet.', 'tbe-child' ) . '</p></div>';
@@ -459,4 +460,82 @@ function tbe_manuscripts_chapter_note( string $slug, int $chapter ): string {
 		) . '</li>';
 	}
 	return '' === $out ? '' : '<aside class="tbe-ms__note" aria-label="' . esc_attr__( 'Manuscripts', 'tbe-child' ) . '"><p><strong>' . esc_html__( 'The manuscripts differ here.', 'tbe-child' ) . '</strong></p><ul>' . $out . '</ul></aside>';
+}
+
+/* Hebrew: written and read (0.10.29) ------------------------------------------------------------------------ */
+
+/** The places where the Hebrew text is written one way and read another, from data/manuscripts/hebrew.json. */
+function tbe_hebrew_variants(): array {
+	static $items = null;
+	if ( null === $items ) {
+		$file  = TBE_DIR . '/data/manuscripts/hebrew.json';
+		$data  = is_readable( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : null; // phpcs:ignore WordPress.WP.AlternativeFunctions
+		$items = is_array( $data ) ? (array) ( $data['items'] ?? array() ) : array();
+	}
+	return $items;
+}
+
+/** The page /manuscripts/hebrew/: every place, book by book, the differences of meaning first in each book. */
+function tbe_view_manuscripts_hebrew(): string {
+	$items = tbe_hebrew_variants();
+	$kinds = array(
+		'Q' => __( 'Written and read differ', 'tbe-child' ),
+		'X' => __( 'A word only some copies have', 'tbe-child' ),
+		'R' => __( 'Restored from other manuscripts', 'tbe-child' ),
+		'E' => __( 'Another edition reads', 'tbe-child' ),
+	);
+	$count   = static fn( string $k ): int => count( array_filter( $items, static fn( $i ) => $k === $i['k'] ) );
+	$meaning = count( array_filter( $items, static fn( $i ) => ! empty( $i['m'] ) ) );
+	$he      = static fn( string $w ): string => '<bdi lang="he" dir="rtl" class="tbe-ms-he__he">' . esc_html( $w ) . '</bdi>';
+
+	$out  = '<div class="tbe-reader tbe-ms tbe-ms-he">';
+	$out .= '<nav class="tbe-breadcrumb" aria-label="' . esc_attr__( 'Breadcrumb', 'tbe-child' ) . '"><a href="' . esc_url( TBE_Manuscripts::url() ) . '">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</a></nav>';
+	$out .= '<p class="tbe-eyebrow">' . esc_html__( 'The Hebrew Bible', 'tbe-child' ) . '</p>';
+	$out .= '<h1 class="tbe-title">' . esc_html__( 'Written one way, read another', 'tbe-child' ) . '</h1>';
+	$out .= '<p class="tbe-title-sub">' . esc_html(
+		sprintf(
+			/* translators: 1: total places, 2: written and read, 3: of meaning */
+			__( 'The Hebrew text printed in Bibles, the Leningrad Codex of 1008, is not one text. In %2$s places its scribes wrote one word and marked another to be read aloud: the written form (ketiv) and the read form (qere). In others a word is missing and restored from other manuscripts, or only some copies have it. %1$s places in all; in %3$s the two forms say different things.', 'tbe-child' ),
+			number_format_i18n( count( $items ) ),
+			number_format_i18n( $count( 'Q' ) ),
+			number_format_i18n( $meaning )
+		)
+	) . '</p>';
+
+	// Genesis 18:22 is the best known: one of the "corrections of the scribes".
+	$out .= '<aside class="tbe-notice"><p><strong>' . esc_html__( 'Genesis 18:22.', 'tbe-child' ) . '</strong> ' . wp_kses_post(
+		sprintf(
+			/* translators: %s: link to the verse */
+			__( 'The text reads “Abraham stood yet before the LORD”. Another Hebrew edition gives the earlier reading, that the LORD stood before Abraham: the rabbis counted this among the “corrections of the scribes” (tiqqune sopherim), made because a god standing before a man seemed unfitting. %s.', 'tbe-child' ),
+			'<a href="' . esc_url( TBE_Interlinear::url( 'genesis', 18 ) . '#v22' ) . '">' . esc_html__( 'See it word by word', 'tbe-child' ) . '</a>'
+		)
+	) . '</p></aside>';
+
+	$out .= '<ul class="tbe-ms-he__kinds">';
+	foreach ( $kinds as $k => $label ) {
+		$out .= '<li><strong>' . esc_html( $label ) . '</strong> ' . esc_html( number_format_i18n( $count( $k ) ) ) . '</li>';
+	}
+	$out .= '</ul>';
+
+	$by_book = array();
+	foreach ( $items as $item ) {
+		$by_book[ $item['b'] ][] = $item;
+	}
+	foreach ( $by_book as $slug => $list ) {
+		usort( $list, static fn( $a, $b ) => ( $b['m'] <=> $a['m'] ) ?: ( array( $a['c'], $a['v'] ) <=> array( $b['c'], $b['v'] ) ) );
+		$book  = TBE_Bible::book( (string) $slug );
+		$m     = count( array_filter( $list, static fn( $i ) => ! empty( $i['m'] ) ) );
+		$out  .= '<details class="tbe-box tbe-ms-he__book" id="' . esc_attr( (string) $slug ) . '"><summary>' . esc_html( $book ? (string) $book['name'] : (string) $slug ) . ' <span class="tbe-muted">' . esc_html( sprintf( /* translators: 1: places, 2: of meaning */ __( '%1$d places, %2$d of meaning', 'tbe-child' ), count( $list ), $m ) ) . '</span></summary>';
+		$out  .= '<div class="tbe-tablewrap"><table class="tbe-table"><thead><tr><th scope="col">' . esc_html__( 'Verse', 'tbe-child' ) . '</th><th scope="col">' . esc_html__( 'Printed (read)', 'tbe-child' ) . '</th><th scope="col">' . esc_html__( 'The other form', 'tbe-child' ) . '</th><th scope="col">' . esc_html__( 'Kind', 'tbe-child' ) . '</th></tr></thead><tbody>';
+		foreach ( $list as $i ) {
+			$ref   = TBE_Bible::label( (string) $slug, (int) $i['c'], (int) $i['v'] );
+			$out  .= '<tr' . ( ! empty( $i['m'] ) ? ' class="is-meaning"' : '' ) . '><th scope="row"><a href="' . esc_url( TBE_Interlinear::url( (string) $slug, (int) $i['c'] ) . '#v' . (int) $i['v'] ) . '">' . esc_html( $ref ) . '</a></th>'
+				. '<td>' . $he( (string) $i['he'] ) . ' <span class="tbe-muted">' . esc_html( (string) $i['g'] ) . '</span></td>'
+				. '<td>' . ( '' !== (string) $i['ohe'] ? $he( (string) $i['ohe'] ) . ' <span class="tbe-muted">' . esc_html( (string) $i['og'] ) . '</span>' : '<span class="tbe-muted">' . esc_html__( 'not given', 'tbe-child' ) . '</span>' ) . '</td>'
+				. '<td>' . esc_html( (string) ( $kinds[ $i['k'] ] ?? $i['k'] ) ) . '</td></tr>';
+		}
+		$out .= '</tbody></table></div></details>';
+	}
+	$out .= '<p class="tbe-copyright">' . esc_html__( 'From the Hebrew word-by-word data of STEPBible (TAHOT), based on work at Tyndale House Cambridge, CC BY 4.0, as used by this site’s interlinear.', 'tbe-child' ) . '</p>';
+	return $out . '</div>';
 }

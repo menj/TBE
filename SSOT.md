@@ -47,7 +47,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The Hebrew Old Testament and the Greek New Testament, word by word, come from STEPBible (CC BY 4.0) in `data/interlinear/`.
 - Recorded readings: Genesis 1 (Hebrew) and Matthew 1 (Greek) only.
 - Samaritan Pentateuch comparison: Genesis to Deuteronomy against the Masoretic text, `data/sp/`, from the CACCHT dataset of Stefan Schorch's edition (CC BY-NC 4.0). That data and the pages built from it stay under CC BY-NC 4.0.
-- Dead Sea Scrolls comparison: Isaiah 1 to 5 against 1QIsa-a only. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
+- Dead Sea Scrolls comparison: all of Isaiah (66 chapters) against 1QIsa-a. Hebrew written and read: 1,528 places in `data/manuscripts/hebrew.json`, at `/manuscripts/hebrew/`. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
 - JPS 1917 parallel text: Genesis only (`data/jps/`).
 - Brown-Driver-Briggs (1906, public domain) for the Hebrew lexicon pages in `data/lexicon/bdb/`, from the Enhanced BDB pages at ericlevy.com.
 - Lexicon: every Hebrew and Greek Strong's number in `data/lexicon/`, from STEPBible's TBESG and TBESH (CC BY 4.0), and Metzger's frequency list in `data/lexicon/metzger.json`.
