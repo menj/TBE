@@ -10,8 +10,8 @@ Each image is an opening of two pages. The text is set in type about 39 pixels t
 heads and page numbers about 29. The script keeps the large type of each page, left page first, from the title
 "THE BOOK OF ENOCH." on, and drops footnote marks (^, *, a lone quotation mark). Only the chapter headings are
 set in the large type with "CHAP."; their numerals are often misread ("CHAP. xni."), so they are counted in
-order, 1 to 105, Laurence's own numbering, which differs from R. H. Charles's. Laurence has no chapter XI; his
-note "(No CHAP. XI.)" stands for it. Section marks ("[SECT. II.]") are left out. Nothing is reworded.
+order, 1 to 105, Laurence's own numbering, which differs from R. H. Charles's. Laurence has no chapters XI, XXXVI
+and CI; his notes say so, and those pages quote them. Headings the OCR misread ("CHAR LXIV.") are still found. Section marks ("[SECT. II.]") are left out. Nothing is reworded.
 
 Usage:  python3 tools/build_enoch.py
 """
@@ -131,7 +131,7 @@ def main():
             numerals.append("XI")
             cur = None
             continue
-        m = re.match(r"^[.,:; ]*CHAP[.,]?\s+(\S+)", t)
+        m = re.match(r"^[.,:; ]*(?:CHAP|CHAR|CEAP|CHAF|OHAP|GHAP)[.,]?\s+(\S+)", t)  # "CHAR LXIV.", "CEAP. LXV." in the OCR
         if m:
             cur = []
             chapters.append(cur)
@@ -153,14 +153,20 @@ def main():
             problems.append("heading %r after chapter %d read as %d" % (read, last, last + 1))
             v = last + 1
         for missing in range(last + 1, v):
-            problems.append("chapter %d: its heading is not in the scan's text; its words stay in chapter %d" % (missing, missing - 1))
+            if missing not in (36, 101):  # Laurence's manuscripts lack these two; see ABSENT
+                problems.append("chapter %d: its heading is not in the scan's text; its words stay in chapter %d" % (missing, missing - 1))
             numbered.append((missing, None))
         numbered.append((v, lines))
         last = v
+    # Chapters Laurence's manuscripts do not have, in his own footnotes.
+    absent = {
+        36: "Laurence has no chapter XXXVI: “Chap. xxxvi. does not occur in the MS.”",
+        101: "Laurence has no chapter CI: “There is no chap. ci. in the MSS.”",
+    }
     out = []
     for c, lines in numbered:
         if lines is None:
-            out.append({"n": c, "heading": "The scan of the 1883 edition does not show where this chapter begins; its words are in the chapter before.", "verses": []})
+            out.append({"n": c, "heading": absent.get(c, "The scan of the 1883 edition does not show where this chapter begins; its words are in the chapter before."), "verses": []})
             continue
         if lines == [NO_XI]:
             out.append({"n": c, "heading": NO_XI.strip("()"), "verses": []})

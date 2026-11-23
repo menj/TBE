@@ -11,6 +11,9 @@ Eight more books beyond the 66, in public-domain translations. Nothing removed, 
 - The book list links all eight; `tools/test_further.php` checks them.
 - `/favicon.png` is answered with the brand icon (192 pixels), as `/favicon.ico` already was, unless a Site Icon is set (`tbe_serve_favicon_png()`, `tbe_send_brand_file()` in `inc/branding.php`).
 
+### Fixed
+- 1 Enoch: chapters LXIV and LXV have their own text again (the OCR had read their headings as "CHAR LXIV." and "CEAP. LXV."), and the pages for XXXVI and CI quote Laurence's notes that his manuscripts have no such chapters.
+
 ### Changed
 - Cloud credential files a scanner asks for (`/google-credentials.json`, `/sa.json`, `/key.json`, `/gcp-key.json`, `/firebase-adminsdk.json`, `/service-account.json`, `secrets.yaml` and the like) get the short plain 404, and so does a bare `/info` unless the site has a page there. A real file at such an address is still served.
 - The interface font (Montserrat) is preloaded on every page, and until it arrives a size-matched Arial ("Montserrat Fallback") stands in, so the swap no longer re-wraps the reading toolbar. The live interlinear at 375 pixels measured a layout shift of 0.061 from the toolbar's text; the colour-contrast failure the 0.10.21 audit listed there is gone (axe finds none).
