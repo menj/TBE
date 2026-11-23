@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.30
+Nothing to do by hand.
+
 ### To 0.10.29
 Nothing to do by hand.
 

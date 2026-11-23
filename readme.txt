@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.29
+Stable tag: 0.10.30
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -121,8 +121,11 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.30 =
+* A new section of the book list: four books proposed as the lost Scrolls of Abraham and Moses (the Testament of Abraham, Sefer Yetzirah, the Testament of Moses and the Apocalypse of Moses), all public domain.
+
 = 0.10.29 =
-* Nine more books can be read: 1 and 2 Clement, the Didache, Barnabas, 3 Corinthians, 3 and 4 Maccabees, Psalm 151, and 4 Baruch in a new translation with the Greek under each verse and S. E. Robinson's translation beside it.
+* Nine more books can be read: 1 and 2 Clement, the Didache, Barnabas, 3 Corinthians, 3 and 4 Maccabees, Psalm 151, and 4 Baruch in a new translation by MENJ with the Greek under each verse and S. E. Robinson's translation beside it.
 * A Hebrew manuscripts page: 1,528 places where the Hebrew is written one way and read another.
 * The Dead Sea Scroll comparison now covers all of Isaiah.
 

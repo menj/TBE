@@ -438,6 +438,50 @@
      "note": "A short letter in Paul's name, in many Latin Vulgate manuscripts and in Wycliffe's English Bible."
     }
    ]
+  },
+  {
+   "id": "suhuf",
+   "title": "Books proposed as the Scrolls of Abraham and Moses",
+   "traditions": [],
+   "intro": "The Qur'an twice names the Scrolls (Suhuf) of Abraham and Moses (53:36-37, 87:18-19), a scripture no longer known. Scholars have put forward these surviving Jewish books as what the name may have meant; some take the Scrolls of Moses to be simply the Torah, which is on this site as Genesis to Deuteronomy. None of these identifications is settled, and none of these books is counted as scripture by any church or by Judaism.",
+   "books": [
+    {
+     "slug": "testament-of-abraham",
+     "name": "Testament of Abraham",
+     "traditions": [],
+     "badge": "Proposed as the Scrolls of Abraham",
+     "language": "Greek",
+     "status": "available",
+     "note": "A Jewish book of about the first century, kept in a longer and a shorter Greek version: Abraham resists death, is shown the world and the judgement of souls, and is taken up. Proposed as the Scrolls of Abraham because it was known in Muhammad's time."
+    },
+    {
+     "slug": "sefer-yetzirah",
+     "name": "Sefer Yetzirah (Book of Formation)",
+     "traditions": [],
+     "badge": "Proposed as the Scrolls of Abraham",
+     "language": "Hebrew",
+     "status": "available",
+     "note": "A short Hebrew book on the making of the world through the ten numbers and the twenty-two letters. Its last section and Jewish tradition ascribe its teaching to Abraham."
+    },
+    {
+     "slug": "testament-of-moses",
+     "name": "Testament of Moses (Assumption of Moses)",
+     "traditions": [],
+     "badge": "Proposed as the Scrolls of Moses",
+     "language": "Latin",
+     "status": "available",
+     "note": "Moses' last words to Joshua, foretelling Israel's history to the end of days, from the first century; it survives in one Latin manuscript that breaks off."
+    },
+    {
+     "slug": "apocalypse-of-moses",
+     "name": "Apocalypse of Moses (Life of Adam and Eve, Greek)",
+     "traditions": [],
+     "badge": "Proposed as the Scrolls of Moses",
+     "language": "Greek",
+     "status": "available",
+     "note": "The life and death of Adam and Eve, presented as revealed to Moses."
+    }
+   ]
   }
  ]
 }
