@@ -19,6 +19,11 @@ Requires: tesseract with the grc and eng languages, and Pillow.
 The English is the site's own translation, verse by verse, in tools/4baruch_en.json (keyed "chapter:verse"); each
 verse gets it as "t" and keeps the Greek as "o", which the reader prints under the English.
 
+Beside it, each chapter shows S. E. Robinson's translation (Charlesworth, The Old Testament Pseudepigrapha, 1985),
+which the owner supplied as a scan under licence. It was read with Tesseract, its margin numbers, cross-references
+and footnotes dropped, split at Robinson's verse marks, checked against his verse count in each chapter, and kept
+in tools/4baruch_robinson.json (a list of chapters, each a list of verses).
+
 Usage:  python3 tools/build_4baruch.py
 """
 import json, os, re, subprocess, sys, time, urllib.request
@@ -204,6 +209,11 @@ def main():
             "translator": {"type": "Person", "name": "J. Rendel Harris", "url": "https://en.wikipedia.org/wiki/James_Rendel_Harris"},
         },
         "chapters": chapters,
+        "parallel": {
+            "title": "S. E. Robinson's translation",
+            "credit": "S. E. Robinson, \u201c4 Baruch,\u201d in J. H. Charlesworth (ed.), The Old Testament Pseudepigrapha, vol. 2 (New York: Doubleday, 1985), pp. 418\u2013425, used with the site owner's licence. His verse numbers follow the edition of R. A. Kraft and A.-E. Purintun, which has some lines Harris's Greek lacks.",
+            "chapters": {str(i + 1): ch for i, ch in enumerate(json.load(open(os.path.join(ROOT, "tools", "4baruch_robinson.json"), encoding="utf-8")))},
+        },
     }
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=1)
