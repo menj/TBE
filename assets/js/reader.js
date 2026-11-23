@@ -164,7 +164,37 @@
 			applyLayout( layoutButton, 'flow' === load( KEYS.layout ) );
 		}
 
+		// Print and "Save as PDF" (0.10.27): every note prints open, then each goes back as it was. A note in a
+		// named group (<details name>) closes its siblings when it opens, so the group name is set aside while
+		// printing, and every note's own state is put back afterwards.
+		var saved = [];
+		window.addEventListener( 'beforeprint', function () {
+			saved = [];
+			document.querySelectorAll( 'details' ).forEach( function ( box ) {
+				saved.push( { box: box, open: box.open, name: box.getAttribute( 'name' ) } );
+			} );
+			saved.forEach( function ( s ) {
+				if ( null !== s.name ) {
+					s.box.removeAttribute( 'name' );
+				}
+				s.box.open = true;
+			} );
+		} );
+		window.addEventListener( 'afterprint', function () {
+			saved.forEach( function ( s ) {
+				s.box.open = s.open;
+				if ( null !== s.name ) {
+					s.box.setAttribute( 'name', s.name );
+				}
+			} );
+			saved = [];
+		} );
+
 		document.addEventListener( 'click', function ( event ) {
+			if ( event.target.closest( '[data-tbe-print]' ) ) {
+				window.print();
+				return;
+			}
 			var sizeButton = event.target.closest( '[data-tbe-size]' );
 			if ( sizeButton ) {
 				var current = parseFloat( getComputedStyle( root ).getPropertyValue( '--tbe-scale' ) ) || 1;

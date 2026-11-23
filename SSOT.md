@@ -98,7 +98,8 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Richard Laurence, R. H. Charles, J. B. Lightfoot and Andrew Rutherfurd as translators of Jubilees, Hermas and the Apocalypse of Peter, on the Sources page and on each book.
 - Wikisource contributors for the 1 to 3 Meqabyan translation, with the CC BY-SA 4.0 licence and a link to each page, on the Sources page and on every page of those books. The licence requires it.
 - The licences in `assets/fonts/` for SBL, Angel, Noto Naskh Arabic, Abyssinica SIL and Montserrat, and the Angel credit with its link on the Sources page.
-- The Minimalist Social Icons Pack 2.8 for the profile icons.
+- The Minimalist Social and Platform Icons Pack (GPL) for the profile icons, and Font Awesome (CC BY 4.0) for the LinkedIn and Scribd icons, on the Sources page. The CC BY licence requires it.
+- Vladimir Carrer's Hartija CSS Print Framework (MIT) for the print styles, on the Sources page and in `assets/css/LICENSE-HARTIJA.txt`.
 - The source of the critical-commentary pack, on the Sources page and nowhere else.
 
 ## Contributor rules

@@ -189,6 +189,7 @@ function tbe_view_further_chapter( array $book, int $chapter ): string {
 		. '<button type="button" class="tbe-btn" data-tbe-size="1" aria-label="' . esc_attr__( 'Larger text', 'tbe-child' ) . '" data-tbe-tip="' . esc_attr__( 'Larger text', 'tbe-child' ) . '">A+</button>'
 		. '<button type="button" class="tbe-btn" data-tbe-numbers aria-pressed="' . ( tbe_setting( 'verse_numbers' ) ? 'true' : 'false' ) . '">' . esc_html__( 'Verse numbers', 'tbe-child' ) . '</button>'
 		. '<button type="button" class="tbe-btn" data-tbe-layout aria-pressed="' . ( 'flow' === $layout ? 'true' : 'false' ) . '" data-tbe-tip="' . esc_attr__( 'Switch between one verse per line and continuous paragraphs', 'tbe-child' ) . '">' . esc_html__( 'Continuous text', 'tbe-child' ) . '</button>'
+		. '<button type="button" class="tbe-btn tbe-print" data-tbe-print data-tbe-tip="' . esc_attr__( 'Print this page, or choose Save as PDF in the print window. Notes print open.', 'tbe-child' ) . '">' . esc_html__( 'Print or save as PDF', 'tbe-child' ) . '</button>'
 		. '</div>';
 	if ( 1 === $chapter ) {
 		$out .= tbe_further_credit( $book );

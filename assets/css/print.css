@@ -1,0 +1,215 @@
+/*
+ * The Bible Exposed: print and "Save as PDF" (0.10.27). Loaded last, for print only (media="print").
+ *
+ * After the Hartija CSS Print Framework 1.0 by Vladimir Carrer (MIT licence, see LICENSE-HARTIJA.txt beside this
+ * file): black text on white, a serif face, headings kept with what follows, no widows or orphans, the address of
+ * an outside link printed after it, table headers repeated on each page. Fitted to the theme: the site's chrome
+ * (header, menu, footer, toolbars, tooltips, progress bar, editing drawer) is left off the page, a chapter's verses,
+ * notes and commentary print in full, and the Hebrew, Greek, Ge'ez and Syriac keep their own fonts.
+ */
+
+@page {
+	margin: 18mm 16mm 20mm;
+}
+
+html,
+body {
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: #fff !important;
+	color: #000 !important;
+	font-size: 11.5pt;
+	line-height: 1.45;
+}
+
+body,
+.tbe-reader,
+.tbe-main {
+	font-family: var(--tbe-serif, Garamond, "Times New Roman", serif);
+}
+
+/* Everything that only works on a screen. */
+.tbe-header,
+.tbe-footer,
+.wp-block-navigation,
+.tbe-toolbar,
+.tbe-search,
+.tbe-progress,
+.tbe-tip,
+[data-tbe-tip-box],
+.tbe-social,
+.tbe-mark,
+.tbe-print,
+.tbe-pager,
+.tbe-fe,
+.tbe-frontend-edit,
+.tbe-skip,
+.skip-link,
+button,
+audio,
+video,
+iframe {
+	display: none !important;
+}
+
+/* The page takes the whole sheet. */
+.tbe-main,
+.tbe-reader,
+.wp-site-blocks,
+main,
+article {
+	max-width: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	box-shadow: none !important;
+	border: 0 !important;
+	background: none !important;
+}
+
+/* No highlighted verse or note on paper, even with "Background graphics" ticked in the print window. */
+.tbe-verse,
+.tbe-verse:target,
+.tbe-verse.is-active,
+.has-note,
+:target {
+	background: none !important;
+}
+
+/* No colour washes, shadows or rounded cards on paper. */
+*,
+*::before,
+*::after {
+	box-shadow: none !important;
+	text-shadow: none !important;
+	animation: none !important;
+	transition: none !important;
+}
+
+.tbe-box,
+.tbe-notice,
+.tbe-card,
+.tbe-contents,
+.tbe-lex__metzger,
+.tbe-further__credit {
+	background: none !important;
+	border: 1px solid #999 !important;
+	border-radius: 0 !important;
+	break-inside: avoid;
+}
+
+/* Headings stay with what follows; no lone lines at the top or foot of a page. */
+h1, h2, h3, h4, h5, h6 {
+	break-after: avoid;
+	page-break-after: avoid;
+	color: #000 !important;
+}
+
+h1 { font-size: 20pt; }
+h2 { font-size: 15pt; }
+h3 { font-size: 13pt; }
+h4, h5, h6 { font-size: 11.5pt; }
+
+p, li, h2, h3, .tbe-verse {
+	orphans: 3;
+	widows: 3;
+}
+
+/* Notes and commentary print open, whatever their state on screen. */
+details {
+	display: block;
+}
+
+details > summary {
+	list-style: none;
+	font-weight: 700;
+}
+
+details > *:not(summary) {
+	display: block !important;
+}
+
+[hidden].tbe-box__body,
+.tbe-box__body {
+	display: block !important;
+	max-height: none !important;
+	overflow: visible !important;
+}
+
+/* Links: underlined, and the address of an outside link after it. */
+a,
+a:visited {
+	color: #000 !important;
+	text-decoration: underline;
+	background: transparent !important;
+}
+
+.tbe-reader a[href^="http"]:not([href*="thebible.exposed"])::after,
+.entry-content a[href^="http"]:not([href*="thebible.exposed"])::after {
+	content: " (" attr(href) ")";
+	font-size: 85%;
+	word-break: break-all;
+}
+
+a[href^="#"]::after,
+a[href^="javascript:"]::after,
+.tbe-vn::after,
+.tbe-booklist a::after,
+.tbe-chapters a::after {
+	content: "" !important;
+}
+
+abbr[title]::after {
+	content: " (" attr(title) ")";
+}
+
+/* Tables: a header row on each page, no row split across two. */
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+thead {
+	display: table-header-group;
+}
+
+tr,
+img,
+figure,
+.tbe-il__verse {
+	break-inside: avoid;
+	page-break-inside: avoid;
+}
+
+th,
+td {
+	border-bottom: 1px solid #666;
+	padding: 3pt 8pt 3pt 0;
+	text-align: start;
+}
+
+.tbe-tablewrap,
+.tbe-scroll {
+	overflow: visible !important;
+}
+
+img {
+	max-width: 100% !important;
+	height: auto !important;
+}
+
+/* Verse numbers and printed references stay readable but quiet. */
+.tbe-vn {
+	font-size: 8pt;
+	text-decoration: none !important;
+	vertical-align: super;
+}
+
+/* The source and licence lines must print: the licences require them. */
+.tbe-copyright,
+.tbe-source,
+.tbe-lex__bdb-credit {
+	display: block !important;
+	color: #333 !important;
+	font-size: 9pt;
+}

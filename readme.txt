@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.26
+Stable tag: 0.10.27
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -116,9 +116,14 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The Brown-Driver-Briggs articles are the 1906 Clarendon Press lexicon (public domain), as set out in the Enhanced Brown-Driver-Briggs pages at ericlevy.com.
 * The Samaritan Pentateuch comparison is built from the CACCHT dataset of Stefan Schorch's edition (Christian Canu Højgaard, Martijn Naaijer and Stefan Schorch), CC BY-NC 4.0, and shares that licence.
 * Fonts: SBL BibLit, SBL Hebrew and SBL Greek under the SBL and Tiro Typeworks licence; Angel, freeware by JuliaL; Noto Naskh Arabic, Abyssinica SIL and Montserrat under the SIL Open Font License.
-* Profile icons: the Minimalist Social Icons Pack 2.8, GPL.
+* Profile icons: the Minimalist Social and Platform Icons Pack, GPL; the LinkedIn and Scribd icons by Font Awesome, CC BY 4.0.
+* Print styles: after the Hartija CSS Print Framework by Vladimir Carrer, MIT.
 
 == Changelog ==
+
+= 0.10.27 =
+* Print or save any chapter as a PDF: a button on the reading toolbar, a clean page for paper, and notes that print open.
+* 33 more networks for the profile links in the footer, from the new icons pack.
 
 = 0.10.26 =
 * Hebrew lexicon pages give the full Brown-Driver-Briggs article.
@@ -203,6 +208,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.27 =
+Nothing to do by hand. The new networks appear empty under Appearance, TBE, Profile links.
 
 = 0.10.26 =
 The theme now needs PHP 8.4 or later. Check the PHP version with your host before updating. If you use the WP TOC plugin, you can deactivate it: the theme now does the same. The new books answer at addresses the reader already serves, so the permalinks need no refresh.
