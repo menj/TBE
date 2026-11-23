@@ -16,6 +16,9 @@ first full stop or colon in the line its number stands beside. Where the scan lo
 stays in the one before, which is labelled with both numbers ("23–24"). The Greek is not yet proofread against the scan.
 
 Requires: tesseract with the grc and eng languages, and Pillow.
+The English is the site's own translation, verse by verse, in tools/4baruch_en.json (keyed "chapter:verse"); each
+verse gets it as "t" and keeps the Greek as "o", which the reader prints under the English.
+
 Usage:  python3 tools/build_4baruch.py
 """
 import json, os, re, subprocess, sys, time, urllib.request
@@ -174,20 +177,28 @@ def main():
         joined = [v["l"] for v in c["verses"] if "l" in v]
         if joined:
             problems.append("chapter %d: verses run together %s" % (c["n"], ", ".join(joined)))
+    english = json.load(open(os.path.join(ROOT, "tools", "4baruch_en.json"), encoding="utf-8"))
+    for c in chapters:
+        for v in c["verses"]:
+            key = "%d:%d" % (c["n"], v["n"])
+            if key not in english:
+                problems.append("no English for " + key)
+                continue
+            v["o"], v["t"] = v["t"], english.pop(key)
+    problems += ["English for a verse not in the Greek: " + k for k in english]
     if len(chapters) != 9:
         problems.append("found %d chapters, not 9" % len(chapters))
     data = {
         "slug": "4-baruch",
         "name": "4 Baruch (The Rest of the Words of Baruch)",
         "language": "Greek",
-        "text_lang": "grc",
-        "translation": "Greek text, J. Rendel Harris, 1889",
+        "translation": "Translated for this site from J. Rendel Harris's Greek text (1889)",
         "source": {
             "title": "J. Rendel Harris, The Rest of the Words of Baruch (1889)",
             "url": "https://archive.org/details/" + ITEM,
-            "credit": "The Greek text edited by J. Rendel Harris, The Rest of the Words of Baruch: A Christian Apocalypse of the Year 136 A.D. (Cambridge: C. J. Clay and Sons, 1889)",
-            "short": "J. Rendel Harris, 1889",
-            "note": "This is the Greek text, not a translation: no English translation in the public domain was found. It is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong. Harris's critical notes are left out.",
+            "credit": "Translated verse by verse for thebible.exposed from the Greek text edited by J. Rendel Harris, The Rest of the Words of Baruch: A Christian Apocalypse of the Year 136 A.D. (Cambridge: C. J. Clay and Sons, 1889)",
+            "short": "Site translation from Harris's Greek, 1889",
+            "note": "No English translation in the public domain was found, so the site made its own, verse by verse, and prints Harris's Greek under each verse. The Greek is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong; the translation follows the sense of Harris's text where the reading is damaged. Harris's critical notes are left out.",
             "licence": "Public domain",
             "licence_url": "",
             "translator": {"type": "Person", "name": "J. Rendel Harris", "url": "https://en.wikipedia.org/wiki/James_Rendel_Harris"},

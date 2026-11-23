@@ -2,14 +2,13 @@
  "slug": "4-baruch",
  "name": "4 Baruch (The Rest of the Words of Baruch)",
  "language": "Greek",
- "text_lang": "grc",
- "translation": "Greek text, J. Rendel Harris, 1889",
+ "translation": "Translated for this site from J. Rendel Harris's Greek text (1889)",
  "source": {
   "title": "J. Rendel Harris, The Rest of the Words of Baruch (1889)",
   "url": "https://archive.org/details/cu31924096046218",
-  "credit": "The Greek text edited by J. Rendel Harris, The Rest of the Words of Baruch: A Christian Apocalypse of the Year 136 A.D. (Cambridge: C. J. Clay and Sons, 1889)",
-  "short": "J. Rendel Harris, 1889",
-  "note": "This is the Greek text, not a translation: no English translation in the public domain was found. It is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong. Harris's critical notes are left out.",
+  "credit": "Translated verse by verse for thebible.exposed from the Greek text edited by J. Rendel Harris, The Rest of the Words of Baruch: A Christian Apocalypse of the Year 136 A.D. (Cambridge: C. J. Clay and Sons, 1889)",
+  "short": "Site translation from Harris's Greek, 1889",
+  "note": "No English translation in the public domain was found, so the site made its own, verse by verse, and prints Harris's Greek under each verse. The Greek is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong; the translation follows the sense of Harris's text where the reading is damaged. Harris's critical notes are left out.",
   "licence": "Public domain",
   "licence_url": "",
   "translator": {
@@ -25,47 +24,58 @@
    "verses": [
     {
      "n": 1,
-     "t": "᾿Ἐγένετο, ἡνίκα ἠχμαλωτεύθησαν οἱ υἱοὶ ᾿Ισραὴλ ἀπὸ τοῦ βασιλέως τῶν Χαλδαίων, ἐλάλησεν ὁ Θεὸς πρὸς Ἱερεμίαν Ιερεμία, ὁ ἐκλεκτός μου, ἀνάστα, ἔξελθε ἐκ τῆς πόλεως ταύτης, σὺ καὶ Βαροὺχ: ἐπειδὴ ἀπολῶ αὐτὴν διὰ τὸ πλῆθος τῶν ἁμαρτιῶν τῶν κατοικούντων ἐν αὐτῇ."
+     "t": "It came to pass, when the children of Israel were taken captive by the king of the Chaldeans, that God spoke to Jeremiah: Jeremiah, my chosen one, arise, go out of this city, you and Baruch; for I am going to destroy it because of the multitude of the sins of those who dwell in it.",
+     "o": "᾿Ἐγένετο, ἡνίκα ἠχμαλωτεύθησαν οἱ υἱοὶ ᾿Ισραὴλ ἀπὸ τοῦ βασιλέως τῶν Χαλδαίων, ἐλάλησεν ὁ Θεὸς πρὸς Ἱερεμίαν Ιερεμία, ὁ ἐκλεκτός μου, ἀνάστα, ἔξελθε ἐκ τῆς πόλεως ταύτης, σὺ καὶ Βαροὺχ: ἐπειδὴ ἀπολῶ αὐτὴν διὰ τὸ πλῆθος τῶν ἁμαρτιῶν τῶν κατοικούντων ἐν αὐτῇ."
     },
     {
      "n": 2,
-     "t": "Αἱ γὰρ προσευχαὶ ὑμὼν ὡς στῦλος ἑδραῖός ἐστιν ἐν μέσῳ αὐτῆς, καὶ ὡς τεῖχος adapavtwov περικυκλοῦν αὐτήν."
+     "t": "For your prayers are like a firm pillar in the midst of it, and like an unbreakable wall surrounding it.",
+     "o": "Αἱ γὰρ προσευχαὶ ὑμὼν ὡς στῦλος ἑδραῖός ἐστιν ἐν μέσῳ αὐτῆς, καὶ ὡς τεῖχος adapavtwov περικυκλοῦν αὐτήν."
     },
     {
      "n": 3,
-     "t": "Νῦν ἀναστάντες ἐξέλθατε πρὸ τοῦ τὴν δύναμιν τῶν Χαλδαίων κυκλῶσαι αὐτήν."
+     "t": "Now arise and go out, before the army of the Chaldeans surrounds it.",
+     "o": "Νῦν ἀναστάντες ἐξέλθατε πρὸ τοῦ τὴν δύναμιν τῶν Χαλδαίων κυκλῶσαι αὐτήν."
     },
     {
      "n": 4,
-     "t": "Καὶ ἀπεκρίθη Ἱερεμίας, λέγων: Παρακαλῶ σε, Κύριε, ἐπίτρεψόν μοι τῷ δούλῳ σου λαλῆσαι ἐνώπιόν σον. [ὑἷπεν δὲ αὐτῷ ὁ Κύριος:"
+     "t": "And Jeremiah answered, saying: I beseech you, Lord, permit me, your servant, to speak before you. And the Lord said to him:",
+     "o": "Καὶ ἀπεκρίθη Ἱερεμίας, λέγων: Παρακαλῶ σε, Κύριε, ἐπίτρεψόν μοι τῷ δούλῳ σου λαλῆσαι ἐνώπιόν σον. [ὑἷπεν δὲ αὐτῷ ὁ Κύριος:"
     },
     {
      "n": 5,
-     "t": "Λάλει, ὁ ἐκλεκτός μου Ἱερεμίας. Καὶ ἐλάλησεν Ἱερεμίας, λέγων: Κύριε παντοκράτωρ, παραδίδως τὴν πόλιν τὴν ἐκλεκτὴν εἰς χεῖρας τῶν Χαλδαίων, iva καυχήσηται ὁ; βασιλεὺς μετὰ τοῦ πλήθους τοῦ λαοῦ αὐτοῦ, καὶ εἴπῃ ὅτι, a Ἴσχυσα ἐπὶ τὴν ἱερὰν πόλιν τοῦ Θεοῦ;"
+     "t": "Speak, my chosen one Jeremiah. And Jeremiah spoke, saying: Lord Almighty, are you handing over the chosen city into the hands of the Chaldeans, so that the king may boast with the multitude of his people and say, I have prevailed over the holy city of God?",
+     "o": "Λάλει, ὁ ἐκλεκτός μου Ἱερεμίας. Καὶ ἐλάλησεν Ἱερεμίας, λέγων: Κύριε παντοκράτωρ, παραδίδως τὴν πόλιν τὴν ἐκλεκτὴν εἰς χεῖρας τῶν Χαλδαίων, iva καυχήσηται ὁ; βασιλεὺς μετὰ τοῦ πλήθους τοῦ λαοῦ αὐτοῦ, καὶ εἴπῃ ὅτι, a Ἴσχυσα ἐπὶ τὴν ἱερὰν πόλιν τοῦ Θεοῦ;"
     },
     {
      "n": 6,
-     "t": "Μὴ, Κύριέ μου: ἀλλ᾽ εἰ θέλημά σού ἐστιν, ἐκ τῶν χειρῶν σον ἀφανισθήτω."
+     "t": "No, my Lord; but if it is your will, let it be destroyed by your own hands.",
+     "o": "Μὴ, Κύριέ μου: ἀλλ᾽ εἰ θέλημά σού ἐστιν, ἐκ τῶν χειρῶν σον ἀφανισθήτω."
     },
     {
      "n": 7,
-     "t": "Καὶ εἶπε Κύριος τῷ Ἱερεμία’ ᾿Επειδὴ σὺ ἐκλεκτός μου εἶ, ἀνάστα καὶ ἔξελθε ἐκ τῆς πόλεως ταύτης, σὺ Καὶ Βαροὺχ- ἐπειδὴ ἀπολῶ αὐτὴν διὰ τὸ πλῆθος τῶν ἁμαρτιῶν τῶν κατοικούντων ἐν αὐτῇ."
+     "t": "And the Lord said to Jeremiah: Since you are my chosen one, arise and go out of this city, you and Baruch; for I am going to destroy it because of the multitude of the sins of those who dwell in it.",
+     "o": "Καὶ εἶπε Κύριος τῷ Ἱερεμία’ ᾿Επειδὴ σὺ ἐκλεκτός μου εἶ, ἀνάστα καὶ ἔξελθε ἐκ τῆς πόλεως ταύτης, σὺ Καὶ Βαροὺχ- ἐπειδὴ ἀπολῶ αὐτὴν διὰ τὸ πλῆθος τῶν ἁμαρτιῶν τῶν κατοικούντων ἐν αὐτῇ."
     },
     {
      "n": 8,
-     "t": "Οὐτε γὰρ ὁ βασιλεὺς, οὔτε ἡ δύναμις αὐτοῦ, δυνήσεται εἰσελθεῖν εἰς αὐτὴν, εἰ μὴ ἐγὼ πρῶτος ἀνοίξω τὰς πύλας αὐτῆς."
+     "t": "For neither the king nor his army will be able to enter it unless I first open its gates.",
+     "o": "Οὐτε γὰρ ὁ βασιλεὺς, οὔτε ἡ δύναμις αὐτοῦ, δυνήσεται εἰσελθεῖν εἰς αὐτὴν, εἰ μὴ ἐγὼ πρῶτος ἀνοίξω τὰς πύλας αὐτῆς."
     },
     {
      "n": 9,
-     "t": "᾿Λνάστηθι οὖν, καὶ ἄπελθε πρὸς Ἰβαροὺχ, καὶ ἀπάγγειλον αὐτῷ τὰ ῥήματα ταῦτα."
+     "t": "Arise then, and go to Baruch, and tell him these words.",
+     "o": "᾿Λνάστηθι οὖν, καὶ ἄπελθε πρὸς Ἰβαροὺχ, καὶ ἀπάγγειλον αὐτῷ τὰ ῥήματα ταῦτα."
     },
     {
      "n": 10,
-     "t": "Καὶ avactavres ἕκτην ὥραν τῆς νυκτὸς, ἔλθετε ἐπὶ τὰ τείχη τῆς πόλεως, καὶ δείξω ὑμῖν, ὅτι, ἐὰν μὴ ἐγὼ πρῶτος ἀφανίσω τὴν πόλιν, οὐ δύιανται εἰσελθεῖν εἰς αὐτήν."
+     "t": "And arise at the sixth hour of the night and come out onto the walls of the city, and I will show you that unless I first destroy the city, they cannot enter it.",
+     "o": "Καὶ avactavres ἕκτην ὥραν τῆς νυκτὸς, ἔλθετε ἐπὶ τὰ τείχη τῆς πόλεως, καὶ δείξω ὑμῖν, ὅτι, ἐὰν μὴ ἐγὼ πρῶτος ἀφανίσω τὴν πόλιν, οὐ δύιανται εἰσελθεῖν εἰς αὐτήν."
     },
     {
      "n": 11,
-     "t": "Ταῦτα εἰπὼν ὁ Κύριος, ἐπῆλθεν ἀπὸ τοῦ ‘bepepiov."
+     "t": "When the Lord had said this, he departed from Jeremiah.",
+     "o": "Ταῦτα εἰπὼν ὁ Κύριος, ἐπῆλθεν ἀπὸ τοῦ ‘bepepiov."
     }
    ]
   },
@@ -75,40 +85,49 @@
    "verses": [
     {
      "n": 1,
-     "t": "Ἱερεμίας δὲ διέρρηξεν τὰ ἱμάτια αὐτοῦ καὶ ἐπέθηκεν χοῦν ἐπὶ τὴν κεφαλὴν αὐτοῦ\" καὶ εἰσῆλθεν εἰς τὸ ἁγιαστήριον τοῦ Θεοῦ: καὶ ἰδὼν αὐτὸν ὁ Βαροὺχ χοῦν πεπασμένον ἐπὶ τὴν Ἁ Ι “\"΄ \\ A [2 ’ J ~ Ὁ “πῆ wy δὰ κεφαλὴν αὐτοῦ, καὶ τὰ ἱμάτια αὐτοῦ διεῤῥωγότα, ἔκραξε φωνῇ μεγάλῃ, λέγων\" Πάτερ Ἱερεμία, τί ἔστι σοι, ἢ ποῖον ἡμήρτημα",
-     "l": "1–2"
+     "t": "And Jeremiah tore his garments and put dust on his head, and went into the sanctuary of God. And when Baruch saw him with dust sprinkled on his head and his garments torn, he cried out with a loud voice, saying: Father Jeremiah, what is the matter with you? Or what sin",
+     "l": "1–2",
+     "o": "Ἱερεμίας δὲ διέρρηξεν τὰ ἱμάτια αὐτοῦ καὶ ἐπέθηκεν χοῦν ἐπὶ τὴν κεφαλὴν αὐτοῦ\" καὶ εἰσῆλθεν εἰς τὸ ἁγιαστήριον τοῦ Θεοῦ: καὶ ἰδὼν αὐτὸν ὁ Βαροὺχ χοῦν πεπασμένον ἐπὶ τὴν Ἁ Ι “\"΄ \\ A [2 ’ J ~ Ὁ “πῆ wy δὰ κεφαλὴν αὐτοῦ, καὶ τὰ ἱμάτια αὐτοῦ διεῤῥωγότα, ἔκραξε φωνῇ μεγάλῃ, λέγων\" Πάτερ Ἱερεμία, τί ἔστι σοι, ἢ ποῖον ἡμήρτημα"
     },
     {
      "n": 3,
-     "t": "γ᾽ ͵ « Ul εν δὴ ef €, ¢ \\ ~ w ἐποίησεν ὁ Aang;"
+     "t": "have the people committed?",
+     "o": "γ᾽ ͵ « Ul εν δὴ ef €, ¢ \\ ~ w ἐποίησεν ὁ Aang;"
     },
     {
      "n": 4,
-     "t": "᾿Ιὑπειδὴ ὅταν ἡμαρτανεν ὁ Kaos, χουν ἔπασσεν. \\ Ν ’ na τε, ‘ w € ‘ ᾿ς ἴω ἐπὶ τὴν κεφαλὴν αὐτοῦ ὁ Ἱερεμίας, καὶ ηὔχετο ὑπερ τοῦ λαου, ἕως ἂν ἀφεθῇ αὐτῷ ἡ ἁμαρτία."
+     "t": "For whenever the people sinned, Jeremiah would sprinkle dust on his head and pray for the people until their sin was forgiven them.",
+     "o": "᾿Ιὑπειδὴ ὅταν ἡμαρτανεν ὁ Kaos, χουν ἔπασσεν. \\ Ν ’ na τε, ‘ w € ‘ ᾿ς ἴω ἐπὶ τὴν κεφαλὴν αὐτοῦ ὁ Ἱερεμίας, καὶ ηὔχετο ὑπερ τοῦ λαου, ἕως ἂν ἀφεθῇ αὐτῷ ἡ ἁμαρτία."
     },
     {
      "n": 5,
-     "t": "᾿ΙΠρωτησε δὲ αὐτὸν ὁ Βαροὺχ, λέγων\" ἹἸ]άτερ, τί ἔστι σοι; [ὑἷπε δὲ αὐτῷ \"Ἱερεμίας."
+     "t": "And Baruch asked him, saying: Father, what is the matter with you? And Jeremiah said to him:",
+     "o": "᾿ΙΠρωτησε δὲ αὐτὸν ὁ Βαροὺχ, λέγων\" ἹἸ]άτερ, τί ἔστι σοι; [ὑἷπε δὲ αὐτῷ \"Ἱερεμίας."
     },
     {
      "n": 6,
-     "t": "Φύλαξαι τοῦ σχίσαι TH ἱμάτιιι σου, ἀλλὰ σχίσωμεν τὰς καρδίας ἡμῶν Καὶ μὴ αντλησωμεν ὕδωρ ἐπὶ τὰς ποτίστρας, ἀλλὰ κλαύσωμεν καὶ γεμίσωμεν αὐτὲς Saxpvor' ὅτι οὐ μὴ ἐλεήσῃ G τὸν λαὸν τοῦτον ὁ Κύριος. Καὶ εἶπε Βαροὺχ: Πάτερ Ιερεμία, τὶ γέγονε;"
+     "t": "Beware of tearing your garments; rather let us tear our hearts. And let us not draw water for the troughs, but let us weep and fill them with tears; for the Lord will not have mercy on this people. And Baruch said: Father Jeremiah, what has happened?",
+     "o": "Φύλαξαι τοῦ σχίσαι TH ἱμάτιιι σου, ἀλλὰ σχίσωμεν τὰς καρδίας ἡμῶν Καὶ μὴ αντλησωμεν ὕδωρ ἐπὶ τὰς ποτίστρας, ἀλλὰ κλαύσωμεν καὶ γεμίσωμεν αὐτὲς Saxpvor' ὅτι οὐ μὴ ἐλεήσῃ G τὸν λαὸν τοῦτον ὁ Κύριος. Καὶ εἶπε Βαροὺχ: Πάτερ Ιερεμία, τὶ γέγονε;"
     },
     {
      "n": 7,
-     "t": "Καὶ elev ‘lepeptas ὅτι, O Θεὸς παραδίδωσι τὴν πολιν εἰς χεῖρας τοῦ βασιλέως τῶν Χαλδαίων, τοῦ αἰχμαλωτεῦσαι ΄ τὸν λαὸν εἰς Βαβυλῶνα."
+     "t": "And Jeremiah said: God is handing the city over into the hands of the king of the Chaldeans, to take the people captive to Babylon.",
+     "o": "Καὶ elev ‘lepeptas ὅτι, O Θεὸς παραδίδωσι τὴν πολιν εἰς χεῖρας τοῦ βασιλέως τῶν Χαλδαίων, τοῦ αἰχμαλωτεῦσαι ΄ τὸν λαὸν εἰς Βαβυλῶνα."
     },
     {
      "n": 8,
-     "t": "᾿Λκούσας δὲ ταῦτα Βαροὺχ, διέῤῥηξε καὶ αὐτὸς τὰ ἱμάτια αὐτοῦ, καὶ ele’ Πάτερ Ἱερεμία, τίς σοι ἐδήλωσε τοῦτο;"
+     "t": "When Baruch heard this, he too tore his garments and said: Father Jeremiah, who made this known to you?",
+     "o": "᾿Λκούσας δὲ ταῦτα Βαροὺχ, διέῤῥηξε καὶ αὐτὸς τὰ ἱμάτια αὐτοῦ, καὶ ele’ Πάτερ Ἱερεμία, τίς σοι ἐδήλωσε τοῦτο;"
     },
     {
      "n": 9,
-     "t": "Καὶ εἶπεν αὐτῷ lepeptas κδεξαι μικρὸν per’ ἐμοῦ ἕως ὥρας ἕκτης τῆς νυκτὸς, iva γνῷς, ὅτι ἀληθές ἐστι τὸ ῥῆμα."
+     "t": "And Jeremiah said to him: Wait with me a little, until the sixth hour of the night, so that you may know that the word is true.",
+     "o": "Καὶ εἶπεν αὐτῷ lepeptas κδεξαι μικρὸν per’ ἐμοῦ ἕως ὥρας ἕκτης τῆς νυκτὸς, iva γνῷς, ὅτι ἀληθές ἐστι τὸ ῥῆμα."
     },
     {
      "n": 10,
-     "t": "\"“Ἐμείναν οὖν ἐν τῷ θυσιαστηρίῳ κλαίοντες."
+     "t": "So they remained at the altar, weeping.",
+     "o": "\"“Ἐμείναν οὖν ἐν τῷ θυσιαστηρίῳ κλαίοντες."
     }
    ]
   },
@@ -118,64 +137,79 @@
    "verses": [
     {
      "n": 1,
-     "t": "Ὡς δὲ ἐγένετο ἡ ὥρα τῆς νυκτὸς, καθὼς εἶπεν ὁ Κύριος τῷ Ἱερεμίᾳ, ἦλθον ὁμοῦ ἐπὶ τὰ τείχη τῆς πόλεως ‘lepenlas καὶ Βαροὺχ."
+     "t": "And when the hour of the night came, as the Lord had told Jeremiah, Jeremiah and Baruch went up together onto the walls of the city.",
+     "o": "Ὡς δὲ ἐγένετο ἡ ὥρα τῆς νυκτὸς, καθὼς εἶπεν ὁ Κύριος τῷ Ἱερεμίᾳ, ἦλθον ὁμοῦ ἐπὶ τὰ τείχη τῆς πόλεως ‘lepenlas καὶ Βαροὺχ."
     },
     {
      "n": 2,
-     "t": "Καὶ ἐγένετο φωνὴ σάλπιγγος, καὶ ἐξῆλθον ἄγγελοι ἐκ τοῦ οὐρανοῦ, κατέχοντες λαμπάδας ἐν ταῖς χερσὶν αὐτῶν, καὶ ἔστησαν ἐπὶ τὴ τείχη τῆς πόλεως."
+     "t": "And there was a sound of trumpets, and angels came out of heaven holding torches in their hands, and they stood on the walls of the city.",
+     "o": "Καὶ ἐγένετο φωνὴ σάλπιγγος, καὶ ἐξῆλθον ἄγγελοι ἐκ τοῦ οὐρανοῦ, κατέχοντες λαμπάδας ἐν ταῖς χερσὶν αὐτῶν, καὶ ἔστησαν ἐπὶ τὴ τείχη τῆς πόλεως."
     },
     {
      "n": 3,
-     "t": "᾿Ιδόντες δὲ αὐτοὺς Ἱερεμίας καὶ Βαροὺχ, ἔκλαυσαν, λέγοντες\" Νῦν ἐγνώκαμεν ὅτι ἀληθές ἐστι τὸ ῥῆμα."
+     "t": "When Jeremiah and Baruch saw them, they wept, saying: Now we know that the word is true.",
+     "o": "᾿Ιδόντες δὲ αὐτοὺς Ἱερεμίας καὶ Βαροὺχ, ἔκλαυσαν, λέγοντες\" Νῦν ἐγνώκαμεν ὅτι ἀληθές ἐστι τὸ ῥῆμα."
     },
     {
      "n": 4,
-     "t": "Παρεκάλεσε δὲ ‘lepeulas τοὺς ἀγγέλους, λέγων Παρακαλῶ ὑμᾶς μὴ ἀπολέσθαι τὴν πόλιν ἄρτι, ἕως av λαλήσω πρὸς Κύριον ῥῆμα. Καὶ εἶπεν Κύριος τοῖς ἀγγέλοις\" Μὴ ἀπολέσητε τὴν πόλιν ἕως av λαλήσω πρὸς τὸν ἐκλεκτόν μου ᾿Ιερεμίαν. Καὶ εἶπε\" Δέομαι, ζύριε, κέλευσόν με λαλῆσαι ἐνώπιόν σου."
+     "t": "And Jeremiah besought the angels, saying: I beseech you, do not destroy the city yet, until I say a word to the Lord. And the Lord said to the angels: Do not destroy the city until I speak to my chosen one Jeremiah. And Jeremiah said: I pray you, Lord, bid me speak before you.",
+     "o": "Παρεκάλεσε δὲ ‘lepeulas τοὺς ἀγγέλους, λέγων Παρακαλῶ ὑμᾶς μὴ ἀπολέσθαι τὴν πόλιν ἄρτι, ἕως av λαλήσω πρὸς Κύριον ῥῆμα. Καὶ εἶπεν Κύριος τοῖς ἀγγέλοις\" Μὴ ἀπολέσητε τὴν πόλιν ἕως av λαλήσω πρὸς τὸν ἐκλεκτόν μου ᾿Ιερεμίαν. Καὶ εἶπε\" Δέομαι, ζύριε, κέλευσόν με λαλῆσαι ἐνώπιόν σου."
     },
     {
      "n": 5,
-     "t": "ΚΚαὶ εἶπε Κύριος\" Λάλει, ὁ ἐκλεκτός μου Ἱερεμίας."
+     "t": "And the Lord said: Speak, my chosen one Jeremiah.",
+     "o": "ΚΚαὶ εἶπε Κύριος\" Λάλει, ὁ ἐκλεκτός μου Ἱερεμίας."
     },
     {
      "n": 6,
-     "t": "Καὶ εἶπεν ᾿Ιερεμίας- ᾿Ιδοὺ νῦν, Κύριε, ἐγνώκαμεν bre παραδίδως τὴν πόλιν σου εἰς χεῖρας τῶν ἐχθρῶν αὐτῆς, καὶ ἀπαροῦσι τὸν λαὸν εἰς Βαβυλῶνα. Τί ποιήσωμεν τὰ “γιά σου ἣ τὰ σκεύη τῆς T λειτουργίας σου, τί θέλεις αὐτὰ ποιήσωμεν;",
-     "l": "6–7"
+     "t": "And Jeremiah said: Behold, Lord, now we know that you are handing your city over into the hands of its enemies, and they will carry the people away to Babylon. What shall we do with your holy things, the vessels of your service? What do you want us to do with them?",
+     "l": "6–7",
+     "o": "Καὶ εἶπεν ᾿Ιερεμίας- ᾿Ιδοὺ νῦν, Κύριε, ἐγνώκαμεν bre παραδίδως τὴν πόλιν σου εἰς χεῖρας τῶν ἐχθρῶν αὐτῆς, καὶ ἀπαροῦσι τὸν λαὸν εἰς Βαβυλῶνα. Τί ποιήσωμεν τὰ “γιά σου ἣ τὰ σκεύη τῆς T λειτουργίας σου, τί θέλεις αὐτὰ ποιήσωμεν;"
     },
     {
      "n": 8,
-     "t": "Καὶ εἶπεν αὐτῷ ὁ ὶ Κύριος\" ἾΛρον αὐτὴ, καὶ παράδος αὐτὰ τῇ γῇ καὶ τῷ θυσιαστηρίῳ λέγων, “Axove, γῆ, τῆς φωνῆς τοῦ κτίσαντός σε ἐν τῇ περιουσίᾳ τῶν ὑδάτων, ὁ σφραγίσας σε ἐν ἑπτὰ σφραγῖσιν, ἐν ἑπτὰ καιpois, καὶ μετὰ ταῦτα λήψῃ τὴν ὡραιότητα σου φύλαξον τὰ σκεύη τῆς λειτουργίας Ἱξως τῆς συνελεύσεως τοῦ ἠγαπημένου. [\"““. “\" Καὶ ἐλάλησε Ἱερεμίας:"
+     "t": "And the Lord said to him: Take them and give them over to the earth and to the altar, saying: Hear, O earth, the voice of him who created you in the abundance of the waters, who sealed you with seven seals in seven periods, and after this you will receive your beauty: guard the vessels of the service until the gathering of the beloved. And Jeremiah spoke:",
+     "o": "Καὶ εἶπεν αὐτῷ ὁ ὶ Κύριος\" ἾΛρον αὐτὴ, καὶ παράδος αὐτὰ τῇ γῇ καὶ τῷ θυσιαστηρίῳ λέγων, “Axove, γῆ, τῆς φωνῆς τοῦ κτίσαντός σε ἐν τῇ περιουσίᾳ τῶν ὑδάτων, ὁ σφραγίσας σε ἐν ἑπτὰ σφραγῖσιν, ἐν ἑπτὰ καιpois, καὶ μετὰ ταῦτα λήψῃ τὴν ὡραιότητα σου φύλαξον τὰ σκεύη τῆς λειτουργίας Ἱξως τῆς συνελεύσεως τοῦ ἠγαπημένου. [\"““. “\" Καὶ ἐλάλησε Ἱερεμίας:"
     },
     {
      "n": 9,
-     "t": "Παρακαλῶ σε, Κύριε: δεῖξόν μοι, τὶ ποιnow Αβιμέλεχ τῷ AiOiome ὅτι πολλὰς εὐεργεσίας ἐποίησε TH λαῷ καὶ τῷ δούλῳ σου ‘lepewla’ ὅτι αὐτὸς ἀνέσπασέ με ι εκ. τοῦ λακκον τοῦ βορβόρου καὶ οὐ θέλω αὐτὸν, ἵνα ἴδῃ τὸν αφανισμὸν τῆς πόλεως καὶ τὴν ἐρήμωσιν: ἀλλ᾽ ἵνα μὴ λυπηθῇ."
+     "t": "I beseech you, Lord, show me what I shall do for Abimelech the Ethiopian, for he did many kindnesses to the people and to your servant Jeremiah, for he drew me up out of the miry pit; and I do not want him to see the destruction and desolation of the city, but that he should not be grieved.",
+     "o": "Παρακαλῶ σε, Κύριε: δεῖξόν μοι, τὶ ποιnow Αβιμέλεχ τῷ AiOiome ὅτι πολλὰς εὐεργεσίας ἐποίησε TH λαῷ καὶ τῷ δούλῳ σου ‘lepewla’ ὅτι αὐτὸς ἀνέσπασέ με ι εκ. τοῦ λακκον τοῦ βορβόρου καὶ οὐ θέλω αὐτὸν, ἵνα ἴδῃ τὸν αφανισμὸν τῆς πόλεως καὶ τὴν ἐρήμωσιν: ἀλλ᾽ ἵνα μὴ λυπηθῇ."
     },
     {
      "n": 10,
-     "t": "Καὶ εἶπε Κύριος τῷ Ἱερεμίᾳ: ᾿Απόστειλον αὑτὸν εἰς τὸν ᾿μπελῶνα τοῦ ᾿ΑΛγρίππα διὰ τοῦ ὄρους καὶ ἐγὼ σκεπάσω αὑτὸν, ἔως οὗ ἐπιστρέψω τὸν λαὸν εἰς τὴν πόλιν."
+     "t": "And the Lord said to Jeremiah: Send him to the vineyard of Agrippa by the mountain road, and I will shelter him until I bring the people back to the city.",
+     "o": "Καὶ εἶπε Κύριος τῷ Ἱερεμίᾳ: ᾿Απόστειλον αὑτὸν εἰς τὸν ᾿μπελῶνα τοῦ ᾿ΑΛγρίππα διὰ τοῦ ὄρους καὶ ἐγὼ σκεπάσω αὑτὸν, ἔως οὗ ἐπιστρέψω τὸν λαὸν εἰς τὴν πόλιν."
     },
     {
      "n": 11,
-     "t": "Εἶπε δὲ Κύριος τῷ Ἱερεμίᾳ Λπελθε μετὰ τοῦ λαοῦ σου εἰς Βαβυλώνα, καὶ μεῖνον pet αὐτῶν εὐαγγελιζόμενος αὐτοῖς, ἕως οὗ ἐπιστρέψω αὐτοὺς εἰς τὴν πόλιν."
+     "t": "And the Lord said to Jeremiah: Go with your people to Babylon, and stay with them, preaching the good news to them, until I bring them back to the city.",
+     "o": "Εἶπε δὲ Κύριος τῷ Ἱερεμίᾳ Λπελθε μετὰ τοῦ λαοῦ σου εἰς Βαβυλώνα, καὶ μεῖνον pet αὐτῶν εὐαγγελιζόμενος αὐτοῖς, ἕως οὗ ἐπιστρέψω αὐτοὺς εἰς τὴν πόλιν."
     },
     {
      "n": 12,
-     "t": "Κατάλειψον δὲ τὸν Βαροὺχ ὧδε, ἕως οὗ λαλήσω αὐτῷ:"
+     "t": "But leave Baruch here until I speak with him.",
+     "o": "Κατάλειψον δὲ τὸν Βαροὺχ ὧδε, ἕως οὗ λαλήσω αὐτῷ:"
     },
     {
      "n": 13,
-     "t": "Ταῦτα εἰπὼν ὁ Κύριος, ἀνέβη ἀπὸ Ἱερεμίου εἰς τὸν οὐρανόν."
+     "t": "When the Lord had said this, he went up from Jeremiah into heaven.",
+     "o": "Ταῦτα εἰπὼν ὁ Κύριος, ἀνέβη ἀπὸ Ἱερεμίου εἰς τὸν οὐρανόν."
     },
     {
      "n": 14,
-     "t": "Ἱερεμίας δὲ καὶ Βαροὺχ εἰσῆλθον εἰς τὸ ἁγιαστήριον, καὶ τὰ σκεύη τῆς λειτουργίας παρέδωκαν τῇ γῆ, καθὼς ἐλάλησεν αὐτοῖς ὁ Κύριος\" καὶ αὔθωρον κατέπιεν αὐτὰ ἡ yn ἐκάθισαν δὲ οἱ δύο, καὶ ἔκλαυσαν."
+     "t": "And Jeremiah and Baruch went into the sanctuary, and they gave the vessels of the service over to the earth, as the Lord had told them; and at once the earth swallowed them up. And the two sat down and wept.",
+     "o": "Ἱερεμίας δὲ καὶ Βαροὺχ εἰσῆλθον εἰς τὸ ἁγιαστήριον, καὶ τὰ σκεύη τῆς λειτουργίας παρέδωκαν τῇ γῆ, καθὼς ἐλάλησεν αὐτοῖς ὁ Κύριος\" καὶ αὔθωρον κατέπιεν αὐτὰ ἡ yn ἐκάθισαν δὲ οἱ δύο, καὶ ἔκλαυσαν."
     },
     {
      "n": 15,
-     "t": "IIpwias δὲ γενομένης, ἀπέστειλεν Ἱερεμίας τὸν ᾿Αβιμέλεχ, λέγων. Λρον τὸν κόφινον, καὶ ἄπελθε εἰς τὸ χωρίον τοῦ ᾿Λγρίππα διὰ τῆς ὑδοῦ τοῦ ὄρους, καὶ ἐνεγκὼν; γ᾽ ~,ὔ -“ a“ “ “΄'΄, “κ΄ ἘΠ ΟΝ \\ ¢ ͵ / ὀλίγα σῦκα, δίδου τοῖς νοσοῦσι τοῦ λαοῦ\" ὅτι ἐπὶ σὲ ἡ evppacia τοῦ Κυρίου, καὶ ἐπὶ τὴν κεφαλὴν σου ἡ δόξα."
+     "t": "When morning came, Jeremiah sent Abimelech away, saying: Take the basket and go to the estate of Agrippa by the mountain road, and bring a few figs, and give them to the sick among the people; for the favour of the Lord is upon you, and glory is upon your head.",
+     "o": "IIpwias δὲ γενομένης, ἀπέστειλεν Ἱερεμίας τὸν ᾿Αβιμέλεχ, λέγων. Λρον τὸν κόφινον, καὶ ἄπελθε εἰς τὸ χωρίον τοῦ ᾿Λγρίππα διὰ τῆς ὑδοῦ τοῦ ὄρους, καὶ ἐνεγκὼν; γ᾽ ~,ὔ -“ a“ “ “΄'΄, “κ΄ ἘΠ ΟΝ \\ ¢ ͵ / ὀλίγα σῦκα, δίδου τοῖς νοσοῦσι τοῦ λαοῦ\" ὅτι ἐπὶ σὲ ἡ evppacia τοῦ Κυρίου, καὶ ἐπὶ τὴν κεφαλὴν σου ἡ δόξα."
     },
     {
      "n": 16,
-     "t": "Αὐτὸς δὲ ἀπελήλυθεν καθὼς εἶπεν αὐτῷ."
+     "t": "And he went off as he had told him.",
+     "o": "Αὐτὸς δὲ ἀπελήλυθεν καθὼς εἶπεν αὐτῷ."
     }
    ]
   },
@@ -185,40 +219,49 @@
    "verses": [
     {
      "n": 1,
-     "t": "Ilpwias δὲ γενομένης, ἰδοὺ ἡ δύναμις τῶν Χαλδαίων ἐκύκλωσε τὴν πόλιν ἐσάλπισεν δὲ ὁ μέγας ἄγγελος, λέγων Εἰσέλθατε εἰς τὴν πόλιν ἡ δύναμις τῶν Χαλδαίων ἰδοὺ γὰρ ἠνεῴχθη ὑμῖν ἡ πύλη."
+     "t": "When morning came, behold, the army of the Chaldeans surrounded the city; and the great angel sounded the trumpet, saying: Enter the city, army of the Chaldeans; for behold, the gate has been opened for you.",
+     "o": "Ilpwias δὲ γενομένης, ἰδοὺ ἡ δύναμις τῶν Χαλδαίων ἐκύκλωσε τὴν πόλιν ἐσάλπισεν δὲ ὁ μέγας ἄγγελος, λέγων Εἰσέλθατε εἰς τὴν πόλιν ἡ δύναμις τῶν Χαλδαίων ἰδοὺ γὰρ ἠνεῴχθη ὑμῖν ἡ πύλη."
     },
     {
      "n": 2,
-     "t": "Εἰσῆλθεν οὖν ὁ βασιλεὺς μετὰ τοῦ πλήθους αὐτοῦ, καὶ ἠχμαλώτευσαν πάντα τὸν λαόν."
+     "t": "So the king entered with his multitude, and they took all the people captive.",
+     "o": "Εἰσῆλθεν οὖν ὁ βασιλεὺς μετὰ τοῦ πλήθους αὐτοῦ, καὶ ἠχμαλώτευσαν πάντα τὸν λαόν."
     },
     {
      "n": 3,
-     "t": "Ἱερεμίας Ν᾿ δὲ ἄρας τὰς κλεῖδας τοῦ ναοῦ, ἐξῆλθεν ἔξω τῆς πόλεως, καὶ ἔῤῥιψεν αὐτὰς ἐνώπιον τοῦ ἡλίου, λέγων\" Σοὶ λέγω, ἥλιε, λάβε τὰς κλεῖδας τοῦ ναοῦ τοῦ Θεοῦ, καὶ φύλαξον αὐτὰς ἕως ἡμέρας, ἐν ἦ ἐξετάσει σε Κύριος περὶ αὐτῶν."
+     "t": "But Jeremiah took the keys of the temple, went outside the city, and threw them before the sun, saying: I say to you, sun, take the keys of the temple of God and guard them until the day on which the Lord will ask you about them.",
+     "o": "Ἱερεμίας Ν᾿ δὲ ἄρας τὰς κλεῖδας τοῦ ναοῦ, ἐξῆλθεν ἔξω τῆς πόλεως, καὶ ἔῤῥιψεν αὐτὰς ἐνώπιον τοῦ ἡλίου, λέγων\" Σοὶ λέγω, ἥλιε, λάβε τὰς κλεῖδας τοῦ ναοῦ τοῦ Θεοῦ, καὶ φύλαξον αὐτὰς ἕως ἡμέρας, ἐν ἦ ἐξετάσει σε Κύριος περὶ αὐτῶν."
     },
     {
      "n": 4,
-     "t": "Διότι ἡμεῖς οὐχ εὑρέθημεν ἄξιοι τοῦ φυλάξαι αὐτὰς, ὅτι ἐπίτροποι ψεύδους ἐγενήθημεν."
+     "t": "For we were not found worthy to guard them, because we became false stewards.",
+     "o": "Διότι ἡμεῖς οὐχ εὑρέθημεν ἄξιοι τοῦ φυλάξαι αὐτὰς, ὅτι ἐπίτροποι ψεύδους ἐγενήθημεν."
     },
     {
      "n": 5,
-     "t": "Ἔτι κλαίοντος ‘lepewlov τὸν λαὸν, εἴλκοντο εἰς Βαβυλῶνα."
+     "t": "While Jeremiah was still weeping for the people, they were dragged away to Babylon.",
+     "o": "Ἔτι κλαίοντος ‘lepewlov τὸν λαὸν, εἴλκοντο εἰς Βαβυλῶνα."
     },
     {
      "n": 6,
-     "t": "O δὲ Βαροὺχ ἐπέθηκε χοῦν ἐπὶ τὴν κεφαλὴν αὐτοῦ, καὶ ἐκάθισε, καὶ ἔκλαυσε τὸν θρῆνον τοῦτον, λέγων Διὰ τί ἠρημώθη ‘lepovσαλήμ; Διὰ τὰς ἁμαρτίας τοῦ ἠγαπημένου λαοῦ παρεδόθη εἰς χεῖρας ἐχθρών, διὰ τὰς ἁμαρτίας ἡμῶν καὶ τοῦ λαοῦ. ᾿Λλλὰ Ἷ μὴ καυχάσθωσαν οἱ παράνομοι, καὶ εἴπωσιν ὅτι, ᾿Ισχύσαμεν λαβεῖν τὴν πόλιν τοῦ Θεοῦ ἐν τῇ δυνάμει ἡμῶν. ᾿Πδυνήθητε ἔπ᾽ αὐτῇ ἀλλὰ διὰ τὰς ἁμαρτίας ἡμῶν παρεδόθημεν.",
-     "l": "6–7"
+     "t": "But Baruch put dust on his head and sat down and wept this lament, saying: Why has Jerusalem been laid waste? Because of the sins of the beloved people she was handed over into the hands of enemies, because of our sins and the sins of the people. But let not the lawless boast and say, We were strong enough to take the city of God by our own might. You did prevail over it, but it was because of our sins that we were handed over.",
+     "l": "6–7",
+     "o": "O δὲ Βαροὺχ ἐπέθηκε χοῦν ἐπὶ τὴν κεφαλὴν αὐτοῦ, καὶ ἐκάθισε, καὶ ἔκλαυσε τὸν θρῆνον τοῦτον, λέγων Διὰ τί ἠρημώθη ‘lepovσαλήμ; Διὰ τὰς ἁμαρτίας τοῦ ἠγαπημένου λαοῦ παρεδόθη εἰς χεῖρας ἐχθρών, διὰ τὰς ἁμαρτίας ἡμῶν καὶ τοῦ λαοῦ. ᾿Λλλὰ Ἷ μὴ καυχάσθωσαν οἱ παράνομοι, καὶ εἴπωσιν ὅτι, ᾿Ισχύσαμεν λαβεῖν τὴν πόλιν τοῦ Θεοῦ ἐν τῇ δυνάμει ἡμῶν. ᾿Πδυνήθητε ἔπ᾽ αὐτῇ ἀλλὰ διὰ τὰς ἁμαρτίας ἡμῶν παρεδόθημεν."
     },
     {
      "n": 8,
-     "t": "“Ὁ δὲ Θεὸς ἡμῶν οἰκτειρήσει ἡμᾶς, καὶ ἐπιστρέψει ἡμᾶς εἰς τὴν πόλιν ἡμῶν\" ὑμεῖῳ δὲ ξωὴν οὐχ ere."
+     "t": "But our God will have mercy on us and will bring us back to our city; but you will not have life.",
+     "o": "“Ὁ δὲ Θεὸς ἡμῶν οἰκτειρήσει ἡμᾶς, καὶ ἐπιστρέψει ἡμᾶς εἰς τὴν πόλιν ἡμῶν\" ὑμεῖῳ δὲ ξωὴν οὐχ ere."
     },
     {
      "n": 9,
-     "t": "Μακαάριοί εἰσιν οἱ πατέρες ἡμῶν, ᾿᾽Λβραὰμ, Ἰσαὰκ καὶ Ἰακὼβ, ὅτι ἐξῆλθον ἐκ τοῦ κόσμου τούτου, καὶ οὐκ εἶδον τὸν ἀφανισμὸν τῆς πόλεως ταύτης."
+     "t": "Blessed are our fathers, Abraham, Isaac and Jacob, for they went out of this world and did not see the destruction of this city.",
+     "o": "Μακαάριοί εἰσιν οἱ πατέρες ἡμῶν, ᾿᾽Λβραὰμ, Ἰσαὰκ καὶ Ἰακὼβ, ὅτι ἐξῆλθον ἐκ τοῦ κόσμου τούτου, καὶ οὐκ εἶδον τὸν ἀφανισμὸν τῆς πόλεως ταύτης."
     },
     {
      "n": 10,
-     "t": "Ταῦτα εἰπὼν, ἐξῆλθεν, κλαίων καὶ λέγων ὅτι, Λυπούμενος\" διὰ σὲ, ‘lepouσαλὴμ, ἐξῆλθον ἀπὸ σοῦ. Καὶ ἔμεινεν ἐν μνημείῳ καθεζόμενος, τῶν ἀγγέλων ἐρχομένων, καὶ ἐκδιηγουμένων αὐτῷ περὶ πάντων."
+     "t": "When he had said this, he went out, weeping and saying: Grieving for you, Jerusalem, I have gone out from you. And he stayed sitting in a tomb, while the angels came and told him about everything.",
+     "o": "Ταῦτα εἰπὼν, ἐξῆλθεν, κλαίων καὶ λέγων ὅτι, Λυπούμενος\" διὰ σὲ, ‘lepouσαλὴμ, ἐξῆλθον ἀπὸ σοῦ. Καὶ ἔμεινεν ἐν μνημείῳ καθεζόμενος, τῶν ἀγγέλων ἐρχομένων, καὶ ἐκδιηγουμένων αὐτῷ περὶ πάντων."
     }
    ]
   },
@@ -228,133 +271,165 @@
    "verses": [
     {
      "n": 1,
-     "t": "ὋὉ δὲ ᾿Αβιμέλεχ ἤνεγκε τὰ σῦκα τῷ καύματι, καὶ καταλαβὼν δένδρον, ἐκάθισεν ὑπὸ τὴν σκιὰν αὐτοῦ τοῦ ἀναπαῆναι ort ὶ κλί ) ὴν αὐτοῦ ἐπὶ τὸν κό ͵ ἤναι ὀλίγον, καὶ κλίνας τὴν κεφαλὴν αὐτοῦ ἐπὶ τὸν κοφινον τῶν σύκων ὕπνωσεν, κοιμώμενος ἔτη ἑξηκονταέξ' καὶ οὐκ ἐξυπνίσθη ἐκ τοῦ ὕπνου αὐτοῦ."
+     "t": "Now Abimelech carried the figs in the heat; and coming upon a tree, he sat down under its shade to rest a little. And leaning his head on the basket of figs, he fell asleep, and slept for sixty-six years; and he did not wake from his sleep.",
+     "o": "ὋὉ δὲ ᾿Αβιμέλεχ ἤνεγκε τὰ σῦκα τῷ καύματι, καὶ καταλαβὼν δένδρον, ἐκάθισεν ὑπὸ τὴν σκιὰν αὐτοῦ τοῦ ἀναπαῆναι ort ὶ κλί ) ὴν αὐτοῦ ἐπὶ τὸν κό ͵ ἤναι ὀλίγον, καὶ κλίνας τὴν κεφαλὴν αὐτοῦ ἐπὶ τὸν κοφινον τῶν σύκων ὕπνωσεν, κοιμώμενος ἔτη ἑξηκονταέξ' καὶ οὐκ ἐξυπνίσθη ἐκ τοῦ ὕπνου αὐτοῦ."
     },
     {
      "n": 2,
-     "t": "Καὶ μετὰ ταῦτα ἐγερθεὶς ἀπὸ τοῦ ὕπνου αὐτοῦ, εἶπεν ὅτι, ‘Hdews ἐκοιμήθην av ἄλλο ὀλίγον, καὶ βεβαρημένη ἐστὶν ἡ κεφαλή μου, ὅτι οὐκ ἐκορέσθην ἢ τοῦ ὕπνου μου. Καὶ ἀνακαλύψας τὸν κόφινον τῶν σύκων, εὗρεν αὐτὴ στάζοντα γίλα.",
-     "l": "2–3"
+     "t": "And afterwards, when he woke from his sleep, he said: I would gladly have slept a little longer, for my head is heavy, because I have not had enough of my sleep. And uncovering the basket of figs, he found them dripping milk.",
+     "l": "2–3",
+     "o": "Καὶ μετὰ ταῦτα ἐγερθεὶς ἀπὸ τοῦ ὕπνου αὐτοῦ, εἶπεν ὅτι, ‘Hdews ἐκοιμήθην av ἄλλο ὀλίγον, καὶ βεβαρημένη ἐστὶν ἡ κεφαλή μου, ὅτι οὐκ ἐκορέσθην ἢ τοῦ ὕπνου μου. Καὶ ἀνακαλύψας τὸν κόφινον τῶν σύκων, εὗρεν αὐτὴ στάζοντα γίλα."
     },
     {
      "n": 4,
-     "t": "Καὶ εἶπεν ἽἼΤθελον κοιμηθῆναι"
+     "t": "And he said: I would like to sleep",
+     "o": "Καὶ εἶπεν ἽἼΤθελον κοιμηθῆναι"
     },
     {
      "n": 5,
-     "t": "ὀλίγον, ὅτι βεβαρημένη ἐστὶν ἡ κεφαλή μου’ ἀλλὰ φοβοῦμαι, μήπως κοιμηθῶ καὶ βραδυνῶ τοῦ ἐξυπνισθῆναι, καὶ ἀλιγωρήσῃ Ἱερεμίας ὁ πατήρ μου’ εἰ μὴ γὰρ ἐσπούδαξεν, οὐκ ἂν ἀπέστειλέ pe ὄρθρου σήμερον."
+     "t": "a little, for my head is heavy; but I am afraid that I may fall asleep and be late in waking, and Jeremiah my father may think little of me; for if he were not in a hurry, he would not have sent me at dawn today.",
+     "o": "ὀλίγον, ὅτι βεβαρημένη ἐστὶν ἡ κεφαλή μου’ ἀλλὰ φοβοῦμαι, μήπως κοιμηθῶ καὶ βραδυνῶ τοῦ ἐξυπνισθῆναι, καὶ ἀλιγωρήσῃ Ἱερεμίας ὁ πατήρ μου’ εἰ μὴ γὰρ ἐσπούδαξεν, οὐκ ἂν ἀπέστειλέ pe ὄρθρου σήμερον."
     },
     {
      "n": 6,
-     "t": "᾿Λναστὰς οὖν πορεύσομαι τῷ καύματι, καὶ ἀπέλθω ὕπου ov καῦμα, ov κόπος ἔστιν καθ᾽ nyepav®. ᾿Ἰὑγερθεὶς οὖν ἦρε τὸν κόφινον τῶν σύκων, καὶ ἐπέθηκεν ἐπὶ τῶν ὥμων ἑαυτοῦ καὶ εἰσῆλθεν εἰς ᾿Ιερουσαλὴμ, καὶ οὐκ ἐπέγνω αὑτὴν, οὔτε τὴν οἰκίαν, οὔτε τὸν τόπον, οὔτε τὸ γένος ἑαυτοῦ, Kui εἵπεν'",
-     "l": "6–7"
+     "t": "So I will get up and go on in the heat; for is there not heat and toil every day? So he got up and took the basket of figs and put it on his shoulders, and went into Jerusalem; and he did not recognise it, neither his house, nor the place, nor his own family. And he said:",
+     "l": "6–7",
+     "o": "᾿Λναστὰς οὖν πορεύσομαι τῷ καύματι, καὶ ἀπέλθω ὕπου ov καῦμα, ov κόπος ἔστιν καθ᾽ nyepav®. ᾿Ἰὑγερθεὶς οὖν ἦρε τὸν κόφινον τῶν σύκων, καὶ ἐπέθηκεν ἐπὶ τῶν ὥμων ἑαυτοῦ καὶ εἰσῆλθεν εἰς ᾿Ιερουσαλὴμ, καὶ οὐκ ἐπέγνω αὑτὴν, οὔτε τὴν οἰκίαν, οὔτε τὸν τόπον, οὔτε τὸ γένος ἑαυτοῦ, Kui εἵπεν'"
     },
     {
      "n": 8,
-     "t": "[ὐλογητὸς Κύριος, ὅτι μεγάλη ἔκστασις ἐπέπεσεν ET EME οὐκ"
+     "t": "Blessed be the Lord, for a great bewilderment has come upon me. This is not",
+     "o": "[ὐλογητὸς Κύριος, ὅτι μεγάλη ἔκστασις ἐπέπεσεν ET EME οὐκ"
     },
     {
      "n": 9,
-     "t": "ἔστιν αὕτη ἡ πόλις πεπλάνημαι, ὅτι διὰ τῆς ὁδοῦ τοῦ ὄρους"
+     "t": "the city; I have lost my way, because I came by the mountain road,",
+     "o": "ἔστιν αὕτη ἡ πόλις πεπλάνημαι, ὅτι διὰ τῆς ὁδοῦ τοῦ ὄρους"
     },
     {
      "n": 10,
-     "t": "ἦλθον, ἐγερθεὶς ἀπὸ τοῦ ὕπνου μου καὶ βαρείας οὔσης τῆς κεφαλῆς μου διὰ τὸ μὴ κορεσθῆναί με τοῦ ὕπνου μου, πεπλανημαι τὴν ὁδόν."
+     "t": "having got up from my sleep; and because my head was heavy, since I had not had enough of my sleep, I have lost my way.",
+     "o": "ἦλθον, ἐγερθεὶς ἀπὸ τοῦ ὕπνου μου καὶ βαρείας οὔσης τῆς κεφαλῆς μου διὰ τὸ μὴ κορεσθῆναί με τοῦ ὕπνου μου, πεπλανημαι τὴν ὁδόν."
     },
     {
      "n": 11,
-     "t": "Θαυμαστὸν εἰπεῖν τοῦτο ἐναντίον Ἱερεμίου, ὅτι πεπλάνημαι."
+     "t": "It will seem a marvel to say this before Jeremiah, that I lost my way.",
+     "o": "Θαυμαστὸν εἰπεῖν τοῦτο ἐναντίον Ἱερεμίου, ὅτι πεπλάνημαι."
     },
     {
      "n": 12,
-     "t": "᾿Εξῆλθε δὲ ἀπὸ τῆς πόλεως\" καὶ κατανοήσας β εἶδε τὰ σημεῖα τῆς πόλεως, καὶ εἶπεν AuTn μὲν ἐστιν ἢ πόλις, πεπλάνημαι δέ."
+     "t": "And he went out of the city; and looking closely, he saw the landmarks of the city, and said: This is indeed the city; yet I have lost my way.",
+     "o": "᾿Εξῆλθε δὲ ἀπὸ τῆς πόλεως\" καὶ κατανοήσας β εἶδε τὰ σημεῖα τῆς πόλεως, καὶ εἶπεν AuTn μὲν ἐστιν ἢ πόλις, πεπλάνημαι δέ."
     },
     {
      "n": 13,
-     "t": "Καὶ πιλιν ὑπέστρεψεν εἰς τὴν πόλιν, καὶ ἐζήτησε, καὶ οὐδένα εὗρε τῶν ἰδίων."
+     "t": "And again he went back into the city and searched, and found none of his own people.",
+     "o": "Καὶ πιλιν ὑπέστρεψεν εἰς τὴν πόλιν, καὶ ἐζήτησε, καὶ οὐδένα εὗρε τῶν ἰδίων."
     },
     {
      "n": 14,
-     "t": "Καὶ εἶπεν ἰὑὐλογητὸς Κύριος, ὅτε μεγάλη ἐκστασις εἐπέπέεσεν ET EpE."
+     "t": "And he said: Blessed be the Lord, for a great bewilderment has come upon me.",
+     "o": "Καὶ εἶπεν ἰὑὐλογητὸς Κύριος, ὅτε μεγάλη ἐκστασις εἐπέπέεσεν ET EpE."
     },
     {
      "n": 15,
-     "t": "Καὶ παλιν ἐξῆλθεν ἔξω τῆς πόλεως. Καὶ ἔμεινε λυπούμενος, μὴ εἰδὼς ποῦ ἀπέλθῃ."
+     "t": "And again he went outside the city. And he stayed there grieving, not knowing where to go.",
+     "o": "Καὶ παλιν ἐξῆλθεν ἔξω τῆς πόλεως. Καὶ ἔμεινε λυπούμενος, μὴ εἰδὼς ποῦ ἀπέλθῃ."
     },
     {
      "n": 16,
-     "t": "Καὶ ἀπέθηκε τὸν κόφινον, λέγων Καθέζομαι \\ ὧδε, ἕως ὁ Κύριος apy, τὴν ἔκστασιν ταύτην ἀπ᾿ ἐμοῦ."
+     "t": "And he put down the basket, saying: I will sit here until the Lord takes this bewilderment from me.",
+     "o": "Καὶ ἀπέθηκε τὸν κόφινον, λέγων Καθέζομαι \\ ὧδε, ἕως ὁ Κύριος apy, τὴν ἔκστασιν ταύτην ἀπ᾿ ἐμοῦ."
     },
     {
      "n": 17,
-     "t": "Καθηὶ μένου δὲ αὐτοῦ, εἶδέ τινα γηραιὸν ἐρχόμενον ἐξ ἀγροῦ, καὶ λέγει αὐτῷ ᾿Αβιμέλεχ᾽ Σοὶ λέγω, πρεσβῦτα, ποία ἐστὶν ἡ πόλις αὕτη;"
+     "t": "And as he sat, he saw an old man coming from the field; and Abimelech said to him: I say to you, old man, what city is this?",
+     "o": "Καθηὶ μένου δὲ αὐτοῦ, εἶδέ τινα γηραιὸν ἐρχόμενον ἐξ ἀγροῦ, καὶ λέγει αὐτῷ ᾿Αβιμέλεχ᾽ Σοὶ λέγω, πρεσβῦτα, ποία ἐστὶν ἡ πόλις αὕτη;"
     },
     {
      "n": 18,
-     "t": "Καὶ εἶπεν αὐτῷ\" ᾿Ἱερουσαλήμ ἐστι. Καὶ λέγει αὐτῷ ᾿Αβιμέλεχ Ποῦ ἔστιν ὁ [Ἱερεμίας ὁ ἱερεὺς, καὶ Βαροὺχ ὁ ἀναγνώστης, καὶ πᾶς ὁ λαὸς τῆς πόλεως ταύτης, ὅτι οὐχ εὗρον αὐτούς;"
+     "t": "And he said to him: It is Jerusalem. And Abimelech said to him: Where is Jeremiah the priest, and Baruch the reader, and all the people of this city? For I have not found them.",
+     "o": "Καὶ εἶπεν αὐτῷ\" ᾿Ἱερουσαλήμ ἐστι. Καὶ λέγει αὐτῷ ᾿Αβιμέλεχ Ποῦ ἔστιν ὁ [Ἱερεμίας ὁ ἱερεὺς, καὶ Βαροὺχ ὁ ἀναγνώστης, καὶ πᾶς ὁ λαὸς τῆς πόλεως ταύτης, ὅτι οὐχ εὗρον αὐτούς;"
     },
     {
      "n": 19,
-     "t": "Καὶ εἶπεν. αὐτῷ ὁ πρεσβύτης Οὐκ εἶ σὺ"
+     "t": "And the old man said to him: Are you not",
+     "o": "Καὶ εἶπεν. αὐτῷ ὁ πρεσβύτης Οὐκ εἶ σὺ"
     },
     {
      "n": 20,
-     "t": "ἐκ τῆς πόλεως ταύτης, σήμερον μνησθεὶς τοῦ “Ιερεμίον, ὅτι ἐπερωτᾷς περὶ αὐτοῦ μετὰ τοσοῦτον χρόνον;"
+     "t": "from this city, that you remember Jeremiah today and ask about him after so long a time?",
+     "o": "ἐκ τῆς πόλεως ταύτης, σήμερον μνησθεὶς τοῦ “Ιερεμίον, ὅτι ἐπερωτᾷς περὶ αὐτοῦ μετὰ τοσοῦτον χρόνον;"
     },
     {
      "n": 21,
-     "t": "“ἱΪερεμίας γὰρ ἐν Βαβυλῶνί ἐστι μετὰ τοῦ λαοῦ ἠχμαλωτεύθησαν γὰρ ὑπὸ Ναβουχοδονόσορ τοῦ βασιλέως, καὶ μετ᾽ αὐτῶν ἐστιν ἱἹερεμίας"
+     "t": "For Jeremiah is in Babylon with the people; for they were taken captive by King Nebuchadnezzar, and Jeremiah is with them",
+     "o": "“ἱΪερεμίας γὰρ ἐν Βαβυλῶνί ἐστι μετὰ τοῦ λαοῦ ἠχμαλωτεύθησαν γὰρ ὑπὸ Ναβουχοδονόσορ τοῦ βασιλέως, καὶ μετ᾽ αὐτῶν ἐστιν ἱἹερεμίας"
     },
     {
      "n": 22,
-     "t": "εὐαγγελίσασθαι αὐτοῖς καὶ κατηχῆσαι αὐτοὺς τὸν λόγον. [υὐθὺς"
+     "t": "to preach the good news to them and to teach them the word. As soon as",
+     "o": "εὐαγγελίσασθαι αὐτοῖς καὶ κατηχῆσαι αὐτοὺς τὸν λόγον. [υὐθὺς"
     },
     {
      "n": 23,
-     "t": "δὲ ἀκούσας ᾿Αβιμέλεχ παρὰ τοῦ γηραιοῦ ἀνθρώπου, εἶπεν Ei μὴ ἧς πρεσβύτης, καὶ ὅτι οὐκ ἐξὸν ἀνθρώπῳ ὑβρίσαι τὸν μείξονα αὐτοῦ, ἐπικατεγέλων ἄν σοι καὶ ἔλεγον, ὅτι μαίνῃ ὅτι εἶπας, ᾿Πχμαλωτεύθη ὁ λαὸς εἰς Βαβυλῶνα."
+     "t": "Abimelech heard this from the old man, he said: If you were not an old man, and if it were not unlawful for a man to insult one older than himself, I would laugh at you and say that you are mad, since you said, The people have been taken captive to Babylon.",
+     "o": "δὲ ἀκούσας ᾿Αβιμέλεχ παρὰ τοῦ γηραιοῦ ἀνθρώπου, εἶπεν Ei μὴ ἧς πρεσβύτης, καὶ ὅτι οὐκ ἐξὸν ἀνθρώπῳ ὑβρίσαι τὸν μείξονα αὐτοῦ, ἐπικατεγέλων ἄν σοι καὶ ἔλεγον, ὅτι μαίνῃ ὅτι εἶπας, ᾿Πχμαλωτεύθη ὁ λαὸς εἰς Βαβυλῶνα."
     },
     {
      "n": 24,
-     "t": "Ei ἦσαν οἱ κρταῤῥάκται τοῦ οὐρανοῦ κατελθόντες ἐπ᾽ αὐτούς; οὔπω ἐστὶ καιρὸς ἀπελθεῖν εἰς Βαβυλῶνα."
+     "t": "Even if the cataracts of heaven had come down on them, there has not yet been time to go to Babylon.",
+     "o": "Ei ἦσαν οἱ κρταῤῥάκται τοῦ οὐρανοῦ κατελθόντες ἐπ᾽ αὐτούς; οὔπω ἐστὶ καιρὸς ἀπελθεῖν εἰς Βαβυλῶνα."
     },
     {
      "n": 25,
-     "t": "Πόση γὰρ ὥρα ἐστὶν, ag’ οὗ ἀπέστειλέ με ὁ πατήρ μου Ἱερεμίας εἰς τὸ χωρίον τοῦ ᾿Αγρίππα ἐπὶ ὀλίγα σῦκα, ἵνα δίδωμεν τοῖς νοσοῦσι τοῦ"
+     "t": "For how long is it since my father Jeremiah sent me to the estate of Agrippa for a few figs, so that we might give them to the sick among the",
+     "o": "Πόση γὰρ ὥρα ἐστὶν, ag’ οὗ ἀπέστειλέ με ὁ πατήρ μου Ἱερεμίας εἰς τὸ χωρίον τοῦ ᾿Αγρίππα ἐπὶ ὀλίγα σῦκα, ἵνα δίδωμεν τοῖς νοσοῦσι τοῦ"
     },
     {
      "n": 26,
-     "t": "λαοῦ, καὶ ἀπελθὼν ἤνεγκον αὐτὰ, καὶ ἐλθὼν ἐπί τι δένδρον τῷ καύματι, ἐκάθισα τοῦ ἀναπαῆναι ὀλίγον, καὶ ἔκλινα τὴν κεφαλήν μου ἐπὶ τὸν κόφινον, καὶ ἐκοιμήθην, καὶ ἐξυπνισθεὶς ἀπεκάλυψα τὸν κόφινον τῶν σύκων, νομίξων ὅτι ἐβράδυνα, καὶ ἶ εὗρον τὰ σῦκα στάξοντα γάλα, καθὼς συνέλεξα αὐτά. Σὺ δὲ λέγεις, ὅτι ἠχμαλωτεύθη ὁ λαὸς εἰς Παβυλώῶνα;"
+     "t": "people? And I went and brought them; and coming to a certain tree in the heat, I sat down to rest a little, and leaned my head on the basket, and fell asleep; and when I woke I uncovered the basket of figs, thinking that I was late, and I found the figs dripping milk, just as I had gathered them. And you say that the people have been taken captive to Babylon?",
+     "o": "λαοῦ, καὶ ἀπελθὼν ἤνεγκον αὐτὰ, καὶ ἐλθὼν ἐπί τι δένδρον τῷ καύματι, ἐκάθισα τοῦ ἀναπαῆναι ὀλίγον, καὶ ἔκλινα τὴν κεφαλήν μου ἐπὶ τὸν κόφινον, καὶ ἐκοιμήθην, καὶ ἐξυπνισθεὶς ἀπεκάλυψα τὸν κόφινον τῶν σύκων, νομίξων ὅτι ἐβράδυνα, καὶ ἶ εὗρον τὰ σῦκα στάξοντα γάλα, καθὼς συνέλεξα αὐτά. Σὺ δὲ λέγεις, ὅτι ἠχμαλωτεύθη ὁ λαὸς εἰς Παβυλώῶνα;"
     },
     {
      "n": 27,
-     "t": "“Iva δὲ γνῷς, λάβε, ἴδε τὰ σῦκα."
+     "t": "But so that you may know, take them, look at the figs.",
+     "o": "“Iva δὲ γνῷς, λάβε, ἴδε τὰ σῦκα."
     },
     {
      "n": 28,
-     "t": "Καὶ ἀνεκάλυψε τὸν κόφινον τῶν σύκων Ι τῷ γέροντι."
+     "t": "And he uncovered the basket of figs for the old man.",
+     "o": "Καὶ ἀνεκάλυψε τὸν κόφινον τῶν σύκων Ι τῷ γέροντι."
     },
     {
      "n": 29,
-     "t": "Καὶ εἶδεν αὐτὰ στάξοντα γάλα. ᾿Ιδὼν δὲ αὐτὰ"
+     "t": "And he saw them dripping milk. And when he saw them,",
+     "o": "Καὶ εἶδεν αὐτὰ στάξοντα γάλα. ᾿Ιδὼν δὲ αὐτὰ"
     },
     {
      "n": 30,
-     "t": "5 γηραιὸς ἄνθρωπος, εἴπεν᾽ \"Ὦ υἱέ μου, δίκαιος ἄνθρωπος el σὺ, καὶ οὐκ ἠθέλησεν ὁ Θεὸς δεῖξαί σοι τὴν ἐρήμωσιν τῆς πόλεως. Ἤνεγκε γὰρ ταύτην τὴν ἔκστασιν ἐπὶ σὲ ὁ Θεός. ᾿Ιδοὺ γὰρ ἑξήκοντα καὶ ἐξ ἔτη σήμερόν εἰσιν ἀφ᾽ οὗ ἠχμαλωτεύθη ὁ λαὸς εἰς Βαβυλῶνα."
+     "t": "the old man said: O my son, you are a righteous man, and God did not want to show you the desolation of the city; for God brought this bewilderment upon you. For behold, it is sixty-six years today since the people were taken captive to Babylon.",
+     "o": "5 γηραιὸς ἄνθρωπος, εἴπεν᾽ \"Ὦ υἱέ μου, δίκαιος ἄνθρωπος el σὺ, καὶ οὐκ ἠθέλησεν ὁ Θεὸς δεῖξαί σοι τὴν ἐρήμωσιν τῆς πόλεως. Ἤνεγκε γὰρ ταύτην τὴν ἔκστασιν ἐπὶ σὲ ὁ Θεός. ᾿Ιδοὺ γὰρ ἑξήκοντα καὶ ἐξ ἔτη σήμερόν εἰσιν ἀφ᾽ οὗ ἠχμαλωτεύθη ὁ λαὸς εἰς Βαβυλῶνα."
     },
     {
      "n": 31,
-     "t": "Καὶ ἵνα μάθης, τέκνον, ὅτι ἀληθές ἐστιν, ἀνάβλεψον εἰς τὸν ἀγρὸν καὶ ἴδε, ὅτι ἐφάνη ἡ αὔξησις τῶν γενημάτων\" ἴδε καὶ τὰ σῦκα, ὅτι καιρὸς αὐτῶν οὐκ ἔστι, καὶ γνῶθι."
+     "t": "And so that you may learn, child, that it is true, look up at the field and see that the growth of the crops has appeared; see the figs too, that it is not their season, and know it.",
+     "o": "Καὶ ἵνα μάθης, τέκνον, ὅτι ἀληθές ἐστιν, ἀνάβλεψον εἰς τὸν ἀγρὸν καὶ ἴδε, ὅτι ἐφάνη ἡ αὔξησις τῶν γενημάτων\" ἴδε καὶ τὰ σῦκα, ὅτι καιρὸς αὐτῶν οὐκ ἔστι, καὶ γνῶθι."
     },
     {
      "n": 32,
-     "t": "Τότε éxpake μεγίλῃ φωνῇ ᾿Αβιμέλεχ, λέγων: ᾿ὐλογήσω σε, Κύριε ὁ Θεὸς τοῦ οὐρανοῦ καὶ τῆς γῆς, ἡ ἀνάπαυσις τῶν ψυχῶν τῶν δικαίων ἐν παντὶ τόπῳ."
+     "t": "Then Abimelech cried out with a loud voice, saying: I will bless you, Lord, God of heaven and earth, the rest of the souls of the righteous in every place.",
+     "o": "Τότε éxpake μεγίλῃ φωνῇ ᾿Αβιμέλεχ, λέγων: ᾿ὐλογήσω σε, Κύριε ὁ Θεὸς τοῦ οὐρανοῦ καὶ τῆς γῆς, ἡ ἀνάπαυσις τῶν ψυχῶν τῶν δικαίων ἐν παντὶ τόπῳ."
     },
     {
      "n": 33,
-     "t": "Καὶ λέγει τῷ γηραιῷ ἐνθρώπῳ' Ποῖός ἐστιν ὁ μὴν οὗτος; Ὃ δὲ εἶπε: Νισσάν' \"καὶ ἔστιν ἡ δωδεκάτη\"."
+     "t": "And he said to the old man: What month is this? And he said: Nisan, and it is the twelfth.",
+     "o": "Καὶ λέγει τῷ γηραιῷ ἐνθρώπῳ' Ποῖός ἐστιν ὁ μὴν οὗτος; Ὃ δὲ εἶπε: Νισσάν' \"καὶ ἔστιν ἡ δωδεκάτη\"."
     },
     {
      "n": 34,
-     "t": "Καὶ ἐπάρας ἐκ τῶν σύκων, ἔδωκε τῷ γηραιῷ avθρώπῳ, καὶ λέγει αὐτῷ: Ὃ Θεὸς φωταγωγήσει σε εἰς THI ἄνω"
+     "t": "And taking some of the figs, he gave them to the old man, and said to him: May God guide you with his light to the city above",
+     "o": "Καὶ ἐπάρας ἐκ τῶν σύκων, ἔδωκε τῷ γηραιῷ avθρώπῳ, καὶ λέγει αὐτῷ: Ὃ Θεὸς φωταγωγήσει σε εἰς THI ἄνω"
     }
    ]
   },
@@ -364,96 +439,119 @@
    "verses": [
     {
      "n": 1,
-     "t": "Μετὰ ταῦτα ἐξῆλθεν ᾿Αβιμέλεχ ἔξω τῆς πόλεως, Καὶ προσηύξατο πρὸς Κύριον. Καὶ ἰδοὺ ἄγγελος Κυρίου ἦλθε, καὶ ἀπεκατέστησεν αὐτὸν, ὅπου ἦν Βαρούχ᾽ εὗρε δὲ αὐτὸν ἐν μνημείῳ καθεζόμενον."
+     "t": "After this Abimelech went outside the city and prayed to the Lord. And behold, an angel of the Lord came and set him down where Baruch was; and he found him sitting in a tomb.",
+     "o": "Μετὰ ταῦτα ἐξῆλθεν ᾿Αβιμέλεχ ἔξω τῆς πόλεως, Καὶ προσηύξατο πρὸς Κύριον. Καὶ ἰδοὺ ἄγγελος Κυρίου ἦλθε, καὶ ἀπεκατέστησεν αὐτὸν, ὅπου ἦν Βαρούχ᾽ εὗρε δὲ αὐτὸν ἐν μνημείῳ καθεζόμενον."
     },
     {
      "n": 2,
-     "t": "Καὶ ἐν τῷ θεωρῆσαι ἀλλήλους, ἔκλαυσαν ἀμφότεροι καὶ κατεφίλησαν ἀλλήλους. ᾿Αναβλέψας δὲ Βαροὺχ, εἶδε τὰ σῦκα ἐσκεπασμένα ἐν τῷ κοφίνῳ καὶ ἄρας τοὺς ὀφθαλμοὺς αὐτοῦ εἰς τὸν οὐρανὸν, προσηύξατο λέγων\" \"Εστι ᾿ Θεὸς ὁ παρέχων μισθαποδοσίαν τοῖς ἁγίοις αὐτοῦ."
+     "t": "And when they saw each other, they both wept and kissed each other. And Baruch looked up and saw the figs covered in the basket; and lifting his eyes to heaven, he prayed, saying: There is a God who gives a reward to his holy ones.",
+     "o": "Καὶ ἐν τῷ θεωρῆσαι ἀλλήλους, ἔκλαυσαν ἀμφότεροι καὶ κατεφίλησαν ἀλλήλους. ᾿Αναβλέψας δὲ Βαροὺχ, εἶδε τὰ σῦκα ἐσκεπασμένα ἐν τῷ κοφίνῳ καὶ ἄρας τοὺς ὀφθαλμοὺς αὐτοῦ εἰς τὸν οὐρανὸν, προσηύξατο λέγων\" \"Εστι ᾿ Θεὸς ὁ παρέχων μισθαποδοσίαν τοῖς ἁγίοις αὐτοῦ."
     },
     {
      "n": 3,
-     "t": "᾿τοίμασον σεαυτὴν, ἡ καρδία μου, καὶ εὐφραίνου, καὶ ἀγάλλου ἐν τῷ 2Cor.v.1. σκηνώματί σον, λέγω τῷ σαρκικῷ οἴκῳ σον τὸ πένθος σου γὰρ μετεστράφη εἰς χαράν. Ἔρχεται γὰρ ὁ ἱκανὸς, καὶ ἀρεῖ σε ἐκ τοῦ σκηνώματός σον. OU γὰρ γέγονέ σοι ἁμαρτία."
+     "t": "Prepare yourself, my heart, and be glad, and rejoice in your tabernacle, I mean your fleshly house; for your mourning has been turned into joy. For the Mighty One is coming and will take you out of your tabernacle; for no sin has been found in you.",
+     "o": "᾿τοίμασον σεαυτὴν, ἡ καρδία μου, καὶ εὐφραίνου, καὶ ἀγάλλου ἐν τῷ 2Cor.v.1. σκηνώματί σον, λέγω τῷ σαρκικῷ οἴκῳ σον τὸ πένθος σου γὰρ μετεστράφη εἰς χαράν. Ἔρχεται γὰρ ὁ ἱκανὸς, καὶ ἀρεῖ σε ἐκ τοῦ σκηνώματός σον. OU γὰρ γέγονέ σοι ἁμαρτία."
     },
     {
      "n": 4,
-     "t": "᾿Ανάψυξον ἡ παρθενική μου πίστις, καὶ πίστευσον ὅτι ζήσεις."
+     "t": "Be refreshed, my virgin faith, and believe that you will live.",
+     "o": "᾿Ανάψυξον ἡ παρθενική μου πίστις, καὶ πίστευσον ὅτι ζήσεις."
     },
     {
      "n": 5,
-     "t": "᾿Επίβλεψον ἐπὶ τὸν κόφινον τοῦτον τῶν σύκων᾽ ἰδοὺ γὰρ ἐξηκονταὲξ ἔτη ἐποίησαν, καὶ οὐκ ἐμαράνθησαν, οὐδὲ ὥξεσαν, ἀλλὰ στάζουσι τοῦ γάλακτος. Οὕτως γίνεταί σοι ἡ σάρξ μου, ἐὰν G ποιήσῃς τὰ προσταχθέντα σου ὑπὸ τοῦ ἀγγέλου τῆς δικαιοσύνης.",
-     "l": "5–6"
+     "t": "Look at this basket of figs: behold, they have been sixty-six years, and they have not withered nor gone sour, but they drip with milk. So it will be with my flesh, if you do what you are commanded by the angel of righteousness.",
+     "l": "5–6",
+     "o": "᾿Επίβλεψον ἐπὶ τὸν κόφινον τοῦτον τῶν σύκων᾽ ἰδοὺ γὰρ ἐξηκονταὲξ ἔτη ἐποίησαν, καὶ οὐκ ἐμαράνθησαν, οὐδὲ ὥξεσαν, ἀλλὰ στάζουσι τοῦ γάλακτος. Οὕτως γίνεταί σοι ἡ σάρξ μου, ἐὰν G ποιήσῃς τὰ προσταχθέντα σου ὑπὸ τοῦ ἀγγέλου τῆς δικαιοσύνης."
     },
     {
      "n": 7,
-     "t": "“O φυλάξας τὸν κόφινον τῶν σύκων, αὐτὸς πάλιν φυλάξει σε ἐν τῇ δυνάμει αὐτοῦ."
+     "t": "He who kept the basket of figs will keep you again by his power.",
+     "o": "“O φυλάξας τὸν κόφινον τῶν σύκων, αὐτὸς πάλιν φυλάξει σε ἐν τῇ δυνάμει αὐτοῦ."
     },
     {
      "n": 8,
-     "t": "Ταῦτα εἰπὼν ὁ Βαροὺχ, λέγει τῷ ᾿Αβιμέλεχ' ᾿Ανάστηθι, καὶ εὐξώμεθα, ἵνα γνωρίσῃ ἡμῖν ὁ Κύριος τὸ, πώς δυνησώμεθα ἀποστεῖλαι τὴν φάσιν τῷ Ἱερεμίᾳ εἰς Βαβυλῶνα διὰ τὴν γενομένην σοι σκέπην."
+     "t": "When Baruch had said this, he said to Abimelech: Arise, and let us pray that the Lord may make known to us how we can send the message to Jeremiah in Babylon about the shelter that was given you.",
+     "o": "Ταῦτα εἰπὼν ὁ Βαροὺχ, λέγει τῷ ᾿Αβιμέλεχ' ᾿Ανάστηθι, καὶ εὐξώμεθα, ἵνα γνωρίσῃ ἡμῖν ὁ Κύριος τὸ, πώς δυνησώμεθα ἀποστεῖλαι τὴν φάσιν τῷ Ἱερεμίᾳ εἰς Βαβυλῶνα διὰ τὴν γενομένην σοι σκέπην."
     },
     {
      "n": 9,
-     "t": "Καὶ ηὔξατο Βαροὺχ, λέγων Ἢ δύναμις ἡμῶν, ὁ Θεὸς ἡμῶν Κύριε, τὸ ἐκλεκτὸν φώς, τὸ ἐξελθὸν ἐκ στόματος αὐτοῦ, παρακαλῶ καὶ δέομαί σου τῆς ἀγαθότητος\" τὸ μέγα ὄνομα, ὃ οὐδεὶς δύναται"
+     "t": "And Baruch prayed, saying: Our strength, our God, Lord, the chosen light that came out of his mouth, I beseech and implore your goodness; the great name which no one can",
+     "o": "Καὶ ηὔξατο Βαροὺχ, λέγων Ἢ δύναμις ἡμῶν, ὁ Θεὸς ἡμῶν Κύριε, τὸ ἐκλεκτὸν φώς, τὸ ἐξελθὸν ἐκ στόματος αὐτοῦ, παρακαλῶ καὶ δέομαί σου τῆς ἀγαθότητος\" τὸ μέγα ὄνομα, ὃ οὐδεὶς δύναται"
     },
     {
      "n": 10,
-     "t": "γνῶναι ἄκουσον τῆς φωνῆς τοῦ δούλου σου, καὶ γενοῦ γνῶσις ἐν τῇ καρδίᾳ μου. Ti θέλεις ποιήσωμεν; πῶς ἀποστείλω πρὸς Ἱερεμίαν εἰς Βαβυλῶνα;"
+     "t": "know: hear the voice of your servant, and let knowledge come into my heart. What do you want us to do? How shall I send to Jeremiah in Babylon?",
+     "o": "γνῶναι ἄκουσον τῆς φωνῆς τοῦ δούλου σου, καὶ γενοῦ γνῶσις ἐν τῇ καρδίᾳ μου. Ti θέλεις ποιήσωμεν; πῶς ἀποστείλω πρὸς Ἱερεμίαν εἰς Βαβυλῶνα;"
     },
     {
      "n": 11,
-     "t": "“Ere δὲ προσευχομένου τοῦ Βαροὺχ,"
+     "t": "And while Baruch was still praying,",
+     "o": "“Ere δὲ προσευχομένου τοῦ Βαροὺχ,"
     },
     {
      "n": 12,
-     "t": "ἰδοὺ ἄγγελος Κυρίου ἦλθε, καὶ λέγει τῷ Βαρούχ᾽ Βαροὺχ, ὃ σύμβουλος τοῦ φωτὸς, Μὴ μεριμνήσῃς τὸ, πῶς ἀποστείAns πρὸς ᾿Ἱερεμίαν' ἔρχεται γὰρ πρός σε ὥρᾳ τοῦ φωτὸς αὔριον ἀετὸς, καὶ σὺ ἐπισκέψῃ πρὸς Ἱερεμίαν."
+     "t": "behold, an angel of the Lord came and said to Baruch: Baruch, counsellor of the light, do not be anxious about how to send to Jeremiah; for an eagle is coming to you tomorrow at the hour of light, and you will send word by it to Jeremiah.",
+     "o": "ἰδοὺ ἄγγελος Κυρίου ἦλθε, καὶ λέγει τῷ Βαρούχ᾽ Βαροὺχ, ὃ σύμβουλος τοῦ φωτὸς, Μὴ μεριμνήσῃς τὸ, πῶς ἀποστείAns πρὸς ᾿Ἱερεμίαν' ἔρχεται γὰρ πρός σε ὥρᾳ τοῦ φωτὸς αὔριον ἀετὸς, καὶ σὺ ἐπισκέψῃ πρὸς Ἱερεμίαν."
     },
     {
      "n": 13,
-     "t": "Γράψων οὖν ἐν τῇ ἐπιστολῇ ὅτι, Λάλησον τοῖς υἱοῖς Ἰσραήλ:"
+     "t": "Write then in the letter: Speak to the children of Israel:",
+     "o": "Γράψων οὖν ἐν τῇ ἐπιστολῇ ὅτι, Λάλησον τοῖς υἱοῖς Ἰσραήλ:"
     },
     {
      "n": 14,
-     "t": "Ὁ γενόμενος ἐν ὑμῖν ξένος, ἀφορισθήτω, καὶ ποιήσωσι ιε ἡμέρας\" καὶ μετὰ ταῦτα εἰσάξω ὑμᾶς εἰς τὴν πόλιν ὑμῶν, λέγει Κύριος."
+     "t": "Whoever has become a stranger among you, let him be set apart, and let them keep fifteen days; and after this I will bring you into your city, says the Lord.",
+     "o": "Ὁ γενόμενος ἐν ὑμῖν ξένος, ἀφορισθήτω, καὶ ποιήσωσι ιε ἡμέρας\" καὶ μετὰ ταῦτα εἰσάξω ὑμᾶς εἰς τὴν πόλιν ὑμῶν, λέγει Κύριος."
     },
     {
      "n": 15,
-     "t": "ὋὉ μὴ ἀφοριζόμενος ἐκ τῆς BaBuravos, ὦ Ἱερεμία, οὐ μὴ εἰσέλθῃ εἰς τὴν πόλιν καὶ ἐπιτιμῶ αὐτοῖς, τοῦ μὴ ἀποδεχθῆναι αὐτοὺς αὖθις ὑπὸ τῶν Βαβυλωνιτῶν, λέγει Κύριος."
+     "t": "Whoever is not set apart from Babylon, O Jeremiah, shall not enter the city; and I rebuke them, so that they will not be received again by the Babylonians, says the Lord.",
+     "o": "ὋὉ μὴ ἀφοριζόμενος ἐκ τῆς BaBuravos, ὦ Ἱερεμία, οὐ μὴ εἰσέλθῃ εἰς τὴν πόλιν καὶ ἐπιτιμῶ αὐτοῖς, τοῦ μὴ ἀποδεχθῆναι αὐτοὺς αὖθις ὑπὸ τῶν Βαβυλωνιτῶν, λέγει Κύριος."
     },
     {
      "n": 16,
-     "t": "Καὶ ταῦτα εἰπὼν ὁ ἄγγελος, ἀπῆλθεν ἀπὸ τοῦ Βαροὺχ."
+     "t": "And when the angel had said this, he departed from Baruch.",
+     "o": "Καὶ ταῦτα εἰπὼν ὁ ἄγγελος, ἀπῆλθεν ἀπὸ τοῦ Βαροὺχ."
     },
     {
      "n": 17,
-     "t": "Ὃ δὲ Βαροὺχ ἀποστείλας εἰς τὴν ἀγορὰν τῶν ἐθνῶν, ἤνεγκε χάρτην καὶ μέλανα, καὶ ἔγραψεν"
+     "t": "And Baruch sent to the market of the Gentiles and got paper and ink, and wrote",
+     "o": "Ὃ δὲ Βαροὺχ ἀποστείλας εἰς τὴν ἀγορὰν τῶν ἐθνῶν, ἤνεγκε χάρτην καὶ μέλανα, καὶ ἔγραψεν"
     },
     {
      "n": 18,
-     "t": "ἐπιστολὴν περιέχουσαν οὕτως\" Βαροὺχ ὁ δοῦλος τοῦ Θεοῦ γράφει τῷ Ἱερεμίᾳ Ὁ ἐν τῇ αἰχμαλωσίᾳ τῆς Βαβυλῶνος, χαῖρε καὶ ἀγαλλιώ, ὅτι ὁ Θεὸς οὐκ ἀφῆκεν ἡμᾶς ἐξελθεῖν ἐκ τοῦ σώματος τούτου λυπουμένους διὰ τὴν πόλιν τὴν ἐρημωθεῖσαν καὶ vBprσθεῖσαν."
+     "t": "a letter that read as follows: Baruch the servant of God writes to Jeremiah, who is in the captivity of Babylon: Rejoice and be glad, for God has not let us depart from this body grieving for the city that was laid waste and outraged.",
+     "o": "ἐπιστολὴν περιέχουσαν οὕτως\" Βαροὺχ ὁ δοῦλος τοῦ Θεοῦ γράφει τῷ Ἱερεμίᾳ Ὁ ἐν τῇ αἰχμαλωσίᾳ τῆς Βαβυλῶνος, χαῖρε καὶ ἀγαλλιώ, ὅτι ὁ Θεὸς οὐκ ἀφῆκεν ἡμᾶς ἐξελθεῖν ἐκ τοῦ σώματος τούτου λυπουμένους διὰ τὴν πόλιν τὴν ἐρημωθεῖσαν καὶ vBprσθεῖσαν."
     },
     {
      "n": 19,
-     "t": "Διὰ τοῦτο ἐσπλαγχνίσθη ὁ Κύριος ἐπὶ τῶν δακρύων β ἡμῶν, καὶ ἐμνήσθη τῆς διαθήκης, ἧς ἔστησε μετὰ τῶν πατέρων ἡμών ᾿Αβραὰμ, καὶ ᾿Ισαὰκ, καὶ ᾿Ιακώβ."
+     "t": "Therefore the Lord has had compassion on our tears, and has remembered the covenant that he established with our fathers Abraham, Isaac and Jacob.",
+     "o": "Διὰ τοῦτο ἐσπλαγχνίσθη ὁ Κύριος ἐπὶ τῶν δακρύων β ἡμῶν, καὶ ἐμνήσθη τῆς διαθήκης, ἧς ἔστησε μετὰ τῶν πατέρων ἡμών ᾿Αβραὰμ, καὶ ᾿Ισαὰκ, καὶ ᾿Ιακώβ."
     },
     {
      "n": 20,
-     "t": "᾿Απέστειλε γὰρ πρός με τὸν ἄγγελον αὐτοῦ, καὶ εἶπέ μοι τοὺς λόγους τούτους, ods ἐπέστειλα πρός σε."
+     "t": "For he sent his angel to me, and he told me these words which I have sent to you.",
+     "o": "᾿Απέστειλε γὰρ πρός με τὸν ἄγγελον αὐτοῦ, καὶ εἶπέ μοι τοὺς λόγους τούτους, ods ἐπέστειλα πρός σε."
     },
     {
      "n": 21,
-     "t": "Οὗτοι οὖν εἰσὶν οἱ λόγοι, ods εἶπε Κύριος ὁ Θεὸς Ἰσραὴλ, ὁ ἐξαγαγὼν ἡμᾶς ἐκ γῆς Αἰγύπτου, ἐκ τῆς"
+     "t": "These, then, are the words which the Lord, the God of Israel, spoke, who brought us out of the land of Egypt, out of the",
+     "o": "Οὗτοι οὖν εἰσὶν οἱ λόγοι, ods εἶπε Κύριος ὁ Θεὸς Ἰσραὴλ, ὁ ἐξαγαγὼν ἡμᾶς ἐκ γῆς Αἰγύπτου, ἐκ τῆς"
     },
     {
      "n": 22,
-     "t": "μεγάλης καμίνου\" \"Ore οὐκ ἐφυλάξατε τὰ δικαιώματά μου, ἀλλὰ ὑψώθη ἡ καρδία ὑμῶν, καὶ ἐτραχηλιάσατε ἐνώπιόν μου, ἐθυμώθην καὶ ἐν ὀργῇ παρέδωκα ὑμᾶς τῇ καμίνῳ εἰς Βαβυλῶνα."
+     "t": "great furnace: Because you did not keep my ordinances, but your heart was lifted up and you were stiff-necked before me, I was angry, and in wrath I handed you over to the furnace in Babylon.",
+     "o": "μεγάλης καμίνου\" \"Ore οὐκ ἐφυλάξατε τὰ δικαιώματά μου, ἀλλὰ ὑψώθη ἡ καρδία ὑμῶν, καὶ ἐτραχηλιάσατε ἐνώπιόν μου, ἐθυμώθην καὶ ἐν ὀργῇ παρέδωκα ὑμᾶς τῇ καμίνῳ εἰς Βαβυλῶνα."
     },
     {
      "n": 23,
-     "t": "᾿Εὰν οὖν ἀκούσητε τῆς φωνῆς μου, λέγει Κύριος, ἐκ στόματος Ἱερεμίου τοῦ παιδός μου, ὁ ἀκούων, ἀναφέρω αὐτὸν ἐκ τῆς Βαβυ- ἑ λώνος, ὁ δὲ μὴ ἀκούων, ξένος γενήσεται τῆς ᾿Ιερουσαλὴμ καὶ τῆς Βαβυλῶνος."
+     "t": "If then you listen to my voice, says the Lord, from the mouth of Jeremiah my servant, whoever listens I will bring up out of Babylon; but whoever does not listen will become a stranger to Jerusalem and to Babylon.",
+     "o": "᾿Εὰν οὖν ἀκούσητε τῆς φωνῆς μου, λέγει Κύριος, ἐκ στόματος Ἱερεμίου τοῦ παιδός μου, ὁ ἀκούων, ἀναφέρω αὐτὸν ἐκ τῆς Βαβυ- ἑ λώνος, ὁ δὲ μὴ ἀκούων, ξένος γενήσεται τῆς ᾿Ιερουσαλὴμ καὶ τῆς Βαβυλῶνος."
     },
     {
      "n": 24,
-     "t": "Δοκιμάσεις δὲ αὐτοὺς ἐκ τοῦ ὕδατος τοῦ Ιορδάνου\" ὁ μὴ ἀκούων φανερὸς yevnoerat: τοῦτο τὸ σημεῖόν ἐστι τῆς μεγάλης σφραγῖδος."
+     "t": "And you will test them by the water of the Jordan; whoever does not listen will be made plain. This is the sign of the great seal.",
+     "o": "Δοκιμάσεις δὲ αὐτοὺς ἐκ τοῦ ὕδατος τοῦ Ιορδάνου\" ὁ μὴ ἀκούων φανερὸς yevnoerat: τοῦτο τὸ σημεῖόν ἐστι τῆς μεγάλης σφραγῖδος."
     }
    ]
   },
@@ -463,128 +561,159 @@
    "verses": [
     {
      "n": 1,
-     "t": "Καὶ avéorn' Βαροὺχ, καὶ ἐξῆλθεν ἐκ τοῦ μνημείου."
+     "t": "And Baruch got up and went out of the tomb.",
+     "o": "Καὶ avéorn' Βαροὺχ, καὶ ἐξῆλθεν ἐκ τοῦ μνημείου."
     },
     {
      "n": 2,
-     "t": "Καὶ ἀποκριθεὶς ἀνθρωπίνῃ φωνῇ ὁ ἀετὸς, εἶπε: Χαῖρε, Βαροὺχ, εἴ οἰκονόμος τῆς πίστεως."
+     "t": "And the eagle answered with a human voice and said: Greetings, Baruch, steward of the faith.",
+     "o": "Καὶ ἀποκριθεὶς ἀνθρωπίνῃ φωνῇ ὁ ἀετὸς, εἶπε: Χαῖρε, Βαροὺχ, εἴ οἰκονόμος τῆς πίστεως."
     },
     {
      "n": 3,
-     "t": "Καὶ εἶπεν αὐτῷ Βαροὺχ ὅτι, ᾿'Εκλεκτός εἶ σὺ ὁ λαλῶν, ἐκ πάντων τῶν πετεινῶν τοῦ οὐρανοῦ\" ἐκ τῆς γὰρ αὐγῆς τῶν ὀφθαλμῶν δῆλόν ἐστι."
+     "t": "And Baruch said to him: You who speak are chosen out of all the birds of heaven; for it is plain from the brightness of your eyes.",
+     "o": "Καὶ εἶπεν αὐτῷ Βαροὺχ ὅτι, ᾿'Εκλεκτός εἶ σὺ ὁ λαλῶν, ἐκ πάντων τῶν πετεινῶν τοῦ οὐρανοῦ\" ἐκ τῆς γὰρ αὐγῆς τῶν ὀφθαλμῶν δῆλόν ἐστι."
     },
     {
      "n": 4,
-     "t": "Δεῖξόν μοι οὖν, τί ποιεῖς ἐνταῦθα;"
+     "t": "Show me, then, what you are doing here.",
+     "o": "Δεῖξόν μοι οὖν, τί ποιεῖς ἐνταῦθα;"
     },
     {
      "n": 5,
-     "t": "Καὶ εἶπεν αὐτῷ ὁ ἀετός: ᾿Λπεστάλην ὧδε, ὅπως πᾶσαν φάσιν ἣν θέλεις, ἀποστείλῃς δι᾿ ἐμοῦ."
+     "t": "And the eagle said to him: I was sent here so that you might send by me whatever message you wish.",
+     "o": "Καὶ εἶπεν αὐτῷ ὁ ἀετός: ᾿Λπεστάλην ὧδε, ὅπως πᾶσαν φάσιν ἣν θέλεις, ἀποστείλῃς δι᾿ ἐμοῦ."
     },
     {
      "n": 6,
-     "t": "Καὶ εἶπεν αὐτῷ Βαρούχ' Ei δύνασαι σὺ ἐπᾶραι τὴν φάσιν ταύτην τῷ ‘Jepeuia εἰς Βαβυλώνα;"
+     "t": "And Baruch said to him: Can you carry this message to Jeremiah in Babylon?",
+     "o": "Καὶ εἶπεν αὐτῷ Βαρούχ' Ei δύνασαι σὺ ἐπᾶραι τὴν φάσιν ταύτην τῷ ‘Jepeuia εἰς Βαβυλώνα;"
     },
     {
      "n": 7,
-     "t": "Καὶ εἶπεν αὐτῷ ὁ ἀετός: Εἰς τοῦτο γὰρ καὶ ἀπεστάλην."
+     "t": "And the eagle said to him: It was for this that I was sent.",
+     "o": "Καὶ εἶπεν αὐτῷ ὁ ἀετός: Εἰς τοῦτο γὰρ καὶ ἀπεστάλην."
     },
     {
      "n": 8,
-     "t": "Καὶ ἄρας Βαροὺχ τὴν ἐπιστολὴν, καὶ δεκαπέντε: σῦκα ἐκ τοῦ Kopivou τοῦ 'ABipérey, ἔδησεν εἰς τὸν τράχηλον τοῦ ἀετοῦ, καὶ εἶπεν αὐτῷ:"
+     "t": "And Baruch took the letter and fifteen figs from Abimelech's basket, and tied them to the eagle's neck, and said to him:",
+     "o": "Καὶ ἄρας Βαροὺχ τὴν ἐπιστολὴν, καὶ δεκαπέντε: σῦκα ἐκ τοῦ Kopivou τοῦ 'ABipérey, ἔδησεν εἰς τὸν τράχηλον τοῦ ἀετοῦ, καὶ εἶπεν αὐτῷ:"
     },
     {
      "n": 9,
-     "t": "Σοὶ λέγω, βασιλεῦ τῶν πετεινῶν, ἄπελθε ἐν εἰρήνῃ μεθ᾽ ὑγείας, καὶ τὴν φάσιν ἔνεγκόν pot."
+     "t": "I say to you, king of the birds, go in peace and in good health, and bring the message back to me.",
+     "o": "Σοὶ λέγω, βασιλεῦ τῶν πετεινῶν, ἄπελθε ἐν εἰρήνῃ μεθ᾽ ὑγείας, καὶ τὴν φάσιν ἔνεγκόν pot."
     },
     {
      "n": 10,
-     "t": "Μὴ ὁμοιωθῇῆς τῷ κόρακι, ὃν ἐξαπέστειλε Nae, καὶ οὐκ ἀπεστράφη ETL πρὸς αὐτὸν εἰς τὴν κιβωτόν: ἀλλὰ ὁμοιώθητι TH περιστερᾷ, Ld ’ U v ὃν ὃ Ψ, ὡς id \\ \\ 4 \\ ἥτις ἐκ τρίτου φάσιν ἤνεγκε τῷ δικαίῳ' οὕτω καὶ σὺ, dpov τὴν καλὴν φάσιν ταύτην τῷ ‘lepeuia καὶ τοῖς σὺν αὐτῷ, iva εὖ σοι γένηται, ἄρον τὸν χάρτην τοῦτον τῷ λαῷ τῷ ἐκλεκτῷ τοῦ (θεοῦ.",
-     "l": "10–11"
+     "t": "Do not be like the raven which Noah sent out, and which never came back to him in the ark; but be like the dove, which the third time brought back word to the righteous man. So you too, take this good message to Jeremiah and to those with him, that it may go well with you; take this paper to the chosen people of God.",
+     "l": "10–11",
+     "o": "Μὴ ὁμοιωθῇῆς τῷ κόρακι, ὃν ἐξαπέστειλε Nae, καὶ οὐκ ἀπεστράφη ETL πρὸς αὐτὸν εἰς τὴν κιβωτόν: ἀλλὰ ὁμοιώθητι TH περιστερᾷ, Ld ’ U v ὃν ὃ Ψ, ὡς id \\ \\ 4 \\ ἥτις ἐκ τρίτου φάσιν ἤνεγκε τῷ δικαίῳ' οὕτω καὶ σὺ, dpov τὴν καλὴν φάσιν ταύτην τῷ ‘lepeuia καὶ τοῖς σὺν αὐτῷ, iva εὖ σοι γένηται, ἄρον τὸν χάρτην τοῦτον τῷ λαῷ τῷ ἐκλεκτῷ τοῦ (θεοῦ."
     },
     {
      "n": 12,
-     "t": "᾿δὰν κυκλώσωσί σε πάντα τὰ πετεινὰ τοῦ οὐρανοῦ, Καὶ πάντες ot ἐχθροὶ τῆς ἀληθείας βουλόμενοι πολεμῆσαι μετὰ σοῦ, ἀγώνιcat’ ὁ Κύριος δώῃ σοι δύναμιν. Καὶ μὴ ἐκκλίνῃς ets τὰ δεξιὰ, μήτε εἰς τὰ ἀῤιστερὰ, GAN ws βέλος ὕπαγον ὀρθῶς, οὕτως ἄπελθε ἔν τῇ δυνάμει τοῦ Θεοῦ."
+     "t": "If all the birds of heaven surround you, and all the enemies of the truth want to fight with you, struggle: the Lord will give you strength. And do not turn aside to the right or to the left, but go straight like an arrow; so go in the power of God.",
+     "o": "᾿δὰν κυκλώσωσί σε πάντα τὰ πετεινὰ τοῦ οὐρανοῦ, Καὶ πάντες ot ἐχθροὶ τῆς ἀληθείας βουλόμενοι πολεμῆσαι μετὰ σοῦ, ἀγώνιcat’ ὁ Κύριος δώῃ σοι δύναμιν. Καὶ μὴ ἐκκλίνῃς ets τὰ δεξιὰ, μήτε εἰς τὰ ἀῤιστερὰ, GAN ws βέλος ὕπαγον ὀρθῶς, οὕτως ἄπελθε ἔν τῇ δυνάμει τοῦ Θεοῦ."
     },
     {
      "n": 13,
-     "t": "Τότε ὁ ἀετὸς ἐπετάσθη, ἔχων τὴν ἐπιστολὴν, καὶ ἀπῆλθεν εἰς Βαβυλῶνα, καὶ ἀνεπαύσατο ἐπί τι ξύλον ὄξω τῆς πόλεως εἰς τόπον ἔρημον ἐσιώπησε δὲ ἕως οὗ;"
+     "t": "Then the eagle flew off with the letter and went to Babylon, and rested on a tree outside the city in a deserted place; and it kept silent until",
+     "o": "Τότε ὁ ἀετὸς ἐπετάσθη, ἔχων τὴν ἐπιστολὴν, καὶ ἀπῆλθεν εἰς Βαβυλῶνα, καὶ ἀνεπαύσατο ἐπί τι ξύλον ὄξω τῆς πόλεως εἰς τόπον ἔρημον ἐσιώπησε δὲ ἕως οὗ;"
     },
     {
      "n": 14,
-     "t": "διῆλθεν Ἱερεμίας, αὐτὸς καὶ ἄλλοι τινὲς τοῦ λαοῦ; ἐξήρχοντο γὰρ θάψαι νεκρόν\" καὶ γὰρ ἠτήσατο Ἱερεμίας παρὰ τοῦ Ναβου- χοδονόσορ, λέγων\" Δός μοι τόπον, ποῦ θάψω τοὺς νεκροὺς τοῦ λαοῦ μου."
+     "t": "Jeremiah passed by, he and some others of the people; for they were going out to bury a dead man. For Jeremiah had asked Nebuchadnezzar, saying: Give me a place where I may bury the dead of my people.",
+     "o": "διῆλθεν Ἱερεμίας, αὐτὸς καὶ ἄλλοι τινὲς τοῦ λαοῦ; ἐξήρχοντο γὰρ θάψαι νεκρόν\" καὶ γὰρ ἠτήσατο Ἱερεμίας παρὰ τοῦ Ναβου- χοδονόσορ, λέγων\" Δός μοι τόπον, ποῦ θάψω τοὺς νεκροὺς τοῦ λαοῦ μου."
     },
     {
      "n": 15,
-     "t": "Καὶ ἔδωκεν αὐτῷ. ᾿Απερχομένων δὲ αὐτῶν καὶ κλαιόντων μετὰ τοῦ νεκροῦ, ἦλθον κατέναντι τοῦ ἀετοῦ\" καὶ ἔκραξεν ὁ ἀετὸς, λέγων Σοὶ λέγω, Ἱερεμία ὁ ἐκλεκτὸς τοῦ Θεοῦ, ἥἅπελθε, σύναξον τὸν λαὸν ἅπαντα, καὶ ἔλθωσιν ὧδε, ἵνα ἀκούσωσι τοῦ καλοῦ κηρύγματος, ὃ ἤνεγκά σοι ἀπὸ τοῦ Βαροὺχ καὶ τοῦ ᾿᾽Λβιμέλεχ."
+     "t": "And he gave it to him. And as they went along weeping with the dead man, they came opposite the eagle; and the eagle cried out, saying: I say to you, Jeremiah, chosen one of God, go, gather all the people, and let them come here, so that they may hear the good news which I have brought you from Baruch and Abimelech.",
+     "o": "Καὶ ἔδωκεν αὐτῷ. ᾿Απερχομένων δὲ αὐτῶν καὶ κλαιόντων μετὰ τοῦ νεκροῦ, ἦλθον κατέναντι τοῦ ἀετοῦ\" καὶ ἔκραξεν ὁ ἀετὸς, λέγων Σοὶ λέγω, Ἱερεμία ὁ ἐκλεκτὸς τοῦ Θεοῦ, ἥἅπελθε, σύναξον τὸν λαὸν ἅπαντα, καὶ ἔλθωσιν ὧδε, ἵνα ἀκούσωσι τοῦ καλοῦ κηρύγματος, ὃ ἤνεγκά σοι ἀπὸ τοῦ Βαροὺχ καὶ τοῦ ᾿᾽Λβιμέλεχ."
     },
     {
      "n": 16,
-     "t": "᾿Λκούσας δὲ ὁ Ἱερεμίας, ἐδόξασε τὸν Θεόν' καὶ ἀπελθὼν συνῆξε τὸν λαὸν σὺν γυναιξὶ καὶ τέκνοις, καὶ ἦλθεν ὅπου ὁ ἀετός."
+     "t": "When Jeremiah heard this, he glorified God; and he went and gathered the people with their wives and children, and came to where the eagle was.",
+     "o": "᾿Λκούσας δὲ ὁ Ἱερεμίας, ἐδόξασε τὸν Θεόν' καὶ ἀπελθὼν συνῆξε τὸν λαὸν σὺν γυναιξὶ καὶ τέκνοις, καὶ ἦλθεν ὅπου ὁ ἀετός."
     },
     {
      "n": 17,
-     "t": "Καὶ κατῆλθεν ὁ ἀετὸς ἐπὶ τὸν τεθνηκότα, καὶ avéfnoe γέγονε δὲ τοῦτο, ἵνα πιστεύσωσιν."
+     "t": "And the eagle came down on the dead man, and he came back to life. This happened so that they might believe.",
+     "o": "Καὶ κατῆλθεν ὁ ἀετὸς ἐπὶ τὸν τεθνηκότα, καὶ avéfnoe γέγονε δὲ τοῦτο, ἵνα πιστεύσωσιν."
     },
     {
      "n": 18,
-     "t": "᾿Ιθαύμασε δὲ πᾶς ὁ λαὸς ἐπὶ τῷ γεγονότι, λέγοντες Ott, Μὴ οὗτος ἔστι ὁ Θεὸς ὁ ὀφθεὶς τοῖς πατράσιν ἡμῶν ἐν τῇ ἐρήμῳ διὰ Μωύσέως, καὶ ἐποίησεν ἑαυτὸν ἐν σχήματι ἀετοῦ καὶ ἐφάνη ἡμῖν διὰ τοῦ μεγάλου ἀετοῦ τούτου;"
+     "t": "And all the people marvelled at what had happened, saying: Is not this the God who appeared to our fathers in the wilderness through Moses, and who has made himself in the form of an eagle and appeared to us through this great eagle?",
+     "o": "᾿Ιθαύμασε δὲ πᾶς ὁ λαὸς ἐπὶ τῷ γεγονότι, λέγοντες Ott, Μὴ οὗτος ἔστι ὁ Θεὸς ὁ ὀφθεὶς τοῖς πατράσιν ἡμῶν ἐν τῇ ἐρήμῳ διὰ Μωύσέως, καὶ ἐποίησεν ἑαυτὸν ἐν σχήματι ἀετοῦ καὶ ἐφάνη ἡμῖν διὰ τοῦ μεγάλου ἀετοῦ τούτου;"
     },
     {
      "n": 19,
-     "t": "Καὶ εἶπεν ὁ ἀετὸς τῷ Ἱερεμίᾳ, Δεῦρο λῦσον τὴν ἐπιστολὴν ταύτην, καὶ ἀνάγνωθι αὐτὴν τῷ λαῷ."
+     "t": "And the eagle said to Jeremiah: Come, untie this letter and read it to the people.",
+     "o": "Καὶ εἶπεν ὁ ἀετὸς τῷ Ἱερεμίᾳ, Δεῦρο λῦσον τὴν ἐπιστολὴν ταύτην, καὶ ἀνάγνωθι αὐτὴν τῷ λαῷ."
     },
     {
      "n": 20,
-     "t": "Λύσας οὖν τὴν ἐπιστολὴν, ἀνέγνω τῷ λαῷ. ᾿Λκούσας οὖν ὁ λαὸς, ἔκλαυσαν, καὶ ἐπέθηκαν χοῦν ἐπὶ τὴν κεφαλὴν αὐτῶν καὶ ἔλε-"
+     "t": "So he untied the letter and read it to the people. And when the people heard it, they wept and put dust on their heads, and",
+     "o": "Λύσας οὖν τὴν ἐπιστολὴν, ἀνέγνω τῷ λαῷ. ᾿Λκούσας οὖν ὁ λαὸς, ἔκλαυσαν, καὶ ἐπέθηκαν χοῦν ἐπὶ τὴν κεφαλὴν αὐτῶν καὶ ἔλε-"
     },
     {
      "n": 21,
-     "t": "γον τῷ Ἱερεμία’ Σῶσον ἡμᾶς καὶ ἀπάγγειλον ἡμῖν, τί ποιήσωμεν, ἵνα εἰσέλθωμεν πάλιν εἰς τὴν πόλιν ἡμῶν;"
+     "t": "said to Jeremiah: Save us, and tell us what we must do to enter our city again.",
+     "o": "γον τῷ Ἱερεμία’ Σῶσον ἡμᾶς καὶ ἀπάγγειλον ἡμῖν, τί ποιήσωμεν, ἵνα εἰσέλθωμεν πάλιν εἰς τὴν πόλιν ἡμῶν;"
     },
     {
      "n": 22,
-     "t": "᾿Αποκριθεὶς δὲ Tepeplas εἶπεν αὐτοῖς. Πάντα ὅσα ἐκ τῆς ἐπιστολῆς ἠκούσατε,:"
+     "t": "And Jeremiah answered and said to them: All that you have heard from the letter,",
+     "o": "᾿Αποκριθεὶς δὲ Tepeplas εἶπεν αὐτοῖς. Πάντα ὅσα ἐκ τῆς ἐπιστολῆς ἠκούσατε,:"
     },
     {
      "n": 23,
-     "t": "φυλάξατε: καὶ εἰσάξει ἡμᾶς εἰς τὴν πόλιν ἡμῶν. Ἔγραψε δὲ καὶ at ἐπιστολὴν ὁ ‘lepeulas πρὸς Βαροὺχ, οὕτως λέγων\" Υἱέ μου ayaπητέ, μὴ ἀμελήφῃς ἐν ταῖς προσευχαῖς σου δεόμενος ὑπὲρ ἡμῶν ὅπως κατευοδεύσῃ τὴν ὁδὸν ἡμῶν, ἄχρις ἂν ἐξέλθωμεν ἐκ τῶν προσταγμάτων τοῦ ἀνόμου βασιλέως τούτου δίκαιος γὰρ εὑρέθης ἐνάντιον αὐτοῦ καὶ οὐκ ἔασέν σε εἰσελθεῖν ἐνταῦθα μεθ᾽ ἡμῶν, ὅπως μὴ ἴδῃς τὴν κάκωσιν τὴν γενομένην τῷ λαῷ ὑπὸ τῶν"
+     "t": "keep it, and he will bring us into our city. And Jeremiah also wrote a letter to Baruch, saying thus: My beloved son, do not be negligent in your prayers, interceding for us, that he may prosper our way until we come out from under the decrees of this lawless king; for you were found righteous before him, and he did not let you come here with us, so that you would not see the affliction which has come upon the people at the hands of the",
+     "o": "φυλάξατε: καὶ εἰσάξει ἡμᾶς εἰς τὴν πόλιν ἡμῶν. Ἔγραψε δὲ καὶ at ἐπιστολὴν ὁ ‘lepeulas πρὸς Βαροὺχ, οὕτως λέγων\" Υἱέ μου ayaπητέ, μὴ ἀμελήφῃς ἐν ταῖς προσευχαῖς σου δεόμενος ὑπὲρ ἡμῶν ὅπως κατευοδεύσῃ τὴν ὁδὸν ἡμῶν, ἄχρις ἂν ἐξέλθωμεν ἐκ τῶν προσταγμάτων τοῦ ἀνόμου βασιλέως τούτου δίκαιος γὰρ εὑρέθης ἐνάντιον αὐτοῦ καὶ οὐκ ἔασέν σε εἰσελθεῖν ἐνταῦθα μεθ᾽ ἡμῶν, ὅπως μὴ ἴδῃς τὴν κάκωσιν τὴν γενομένην τῷ λαῷ ὑπὸ τῶν"
     },
     {
      "n": 24,
-     "t": "Βαβυλωνίων ὥσπερ γὰρ πατὴρ, υἱὸν μονογενῆ ἔχων, τούτου δὲ παραδοθέντος εἰς τιμωρίαν οἱ οὖν ἰδόντες τὸν πατέρα αὐτοῦ, καὶ παραμυθούμενοι αὐτὸν, σκέπουσιν τὸ πρόσωπον αὐτοῦ, ἵνα μὴ ἴδῃ πώς τιμωρεῖται αὐτὸς ὁ υἱὸς καὶ πλείονα φθαρῇ ἀπὸ τῆς λύπης\" οὕτως γάρ σε ἐλέησεν ὁ Θεὸς καὶ οὐκ ἔασέν σε ἐλθεῖν εἰς Παβυλῶνα᾽ ἵνα μὴ ἴδῃς τὴν κάκωσιν τοῦ λαοῦ ad’ ἧς γὰρ εἰσήλθομεν εἰς τὴν πόλιν ταύτην, οὐκ ἐπαύσατο ἡ λύπη ad’ ἡμῶν, ἑξήκοντα καὶ ἕξ ἔτη σήμερον."
+     "t": "Babylonians. For it is as with a father who has an only son, and this son is handed over to punishment: those who see his father and comfort him cover his face, so that he may not see how his son is being punished and be the more wasted by grief. So God has had mercy on you and did not let you come to Babylon, so that you would not see the affliction of the people. For since we came into this city, grief has not left us, sixty-six years today.",
+     "o": "Βαβυλωνίων ὥσπερ γὰρ πατὴρ, υἱὸν μονογενῆ ἔχων, τούτου δὲ παραδοθέντος εἰς τιμωρίαν οἱ οὖν ἰδόντες τὸν πατέρα αὐτοῦ, καὶ παραμυθούμενοι αὐτὸν, σκέπουσιν τὸ πρόσωπον αὐτοῦ, ἵνα μὴ ἴδῃ πώς τιμωρεῖται αὐτὸς ὁ υἱὸς καὶ πλείονα φθαρῇ ἀπὸ τῆς λύπης\" οὕτως γάρ σε ἐλέησεν ὁ Θεὸς καὶ οὐκ ἔασέν σε ἐλθεῖν εἰς Παβυλῶνα᾽ ἵνα μὴ ἴδῃς τὴν κάκωσιν τοῦ λαοῦ ad’ ἧς γὰρ εἰσήλθομεν εἰς τὴν πόλιν ταύτην, οὐκ ἐπαύσατο ἡ λύπη ad’ ἡμῶν, ἑξήκοντα καὶ ἕξ ἔτη σήμερον."
     },
     {
      "n": 25,
-     "t": "Πολλάκις γὰρ ἐξερχόμενος ηὕρισκον ἐκ τοῦ λαοῦ κρεμαμένους ὑπὸ Ναβουχοδονόσορ βασιλέως, κλαίοντας καὶ λέγοντας, ᾿Ελέησον ἡμᾶς, ὁ θεὸς"
+     "t": "For often when I went out I found some of the people hanged by King Nebuchadnezzar, weeping and saying: Have mercy on us, O god Zar.",
+     "o": "Πολλάκις γὰρ ἐξερχόμενος ηὕρισκον ἐκ τοῦ λαοῦ κρεμαμένους ὑπὸ Ναβουχοδονόσορ βασιλέως, κλαίοντας καὶ λέγοντας, ᾿Ελέησον ἡμᾶς, ὁ θεὸς"
     },
     {
      "n": 26,
-     "t": "᾿ ᾿Ακούων ταῦτα, ἐλυπούμην καὶ ἔκλαιον δισσὸν κλαυθμόν οὐ \" μόνον ὅτι ἐκρέμαντο, ἀλλ᾽ ότι ἐπεκαλοῦντο θεὸν ἀλλότριον\" λέk yovtes, EXénaov ἡμᾶς. ᾿Ιμνημόνευον δὲ ἡμέρας ἑορτῆς ἃς ἐποιοῦμεν ἐν Ἱερουσαλήμ᾽ πρὸ τοῦ ἡμᾶς αἰχμαλωτευθῆναι."
+     "t": "Hearing this, I grieved and wept a double weeping, not only because they were hanged, but because they called on a foreign god, saying: Have mercy on us. And I remembered the feast days that we kept in Jerusalem before we were taken captive.",
+     "o": "᾿ ᾿Ακούων ταῦτα, ἐλυπούμην καὶ ἔκλαιον δισσὸν κλαυθμόν οὐ \" μόνον ὅτι ἐκρέμαντο, ἀλλ᾽ ότι ἐπεκαλοῦντο θεὸν ἀλλότριον\" λέk yovtes, EXénaov ἡμᾶς. ᾿Ιμνημόνευον δὲ ἡμέρας ἑορτῆς ἃς ἐποιοῦμεν ἐν Ἱερουσαλήμ᾽ πρὸ τοῦ ἡμᾶς αἰχμαλωτευθῆναι."
     },
     {
      "n": 27,
-     "t": "Καὶ μνησκόμενος ἐστέναζον, καὶ ἐπέστρεφον εἰς τὸν οἶκόν μου ὀδυνώμενος καὶ κλαίων."
+     "t": "And remembering, I groaned, and returned to my house in pain and weeping.",
+     "o": "Καὶ μνησκόμενος ἐστέναζον, καὶ ἐπέστρεφον εἰς τὸν οἶκόν μου ὀδυνώμενος καὶ κλαίων."
     },
     {
      "n": 28,
-     "t": "Νῦν οὖν δεήθητι, εἰς τὸν τόπον ὅπου εἶ, σὺ καὶ ᾿Αβιμέλεχ, ὑπὲρ τοῦ λαοῦ τούτου, ὅπως εἰσακούσωσιν τῆς φωνῆς μου καὶ τῶν κριμάτων τοῦ στόματός μου καὶ ἐξέλθωμεν ἐντεῦθεν."
+     "t": "Now then, pray in the place where you are, you and Abimelech, for this people, that they may listen to my voice and to the judgments of my mouth, and that we may go out from here.",
+     "o": "Νῦν οὖν δεήθητι, εἰς τὸν τόπον ὅπου εἶ, σὺ καὶ ᾿Αβιμέλεχ, ὑπὲρ τοῦ λαοῦ τούτου, ὅπως εἰσακούσωσιν τῆς φωνῆς μου καὶ τῶν κριμάτων τοῦ στόματός μου καὶ ἐξέλθωμεν ἐντεῦθεν."
     },
     {
      "n": 29,
-     "t": "Neyo γὰρ σοι, ὅτι ὅλον τὸν χρόνον ὃν ἐποιήσαμεν ἐνταῦθα, κατέχουσιν ἡμᾶς λέγοντες ὅτι, Εἴπατε ἡμῖν ὠδὴν ἐκ τῶν ῳδών Σιὼν, καὶ τὴν δὴν τοῦ Θεοῦ ὑμῶν. Καὶ ἀντελέγομὲν αὐτοῖς, Πῶς ἄσωμεν ὑμῖν ἐπὶ γῆς ἀλλοτρίας ὄντες:"
+     "t": "For I tell you that the whole time we have spent here, they have held us, saying: Sing us a song from the songs of Zion, the song of your God. And we answered them: How shall we sing to you, being in a foreign land?",
+     "o": "Neyo γὰρ σοι, ὅτι ὅλον τὸν χρόνον ὃν ἐποιήσαμεν ἐνταῦθα, κατέχουσιν ἡμᾶς λέγοντες ὅτι, Εἴπατε ἡμῖν ὠδὴν ἐκ τῶν ῳδών Σιὼν, καὶ τὴν δὴν τοῦ Θεοῦ ὑμῶν. Καὶ ἀντελέγομὲν αὐτοῖς, Πῶς ἄσωμεν ὑμῖν ἐπὶ γῆς ἀλλοτρίας ὄντες:"
     },
     {
      "n": 30,
-     "t": "Καὶ μετὰ ταῦτα ἔδησε τὴν ἐπιστολὴν εἰς τὸν τράχηλον τοῦ ἀετοῦ, λέγων, ἼΔπελθε ἐν εἰρήνῃ, ἐπισκέψηται Κύριος ἀμφοτέρους."
+     "t": "And after this he tied the letter to the eagle's neck, saying: Go in peace, and may the Lord watch over us both.",
+     "o": "Καὶ μετὰ ταῦτα ἔδησε τὴν ἐπιστολὴν εἰς τὸν τράχηλον τοῦ ἀετοῦ, λέγων, ἼΔπελθε ἐν εἰρήνῃ, ἐπισκέψηται Κύριος ἀμφοτέρους."
     },
     {
      "n": 31,
-     "t": "Καὶ ἐπετάσθη ὁ ἀετὸς, καὶ ἤνεγκεν τὴν ἐπιστολὴν καὶ ἔδωκε τῷ Βαροὺχ. Καὶ λύσας ἀνέγνω, καὶ κατεφίλησεν αὐτὴν, καὶ ἔκλαυσε ἀκούσας διὰ τὰς λύπας καὶ τὰς κακώσεις τοῦ λαοῦ."
+     "t": "And the eagle flew off and carried the letter and gave it to Baruch. And he untied it and read it, and kissed it, and wept when he heard of the griefs and afflictions of the people.",
+     "o": "Καὶ ἐπετάσθη ὁ ἀετὸς, καὶ ἤνεγκεν τὴν ἐπιστολὴν καὶ ἔδωκε τῷ Βαροὺχ. Καὶ λύσας ἀνέγνω, καὶ κατεφίλησεν αὐτὴν, καὶ ἔκλαυσε ἀκούσας διὰ τὰς λύπας καὶ τὰς κακώσεις τοῦ λαοῦ."
     },
     {
      "n": 32,
-     "t": "Ἱερεμίας δὲ ἄρας τὰ σῦκα, διέδωκε τοῖς νοσοῦσι τοῦ λαοῦ. Καὶ ἔμεινε διδάσκων αὐτοὺς τοῦ ἀπέχεσθαι ἐκ τῶν ἀλισγημάτων τῶν ἐθνῶν τῆς BaBvurovos."
+     "t": "And Jeremiah took the figs and distributed them to the sick among the people. And he went on teaching them to keep away from the pollutions of the Gentiles of Babylon.",
+     "o": "Ἱερεμίας δὲ ἄρας τὰ σῦκα, διέδωκε τοῖς νοσοῦσι τοῦ λαοῦ. Καὶ ἔμεινε διδάσκων αὐτοὺς τοῦ ἀπέχεσθαι ἐκ τῶν ἀλισγημάτων τῶν ἐθνῶν τῆς BaBvurovos."
     }
    ]
   },
@@ -594,36 +723,44 @@
    "verses": [
     {
      "n": 1,
-     "t": "᾿Εγένετο δὲ ἡ ἡμέρα, ἐν ἡ ἐξέφερε ὁ Θεὸς τὸν λαὸν ex Ἰ)βαβυλῶνος\" καὶ εἶπεν ὁ Κύριος πρὸς Ἱερεμίαν:"
+     "t": "And the day came on which God brought the people out of Babylon; and the Lord said to Jeremiah:",
+     "o": "᾿Εγένετο δὲ ἡ ἡμέρα, ἐν ἡ ἐξέφερε ὁ Θεὸς τὸν λαὸν ex Ἰ)βαβυλῶνος\" καὶ εἶπεν ὁ Κύριος πρὸς Ἱερεμίαν:"
     },
     {
      "n": 2,
-     "t": "᾿Ανάστηθι, σὺ καὶ ὁ λαὸς, καὶ δεῦτε ἐπὶ τὸν ᾿Ιορδάνην, καὶ ἐρεῖς τῷ λαῷ, ὋὉ θέλων τὸν Κύριον καταλειψάτω τὰ ἔργα τῆς Βαβυλῶνος, καὶ τοὺς ἄῤῥενας τοὺς λαβόντας ἐξ αὐτῶν γυναῖκας, καὶ τὰς γυναῖκας τὰς λαβούσας ἐξ αὐτῶν ἄνδρας."
+     "t": "Arise, you and the people, and come to the Jordan, and you shall say to the people: Whoever wants the Lord, let him leave behind the works of Babylon, both the men who have taken wives from them and the women who have taken husbands from them.",
+     "o": "᾿Ανάστηθι, σὺ καὶ ὁ λαὸς, καὶ δεῦτε ἐπὶ τὸν ᾿Ιορδάνην, καὶ ἐρεῖς τῷ λαῷ, ὋὉ θέλων τὸν Κύριον καταλειψάτω τὰ ἔργα τῆς Βαβυλῶνος, καὶ τοὺς ἄῤῥενας τοὺς λαβόντας ἐξ αὐτῶν γυναῖκας, καὶ τὰς γυναῖκας τὰς λαβούσας ἐξ αὐτῶν ἄνδρας."
     },
     {
      "n": 3,
-     "t": "Καὶ διαπεράσωσιν οἱ ἀκούοντές σου, καὶ ρον αὐτοὺς εἰς ᾿ἹΙερουσαλήμ' τοὺς δὲ μὴ ἀκούοντάς σου, μὴ εἰσαγιΐγῃς αὐτοὺς εἰς αὐτήν."
+     "t": "And let those who listen to you cross over, and take them up to Jerusalem; but those who do not listen to you, do not bring them into it.",
+     "o": "Καὶ διαπεράσωσιν οἱ ἀκούοντές σου, καὶ ρον αὐτοὺς εἰς ᾿ἹΙερουσαλήμ' τοὺς δὲ μὴ ἀκούοντάς σου, μὴ εἰσαγιΐγῃς αὐτοὺς εἰς αὐτήν."
     },
     {
      "n": 4,
-     "t": "‘I ερεμίας δὲ eXaλησεν αὐτοῖς τὰ ῥήματα ταῦτα: καὶ ἀναστάντες ἦλθον ἐπὶ τὸν Ιορδάνην τοῦ περᾶσαι, λέγων αὐτοῖς τὰ ῥήματα, ἃ εἶπε Κύριος πρὸς αὐτόν. Καὶ τὸ ἥμισυ τῶν γαμησάντων ἐξ αὐτῶν οὐκ ἠθέἰ λησαν ἀκοῦσαι τοῦ Ἱερεμίου, ἀλλ᾽ εἶπον πρὸς αὐτόν Οὐ μὴ καταλείψωμεν τὰς γυναῖκας ἡμῶν εἰς τὸν αἰῶνα; ἀλλ᾽ ὑποστρέφωμεν αὐτὴς μεθ᾽ ἡμῶν εἰς τὴν πόλιν ἡμῶν."
+     "t": "And Jeremiah spoke these words to them; and they arose and came to the Jordan to cross over, and he told them the words which the Lord had spoken to him. And half of those who had married among them would not listen to Jeremiah, but said to him: We will never leave our wives; but we will bring them back with us to our city.",
+     "o": "‘I ερεμίας δὲ eXaλησεν αὐτοῖς τὰ ῥήματα ταῦτα: καὶ ἀναστάντες ἦλθον ἐπὶ τὸν Ιορδάνην τοῦ περᾶσαι, λέγων αὐτοῖς τὰ ῥήματα, ἃ εἶπε Κύριος πρὸς αὐτόν. Καὶ τὸ ἥμισυ τῶν γαμησάντων ἐξ αὐτῶν οὐκ ἠθέἰ λησαν ἀκοῦσαι τοῦ Ἱερεμίου, ἀλλ᾽ εἶπον πρὸς αὐτόν Οὐ μὴ καταλείψωμεν τὰς γυναῖκας ἡμῶν εἰς τὸν αἰῶνα; ἀλλ᾽ ὑποστρέφωμεν αὐτὴς μεθ᾽ ἡμῶν εἰς τὴν πόλιν ἡμῶν."
     },
     {
      "n": 5,
-     "t": "᾿Βπέρασαν οὖν; τὸν ᾿Ιορδάνην, καὶ ἦλθον εἰς ᾿Ιερουσαλήμ. Καὶ ἔστη Ἱερεμίας, καὶ Βαροὺχ καὶ ᾿Αβιμέλεχ, λέγοντες ὅτι, Πᾶς ἄνθρωπος κοινῶν Βαβυλωνίταις οὐ μὴ εἰσέλθῃ εἰς τὴν πόλιν ταύτην. Καὶ G εἶπον πρὸς αὐτούς\" ᾿Αναστάντες ὑποστρέψωμεν εἰς Βαβυλῶνα εἰς τὸν τόπον ἡμῶν.",
-     "l": "5–6"
+     "t": "So they crossed the Jordan and came to Jerusalem. And Jeremiah stood, with Baruch and Abimelech, saying: No one who has fellowship with the Babylonians shall enter this city. And they said to one another: Let us arise and go back to Babylon, to our own place.",
+     "l": "5–6",
+     "o": "᾿Βπέρασαν οὖν; τὸν ᾿Ιορδάνην, καὶ ἦλθον εἰς ᾿Ιερουσαλήμ. Καὶ ἔστη Ἱερεμίας, καὶ Βαροὺχ καὶ ᾿Αβιμέλεχ, λέγοντες ὅτι, Πᾶς ἄνθρωπος κοινῶν Βαβυλωνίταις οὐ μὴ εἰσέλθῃ εἰς τὴν πόλιν ταύτην. Καὶ G εἶπον πρὸς αὐτούς\" ᾿Αναστάντες ὑποστρέψωμεν εἰς Βαβυλῶνα εἰς τὸν τόπον ἡμῶν."
     },
     {
      "n": 7,
-     "t": "Καὶ ἐπορεύθησαν. ᾿Ελθόντων δὲ αὐτῶν εἰς Βαβυλῶνα, ἐξῆλθον οἱ Βαβυλωνῖται εἰς συνόντησιν αὐτῶν, λέγοντες\" OU μὴ elceAOnte εἰς τὴν πόλιν ἡμῶν, ὅτι ἐμισήσατε ᾿ ἡμᾶς, καὶ κρυφῆ ἐξήλθετε ad’ ἡμῶν διὰ τοῦτο οὐκ εἰσελεύσεσθε πρὸς ἡμᾶς. “Ορκῳ γὰρ ὡρκίσαμεν ἀλλήλους κατὰ τοῦ ὀνόματος τοῦ θεοῦ ἡμῶν, μήτε ὑμᾶς μήτε τέκνα ὑμῶν δέξασθαι, ἐπειδὴ κρυφῆ ἐξήλθετε ἀφ᾽ ἡμῶν."
+     "t": "And they set out. But when they came to Babylon, the Babylonians came out to meet them, saying: You shall not enter our city, because you hated us and went out from us secretly; therefore you shall not come in to us. For we have bound one another with an oath by the name of our god to receive neither you nor your children, since you went out from us secretly.",
+     "o": "Καὶ ἐπορεύθησαν. ᾿Ελθόντων δὲ αὐτῶν εἰς Βαβυλῶνα, ἐξῆλθον οἱ Βαβυλωνῖται εἰς συνόντησιν αὐτῶν, λέγοντες\" OU μὴ elceAOnte εἰς τὴν πόλιν ἡμῶν, ὅτι ἐμισήσατε ᾿ ἡμᾶς, καὶ κρυφῆ ἐξήλθετε ad’ ἡμῶν διὰ τοῦτο οὐκ εἰσελεύσεσθε πρὸς ἡμᾶς. “Ορκῳ γὰρ ὡρκίσαμεν ἀλλήλους κατὰ τοῦ ὀνόματος τοῦ θεοῦ ἡμῶν, μήτε ὑμᾶς μήτε τέκνα ὑμῶν δέξασθαι, ἐπειδὴ κρυφῆ ἐξήλθετε ἀφ᾽ ἡμῶν."
     },
     {
      "n": 8,
-     "t": "Καὶ ἐπιγνόντες ὑπέότρεψαν' καὶ ἦλθον εἰς τόπον ἔρημον μακρόθεν τῆς Ἱερουσαλὴμ, καὶ φὠκοδόμησαν ἑαυτοῖς πόλιν, καὶ ἐπωνόμασαν τὸ ὄνομα αὐτῆς Σαμάρειαν."
+     "t": "And when they learned this, they turned back, and came to a deserted place far from Jerusalem, and built themselves a city, and called its name Samaria.",
+     "o": "Καὶ ἐπιγνόντες ὑπέότρεψαν' καὶ ἦλθον εἰς τόπον ἔρημον μακρόθεν τῆς Ἱερουσαλὴμ, καὶ φὠκοδόμησαν ἑαυτοῖς πόλιν, καὶ ἐπωνόμασαν τὸ ὄνομα αὐτῆς Σαμάρειαν."
     },
     {
      "n": 9,
-     "t": "᾿Απέστειλε δὲ πρὸς αὐτοὺς Ἱερεμίας, λέγων᾽' Μετανοήσατε' ἔρχεται γὰρ ἄγγελος τῆς δικαιοσύνης, καὶ εἰσἄξει ὑμᾶς εἰς τὸν τόπον ὑμῶν τὸν ὑψηλόν."
+     "t": "And Jeremiah sent to them, saying: Repent; for an angel of righteousness is coming, and he will bring you into your place on high.",
+     "o": "᾿Απέστειλε δὲ πρὸς αὐτοὺς Ἱερεμίας, λέγων᾽' Μετανοήσατε' ἔρχεται γὰρ ἄγγελος τῆς δικαιοσύνης, καὶ εἰσἄξει ὑμᾶς εἰς τὸν τόπον ὑμῶν τὸν ὑψηλόν."
     }
    ]
   },
@@ -633,125 +770,155 @@
    "verses": [
     {
      "n": 1,
-     "t": "Ἔμειναν δὲ οἱ τοῦ Ἱερεμίου, χαίροντες καὶ ἀναφέροντες θυσίαν ὑπὲρ τοῦ λαοῦ ἐννέα ἡμέρας."
+     "t": "And those with Jeremiah remained, rejoicing and offering sacrifice for the people for nine days.",
+     "o": "Ἔμειναν δὲ οἱ τοῦ Ἱερεμίου, χαίροντες καὶ ἀναφέροντες θυσίαν ὑπὲρ τοῦ λαοῦ ἐννέα ἡμέρας."
     },
     {
      "n": 2,
-     "t": "Τῇ δὲ δεκάτῃ ἀνήνεγκεν"
+     "t": "And on the tenth day Jeremiah",
+     "o": "Τῇ δὲ δεκάτῃ ἀνήνεγκεν"
     },
     {
      "n": 3,
-     "t": "Ἱερεμίας μόνος θυσίαν, καὶ ηὔξατο εὐχὴν, λέγων\" “Αγιος, ἅγιος, ἅγιος\" τὸ θυμίαμα τῶν δένδρων τῶν ζώντων, τὸ φῶς τὸ ἀληθινὸν τὸ φωτίζον με, ἕως οὗ ἀναληφθῶ πρὸς σὲ, περὶ τῆς φωνῆς τῆς γλυκείας τῶν δύο Σεραφίμ."
+     "t": "alone offered sacrifice, and prayed a prayer, saying: Holy, holy, holy, the incense of the living trees, the true light that enlightens me until I am taken up to you; for the sweet voice of the two seraphim,",
+     "o": "Ἱερεμίας μόνος θυσίαν, καὶ ηὔξατο εὐχὴν, λέγων\" “Αγιος, ἅγιος, ἅγιος\" τὸ θυμίαμα τῶν δένδρων τῶν ζώντων, τὸ φῶς τὸ ἀληθινὸν τὸ φωτίζον με, ἕως οὗ ἀναληφθῶ πρὸς σὲ, περὶ τῆς φωνῆς τῆς γλυκείας τῶν δύο Σεραφίμ."
     },
     {
      "n": 4,
-     "t": "Παρακαλῶ ὑπὲρ ἄλλης εὐωδίας θυμιάματος:"
+     "t": "I pray for another sweet fragrance of incense;",
+     "o": "Παρακαλῶ ὑπὲρ ἄλλης εὐωδίας θυμιάματος:"
     },
     {
      "n": 5,
-     "t": "καὶ ἡ μελέτη μου Μιχαὴλ ὁ ἐρχάγγελος τῆς δικαιοσύνης, ἕως ἂν εἰσενέγκη τοὺς δικαίους."
+     "t": "and my meditation is Michael, the archangel of righteousness, until he brings the righteous in.",
+     "o": "καὶ ἡ μελέτη μου Μιχαὴλ ὁ ἐρχάγγελος τῆς δικαιοσύνης, ἕως ἂν εἰσενέγκη τοὺς δικαίους."
     },
     {
      "n": 6,
-     "t": "Ἰ]αρακαλῶ σε, Κύριε παντοκράτωρ πάσης κτίσεως, ὁ ἀγέννητος καὶ ἀπερινόητος, ᾧ πᾶσα κρίσις κέκρυπται ἐν αὐτῷ πρὸ τοῦ ταῦτα Ι γενέσθαι."
+     "t": "I beseech you, Lord Almighty of all creation, unbegotten and incomprehensible, in whom all judgment was hidden before these things came to be.",
+     "o": "Ἰ]αρακαλῶ σε, Κύριε παντοκράτωρ πάσης κτίσεως, ὁ ἀγέννητος καὶ ἀπερινόητος, ᾧ πᾶσα κρίσις κέκρυπται ἐν αὐτῷ πρὸ τοῦ ταῦτα Ι γενέσθαι."
     },
     {
      "n": 7,
-     "t": "Ταῦτα λέγοντος τοῦ Ἱερεμίου, καὶ ἱσταμένον ἐν τῷ θυσιαστηρίῳ μετὰ Βαροὺχ καὶ ᾿Αβιμέλεχ, ἐγένετο ὡς els;"
+     "t": "While Jeremiah was saying this, standing at the altar with Baruch and Abimelech, he became like one of those",
+     "o": "Ταῦτα λέγοντος τοῦ Ἱερεμίου, καὶ ἱσταμένον ἐν τῷ θυσιαστηρίῳ μετὰ Βαροὺχ καὶ ᾿Αβιμέλεχ, ἐγένετο ὡς els;"
     },
     {
      "n": 8,
-     "t": "τῶν παραδιδόντων τὴν ψυχὴν αὐτοῦ. Καὶ ἔμειναν Βαροὺχ καὶ ᾿Αβιμέλεχ κλαίοντες, καὶ κράζοντες μεγάλῃ τῇ φωνῇ ὅτι, O πατὴρ ἡμῶν Ἱερεμίας κατέλιπεν ἡμᾶς, ὁ ἱερεὺς τοῦ Θεοῦ, καὶ ἀπῆλθεν."
+     "t": "who gives up his soul. And Baruch and Abimelech stayed there weeping and crying out with a loud voice: Our father Jeremiah, the priest of God, has left us and gone away.",
+     "o": "τῶν παραδιδόντων τὴν ψυχὴν αὐτοῦ. Καὶ ἔμειναν Βαροὺχ καὶ ᾿Αβιμέλεχ κλαίοντες, καὶ κράζοντες μεγάλῃ τῇ φωνῇ ὅτι, O πατὴρ ἡμῶν Ἱερεμίας κατέλιπεν ἡμᾶς, ὁ ἱερεὺς τοῦ Θεοῦ, καὶ ἀπῆλθεν."
     },
     {
      "n": 9,
-     "t": "κουσε δὲ πᾶς ὁ λαὸς τοῦ κλαυθμοῦ αὐτών, ἰ καὶ ἔδραμον ἐπ᾽ αὐτοὺς πάντες, καὶ εἶδον 'Ἱερεμίαν ἀνακείμενον; χαμαὶ τεθνηκότα: καὶ διέῤῥηξαν τὰ ἱμάτια αὐτῶν, καὶ ἐπέθηκαν χοῦν ἐπὶ τὰς κεφαλὰς αὐτῶν, καὶ ἔκλαυσαν κλαυθμὸν πικρόν."
+     "t": "And all the people heard their weeping, and they all ran to them, and saw Jeremiah lying on the ground dead; and they tore their garments and put dust on their heads and wept bitterly.",
+     "o": "κουσε δὲ πᾶς ὁ λαὸς τοῦ κλαυθμοῦ αὐτών, ἰ καὶ ἔδραμον ἐπ᾽ αὐτοὺς πάντες, καὶ εἶδον 'Ἱερεμίαν ἀνακείμενον; χαμαὶ τεθνηκότα: καὶ διέῤῥηξαν τὰ ἱμάτια αὐτῶν, καὶ ἐπέθηκαν χοῦν ἐπὶ τὰς κεφαλὰς αὐτῶν, καὶ ἔκλαυσαν κλαυθμὸν πικρόν."
     },
     {
      "n": 10,
-     "t": "Καὶ μετὰ ταῦτα ἡτοίμασαν ἑαυτοὺς, ἵνα κηδεύσωσιν αὐτόν. Καὶ ἰδοὺ φωνὴ ἦλθε, λέγουσα. Μὴ κηδεύετε τὸν ἔτι Covta’ ὅτι ἡ ψυχὴ αὐτοῦ εἰσέρχεται εἰς τὸ σῶμα αὐτοῦ πάλιν.",
-     "l": "10–11"
+     "t": "And after this they prepared themselves to bury him. And behold, a voice came, saying: Do not bury the one who is still living; for his soul is coming back into his body.",
+     "l": "10–11",
+     "o": "Καὶ μετὰ ταῦτα ἡτοίμασαν ἑαυτοὺς, ἵνα κηδεύσωσιν αὐτόν. Καὶ ἰδοὺ φωνὴ ἦλθε, λέγουσα. Μὴ κηδεύετε τὸν ἔτι Covta’ ὅτι ἡ ψυχὴ αὐτοῦ εἰσέρχεται εἰς τὸ σῶμα αὐτοῦ πάλιν."
     },
     {
      "n": 12,
-     "t": "Καὶ ἀκούσαντες τῆς φωνῆς, οὐκ ἐκήδευσαν αὐτὸν, ἀλλ᾽ ἔμειναν; περικύκλῳ τοῦ ὁκηνώματος αὐτοῦ ἡμέρας τρεῖς, λέγοντες καὶ ἀποροῦντες, ποίᾳ ὥρᾳ μέλλει ἀναστῆναι."
+     "t": "And hearing the voice, they did not bury him, but stayed around his tabernacle for three days, saying and wondering at what hour he would rise.",
+     "o": "Καὶ ἀκούσαντες τῆς φωνῆς, οὐκ ἐκήδευσαν αὐτὸν, ἀλλ᾽ ἔμειναν; περικύκλῳ τοῦ ὁκηνώματος αὐτοῦ ἡμέρας τρεῖς, λέγοντες καὶ ἀποροῦντες, ποίᾳ ὥρᾳ μέλλει ἀναστῆναι."
     },
     {
      "n": 13,
-     "t": "Μετὰ δὲ τρεῖς ἡμέρας εἰσῆλθεν ἡ ψυχὴ αὐτοῦ εἰς τὸ σῶμα αὐτοῦ καὶ ἐπῆρε τὴν φωνὴν αὐτοῦ ἐν μέσῳ πάντων, καὶ ele’ Aokacate τὸν Θεὸν, a πάντες δοξάσατε τὸν Θεὸν, καὶ tov Tiov τοῦ Θεοῦ τὸν ἐξυπνίἱ Covra ἡμᾶς ᾿Ιησοῦν Χριστὸν, τὸ φῶς τῶν αἰώνων πάντων, ὁ ἄσβεστος λύχνος, ἡ ζωὴ τῆς πίστεως."
+     "t": "And after three days his soul came back into his body, and he lifted up his voice in the midst of them all, and said: Glorify God, all of you glorify God, and the Son of God who wakes us, Jesus Christ, the light of all the ages, the lamp that is not quenched, the life of faith.",
+     "o": "Μετὰ δὲ τρεῖς ἡμέρας εἰσῆλθεν ἡ ψυχὴ αὐτοῦ εἰς τὸ σῶμα αὐτοῦ καὶ ἐπῆρε τὴν φωνὴν αὐτοῦ ἐν μέσῳ πάντων, καὶ ele’ Aokacate τὸν Θεὸν, a πάντες δοξάσατε τὸν Θεὸν, καὶ tov Tiov τοῦ Θεοῦ τὸν ἐξυπνίἱ Covra ἡμᾶς ᾿Ιησοῦν Χριστὸν, τὸ φῶς τῶν αἰώνων πάντων, ὁ ἄσβεστος λύχνος, ἡ ζωὴ τῆς πίστεως."
     },
     {
      "n": 14,
-     "t": "Γίνεται δὲ μετὰ τοὺς καιροὺς τούτους ἄλλα ern τετρακόσια ἑβδομηκονταεπτὰ, καὶ ἔρχεται εἰς τὴν γῆν καὶ τὸ δένδρον τῆς ζωῆς τὸ ἐν μέσῳ τοῦ παραδείσον φυτευθὲν ποιήσει πάντα τὰ δένδρα τὰ ἄκαρπα: Cf.Ign. ποιῆσαι καρπὸν,“ καὶ αὐξηθήσονται, καὶ βλαστήσουσι, \" καὶ"
+     "t": "And after these times there will be another four hundred and seventy-seven years, and he comes to the earth; and the tree of life planted in the midst of paradise will make all the unfruitful trees bear fruit, and they will grow and sprout, and",
+     "o": "Γίνεται δὲ μετὰ τοὺς καιροὺς τούτους ἄλλα ern τετρακόσια ἑβδομηκονταεπτὰ, καὶ ἔρχεται εἰς τὴν γῆν καὶ τὸ δένδρον τῆς ζωῆς τὸ ἐν μέσῳ τοῦ παραδείσον φυτευθὲν ποιήσει πάντα τὰ δένδρα τὰ ἄκαρπα: Cf.Ign. ποιῆσαι καρπὸν,“ καὶ αὐξηθήσονται, καὶ βλαστήσουσι, \" καὶ"
     },
     {
      "n": 15,
-     "t": ": = geal ὁ καρπὸς αὐτῶν μετὰ τῶν ἀγγέλων μενεῖ\" Καὶ τὰ βεβλα᾿ στηκότα, καὶ μεγαλαυχοῦντα, καὶ λέγοντα, \"Edmxapev τὸ ᾿ τέλος ἡμῶν τῷ ἀέρι ποιήσει αὐτὰ ξηρανθῆναι μετὰ τοῦ ὕψους τῶν κλάδων αὐτῶν καὶ ποιήσει αὐτὰ κλιθῆναι\" τὸ δένδρον τὸ στηριχθέν᾽ καὶ ποιήσει τὸ κόκκινον ὡς ἔριον λευκὸν γενέσθαι. Ἡ χιὼν μελανθήσεται, τὰ γλυκέα ὕδατα ἁλμυρὰ γενήσονται 16) ἐν τῷ μεγάλῳ φωτὶ τῆς εὐφροσύνης τοῦ Θεοῦ.",
-     "l": "15–16"
+     "t": "their fruit will remain with the angels. And the trees that have sprouted and are boastful and say, We have reached our end in the air, he will make them wither with the height of their branches, and will make them be judged, the tree that was set firm. And he will make the scarlet become like white wool. The snow will be made black, the sweet waters will become salt, in the great light of the gladness of God.",
+     "l": "15–16",
+     "o": ": = geal ὁ καρπὸς αὐτῶν μετὰ τῶν ἀγγέλων μενεῖ\" Καὶ τὰ βεβλα᾿ στηκότα, καὶ μεγαλαυχοῦντα, καὶ λέγοντα, \"Edmxapev τὸ ᾿ τέλος ἡμῶν τῷ ἀέρι ποιήσει αὐτὰ ξηρανθῆναι μετὰ τοῦ ὕψους τῶν κλάδων αὐτῶν καὶ ποιήσει αὐτὰ κλιθῆναι\" τὸ δένδρον τὸ στηριχθέν᾽ καὶ ποιήσει τὸ κόκκινον ὡς ἔριον λευκὸν γενέσθαι. Ἡ χιὼν μελανθήσεται, τὰ γλυκέα ὕδατα ἁλμυρὰ γενήσονται 16) ἐν τῷ μεγάλῳ φωτὶ τῆς εὐφροσύνης τοῦ Θεοῦ."
     },
     {
      "n": 17,
-     "t": "Καὶ εὐλογήσει τὰς νήσους TOU ποιῆσαι καρπὸν ἐν τῷ λόγῳ TOD στόματος TOU ᾿ Χριστοῦ αὐτοῦ."
+     "t": "And he will bless the islands so that they bear fruit by the word of the mouth of his Christ.",
+     "o": "Καὶ εὐλογήσει τὰς νήσους TOU ποιῆσαι καρπὸν ἐν τῷ λόγῳ TOD στόματος TOU ᾿ Χριστοῦ αὐτοῦ."
     },
     {
      "n": 18,
-     "t": "Αὐτὸς γὰρ ἐλεύσεται, καὶ ἐξελεύσεται, καὶ ἐπιλέξεται ἑαυτῷ δώδεκα ἀποστόλους, ἵνα εὐαγγελίζωνται ἐν Ἵ τοῖς ἔθνεσιν. ὃν ἐγὼ ἑώρακα κεκοσμημένον ὑπὸ τοῦ Πατρὸς H αὐτοῦ, καὶ ἐρχόμενον εἰς τὸν κόσμον ἐπὶ TO ὄρος τῶν ἐλαιῶν' καὶ ἐμπλήσει τὰς πεινώσας ψυχάς."
+     "t": "For he will come, and go out, and choose for himself twelve apostles, to preach the good news among the nations; he whom I have seen adorned by his Father and coming into the world on the Mount of Olives; and he will fill the hungry souls.",
+     "o": "Αὐτὸς γὰρ ἐλεύσεται, καὶ ἐξελεύσεται, καὶ ἐπιλέξεται ἑαυτῷ δώδεκα ἀποστόλους, ἵνα εὐαγγελίζωνται ἐν Ἵ τοῖς ἔθνεσιν. ὃν ἐγὼ ἑώρακα κεκοσμημένον ὑπὸ τοῦ Πατρὸς H αὐτοῦ, καὶ ἐρχόμενον εἰς τὸν κόσμον ἐπὶ TO ὄρος τῶν ἐλαιῶν' καὶ ἐμπλήσει τὰς πεινώσας ψυχάς."
     },
     {
      "n": 19,
-     "t": "Ταῦτα λέγοντος τοῦ Ἱερεμίου περὶ τοῦ Ὑἱοῦ τοῦ Θεοῦ, ὅτι ἔρχεται εἰς τὸν κόσμον, Ἴ ὠργίσθη ὁ λαὸς, καὶ εἶπε:"
+     "t": "While Jeremiah was saying this about the Son of God, that he is coming into the world, the people were enraged and said:",
+     "o": "Ταῦτα λέγοντος τοῦ Ἱερεμίου περὶ τοῦ Ὑἱοῦ τοῦ Θεοῦ, ὅτι ἔρχεται εἰς τὸν κόσμον, Ἴ ὠργίσθη ὁ λαὸς, καὶ εἶπε:"
     },
     {
      "n": 20,
-     "t": "Ταῦτα πάλιν ἐστὶ τὰ ῥήματα τὰ ὑπὸ Ἡσαΐου τοῦ υἱοῦ ᾿Αμὼς εἰρημένα, λέγοντος ὅτι, Εἶδον τὸν Θεὸν, καὶ τὸν Υἱὸν τοῦ Θεοῦ."
+     "t": "These again are the words spoken by Isaiah the son of Amoz, who said, I have seen God and the Son of God.",
+     "o": "Ταῦτα πάλιν ἐστὶ τὰ ῥήματα τὰ ὑπὸ Ἡσαΐου τοῦ υἱοῦ ᾿Αμὼς εἰρημένα, λέγοντος ὅτι, Εἶδον τὸν Θεὸν, καὶ τὸν Υἱὸν τοῦ Θεοῦ."
     },
     {
      "n": 21,
-     "t": "Δεῦτε οὖν, καὶ μὴ ἀποκτείνωμεν αὐτὸν τῷ ἐκείνου θανάτῳ, ἀλλὰ λίθοις λιθοβολήσωμεν;"
+     "t": "Come, then, let us not kill him by the same death as that one, but let us stone him with stones.",
+     "o": "Δεῦτε οὖν, καὶ μὴ ἀποκτείνωμεν αὐτὸν τῷ ἐκείνου θανάτῳ, ἀλλὰ λίθοις λιθοβολήσωμεν;"
     },
     {
      "n": 22,
-     "t": "αὐτόν. ᾿Ελυπήθησαν σφόδρα ἐπὶ τῇ ἁπονοίᾳ ταύτῃ Βαροὺχ καὶ ᾿Αβιμέλεχ, καὶ ὅτι ἤθελον ἀκοῦσαι πλήρης τὰ μυστήρια, ἱ ἃ εἶδε."
+     "t": "And Baruch and Abimelech were greatly grieved at this madness, and because they wanted to hear in full the mysteries which he had seen.",
+     "o": "αὐτόν. ᾿Ελυπήθησαν σφόδρα ἐπὶ τῇ ἁπονοίᾳ ταύτῃ Βαροὺχ καὶ ᾿Αβιμέλεχ, καὶ ὅτι ἤθελον ἀκοῦσαι πλήρης τὰ μυστήρια, ἱ ἃ εἶδε."
     },
     {
      "n": 23,
-     "t": "Λέγει δὲ αὐτοῖς Ἱερεμίας: Σιωπήσατε, καὶ μὴ κλαίετε:"
+     "t": "But Jeremiah said to them: Be silent, and do not weep;",
+     "o": "Λέγει δὲ αὐτοῖς Ἱερεμίας: Σιωπήσατε, καὶ μὴ κλαίετε:"
     },
     {
      "n": 24,
-     "t": "οὐ μὴ γάρ με ἀποκτείνωσιν, ἕως οὗ πάντα ὅσα εἶδον διηγή- Ὶ σ “μαι ὑμῖν."
+     "t": "for they will not kill me until I have told you all that I have seen.",
+     "o": "οὐ μὴ γάρ με ἀποκτείνωσιν, ἕως οὗ πάντα ὅσα εἶδον διηγή- Ὶ σ “μαι ὑμῖν."
     },
     {
      "n": 25,
-     "t": "Εἶπε δὲ αὐτοῖς\" “Evéyxaré μοι λίθον. Ὁ δὲ ἔστησεν αὐτὸν, καὶ εἶπε. Τὸ φῶς τῶν αἰώνων, ποίησον τὸν λίθον τοῦτον καθ᾽ ὁμοιότητά μου γενέσθαι."
+     "t": "And he said to them: Bring me a stone. And he set it up, and said: Light of the ages, make this stone take on my likeness.",
+     "o": "Εἶπε δὲ αὐτοῖς\" “Evéyxaré μοι λίθον. Ὁ δὲ ἔστησεν αὐτὸν, καὶ εἶπε. Τὸ φῶς τῶν αἰώνων, ποίησον τὸν λίθον τοῦτον καθ᾽ ὁμοιότητά μου γενέσθαι."
     },
     {
      "n": 26,
-     "t": "Ὁ δὲ λίθος ἐνέλαβεν ὁμοιότητα τοῦ ‘lepepiov."
+     "t": "And the stone took on the likeness of Jeremiah.",
+     "o": "Ὁ δὲ λίθος ἐνέλαβεν ὁμοιότητα τοῦ ‘lepepiov."
     },
     {
      "n": 27,
-     "t": "Καὶ ἐλιθοβόλουν τὸν λίθον, νομίξοντες ὅτι Ἱερεμίας ἐστίν."
+     "t": "And they stoned the stone, thinking that it was Jeremiah.",
+     "o": "Καὶ ἐλιθοβόλουν τὸν λίθον, νομίξοντες ὅτι Ἱερεμίας ἐστίν."
     },
     {
      "n": 28,
-     "t": "Ὁ δὲ [Ἱερεμίας πάντα παρέδωκε τὰ μυστήρια, ἃ εἶδε, τῷ Βαροὺχ καὶ τῷ ᾿Αβιμέλεχ."
+     "t": "But Jeremiah handed over all the mysteries that he had seen to Baruch and Abimelech.",
+     "o": "Ὁ δὲ [Ἱερεμίας πάντα παρέδωκε τὰ μυστήρια, ἃ εἶδε, τῷ Βαροὺχ καὶ τῷ ᾿Αβιμέλεχ."
     },
     {
      "n": 29,
-     "t": "Καὶ εἶθ᾽ οὕτως ἔστη ἐν μέσῳ τοῦ λαοῦ, ἐκτελέσαι βουλόμενος τὴν οἰκονομίαν αὐτοῦ."
+     "t": "And then he stood in the midst of the people, wishing to complete his stewardship.",
+     "o": "Καὶ εἶθ᾽ οὕτως ἔστη ἐν μέσῳ τοῦ λαοῦ, ἐκτελέσαι βουλόμενος τὴν οἰκονομίαν αὐτοῦ."
     },
     {
      "n": 30,
-     "t": "\"EBonce δὲ ὁ λίθος, λέγων: Ὦ μωροὶ υἱοὶ ᾿Ισραὴλ, διὰ τί; λιθοβολεῖτέ με, νομίζοντες ὅτι ἐγὼ ᾿Ιερεμίας; ᾿Ιδοὺ Ἱερεμίας ἐν μέσῳ ὑμῶν ἵσταται."
+     "t": "And the stone cried out, saying: O foolish children of Israel, why do you stone me, thinking that I am Jeremiah? Behold, Jeremiah is standing in your midst.",
+     "o": "\"EBonce δὲ ὁ λίθος, λέγων: Ὦ μωροὶ υἱοὶ ᾿Ισραὴλ, διὰ τί; λιθοβολεῖτέ με, νομίζοντες ὅτι ἐγὼ ᾿Ιερεμίας; ᾿Ιδοὺ Ἱερεμίας ἐν μέσῳ ὑμῶν ἵσταται."
     },
     {
      "n": 31,
-     "t": "Ὡς δὲ εἶδον αὐτὸν, εὐθέως ἔδραμον πρὸς αὐτὸν μετὰ πολλῶν λίθων. Καὶ ἐπληρώθη αὐτοῦ oixoνομία."
+     "t": "And when they saw him, at once they ran at him with many stones. And his stewardship was fulfilled.",
+     "o": "Ὡς δὲ εἶδον αὐτὸν, εὐθέως ἔδραμον πρὸς αὐτὸν μετὰ πολλῶν λίθων. Καὶ ἐπληρώθη αὐτοῦ oixoνομία."
     },
     {
      "n": 32,
-     "t": "Καὶ ἐλθόντες Βαροὺχ καὶ ᾿Αβιμέλεχ, ἔθαψαν αὐτὸν, καὶ λαβόντες τὸν λίθον ἔθηκαν ἐπὶ τὸ μνῆμα αὐτοῦ, ἐπιγράψαντες οὕτως Οὗτός ἐστιν ὁ λίθος ὁ βοηθὸς τοῦ Ἱερεμίου."
+     "t": "And Baruch and Abimelech came and buried him, and took the stone and placed it on his tomb, inscribing it thus: This is the stone, the helper of Jeremiah.",
+     "o": "Καὶ ἐλθόντες Βαροὺχ καὶ ᾿Αβιμέλεχ, ἔθαψαν αὐτὸν, καὶ λαβόντες τὸν λίθον ἔθηκαν ἐπὶ τὸ μνῆμα αὐτοῦ, ἐπιγράψαντες οὕτως Οὗτός ἐστιν ὁ λίθος ὁ βοηθὸς τοῦ Ἱερεμίου."
     }
    ]
   }

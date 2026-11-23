@@ -122,7 +122,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 == Changelog ==
 
 = 0.10.29 =
-* Nine more books can be read: 1 and 2 Clement, the Didache, Barnabas, 3 Corinthians, 3 and 4 Maccabees, Psalm 151, and 4 Baruch in Greek.
+* Nine more books can be read: 1 and 2 Clement, the Didache, Barnabas, 3 Corinthians, 3 and 4 Maccabees, Psalm 151, and 4 Baruch in a new translation with the Greek under each verse.
 * A Hebrew manuscripts page: 1,528 places where the Hebrew is written one way and read another.
 * The Dead Sea Scroll comparison now covers all of Isaiah.
 

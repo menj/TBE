@@ -397,6 +397,8 @@ function tbe_render_verses( array $verses, array $starts, array $covered, string
 			$boxes .= tbe_render_box( $entry, $slug, $chapter );
 		}
 		$jewish = isset( $jps[ $n ] ) ? '<span class="tbe-jps' . ( $is_poem ? ' tbe-jps--n' : '' ) . '" lang="en" data-n="' . $n . '">' . esc_html( $jps[ $n ] ) . '</span>' : '';
+		// The original-language text under a translated verse, such as the Greek of 4 Baruch.
+		$jewish .= isset( $verse['o'] ) ? '<span class="tbe-orig" lang="grc">' . esc_html( (string) $verse['o'] ) . '</span>' : '';
 		$shown  = isset( $verse['l'] ) ? esc_html( (string) $verse['l'] ) : (string) $n; // a printed reference, such as Hermas's "3[11]:2"
 		$number = '<a class="tbe-vn" href="#v' . $n . '"><span class="screen-reader-text">' . esc_html__( 'Verse', 'tbe-child' ) . ' </span>' . $shown . '</a>';
 
