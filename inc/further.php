@@ -198,11 +198,13 @@ function tbe_view_further_chapter( array $book, int $chapter ): string {
 		$out .= '<p class="tbe-further__heading">' . esc_html( (string) $book['prologue'] ) . '</p>';
 	}
 	$class = 'tbe-text' . ( tbe_setting( 'verse_numbers' ) ? '' : ' tbe-hide-numbers' );
-	$out  .= '<div class="' . esc_attr( $class ) . '" lang="en" dir="ltr">';
+	$twin  = tbe_further_parallel( $book, $chapter );
+	$out  .= ( '' !== $twin ? '<div class="tbe-twin">' : '' ) . '<div class="' . esc_attr( $class ) . '" lang="en" dir="ltr">';
 	if ( '' !== (string) ( $ch['heading'] ?? '' ) ) {
 		$out .= '<p class="tbe-further__heading">' . esc_html( (string) $ch['heading'] ) . '</p>';
 	}
 	$out .= tbe_render_verses( (array) ( $ch['verses'] ?? array() ), array(), array(), $slug, $chapter ) . '</div>';
+	$out .= '' !== $twin ? $twin . '</div>' : '';
 
 	[ $prev, $next ] = TBE_Further::neighbours( $slug, $chapter );
 	$out .= '<nav class="tbe-pager" aria-label="' . esc_attr__( 'Chapter navigation', 'tbe-child' ) . '">';
@@ -213,4 +215,24 @@ function tbe_view_further_chapter( array $book, int $chapter ): string {
 		$out .= tbe_further_credit_line( $book );
 	}
 	return $out . '</div>';
+}
+
+/**
+ * A second translation of the chapter beside the first, with its own verse numbers (4 Baruch: S. E. Robinson's),
+ * from the book's "parallel" field: title, credit and chapters keyed by number, each a list of verses.
+ */
+function tbe_further_parallel( array $book, int $chapter ): string {
+	$par    = (array) ( $book['parallel'] ?? array() );
+	$verses = (array) ( $par['chapters'][ (string) $chapter ] ?? array() );
+	if ( ! $verses ) {
+		return '';
+	}
+	$id  = 'tbe-parallel-' . $chapter;
+	$out = '<section class="tbe-parallel" lang="en" aria-labelledby="' . esc_attr( $id ) . '">'
+		. '<h2 class="tbe-parallel__title" id="' . esc_attr( $id ) . '">' . esc_html( (string) ( $par['title'] ?? '' ) ) . '</h2>'
+		. '<p class="tbe-parallel__credit">' . esc_html( (string) ( $par['credit'] ?? '' ) ) . '</p><p class="tbe-parallel__text">';
+	foreach ( $verses as $i => $text ) {
+		$out .= '<span class="tbe-parallel__v"><sup class="tbe-vn">' . ( (int) $i + 1 ) . '</sup> ' . esc_html( (string) $text ) . '</span> ';
+	}
+	return $out . '</p></section>';
 }

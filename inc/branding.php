@@ -70,16 +70,43 @@ add_action(
 
 /** Browsers ask for /favicon.ico on their own; answer with the brand icon unless a Site Icon is set. */
 function tbe_serve_favicon(): void {
-	$file = TBE_DIR . '/assets/img/brand/favicon.ico';
-	$etag = tbe_asset_version( 'assets/img/brand/favicon.ico' );
-	// While the file is missing (an upload still running), WordPress answers as it would without the theme.
+	tbe_send_brand_file( 'assets/img/brand/favicon.ico', 'image/x-icon' );
+}
+
+/**
+ * Some browsers and crawlers ask for /favicon.png as well (5 a day in the November logs, each answered with the
+ * full 404 page): answer with the brand icon, 192 pixels, unless a Site Icon is set (0.10.29).
+ *
+ * @param WP|null $wp The request.
+ */
+function tbe_serve_favicon_png( $wp = null ): void {
+	$uri  = (string) wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+	$home = rtrim( (string) parse_url( home_url( '/' ), PHP_URL_PATH ), '/' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	if ( $home . '/favicon.png' !== (string) parse_url( $uri, PHP_URL_PATH ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions
+		return;
+	}
+	tbe_send_brand_file( 'assets/img/brand/icon-192.png', 'image/png' );
+}
+add_action( 'parse_request', 'tbe_serve_favicon_png', 0 );
+
+/**
+ * Send a brand file at a fixed address with a day's cache and its hash as ETag, then stop; do nothing while a
+ * Site Icon is set or the file is missing (an upload still running), so WordPress answers as it would without
+ * the theme.
+ *
+ * @param string $rel  The file, relative to the theme.
+ * @param string $type Its media type.
+ */
+function tbe_send_brand_file( string $rel, string $type ): void {
+	$file = TBE_DIR . '/' . $rel;
+	$etag = tbe_asset_version( $rel );
 	if ( has_site_icon() || null === $etag ) {
 		return;
 	}
 	// Browsers ask for /favicon.ico at a fixed address, so it cannot carry a version: a day's cache, then a
 	// check against the file's hash, which answers 304 while it is unchanged and sends a changed icon at once.
 	$etag = '"' . $etag . '"';
-	header( 'Content-Type: image/x-icon' );
+	header( 'Content-Type: ' . $type );
 	header( 'Cache-Control: public, max-age=86400' );
 	header( 'ETag: ' . $etag );
 	// If-None-Match may list several validators, weak ones (W/"...") or *.

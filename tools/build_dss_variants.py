@@ -12,7 +12,9 @@ scroll adds or leaves out, a different form) or a "spelling" difference (the sam
 vowel letters, a lengthened pronoun, a different word division). The page shows meaning differences by default
 and spelling differences on request.
 """
-import argparse, difflib, json, os, re
+import argparse, difflib, json, os, re, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 POINTS = re.compile(r"[֑-ׇ]")
@@ -54,6 +56,48 @@ def mt_words(path, verse):
     return out
 
 
+def raw_api(tfdir):
+    """Enough of Text-Fabric's F and L for this script, read straight from the .tf files."""
+    import bisect, types
+    from build_sp_variants import read_feature, slots
+    ranges = {}
+    for line in open(os.path.join(tfdir, "otype.tf"), encoding="utf8"):
+        if "\t" in line and not line.startswith("@"):
+            spec, kind = line.rstrip("\n").split("\t")
+            a, _, b = spec.partition("-")
+            ranges[kind] = (int(a), int(b or a))
+    oslots = read_feature(os.path.join(tfdir, "oslots.tf"))
+    cache = {}
+
+    def feature(name):
+        if name not in cache:
+            data = read_feature(os.path.join(tfdir, name + ".tf"))
+            cache[name] = types.SimpleNamespace(v=lambda n, d=data: d.get(n))
+        return cache[name]
+
+    def kind_nodes(kind):
+        lo, hi = ranges[kind]
+        return range(lo, hi + 1)
+
+    words_by_first = sorted((slots(oslots[w])[0], w) for w in kind_nodes("word"))
+    firsts = [f for f, _ in words_by_first]
+
+    def down(node, otype):
+        if otype == "sign":
+            return slots(oslots[node])
+        sl = slots(oslots[node])
+        i, j = bisect.bisect_left(firsts, sl[0]), bisect.bisect_right(firsts, sl[-1])
+        return [w for _, w in words_by_first[i:j]]
+
+    class _F:
+        def __getattr__(self, name):
+            if name == "otype":
+                return types.SimpleNamespace(s=kind_nodes)
+            return feature(name)
+
+    return _F(), types.SimpleNamespace(d=down)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tf", required=True)
@@ -65,9 +109,12 @@ def main():
     args = ap.parse_args()
     lo, hi = [int(x) for x in args.chapters.split("-")] if "-" in args.chapters else (int(args.chapters),) * 2
 
-    from tf.fabric import Fabric
-    api = Fabric(locations=args.tf, silent="deep").loadAll(silent="deep")
-    F, L = api.F, api.L
+    try:
+        from tf.fabric import Fabric
+        api = Fabric(locations=args.tf, silent="deep").loadAll(silent="deep")
+        F, L = api.F, api.L
+    except ImportError:  # no Text-Fabric library: read the .tf files directly (0.10.29)
+        F, L = raw_api(args.tf)
 
     scroll = next(s for s in F.otype.s("scroll") if F.scroll.v(s) == args.scroll)
 

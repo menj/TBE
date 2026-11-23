@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.28
+Stable tag: 0.10.29
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -22,7 +22,7 @@ What a visitor gets:
 * Commentary boxes under the verses they discuss, with footnotes that pop up on hover.
 * A glossary, an index of the commentary and a passage search.
 * Recorded readings of Genesis 1 (Hebrew) and Matthew 1 (Greek), with each word lit as it is read.
-* A Christian and Jewish side-by-side view for Genesis (ESV and JPS 1917), and Dead Sea Scroll readings for Isaiah 1 to 5.
+* A Christian and Jewish side-by-side view for Genesis to Deuteronomy (ESV and JPS 1917), and Dead Sea Scroll readings for the whole of Isaiah.
 * A lexicon at /lexicon/: every Hebrew and Greek word by its Strong's number, with its meaning, how often it is used and where, and Metzger's list of Greek words by how often they occur. Each Strong's number on the word-by-word pages opens its entry.
 * A Manuscripts section at /manuscripts/: twenty-two places where the Greek manuscripts disagree, most of them passages that the King James Version prints and the earliest Greek manuscripts leave out, such as the long ending of Mark and the woman caught in adultery, with each manuscript's own words line by line.
 * Three colour schemes, or your own colours. The site is light only.
@@ -110,7 +110,7 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * The Hebrew and Greek word-by-word data is from STEPBible (www.STEPBible.org), CC BY 4.0, based on work at Tyndale House Cambridge.
 * The JPS 1917 translation is in the public domain and comes through Sefaria.
 * The Dead Sea Scroll comparison is built from the CACCHT project's data (ETCBC, after Martin Abegg), CC BY-NC 4.0.
-* The Manuscripts pages are built from the transcriptions of the early Greek manuscripts by Alan Bunning and the Center for New Testament Restoration, CC BY-SA 4.0, and share that licence. Their English wording is from the public-domain KJV, World English Bible and Berean Standard Bible. The lexicon's definitions are from STEP Bible's brief lexicons (CC BY 4.0), and its Greek frequency list from Bruce M. Metzger's Lexical Aids for Students of New Testament Greek. The manuscript photographs come from Wikimedia Commons, each credited under the picture. The evidence of later manuscripts comes from the United Bible Societies Greek New Testament and from Reuben J. Swanson's New Testament Greek Manuscripts: Matthew, used by the owner's permission.
+* The Manuscripts pages are built from the transcriptions of the early Greek manuscripts by Alan Bunning and the Center for New Testament Restoration, CC BY-SA 4.0, and share that licence. Their English wording is from the public-domain KJV, World English Bible and Berean Standard Bible. The lexicon's definitions are from STEP Bible's brief lexicons (CC BY 4.0), and its Greek frequency list from Bruce M. Metzger's Lexical Aids for Students of New Testament Greek. The manuscript photographs come from Wikimedia Commons, each credited under the picture. The evidence of later manuscripts comes from the United Bible Societies Greek New Testament and from Reuben J. Swanson's New Testament Greek Manuscripts: Matthew, used by the owner's permission. 1 and 2 Clement, the Didache and Barnabas (J. B. Lightfoot), 3 Corinthians (M. R. James) and 3 and 4 Maccabees and Psalm 151 (Brenton, 1844) are public-domain translations.
 * The text of 1, 2 and 3 Meqabyan is the English translation from Ge'ez made by Wikisource contributors, CC BY-SA 4.0, and shares that licence. 1 Enoch (Richard Laurence, 1883), Jubilees (R. H. Charles, 1902), the Shepherd of Hermas (J. B. Lightfoot, 1891) and the Greek Apocalypse of Peter (Andrew Rutherfurd, 1896) are public-domain translations. The Ethiopic Apocalypse of Peter is J. K. Elliott's translation as printed in Bart D. Ehrman's Lost Scriptures (Oxford University Press, 2003), used by the owner's permission.
 * The deuterocanonical books and Ezra Sutu'el are the King James Version with the Apocrypha (1769), public domain, from eBible.org.
 * The Brown-Driver-Briggs articles are the 1906 Clarendon Press lexicon (public domain), as set out in the Enhanced Brown-Driver-Briggs pages at ericlevy.com.
@@ -120,6 +120,11 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * Print styles: after the Hartija CSS Print Framework by Vladimir Carrer, MIT.
 
 == Changelog ==
+
+= 0.10.29 =
+* Nine more books can be read: 1 and 2 Clement, the Didache, Barnabas, 3 Corinthians, 3 and 4 Maccabees, Psalm 151, and 4 Baruch in a new translation with the Greek under each verse and S. E. Robinson's translation beside it.
+* A Hebrew manuscripts page: 1,528 places where the Hebrew is written one way and read another.
+* The Dead Sea Scroll comparison now covers all of Isaiah.
 
 = 0.10.28 =
 * A "Which Bible?" page at /which-bible/, with a graphic to share: how many books each church counts, which text, which verses, and which books were dropped, each point linked to its evidence.
@@ -211,6 +216,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.29 =
+Nothing to do by hand.
 
 = 0.10.28 =
 Nothing to do by hand: the theme refreshes its addresses itself when its version changes.

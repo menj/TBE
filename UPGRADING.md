@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.29
+Nothing to do by hand.
+
 ### To 0.10.28
 Nothing to do by hand: the theme flushes its rewrite rules when `TBE_VERSION` changes, so `/which-bible/` answers at once. The graphic is in the theme at `assets/img/which-bible.png`; to change it, edit `tools/build_which_bible_graphic.js` and run it with Node.
 
@@ -135,22 +138,17 @@ Nothing to do. The new documents (`readme.txt`, `SSOT.md`, this file) ship in th
 These are plans, not promises. An item leaves this list when it ships, and CHANGELOG.md records it.
 
 ### Next
-- Interlinear page: reserve space for the word grid (layout shift 0.054 at 375 px) and lift the contrast of the highlighted word. Why: the 0.10.21 mobile audit found both; they touch the design, so they wait for the owner.
 - Untick "Discourage search engines" on the live site. Why: thebible.exposed serves `noindex, nofollow` on its home page and a 67-byte `robots.txt` (checked 5 November 2026), so nothing is indexed. This is the owner's step; the theme only reminds.
-- Answer credential-file probes with the short 404. Why: the November logs show `/google-credentials.json`, `/sa.json`, `/key.json`, `/google-key.json`, `/gcp-key.json`, `/gcp-sa.json`, `/firebase-key.json` and `/firebase-adminsdk.json` (4 or 5 requests each) and `/info` (12) still rendering the 74 KB theme 404.
-- Serve `/favicon.png` from the brand icon, as `/favicon.ico` is. Why: 5 requests in the logs got the full 404 page.
 - Test the Nginx lines in README.md on a real Nginx. Why: they are written from the Apache rules and marked untested.
 - Settle the Qur'an cross-references. Why: the owner's rule that nothing Islamic goes on the site for now (restated 7 November 2026) meets references still shown on entry pages, in the reader, in the structured data and in link tips, and SSOT.md still calls the position "Islamic-leaning". The owner decides whether the public pages hide them; the admin field keeps what is saved.
-- A Hebrew page in the manuscripts section. Why: 0.10.18 covers the Greek New Testament only, while the interlinear data records about 1,500 Hebrew written-and-read (ketiv and qere) places and the Dead Sea Scrolls comparison has Isaiah 1 to 5.
 - More passages in the manuscripts section, and a per-book table of every place the editions differ. Why: 0.10.18 has twenty-two passages; the interlinear data records about 4,100 Greek words outside NA28 and about 3,850 variant readings, and `tools/build_manuscripts.py` takes a new passage in one line.
 
 ### Later
 - More recorded readings. Why: only Genesis 1 (Hebrew) and Matthew 1 (Greek) have audio; `tools/align_audio.py` is ready for more, but each needs a recording with a licence, which the owner supplies.
-- Isaiah 6 to 66 in the Dead Sea Scrolls comparison, then other scrolls. Why: only Isaiah 1 to 5 is compared; `tools/build_dss_variants.py` takes a chapter range, and each batch needs its spelling differences spot-checked.
-- The JPS 1917 parallel beyond Genesis. Why: `tools/fetch_jps.py --books` adds a book at a time, and each needs its versification checked against `data/jps-versification.json`.
-- The deuterocanonical, further Orthodox and remaining Ethiopian books. Why: 1 to 3 Meqabyan are readable since 0.10.26; the others are still listed as "Not on the site yet", and the Ethiopian list is still to be confirmed. Each needs a text with a licence; `inc/further.php` takes one as a JSON file.
-- A proofreading of 1 Enoch and Jubilees against the page images. Why: both are read from OCR. In 1 Enoch the scan lost the headings of chapters 36, 64, 65 and 101, and a few of Laurence's footnotes may remain in the text.
-- A proofreading of Jubilees against the page images. Why: it is read from OCR; about twenty verse numbers the scan lost are listed by `tools/build_jubilees.py`, and spelling slips may remain.
+- Other scrolls in the Dead Sea Scrolls comparison (1QIsa-b, the Psalms Scroll, the Qumran Deuteronomy and Samuel scrolls). Why: Isaiah is compared with 1QIsa-a whole since 0.10.29; `tools/build_dss_variants.py --scroll` takes any scroll, and each needs its spelling differences spot-checked.
+- The JPS 1917 parallel beyond the Torah. Why: Genesis to Deuteronomy have it since 0.10.29; `tools/fetch_jps.py --books` adds a book at a time and `tools/build_jps_versification.py` maps its verse numbers, but Psalms (the titles are verse 1 in Hebrew) and Joel and Malachi need checking by eye.
+- Zëna Ayhud and the Ethiopian New Testament church books (Sinodos, the Book of the Covenant, Ethiopic Clement, the Ethiopic Didascalia). Why: they are the books of the prepared sections still marked "Not on the site yet"; the Ethiopic church books need a source.
+- A proofreading of 1 Enoch, Jubilees and the Greek of 4 Baruch against the page images. Why: all three are read from OCR; in 4 Baruch nine places where the scan lost a margin number hold two verses (labelled "6–7"). In 1 Enoch a few of Laurence's footnotes may remain in the text.
 - A check of 1 to 3 Meqabyan against a printed translation. Why: the Wikisource translation is a working one, its wording is uneven (1 Meqabyan reads "JAH", "irie" and "I-man"), it lacks 2 Meqabyan 16:9 and 21:9, and its pages were proposed for deletion in November 2026.
 - The Ge'ez texts of the Ethiopian books. Why: the Ge'ez font is bundled and unused, and the texts need a licensed source. The owner asks the Ethiopian Orthodox Tewahedo Church first, since its permission so far covers names and notes from its site.
 - The Greek Old Testament manuscripts in the Freer collection (Deuteronomy, Joshua, Psalms). Why: Henry A. Sanders, "The Old Testament Manuscripts in the Freer Collection" (University of Michigan, 1917, public domain) describes and collates them, but the scanned copy's Greek text is too poorly read by machine to use without checking by hand. Its plates are public domain too.

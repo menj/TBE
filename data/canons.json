@@ -177,7 +177,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": ""
     },
     {
@@ -199,7 +199,7 @@
       "orthodox"
      ],
      "language": "Greek; Hebrew at Qumran",
-     "status": "planned",
+     "status": "available",
      "note": "The Ethiopian Orthodox church is said to accept the Orthodox additional books except the Maccabees."
     },
     {
@@ -209,7 +209,7 @@
       "orthodox"
      ],
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "An appendix in some editions."
     }
    ]
@@ -293,8 +293,8 @@
       "ethiopian"
      ],
      "language": "Greek and Ge'ez",
-     "status": "planned",
-     "note": "In the Ethiopian canon it is part of Säqoqawä Eremyas."
+     "status": "available",
+     "note": "In the Ethiopian canon it is part of Säqoqawä Eremyas. The site gives J. Rendel Harris's Greek text (1889), read by machine and not yet proofread."
     },
     {
      "slug": "zena-ayhud",
@@ -371,7 +371,7 @@
      "traditions": [],
      "badge": "Once read as scripture",
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "Written about the end of the first century. In Codex Alexandrinus, and listed as canonical in Canon 85 of the Apostolic Canons."
     },
     {
@@ -380,7 +380,7 @@
      "traditions": [],
      "badge": "Once read as scripture",
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "A sermon of the second century. In Codex Alexandrinus, and listed with 1 Clement in Canon 85 of the Apostolic Canons."
     },
     {
@@ -389,7 +389,7 @@
      "traditions": [],
      "badge": "Once read as scripture",
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "A church manual of the first or second century; the dating is debated. Treated as scriptural by some early church writers; preserved in Codex Hierosolymitanus."
     },
     {
@@ -398,7 +398,7 @@
      "traditions": [],
      "badge": "Once read as scripture",
      "language": "Greek",
-     "status": "planned",
+     "status": "available",
      "note": "Written between the late first and the early second century. In Codex Sinaiticus; also in the lists of Codex Claromontanus and Codex Hierosolymitanus."
     },
     {
@@ -425,7 +425,7 @@
      "traditions": [],
      "badge": "Once read as scripture",
      "language": "Greek, Syriac, Armenian",
-     "status": "planned",
+     "status": "available",
      "note": "A second-century letter. Aphrahat and Ephraem treated it as canonical in the Syriac church; it was once part of the Armenian Bible."
     },
     {

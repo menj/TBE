@@ -127,6 +127,10 @@ function tbe_font_face_css( array $keys, string $q = '"' ): string {
 			continue;
 		}
 		$css .= '@font-face{font-family:' . $q . $family . $q . ';src:url(' . $q . esc_url( $url ) . $q . ') format(' . $q . 'woff2' . $q . ');font-weight:normal;font-style:normal;font-display:swap' . ( '' !== $range ? ';unicode-range:' . $range : '' ) . '}';
+		if ( 'montserrat' === $key ) {
+			// Until Montserrat arrives, Arial scaled to its measurements stands in, so the swap moves nothing (0.10.29).
+			$css .= '@font-face{font-family:' . $q . 'Montserrat Fallback' . $q . ';src:local(' . $q . 'Arial' . $q . '),local(' . $q . 'Helvetica' . $q . '),local(' . $q . 'Liberation Sans' . $q . ');size-adjust:112.83%;ascent-override:85.79%;descent-override:22.25%;line-gap-override:0%}';
+		}
 	}
 	return $css;
 }
@@ -265,6 +269,9 @@ add_action(
 		if ( tbe_request() ) {
 			echo tbe_font_preload( 'assets/fonts/SBL_BLit.woff2' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in tbe_font_preload().
 		}
+		// The interface font sets every toolbar and button; fetched late, it re-wrapped the reading toolbar and
+		// moved the page (layout shift 0.061 on the interlinear at 375 px). Fetch it first on every page (0.10.29).
+		echo tbe_font_preload( 'assets/fonts/Montserrat-Regular.woff2' ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in tbe_font_preload().
 	},
 	1
 );

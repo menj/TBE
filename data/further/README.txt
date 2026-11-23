@@ -48,3 +48,14 @@ esther-additions.json, daniel-additions.json, 1-esdras.json, prayer-of-manasseh.
 laodiceans.json
   The Epistle to the Laodiceans in M. R. James's translation (The Apocryphal New Testament, 1924), supplied by the
   site owner; built by tools/build_laodiceans.py. James's introduction is the chapter heading.
+
+1-clement.json, 2-clement.json, didache.json, barnabas.json
+  J. B. Lightfoot's translations (The Apostolic Fathers, 1891), public domain, from earlychristianwritings.com;
+  built by tools/build_apostolic.py.
+
+3-corinthians.json
+  M. R. James's translation (The Apocryphal New Testament, 1924), the Acts of Paul, part VII, from
+  earlychristianwritings.com; built by tools/build_3corinthians.py.
+
+3-maccabees.json, 4-maccabees.json, psalm-151.json
+  Brenton's English Septuagint (1844), public domain, from eBible.org; built by tools/build_brenton.py.

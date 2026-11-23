@@ -18,6 +18,7 @@ add_action(
 		add_rewrite_rule( '^lexicon/(greek|hebrew)/([a-z]+)/?$', 'index.php?tbe_view=lexicon-letter&tbe_lang=$matches[1]&tbe_ms=$matches[2]', 'top' );
 		add_rewrite_rule( '^lexicon/([gh][0-9]{1,4})/?$', 'index.php?tbe_view=lexicon-entry&tbe_ms=$matches[1]', 'top' );
 		add_rewrite_rule( '^manuscripts/?$', 'index.php?tbe_view=manuscripts', 'top' );
+		add_rewrite_rule( '^manuscripts/hebrew/?$', 'index.php?tbe_view=manuscripts-hebrew', 'top' );
 		add_rewrite_rule( '^manuscripts/([a-z0-9-]+)/?$', 'index.php?tbe_view=manuscript&tbe_ms=$matches[1]', 'top' );
 		add_rewrite_rule( '^sources/?$', 'index.php?tbe_view=credits', 'top' );
 		add_rewrite_rule( '^which-bible/?$', 'index.php?tbe_view=which-bible', 'top' );
@@ -47,7 +48,7 @@ function tbe_request(): ?array {
 	if ( '' === $view ) {
 		return $request = null;
 	}
-	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view || 'credits' === $view || 'which-bible' === $view || 'manuscripts' === $view || 'lexicon' === $view || 'lexicon-frequency' === $view ) {
+	if ( 'books' === $view || 'index' === $view || 'interlinear-index' === $view || 'credits' === $view || 'which-bible' === $view || 'manuscripts' === $view || 'manuscripts-hebrew' === $view || 'lexicon' === $view || 'lexicon-frequency' === $view ) {
 		return $request = array( 'view' => $view );
 	}
 	if ( 'lexicon-entry' === $view ) {
@@ -195,6 +196,9 @@ add_filter(
 				break;
 			case 'interlinear-index':
 				$parts['title'] = __( 'Interlinear', 'tbe-child' );
+				break;
+			case 'manuscripts-hebrew':
+				$parts['title'] = __( 'Hebrew: written one way, read another', 'tbe-child' );
 				break;
 			case 'which-bible':
 				$parts['title'] = __( 'Which Bible?', 'tbe-child' );

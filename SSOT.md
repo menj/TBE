@@ -47,8 +47,8 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The Hebrew Old Testament and the Greek New Testament, word by word, come from STEPBible (CC BY 4.0) in `data/interlinear/`.
 - Recorded readings: Genesis 1 (Hebrew) and Matthew 1 (Greek) only.
 - Samaritan Pentateuch comparison: Genesis to Deuteronomy against the Masoretic text, `data/sp/`, from the CACCHT dataset of Stefan Schorch's edition (CC BY-NC 4.0). That data and the pages built from it stay under CC BY-NC 4.0.
-- Dead Sea Scrolls comparison: Isaiah 1 to 5 against 1QIsa-a only. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
-- JPS 1917 parallel text: Genesis only (`data/jps/`).
+- Dead Sea Scrolls comparison: all of Isaiah (66 chapters) against 1QIsa-a. Hebrew written and read: 1,528 places in `data/manuscripts/hebrew.json`, at `/manuscripts/hebrew/`. The CACCHT source data (CC BY-NC 4.0) is never stored in the theme, only the comparison in `data/dss/`.
+- JPS 1917 parallel text: Genesis to Deuteronomy (`data/jps/`), with the verse-number differences in `data/jps-versification.json` (built by `tools/build_jps_versification.py`).
 - Brown-Driver-Briggs (1906, public domain) for the Hebrew lexicon pages in `data/lexicon/bdb/`, from the Enhanced BDB pages at ericlevy.com.
 - Lexicon: every Hebrew and Greek Strong's number in `data/lexicon/`, from STEPBible's TBESG and TBESH (CC BY 4.0), and Metzger's frequency list in `data/lexicon/metzger.json`.
 - Manuscripts evidence from the printed apparatuses: `data/manuscripts/editions.json` (UBS for all twenty-two passages, Swanson for the four in Matthew) with page images in `assets/img/manuscripts/books/`.
@@ -57,7 +57,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Glossary: 13 starter terms, created as drafts (`tbe_seed_terms()`).
 - Canons in `data/canons.json`: Jewish, Protestant, Catholic, Orthodox and Ethiopian. The deuterocanonical, further Orthodox and Ethiopian books are prepared sections marked "Not on the site yet", except 1 to 3 Meqabyan.
 - Further books from the KJV Apocrypha (public domain): Tobit, Judith, Wisdom, Sirach, Baruch, 1 and 2 Maccabees, the Additions to Esther and to Daniel, 1 Esdras, the Prayer of Manasseh and Ezra Sutu'el (2 Esdras 3 to 14).
-- Further books: 1, 2 and 3 Meqabyan (7, 21 and 10 chapters) in `data/further/`, the Wikisource translation from Ge'ez (CC BY-SA 4.0). Those files and the pages built from them stay under CC BY-SA 4.0, whatever the theme's licence. 1 Enoch (105 chapters, Richard Laurence 1883), Jubilees (50 chapters, R. H. Charles 1902), the Shepherd of Hermas (27 parts, J. B. Lightfoot) and the Apocalypse of Peter (Andrew Rutherfurd) are public domain. The Ethiopian list is still to be confirmed.
+- Further books: 1, 2 and 3 Meqabyan (7, 21 and 10 chapters) in `data/further/`, the Wikisource translation from Ge'ez (CC BY-SA 4.0). Those files and the pages built from them stay under CC BY-SA 4.0, whatever the theme's licence. 1 Enoch (105 chapters, Richard Laurence 1883), Jubilees (50 chapters, R. H. Charles 1902), the Shepherd of Hermas (27 parts, J. B. Lightfoot) and the Apocalypse of Peter (Andrew Rutherfurd) are public domain, as is J. Rendel Harris's Greek of 4 Baruch (1889, 9 chapters, unproofread OCR), which the site translates itself; a verse's `o` field holds the Greek, shown under the English. Its `parallel` field holds S. E. Robinson's translation (Charlesworth, 1985; licensed by the owner), shown beside the chapter by `tbe_further_parallel()`. The Ethiopian list is still to be confirmed.
 - The brand mark is a broken inverted cross. It follows Sahih al-Bukhari 2476, cited on the Sources page.
 
 ## Addresses
@@ -96,6 +96,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
 - M. R. James as translator of the Epistle to the Laodiceans, on the book.
 - J. K. Elliott as translator and Bart D. Ehrman's *Lost Scriptures* (Oxford University Press) as the source of the Ethiopic Apocalypse of Peter, on the Sources page and on the book.
+- Sir Lancelot Brenton (3 and 4 Maccabees, Psalm 151) and earlychristianwritings.com (the transcription of Lightfoot's Apostolic Fathers and James's Acts of Paul), on the Sources page and on each book.
 - Richard Laurence, R. H. Charles, J. B. Lightfoot and Andrew Rutherfurd as translators of Jubilees, Hermas and the Apocalypse of Peter, on the Sources page and on each book.
 - Wikisource contributors for the 1 to 3 Meqabyan translation, with the CC BY-SA 4.0 licence and a link to each page, on the Sources page and on every page of those books. The licence requires it.
 - The licences in `assets/fonts/` for SBL, Angel, Noto Naskh Arabic, Abyssinica SIL and Montserrat, and the Angel credit with its link on the Sources page.

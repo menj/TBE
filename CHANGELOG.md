@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.10.29
+
+Nine more books beyond the 66: eight in public-domain translations and 4 Baruch in the site's own translation. Nothing removed, nothing renamed.
+
+### Added
+- 1 Clement, 2 Clement, the Didache and the Epistle of Barnabas in J. B. Lightfoot's translations (The Apostolic Fathers, 1891), from the transcriptions on earlychristianwritings.com (`tools/build_apostolic.py`). 1 Clement's greeting is the heading of its first chapter.
+- 3 Corinthians from the Acts of Paul in M. R. James's translation (1924): the Corinthians' letter, the deacons bringing it, and Paul's reply, as three titled chapters (`tools/build_3corinthians.py`).
+- 3 Maccabees, 4 Maccabees and Psalm 151 in Brenton's English Septuagint (1844), from eBible.org (`tools/build_brenton.py`).
+- 4 Baruch (The Rest of the Words of Baruch) in the site's own English translation, verse by verse, from J. Rendel Harris's Greek text (Cambridge, 1889), with the Greek under each verse; no public-domain English translation was found. The Greek is read from the scan with Tesseract and not yet proofread (`tools/build_4baruch.py`, `tools/4baruch_en.json`). A verse may now carry its original-language text as `o`, shown under the verse (`.tbe-orig`).
+- S. E. Robinson's translation of 4 Baruch (in Charlesworth, The Old Testament Pseudepigrapha, 1985, supplied by the owner under licence) beside the site's, with his own verse numbers: side by side on wide screens, below on narrow ones. A further book's `parallel` field holds a second translation (`tbe_further_parallel()`, `tools/4baruch_robinson.json`).
+- The book list links all nine; `tools/test_further.php` checks them.
+- `/manuscripts/hebrew/`: the 1,528 places where the Hebrew Bible is written one way and read another (ketiv and qere, 1,323), or where a word is restored from other manuscripts, found only in some copies, or read otherwise in another edition, book by book with each place linked to its interlinear verse; 815 of them change the meaning. Genesis 18:22, a "correction of the scribes", is shown first. Built from the interlinear's own notes by `tools/build_hebrew_variants.py` into `data/manuscripts/hebrew.json`; the manuscripts index links it.
+- The Dead Sea Scrolls comparison covers the whole of Isaiah: the Great Isaiah Scroll against all 66 chapters (1,227 differences of meaning, 3,798 of spelling), among them "he shall see light" at 53:11. `tools/build_dss_variants.py` now reads the dataset's files directly when the Text-Fabric library is not installed, and gives the same output for Isaiah 1 to 5 as before.
+- The Christian and Jewish side-by-side view (ESV and JPS 1917) covers Exodus, Leviticus, Numbers and Deuteronomy as well as Genesis. `tools/build_jps_versification.py` writes where the verse numbers differ (Exodus 8:1 is the Hebrew 7:26, Numbers 16:36 the Hebrew 17:1, and so on); in the Ten Commandments the Hebrew makes one verse of "Thou shalt not murder" to "false witness", so the English verses after the first show no separate Jewish verse (`""` in the rules, read by `TBE_Bible::jps()`).
+- `/favicon.png` is answered with the brand icon (192 pixels), as `/favicon.ico` already was, unless a Site Icon is set (`tbe_serve_favicon_png()`, `tbe_send_brand_file()` in `inc/branding.php`).
+
+### Fixed
+- 1 Enoch: chapters LXIV and LXV have their own text again (the OCR had read their headings as "CHAR LXIV." and "CEAP. LXV."), and the pages for XXXVI and CI quote Laurence's notes that his manuscripts have no such chapters.
+
+### Changed
+- Cloud credential files a scanner asks for (`/google-credentials.json`, `/sa.json`, `/key.json`, `/gcp-key.json`, `/firebase-adminsdk.json`, `/service-account.json`, `secrets.yaml` and the like) get the short plain 404, and so does a bare `/info` unless the site has a page there. A real file at such an address is still served.
+- The interface font (Montserrat) is preloaded on every page, and until it arrives a size-matched Arial ("Montserrat Fallback") stands in, so the swap no longer re-wraps the reading toolbar. The live interlinear at 375 pixels measured a layout shift of 0.061 from the toolbar's text; the colour-contrast failure the 0.10.21 audit listed there is gone (axe finds none).
+
+
 ## 0.10.28
 
 "Which Bible?": one page and one graphic that set out, from the site's own data, how far "the Bible" is from being one book. Nothing removed, nothing renamed.

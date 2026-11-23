@@ -1,0 +1,57 @@
+{
+ "slug": "psalm-151",
+ "name": "Psalm 151",
+ "language": "Greek",
+ "translation": "Brenton, 1844",
+ "source": {
+  "title": "Brenton's English Septuagint (eBible.org)",
+  "url": "https://ebible.org/eng-Brenton/",
+  "credit": "The translation from the Greek Septuagint by Sir Lancelot C. L. Brenton (London: Samuel Bagster and Sons, 1844)",
+  "short": "Brenton, 1844",
+  "note": "",
+  "licence": "Public domain",
+  "licence_url": "",
+  "translator": {
+   "type": "Person",
+   "name": "Lancelot C. L. Brenton",
+   "url": "https://en.wikipedia.org/wiki/Lancelot_Charles_Lee_Brenton"
+  }
+ },
+ "chapters": [
+  {
+   "n": 1,
+   "heading": "",
+   "verses": [
+    {
+     "n": 1,
+     "t": "This Psalm is a genuine one of David, though supernumerary, composed when he fought in single combat with Goliad. I was small among my brethren, and youngest in my father's house: I tended my father's sheep."
+    },
+    {
+     "n": 2,
+     "t": "My hands formed a musical instrument, and my fingers tuned a psaltery."
+    },
+    {
+     "n": 3,
+     "t": "And who shall tell my Lord? the Lord himself, he himself hears."
+    },
+    {
+     "n": 4,
+     "t": "He sent forth his angel, and took me from my father's sheep, and he anointed me with the oil of his anointing."
+    },
+    {
+     "n": 5,
+     "t": "My brothers were handsome and tall; but the Lord did not take pleasure in them."
+    },
+    {
+     "n": 6,
+     "t": "I went forth to meet the Philistine; and he cursed me by his idols."
+    },
+    {
+     "n": 7,
+     "t": "But I drew his own sword, and beheaded him, and removed reproach from the children of Israel."
+    }
+   ],
+   "title": "Psalm 151"
+  }
+ ]
+}

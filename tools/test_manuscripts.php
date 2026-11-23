@@ -113,5 +113,16 @@ $functions = (string) file_get_contents( TBE_DIR . '/functions.php' ); // phpcs:
 check( false !== strpos( $functions, "'manuscripts'" ), 'functions.php loads inc/manuscripts.php' );
 check( is_readable( TBE_DIR . '/data/manuscripts/README.txt' ), 'the data folder says where the data comes from' );
 
+// The Hebrew page (0.10.29): written one way, read another.
+function number_format_i18n( $n ) { return number_format( (float) $n ); }
+final class TBE_Interlinear { public static function url( string $s, int $c ): string { return home_url( "/bible/$s/$c/interlinear/" ); } } // phpcs:ignore
+$he = tbe_hebrew_variants();
+check( count( $he ) > 1500 && count( array_filter( $he, static fn( $i ) => 'Q' === $i['k'] ) ) > 1300, 'the Hebrew variants read (' . count( $he ) . ')' );
+$gen = array_values( array_filter( $he, static fn( $i ) => 'genesis' === $i['b'] && 18 === $i['c'] && 22 === $i['v'] ) );
+check( $gen && 'אַבְרָהָם' === $gen[1]['ohe'], 'Genesis 18:22: the other edition reads Abraham where the text has the LORD' );
+$page = tbe_view_manuscripts_hebrew();
+check( false !== strpos( $page, 'Written one way, read another' ) && false !== strpos( $page, '/bible/genesis/18/interlinear/#v22' ) && false !== strpos( $page, 'CC BY 4.0' ), 'the Hebrew page renders with its example and credit' );
+check( false !== strpos( (string) file_get_contents( TBE_DIR . '/inc/routes.php' ), "'^manuscripts/hebrew/?$'" ), 'the route answers /manuscripts/hebrew/ before the passages' );
+
 echo $fail ? "\n$fail failed\n" : "\nall passed\n";
 exit( $fail ? 1 : 0 );
