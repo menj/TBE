@@ -198,7 +198,7 @@ function tbe_view_further_chapter( array $book, int $chapter ): string {
 		$out .= '<p class="tbe-further__heading">' . esc_html( (string) $book['prologue'] ) . '</p>';
 	}
 	$class = 'tbe-text' . ( tbe_setting( 'verse_numbers' ) ? '' : ' tbe-hide-numbers' );
-	$out  .= '<div class="' . esc_attr( $class ) . '" lang="en" dir="ltr">';
+	$out  .= '<div class="' . esc_attr( $class ) . '" lang="' . esc_attr( preg_match( '/^[a-z]{2,3}$/', (string) ( $book['text_lang'] ?? '' ) ) ? (string) $book['text_lang'] : 'en' ) . '" dir="ltr">';
 	if ( '' !== (string) ( $ch['heading'] ?? '' ) ) {
 		$out .= '<p class="tbe-further__heading">' . esc_html( (string) $ch['heading'] ) . '</p>';
 	}
