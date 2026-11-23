@@ -164,19 +164,30 @@
 			applyLayout( layoutButton, 'flow' === load( KEYS.layout ) );
 		}
 
-		// Print and "Save as PDF" (0.10.27): every note prints open, then each goes back as it was.
-		var reopened = [];
+		// Print and "Save as PDF" (0.10.27): every note prints open, then each goes back as it was. A note in a
+		// named group (<details name>) closes its siblings when it opens, so the group name is set aside while
+		// printing, and every note's own state is put back afterwards.
+		var saved = [];
 		window.addEventListener( 'beforeprint', function () {
-			document.querySelectorAll( 'details:not([open])' ).forEach( function ( box ) {
-				box.open = true;
-				reopened.push( box );
+			saved = [];
+			document.querySelectorAll( 'details' ).forEach( function ( box ) {
+				saved.push( { box: box, open: box.open, name: box.getAttribute( 'name' ) } );
+			} );
+			saved.forEach( function ( s ) {
+				if ( null !== s.name ) {
+					s.box.removeAttribute( 'name' );
+				}
+				s.box.open = true;
 			} );
 		} );
 		window.addEventListener( 'afterprint', function () {
-			reopened.forEach( function ( box ) {
-				box.open = false;
+			saved.forEach( function ( s ) {
+				s.box.open = s.open;
+				if ( null !== s.name ) {
+					s.box.setAttribute( 'name', s.name );
+				}
 			} );
-			reopened = [];
+			saved = [];
 		} );
 
 		document.addEventListener( 'click', function ( event ) {

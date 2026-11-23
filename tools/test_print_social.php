@@ -37,7 +37,7 @@ check( array( 'x', 'facebook', 'instagram', 'youtube', 'tiktok', 'telegram', 'wh
 $bad = array();
 foreach ( glob( TBE_DIR . '/assets/img/social/*.svg' ) as $f ) {
 	$svg = (string) file_get_contents( $f ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-	if ( preg_match( '/<script|\son\w+=|javascript:|<foreignObject/i', $svg ) || ! preg_match( '/viewBox="0 0 \d+ \d+"/', $svg ) ) {
+	if ( preg_match( '/<script|\son\w+\s*=|javascript:|<foreignObject/i', $svg ) || ! preg_match( '/viewBox="0 0 \d+ \d+"/', $svg ) ) {
 		$bad[] = basename( $f );
 	}
 }
@@ -51,6 +51,8 @@ $css = $read( 'assets/css/print.css' );
 check( (bool) preg_match( '/\.tbe-header,\s*\n\.tbe-footer,/', $css ) && false !== strpos( $css, '.tbe-copyright' ) && false !== strpos( $css, 'thead {' ) && is_readable( TBE_DIR . '/assets/css/LICENSE-HARTIJA.txt' ), 'print hides the chrome, keeps the licence lines, repeats table headers, and carries Hartija\'s licence' );
 check( false !== strpos( $read( 'inc/reader.php' ), 'data-tbe-print' ) && false !== strpos( $read( 'inc/further.php' ), 'data-tbe-print' ), 'the Bible and further-book toolbars carry the print button' );
 $js = $read( 'assets/js/reader.js' );
+check( false !== strpos( $js, "removeAttribute( 'name' )" ) && false !== strpos( $js, 's.box.open = s.open;' ), 'a note in a named group is restored to its own state after printing' );
+check( false !== strpos( $css, '.tbe-verse:target' ) && false !== strpos( $css, 'background: none !important' ), 'a highlighted verse prints without its wash' );
 check( false !== strpos( $js, "'beforeprint'" ) && false !== strpos( $js, "'afterprint'" ) && false !== strpos( $js, 'window.print()' ), 'notes print open and close again afterwards' );
 $src = $read( 'inc/reader.php' );
 check( false !== strpos( $src, 'Font Awesome' ) && false !== strpos( $src, 'CC BY 4.0' ) && false !== strpos( $src, 'Hartija' ), 'the Sources page credits Font Awesome (LinkedIn, Scribd) and Hartija' );

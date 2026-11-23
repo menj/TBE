@@ -1,12 +1,13 @@
 MINIMALIST SOCIAL & PLATFORM ICONS PACK
+(Copy shipped with the TBE theme. The counts below are corrected to the 45 files in svg/; the list names all 45.)
 ========================================
 
-41 single-color, minimalist icons for social media platforms, music
+45 single-color, minimalist icons for social media platforms, music
 platforms, and identity/library authority services. Every icon is a
 clean monochrome glyph with no gradients, shadows, or extra detail —
 just the mark.
 
-INCLUDED (44 — every icon has both SVG and PNG)
+INCLUDED (45 — every icon has both SVG and PNG)
 --------------------------------------------------
 Facebook, Instagram, X (Twitter), LinkedIn, YouTube, TikTok,
 Pinterest, Snapchat, WhatsApp, Telegram, Reddit, Discord, Threads,

@@ -67,6 +67,15 @@ article {
 	background: none !important;
 }
 
+/* No highlighted verse or note on paper, even with "Background graphics" ticked in the print window. */
+.tbe-verse,
+.tbe-verse:target,
+.tbe-verse.is-active,
+.has-note,
+:target {
+	background: none !important;
+}
+
 /* No colour washes, shadows or rounded cards on paper. */
 *,
 *::before,

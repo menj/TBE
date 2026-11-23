@@ -10,6 +10,12 @@ Print and "Save as PDF", and the new profile icons pack. Nothing removed, nothin
 - 33 more profile networks under Profile links, from the 2026 Minimalist Social and Platform Icons Pack (GPL): LinkedIn, Pinterest, Reddit, Discord, Signal, LINE, WeChat, Snapchat, Tumblr, Medium, Quora, Twitch, Vimeo, Spotify, SoundCloud, Suno, Flickr, Behance, Dribbble, Fiverr, GTribe, Goodreads, Issuu, Scribd, Academia.edu, WordPress, WordPress.org profile, Wikipedia, Wikidata, ORCID, VIAF, ISNI and OCLC. The twelve networks of before keep their order.
 - `tools/test_print_social.php`.
 
+### Fixed in review
+- A verse highlighted by a link (`:target`) or a note printed its colour wash when the print window's background graphics were on; print now clears it.
+- A note in a named group (`<details name>`) could stay closed after printing, because opening a sibling closes it; the group name is set aside while printing and every note's own state is restored afterwards.
+- The icon test now also catches an event attribute written with a space before `=`.
+- `assets/img/social/README-PACK.txt` gave three different icon totals; it now says 45, the number of files.
+
 ### Changed
 - The twelve profile icons of before are the new pack's drawings. The LinkedIn and Scribd icons are Font Awesome's (CC BY 4.0), credited on the Sources page with the pack and Hartija.
 
