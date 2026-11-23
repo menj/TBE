@@ -387,3 +387,9 @@
 .tbe-lex__bdb p { line-height: 1.7; }
 .tbe-lex__bdb span[lang="he"] { font-family: var(--tbe-hebrew, "SBL Hebrew", serif); font-size: 1.12em; }
 .tbe-lex__bdb small { color: var(--tbe-muted); }
+
+/* Which Bible? (0.10.28) */
+.tbe-which__graphic { max-width: 26rem; margin: 0 auto 2rem; text-align: center; }
+.tbe-which__graphic img { width: 100%; height: auto; border-radius: var(--tbe-radius, 14px); box-shadow: var(--tbe-shadow); }
+.tbe-which__graphic figcaption { font: 0.8rem var(--tbe-ui); color: var(--tbe-muted); margin-top: 0.5rem; }
+.tbe-which__count { font: 700 1.3rem var(--tbe-ui); color: var(--tbe-accent); text-align: center; white-space: nowrap; }

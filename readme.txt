@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.27
+Stable tag: 0.10.28
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -121,6 +121,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 
 == Changelog ==
 
+= 0.10.28 =
+* A "Which Bible?" page at /which-bible/, with a graphic to share: how many books each church counts, which text, which verses, and which books were dropped, each point linked to its evidence.
+
 = 0.10.27 =
 * Print or save any chapter as a PDF: a button on the reading toolbar, a clean page for paper, and notes that print open.
 * 33 more networks for the profile links in the footer, from the new icons pack.
@@ -208,6 +211,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 The full history is in CHANGELOG.md.
 
 == Upgrade Notice ==
+
+= 0.10.28 =
+Nothing to do by hand: the theme refreshes its addresses itself when its version changes.
 
 = 0.10.27 =
 Nothing to do by hand. The new networks appear empty under Appearance, TBE, Profile links.
