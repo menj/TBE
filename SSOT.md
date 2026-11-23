@@ -62,6 +62,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 
 ## Addresses
 
+- Which Bible?: `/which-bible/` (0.10.28).
 - Reader: `/bible/`, `/bible/{book}/`, `/bible/{book}/{chapter}/`, `/bible/{book}/{chapter}/interlinear/`, `/bible/interlinear/`, `/bible/index/`, `/bible/search/`, the further books at `/bible/{slug}/` and `/bible/{slug}/{chapter}/` (0.10.26) and `/sources/` (the old `/credits/` answers 301), and `/manuscripts/` with `/manuscripts/{passage}/`, and `/lexicon/` with `/lexicon/{number}/`, `/lexicon/{greek|hebrew}/{letter}/` and `/lexicon/greek/frequency/` (`inc/routes.php`).
 - Commentary: post type `tbe_commentary` at `/commentary/`, its sections at `/section/`. Glossary: post type `tbe_term` at `/glossary/`.
 - Front-end editing: only a signed-in user who may edit a note (or create notes) gets the drawer, which saves through the core REST API (`/wp/v2/tbe_commentary`); new notes are drafts until Publish, and a passage that is not a real reference is refused (0.10.15).

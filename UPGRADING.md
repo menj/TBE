@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.28
+Nothing to do by hand: the theme flushes its rewrite rules when `TBE_VERSION` changes, so `/which-bible/` answers at once. The graphic is in the theme at `assets/img/which-bible.png`; to change it, edit `tools/build_which_bible_graphic.js` and run it with Node.
+
 ### To 0.10.27
 Nothing to do by hand. Profile links offer 33 more networks, empty until an address is set. Print a chapter once to check the page: the browser's print window offers Save as PDF.
 

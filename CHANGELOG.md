@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.10.28
+
+"Which Bible?": one page and one graphic that set out, from the site's own data, how far "the Bible" is from being one book. Nothing removed, nothing renamed.
+
+### Added
+- `/which-bible/` (`inc/which-bible.php`, view `which-bible`): how many books each tradition counts (Samaritan 5, Jewish 24, Protestant 66, Catholic 73, Orthodox 76 and more, Ethiopian 81); which Hebrew text stands underneath (the Samaritan Pentateuch's differences from the Masoretic text, counted from `data/sp/`, and the Great Isaiah Scroll); which verses the earliest manuscripts lack (the ending of Mark, the woman caught in adultery, the three witnesses, "Father, forgive them"); and which books were once read as scripture (Hermas, the Apocalypse of Peter, Laodiceans). Every point links to the page that shows the evidence. The book list links the page.
+- `assets/img/which-bible.png` (1080 by 1350), a shareable graphic in five escalating panels, from "1 Bible" to "Which Bible?", drawn by `tools/build_which_bible_graphic.js` with Playwright in the site's colours and Montserrat. It is about the claim, not about people.
+- `tools/test_which_bible.php`.
+
+
 ## 0.10.27
 
 Print and "Save as PDF", and the new profile icons pack. Nothing removed, nothing renamed.

@@ -33,6 +33,8 @@ function tbe_render_reader(): string {
 			return tbe_view_credits();
 		case 'manuscripts':
 			return tbe_view_manuscripts();
+		case 'which-bible':
+			return tbe_view_which_bible();
 		case 'lexicon':
 			return tbe_view_lexicon();
 		case 'lexicon-frequency':
@@ -186,7 +188,7 @@ function tbe_view_interlinear_index(): string {
 function tbe_view_books(): string {
 	$out  = '<div class="tbe-reader tbe-books">';
 	$out .= '<h1 class="tbe-title">' . esc_html__( 'The Books of the Bible', 'tbe-child' ) . '</h1>';
-	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Manuscripts::url() ) . '">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Lexicon::url() ) . '">' . esc_html__( 'Lexicon', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
+	$out .= '<p class="tbe-center"><a href="' . esc_url( home_url( '/bible/interlinear/' ) ) . '">' . esc_html__( 'Interlinear', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Manuscripts::url() ) . '">' . esc_html__( 'Manuscripts', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( tbe_which_bible_url() ) . '">' . esc_html__( 'Which Bible?', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( TBE_Lexicon::url() ) . '">' . esc_html__( 'Lexicon', 'tbe-child' ) . '</a> &nbsp;·&nbsp; <a href="' . esc_url( home_url( '/bible/index/' ) ) . '">' . esc_html__( 'Index of commentary', 'tbe-child' ) . '</a></p>';
 
 	$out .= tbe_canon_filter();
 
