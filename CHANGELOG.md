@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.30
+
+A new section of the book list: four books scholars have put forward as the lost Scrolls (Suhuf) of Abraham and Moses named in the Qur'an. Nothing removed, nothing renamed.
+
+### Added
+- The section "Books proposed as the Scrolls of Abraham and Moses" in `data/canons.json` (`suhuf`), whose introduction says what the Scrolls are, that the identifications are proposals, and that some take the Scrolls of Moses to be the Torah.
+- The Testament of Abraham in W. A. Craigie's translation (Ante-Nicene Fathers 9, 1896), both Greek versions, each printed chapter titled "Longer version" or "Shorter version" with its numeral, from CCEL.
+- Sefer Yetzirah in W. Wynn Westcott's translation (1893), chapters I to VI with his numbered sections, without his notes or the two supplements he marks as modern, from the Internet Archive scan.
+- The Testament (Assumption) of Moses in R. H. Charles's translation (1913), twelve chapters with his verse numbers, read from the scan's text type with the notes left out; chapter 10 as verse.
+- The Apocalypse of Moses (the Greek Life of Adam and Eve) in Alexander Walker's translation, "Revelation of Moses" (Ante-Nicene Fathers 8, 1886), in his paragraphs, from CCEL.
+- `tools/build_suhuf.py` builds all four; `tools/test_further.php` checks them.
+
 ## 0.10.29
 
 Nine more books beyond the 66: eight in public-domain translations and 4 Baruch in the site's own translation. Nothing removed, nothing renamed.
