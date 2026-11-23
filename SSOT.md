@@ -96,6 +96,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - Alan Bunning and the Center for New Testament Restoration for the manuscripts data, on the Sources page and on every manuscripts page, with the CC BY-SA 4.0 licence. The licence requires it.
 - M. R. James as translator of the Epistle to the Laodiceans, on the book.
 - J. K. Elliott as translator and Bart D. Ehrman's *Lost Scriptures* (Oxford University Press) as the source of the Ethiopic Apocalypse of Peter, on the Sources page and on the book.
+- Sir Lancelot Brenton (3 and 4 Maccabees, Psalm 151) and earlychristianwritings.com (the transcription of Lightfoot's Apostolic Fathers and James's Acts of Paul), on the Sources page and on each book.
 - Richard Laurence, R. H. Charles, J. B. Lightfoot and Andrew Rutherfurd as translators of Jubilees, Hermas and the Apocalypse of Peter, on the Sources page and on each book.
 - Wikisource contributors for the 1 to 3 Meqabyan translation, with the CC BY-SA 4.0 licence and a link to each page, on the Sources page and on every page of those books. The licence requires it.
 - The licences in `assets/fonts/` for SBL, Angel, Noto Naskh Arabic, Abyssinica SIL and Montserrat, and the Angel credit with its link on the Sources page.

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.10.29
+
+Eight more books beyond the 66, in public-domain translations. Nothing removed, nothing renamed.
+
+### Added
+- 1 Clement, 2 Clement, the Didache and the Epistle of Barnabas in J. B. Lightfoot's translations (The Apostolic Fathers, 1891), from the transcriptions on earlychristianwritings.com (`tools/build_apostolic.py`). 1 Clement's greeting is the heading of its first chapter.
+- 3 Corinthians from the Acts of Paul in M. R. James's translation (1924): the Corinthians' letter, the deacons bringing it, and Paul's reply, as three titled chapters (`tools/build_3corinthians.py`).
+- 3 Maccabees, 4 Maccabees and Psalm 151 in Brenton's English Septuagint (1844), from eBible.org (`tools/build_brenton.py`).
+- The book list links all eight; `tools/test_further.php` checks them.
+
+
 ## 0.10.28
 
 "Which Bible?": one page and one graphic that set out, from the site's own data, how far "the Bible" is from being one book. Nothing removed, nothing renamed.
