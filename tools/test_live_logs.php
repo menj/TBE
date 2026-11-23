@@ -96,11 +96,11 @@ $src = (string) file_get_contents( __DIR__ . '/../inc/hardening.php' );
 check( false !== strpos( $src, "defined( 'TBE_ALLOW_XMLRPC' ) && TBE_ALLOW_XMLRPC" ), 'so does TBE_ALLOW_XMLRPC' );
 
 // Scanner probes (0.10.6): the paths from the live logs get the short 404; the site's own paths never do.
-$probes = array( '/.env', '/.env.production', '/.env.bak', '/sitemaps/.env', '/wp/.env', '/.git/config', '/.git/HEAD', '/.aws/credentials', '/.DS_Store', '/%2eenv', '/phpinfo.php', '/phpinfo', '/_profiler/phpinfo', '/php-info.php', '/info.php', '/test.php', '/i.php', '/server-status.php', '/webmail/phpinfo.php', '/phpinfo.php~', '/_environment', '/webroot/_environment', '/webroot/index.php/_environment', '/wp-config.php', '/wp-config.php.bak', '/wp-config.bak', '/wp-config.php~', '/x.php/extra', '/WP-LOGIN.PHP', '/wp-content/plugins/hellopress/wp_filemanager.php', '/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php' );
+$probes = array( '/.env', '/.env.production', '/.env.bak', '/sitemaps/.env', '/wp/.env', '/.git/config', '/.git/HEAD', '/.aws/credentials', '/.DS_Store', '/%2eenv', '/phpinfo.php', '/phpinfo', '/_profiler/phpinfo', '/php-info.php', '/info.php', '/test.php', '/i.php', '/server-status.php', '/webmail/phpinfo.php', '/phpinfo.php~', '/_environment', '/webroot/_environment', '/webroot/index.php/_environment', '/wp-config.php', '/wp-config.php.bak', '/wp-config.bak', '/wp-config.php~', '/x.php/extra', '/WP-LOGIN.PHP', '/wp-content/plugins/hellopress/wp_filemanager.php', '/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php', '/google-credentials.json', '/sa.json', '/key.json', '/google-key.json', '/gcp-key.json', '/gcp-sa.json', '/firebase-key.json', '/firebase-adminsdk.json', '/service-account.json', '/config/credentials.yml', '/secrets.yaml' );
 foreach ( $probes as $p ) {
 	check( tbe_is_probe( $p ), "probe: $p" );
 }
-$pages = array( '/', '/bible/', '/bible/john/3/', '/bible/interlinear/', '/sources/', '/commentary/', '/glossary/', '/search/grace/', '/wp-sitemap.xml', '/sitemap.xml', '/robots.txt', '/feed/', '/index.php', '/wp-login.php', '/wp-cron.php', '/xmlrpc.php', '/wp-comments-post.php', '/wp-admin/', '/wp-admin/admin-ajax.php', '/wp-admin/post.php', '/wp-json/wp/v2/posts', '/.well-known/acme-challenge/token', '/.well-known/security.txt', '/.well-known/pki-validation/x.php', '/wp-content/themes/TBE/assets/js/reader.js', '/commentary/environment-and-law/', '/image.webp' );
+$pages = array( '/', '/bible/', '/bible/john/3/', '/bible/interlinear/', '/sources/', '/commentary/', '/glossary/', '/search/grace/', '/wp-sitemap.xml', '/sitemap.xml', '/robots.txt', '/feed/', '/index.php', '/wp-login.php', '/wp-cron.php', '/xmlrpc.php', '/wp-comments-post.php', '/wp-admin/', '/wp-admin/admin-ajax.php', '/wp-admin/post.php', '/wp-json/wp/v2/posts', '/.well-known/acme-challenge/token', '/.well-known/security.txt', '/.well-known/pki-validation/x.php', '/wp-content/themes/TBE/assets/js/reader.js', '/commentary/environment-and-law/', '/image.webp', '/wp-content/themes/TBE/data/canons.json', '/wp-json/wp/v2/pages', '/commentary/the-key-of-david/', '/bible/samaritan-key/' );
 foreach ( $pages as $p ) {
 	check( ! tbe_is_probe( $p ), "not a probe: $p" );
 }
@@ -258,6 +258,12 @@ unset( $_SERVER['REQUEST_URI'] );
 foreach ( glob( __DIR__ . '/*.php' ) as $f ) {
 	check( false !== strpos( (string) file_get_contents( $f, false, null, 0, 2000 ), "if ( 'cli' !== PHP_SAPI ) {" ), basename( $f ) . ' has the CLI guard' );
 }
+
+// 0.10.29: /favicon.png gets the brand icon; the interface font is fetched first and has a metric-matched stand-in.
+$branding = (string) file_get_contents( __DIR__ . '/../inc/branding.php' );
+check( false !== strpos( $branding, "add_action( 'parse_request', 'tbe_serve_favicon_png', 0 );" ) && false !== strpos( $branding, "tbe_send_brand_file( 'assets/img/brand/icon-192.png', 'image/png' )" ) && is_readable( __DIR__ . '/../assets/img/brand/icon-192.png' ), '/favicon.png is answered with the brand icon' );
+$enqueue = (string) file_get_contents( __DIR__ . '/../inc/enqueue.php' );
+check( false !== strpos( $enqueue, "tbe_font_preload( 'assets/fonts/Montserrat-Regular.woff2' )" ) && false !== strpos( $enqueue, 'Montserrat Fallback' ) && false !== strpos( (string) file_get_contents( __DIR__ . '/../assets/css/base.css' ), '"Montserrat", "Montserrat Fallback"' ), 'the interface font is preloaded and has a size-matched fallback' );
 
 echo $fail ? "$fail failed\n" : "all passed\n";
 exit( $fail ? 1 : 0 );

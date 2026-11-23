@@ -224,6 +224,11 @@ function tbe_is_probe( string $path ): bool {
 	if ( preg_match( '#(^|/)(wp-config|phpinfo|_environment)(\.[^/]*|~)?(/|$)#i', $path ) ) {
 		return true;
 	}
+	// Cloud credential files a scanner hopes to find (0.10.29): google-credentials.json, sa.json, key.json,
+	// gcp-key.json, firebase-adminsdk.json, service-account.json, and their YAML and key-file kin.
+	if ( preg_match( '#(^|/)([a-z0-9_.-]*(credential|secret|service[-_]?account|adminsdk)[a-z0-9_.-]*|sa|key|[a-z0-9_.-]+[-_](key|sa))\.(json|ya?ml|pem|p12|key)$#i', $path ) ) {
+		return true;
+	}
 	if ( ! preg_match( '#\.(php[0-9]?|phtml|phar)(/|$|~|\.(bak|old|orig|save|swp|txt|dist)$)#i', $path ) ) {
 		return false;
 	}
@@ -291,7 +296,12 @@ function tbe_short_circuit_probe( $wp = null ): void {
 	}
 	$uri  = (string) wp_unslash( $_SERVER['REQUEST_URI'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 	$path = tbe_probe_path( $uri, (string) parse_url( home_url( '/' ), PHP_URL_PATH ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-	if ( null === $path || ! tbe_is_probe( $path ) || tbe_probe_has_file( (string) parse_url( $uri, PHP_URL_PATH ), $path ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions
+	if ( null === $path || tbe_probe_has_file( (string) parse_url( $uri, PHP_URL_PATH ), $path ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions
+		return;
+	}
+	// A bare /info is a probe too (12 a day in the November logs), unless the site has a page at that address.
+	$bare_info = 'info' === strtolower( trim( $path, '/' ) ) && ! ( function_exists( 'get_page_by_path' ) && get_page_by_path( 'info' ) );
+	if ( ! $bare_info && ! tbe_is_probe( $path ) ) {
 		return;
 	}
 	tbe_send_probe_404();
