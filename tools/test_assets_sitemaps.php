@@ -213,7 +213,10 @@ check( ! wp_sitemaps_get_server()->sitemaps_enabled() && '' === tbe_active_sitem
 unset( $GLOBALS['t']['filters']['tbe_core_sitemaps'] );
 check( '' === tbe_plugin_sitemap_url(), 'no SEO plugin, no plugin sitemap' );
 
+$nul = tbe_robots_null_links( $robots );
+check( 0 === strpos( $nul, "User-agent: *\nDisallow: /*/null$\n" ) && $nul === tbe_robots_null_links( $nul ), 'robots.txt keeps crawlers off /null addresses, once' );
 $slow = tbe_robots_crawl_delay( $robots );
+check( false !== strpos( $slow, "User-agent: GPTBot\nCrawl-delay: 10\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\nDisallow: /*/null$\n" ), 'the crawler groups carry the /null rule too' );
 check( 0 === strpos( $slow, $robots ) && false !== strpos( $slow, "User-agent: GPTBot\nCrawl-delay: 10\nDisallow: /wp-admin/\n" ) && false !== strpos( $slow, "User-agent: Amazonbot\nCrawl-delay: 10\n" ), 'robots.txt asks the heavy crawlers for a 10 second delay, keeping the admin rule' );
 check( $slow === tbe_robots_crawl_delay( $slow ), 'the delay groups are not repeated' );
 $GLOBALS['t']['filters']['tbe_crawl_delay'] = 0;

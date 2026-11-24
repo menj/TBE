@@ -85,6 +85,25 @@ function tbe_robots_sitemap( $output ): string {
 }
 add_filter( 'robots_txt', 'tbe_robots_sitemap', 99 );
 
+/** The robots.txt rule for the literal "null" addresses a crawler builds (/lexicon/h1138/null). */
+const TBE_NULL_RULE = '/*/null$';
+
+/**
+ * Keep crawlers off addresses that end in /null. Meta's crawler asked for 265 of them in November 2026
+ * (/lexicon/h1138/null, /commentary/<slug>/null), each with the page itself as referer, and each was a 404.
+ * Added to the "*" group; the named crawler groups in tbe_robots_crawl_delay() carry it too.
+ *
+ * @param string $output The robots.txt text.
+ */
+function tbe_robots_null_links( $output ): string {
+	$output = (string) $output;
+	if ( false !== strpos( $output, TBE_NULL_RULE ) || false === strpos( $output, "User-agent: *\n" ) ) {
+		return $output;
+	}
+	return preg_replace( '/^User-agent: \*\n/m', "User-agent: *\nDisallow: " . TBE_NULL_RULE . "\n", $output, 1 );
+}
+add_filter( 'robots_txt', 'tbe_robots_null_links', 97 );
+
 /**
  * Ask the crawlers that hammered the site to slow down. The server log for November 2026 showed GPTBot, Applebot,
  * Amazonbot, Reflectionbot and Meta's crawler each making tens of thousands of requests, with 503 answers in the
@@ -105,7 +124,7 @@ function tbe_robots_crawl_delay( $output ): string {
 	foreach ( $bots as $bot ) {
 		$bot = trim( (string) $bot );
 		if ( '' !== $bot && false === stripos( $output, 'User-agent: ' . $bot . "\n" ) ) {
-			$text .= "User-agent: $bot\nCrawl-delay: $delay\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n\n";
+			$text .= "User-agent: $bot\nCrawl-delay: $delay\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\nDisallow: " . TBE_NULL_RULE . "\n\n";
 		}
 	}
 	return '' === $text ? $output : rtrim( $output, "\n" ) . "\n\n" . rtrim( $text, "\n" ) . "\n";
