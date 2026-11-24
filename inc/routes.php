@@ -112,7 +112,39 @@ add_action(
 	0
 );
 
-/** The old /credits/ address answers 301 to /sources/ (0.10.17). */
+/**
+ * The old /credits/ address answers 301 to /sources/ (0.10.17). With Rank Math's Redirections module active the
+ * redirect is kept there, where the owner sees it, counts its hits and can change it (0.10.32): the theme adds it
+ * once, and does not add it again if the owner deletes or edits it. Rank Math answers first; the redirect below
+ * stays for a site without it.
+ */
+function tbe_register_rank_math_redirects(): void {
+	if ( TBE_VERSION === get_option( 'tbe_rm_redirects' )
+		|| ! defined( 'RANK_MATH_VERSION' )
+		|| ! class_exists( 'RankMath\Helper' )
+		|| ! \RankMath\Helper::is_module_active( 'redirections' )
+		|| ! class_exists( 'RankMath\Redirections\Redirection' )
+		|| ! class_exists( 'RankMath\Redirections\DB' ) ) {
+		return;
+	}
+	try {
+		if ( empty( \RankMath\Redirections\DB::match_redirections_source( 'credits' ) ) && ! get_option( 'tbe_rm_redirects' ) ) {
+			\RankMath\Redirections\Redirection::from(
+				array(
+					'url_to'      => home_url( '/sources/' ),
+					'sources'     => array( array( 'pattern' => 'credits', 'comparison' => 'exact' ) ),
+					'header_code' => '301',
+				)
+			)->save();
+		}
+		update_option( 'tbe_rm_redirects', TBE_VERSION, false );
+	} catch ( \Throwable $e ) {
+		error_log( 'TBE: could not add the Rank Math redirect: ' . $e->getMessage() ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+	}
+}
+add_action( 'init', 'tbe_register_rank_math_redirects', 30 );
+
+/** The old /credits/ address answers 301 to /sources/ (0.10.17); Rank Math answers first when it holds the redirect. */
 add_action(
 	'template_redirect',
 	static function () {

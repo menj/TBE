@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.31
+Stable tag: 0.10.33
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -120,6 +120,12 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * Print styles: after the Hartija CSS Print Framework by Vladimir Carrer, MIT.
 
 == Changelog ==
+
+= 0.10.33 =
+* With Rank Math's Redirections module on, the old /credits/ address is redirected there, where you can see and change it. robots.txt keeps crawlers off the /null addresses Meta's crawler kept requesting.
+
+= 0.10.32 =
+* robots.txt asks the crawlers that made tens of thousands of requests in November to wait 10 seconds between requests.
 
 = 0.10.31 =
 * Structured data: 4 Baruch's translator is named in full, and each further book gives its own original language.

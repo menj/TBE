@@ -20,6 +20,12 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.33
+Nothing to do by hand. With Rank Math's Redirections module on, the first request after the update adds `credits` to `/sources/` (301) to Rank Math's list; after that it is yours to edit. With a physical `robots.txt` file in the site root, copy the `Disallow: /*/null$` line into it.
+
+### To 0.10.32
+Nothing to do by hand. If the site has a physical `robots.txt` file in its root, WordPress does not serve its own and the delay does not appear: delete the file, or copy the `Crawl-delay` groups into it.
+
 ### To 0.10.31
 Nothing to do by hand.
 

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.10.33
+
+Redirects through Rank Math, and the /null addresses. Nothing removed, nothing renamed.
+
+### Added
+- With Rank Math's Redirections module active, the theme adds the `/credits/` to `/sources/` 301 there once (`tbe_register_rank_math_redirects()` in `inc/routes.php`, remembered in the option `tbe_rm_redirects`). It is not added again if the owner edits or deletes it. The theme's own 301 stays for a site without Rank Math. `?author=` stays in the theme, because it is a security rule; `?s=` stays too (a query-string pattern).
+- `robots.txt` carries `Disallow: /*/null$` (`tbe_robots_null_links()` in `inc/sitemaps.php`), in the `*` group and in each crawler group. In November 2026 Meta's crawler requested 265 addresses such as `/lexicon/h1138/null` and `/commentary/<slug>/null`, each a 404 with the page itself as referer; no link of the theme's makes them.
+
+## 0.10.32
+
+Crawler rate limit. Nothing removed, nothing renamed.
+
+### Added
+- `robots.txt` carries `Crawl-delay: 10` for GPTBot, Applebot, Amazonbot, Reflectionbot, meta-externalagent and SERankingBacklinksBot (`tbe_robots_crawl_delay()` in `inc/sitemaps.php`), each group repeating the admin rule because a named group ignores `*`. The November 2026 server log showed these crawlers making tens of thousands of requests each, with 503 answers in the bursts. Google ignores `Crawl-delay`. Filters `tbe_crawl_delay` (seconds, 0 for none) and `tbe_crawl_delay_bots` change it.
+
 ## 0.10.31
 
 Structured data only. Nothing removed, nothing renamed.

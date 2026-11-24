@@ -79,7 +79,7 @@ Child theme of **Twenty Twenty-Five** for https://thebible.exposed.
 | `tools/ttf2woff2.js` | Dependency-free lossless TTF to WOFF2 converter |
 
 ## At a glance
-- Version 0.10.31. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.4 or later with `dom` and `mbstring`. On older PHP, WordPress will not activate the theme, and an installed copy shows administrators a notice on every admin screen until PHP is upgraded (`tbe_php_notice()` in `functions.php`).
+- Version 0.10.33. WordPress 6.7 or later with Twenty Twenty-Five, PHP 8.4 or later with `dom` and `mbstring`. On older PHP, WordPress will not activate the theme, and an installed copy shows administrators a notice on every admin screen until PHP is upgraded (`tbe_php_notice()` in `functions.php`).
 - Apache 2.2 or 2.4 reads the theme's `.htaccess` and `tools/.htaccess` as they are. On Nginx those files do nothing; add the lines under "Nginx" below to the server block.
 - Multisite works: each site keeps its own settings, and one site writes the shared error pages (see Error pages).
 - The theme makes no remote call from a visitor's browser. The server calls the ESV API only for a chapter the bundle lacks, and only with a token.
