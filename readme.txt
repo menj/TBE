@@ -4,7 +4,7 @@ Tags: blog, one-column, custom-colors, editor-style, full-site-editing, block-st
 Requires at least: 6.7
 Tested up to: 7.1
 Requires PHP: 8.4
-Stable tag: 0.10.33
+Stable tag: 0.10.34
 Template: twentytwentyfive
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -120,6 +120,9 @@ TBE is distributed under the GNU General Public License v3 or later. The full te
 * Print styles: after the Hartija CSS Print Framework by Vladimir Carrer, MIT.
 
 == Changelog ==
+
+= 0.10.34 =
+* The clean-up of development files (.git, tools) also runs every hour, so a .git uploaded by FTP after an update is removed without waiting for the next version.
 
 = 0.10.33 =
 * With Rank Math's Redirections module on, the old /credits/ address is redirected there, where you can see and change it. robots.txt keeps crawlers off the /null addresses Meta's crawler kept requesting.

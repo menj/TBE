@@ -208,6 +208,16 @@ $GLOBALS['t']['options']['tbe_dev_files_lock'] = $GLOBALS['tbe_cleanup_lease'];
 tbe_renew_cleanup_lease();
 check( time() - (int) $GLOBALS['t']['options']['tbe_dev_files_lock'] < 60, 'a running clean-up renews its lease' );
 unset( $GLOBALS['tbe_cleanup_lease'], $GLOBALS['t']['options']['tbe_dev_files_lock'] );
+// The hourly sweep: a .git that arrives after the version was recorded is removed, and an empty folder is left alone.
+function delete_option( $k ) { unset( $GLOBALS['t']['options'][ $k ] ); return true; }
+mkdir( "$root/.git/objects/pack", 0755, true );
+file_put_contents( "$root/.git/objects/pack/p.pack", 'x' );
+tbe_cleanup_sweep();
+check( ! file_exists( "$root/.git" ) && '9.9.9' === ( $GLOBALS['t']['options']['tbe_dev_files_version'] ?? '' ), 'the sweep removes a .git uploaded after the version was recorded, and records the version again' );
+$GLOBALS['t']['options']['tbe_dev_files_version'] = 'kept';
+tbe_cleanup_sweep();
+check( 'kept' === $GLOBALS['t']['options']['tbe_dev_files_version'], 'with nothing to remove the sweep leaves the record alone' );
+$GLOBALS['t']['options']['tbe_dev_files_version'] = '9.9.9';
 $outside = sys_get_temp_dir() . '/tbe-live-target-' . getmypid();
 file_put_contents( $outside, 'x' );
 chmod( $outside, 0600 );

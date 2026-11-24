@@ -188,6 +188,41 @@ function tbe_cleanup_on_version_change() {
 add_action( 'init', 'tbe_cleanup_on_version_change', 1 );
 
 /**
+ * The same clean-up on a schedule (0.10.34). The version check above runs once per version, but an FTP upload
+ * can put .git or tools/ back at any time, as on 23 November 2026 when a 45 MB .git/objects/pack arrived
+ * after the clean-up had run. Hourly, WP-Cron looks at the theme folder; when a development entry is there
+ * it forgets the recorded version, so tbe_cleanup_on_version_change() runs again, under the same lease.
+ * A folder with nothing to remove costs one scandir().
+ */
+function tbe_cleanup_sweep() {
+	if ( tbe_keeps_dev_files() || ! tbe_dev_entries() ) {
+		return;
+	}
+	delete_option( 'tbe_dev_files_version' );
+	tbe_cleanup_on_version_change();
+}
+add_action( 'tbe_dev_files_sweep', 'tbe_cleanup_sweep' );
+
+/** Put the hourly sweep on the schedule, unless this site keeps its development files. */
+function tbe_schedule_cleanup_sweep() {
+	if ( tbe_keeps_dev_files() ) {
+		return;
+	}
+	if ( ! wp_next_scheduled( 'tbe_dev_files_sweep' ) ) {
+		wp_schedule_event( time() + HOUR_IN_SECONDS, 'hourly', 'tbe_dev_files_sweep' );
+	}
+}
+add_action( 'init', 'tbe_schedule_cleanup_sweep', 5 );
+
+/** Take the sweep off the schedule when the theme is switched away. */
+add_action(
+	'switch_theme',
+	static function () {
+		wp_clear_scheduled_hook( 'tbe_dev_files_sweep' );
+	}
+);
+
+/**
  * Renew the running clean-up's lease, at most once a minute, with the same
  * compare-and-set, so it never looks stale while it works.
  */
