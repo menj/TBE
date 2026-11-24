@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.34
+Nothing to do by hand. The sweep needs WP-Cron: with `DISABLE_WP_CRON` set, run `wp-cron.php` from the server's own cron at least hourly, or the clean-up stays at once per version.
+
 ### To 0.10.33
 Nothing to do by hand. With Rank Math's Redirections module on, the first request after the update adds `credits` to `/sources/` (301) to Rank Math's list; after that it is yours to edit. With a physical `robots.txt` file in the site root, copy the `Disallow: /*/null$` line into it.
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.34
+
+The development-files clean-up on a schedule. Nothing removed, nothing renamed.
+
+### Added
+- An hourly WP-Cron event, `tbe_dev_files_sweep` (`tbe_cleanup_sweep()` in `inc/dev-files.php`): when `.git`, a dot entry or `tools/` is in the theme folder, it forgets the recorded version and runs `tbe_cleanup_on_version_change()`, under the same lease. On 23 November 2026 a 45 MB `.git/objects/pack` was uploaded after that day's clean-up and stayed until the next version. A folder with nothing to remove costs one `scandir()`. The event is scheduled on `init`, removed when the theme is switched away, and not scheduled on a site that keeps its development files (`TBE_KEEP_DOTFILES`, local or development).
+
 ## 0.10.33
 
 Redirects through Rank Math, and the /null addresses. Nothing removed, nothing renamed.
