@@ -678,12 +678,13 @@ function tbe_ld_graph(): array {
 			'inLanguage'      => 'en',
 			'license'         => (string) ( $book['source']['licence_url'] ?? '' ),
 			'isBasedOn'       => (string) ( $book['source']['url'] ?? '' ),
-			'translator'      => array(
+			// A translation made for the site (4 Baruch) names its translator as the site's author, in full.
+			'translator'      => ! empty( $book['source']['translator']['site_author'] ) ? tbe_ld_author_node() + array( 'alternateName' => 'MENJ' ) : array(
 				'@type' => (string) ( $book['source']['translator']['type'] ?? 'Organization' ),
 				'name'  => (string) ( $book['source']['translator']['name'] ?? '' ),
 				'url'   => (string) ( $book['source']['translator']['url'] ?? '' ),
 			),
-			'translationOfWork' => array( '@type' => 'Book', 'name' => (string) $book['name'], 'inLanguage' => 'gez' ),
+			'translationOfWork' => array( '@type' => 'Book', 'name' => (string) $book['name'], 'inLanguage' => tbe_ld_language_code( (string) ( $book['language'] ?? '' ) ) ),
 		);
 		if ( 'further-chapter' === $request['view'] ) {
 			$chapter = (int) $request['chapter'];
@@ -891,3 +892,10 @@ add_action(
 	},
 	99
 );
+
+/** The language code of a further book's original language as data/further/ names it ("Greek" grc), or "und". */
+function tbe_ld_language_code( string $language ): string {
+	$codes = array( 'greek' => 'grc', "ge'ez" => 'gez', 'hebrew' => 'he', 'latin' => 'la', 'aramaic' => 'arc', 'syriac' => 'syc', 'coptic' => 'cop', 'armenian' => 'hy' );
+	$first = strtolower( trim( (string) preg_split( '/\s+(?:and|or)\s+|,/', $language )[0] ) );
+	return $codes[ $first ] ?? 'und';
+}

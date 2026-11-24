@@ -74,5 +74,9 @@ $check( ! isset( $graph[0]['author'] ), 'the Organization gets no author' );
 $again = tbe_ld_one_author( $graph );
 $check( 1 === count( array_filter( $again, static fn( $n ) => 'Person' === ( $n['@type'] ?? '' ) ) ), 'a second pass adds no second Person' );
 
+$check( 'grc' === tbe_ld_language_code( 'Greek' ) && 'gez' === tbe_ld_language_code( "Ge'ez" ) && 'grc' === tbe_ld_language_code( "Greek and Ge'ez" ) && 'la' === tbe_ld_language_code( 'Latin' ) && 'und' === tbe_ld_language_code( '' ), 'a further book\'s original language has its code' );
+$baruch = json_decode( (string) file_get_contents( dirname( __DIR__ ) . '/data/further/4-baruch.json' ), true );
+$check( ! empty( $baruch['source']['translator']['site_author'] ) && 'Mohd Elfie Nieshaem Juferi' === ( tbe_ld_author_node() + array( 'alternateName' => 'MENJ' ) )['name'], '4 Baruch names its translator in structured data as Mohd Elfie Nieshaem Juferi' );
+
 echo $fail ? "$fail failure(s)\n" : "schema author: all checks passed\n";
 exit( $fail ? 1 : 0 );

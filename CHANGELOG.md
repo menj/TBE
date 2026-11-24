@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.10.31
+
+Structured data only. Nothing removed, nothing renamed.
+
+### Changed
+- The `Book` node of 4 Baruch names its translator as the site's author Person, Mohd Elfie Nieshaem Juferi (https://menj.bio), with `alternateName` MENJ; the page still credits MENJ. A further book's translator marked `site_author` in `data/further/` is given this way.
+
+### Fixed
+- `translationOfWork` gives each further book's own original language (`tbe_ld_language_code()`: Greek `grc`, Ge'ez `gez`, Hebrew `he`, Latin `la`) instead of Ge'ez for every book.
+
 ## 0.10.30
 
 A new section of the book list: four books scholars have put forward as the lost Scrolls (Suhuf) of Abraham and Moses named in the Qur'an. Nothing removed, nothing renamed.

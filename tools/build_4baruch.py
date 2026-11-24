@@ -206,7 +206,7 @@ def main():
             "note": "No English translation in the public domain was found, so MENJ made one for the site, verse by verse, and prints Harris's Greek under each verse. The Greek is read by machine from the scan of the 1889 edition and is not yet proofread, so some letters and accents are wrong; the translation follows the sense of Harris's text where the reading is damaged. Harris's critical notes are left out.",
             "licence": "Public domain",
             "licence_url": "",
-            "translator": {"type": "Person", "name": "MENJ", "url": "https://thebible.exposed/"},
+            "translator": {"type": "Person", "name": "MENJ", "url": "https://menj.bio", "site_author": True},
         },
         "chapters": chapters,
         "parallel": {
