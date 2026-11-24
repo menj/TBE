@@ -85,6 +85,33 @@ function tbe_robots_sitemap( $output ): string {
 }
 add_filter( 'robots_txt', 'tbe_robots_sitemap', 99 );
 
+/**
+ * Ask the crawlers that hammered the site to slow down. The server log for November 2026 showed GPTBot, Applebot,
+ * Amazonbot, Reflectionbot and Meta's crawler each making tens of thousands of requests, with 503 answers in the
+ * bursts. A crawler with its own group in robots.txt ignores the "*" group, so each group repeats the admin rule.
+ * Google ignores Crawl-delay; the others may honour it. Filter `tbe_crawl_delay` (seconds, 0 for none) and
+ * `tbe_crawl_delay_bots` (user-agent names) change it.
+ *
+ * @param string $output The robots.txt text.
+ */
+function tbe_robots_crawl_delay( $output ): string {
+	$output = (string) $output;
+	$delay  = max( 0, (int) apply_filters( 'tbe_crawl_delay', 10 ) );
+	$bots   = (array) apply_filters( 'tbe_crawl_delay_bots', array( 'GPTBot', 'Applebot', 'Amazonbot', 'Reflectionbot', 'meta-externalagent', 'SERankingBacklinksBot' ) );
+	if ( 0 === $delay || ! $bots ) {
+		return $output;
+	}
+	$text = '';
+	foreach ( $bots as $bot ) {
+		$bot = trim( (string) $bot );
+		if ( '' !== $bot && false === stripos( $output, 'User-agent: ' . $bot . "\n" ) ) {
+			$text .= "User-agent: $bot\nCrawl-delay: $delay\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n\n";
+		}
+	}
+	return '' === $text ? $output : rtrim( $output, "\n" ) . "\n\n" . rtrim( $text, "\n" ) . "\n";
+}
+add_filter( 'robots_txt', 'tbe_robots_crawl_delay', 98 );
+
 /** On the dashboard and the theme's settings screen: a word when search engines are asked to stay away. */
 function tbe_search_visibility_notice(): void {
 	if ( get_option( 'blog_public' ) || ! current_user_can( 'manage_options' ) || ! function_exists( 'get_current_screen' ) ) {

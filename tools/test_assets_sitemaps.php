@@ -213,6 +213,13 @@ check( ! wp_sitemaps_get_server()->sitemaps_enabled() && '' === tbe_active_sitem
 unset( $GLOBALS['t']['filters']['tbe_core_sitemaps'] );
 check( '' === tbe_plugin_sitemap_url(), 'no SEO plugin, no plugin sitemap' );
 
+$slow = tbe_robots_crawl_delay( $robots );
+check( 0 === strpos( $slow, $robots ) && false !== strpos( $slow, "User-agent: GPTBot\nCrawl-delay: 10\nDisallow: /wp-admin/\n" ) && false !== strpos( $slow, "User-agent: Amazonbot\nCrawl-delay: 10\n" ), 'robots.txt asks the heavy crawlers for a 10 second delay, keeping the admin rule' );
+check( $slow === tbe_robots_crawl_delay( $slow ), 'the delay groups are not repeated' );
+$GLOBALS['t']['filters']['tbe_crawl_delay'] = 0;
+check( $robots === tbe_robots_crawl_delay( $robots ), 'a delay of 0 adds nothing' );
+unset( $GLOBALS['t']['filters']['tbe_crawl_delay'] );
+
 array_map( 'unlink', glob( "$t_dir/assets/img/brand/*" ) );
 rmdir( "$t_dir/assets/img/brand" );
 array_map( 'unlink', array_filter( glob( "$t_dir/assets/*/*" ), 'is_file' ) );

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.32
+
+Crawler rate limit. Nothing removed, nothing renamed.
+
+### Added
+- `robots.txt` carries `Crawl-delay: 10` for GPTBot, Applebot, Amazonbot, Reflectionbot, meta-externalagent and SERankingBacklinksBot (`tbe_robots_crawl_delay()` in `inc/sitemaps.php`), each group repeating the admin rule because a named group ignores `*`. The November 2026 server log showed these crawlers making tens of thousands of requests each, with 503 answers in the bursts. Google ignores `Crawl-delay`. Filters `tbe_crawl_delay` (seconds, 0 for none) and `tbe_crawl_delay_bots` change it.
+
 ## 0.10.31
 
 Structured data only. Nothing removed, nothing renamed.
