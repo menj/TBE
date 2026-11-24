@@ -119,7 +119,7 @@ The fixed facts and the rules of the TBE theme. When README.md, readme.txt, CHAN
 - The theme writes no `.htaccess` outside its own folder. Lines for the site's `.htaccess` are shown on Appearance, TBE, Error pages.
 - Error pages come from `inc/error-page-html.php`. After a change, run `php tools/build_error_pages.php` and commit `errors/`.
 - Every PHP script in `tools/` exits at once unless PHP runs it from the command line.
-- A local or development site keeps `.git`, `.claude` and `tools/`. A live site loses them on the first request after an update, and again within the hour if an upload puts them back (`inc/dev-files.php`, WP-Cron event `tbe_dev_files_sweep`), unless `TBE_KEEP_DOTFILES` is set.
+- A local or development site keeps `.git`, `.claude` and `tools/`. A live site loses them on the first request after an update, and again at the first WP-Cron run after an hour has passed if an upload puts them back (`inc/dev-files.php`, WP-Cron event `tbe_dev_files_sweep`), unless `TBE_KEEP_DOTFILES` is set.
 
 ## Release checklist
 

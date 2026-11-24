@@ -1,11 +1,19 @@
 # Changelog
 
+## 0.10.35
+
+Two fixes to 0.10.34's hourly clean-up, from a review after the merge. Nothing removed, nothing renamed.
+
+### Fixed
+- A site that sets `TBE_KEEP_DOTFILES` or becomes a local or development site after the sweep was scheduled now has `tbe_dev_files_sweep` cleared (`tbe_schedule_cleanup_sweep()`), instead of an event that fires every hour and does nothing.
+- The documentation said the sweep runs "within the hour". WP-Cron runs only when a request arrives or the server's cron calls `wp-cron.php`, so it runs at the first such run after the hour has passed; `SSOT.md`, `readme.txt` and the code comment now say so.
+
 ## 0.10.34
 
 The development-files clean-up on a schedule. Nothing removed, nothing renamed.
 
 ### Added
-- An hourly WP-Cron event, `tbe_dev_files_sweep` (`tbe_cleanup_sweep()` in `inc/dev-files.php`): when `.git`, a dot entry or `tools/` is in the theme folder, it forgets the recorded version and runs `tbe_cleanup_on_version_change()`, under the same lease. On 23 November 2026 a 45 MB `.git/objects/pack` was uploaded after that day's clean-up and stayed until the next version. A folder with nothing to remove costs one `scandir()`. The event is scheduled on `init`, removed when the theme is switched away, and not scheduled on a site that keeps its development files (`TBE_KEEP_DOTFILES`, local or development).
+- An hourly WP-Cron event (it runs at the first WP-Cron run after each hour), `tbe_dev_files_sweep` (`tbe_cleanup_sweep()` in `inc/dev-files.php`): when `.git`, a dot entry or `tools/` is in the theme folder, it forgets the recorded version and runs `tbe_cleanup_on_version_change()`, under the same lease. On 23 November 2026 a 45 MB `.git/objects/pack` was uploaded after that day's clean-up and stayed until the next version. A folder with nothing to remove costs one `scandir()`. The event is scheduled on `init`, removed when the theme is switched away, and not scheduled on a site that keeps its development files (`TBE_KEEP_DOTFILES`, local or development).
 
 ## 0.10.33
 

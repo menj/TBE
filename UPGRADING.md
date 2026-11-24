@@ -20,6 +20,9 @@ Never upload WordPress core without `wp-config.php` in place, or the site starts
 
 Only the versions that need something done by hand are listed.
 
+### To 0.10.35
+Nothing to do by hand.
+
 ### To 0.10.34
 Nothing to do by hand. The sweep needs WP-Cron: with `DISABLE_WP_CRON` set, run `wp-cron.php` from the server's own cron at least hourly, or the clean-up stays at once per version.
 

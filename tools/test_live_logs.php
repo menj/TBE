@@ -218,6 +218,17 @@ $GLOBALS['t']['options']['tbe_dev_files_version'] = 'kept';
 tbe_cleanup_sweep();
 check( 'kept' === $GLOBALS['t']['options']['tbe_dev_files_version'], 'with nothing to remove the sweep leaves the record alone' );
 $GLOBALS['t']['options']['tbe_dev_files_version'] = '9.9.9';
+// The schedule: set on a live site, cleared when the site keeps its development files.
+if ( ! defined( 'HOUR_IN_SECONDS' ) ) { define( 'HOUR_IN_SECONDS', 3600 ); }
+function wp_next_scheduled( $h ) { return $GLOBALS['t']['cron'][ $h ] ?? false; }
+function wp_schedule_event( $when, $rec, $h ) { $GLOBALS['t']['cron'][ $h ] = $when; return true; }
+function wp_clear_scheduled_hook( $h ) { unset( $GLOBALS['t']['cron'][ $h ] ); return 1; }
+tbe_schedule_cleanup_sweep();
+check( isset( $GLOBALS['t']['cron']['tbe_dev_files_sweep'] ), 'the hourly sweep is scheduled on a live site' );
+$GLOBALS['t']['env'] = 'development';
+tbe_schedule_cleanup_sweep();
+check( ! isset( $GLOBALS['t']['cron']['tbe_dev_files_sweep'] ), 'a site that keeps its development files has the sweep taken off the schedule' );
+$GLOBALS['t']['env'] = 'production';
 $outside = sys_get_temp_dir() . '/tbe-live-target-' . getmypid();
 file_put_contents( $outside, 'x' );
 chmod( $outside, 0600 );
