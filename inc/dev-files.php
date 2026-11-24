@@ -190,7 +190,7 @@ add_action( 'init', 'tbe_cleanup_on_version_change', 1 );
 /**
  * The same clean-up on a schedule (0.10.34). The version check above runs once per version, but an FTP upload
  * can put .git or tools/ back at any time, as on 23 November 2026 when a 45 MB .git/objects/pack arrived
- * after the clean-up had run. Hourly, WP-Cron looks at the theme folder; when a development entry is there
+ * after the clean-up had run. Once an hour has passed and a request or the server's cron runs WP-Cron, it looks at the theme folder; when a development entry is there
  * it forgets the recorded version, so tbe_cleanup_on_version_change() runs again, under the same lease.
  * A folder with nothing to remove costs one scandir().
  */
@@ -203,9 +203,14 @@ function tbe_cleanup_sweep() {
 }
 add_action( 'tbe_dev_files_sweep', 'tbe_cleanup_sweep' );
 
-/** Put the hourly sweep on the schedule, unless this site keeps its development files. */
+/**
+ * Put the hourly sweep on the schedule. A site that keeps its development files takes it off again, so a site
+ * that sets TBE_KEEP_DOTFILES or becomes a development site after it was scheduled is not left with an event
+ * that does nothing.
+ */
 function tbe_schedule_cleanup_sweep() {
 	if ( tbe_keeps_dev_files() ) {
+		wp_clear_scheduled_hook( 'tbe_dev_files_sweep' );
 		return;
 	}
 	if ( ! wp_next_scheduled( 'tbe_dev_files_sweep' ) ) {

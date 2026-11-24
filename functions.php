@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TBE_VERSION', '0.10.34' );
+define( 'TBE_VERSION', '0.10.35' );
 define( 'TBE_DIR', get_stylesheet_directory() );
 define( 'TBE_MIN_PHP', '8.4' );
 
